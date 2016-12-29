@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,7 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "department")
-public class Department implements Serializable{
+public class Department implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +40,12 @@ public class Department implements Serializable{
     @ManyToMany(mappedBy = "department")
     private List<Teacher> teachers = new ArrayList();
 
+    @OneToOne
+    @Column(name = "hod")
+    private Teacher hod;
+
     public Department() {
     }
-    
-    
 
     public Department(String name) {
         this.name = name;
@@ -60,6 +63,14 @@ public class Department implements Serializable{
             this.courses.add(course);
             course.setDepartment(this);
         }
+    }
+
+    public Teacher getHod() {
+        return hod;
+    }
+
+    public void setHod(Teacher hod) {
+        this.hod = hod;
     }
 
     public int getId() {

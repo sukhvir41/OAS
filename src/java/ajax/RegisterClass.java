@@ -27,44 +27,44 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/ajax/getclass")
 public class RegisterClass extends HttpServlet {
-
+    
     JsonArray jsonClasses;
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String courseId = req.getParameter("course");
         resp.setContentType("text/json");
         if (courseId != null && !courseId.equals("")) {
-            int courseid = Integer.parseInt(courseId);
-            PrintWriter out = resp.getWriter();
-            Session session = Utils.openSession();
-            session.beginTransaction();
-            Course course = (Course) session.get(Course.class, courseid);
-            List<ClassRoom> classes = course.getClassRooms();
-            Gson gson = new Gson();
-            jsonClasses = new JsonArray();
-            classes.stream()
-                    .forEach(e -> add(e));
-            out.print(gson.toJson(jsonClasses));
-            session.getTransaction().commit();
-            session.close();
-            out.close();
+                int courseid = Integer.parseInt(courseId);
+                PrintWriter out = resp.getWriter();
+                Session session = Utils.openSession();
+                session.beginTransaction();
+                Course course = (Course) session.get(Course.class, courseid);
+                List<ClassRoom> classes = course.getClassRooms();
+                Gson gson = new Gson();
+                jsonClasses = new JsonArray();
+                classes.stream()
+                        .forEach(e -> add(e));
+                out.print(gson.toJson(jsonClasses));
+                session.getTransaction().commit();
+                session.close();
+                out.close();         
         }
     }
-
+    
     private void add(ClassRoom e) {
         JsonObject o = new JsonObject();
         o.addProperty("id", e.getId());
         o.addProperty("name", e.getName());
         jsonClasses.add(o);
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        
         PrintWriter out = resp.getWriter();
         out.print("error");
         out.close();
     }
-
+    
 }

@@ -26,7 +26,7 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/loginpost")
 public class LoginPost extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -35,7 +35,7 @@ public class LoginPost extends HttpServlet {
         Session session = Utils.openSession();
         session.beginTransaction();
         Login login;
-        if (Pattern.compile("/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6})?$/").matcher(username).matches()) {
+        if (Utils.regexMatch("/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6})?$/", username)) {
             Query query = session.createQuery("from Login where email = :email");
             query.setString("email", username);
             login = (Login) query.list().get(0);
@@ -59,13 +59,13 @@ public class LoginPost extends HttpServlet {
             }
             session.getTransaction().commit();
             session.close();
-
+            
         } else {
             session.getTransaction().commit();
             session.close();
             resp.sendRedirect("login?verified=false");
         }
-
+        
         req.getSession().setAttribute("valid", true);
         if (remember != null && !remember.equals("") && remember.equals(true)) {
             req.getSession().setMaxInactiveInterval(0);
@@ -74,18 +74,18 @@ public class LoginPost extends HttpServlet {
             case "student":
                 resp.sendRedirect("student/home");
                 break;
-
+            
             case "teacher":
                 resp.sendRedirect("teacher/home");
                 break;
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         out.print("error");
         out.close();
     }
-
+    
 }

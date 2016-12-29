@@ -43,38 +43,56 @@ public class Registeration extends HttpServlet {
         String password = req.getParameter("password");
         long number = Long.parseLong(req.getParameter("number"));
         String type = req.getParameter("type");
-        int rollNumber = 0, courseId = 0, classId = 0;
-        String[] subjects = null;
-        String[] departments = null;
+        int rollNumber = 0, classId = 0;
+        ArrayList<String> subjects;
+        ArrayList<String> departments;
         String hod = null;
-        System.out.println(type);
-        //System.out.println(req.getParameterValues("subject"));
         if (type.equals("student")) {
-            rollNumber = Integer.parseInt(req.getParameter("rollnumber"));
-            courseId = Integer.parseInt(req.getParameter("course"));
+            subjects = new ArrayList<>(Arrays.asList(req.getParameterValues("subject")));
             classId = Integer.parseInt(req.getParameter("class"));
-            subjects = req.getParameterValues("subject");
+            rollNumber = Integer.parseInt(req.getParameter("rollnumber"));
+            Student student = new Student(rollNumber, firstName, lastName, number, email);
+            Session session = Utils.openSession();
+            session.beginTransaction();
+            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
+            session.save(student);
+            subjects.stream()
+                    .map(Integer::parseInt)
+                    .map(e -> (Subject) session.get(Subject.class, e))
+                    .forEachOrdered(student::addSubject);
+            student.addClassRoom(classRoom);
+            Login login = new Login(userName, password, "student", student.getId(), email);
+            session.save(login);
+            session.getTransaction().commit();
+            session.close();
+            resp.sendRedirect("login");
         } else {
-            departments = req.getParameterValues("department");
             hod = req.getParameter("hod");
-        }
-        PrintWriter out = resp.getWriter();
-        if (type.equals("student")) {
-            out.print(firstName + "\n" + lastName + "\n" + email + "\n" + userName + "\n" + password + "\n" + number + "\n" + type + "\n" + rollNumber + "\n" + courseId + "\n" + classId);
-            for (int i = 0; i < subjects.length; i++) {
-                out.print("\n");
-                out.print(subjects[i]);
+            departments = new ArrayList<>(Arrays.asList(req.getParameterValues("department")));
+            Session session = Utils.openSession();
+            session.beginTransaction();
+            Teacher teacher;
+            if (hod.equals("none")) {
+                teacher = new Teacher(firstName, lastName, number, email, false);
+            } else {
+                teacher = new Teacher(firstName, lastName, number, email, true);
+                Department department = (Department) session.get(Department.class, Integer.parseInt(hod));
+                department.setHod(teacher);
             }
-        } else {
-            out.print(firstName + "\n" + lastName + "\n" + email + "\n" + userName + "\n" + password + "\n" + number + "\n" + type + "\n" + hod);
-            for (int i = 0; i < departments.length; i++) {
-                out.print("\n");
-                out.print(departments[i]);
-            }
+            session.save(teacher);
+            departments.stream()
+                    .map(Integer::parseInt)
+                    .map(e -> (Department) session.get(Department.class, e))
+                    .forEachOrdered(teacher::addDepartment);
+            Login login = new Login(userName, password, "teacher", teacher.getId(), email);
+            session.save(login);
+            session.getTransaction().commit();
+            session.close();
+            resp.sendRedirect("login");
         }
-        out.close();
+        
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();

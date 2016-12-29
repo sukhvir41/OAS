@@ -8,6 +8,7 @@ package utility;
 import entities.Lecture;
 import java.security.SecureRandom;
 import java.util.Properties;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.mail.Message;
 import javax.mail.Transport;
@@ -163,4 +164,7 @@ public class Utils {
         return message;
     }
 
+    public static boolean regexMatch(String regex, String string) {
+        return Pattern.compile(regex).matcher(string).matches();
+    }
 }

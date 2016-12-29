@@ -30,29 +30,33 @@ public class forgotpassword extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         PrintWriter out = resp.getWriter();
-        if (email != null && !email.equals("")) {
-            String body = "This is an auto generated mail. Do not reply or send any mail to this address."
-                    + "Click on the link to reset your password in 30 mins or it will get expired";
-            Session session = Utils.openSession();
-            session.beginTransaction();
-            Query query = session.createQuery("from Login where email = :email");
-            query.setString("email", email);
-            List<Login> list = query.list();
-            if (list.size() != 0) {
-                Login login = (Login) list.get(0);
-                String token = Utils.createToken();
-                login.setToken(token);
-                login.setDate(new Date());
-                session.update(login);
-                String url = "192.168.1.1/OAS/resetpassword?username=" + login.getUsername() + "&token=" + token;
-                Utils.sendMail(email, "Password reset.  OAS system", body + url);
-                out.print("true");
-            } else {
-                out.print("true");
-            }
-            session.getTransaction().commit();
-            session.close();
+        if (Utils.regexMatch("/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6})?$/", email)) {
+            if (email != null && !email.equals("")) {
+                String body = "This is an auto generated mail. Do not reply or send any mail to this address."
+                        + "Click on the link to reset your password in 30 mins or it will get expired";
+                Session session = Utils.openSession();
+                session.beginTransaction();
+                Query query = session.createQuery("from Login where email = :email");
+                query.setString("email", email);
+                List<Login> list = query.list();
+                if (list.size() != 0) {
+                    Login login = (Login) list.get(0);
+                    String token = Utils.createToken();
+                    login.setToken(token);
+                    login.setDate(new Date());
+                    session.update(login);
+                    String url = "192.168.1.1/OAS/resetpassword?username=" + login.getUsername() + "&token=" + token;
+                    Utils.sendMail(email, "Password reset.  OAS system", body + url);
+                    out.print("true");
+                } else {
+                    out.print("true");
+                }
+                session.getTransaction().commit();
+                session.close();
 
+            } else {
+                out.print("false");
+            }
         } else {
             out.print("false");
         }
