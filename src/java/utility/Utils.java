@@ -45,8 +45,8 @@ public class Utils {
     static {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
-            username = reader.readLine();
             password = reader.readLine();
+            username = reader.readLine();
         } catch (Exception e) {
             System.out.println("error occured");
         }
@@ -137,7 +137,9 @@ public class Utils {
             return false;
         }
     }
-
+/**
+ * this gives a unique lecture id in base64 of 8 characters long
+ */
     public static String getLectureId() {
         Session session = openSession();
 
