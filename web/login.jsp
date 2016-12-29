@@ -122,14 +122,6 @@
                                                             </div> 
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
-                                                    <div class="row">
-                                                        <div class="col-md-12 ">
-                                                            <div class="alert alert-danger" hidden id="loginError">
-                                                                <strong>Error!</strong> Username or Password is wrong
-                                                            </div>
-                                                        </div> 
-                                                    </div> 
                                                     <div class="row">
                                                         <!-- SHOW THIS WHEN THRER IS AN ERROR -->
                                                         <div class="col-md-12 ">

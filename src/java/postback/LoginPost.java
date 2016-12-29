@@ -26,7 +26,7 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/loginpost")
 public class LoginPost extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -58,6 +58,7 @@ public class LoginPost extends HttpServlet {
                         break;
                     }
                     case "admin": {
+                        req.getSession().setAttribute("details", login);
                         req.getSession().setAttribute("type", "admin");
                         break;
                     }
@@ -72,7 +73,7 @@ public class LoginPost extends HttpServlet {
                     case "student":
                         resp.sendRedirect("student/home");
                         break;
-
+                    
                     case "teacher":
                         resp.sendRedirect("teacher/home");
                         break;
@@ -90,14 +91,14 @@ public class LoginPost extends HttpServlet {
             resp.sendRedirect("login?verified=false");
             return;
         }
-
+        
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         out.print("error");
         out.close();
     }
-
+    
 }
