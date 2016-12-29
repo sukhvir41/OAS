@@ -6,6 +6,8 @@
 package utility;
 
 import entities.Lecture;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.security.SecureRandom;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -27,7 +29,8 @@ import org.hibernate.cfg.Configuration;
 public class Utils {
 
     private static SessionFactory sessionFactory;
-
+    private static String username;
+    private static String password;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
 //    static {
@@ -39,6 +42,16 @@ public class Utils {
 //                .build();
 //        sessionFactory = metadata.getSessionFactoryBuilder().build();
 //    }
+    static {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
+            username = reader.readLine();
+            password = reader.readLine();
+        } catch (Exception e) {
+            System.out.println("error occured");
+        }
+    }
+
     /**
      * this methods is used to create a session for hibernate
      *
@@ -86,7 +99,7 @@ public class Utils {
             generateMailMessage.setSubject(subject);
             generateMailMessage.setContent(message, "text/html");
             transport = getMailSession.getTransport("smtp");
-            transport.connect("smtp.gmail.com", "oasservice.mail", "admin@oas");
+            transport.connect("smtp.gmail.com", username, password);
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
             return true;

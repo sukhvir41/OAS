@@ -8,6 +8,9 @@ package utility;
 import com.google.gson.*;
 import entities.Course;
 import entities.Login;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Calendar;
@@ -25,18 +28,11 @@ public class TestBcrypt {
 
     static JsonArray jsonCourses;
 
-    public static void main(String[] args) {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        Login login = (Login) session.get(Login.class, "s1");
-        System.out.println(Math.abs(login.getDate().getTime() - new Date().getTime())/60000d);
-        session.getTransaction().commit();
-        session.close();
-      
-        
+    public static void main(String[] args) throws Exception {
+        BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
+        System.out.println(reader.readLine());
+        System.out.println(reader.readLine());
 
     }
-
-    
 
 }

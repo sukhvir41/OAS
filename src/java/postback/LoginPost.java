@@ -26,7 +26,7 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/loginpost")
 public class LoginPost extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -34,7 +34,7 @@ public class LoginPost extends HttpServlet {
         String remember = req.getParameter("rememberme");
         Session session = Utils.openSession();
         session.beginTransaction();
-        Login login;
+        Login login = null;
         if (Utils.regexMatch("/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6})?$/", username)) {
             Query query = session.createQuery("from Login where email = :email");
             query.setString("email", username);
@@ -42,50 +42,62 @@ public class LoginPost extends HttpServlet {
         } else {
             login = (Login) session.get(Login.class, username);
         }
-        if (login.checkPassword(password)) {
-            switch (login.getType()) {
-                case "student": {
-                    Student student = (Student) session.get(Student.class, login.getId());
-                    req.getSession().setAttribute("student", student);
-                    req.getSession().setAttribute("type", "student");
-                    break;
+        if (login != null) {
+            if (login.checkPassword(password)) {
+                switch (login.getType()) {
+                    case "student": {
+                        Student student = (Student) session.get(Student.class, login.getId());
+                        req.getSession().setAttribute("student", student);
+                        req.getSession().setAttribute("type", "student");
+                        break;
+                    }
+                    case "teacher": {
+                        Teacher teacher = (Teacher) session.get(Teacher.class, login.getId());
+                        req.getSession().setAttribute("teacher", teacher);
+                        req.getSession().setAttribute("type", "teacher");
+                        break;
+                    }
+                    case "admin": {
+                        req.getSession().setAttribute("type", "admin");
+                        break;
+                    }
                 }
-                case "teacher": {
-                    Teacher teacher = (Teacher) session.get(Teacher.class, login.getId());
-                    req.getSession().setAttribute("teacher", teacher);
-                    req.getSession().setAttribute("type", "teacher");
-                    break;
+                session.getTransaction().commit();
+                session.close();
+                req.getSession().setAttribute("valid", true);
+                if (remember != null && !remember.equals("") && remember.equals(true)) {
+                    req.getSession().setMaxInactiveInterval(0);
                 }
+                switch (login.getType()) {
+                    case "student":
+                        resp.sendRedirect("student/home");
+                        break;
+
+                    case "teacher":
+                        resp.sendRedirect("teacher/home");
+                        break;
+                    case "admin":
+                        resp.sendRedirect("admin/home");
+                        break;
+                }
+            } else {
+                session.getTransaction().commit();
+                session.close();
+                resp.sendRedirect("login?verified=false");
+                return;
             }
-            session.getTransaction().commit();
-            session.close();
-            
         } else {
-            session.getTransaction().commit();
-            session.close();
             resp.sendRedirect("login?verified=false");
+            return;
         }
-        
-        req.getSession().setAttribute("valid", true);
-        if (remember != null && !remember.equals("") && remember.equals(true)) {
-            req.getSession().setMaxInactiveInterval(0);
-        }
-        switch (login.getType()) {
-            case "student":
-                resp.sendRedirect("student/home");
-                break;
-            
-            case "teacher":
-                resp.sendRedirect("teacher/home");
-                break;
-        }
+
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         out.print("error");
         out.close();
     }
-    
+
 }
