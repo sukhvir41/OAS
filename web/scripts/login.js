@@ -5,12 +5,21 @@ var loginBlankCheck = function(){
 	var username = $("#username");
 	var password = $("#password");
 	var error = $("#loginblank");
+	var errorLenght = $("#loginError");
 	if(username.val()===""||password.val()===""){
+		errorLenght.hide();
 		error.show();
 		return false;
 	}else{
-		error.hide();
-		return true;
+		if (password.val().length >=8 && password.val().length<=40) {
+			errorLenght.hide();
+			error.hide();
+			return true;
+		}else{
+			errorLenght.show();
+			error.hide();
+			return false;
+		}
 	}
 }
 
