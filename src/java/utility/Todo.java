@@ -15,4 +15,6 @@ public class Todo {
     //todo: fix registeration and make reset password page and post back servlet for it
     //todo : start work on admin module
     //todo : make error pages for all errors(remaining)
+    // make the bCrypt to 8 fro performance
+    // change adminstrator to admin fro less spling mistakes
 }

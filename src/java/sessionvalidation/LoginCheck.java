@@ -35,16 +35,16 @@ public class LoginCheck implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         try {
-            if ((boolean) session.getAttribute("valid") == true) {
+            if (session.getAttribute("accept") != null && (boolean) session.getAttribute("accept") == true) {
                 switch ((String) session.getAttribute("type")) {
                     case "students":
-                        resp.sendRedirect("student/home");
+                        resp.sendRedirect("/OAS/student");
                         break;
                     case "teacher":
-                        resp.sendRedirect("teacher/home");
+                        resp.sendRedirect("/OAS/teacher");
                         break;
                     case "admin":
-                        resp.sendRedirect("admin/home");
+                        resp.sendRedirect("/OAS/administrator");
                         break;
                 }
             } else {

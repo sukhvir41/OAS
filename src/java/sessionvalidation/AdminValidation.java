@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author sukhvir
  */
-@WebFilter(urlPatterns = "/admin/*")
+@WebFilter(urlPatterns = {"/administrator/*","/administrator"})
 public class AdminValidation implements Filter {
 
     @Override
@@ -34,10 +34,14 @@ public class AdminValidation implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
-        if ((boolean) session.getAttribute("valid") == true && session.getAttribute("type").equals("admin")) {
-            chain.doFilter(request, response);
-        } else {
-            resp.sendRedirect("login");
+        try {
+            if ((boolean) session.getAttribute("accept") == true && session.getAttribute("type").equals("admin")) {
+                chain.doFilter(request, response);
+            } else {
+                resp.sendRedirect("/OAS/login");
+            }
+        } catch (Exception e) {
+            resp.sendRedirect("/OAS/login");
         }
     }
 

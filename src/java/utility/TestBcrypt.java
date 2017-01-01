@@ -16,6 +16,7 @@ import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -29,10 +30,9 @@ public class TestBcrypt {
     static JsonArray jsonCourses;
 
     public static void main(String[] args) throws Exception {
-        BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
-        System.out.println(reader.readLine());
-        System.out.println(reader.readLine());
-
+      //String pat = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher("sukhvir41@gmail.com").find();
+        System.out.println(Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher("sukhvir41@gmail.com").find());
+        System.out.println(Utils.regexMatch("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", "sukhvir41@gmail.com", Pattern.CASE_INSENSITIVE));
     }
 
 }

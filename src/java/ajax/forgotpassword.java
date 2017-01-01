@@ -8,8 +8,10 @@ package ajax;
 import entities.Login;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +32,7 @@ public class forgotpassword extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         PrintWriter out = resp.getWriter();
-        if (Utils.regexMatch("/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6})?$/", email)) {
+        if (Utils.regexMatch("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", email,Pattern.CASE_INSENSITIVE)) {
             if (email != null && !email.equals("")) {
                 String body = "This is an auto generated mail. Do not reply or send any mail to this address."
                         + "Click on the link to reset your password in 30 mins or it will get expired";
@@ -45,7 +47,7 @@ public class forgotpassword extends HttpServlet {
                     login.setToken(token);
                     login.setDate(new Date());
                     session.update(login);
-                    String url = "192.168.1.1/OAS/resetpassword?username=" + login.getUsername() + "&token=" + token;
+                    String url = "192.168.1.1/OAS/resetpassword?username=" + login.getUsername() + "&token=" + URLEncoder.encode(token,"UTF-8" );
                     Utils.sendMail(email, "Password reset.  OAS system", body + url);
                     out.print("true");
                 } else {

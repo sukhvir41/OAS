@@ -41,7 +41,7 @@ public class Subject implements Serializable {
 
     @ManyToMany(mappedBy = "subjects")
     List<Student> students = new ArrayList<>();
-
+    
     public Subject() {
     }
 

@@ -34,6 +34,7 @@ public class ResetPasswordValidation implements Filter {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        try{
         if (username != null && !username.equals("") && password != null && !password.equals("")) {
             if (password.length() >= 8 && password.length() <= 40) {
                 chain.doFilter(request, response);
@@ -42,6 +43,9 @@ public class ResetPasswordValidation implements Filter {
             }
         } else {
             resp.sendRedirect("error");
+        }
+        }catch(Exception e){
+            resp.sendRedirect("/OAS/error");
         }
 
     }

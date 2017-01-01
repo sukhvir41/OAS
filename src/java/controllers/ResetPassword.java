@@ -8,6 +8,7 @@ package controllers;
 import entities.Login;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,15 +28,14 @@ public class ResetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        String token = req.getParameter("token");
+        String token = URLDecoder.decode(req.getParameter("token"), "UTF-8");
         Login login;
         if (username != null && !username.equals("") && token != null && !token.equals("")) {
             Date now = new Date();
             Session session = Utils.openSession();
             session.beginTransaction();
             login = (Login) session.get(Login.class, username);
-            session.getTransaction().commit();
-            session.close();
+            System.out.println(token);
             if (login == null) {
                 resp.sendRedirect("error");
             } else {
@@ -55,7 +55,8 @@ public class ResetPassword extends HttpServlet {
                     resp.sendRedirect("error");
                 }
             }
-
+            session.getTransaction().commit();
+            session.close();
         } else {
             resp.sendRedirect("error");
         }

@@ -44,7 +44,7 @@ public class RegisterSubjects extends HttpServlet {
             Course course = (Course) session.get(Course.class, courseid);
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, Integer.parseInt(classId));
             jsonSubjects = new JsonArray();
-            List<Subject> subjects = course.getSubjects();
+            List<Subject> subjects = classRoom.getSubjects();
             subjects.stream()
                     .forEach(e -> add(e));
             session.getTransaction().commit();

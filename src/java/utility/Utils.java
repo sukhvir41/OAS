@@ -31,7 +31,7 @@ public class Utils {
     private static SessionFactory sessionFactory;
     private static String username;
     private static String password;
-    private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
 
 //    static {
 //        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
@@ -137,9 +137,10 @@ public class Utils {
             return false;
         }
     }
-/**
- * this gives a unique lecture id in base64 of 8 characters long
- */
+
+    /**
+     * this gives a unique lecture id in base64 of 8 characters long
+     */
     public static String getLectureId() {
         Session session = openSession();
 
@@ -180,6 +181,10 @@ public class Utils {
     }
 
     public static boolean regexMatch(String regex, String string) {
-        return Pattern.compile(regex).matcher(string).matches();
+        return Pattern.compile(regex).matcher(string).find();
+    }
+
+    public static boolean regexMatch(String regex, String string, int flag) {
+        return Pattern.compile(regex, flag).matcher(string).find();
     }
 }
