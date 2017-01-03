@@ -44,7 +44,7 @@ public class LoginCheck implements Filter {
                         resp.sendRedirect("/OAS/teacher");
                         break;
                     case "admin":
-                        resp.sendRedirect("/OAS/administrator");
+                        resp.sendRedirect("/OAS/admin");
                         break;
                 }
             } else {

@@ -19,7 +19,7 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/administrator/adddepartment")
+@WebServlet(urlPatterns = "/admin/adddepartment")
 public class AddDepartment extends HttpServlet {
 
     @Override
@@ -31,12 +31,12 @@ public class AddDepartment extends HttpServlet {
         session.save(department);
         session.getTransaction().commit();
         session.close();
-        resp.sendRedirect("/OAS/administrator/departments");
+        resp.sendRedirect("/OAS/admin/departments");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/administrator/departments");
+        resp.sendRedirect("/OAS/admin/departments");
     }
 
 }

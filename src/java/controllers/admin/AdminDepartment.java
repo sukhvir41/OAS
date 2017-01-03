@@ -20,7 +20,7 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/administrator/departments")
+@WebServlet(urlPatterns = "/admin/departments")
 public class AdminDepartment extends HttpServlet {
     
     @Override
@@ -41,7 +41,7 @@ public class AdminDepartment extends HttpServlet {
         session.getTransaction().commit();
         session.close();
         req.setAttribute("departments", depsrtments);
-        req.getRequestDispatcher("/WEB-INF/administrator/admindepartment.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/admindepartment.jsp").forward(req, resp);
     }
     
 }

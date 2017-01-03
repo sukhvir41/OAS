@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author sukhvir
  */
-@WebFilter(urlPatterns = {"/administrator/*","/administrator"})
+@WebFilter(urlPatterns = {"/admin/*","/admin"})
 public class AdminValidation implements Filter {
 
     @Override

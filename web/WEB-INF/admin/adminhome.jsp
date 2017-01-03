@@ -1,6 +1,6 @@
 <%-- 
-    Document   : admindepartment
-    Created on : Jan 1, 2017, 7:59:55 PM
+    Document   : home
+    Created on : Dec 31, 2016, 1:12:13 AM
     Author     : sukhvir
 --%>
 
@@ -14,8 +14,15 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-        <title>Departments - Admin</title>	
+        <title>Home - Admin</title>	
 
+        <meta name="keywords" content="HTML5 Template" />
+        <meta name="description" content="Porto - Responsive HTML5 Template">
+        <meta name="author" content="okler.net">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -24,35 +31,35 @@
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
         <!-- Vendor CSS -->
-        <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="/OAS/vendor/font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" href="/OAS/vendor/simple-line-icons/css/simple-line-icons.css">
-        <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.theme.default.min.css">
-        <link rel="stylesheet" href="/OAS/vendor/magnific-popup/magnific-popup.css">
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+        <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css">
 
         <!-- Theme CSS -->
-        <link rel="stylesheet" href="/OAS/css/theme.css">
-        <link rel="stylesheet" href="/OAS/css/theme-elements.css">
-        <link rel="stylesheet" href="/OAS/css/theme-blog.css">
-        <link rel="stylesheet" href="/OAS/css/theme-shop.css">
-        <link rel="stylesheet" href="/OAS/css/theme-animate.css">
+        <link rel="stylesheet" href="css/theme.css">
+        <link rel="stylesheet" href="css/theme-elements.css">
+        <link rel="stylesheet" href="css/theme-blog.css">
+        <link rel="stylesheet" href="css/theme-shop.css">
+        <link rel="stylesheet" href="css/theme-animate.css">
 
         <!-- Current Page CSS -->
-        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/settings.css" media="screen">
-        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/layers.css" media="screen">
-        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/navigation.css" media="screen"> 
+        <link rel="stylesheet" href="vendor/rs-plugin/css/settings.css" media="screen">
+        <link rel="stylesheet" href="vendor/rs-plugin/css/layers.css" media="screen">
+        <link rel="stylesheet" href="vendor/rs-plugin/css/navigation.css" media="screen"> 
 
-        <link rel="stylesheet" href="/OAS/vendor/circle-flip-slideshow/css/component.css" media="screen">
+        <link rel="stylesheet" href="vendor/circle-flip-slideshow/css/component.css" media="screen">
 
         <!-- Skin CSS -->
-        <link rel="stylesheet" href="/OAS/css/skins/default.css">
+        <link rel="stylesheet" href="css/skins/default.css">
 
         <!-- Theme Custom CSS -->
-        <link rel="stylesheet" href="/OAS/css/custom.css">
+        <link rel="stylesheet" href="css/custom.css">
 
         <!-- Head Libs -->
-        <script src="/OAS/vendor/modernizr/modernizr.js"></script>
+        <script src="vendor/modernizr/modernizr.js"></script>
 
         <!--[if IE]>
                 <link rel="stylesheet" href="css/ie.css">
@@ -67,7 +74,7 @@
     <body>
         <div class="body">
             <header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-10px", "stickyChangeLogo": true}' >
-                <div class="header-body">
+                <div class="header-body" style="max-height:150px; min-height: 90px;">
                     <div class="header-container container">
                         <div class="header-row">
                             <div class="header-column">
@@ -429,7 +436,7 @@
                                                                             <div class="user-avatar">
                                                                                 <!-- <div class="img-thumbnail">
                                                                                         <img src="img/clients/client-1.jpg" alt="">
-                                                                                    </div> -->
+                                                                                </div> -->
                                                                                 <p><strong>Username here of admin</strong><span>Administrator</span></p>
                                                                             </div>
                                                                         </div>
@@ -465,14 +472,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li><a href="/OAS/administrator">Home</a></li>
-                                    <li>Departments</li>
+                                    <li>Home</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Departments</h1>
+                                <h1>Home</h1>
                             </div>
                         </div>
                     </div>
@@ -480,50 +486,155 @@
 
                 <div class="container">
                     <div class="row">
-                        <form action="adddepartment" method="post">
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        <label>Deaperment Name</label>
-                                        <input class="form-control input-lg" placeholder="department name" type="text" name="departmentname" id="departmentname" required="true">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class= "row">
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        <input type="submit" value="Add" class="btn btn-primary">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <hr class="tall">
-                    <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <!--Department-->
-                                    <h4>Department</h4>
+                                    <div class="col-md-8">
+                                        <h4>Department</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="admin/departments">deatils</a>
+                                    </div>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Action</th>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="department" items="${requestScope.departments}">
                                                 <tr>
                                                     <td>${department.id}</td>
-                                                    <td><a href="#">${department.name}</a></td>
-                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
+                                                    <td>${department.name}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+
+                                    <hr class="tall">
+                                    <!--Course-->
+                                    <div class="col-md-8">
+                                        <h4>Course</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="#">deatils</a>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Department Name
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="course" items="${requestScope.courses}">
+                                                <tr>
+                                                    <td>${course.id}</td>
+                                                    <td>${course.name}</td>
+                                                    <td>${course.department.name}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+
+                                    <hr class="tall">
+                                    <!--class-->
+                                    <div class="col-md-8">
+                                        <h4>Class</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="#">deatils</a>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Divison
+                                                </th>
+                                                <th>
+                                                    Semister
+                                                </th>
+                                                <th>
+                                                    Course
+                                                </th>
+                                                <th>
+                                                    MiniSubjects
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <c:forEach var="classRoom" items="${requestScope.classRooms}">
+                                                <tr>
+                                                    <td>${classRoom.id}</td>
+                                                    <td>${classRoom.name}</td>
+                                                    <td>${classRoom.division}</td>
+                                                    <td>${classRoom.semister}</td>
+                                                    <td>${classRoom.course.name}</td>
+                                                    <td>${classRoom.minimumSubecjts}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+
+                                    <hr class="tall">
+
+                                    <!--Subjects-->
+                                    <div class="col-md-8">
+                                        <h4>Subjects</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="#">deatils</a>
+                                    </div>
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Course
+                                                </th>
+                                                <th>
+                                                    Elective
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="subject" items="${requestScope.subjects}">
+                                                <tr>
+                                                    <td>${subject.id}</td>
+                                                    <td>${subject.name}</td>
+                                                    <td>${subject.course.name}</td>
+                                                    <td>${subject.elective}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                    <hr class="tall">
                                 </div>
                             </div>
                         </div>
@@ -536,47 +647,47 @@
             <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
             <![endif]-->
             <!--[if gte IE 9]><!-->
-            <script src="/OAS/vendor/jquery/jquery.js"></script>
+            <script src="vendor/jquery/jquery.js"></script>
             <!--<![endif]-->
-            <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
-            <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
-            <script src="/OAS/vendor/jquery-cookie/jquery-cookie.js"></script>
-            <script src="/OAS/vendor/bootstrap/js/bootstrap.js"></script>
-            <script src="/OAS/vendor/common/common.js"></script>
-            <script src="/OAS/vendor/jquery.validation/jquery.validation.js"></script>
-            <script src="/OAS/vendor/jquery.stellar/jquery.stellar.js"></script>
-            <script src="/OAS/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
-            <script src="/OAS/vendor/jquery.gmap/jquery.gmap.js"></script>
-            <script src="/OAS/vendor/jquery.lazyload/jquery.lazyload.js"></script>
-            <script src="/OAS/vendor/isotope/jquery.isotope.js"></script>
-            <script src="/OAS/vendor/owl.carousel/owl.carousel.js"></script>
-            <script src="/OAS/vendor/magnific-popup/jquery.magnific-popup.js"></script>
-            <script src="/OAS/vendor/vide/vide.js"></script>
+            <script src="vendor/jquery.appear/jquery.appear.js"></script>
+            <script src="vendor/jquery.easing/jquery.easing.js"></script>
+            <script src="vendor/jquery-cookie/jquery-cookie.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.js"></script>
+            <script src="vendor/common/common.js"></script>
+            <script src="vendor/jquery.validation/jquery.validation.js"></script>
+            <script src="vendor/jquery.stellar/jquery.stellar.js"></script>
+            <script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+            <script src="vendor/jquery.gmap/jquery.gmap.js"></script>
+            <script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
+            <script src="vendor/isotope/jquery.isotope.js"></script>
+            <script src="vendor/owl.carousel/owl.carousel.js"></script>
+            <script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+            <script src="vendor/vide/vide.js"></script>
 
             <!-- Theme Base, Components and Settings -->
-            <script src="/OAS/js/theme.js"></script>
+            <script src="js/theme.js"></script>
 
             <!-- Specific Page Vendor and Views -->
-            <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.carousel.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+            <script src="vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+            <script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.carousel.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+            <script src="vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
 
-            <script src="/OAS/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
-            <script src="/OAS/js/views/view.home.js"></script>
+            <script src="vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
+            <script src="js/views/view.home.js"></script>
 
             <!-- Theme Custom -->
-            <script src="/OAS/js/custom.js"></script>
+            <script src="js/custom.js"></script>
 
             <!-- Theme Initialization Files -->
-            <script src="/OAS/js/theme.init.js"></script>
+            <script src="js/theme.init.js"></script>
 
             <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
             <script type="text/javascript">

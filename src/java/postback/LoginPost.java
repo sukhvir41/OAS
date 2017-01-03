@@ -81,7 +81,7 @@ public class LoginPost extends HttpServlet {
                         resp.sendRedirect("teacher");
                         break;
                     case "admin":
-                        resp.sendRedirect("administrator");
+                        resp.sendRedirect("admin");
                         break;
                 }
             } else {

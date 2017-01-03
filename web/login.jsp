@@ -145,7 +145,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <center>
-                                                                <a  class="" href="registeration">Register Now</a>
+                                                                <a  class="" href="register">Register Now</a>
                                                             </center>
                                                         </div>
                                                     </div>

@@ -23,7 +23,7 @@ import org.hibernate.Session;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/administrator")
+@WebServlet(urlPatterns = "/admin")
 public class AdminHome extends HttpServlet {
 
     @Override
@@ -55,7 +55,7 @@ public class AdminHome extends HttpServlet {
         req.setAttribute("subjects", subjects);
         session.getTransaction().commit();
         session.close();
-        req.getRequestDispatcher("WEB-INF/administrator/adminhome.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/admin/adminhome.jsp").forward(req, resp);
 
     }
 

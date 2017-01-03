@@ -22,7 +22,7 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/administrator/departments/detaildepartment")
+@WebServlet(urlPatterns = "/admin/departments/detaildepartment")
 public class DetailDepartment extends HttpServlet {
 
     @Override
@@ -35,7 +35,7 @@ public class DetailDepartment extends HttpServlet {
         process(req, resp);
     }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) {
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException , IOException{
         int departmentID = 1;
         try {
             departmentID = Integer.parseInt(req.getParameter("departmentId"));
@@ -51,13 +51,15 @@ public class DetailDepartment extends HttpServlet {
         teachers = department.getTeachers();
         courses = department.getCourses();
         hod = department.getHod();
-        session.getTransaction().commit();
-        session.close();
         req.setAttribute("department", department);
         req.setAttribute("hod", hod);
         req.setAttribute("teachers", teachers);
         req.setAttribute("courses", courses);
-        // add resquest diapatch er and design the jsp
+        req.getRequestDispatcher("/WEB-INF/admin/detaildepartment.jsp").forward(req, resp);
+        session.getTransaction().commit();
+        session.close();
+        System.out.println("session was closed");
+       
     }
 
 }
