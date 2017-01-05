@@ -56,6 +56,7 @@ public class Lecture implements Serializable {
         this.date = new Date();
     }
 
+   
     public void addStudent(Student student) {
         if (!students.contains(student)) {
             students.add(student);

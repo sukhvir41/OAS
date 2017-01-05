@@ -41,7 +41,7 @@ public class Subject implements Serializable {
 
     @ManyToMany(mappedBy = "subjects")
     List<Student> students = new ArrayList<>();
-    
+
     public Subject() {
     }
 
@@ -56,11 +56,22 @@ public class Subject implements Serializable {
         addCourse(course);
     }
 
+    /**
+     * this method adds the subject to the student and the student to the
+     * subject to the subject
+     *
+     * @param student student to be added
+     */
     public void addStudent(Student student) {
         student.addSubject(this);
     }
 
-    public void addCourse(Course course) {
+    /**
+     * this method add the subject to the course and the course to the subject
+     *
+     * @param course course to be added
+     */
+    final public void addCourse(Course course) {
         course.addSubject(this);
     }
 

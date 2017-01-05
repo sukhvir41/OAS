@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import utility.BCrypt;
+import utility.Utils;
 
 /**
  *
@@ -45,8 +46,15 @@ public class Login implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+
     @Column(name = "used")
     private boolean used;
+
+    @Column(name = "session_id")
+    private String sessionId;
+
+    @Column(name = "session_token")
+    private String sessionToken;
 
     public Login() {
     }
@@ -68,6 +76,22 @@ public class Login implements Serializable {
         this.token = token;
         this.date = date;
 
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = Utils.hash(sessionToken);
+    }
+
+    public boolean matchSessionToken(String token) {
+        return Utils.hashEquals(this.sessionToken, token);
     }
 
     public boolean isUsed() {

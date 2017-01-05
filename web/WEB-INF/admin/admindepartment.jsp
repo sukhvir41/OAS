@@ -439,7 +439,7 @@
                                                                                     <a href="#">My Account(add edit account changes page)</a>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a href="logout">Log Out(addd sesion deactivate page)</a>
+                                                                                    <a href="/OAS/logout">Log Out(addd sesion deactivate page)</a>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
@@ -517,9 +517,9 @@
                                         <tbody>
                                             <c:forEach var="department" items="${requestScope.departments}">
                                                 <tr>
-                                                    <td>${department.id}</td>
+                                                    <td>${department.id}<a name="${department.id}"></a></td>
                                                     <td><a href="/OAS/admin/departments/detaildepartment?departmentId=${department.id}">${department.name}</a></td>
-                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
+                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/departments/editdepartment?departmentId=${department.id}&from=departments">Edit</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

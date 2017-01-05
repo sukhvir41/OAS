@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/loginpost")
 public class LoginPost extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -66,17 +67,25 @@ public class LoginPost extends HttpServlet {
                         break;
                     }
                 }
-                session.getTransaction().commit();
-                session.close();
                 htppSession.setAttribute("accept", true);
                 if (remember != null && remember.equals("true")) {
-                    htppSession.setMaxInactiveInterval(259200);
+                    htppSession.setMaxInactiveInterval(864000);
+                    String id = Utils.generateSessionId();
+                    Cookie cookieSessionId = new Cookie("sid", id);
+                    cookieSessionId.setMaxAge(864000);
+                    login.setSessionId(id);
+                    String token = Utils.createToken(12);
+                    Cookie cookieSessionToken = new Cookie("stoken", token);
+                    cookieSessionToken.setMaxAge(864000);
+                    login.setSessionToken(token);
+                    resp.addCookie(cookieSessionId);
+                    resp.addCookie(cookieSessionToken);
                 }
                 switch (login.getType()) {
                     case "student":
                         resp.sendRedirect("student");
                         break;
-
+                    
                     case "teacher":
                         resp.sendRedirect("teacher");
                         break;
@@ -85,21 +94,21 @@ public class LoginPost extends HttpServlet {
                         break;
                 }
             } else {
-                session.getTransaction().commit();
-                session.close();
                 resp.sendRedirect("login?verified=false");
             }
         } else {
             resp.sendRedirect("login?verified=false");
         }
-
+        session.getTransaction().commit();
+        session.close();
+        System.out.println("called session closed");
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         out.print("error");
         out.close();
     }
-
+    
 }

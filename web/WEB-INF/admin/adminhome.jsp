@@ -446,7 +446,7 @@
                                                                                     <a href="#">My Account(add edit account changes page)</a>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a href="logout">Log Out(addd sesion deactivate page)</a>
+                                                                                    <a href="/OAS/logout">Log Out(addd sesion deactivate page)</a>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
@@ -528,15 +528,12 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>
-                                                    #
-                                                </th>
-                                                <th>
-                                                    Name
-                                                </th>
-                                                <th>
-                                                    Department Name
-                                                </th>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Started</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Department Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -544,6 +541,23 @@
                                                 <tr>
                                                     <td>${course.id}</td>
                                                     <td>${course.name}</td>
+                                                    <td>${course.started}</td>
+                                                    <td><c:choose>
+                                                        <c:when test="${course.started} == true">
+                                                            ${course.start}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            --------
+                                                        </c:otherwise>
+                                                    </c:choose></td>
+                                                    <td><c:choose>
+                                                        <c:when test="${course.started} == false && ${course.start} != 'null'">
+                                                            ${course.end}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            --------
+                                                        </c:otherwise>
+                                                    </c:choose></td>
                                                     <td>${course.department.name}</td>
                                                 </tr>
                                             </c:forEach>

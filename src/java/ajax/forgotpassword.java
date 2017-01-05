@@ -35,7 +35,7 @@ public class forgotpassword extends HttpServlet {
         if (Utils.regexMatch("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", email,Pattern.CASE_INSENSITIVE)) {
             if (email != null && !email.equals("")) {
                 String body = "This is an auto generated mail. Do not reply or send any mail to this address."
-                        + "Click on the link to reset your password in 30 mins or it will get expired";
+                        + "Click on the link to reset your password in 30 mins or it will get expired. ";
                 Session session = Utils.openSession();
                 session.beginTransaction();
                 Query query = session.createQuery("from Login where email = :email");

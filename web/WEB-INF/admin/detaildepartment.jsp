@@ -442,7 +442,7 @@
                                                                                     <a href="#">My Account(add edit account changes page)</a>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a href="#">Log Out(addd sesion deactivate page)</a>
+                                                                                    <a href="/OAS/logout">Log Out(addd sesion deactivate page)</a>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
@@ -503,7 +503,7 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </dl>
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a>
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/departments/editdepartment?departmentId=${requestScope.department.id}">Edit</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
                                         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
                                             <div class="modal-dialog">
@@ -512,7 +512,7 @@
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                         <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
                                                     </div>
-                                                    <form class="form-horizontal mb-lg" action="#">
+                                                    <form class="form-horizontal mb-lg" action="/OAS/admin/departments/deletedepartment" method="post">
                                                         <div class="modal-body">
 
                                                             <input type="hidden" name="departmentId" value="${requestScope.department.id}">
@@ -590,7 +590,7 @@
                                                 <c:forEach var="teacher" items="${requestScope.teachers}">
                                                     <tr>
                                                         <td>${teacher.id}</td>
-                                                        <td><a href="#">${teacher.fname} ${teacher.lname}</a></td>
+                                                        <td><a href="#">${teacher.fName} ${teacher.lName}</a></td>
                                                         <td>${teacher.email}</td>
                                                         <td>${teacher.verified}</td>
                                                     </tr>

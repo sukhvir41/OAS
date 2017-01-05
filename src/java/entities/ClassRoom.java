@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -51,7 +52,7 @@ public class ClassRoom implements Serializable {
     @OneToMany(mappedBy = "classRoom")
     private List<Student> students = new ArrayList();
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "subject_class_link", joinColumns = @JoinColumn(name = "class_fid"), inverseJoinColumns = @JoinColumn(name = "subject_fid"))
     private List<Subject> subjects = new ArrayList<>();
 
@@ -80,14 +81,33 @@ public class ClassRoom implements Serializable {
         addCourse(course);
     }
 
+    /**
+     * this method adds the classroom to the course and the course to the
+     * classroom
+     */
     public void addCourse(Course course) {
         course.addClassRoom(this);
     }
 
+    /**
+     * this method adds the student to the classroom and the class room to the
+     * student
+     */
     public void addStudent(Student student) {
         if (!students.contains(student)) {
             this.students.add(student);
             student.setClassRoom(this);
+        }
+    }
+
+    /**
+     * this method adds the subject to ten classroom
+     *
+     * @param subject subject to be added
+     */
+    public void addSubject(Subject subject) {
+        if (!subjects.contains(subject)) {
+            this.subjects.add(subject);
         }
     }
 

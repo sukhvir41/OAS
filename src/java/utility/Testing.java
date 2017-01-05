@@ -25,14 +25,12 @@ import org.hibernate.Session;
  *
  * @author sukhvir
  */
-public class TestBcrypt {
+public class Testing {
 
-    static JsonArray jsonCourses;
+  
 
     public static void main(String[] args) throws Exception {
-      //String pat = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher("sukhvir41@gmail.com").find();
-        System.out.println(Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher("sukhvir41@gmail.com").find());
-        System.out.println(Utils.regexMatch("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", "sukhvir41@gmail.com", Pattern.CASE_INSENSITIVE));
+     
     }
 
 }

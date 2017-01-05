@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +36,15 @@ public class Course implements Serializable {
     @Column(name = "co_name")
     private String name;
 
+    @Column(name = "start_date")
+    private Date start;
+
+    @Column(name = "end_date")
+    private Date end;
+
+    @Column(name = "started")
+    private boolean started = false;
+
     @ManyToOne
     @JoinColumn(name = "department_fid")
     private Department department;
@@ -58,10 +68,22 @@ public class Course implements Serializable {
         addDepartment(department);
     }
 
+    /**
+     * this method adds the course to the department and the department to the
+     * course
+     *
+     * @param department department to be added
+     */
     public void addDepartment(Department department) {
         department.addCourse(this);
     }
 
+    /**
+     * this method adds the classroom to the course and the course to the
+     * classroom
+     *
+     * @param classRoom classroom to be added
+     */
     public void addClassRoom(ClassRoom classRoom) {
         if (!classRooms.contains(classRoom)) {
             this.classRooms.add(classRoom);
@@ -69,11 +91,61 @@ public class Course implements Serializable {
         }
     }
 
+    /**
+     * this method adds the subject to the course and the course to the subject
+     *
+     * @param subject subject to be added
+     */
     public void addSubject(Subject subject) {
         if (!subjects.contains(subject)) {
             this.subjects.add(subject);
             subject.setCourse(this);
         }
+    }
+
+    /**
+     * this methods starts the course if not started
+     */
+    public void startCourse() {
+        if (!this.started) {
+            this.start = new Date();
+            this.end = null;
+            this.started = true;
+        }
+    }
+
+    /**
+     * this method stops the course if not stopped
+     */
+    public void stopCourse() {
+        if (started) {
+            this.end = new Date();
+            this.started = false;
+        }
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
     }
 
     public int getId() {

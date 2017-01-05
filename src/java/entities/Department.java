@@ -52,6 +52,11 @@ public class Department implements Serializable {
         this.name = name;
     }
 
+    /**
+     * this methods adds the teacher to the department
+     *
+     * @param teacher teacher to be added to the department
+     */
     public void addTeacher(Teacher teacher) {
         if (!teachers.contains(teacher)) {
             this.teachers.add(teacher);
@@ -59,6 +64,12 @@ public class Department implements Serializable {
         }
     }
 
+    /**
+     * this method adds the course to the department and the department to the
+     * course
+     *
+     * @param course course to be added
+     */
     public void addCourse(Course course) {
         if (!courses.contains(course)) {
             this.courses.add(course);

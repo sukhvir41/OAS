@@ -49,8 +49,7 @@ public class Teaching implements Serializable {
     public Teaching() {
     }
 
-    public Teaching(int id, ClassRoom classRoom, Subject subject) {
-        this.id = id;
+    public Teaching(ClassRoom classRoom, Subject subject) {
         this.classRoom = classRoom;
         this.subject = subject;
     }

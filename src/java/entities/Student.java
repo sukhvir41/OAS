@@ -83,6 +83,11 @@ public class Student implements Serializable {
         setClassRoom(classRoom);
     }
 
+    /**
+     * this method adds the subject to the student the subject to the student
+     *
+     * @param subject subject to be added
+     */
     public void addSubject(Subject subject) {
         if (!subjects.contains(subject)) {
             subjects.add(subject);
@@ -90,6 +95,12 @@ public class Student implements Serializable {
         }
     }
 
+    /**
+     * this methods adds the student to the classroom the classroom to the
+     * student
+     *
+     * @param classRoom classroom to be added
+     */
     public void addClassRoom(ClassRoom classRoom) {
         classRoom.addStudent(this);
     }

@@ -6,9 +6,13 @@
 package utility;
 
 import entities.Lecture;
+import entities.Login;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -16,6 +20,8 @@ import javax.mail.Message;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.xml.bind.DatatypeConverter;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -29,28 +35,7 @@ import org.hibernate.cfg.Configuration;
 public class Utils {
 
     private static SessionFactory sessionFactory;
-    private static String username;
-    private static String password;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
-
-//    static {
-//        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
-//                .configure("hibernate.cfg.xml")
-//                .build();
-//        Metadata metadata = new MetadataSources(standardRegistry)
-//                .getMetadataBuilder()
-//                .build();
-//        sessionFactory = metadata.getSessionFactoryBuilder().build();
-//    }
-    static {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
-            password = reader.readLine();
-            username = reader.readLine();
-        } catch (Exception e) {
-            System.out.println("error occured");
-        }
-    }
 
     /**
      * this methods is used to create a session for hibernate
@@ -84,7 +69,12 @@ public class Utils {
         javax.mail.Session getMailSession;
         MimeMessage generateMailMessage;
         Transport transport;
+        String username, password;
         try {
+            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            password = reader.readLine();
+            username = reader.readLine();
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
@@ -114,7 +104,13 @@ public class Utils {
         javax.mail.Session getMailSession;
         MimeMessage generateMailMessage;
         Transport transport;
+        String username, password;
         try {
+            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
+            System.out.println(file.exists());
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            password = reader.readLine();
+            username = reader.readLine();
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
@@ -128,7 +124,7 @@ public class Utils {
             generateMailMessage.setSubject(subject);
             generateMailMessage.setContent(message, "text/html");
             transport = getMailSession.getTransport("smtp");
-            transport.connect("smtp.gmail.com", "oasservice.mail", "admin@oas");
+            transport.connect("smtp.gmail.com", username, password);
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
             return true;
@@ -143,11 +139,12 @@ public class Utils {
      */
     public static String getLectureId() {
         Session session = openSession();
-
+        session.beginTransaction();
         Lecture lecture = (Lecture) session.get(Lecture.class, generateBase64());
         while (lecture != null) {
             lecture = (Lecture) session.get(Lecture.class, generateBase64());
         }
+        session.getTransaction().commit();
         session.close();
         return lecture.getId();
     }
@@ -163,7 +160,23 @@ public class Utils {
         return number.toString();
     }
 
+    private static String generateBase64(int limit) {
+        SecureRandom random = new SecureRandom();
+        StringBuilder number = new StringBuilder();
+
+        Stream.iterate(0, e -> e + 1)
+                .limit(limit)
+                .forEach((e) -> number.append(CODES.charAt(random.nextInt(63))));
+
+        return number.toString();
+    }
+
     //todo: have to make the token of variable legth but between limits 
+    /**
+     * this create a token of length 50 ie random in base64
+     *
+     * @return
+     */
     public static String createToken() {
         StringBuilder token = new StringBuilder();
         SecureRandom random = new SecureRandom();
@@ -173,6 +186,16 @@ public class Utils {
 
         return token.toString();
 
+    }
+
+    public static String createToken(int limit) {
+        StringBuilder token = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+        Stream.iterate(0, e -> e + 1)
+                .limit(limit)
+                .forEach((e) -> token.append(CODES.charAt(random.nextInt(63))));
+
+        return token.toString();
     }
 
     //Todo: fromated body to match the template
@@ -186,5 +209,43 @@ public class Utils {
 
     public static boolean regexMatch(String regex, String string, int flag) {
         return Pattern.compile(regex, flag).matcher(string).find();
+    }
+
+    public static String hash(String string) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] h = md.digest(string.getBytes());
+            return DatatypeConverter.printHexBinary(h);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static boolean hashEquals(String hash, String plain) {
+        byte[] hashBytes = hash.getBytes();
+        byte[] plainBytes = hash(plain).getBytes();
+        int diff = hashBytes.length ^ plainBytes.length;
+        for (int i = 0; i < hashBytes.length && i < plainBytes.length; i++) {
+            diff |= hashBytes[i] ^ plainBytes[i];
+        }
+        return diff == 0;
+    }
+
+    public static String generateSessionId() {
+        Session session = Utils.openSession();
+        session.beginTransaction();
+        String id = generateBase64(12);
+        List<Login> logins;
+        Query query = session.createQuery("from Login where sessionId = :id");
+        query.setString("id", id);
+        logins = query.list();
+        while (logins.size() > 0) {
+            id = generateBase64(12);
+            query.setString("id", id);
+            logins = query.list();
+        }
+        session.getTransaction().commit();
+        session.close();
+        return id;
     }
 }

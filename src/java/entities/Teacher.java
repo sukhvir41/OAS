@@ -86,6 +86,12 @@ public class Teacher implements Serializable {
         }
     }
 
+    /**
+     * this methods adds the teacher to the department and the department to the
+     * teacher
+     *
+     * @param department
+     */
     public void addDepartment(Department department) {
         department.addTeacher(this);
     }

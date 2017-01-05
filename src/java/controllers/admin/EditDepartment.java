@@ -5,11 +5,8 @@
  */
 package controllers.admin;
 
-import entities.Course;
 import entities.Department;
-import entities.Teacher;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +19,8 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/departments/detaildepartment")
-public class DetailDepartment extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/departments/editdepartment")
+public class EditDepartment extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,29 +32,15 @@ public class DetailDepartment extends HttpServlet {
         process(req, resp);
     }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException , IOException{
-        int departmentID = 1;
-        try {
-            departmentID = Integer.parseInt(req.getParameter("departmentId"));
-        } catch (Exception e) {
-        }
-        Department department;
-        List<Teacher> teachers;
-        List<Course> courses;
-        Teacher hod;
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        int departmentId = Integer.parseInt(req.getParameter("departmentId"));
         Session session = Utils.openSession();
         session.beginTransaction();
-        department = (Department) session.get(Department.class, departmentID);
-        teachers = department.getTeachers();
-        courses = department.getCourses();
-        hod = department.getHod();
-        req.setAttribute("department", department);
-        req.setAttribute("hod", hod);
-        req.setAttribute("teachers", teachers);
-        req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/admin/detaildepartment.jsp").forward(req, resp);
+        Department department = (Department) session.get(Department.class, departmentId);
         session.getTransaction().commit();
         session.close();
+        req.setAttribute("department", department);
+        req.getRequestDispatcher("/WEB-INF/admin/editdepartment.jsp").forward(req, resp);
     }
 
 }
