@@ -50,6 +50,7 @@ public class AddToDatabase {
         System.out.println("called");
         session.save(l);
         session.save(l1);
+        session.save(new Login("adminsukhvir", "qwertyuiop", "admin", 0, "sukhvir41@gmail.com"));
         System.out.println(student.getId());
         session.getTransaction().commit();
         session.close();

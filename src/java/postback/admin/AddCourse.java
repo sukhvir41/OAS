@@ -5,6 +5,7 @@
  */
 package postback.admin;
 
+import entities.Course;
 import entities.Department;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -19,30 +20,31 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/departments/updatedepartment")
-public class UpdateDepartment extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/courses/addcourse")
+public class AddCourse extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int departmentId = Integer.parseInt(req.getParameter("departmentId"));
-        String name = req.getParameter("departmentname");
+        String name = req.getParameter("coursename");
         Session session = Utils.openSession();
         session.beginTransaction();
         Department department = (Department) session.get(Department.class, departmentId);
-        department.setName(name);
+        Course course = new Course(name);
+        department.addCourse(course);
+        session.save(course);
         session.getTransaction().commit();
         session.close();
-        String from = req.getParameter("from");
-        if (!from.equals("")) {
-            resp.sendRedirect("/OAS/admin/departments#" + departmentId);
-        } else {
+        if (req.getParameter("from") != null) {
             resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
+        } else {
+            resp.sendRedirect("/OAS/admin/courses");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/admin/departments");
+        resp.sendRedirect("/OAS/admin");
     }
 
 }
