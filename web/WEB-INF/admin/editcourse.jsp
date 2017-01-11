@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : editcourse
+    Created on : Jan 11, 2017, 11:38:31 PM
+    Author     : sukhvir
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -10,11 +14,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-        <title>Course Details - Admin</title>	
-
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <title>Edit Course - Admin</title>	
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -428,7 +428,7 @@
                                                                             <div class="user-avatar">
                                                                                 <!-- <div class="img-thumbnail">
                                                                                         <img src="img/clients/client-1.jpg" alt="">
-                                                                                    </div> -->
+                                                                                </div> -->
                                                                                 <p><strong>Username here of admin</strong><span>Administrator</span></p>
                                                                             </div>
                                                                         </div>
@@ -465,14 +465,14 @@
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/admin">Home</a></li>
-                                    <li><a href="/OAS/admin/courses">Courses</a></li>
-                                    <li>Course Detail</li>
+                                    <li><a href="/OAS/admin/courses">Course</a></li>
+                                    <li>Edit Course</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Course Detail</h1>
+                                <h1>Edit Course</h1>
                             </div>
                         </div>
                     </div>
@@ -480,216 +480,34 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Course : <c:out value="${requestScope.course.name}"/></h2>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4>Deatils</h4>
-                                            <dl>
-                                                <dt>Name</dt>
-                                                <dd>${requestScope.course.name}</dd>
-                                                <dt>Started</dt>
-                                                <dd>${requestScope.course.started}</dd>
-                                                <dt>Start Date</dt>
-                                                <dd><c:choose>
-                                                        <c:when test="${requestScope.course.started}">
-                                                            ${course.start}
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            --------
-                                                        </c:otherwise>
-                                                    </c:choose></dd>
-                                                <dt>End Date</dt>
-                                                <dd><c:choose>
-                                                        <c:when test="!${requestScope.course.started} && ${requestScope.course.start} != 'null'">
-                                                            ${course.end}
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            --------
-                                                        </c:otherwise>
-                                                    </c:choose></dd>
-                                                <dt>Department Name</dt>
-                                                <dd>${requestScope.course.department.name}</dd>
-                                            </dl>
-                                            <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/courses/startcourse?courseId=${requestScope.course.id}">Start</a>
-                                            <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/courses/editcourse?courseId=${requestScope.course.id}">Edit</a>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                            <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
-                                                        </div>
-                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/courses/deletecourse" method="post">
-                                                            <div class="modal-body">
-
-                                                                <input type="hidden" name="courseId" value="${requestScope.course.id}">
-                                                                <label>Deleting the course directly will make the system unpredictable and may cause some problems</label>
-                                                                <label><b>Its is advised to delete the course respective data first before deleting it</b></label>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <input type="submit" value="Delete" class="btn btn-danger">
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                    <form action="/OAS/admin/courses/updatecourse" method="Post">
+                                        <input type="hidden" name="courseId" value="${requestScope.course.id}">
+                                        <input type="hidden" name="from" value="${param.from}">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <label>Course Name</label>
+                                                    <input class="form-control input-lg"  type="text" name="coursename" id="coursename" required="true" value="${requestScope.course.name}">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <hr class="tall">
-                                    <div class="col-md-6">
-                                        <form action="#" method="post">
-                                            <h4>Add Class Room</h4>
-                                            <input type="hidden" name="courseId" value="${requestScope.course.id}">
-                                            <input type="hidden" name="from" value="course">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <label>Class Room Name</label>
-                                                        <input class="form-control input-lg" placeholder="class room name" type="text" name="classroomname" id="classroomname" required="true">
-
-                                                    </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <input type="submit" value="Update" class="btn btn-primary">
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <label>Division</label>
-                                                        <input class="form-control input-lg" placeholder="A" type="text" name="division" id="division" required="true">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <label>Semister</label>
-                                                        <input class="form-control input-lg" placeholder="1" type="number" name="semister" id="semister" required="true">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <label>Minimmum Subjects</label>
-                                                        <input class="form-control input-lg" placeholder="1" type="number" name="semister" id="semister" required="true">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class= "row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <input type="submit" value="Add" class="btn btn-primary">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form action="#" method="post">
-                                            <h4>Add Subject</h4>
-                                            <input type="hidden" name="courseId" value="${requestScope.course.id}">
-                                            <input type="hidden" name="from" value="course">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <label>Subject Name</label>
-                                                        <input class="form-control input-lg" placeholder="subject name" type="text" name="subjectname" id="subjectname" required="true">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <label>Elective</label>
-                                                        <span class="checkbox">
-                                                            <label class="checkbox"><input type="checkbox" name="elective" value="true">Elective</label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class= "row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <input type="submit" value="Add" class="btn btn-primary">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="tall">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Class Rooms</h4>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Divison</th>
-                                                <th>Semister</th>
-                                                <th>Course</th>
-                                                <th>MiniSubjects</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <c:forEach var="classRoom" items="${requestScope.course.classRooms}">
-                                                <tr>
-                                                    <td>${classRoom.id}</td>
-                                                    <td><a href="#">${classRoom.name}</a></td>
-                                                    <td>${classRoom.division}</td>
-                                                    <td>${classRoom.semister}</td>
-                                                    <td>${classRoom.course.name}</td>
-                                                    <td>${classRoom.minimumSubecjts}</td>
-                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                    <hr class="tall">
-                                    <h4>Subjects</h4>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Course</th>
-                                                <th>Elective</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="subject" items="${requestScope.course.subjects}">
-                                                <tr>
-                                                    <td>${subject.id}</td>
-                                                    <td><a href="">${subject.name}</a></td>
-                                                    <td>${subject.course.name}</td>
-                                                    <td>${subject.elective}</td>
-                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <!-- Vendor -->
             <!--[if lt IE 9]>

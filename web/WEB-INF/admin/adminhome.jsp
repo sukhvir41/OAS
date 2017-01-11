@@ -74,11 +74,10 @@
     <body>
         <div class="body">
             <header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-10px", "stickyChangeLogo": true}' >
-                <div class="header-body" style="max-height:150px; min-height: 90px;">
+                <div class="header-body" style="min-height: 90px;">
                     <div class="header-container container">
                         <div class="header-row">
                             <div class="header-column">
-                                <div class="header-column"></div>
                                 <div class="header-row">
                                     <div class="header-nav">
                                         <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
@@ -499,12 +498,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>
-                                                    #
-                                                </th>
-                                                <th>
-                                                    Name
-                                                </th>
+                                                <th>#</th>
+                                                <th>Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -543,7 +538,7 @@
                                                     <td>${course.name}</td>
                                                     <td>${course.started}</td>
                                                     <td><c:choose>
-                                                        <c:when test="${course.started} == true">
+                                                        <c:when test="${course.started}">
                                                             ${course.start}
                                                         </c:when>
                                                         <c:otherwise>
@@ -570,7 +565,7 @@
                                         <h4>Class Room</h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="#">Deatils</a>
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="/OAS/admin/classrooms">Deatils</a>
                                     </div>
                                     <table class="table">
                                         <thead>

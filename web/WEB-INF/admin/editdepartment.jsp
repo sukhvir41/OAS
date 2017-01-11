@@ -66,7 +66,7 @@
 		<body>
 			<div class="body">
 				<header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-10px", "stickyChangeLogo": true}' >
-					<div class="header-body" style="max-height:150px; min-height: 90px;">
+					<div class="header-body" style="min-height: 90px;">
 						<div class="header-container container">
 							<div class="header-row">
 								<div class="header-column">
@@ -482,25 +482,27 @@
 					<div class="row">
 						<div class="col-md-8">
 							<div class="row">
-								<form action="/OAS/admin/departments/updatedepartment" method="Post">
-								<input type="hidden" name="departmentId" value="${requestScope.department.id}">
-                                                                <input type="hidden" name="from" value="${param.from}">
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-8">
-												<label>Department Name</label>
-												<input class="form-control input-lg"  type="text" name="departmentname" id="departmentname" required="true" value="${requestScope.department.name}">
+								<div class="col-md-12">
+									<form action="/OAS/admin/departments/updatedepartment" method="Post">
+										<input type="hidden" name="departmentId" value="${requestScope.department.id}">
+										<input type="hidden" name="from" value="${param.from}">
+										<div class="row">
+											<div class="form-group">
+												<div class="col-md-8">
+													<label>Department Name</label>
+													<input class="form-control input-lg"  type="text" name="departmentname" id="departmentname" required="true" value="${requestScope.department.name}">
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-8">
-												<input type="submit" value="Update" class="btn btn-primary">
+										<div class="row">
+											<div class="form-group">
+												<div class="col-md-8">
+													<input type="submit" value="Update" class="btn btn-primary">
+												</div>
 											</div>
 										</div>
-									</div>
-								</form>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>

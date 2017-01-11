@@ -70,7 +70,7 @@
     <body>
         <div class="body">
             <header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-10px", "stickyChangeLogo": true}' >
-                <div class="header-body" style="max-height:150px; min-height: 90px;">
+                <div class="header-body" style="min-height: 90px;">
                     <div class="header-container container">
                         <div class="header-row">
                             <div class="header-column">
@@ -489,116 +489,122 @@
                                 <div class="col-md-12">
                                     <h2>Department : <c:out value="${requestScope.department.name}"/></h2>
                                     <div class="row">
-                                        <h4>Deatils</h4>
-                                        <dl>
-                                            <dt>Name</dt>
-                                            <dd>${requestScope.department.name}</dd>
-                                            <dt>Hod</dt>
-                                            <c:choose>
-                                                <c:when test="${requestScope.hod} != 'null'" >
-                                                    <dd>${requestScope.hod.name}</dd>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <dd>No Hod</dd>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </dl>
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/departments/editdepartment?departmentId=${requestScope.department.id}">Edit</a>
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                        <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
-                                                    </div>
-                                                    <form class="form-horizontal mb-lg" action="/OAS/admin/departments/deletedepartment" method="post">
-                                                        <div class="modal-body">
+                                        <div class="col-md-12">
+                                            <h4>Deatils</h4>
+                                            <dl>
+                                                <dt>Name</dt>
+                                                <dd>${requestScope.department.name}</dd>
+                                                <dt>Hod</dt>
+                                                <c:choose>
+                                                    <c:when test="${requestScope.hod} != 'null'" >
+                                                        <dd>${requestScope.hod.name}</dd>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <dd>No Hod</dd>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </dl>
+                                            <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/departments/editdepartment?departmentId=${requestScope.department.id}">Edit</a>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                            <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
+                                                        </div>
+                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/departments/deletedepartment" method="post">
+                                                            <div class="modal-body">
 
-                                                            <input type="hidden" name="departmentId" value="${requestScope.department.id}">
-                                                            <label>Deleting the department directly will make the system unpredictable and may cause some problems</label>
-                                                            <label><b>Its is advised to delete the departments respective data first before deleting the department</b></label>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <input type="submit" value="Delete" class="btn btn-danger">
-                                                        </div>
-                                                    </form>
+                                                                <input type="hidden" name="departmentId" value="${requestScope.department.id}">
+                                                                <label>Deleting the department directly will make the system unpredictable and may cause some problems</label>
+                                                                <label><b>Its is advised to delete the departments respective data first before deleting the department</b></label>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <input type="submit" value="Delete" class="btn btn-danger">
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <hr class="tall">
                                     <div class="row">
-                                        <form action="/OAS/admin/courses/addcourse" method="post">
-                                            <h4>Add Course</h4>
-                                            <input type="hidden" name="departmentId" value="${requestScope.department.id}">
-                                            <input type="hidden" name="from" value="department">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <label>Course Name</label>
-                                                        <input class="form-control input-lg" placeholder="course name" type="text" name="coursename" id="coursename" required="true">
+                                        <div class="col-md-12">
+                                            <form action="/OAS/admin/courses/addcourse" method="post">
+                                                <h4>Add Course</h4>
+                                                <input type="hidden" name="departmentId" value="${requestScope.department.id}">
+                                                <input type="hidden" name="from" value="department">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-4">
+                                                            <label>Course Name</label>
+                                                            <input class="form-control input-lg" placeholder="course name" type="text" name="coursename" id="coursename" required="true">
 
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class= "row">
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <input type="submit" value="Add" class="btn btn-primary">
+                                                <div class= "row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-4">
+                                                            <input type="submit" value="Add" class="btn btn-primary">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                     <hr class="tall">
                                     <div class="row">
-                                        <h4>Courses</h4>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <c:forEach var="course" items="${requestScope.courses}">
+                                        <div class="col-md-12">
+                                            <h4>Courses</h4>
+                                            <table class="table">
+                                                <thead>
                                                     <tr>
-                                                        <td>${course.id}</td>
-                                                        <td><a href="/OAS/admin/courses/detailcourse?courseId=${course.id}">${course.name}</a></td>
-                                                        <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Action</th>
                                                     </tr>
-                                                </c:forEach>
+                                                </thead>
+                                                <tbody>
 
-                                            </tbody>
-                                        </table>
-                                        <hr class="tall">
-                                        <h4>Teachers</h4>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Verified</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                                    <c:forEach var="course" items="${requestScope.courses}">
+                                                        <tr>
+                                                            <td>${course.id}</td>
+                                                            <td><a href="/OAS/admin/courses/detailcourse?courseId=${course.id}">${course.name}</a></td>
+                                                            <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
+                                                        </tr>
+                                                    </c:forEach>
 
-                                                <c:forEach var="teacher" items="${requestScope.teachers}">
+                                                </tbody>
+                                            </table>
+                                            <hr class="tall">
+                                            <h4>Teachers</h4>
+                                            <table class="table">
+                                                <thead>
                                                     <tr>
-                                                        <td>${teacher.id}</td>
-                                                        <td><a href="#">${teacher.fName} ${teacher.lName}</a></td>
-                                                        <td>${teacher.email}</td>
-                                                        <td>${teacher.verified}</td>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Verified</th>
                                                     </tr>
-                                                </c:forEach>
+                                                </thead>
+                                                <tbody>
 
-                                            </tbody>
-                                        </table>
+                                                    <c:forEach var="teacher" items="${requestScope.teachers}">
+                                                        <tr>
+                                                            <td>${teacher.id}</td>
+                                                            <td><a href="#">${teacher.fName} ${teacher.lName}</a></td>
+                                                            <td>${teacher.email}</td>
+                                                            <td>${teacher.verified}</td>
+                                                        </tr>
+                                                    </c:forEach>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
