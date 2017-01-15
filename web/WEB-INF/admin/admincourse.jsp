@@ -496,7 +496,6 @@
                                                     <option value="${department.id}">${department.name}</option>
                                                 </c:forEach>
                                             </select>
-
                                         </div>
                                     </div>
                                 </div>

@@ -547,7 +547,7 @@
                                 <div class="col-md-12">
                                     <hr class="tall">
                                     <div class="col-md-6">
-                                        <form action="#" method="post">
+                                        <form action="/OAS/admin/classrooms/addclassroom" method="Post">
                                             <h4>Add Class Room</h4>
                                             <input type="hidden" name="courseId" value="${requestScope.course.id}">
                                             <input type="hidden" name="from" value="course">
@@ -580,7 +580,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-8">
                                                         <label>Minimmum Subjects</label>
-                                                        <input class="form-control input-lg" placeholder="1" type="number" name="semister" id="semister" required="true">
+                                                        <input class="form-control input-lg" placeholder="1" type="number" name="minimumsubjects" id="minimumsubjects" required="true">
                                                     </div>
                                                 </div>
                                             </div>

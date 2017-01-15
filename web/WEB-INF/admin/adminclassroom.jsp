@@ -481,12 +481,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/admin/courses/addcourse" method="post">
+                            <form action="/OAS/admin/classrooms/addclassroom" method="Post">
+                                <h4>Add Class Room</h4>
+                                <input type="hidden" name="courseId" value="${requestScope.course.id}">
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
-                                            <label>Course Name</label>
-                                            <input class="form-control input-lg" placeholder="course name" type="text" name="coursename" id="coursename" required="true">
+                                            <label>Class Room Name</label>
+                                            <input class="form-control input-lg" placeholder="class room name" type="text" name="classroomname" id="classroomname" required="true">
 
                                         </div>
                                     </div>
@@ -494,19 +496,42 @@
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
-                                            <label>Department</label>
-                                            <select class="form-control mb-md"  id="department" name="departmentId">
-                                                <c:forEach var="department" items="${requestScope.departments}">
-                                                    <option value="${department.id}">${department.name}</option>
+                                            <label>Division</label>
+                                            <input class="form-control input-lg" placeholder="A" type="text" name="division" id="division" required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Semister</label>
+                                            <input class="form-control input-lg" placeholder="1" type="number" name="semister" id="semister" required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Minimmum Subjects</label>
+                                            <input class="form-control input-lg" placeholder="1" type="number" name="minimumsubjects" id="minimumsubjects" required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Course</label>
+                                            <select class="form-control mb-md"  id="course" name="courseId">
+                                                <c:forEach var="course" items="${requestScope.courses}">
+                                                    <option value="${course.id}">${course.name}</option>
                                                 </c:forEach>
                                             </select>
-
                                         </div>
                                     </div>
                                 </div>
                                 <div class= "row">
                                     <div class="form-group">
-                                        <div class="col-md-4">
+                                        <div class="col-md-8">
                                             <input type="submit" value="Add" class="btn btn-primary">
                                         </div>
                                     </div>

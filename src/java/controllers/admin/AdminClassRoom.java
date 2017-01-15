@@ -6,6 +6,7 @@
 package controllers.admin;
 
 import entities.ClassRoom;
+import entities.Course;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -35,10 +36,13 @@ public class AdminClassRoom extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<ClassRoom> classRooms;
+        List<Course> courses;
         Session session = Utils.openSession();
         session.beginTransaction();
         classRooms = (List<ClassRoom>) session.createCriteria(ClassRoom.class).list();
+        courses = (List<Course>) session.createCriteria(Course.class).list();
         req.setAttribute("classrooms", classRooms);
+        req.setAttribute("courses", courses);
         req.getRequestDispatcher("/WEB-INF/admin/adminclassroom.jsp").forward(req, resp);
         session.getTransaction().commit();
         session.close();
