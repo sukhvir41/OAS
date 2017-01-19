@@ -27,9 +27,11 @@ public class AddClassRoom extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Enumeration<String> enums = req.getAttributeNames();
+            Enumeration<String> enums = req.getParameterNames();
             while(enums.hasMoreElements()){
-                System.out.println(req.getParameter(enums.nextElement()));
+                String string = enums.nextElement();
+                System.out.println(string);
+                System.out.println(req.getParameter(string));
             }
             
             int courseId = Integer.parseInt(req.getParameter("courseId"));

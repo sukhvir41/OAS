@@ -99,8 +99,11 @@ public class LoginCheck implements Filter {
                             }
                             break;
                         }
+
                         session.getTransaction().commit();
                         session.close();
+                        id.setMaxAge(864000);
+                        token.setMaxAge(864000);
                     } else {
                         System.out.println("token not match");
                         chain.doFilter(request, response);

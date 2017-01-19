@@ -481,9 +481,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/admin/classrooms/addclassroom" method="Post">
+                            <form action="/OAS/admin/classrooms/addclassroom" method="post">
                                 <h4>Add Class Room</h4>
-                                <input type="hidden" name="courseId" value="${requestScope.course.id}">
+                               
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">

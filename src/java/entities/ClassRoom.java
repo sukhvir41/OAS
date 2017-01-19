@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -48,6 +49,9 @@ public class ClassRoom implements Serializable {
     @ManyToOne
     @JoinColumn(name = "course_fid")
     private Course course;
+    
+    @OneToOne(mappedBy = "classRoom")
+    private Teacher classTeacher;
 
     @OneToMany(mappedBy = "classRoom")
     private List<Student> students = new ArrayList();
@@ -174,4 +178,13 @@ public class ClassRoom implements Serializable {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    public Teacher getClassTeacher() {
+        return classTeacher;
+    }
+
+    public void setClassTeacher(Teacher classTeacher) {
+        this.classTeacher = classTeacher;
+    }
+    
 }

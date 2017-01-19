@@ -48,6 +48,10 @@ public class Teacher implements Serializable {
     @Column(name = "t_hod")
     private boolean hod;
 
+    @OneToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "tecaher_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))
+    private List<Department> hodOf;
+
     @OneToOne
     @JoinColumn(name = "class_fid")
     private ClassRoom classRoom;
@@ -94,6 +98,13 @@ public class Teacher implements Serializable {
      */
     public void addDepartment(Department department) {
         department.addTeacher(this);
+    }
+
+    public void addHodOf(Department department) {
+        if (!hodOf.contains(department)) {
+            hodOf.add(department);
+            department.setHod(this);
+        }
     }
 
     public int getId() {
@@ -174,6 +185,14 @@ public class Teacher implements Serializable {
 
     public void setDepartment(List<Department> department) {
         this.department = department;
+    }
+
+    public List<Department> getHodOf() {
+        return hodOf;
+    }
+
+    public void setHodOf(List<Department> hodOf) {
+        this.hodOf = hodOf;
     }
 
 }

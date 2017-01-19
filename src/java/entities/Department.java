@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,28 +27,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "department")
 public class Department implements Serializable {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "d_id")
     private int id;
-
+    
     @Column(name = "d_name", nullable = false)
     private String name;
-
+    
+    @ManyToOne
+    private Teacher hod;
+    
     @OneToMany(mappedBy = "department")
     private List<Course> courses = new ArrayList();
-
+    
     @ManyToMany(mappedBy = "department")
     private List<Teacher> teachers = new ArrayList();
-
-    @OneToOne
-    @JoinColumn(name = "hod")
-    private Teacher hod;
-
+    
     public Department() {
     }
-
+    
     public Department(String name) {
         this.name = name;
     }
@@ -76,45 +76,49 @@ public class Department implements Serializable {
             course.setDepartment(this);
         }
     }
-
+    
+    public void addHod(Teacher teacher) {
+        teacher.addHodOf(this);
+    }
+    
     public Teacher getHod() {
         return hod;
     }
-
+    
     public void setHod(Teacher hod) {
         this.hod = hod;
     }
-
+    
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public List<Course> getCourses() {
         return courses;
     }
-
+    
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
-
+    
     public List<Teacher> getTeachers() {
         return teachers;
     }
-
+    
     public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
-
+    
 }
