@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -49,7 +50,6 @@ public class Student implements Serializable {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "class_fid")
     private ClassRoom classRoom;
 
     @Column(name = "verified")
@@ -59,8 +59,8 @@ public class Student implements Serializable {
     @JoinTable(name = "student_subject_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "sub_fid"))
     private List<Subject> subjects = new ArrayList();
 
-    @ManyToMany(mappedBy = "students")
-    List<Lecture> lecture = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<Attendance> attendance = new ArrayList<>();
 
     public Student() {
     }
@@ -81,6 +81,11 @@ public class Student implements Serializable {
         this.email = email;
         this.verified = verified;
         setClassRoom(classRoom);
+    }
+
+    public void addAttendance(Attendance attendance) {
+        attendance.setStudent(this);
+        this.attendance.add(attendance);
     }
 
     /**
@@ -167,6 +172,14 @@ public class Student implements Serializable {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
 
 }

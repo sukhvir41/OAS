@@ -47,13 +47,13 @@ public class ClassRoom implements Serializable {
     private int minimumSubecjts;
 
     @ManyToOne
-    @JoinColumn(name = "course_fid")
     private Course course;
     
     @OneToOne(mappedBy = "classRoom")
     private Teacher classTeacher;
 
-    @OneToMany(mappedBy = "classRoom")
+    @OneToMany
+    @JoinTable(name = "student_calssroom_link",joinColumns = @JoinColumn(name = "class_fid"),inverseJoinColumns = @JoinColumn(name = "student_fid"))
     private List<Student> students = new ArrayList();
 
     @ManyToMany

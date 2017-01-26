@@ -46,10 +46,10 @@ public class Course implements Serializable {
     private boolean started = false;
 
     @ManyToOne
-    @JoinColumn(name = "department_fid")
     private Department department;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany
+    @JoinTable(name = "course_class_link", joinColumns = @JoinColumn(name = "course_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
     private List<ClassRoom> classRooms = new ArrayList();
 
     @OneToMany

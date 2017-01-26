@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,9 +44,8 @@ public class Lecture implements Serializable {
     @Column(name = "count")
     private int count = 1;
 
-    @ManyToMany
-    @JoinTable(name = "attendance", joinColumns = @JoinColumn(name = "lecture_fid"), inverseJoinColumns = @JoinColumn(name = "Student_fid"))
-    List<Student> students = new ArrayList();
+    @OneToMany(mappedBy = "lecture")
+    private List<Attendance> attendance = new ArrayList<Attendance>();
 
     public Lecture() {
     }
@@ -56,11 +56,9 @@ public class Lecture implements Serializable {
         this.date = new Date();
     }
 
-   
-    public void addStudent(Student student) {
-        if (!students.contains(student)) {
-            students.add(student);
-        }
+    public void adddAttendance(Attendance attendance) {
+        attendance.setLecture(this);
+        this.attendance.add(attendance);
     }
 
     public Date getDate() {
@@ -93,14 +91,6 @@ public class Lecture implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
     }
 
 }
