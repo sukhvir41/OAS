@@ -38,10 +38,10 @@ public class Department implements Serializable {
     private String name;
 
     @ManyToOne
+    @JoinTable(name = "department_hod_link", joinColumns = @JoinColumn(name = "department_fid"), inverseJoinColumns = @JoinColumn(name = "teacher_hod_fid"))
     private Teacher hod;
 
-    @OneToMany
-    @JoinTable(name = "department_course_link", joinColumns = @JoinColumn(name = "department_fid"), inverseJoinColumns = @JoinColumn(name = "course_fid"))
+    @OneToMany(mappedBy = "department")
     private List<Course> courses = new ArrayList();
 
     @ManyToMany(mappedBy = "department")

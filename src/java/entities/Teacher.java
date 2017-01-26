@@ -48,8 +48,7 @@ public class Teacher implements Serializable {
     @Column(name = "t_hod")
     private boolean hod;
 
-    @OneToMany
-    @JoinTable(name = "department_hod",joinColumns = @JoinColumn(name = "tecaher_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))
+    @OneToMany(mappedBy = "hod")
     private List<Department> hodOf;
 
     @OneToOne

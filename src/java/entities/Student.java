@@ -50,6 +50,7 @@ public class Student implements Serializable {
     private String email;
 
     @ManyToOne
+    @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
     private ClassRoom classRoom;
 
     @Column(name = "verified")

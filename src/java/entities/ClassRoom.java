@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,13 +48,13 @@ public class ClassRoom implements Serializable {
     private int minimumSubecjts;
 
     @ManyToOne
+    @JoinTable(name = "course_class_link",joinColumns = @JoinColumn(name = "class_fid"),inverseJoinColumns = @JoinColumn(name = "course_fid"))
     private Course course;
-    
+
     @OneToOne(mappedBy = "classRoom")
     private Teacher classTeacher;
 
-    @OneToMany
-    @JoinTable(name = "student_calssroom_link",joinColumns = @JoinColumn(name = "class_fid"),inverseJoinColumns = @JoinColumn(name = "student_fid"))
+    @OneToMany(mappedBy = "classRoom")
     private List<Student> students = new ArrayList();
 
     @ManyToMany
@@ -98,10 +99,8 @@ public class ClassRoom implements Serializable {
      * student
      */
     public void addStudent(Student student) {
-        if (!students.contains(student)) {
-            this.students.add(student);
-            student.setClassRoom(this);
-        }
+        this.students.add(student);
+        student.setClassRoom(this);
     }
 
     /**
@@ -110,9 +109,8 @@ public class ClassRoom implements Serializable {
      * @param subject subject to be added
      */
     public void addSubject(Subject subject) {
-        if (!subjects.contains(subject)) {
-            this.subjects.add(subject);
-        }
+        this.subjects.add(subject);
+        subject.getClassRoom().add(this);
     }
 
     public int getMinimumSubecjts() {
@@ -186,5 +184,5 @@ public class ClassRoom implements Serializable {
     public void setClassTeacher(Teacher classTeacher) {
         this.classTeacher = classTeacher;
     }
-    
+
 }
