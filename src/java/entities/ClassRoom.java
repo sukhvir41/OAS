@@ -45,10 +45,10 @@ public class ClassRoom implements Serializable {
     private int semister;
 
     @Column(name = "c_minimum_subs")
-    private int minimumSubecjts;
+    private int minimumSubjects;
 
     @ManyToOne
-    @JoinTable(name = "course_class_link",joinColumns = @JoinColumn(name = "class_fid"),inverseJoinColumns = @JoinColumn(name = "course_fid"))
+    @JoinTable(name = "course_class_link", joinColumns = @JoinColumn(name = "class_fid"), inverseJoinColumns = @JoinColumn(name = "course_fid"))
     private Course course;
 
     @OneToOne(mappedBy = "classRoom")
@@ -68,7 +68,7 @@ public class ClassRoom implements Serializable {
         this.name = name;
         this.division = division;
         this.semister = semister;
-        this.minimumSubecjts = minimumSubecjts;
+        this.minimumSubjects = minimumSubecjts;
     }
 
     public ClassRoom(String name, String division, int semister, Course course) {
@@ -82,7 +82,7 @@ public class ClassRoom implements Serializable {
         this.name = name;
         this.division = division;
         this.semister = semister;
-        this.minimumSubecjts = minimumSubjects;
+        this.minimumSubjects = minimumSubjects;
         addCourse(course);
     }
 
@@ -113,12 +113,12 @@ public class ClassRoom implements Serializable {
         subject.getClassRoom().add(this);
     }
 
-    public int getMinimumSubecjts() {
-        return minimumSubecjts;
+    public int getMinimumSubjects() {
+        return minimumSubjects;
     }
 
-    public void setMinimumSubecjts(int minimumSubecjts) {
-        this.minimumSubecjts = minimumSubecjts;
+    public void setMinimumSubjects(int minimumSubjects) {
+        this.minimumSubjects = minimumSubjects;
     }
 
     public List<Subject> getSubjects() {

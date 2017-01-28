@@ -53,7 +53,7 @@ public class RegisterSubjects extends HttpServlet {
             Gson gson = new Gson();
             JsonObject subject = new JsonObject();
             subject.add("subjects", jsonSubjects);
-            subject.addProperty("minimumsubjects", classRoom.getMinimumSubecjts());
+            subject.addProperty("minimumsubjects", classRoom.getMinimumSubjects());
             out.print(gson.toJson(subject));
             out.close();
 

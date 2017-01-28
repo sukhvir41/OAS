@@ -104,6 +104,8 @@ public class LoginCheck implements Filter {
                         session.close();
                         id.setMaxAge(864000);
                         token.setMaxAge(864000);
+                        resp.addCookie(id);
+                        resp.addCookie(token);
                     } else {
                         System.out.println("token not match");
                         chain.doFilter(request, response);

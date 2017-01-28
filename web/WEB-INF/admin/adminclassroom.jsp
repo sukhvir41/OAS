@@ -562,11 +562,11 @@
                                             <c:forEach var="classRoom" items="${requestScope.classrooms}">
                                                 <tr>
                                                     <td><a name="${classRoom.id}"></a>${classRoom.id}</td>
-                                                    <td><a href="#">${classRoom.name}</a></td>
+                                                    <td><a href="/OAS/admin/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom.name}</a></td>
                                                     <td>${classRoom.division}</td>
                                                     <td>${classRoom.semister}</td>
                                                     <td><a href="/OAS/admin/courses/detailcourse?courseId=${classRoom.course.id}">${classRoom.course.name}</a></td>
-                                                    <td>${classRoom.minimumSubecjts}</td>
+                                                    <td>${classRoom.minimumSubjects}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

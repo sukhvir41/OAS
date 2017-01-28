@@ -5,7 +5,7 @@
  */
 package controllers.admin;
 
-import entities.Department;
+import entities.ClassRoom;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +19,8 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/departments/editdepartment")
-public class EditDepartment extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/classrooms/detailclassroom")
+public class DetailClassRoom extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,19 +32,20 @@ public class EditDepartment extends HttpServlet {
         process(req, resp);
     }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        int departmentId = 1;
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int classRoomId = 1;
         try {
-            departmentId = Integer.parseInt(req.getParameter("departmentId"));
+            classRoomId = Integer.parseInt(req.getParameter("classroomId"));
         } catch (Exception e) {
         }
+        ClassRoom classRoom;
         Session session = Utils.openSession();
         session.beginTransaction();
-        Department department = (Department) session.get(Department.class, departmentId);
+        classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
+        req.setAttribute("classroom", classRoom);
+        req.getRequestDispatcher("/WEB-INF/admin/detailclassroom.jsp").forward(req, resp);
         session.getTransaction().commit();
         session.close();
-        req.setAttribute("department", department);
-        req.getRequestDispatcher("/WEB-INF/admin/editdepartment.jsp").forward(req, resp);
     }
 
 }

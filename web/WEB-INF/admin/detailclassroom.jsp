@@ -1,9 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : Dec 31, 2016, 1:12:13 AM
-    Author     : sukhvir
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -14,11 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-        <title>Home - Admin</title>	
-
-        <meta name="keywords" content="HTML5 Template" />
-        <meta name="description" content="Porto - Responsive HTML5 Template">
-        <meta name="author" content="okler.net">
+        <title>Class Room Details - Admin</title>	
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
@@ -31,35 +21,35 @@
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
         <!-- Vendor CSS -->
-        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
-        <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.theme.default.min.css">
-        <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css">
+        <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="/OAS/vendor/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="/OAS/vendor/simple-line-icons/css/simple-line-icons.css">
+        <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="/OAS/vendor/magnific-popup/magnific-popup.css">
 
         <!-- Theme CSS -->
-        <link rel="stylesheet" href="css/theme.css">
-        <link rel="stylesheet" href="css/theme-elements.css">
-        <link rel="stylesheet" href="css/theme-blog.css">
-        <link rel="stylesheet" href="css/theme-shop.css">
-        <link rel="stylesheet" href="css/theme-animate.css">
+        <link rel="stylesheet" href="/OAS/css/theme.css">
+        <link rel="stylesheet" href="/OAS/css/theme-elements.css">
+        <link rel="stylesheet" href="/OAS/css/theme-blog.css">
+        <link rel="stylesheet" href="/OAS/css/theme-shop.css">
+        <link rel="stylesheet" href="/OAS/css/theme-animate.css">
 
         <!-- Current Page CSS -->
-        <link rel="stylesheet" href="vendor/rs-plugin/css/settings.css" media="screen">
-        <link rel="stylesheet" href="vendor/rs-plugin/css/layers.css" media="screen">
-        <link rel="stylesheet" href="vendor/rs-plugin/css/navigation.css" media="screen"> 
+        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/settings.css" media="screen">
+        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/layers.css" media="screen">
+        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/navigation.css" media="screen"> 
 
-        <link rel="stylesheet" href="vendor/circle-flip-slideshow/css/component.css" media="screen">
+        <link rel="stylesheet" href="/OAS/vendor/circle-flip-slideshow/css/component.css" media="screen">
 
         <!-- Skin CSS -->
-        <link rel="stylesheet" href="css/skins/default.css">
+        <link rel="stylesheet" href="/OAS/css/skins/default.css">
 
         <!-- Theme Custom CSS -->
-        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="/OAS/css/custom.css">
 
         <!-- Head Libs -->
-        <script src="vendor/modernizr/modernizr.js"></script>
+        <script src="/OAS/vendor/modernizr/modernizr.js"></script>
 
         <!--[if IE]>
                 <link rel="stylesheet" href="css/ie.css">
@@ -78,6 +68,7 @@
                     <div class="header-container container">
                         <div class="header-row">
                             <div class="header-column">
+                                <div class="header-column"></div>
                                 <div class="header-row">
                                     <div class="header-nav">
                                         <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
@@ -471,13 +462,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li>Home</li>
+                                    <li><a href="/OAS/admin">Home</a></li>
+                                    <li><a href="/OAS/admin/classrooms">Class Rooms</a></li>
+                                    <li>Class Room Deatil</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Home</h1>
+                                <h1>CLass Room Detail</h1>
                             </div>
                         </div>
                     </div>
@@ -488,142 +481,142 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!--Department-->
-                                    <div class="col-md-8">
-                                        <h4>Department</h4>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="admin/departments">Deatils</a>
-                                    </div>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="department" items="${requestScope.departments}">
-                                                <tr>
-                                                    <td>${department.id}</td>
-                                                    <td>${department.name}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                    <h2>CLass Room : <c:out value="${requestScope.classroom.name}"/></h2>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Deatils</h4>
+                                            <dl>
+                                                <dt>Name</dt>
+                                                <dd>${requestScope.classroom.name}</dd>
+                                                <dt>Division</dt>	
+                                                <dd>${requestScope.classroom.division}</dd>
+                                                <dt>Semister</dt>
+                                                <dd>${requestScope.classroom.semister}</dd>
+                                                <dt>Minimum Subjects</dt>
+                                                <dd>${requestScope.classroom.minimumSubjects}</dd>
+                                                <dt>Course</dt>
+                                                <dd>${requestScope.classroom.course.name}</dd>
+                                                <dt>Class Teacher</dt>
+                                                <dd>${requestScope.classroom.classTeacher.fName} ${requestScope.classroom.classTeacher.lName}</dd>
+                                            </dl>
+                                            <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/classrooms/editclassroom?classroomId=${requestScope.classroom.id}">Edit</a>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã</button>
+                                                            <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
+                                                        </div>
+                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/classrooms/deleteclassroom" method="post">
+                                                            <div class="modal-body">
 
+                                                                <input type="hidden" name="classroomId" value="${requestScope.classroom.id}">
+                                                                <label>Deleting the class room directly will make the system unpredictable and may cause some problems</label>
+                                                                <label><b>Its is advised to delete the class rooms's respective data first before deleting the class room</b></label>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <input type="submit" value="Delete" class="btn btn-danger">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr class="tall">
-                                    <!--Course-->
-                                    <div class="col-md-8">
-                                        <h4>Course</h4>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="admin/courses">Deatils</a>
-                                    </div>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Started</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Department Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="course" items="${requestScope.courses}">
-                                                <tr>
-                                                    <td>${course.id}</td>
-                                                    <td>${course.name}</td>
-                                                    <td>${course.started}</td>
-                                                    <td><c:choose>
-                                                        <c:when test="${course.started}">
-                                                            ${course.start}
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            --------
-                                                        </c:otherwise>
-                                                    </c:choose></td>
-                                                    <td><c:choose>
-                                                        <c:when test="${course.started} == false && ${course.start} != 'null'">
-                                                            ${course.end}
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            --------
-                                                        </c:otherwise>
-                                                    </c:choose></td>
-                                                    <td>${course.department.name}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form action="/OAS/admin/subjects/addsubject" method="post">
+                                                <h4>Add Subject</h4>
+                                                <input type="hidden" name="courseId" value="${requestScope.classroom.course.id}">
+                                                <input type="hidden" name="from" value="classroom">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label>Subject Name</label>
+                                                            <input class="form-control input-lg" placeholder="subject name" type="text" name="subjectname" id="subjectname" required="true">
 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label>Elective</label>
+                                                            <span class="checkbox">
+                                                                <label class="checkbox"><input type="checkbox" name="elective" value="true">Elective</label>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class= "row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <input type="submit" value="Add" class="btn btn-primary">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                     <hr class="tall">
-                                    <!--class-->
-                                    <div class="col-md-8">
-                                        <h4>Class Room</h4>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="/OAS/admin/classrooms">Deatils</a>
-                                    </div>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Divison</th>
-                                                <th>Semister</th>
-                                                <th>Course</th>
-                                                <th>MiniSubjects</th>
-                                            </tr>
-                                        </thead>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Subjects</h4>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Elective</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                        <tbody>
-                                            <c:forEach var="classRoom" items="${requestScope.classRooms}">
-                                                <tr>
-                                                    <td>${classRoom.id}</td>
-                                                    <td>${classRoom.name}</td>
-                                                    <td>${classRoom.division}</td>
-                                                    <td>${classRoom.semister}</td>
-                                                    <td>${classRoom.course.name}</td>
-                                                    <td>${classRoom.minimumSubjects}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                                    <c:forEach var="subject" items="${requestScope.classroom.subjects}">
+                                                        <tr>
+                                                            <td>${subject.id}</td>
+                                                            <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
+                                                            <td>${subject.elective}</td>
+                                                            <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
+                                                        </tr>
+                                                    </c:forEach>
 
-                                    <hr class="tall">
+                                                </tbody>
+                                            </table>
+                                            <hr class="tall">
+                                            <h4>Students</h4>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Roll Number</th>
+                                                        <th>Email</th>
+                                                        <th>Number</th>
+                                                        <th>Verified</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                    <!--Subjects-->
-                                    <div class="col-md-8">
-                                        <h4>Subjects</h4>
+                                                    <c:forEach var="student" items="${requestScope.classroom.students}">
+                                                        <tr>
+                                                            <td>${student.id}</td>
+                                                            <td><a href="#">${student.fName} ${student.lName}</a></td>
+                                                            <td>${student.rollNumber}</td>
+                                                            <td>${student.email}</td>
+                                                            <td>${student.number}</td>
+                                                            <td>${student.verified}</td>
+                                                        </tr>
+                                                    </c:forEach>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="#">Deatils</a>
-                                    </div>
-
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Course</th>
-                                                <th>Elective</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="subject" items="${requestScope.subjects}">
-                                                <tr>
-                                                    <td>${subject.id}</td>
-                                                    <td>${subject.name}</td>
-                                                    <td>${subject.course.name}</td>
-                                                    <td>${subject.elective}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                    <hr class="tall">
                                 </div>
                             </div>
                         </div>
@@ -636,47 +629,47 @@
             <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
             <![endif]-->
             <!--[if gte IE 9]><!-->
-            <script src="vendor/jquery/jquery.js"></script>
+            <script src="/OAS/vendor/jquery/jquery.js"></script>
             <!--<![endif]-->
-            <script src="vendor/jquery.appear/jquery.appear.js"></script>
-            <script src="vendor/jquery.easing/jquery.easing.js"></script>
-            <script src="vendor/jquery-cookie/jquery-cookie.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.js"></script>
-            <script src="vendor/common/common.js"></script>
-            <script src="vendor/jquery.validation/jquery.validation.js"></script>
-            <script src="vendor/jquery.stellar/jquery.stellar.js"></script>
-            <script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
-            <script src="vendor/jquery.gmap/jquery.gmap.js"></script>
-            <script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
-            <script src="vendor/isotope/jquery.isotope.js"></script>
-            <script src="vendor/owl.carousel/owl.carousel.js"></script>
-            <script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
-            <script src="vendor/vide/vide.js"></script>
+            <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
+            <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
+            <script src="/OAS/vendor/jquery-cookie/jquery-cookie.js"></script>
+            <script src="/OAS/vendor/bootstrap/js/bootstrap.js"></script>
+            <script src="/OAS/vendor/common/common.js"></script>
+            <script src="/OAS/vendor/jquery.validation/jquery.validation.js"></script>
+            <script src="/OAS/vendor/jquery.stellar/jquery.stellar.js"></script>
+            <script src="/OAS/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+            <script src="/OAS/vendor/jquery.gmap/jquery.gmap.js"></script>
+            <script src="/OAS/vendor/jquery.lazyload/jquery.lazyload.js"></script>
+            <script src="/OAS/vendor/isotope/jquery.isotope.js"></script>
+            <script src="/OAS/vendor/owl.carousel/owl.carousel.js"></script>
+            <script src="/OAS/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+            <script src="/OAS/vendor/vide/vide.js"></script>
 
             <!-- Theme Base, Components and Settings -->
-            <script src="js/theme.js"></script>
+            <script src="/OAS/js/theme.js"></script>
 
             <!-- Specific Page Vendor and Views -->
-            <script src="vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-            <script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.carousel.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
-            <script src="vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.carousel.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
 
-            <script src="vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
-            <script src="js/views/view.home.js"></script>
+            <script src="/OAS/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
+            <script src="/OAS/js/views/view.home.js"></script>
 
             <!-- Theme Custom -->
-            <script src="js/custom.js"></script>
+            <script src="/OAS/js/custom.js"></script>
 
             <!-- Theme Initialization Files -->
-            <script src="js/theme.init.js"></script>
+            <script src="/OAS/js/theme.init.js"></script>
 
             <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
             <script type="text/javascript">
