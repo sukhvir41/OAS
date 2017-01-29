@@ -594,9 +594,9 @@
                                         </form>
                                     </div>
                                     <div class="col-md-6">
-                                        <form action="#" method="post">
+                                        <form action="/OAS/admin/subjects/addsubject" method="post">
                                             <h4>Add Subject</h4>
-                                            <input type="hidden" name="courseId" value="${requestScope.course.id}">
+                                            <input type="hidden" name="course" value="${requestScope.course.id}">
                                             <input type="hidden" name="from" value="course">
                                             <div class="row">
                                                 <div class="form-group">
@@ -617,6 +617,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label>Class Rooms</label>
+                                                            <c:forEach var="classroom" items="${requestScope.course.classRooms}">
+                                                                <span class="checkbox">
+                                                                    <label class="checkbox"><input type="checkbox" name="classes" value="${classroom.id}">${classroom.name}</label>
+                                                                </span>
+                                                            </c:forEach>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             <div class= "row">
                                                 <div class="form-group">
                                                     <div class="col-md-8">
@@ -641,7 +653,6 @@
                                                 <th>Semister</th>
                                                 <th>Course</th>
                                                 <th>MiniSubjects</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
 
@@ -654,7 +665,6 @@
                                                     <td>${classRoom.semister}</td>
                                                     <td>${classRoom.course.name}</td>
                                                     <td>${classRoom.minimumSubjects}</td>
-                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -668,17 +678,15 @@
                                                 <th>Name</th>
                                                 <th>Course</th>
                                                 <th>Elective</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="subject" items="${requestScope.course.subjects}">
                                                 <tr>
                                                     <td>${subject.id}</td>
-                                                    <td><a href="">${subject.name}</a></td>
+                                                    <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
                                                     <td>${subject.course.name}</td>
                                                     <td>${subject.elective}</td>
-                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

@@ -530,8 +530,9 @@
                                         <div class="col-md-6">
                                             <form action="/OAS/admin/subjects/addsubject" method="post">
                                                 <h4>Add Subject</h4>
-                                                <input type="hidden" name="courseId" value="${requestScope.classroom.course.id}">
+                                                <input type="hidden" name="course" value="${requestScope.classroom.course.id}">
                                                 <input type="hidden" name="from" value="classroom">
+                                                <input type="hidden" name="classes" value="${requestScope.classroom.id}">
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-8">
@@ -571,7 +572,6 @@
                                                         <th>#</th>
                                                         <th>Name</th>
                                                         <th>Elective</th>
-                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -581,7 +581,6 @@
                                                             <td>${subject.id}</td>
                                                             <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
                                                             <td>${subject.elective}</td>
-                                                            <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
                                                         </tr>
                                                     </c:forEach>
 

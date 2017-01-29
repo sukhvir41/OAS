@@ -565,7 +565,6 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Name</th>
-                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -574,7 +573,6 @@
                                                         <tr>
                                                             <td>${course.id}</td>
                                                             <td><a href="/OAS/admin/courses/detailcourse?courseId=${course.id}">${course.name}</a></td>
-                                                            <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="#">Edit</a></td>
                                                         </tr>
                                                     </c:forEach>
 

@@ -104,13 +104,13 @@ public class ClassRoom implements Serializable {
     }
 
     /**
-     * this method adds the subject to ten classroom
+     * this method adds the subject to the classroom
      *
      * @param subject subject to be added
      */
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
-        subject.getClassRoom().add(this);
+        subject.getClassRooms().add(this);
     }
 
     public int getMinimumSubjects() {

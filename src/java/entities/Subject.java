@@ -43,7 +43,7 @@ public class Subject implements Serializable {
     private Course course;
 
     @ManyToMany(mappedBy = "subjects")
-    private List<ClassRoom> classRoom;
+    private List<ClassRoom> classRooms = new ArrayList<>();
 
     @ManyToMany(mappedBy = "subjects")
     List<Student> students = new ArrayList<>();
@@ -125,12 +125,12 @@ public class Subject implements Serializable {
         this.course = course;
     }
 
-    public List<ClassRoom> getClassRoom() {
-        return classRoom;
+    public List<ClassRoom> getClassRooms() {
+        return classRooms;
     }
 
-    public void setClassRoom(List<ClassRoom> classRoom) {
-        this.classRoom = classRoom;
+    public void setClassRooms(List<ClassRoom> classRoom) {
+        this.classRooms = classRoom;
     }
 
 }

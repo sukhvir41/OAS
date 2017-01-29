@@ -27,7 +27,7 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebFilter(urlPatterns = {"/login", "/"})
+@WebFilter(urlPatterns = {"/login", "/","/login.jsp"})
 public class LoginCheck implements Filter {
 
     @Override

@@ -5,20 +5,8 @@
  */
 package utility;
 
-import com.google.gson.*;
-import entities.Course;
-import entities.Login;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-import org.hibernate.Query;
+import entities.ClassRoom;
+import entities.Subject;
 import org.hibernate.Session;
 
 /**
@@ -28,7 +16,17 @@ import org.hibernate.Session;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-                
+        ClassRoom c;
+        Subject s;
+        Session session = Utils.openSession();
+        session.beginTransaction();
+        s = (Subject) session.get(Subject.class, 1);
+        ClassRoom c1 = s.getClassRooms().get(0);
+        c = (ClassRoom) session.get(ClassRoom.class, c1.getId());
+        System.out.println(s.getClassRooms().contains(c));
+        session.getTransaction().commit();
+        session.close();
+
     }
 
 }

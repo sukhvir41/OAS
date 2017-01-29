@@ -49,7 +49,7 @@ public class Teacher implements Serializable {
     private boolean hod;
 
     @OneToMany(mappedBy = "hod")
-    private List<Department> hodOf;
+    private List<Department> hodOf = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "class_fid")
