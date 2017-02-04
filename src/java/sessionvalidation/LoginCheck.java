@@ -27,7 +27,7 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebFilter(urlPatterns = {"/login", "/","/login.jsp"})
+@WebFilter(urlPatterns = {"/login", "/", "/login.jsp"})
 public class LoginCheck implements Filter {
 
     @Override
@@ -79,6 +79,7 @@ public class LoginCheck implements Filter {
                     if (login.matchSessionToken(token.getValue())) {
                         httpSession.setAttribute("type", login.getType());
                         httpSession.setAttribute("accept", true);
+                        httpSession.setAttribute("extenedCookie", true);
                         System.out.println("called end cookie");
                         switch ((String) httpSession.getAttribute("type")) {
                             case "students": {
@@ -102,10 +103,6 @@ public class LoginCheck implements Filter {
 
                         session.getTransaction().commit();
                         session.close();
-                        id.setMaxAge(864000);
-                        token.setMaxAge(864000);
-                        resp.addCookie(id);
-                        resp.addCookie(token);
                     } else {
                         System.out.println("token not match");
                         chain.doFilter(request, response);

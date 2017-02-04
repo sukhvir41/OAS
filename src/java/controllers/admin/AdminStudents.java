@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllers.admin;
 
+import entities.Course;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
+import utility.Utils;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/logout")
-public class LogOut extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/students")
+public class AdminStudents extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,22 +34,14 @@ public class LogOut extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("loging out");
-        HttpSession httpSession = req.getSession();
-        httpSession.setAttribute("accept", null);
-        httpSession.invalidate();
-        for (Cookie c : req.getCookies()) {
-            if (c.getName().equals("sid")) {
-                c.setMaxAge(0);
-                resp.addCookie(c);
-            } else if (c.getName().equals("stoken")) {
-                c.setMaxAge(0);
-                resp.addCookie(c);
-            }
-        }
-        resp.sendRedirect("login");
-        out.close();
+
+        Session session = Utils.openSession();
+        session.beginTransaction();
+        List<Course> courses = session.createCriteria(Course.class).list();
+        session.getTransaction().commit();
+        session.close();
+        req.setAttribute("courses", courses);
+        req.getRequestDispatcher("/WEB-INF/admin/adminstudent.jsp").forward(req, resp);
 
     }
 

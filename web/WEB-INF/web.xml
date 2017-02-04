@@ -72,7 +72,12 @@
     </error-page>
     
     
-   <!-- <welcome-file-list>
+    <!-- <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>-->
+    
+    
+    <listener>
+        <listener-class>servletListners.ContextListner</listener-class>
+    </listener>
 </web-app>

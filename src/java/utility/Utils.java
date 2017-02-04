@@ -53,6 +53,12 @@ public class Utils {
         return sessionFactory.openSession();
     }
 
+    public static void closeSesssioFactory() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        }
+    }
+
     /**
      * this method sends an email using the email id oasservice.mail@gmail.com
      * to the specified emailids

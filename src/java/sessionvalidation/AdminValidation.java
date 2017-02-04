@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,8 +22,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author sukhvir
  */
-@WebFilter(urlPatterns = {"/admin/*","/admin"})
+@WebFilter(urlPatterns = {"/admin/*", "/admin"})
 public class AdminValidation implements Filter {
+
+    HttpServletResponse resp;
+    HttpServletRequest req;
+    HttpSession session;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -31,11 +36,15 @@ public class AdminValidation implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletResponse resp = (HttpServletResponse) response;
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpSession session = req.getSession();
+        resp = (HttpServletResponse) response;
+        req = (HttpServletRequest) request;
+        session = req.getSession();
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        resp.setDateHeader("Expires", 0);
         try {
             if ((boolean) session.getAttribute("accept") == true && session.getAttribute("type").equals("admin")) {
+                checkCookie();
                 chain.doFilter(request, response);
             } else {
                 resp.sendRedirect("/OAS/login");
@@ -48,6 +57,35 @@ public class AdminValidation implements Filter {
     @Override
     public void destroy() {
 
+    }
+
+    private void checkCookie() {
+        try {
+            if ((boolean) session.getAttribute("extenedCookie")) {
+                session.setAttribute("extenedCookie", false);
+                Cookie id = null, token = null;
+
+                for (Cookie cookie : req.getCookies()) {
+                    switch (cookie.getName()) {
+                        case "sid":
+                            id = cookie;
+                            break;
+                        case "stoken":
+                            token = cookie;
+                            break;
+                    }
+                }
+
+                id.setMaxAge(864000);
+                token.setMaxAge(864000);
+                resp.addCookie(id);
+                resp.addCookie(token);
+            }
+
+        } catch (Exception e) {
+            System.out.println("error in extend cookie");
+
+        }
     }
 
 }
