@@ -33,14 +33,14 @@ public class UpdateSubject extends HttpServlet {
             int subjectId = Integer.parseInt(req.getParameter("subjectId"));
             String name = req.getParameter("subjectname");
             boolean elective = Boolean.parseBoolean(req.getParameter("elective"));
-            System.out.println(req.getParameterValues("classes"));
+
             List<String> classes = new ArrayList<>(Arrays.asList(req.getParameterValues("classes")));
             Session session = Utils.openSession();
             session.beginTransaction();
             Subject subject = (Subject) session.get(Subject.class, subjectId);
             subject.setName(name);
             subject.setElective(elective);
-            HashSet<ClassRoom> classRooms = new HashSet<>();
+            HashSet<ClassRoom> classRooms = new HashSet<>();//contains the class room that should have this subject
             classes.stream()
                     .map(Integer::parseInt)
                     .map(e -> (ClassRoom) session.get(ClassRoom.class, e))
@@ -55,6 +55,7 @@ public class UpdateSubject extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            resp.sendRedirect("/OAS/error");
         }
 
     }
@@ -65,13 +66,17 @@ public class UpdateSubject extends HttpServlet {
     }
 
     private void checkAndRemove(HashSet hashSet, Subject subject) {
+        List<ClassRoom> classes = new ArrayList<>();
+        subject.getClassRooms()
+                .stream()
+                .filter(classRoom -> !hashSet.contains(classRoom))
+                .forEachOrdered(classRoom -> { // find a better way to do this
+                    classRoom.getSubjects().remove(subject);
+                    classes.add(classRoom);
+                });
 
-        for (int i = 0; i < subject.getClassRooms().size(); i++) {
-            if (!hashSet.contains(subject.getClassRooms().get(i))) { 
-                subject.getClassRooms().get(i).getSubjects().remove(subject);
-                subject.getClassRooms().remove(i);
-            }
-        }
+        subject.getClassRooms().removeAll(classes);
+
     }
 
 }

@@ -6,11 +6,11 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-        <title>Students - Admin</title> 
-        .
+        <title>Home - Admin</title>	
 
+       
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -422,7 +422,7 @@
                                                                             <div class="user-avatar">
                                                                                 <!-- <div class="img-thumbnail">
                                                                                         <img src="img/clients/client-1.jpg" alt="">
-                                                                                    </div> -->
+                                                                                </div> -->
                                                                                 <p><strong>Username here of admin</strong><span>Administrator</span></p>
                                                                             </div>
                                                                         </div>
@@ -459,13 +459,13 @@
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/admin">Home</a></li>
-                                    <li>Students</li>
+                                    <li>Reports</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Students</h1>
+                                <h1>Reports</h1>
                             </div>
                         </div>
                     </div>
@@ -475,99 +475,60 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h4>Courses</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="course" name="courseId">
-                                                <c:forEach var="course" items="${requestScope.courses}">
-                                                    <option value="${course.id}">${course.name}</option>
-                                                </c:forEach>
-                                            </select>
-                                            <h4>Class Room</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="classroom" name="classroomId">
-
-                                            </select>
-                                            <h4>Subject</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
-
-                                            </select>
-                                            <h4>Filter</h4>
-                                            <div class="radio">
-                                                <label>
-                                                    <input id="filter" name="filter" value="all" checked type="radio">
-                                                    All
-                                                </label>&nbsp; &nbsp;
-                                                <label>
-                                                    <input id="filter" name="filter" value="true" type="radio">
-                                                    Verified
-                                                </label>&nbsp; &nbsp;
-                                                <label>
-                                                    <input id="filter" name="filter" value="false" type="radio">
-                                                    Not Verified
-                                                </label>&nbsp; &nbsp;
-                                            </div>
-                                            <button class="btn btn-primary" id ="search">Search</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h4>Serach By Name</h4>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
-                                                        <br>
-                                                        <button class="btn btn-primary" id ="searchname">Search</button>
-                                                    </div>
+                                <div class="col-md-6">
+                                    <form action="/OAS/admin/generatereportpost" method="post" target="_blank">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                <label>Course</label>
+                                                    <select class="form-control" name="course" id="course">
+                                                        <c:forEach var="course" items="${requestScope.courses}">
+                                                            <option value="${course.id}">${course.name}</option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                <div class="col-md-4">
-                                    <div class="alert alert-danger" hidden id="error">
-                                        <strong>Failure!</strong> Error in getting result
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="row">
-                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                <div class="col-md-4">
-                                    <div class="alert alert-success" hidden id="success">
-                                        <strong>Success!</strong> Results below
-                                    </div>
-                                </div> 
-                            </div>
-                            <hr class="tall">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Number</th>
-                                                <th>Email</th>
-                                                <th>Class Room</th>
-                                                <th>Roll Number</th>
-                                                <th>Subjects</th>
-                                                <th>Verified</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablebody">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                <label>Class Rooom</label>
+                                                    <select required="true" class="form-control" name="classroom" id="classroom">
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                <label>Start Date</label>
+                                                    <input required="true" class="form-control" type="date" name="startdate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                <label>End Date</label>
+                                                    <input required="true" class="form-control" type="date" name="enddate">
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        </tbody>
-                                    </table>
-                                </div>        
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input value="Generate Report" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <!-- Vendor -->
             <!--[if lt IE 9]>
@@ -575,9 +536,8 @@
             <![endif]-->
             <!--[if gte IE 9]><!-->
             <script src="/OAS/vendor/jquery/jquery.js"></script>
-            <script src="/OAS/scripts/adminsearchstudent.js"></script>
+            <script src="/OAS/scripts/adminreport.js"></script>
             <script src="/OAS/scripts/mustache.js"></script>
-
             <!--<![endif]-->
             <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
             <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

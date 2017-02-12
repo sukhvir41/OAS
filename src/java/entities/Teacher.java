@@ -55,7 +55,7 @@ public class Teacher implements Serializable {
     @JoinColumn(name = "class_fid")
     private ClassRoom classRoom;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "teacher")
     private List<Teaching> teaches = new ArrayList();
 
     @ManyToMany
