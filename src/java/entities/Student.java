@@ -181,5 +181,13 @@ public class Student implements Serializable {
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
+
+    public List<Attendance> getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(List<Attendance> attendance) {
+        this.attendance = attendance;
+    }
         
 }

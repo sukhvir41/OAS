@@ -54,7 +54,6 @@ public class Teaching implements Serializable {
         this.subject = subject;
     }
 
-    
     public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
         setTeacher(teacher);
         setClassRoom(classRoom);
@@ -91,6 +90,14 @@ public class Teaching implements Serializable {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public List<Lecture> getLectures() {
+        return lectures;
+    }
+
+    public void setLectures(List<Lecture> lectures) {
+        this.lectures = lectures;
     }
 
 }

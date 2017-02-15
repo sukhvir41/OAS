@@ -6,8 +6,10 @@
 package utility;
 
 import entities.ClassRoom;
-import entities.Subject;
+import entities.Student;
+import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -16,14 +18,16 @@ import org.hibernate.Session;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-        ClassRoom c;
-        Subject s;
         Session session = Utils.openSession();
-        session.beginTransaction();
-        s = (Subject) session.get(Subject.class, 1);
-        ClassRoom c1 = s.getClassRooms().get(0);
-        c = (ClassRoom) session.get(ClassRoom.class, c1.getId());
-        System.out.println(s.getClassRooms().contains(c));
+        session.beginTransaction();  
+                
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, 1);
+        List<Student> students = session.createCriteria(Student.class)
+                .add(Restrictions.eq("classRoom", classRoom))
+                .list();
+        
+        System.out.println(students.size());
+        
         session.getTransaction().commit();
         session.close();
 

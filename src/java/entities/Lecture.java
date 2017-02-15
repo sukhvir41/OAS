@@ -93,4 +93,12 @@ public class Lecture implements Serializable {
         this.count = count;
     }
 
+    public List<Attendance> getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(List<Attendance> attendance) {
+        this.attendance = attendance;
+    }
+
 }
