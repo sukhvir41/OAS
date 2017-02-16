@@ -14,6 +14,7 @@ import entities.Teaching;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +47,7 @@ public class GenerateReport extends HttpServlet {
 
         resp.setContentType("APPLICATION/OCTET-STREAM");
         resp.setHeader("Content-Disposition", "attachment; filename=report " + new Date() + ".xlsx");
-        
+
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet spreadsheet = workbook.createSheet(" Report ");
 
@@ -56,15 +57,16 @@ public class GenerateReport extends HttpServlet {
 
         try {
             int classroomId = Integer.parseInt(req.getParameter("classroom"));
-            start = new SimpleDateFormat().parse(req.getParameter("startdate"));
-            end = new SimpleDateFormat().parse(req.getParameter("enddate"));
+            System.out.println(req.getParameter("startdate"));
+            start = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("startdate"));
+            end = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("enddate"));
 
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
 
             row = spreadsheet.createRow(0);
             c = row.createCell(0);
             c.setCellValue(classRoom.getName() + " " + classRoom.getDivision() + "  " + classRoom.getCourse().getName()
-                    + "from " + start + " to " + end);
+                    + " from " + start + " to " + end);
 
             int rowNumber = 1;
 
@@ -84,13 +86,21 @@ public class GenerateReport extends HttpServlet {
                 cellNumber++;
 
                 for (Subject subject : student.getSubjects()) {
+                    
                     List<Lecture> lectures = getLectures(classRoom, subject);
-                    totalLectures += lectures.size();
-                    int attendance = getStudentAttendance(student, lectures);
-                    totalAttendance += attendance;
+                    int lecturesCount = lectures.stream()
+                            .map(e -> e.getCount())
+                            .reduce(0, (c, e) -> c + e);
+                    totalLectures += lecturesCount;
+                    
+                    List<Attendance> studentAttendances = getStudentAttendance(student, lectures);
+                    int attendanceCount = studentAttendances.stream()
+                            .map(e -> e.getLecture().getCount())
+                            .reduce(0, (c, e) -> c + e);
+                    totalAttendance += attendanceCount;
 
                     c = row.createCell(cellNumber);
-                    c.setCellValue(subject.getName() + " " + attendance + "/" + lectures.size());
+                    c.setCellValue(subject.getName() + " " + attendanceCount + "/" + lecturesCount);
                     cellNumber++;
                 }
 
@@ -101,7 +111,11 @@ public class GenerateReport extends HttpServlet {
                 c.setCellValue(totalAttendance + "/" + totalLectures);
                 cellNumber++;
                 c = row.createCell(cellNumber);
-                c.setCellValue("percentage : " + ((totalAttendance / totalLectures) * 100));
+                if (totalLectures > 0) {
+                    c.setCellValue("percentage : " + ((totalAttendance / totalLectures) * 100));
+                } else {
+                    c.setCellValue("percentage : 100%");
+                }
                 rowNumber++;
             }
 
@@ -109,6 +123,7 @@ public class GenerateReport extends HttpServlet {
             session.close();
             workbook.write(out);
         } catch (Exception e) {
+            e.printStackTrace();;
             session.getTransaction().rollback();
             session.close();
         } finally {
@@ -128,13 +143,17 @@ public class GenerateReport extends HttpServlet {
                 .list();
     }
 
-    private int getStudentAttendance(Student student, List<Lecture> lectures) {
-        return session.createCriteria(Attendance.class)
-                .add(Restrictions.in("lecture", lectures))
-                .add(Restrictions.eq("student", student))
-                .add(Restrictions.eqOrIsNull("attended", true))
-                .list()
-                .size();
+    private List<Attendance> getStudentAttendance(Student student, List<Lecture> lectures) {
+        if (lectures.size() > 0) {
+            return session.createCriteria(Attendance.class)
+                    .add(Restrictions.in("lecture", lectures))
+                    .add(Restrictions.eq("student", student))
+                    .add(Restrictions.eq("attended", true))
+                    .list();
+
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override
