@@ -19,8 +19,7 @@ import org.hibernate.criterion.Restrictions;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-        Attendance a= new Attendance();
-        System.out.println(a.isAttended());
+        
 
     }
 

@@ -80,9 +80,12 @@ public class Student implements Serializable {
         this.number = number;
         this.email = email;
         this.verified = verified;
-        setClassRoom(classRoom);
+        addClassRoom(classRoom);
     }
 
+    /**
+     * this method adds attendance to the student and vice versa
+     */
     public void addAttendance(Attendance attendance) {
         attendance.setStudent(this);
         this.attendance.add(attendance);
@@ -106,7 +109,7 @@ public class Student implements Serializable {
      *
      * @param classRoom classroom to be added
      */
-    public void addClassRoom(ClassRoom classRoom) {
+    final public void addClassRoom(ClassRoom classRoom) {
         classRoom.addStudent(this);
     }
 
@@ -162,7 +165,7 @@ public class Student implements Serializable {
         return classRoom;
     }
 
-    public void setClassRoom(ClassRoom classRoom) {
+    final public void setClassRoom(ClassRoom classRoom) {
         this.classRoom = classRoom;
     }
 
@@ -189,5 +192,5 @@ public class Student implements Serializable {
     public void setAttendance(List<Attendance> attendance) {
         this.attendance = attendance;
     }
-        
+
 }

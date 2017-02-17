@@ -90,8 +90,11 @@ public class Login implements Serializable {
         this.sessionToken = Utils.hash(sessionToken);
     }
 
+    /**
+     * this method matches the given session token with the stored session token
+     */
     public boolean matchSessionToken(String token) {
-        return Utils.hashEquals(this.sessionToken, token);
+        return Utils.hashEquals(this.sessionToken, Utils.hash(token));
     }
 
     public boolean isUsed() {
@@ -110,12 +113,26 @@ public class Login implements Serializable {
         this.username = username;
     }
 
-    public boolean checkPassword(String passwordPlainText) {
+    /**
+     * this method checks the given password matches with the stored password
+     */
+    public final boolean checkPassword(String passwordPlainText) {
         return BCrypt.checkpw(passwordPlainText, this.password);
     }
 
-    public void setPassword(String password) {
+    /**
+     * this method hashes the password and sets it
+     */
+    final public void setPassword(String password) {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
+    }
+
+    private String getPassword() {
+        return password;
+    }
+
+    private String getSessionToken() {
+        return sessionToken;
     }
 
     public String getType() {

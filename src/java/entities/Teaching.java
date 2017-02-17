@@ -55,9 +55,40 @@ public class Teaching implements Serializable {
     }
 
     public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
-        setTeacher(teacher);
+        addTeacher(teacher);
+        addClassRoom(classRoom);
+        addSubject(subject);
+    }
+
+    /**
+     * this method adds lecture to teachings and vice versa
+     */
+    public final void addLecture(Lecture lecture) {
+        if (!lectures.contains(lecture)) {
+            lectures.add(lecture);
+            lecture.setTeaching(this);
+        }
+    }
+
+    /**
+     * this method adds class room to this teaching
+     */
+    public final void addClassRoom(ClassRoom classRoom) {
         setClassRoom(classRoom);
+    }
+
+    /**
+     * this method adds subject to teaching
+     */
+    public final void addSubject(Subject subject) {
         setSubject(subject);
+    }
+
+    /**
+     * this method adds teaching to teacher and vice versa
+     */
+    public final void addTeacher(Teacher teacher) {
+        teacher.addTeaching(this);
     }
 
     public Teacher getTeacher() {

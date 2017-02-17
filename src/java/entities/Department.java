@@ -79,6 +79,9 @@ public class Department implements Serializable {
         }
     }
 
+    /**
+     * this method adds the teacher as hod of department and vice versa
+     */
     public void addHod(Teacher teacher) {
         teacher.addHodOf(this);
     }

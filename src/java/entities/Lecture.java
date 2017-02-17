@@ -52,11 +52,18 @@ public class Lecture implements Serializable {
 
     public Lecture(int count, Teaching teaching) {
         this.count = count;
-        setTeaching(teaching);
+        addTeaching(teaching);
         this.date = new Date();
     }
 
-    public void adddAttendance(Attendance attendance) {
+    public final void addTeaching(Teaching teaching) {
+        teaching.addLecture(this);
+    }
+
+    /**
+     * this method adds attendance to lecture and vice versa
+     */
+    public void addAttendance(Attendance attendance) {
         attendance.setLecture(this);
         this.attendance.add(attendance);
     }

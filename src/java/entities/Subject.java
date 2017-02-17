@@ -68,7 +68,7 @@ public class Subject implements Serializable {
      *
      * @param student student to be added
      */
-    public void addStudent(Student student) {
+    public final void addStudent(Student student) {
         student.addSubject(this);
     }
 
@@ -81,7 +81,10 @@ public class Subject implements Serializable {
         course.addSubject(this);
     }
 
-    public void addClassRoom(ClassRoom classRoom) {
+    /**
+     * this method adds subject to class room and vice versa
+     */
+    public final void addClassRoom(ClassRoom classRoom) {
         classRoom.addSubject(this);
     }
 

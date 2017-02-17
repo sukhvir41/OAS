@@ -227,9 +227,9 @@ public class Utils {
         }
     }
 
-    public static boolean hashEquals(String hash, String plain) {
-        byte[] hashBytes = hash.getBytes();
-        byte[] plainBytes = hash(plain).getBytes();
+    public static boolean hashEquals(String hash1, String hash2) {
+        byte[] hashBytes = hash1.getBytes();
+        byte[] plainBytes = hash2.getBytes();
         int diff = hashBytes.length ^ plainBytes.length;
         for (int i = 0; i < hashBytes.length && i < plainBytes.length; i++) {
             diff |= hashBytes[i] ^ plainBytes[i];

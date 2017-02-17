@@ -80,12 +80,23 @@ public class Teacher implements Serializable {
         this.email = email;
         this.verified = verified;
         this.hod = hod;
-        setClassRoom(classRoom);
+        addClassRoom(classRoom);
     }
 
-    public void addTeaching(Teaching teaching) {
+    /**
+     * this method adds class room to class teacher and vice versa
+     */
+    public final void addClassRoom(ClassRoom classRoom) {
+        classRoom.addClassTeacher(this);
+    }
+
+    /**
+     * this methods adds the teaching to teacher and vice versa
+     */
+    public final void addTeaching(Teaching teaching) {
         if (!teaches.contains(teaching)) {
             this.teaches.add(teaching);
+            teaching.setTeacher(this);
         }
     }
 
@@ -99,6 +110,10 @@ public class Teacher implements Serializable {
         department.addTeacher(this);
     }
 
+    /**
+     * this method adds department hod to teacher and vice versa but does not
+     * mark hod to true
+     */
     public void addHodOf(Department department) {
         if (!hodOf.contains(department)) {
             hodOf.add(department);

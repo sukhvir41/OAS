@@ -8,7 +8,6 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -87,10 +86,18 @@ public class ClassRoom implements Serializable {
     }
 
     /**
+     * this methods adds the teacher as class teacher to the class Room and vice versa
+     */
+    final public void addClassTeacher(Teacher teacher) {
+        teacher.setClassRoom(this);
+        this.classTeacher = teacher;
+    }
+
+    /**
      * this method adds the classroom to the course and the course to the
      * classroom
      */
-    public void addCourse(Course course) {
+    final public void addCourse(Course course) {
         course.addClassRoom(this);
     }
 
