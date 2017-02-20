@@ -12,6 +12,7 @@ import entities.Login;
 import entities.Student;
 import entities.Subject;
 import entities.Teacher;
+import entities.UserType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class Registeration extends HttpServlet {
                     .map(e -> (Subject) session.get(Subject.class, e))
                     .forEachOrdered(student::addSubject);
             student.addClassRoom(classRoom);
-            Login login = new Login(userName, password, "student", student.getId(), email);
+            Login login = new Login(userName, password, UserType.Student, student.getId(), email);
             session.save(login);
             session.getTransaction().commit();
             session.close();
@@ -84,15 +85,15 @@ public class Registeration extends HttpServlet {
                     .map(Integer::parseInt)
                     .map(e -> (Department) session.get(Department.class, e))
                     .forEachOrdered(teacher::addDepartment);
-            Login login = new Login(userName, password, "teacher", teacher.getId(), email);
+            Login login = new Login(userName, password, UserType.Teacher, teacher.getId(), email);
             session.save(login);
             session.getTransaction().commit();
             session.close();
             resp.sendRedirect("login");
         }
-        
+
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();

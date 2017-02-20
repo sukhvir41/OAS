@@ -28,9 +28,6 @@ public class Attendance implements Serializable {
     @Column(name = "attendance_id")
     private long id;
 
-    @Column(name = "macId")
-    private String macId;
-
     @Column(name = "marked_ny_teacher")
     private boolean markedByTeacher = false;
 
@@ -83,14 +80,6 @@ public class Attendance implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getMacId() {
-        return macId;
-    }
-
-    public void setMacId(String macId) {
-        this.macId = macId;
     }
 
     public boolean isMarkedByTeacher() {

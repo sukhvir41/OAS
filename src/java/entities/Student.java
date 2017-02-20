@@ -48,6 +48,9 @@ public class Student implements Serializable {
     @Column(name = "s_email")
     private String email;
 
+    @Column(name = "mac_id")
+    private String macId;
+
     @ManyToOne
     @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
     private ClassRoom classRoom;
@@ -191,6 +194,14 @@ public class Student implements Serializable {
 
     public void setAttendance(List<Attendance> attendance) {
         this.attendance = attendance;
+    }
+
+    public String getMacId() {
+        return macId;
+    }
+
+    public void setMacId(String macId) {
+        this.macId = macId;
     }
 
 }

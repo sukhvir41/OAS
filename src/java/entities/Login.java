@@ -56,21 +56,24 @@ public class Login implements Serializable {
     @Column(name = "session_token")
     private String sessionToken;
 
+    @Column(name = "admin_type")
+    private String adminType;
+
     public Login() {
     }
 
-    public Login(String username, String password, String type, int id, String email) {
+    public Login(String username, String password, UserType type, int id, String email) {
         this.username = username;
         setPassword(password);
-        this.type = type;
+        this.type = type.toString();
         this.id = id;
         this.email = email;
     }
 
-    public Login(String username, String password, String type, int id, String email, String token, Date date) {
+    public Login(String username, String password, UserType type, int id, String email, String token, Date date) {
         this.username = username;
         setPassword(password);
-        this.type = type;
+        this.type = type.toString();
         this.id = id;
         this.email = email;
         this.token = token;
@@ -139,8 +142,8 @@ public class Login implements Serializable {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(UserType type) {
+        this.type = type.toString();
     }
 
     public int getId() {
@@ -173,6 +176,14 @@ public class Login implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getAdminType() {
+        return adminType;
+    }
+
+    public void setAdminType(AdminType adminType) {
+        this.adminType = adminType.toString();
     }
 
 }

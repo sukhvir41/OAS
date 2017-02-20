@@ -14,9 +14,9 @@ import org.hibernate.Session;
  * @author Kalpesh
  */
 public class AddToDatabase {
-    
+
     public static void main(String[] args) {
-        
+
         Session session = Utils.openSession();
         session.beginTransaction();
         Department depart = new Department("IT");
@@ -29,14 +29,14 @@ public class AddToDatabase {
         Teacher teacher = new Teacher("Sunita", "Jena", 0, "abc@xyz.com", true, false, classroom);
         teacher.addDepartment(depart);
         classroom.addStudent(student);
-        
+
         session.save(depart);
         session.save(course);
         session.save(subject);
         session.save(classroom);
         session.save(student);
         session.save(teacher);
-        
+
         Teaching t = new Teaching(teacher, classroom, subject);
         teacher.addTeaching(t);
         Lecture lec = new Lecture(1, t);
@@ -44,25 +44,25 @@ public class AddToDatabase {
         lec.setId("lec1");
         session.save(t);
         session.save(lec);
-        
-        Login l = new Login("s1", "123456", "student", 1, "email", "123456", new Date());
-        Login l1 = new Login("t1", "123456", "teacher", 1, "email", "123456", new Date());
-        
+
+        Login l = new Login("s1", "123456", UserType.Student, 1, "email", "123456", new Date());
+        Login l1 = new Login("t1", "123456", UserType.Teacher, 1, "email", "123456", new Date());
+
         System.out.println("called");
         session.save(l);
         session.save(l1);
-        session.save(new Login("adminsukhvir", "qwertyuiop", "admin", 0, "sukhvir41@gmail.com"));
+        session.save(new Login("adminsukhvir", "qwertyuiop", UserType.Admin, 0, "sukhvir41@gmail.com"));
         System.out.println(student.getId());
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
         session = Utils.openSession();
         session.beginTransaction();
         //have to test cascaade
         session.getTransaction().commit();
         session.close();
-        
+
     }
-    
+
 }

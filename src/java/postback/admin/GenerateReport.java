@@ -68,7 +68,7 @@ public class GenerateReport extends HttpServlet {
             c.setCellValue(classRoom.getName() + " " + classRoom.getDivision() + "  " + classRoom.getCourse().getName()
                     + " from " + start + " to " + end);
 
-            int rowNumber = 1;
+            int rowNumber = 2;
 
             for (Student student : classRoom.getStudents()) {
 
@@ -86,18 +86,26 @@ public class GenerateReport extends HttpServlet {
                 cellNumber++;
 
                 for (Subject subject : student.getSubjects()) {
-                    
+
+                    //getting lectures of the class and subject
                     List<Lecture> lectures = getLectures(classRoom, subject);
                     int lecturesCount = lectures.stream()
                             .map(e -> e.getCount())
                             .reduce(0, (c, e) -> c + e);
                     totalLectures += lecturesCount;
-                    
+
+                    //getting student attendace according to the lectures and the subject 
                     List<Attendance> studentAttendances = getStudentAttendance(student, lectures);
                     int attendanceCount = studentAttendances.stream()
                             .map(e -> e.getLecture().getCount())
                             .reduce(0, (c, e) -> c + e);
                     totalAttendance += attendanceCount;
+
+                    //calculating leaves according to the atendance
+                    leaves += studentAttendances.stream()
+                            .filter(attendance -> attendance.isLeave())
+                            .map(attendance -> attendance.getLecture().getCount())
+                            .reduce(0, (c, e) -> c + e);
 
                     c = row.createCell(cellNumber);
                     c.setCellValue(subject.getName() + " " + attendanceCount + "/" + lecturesCount);
@@ -108,7 +116,7 @@ public class GenerateReport extends HttpServlet {
                 c.setCellValue("leaves " + leaves);
                 cellNumber++;
                 c = row.createCell(cellNumber);
-                c.setCellValue(totalAttendance + "/" + totalLectures);
+                c.setCellValue("total " + totalAttendance + "/" + totalLectures);
                 cellNumber++;
                 c = row.createCell(cellNumber);
                 if (totalLectures > 0) {
@@ -148,7 +156,7 @@ public class GenerateReport extends HttpServlet {
             return session.createCriteria(Attendance.class)
                     .add(Restrictions.in("lecture", lectures))
                     .add(Restrictions.eq("student", student))
-                    .add(Restrictions.eq("attended", true))
+                    .add(Restrictions.eqOrIsNull("attended", true))
                     .list();
 
         } else {

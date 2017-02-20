@@ -36,23 +36,25 @@ public class MacAddressUtil {
     private static PcapNetworkInterface nif;
     private static String stringSourceIpAddress;
 
-    static {
-        try {
-            sourceMacAddress = MacAddress.getByName("08:00:27:5F:F2:E4");
-            stringSourceIpAddress = "192.168.1.12";
-            sourceIpAddress = InetAddress.getByName(stringSourceIpAddress);
-            nif = Pcaps.getDevByAddress(sourceIpAddress);
-        } catch (Exception e) {
-        }
-
-    }
-
     private MacAddress destinationMacAddress;
     private PcapHandle handle;
     private PcapHandle sendHandle;
     private int timeOut = 5;
 
-    public String getMAcAddress(String destinationAddress) {
+    public static boolean setAddresses(String macAddress, String ipAddress) {
+        try {
+            sourceMacAddress = MacAddress.getByName(macAddress);
+            stringSourceIpAddress = ipAddress;
+            sourceIpAddress = InetAddress.getByName(stringSourceIpAddress);
+            nif = Pcaps.getDevByAddress(sourceIpAddress);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    
+    private String getMacAddressImpl(String destinationIpAddress) {
         handle = null;
         sendHandle = null;
         ExecutorService service = null;
@@ -62,7 +64,7 @@ public class MacAddressUtil {
             sendHandle = nif.openLive(65536, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, 10);
             service = Executors.newSingleThreadExecutor();
             handle.setFilter(
-                    "arp and src host " + destinationAddress
+                    "arp and src host " + destinationIpAddress
                     + " and dst host " + stringSourceIpAddress
                     + " and ether dst " + Pcaps.toBpfString(sourceMacAddress),
                     BpfProgram.BpfCompileMode.OPTIMIZE
@@ -91,7 +93,7 @@ public class MacAddressUtil {
                     .srcHardwareAddr(sourceMacAddress)
                     .srcProtocolAddr(sourceIpAddress)
                     .dstHardwareAddr(MacAddress.ETHER_BROADCAST_ADDRESS)
-                    .dstProtocolAddr(InetAddress.getByName(destinationAddress));
+                    .dstProtocolAddr(InetAddress.getByName(destinationIpAddress));
 
             EthernetPacket.Builder etherBuilder = new EthernetPacket.Builder();
             etherBuilder.dstAddr(MacAddress.ETHER_BROADCAST_ADDRESS)
@@ -139,6 +141,15 @@ public class MacAddressUtil {
         } else {
             return null;
         }
+    }
+
+    public String getMacAddress(String destinationIpAddress) {
+        if (nif != null) {
+            return getMacAddressImpl(destinationIpAddress);
+        } else {
+            return null;
+        }
+
     }
 
     public void setTimeOut(int timeOut) {
