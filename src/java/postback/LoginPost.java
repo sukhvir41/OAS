@@ -62,7 +62,7 @@ public class LoginPost extends HttpServlet {
                         break;
                     }
                     case "admin": {
-                        htppSession.setAttribute("details", login);
+                        htppSession.setAttribute("admin", login);
                         htppSession.setAttribute("type", "admin");
                         break;
                     }
