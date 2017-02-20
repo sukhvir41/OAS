@@ -5,9 +5,12 @@
  */
 package utility;
 
+import entities.AdminType;
 import entities.Attendance;
 import entities.ClassRoom;
+import entities.Login;
 import entities.Student;
+import entities.UserType;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -19,7 +22,9 @@ import org.hibernate.criterion.Restrictions;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-        
+        Login l = new Login("sdfgsdf","asdfas", UserType.Admin, 0,"sdfsdf");
+        l.setAdminType(AdminType.Sub);
+                
 
     }
 
