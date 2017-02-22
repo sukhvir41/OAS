@@ -62,7 +62,7 @@ public class Registeration extends HttpServlet {
                     .map(e -> (Subject) session.get(Subject.class, e))
                     .forEachOrdered(student::addSubject);
             student.addClassRoom(classRoom);
-            Login login = new Login(userName, password, UserType.Student, student.getId(), email);
+            Login login = Login.createStudentLogin(userName, password, student.getId(), email);
             session.save(login);
             session.getTransaction().commit();
             session.close();
@@ -85,7 +85,7 @@ public class Registeration extends HttpServlet {
                     .map(Integer::parseInt)
                     .map(e -> (Department) session.get(Department.class, e))
                     .forEachOrdered(teacher::addDepartment);
-            Login login = new Login(userName, password, UserType.Teacher, teacher.getId(), email);
+            Login login = Login.createTeacherLogin(userName, password, teacher.getId(), email);
             session.save(login);
             session.getTransaction().commit();
             session.close();

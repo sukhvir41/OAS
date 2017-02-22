@@ -22,8 +22,6 @@ import org.hibernate.criterion.Restrictions;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-        Login l = new Login("sdfgsdf","asdfas", UserType.Admin, 0,"sdfsdf");
-        l.setAdminType(AdminType.Sub);
                 
 
     }

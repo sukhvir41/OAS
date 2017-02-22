@@ -37,6 +37,10 @@ public class Utils {
     private static SessionFactory sessionFactory;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
 
+    private Utils() throws Exception {
+        throw new Exception("dont use this contructor");
+    }
+
     /**
      * this methods is used to create a session for hibernate
      *

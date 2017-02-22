@@ -59,10 +59,24 @@ public class Login implements Serializable {
     @Column(name = "admin_type")
     private String adminType;
 
-    public Login() {
+    private Login() {
     }
 
-    public Login(String username, String password, UserType type, int id, String email) {
+    public static Login createStudentLogin(String Username, String passsword, int studentId, String email) {
+        return new Login(Username, passsword, UserType.Student, studentId, email);
+    }
+
+    public static Login createTeacherLogin(String Username, String passsword, int teacherId, String email) {
+        return new Login(Username, passsword, UserType.Teacher, teacherId, email);
+    }
+
+    public static Login createAdminLogin(String Username, String passsword, String email, AdminType adminType) {
+        Login admin = new Login(Username, passsword, UserType.Admin, 0, email);
+        admin.setAdminType(adminType);
+        return admin;
+    }
+
+    private Login(String username, String password, UserType type, int id, String email) {
         this.username = username;
         setPassword(password);
         this.type = type.toString();
@@ -70,7 +84,7 @@ public class Login implements Serializable {
         this.email = email;
     }
 
-    public Login(String username, String password, UserType type, int id, String email, String token, Date date) {
+    private Login(String username, String password, UserType type, int id, String email, String token, Date date) {
         this.username = username;
         setPassword(password);
         this.type = type.toString();

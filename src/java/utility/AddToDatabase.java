@@ -45,13 +45,14 @@ public class AddToDatabase {
         session.save(t);
         session.save(lec);
 
-        Login l = new Login("s1", "123456", UserType.Student, 1, "email", "123456", new Date());
-        Login l1 = new Login("t1", "123456", UserType.Teacher, 1, "email", "123456", new Date());
+        Login l = Login.createStudentLogin("asds", "asdasd", student.getId(), student.getEmail());
+        Login l1 = Login.createTeacherLogin("asdasd", "adfdf", teacher.getId(), teacher.getEmail());
 
         System.out.println("called");
         session.save(l);
         session.save(l1);
-        session.save(new Login("adminsukhvir", "qwertyuiop", UserType.Admin, 0, "sukhvir41@gmail.com"));
+        session.save(Login.createAdminLogin("adminsukhvir", "qwertyuiop", "sukhvir41@gmail.com", AdminType.Main));
+        session.save(Login.createAdminLogin("adminkalpesh", "qwertyuiop", "kalpeshrawal96@gmail.com", AdminType.Main));
         System.out.println(student.getId());
 
         session.getTransaction().commit();
