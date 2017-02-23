@@ -30,6 +30,7 @@ public class DeleteAdmin extends HttpServlet {
             String username = req.getParameter("username");
             Login admin = (Login) session.get(Login.class, username);
             session.delete(admin);
+            //###
             session.getTransaction().commit();
             session.close();
             resp.sendRedirect("/OAS/admin/admins");

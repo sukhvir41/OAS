@@ -6,9 +6,13 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Change Password - Admin</title>	
+        <title>My Account - Admin</title>   
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -68,14 +72,13 @@
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/admin">Home</a></li>
-                                    <li><a href="/OAS/admin/myaccount">My Account</a></li>
-                                    <li>Change Password</li>
+                                    <li>My Account</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Change Password</h1>
+                                <h1>My Account</h1>
                             </div>
                         </div>
                     </div>
@@ -84,64 +87,28 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/admin/myaccount/changepasswordpost" method="Post">
-                                <h4>Username : ${requestScope.username}</h4>
-                                <div class="row">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Username : <c:out value="${sessionScope.admin.username}"/></h2>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <dl>
+                                                <dt>Email Address</dt>
+                                                <dd>${sessionScope.admin.email}</dd>
+                                                <dt>Admin Type</dt>
+                                                <dd>${sessionScope.admin.adminType}</dd>
+                                                <dt><a href="/OAS/admin/myaccount/changepassword">Change Password</a></dt>
+                                            </dl>
 
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>Old Password</label>
-                                            <input class="form-control input-lg" type="Password" name="oldpassword" id="oldpassword" required="true">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>New Password</label>
-                                            <input class="form-control input-lg" type="Password" name="newpassword" id="newpassword" required="true">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>Re Enter New Password</label>
-                                            <input class="form-control input-lg" type="Password" name="renewpassword" id="renewpassword" required="true">
-                                        </div>
-                                    </div>
-                                </div>
-                                <c:choose>
-                                    <c:when test="${param.error =='false'}">
-                                        <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="alert alert-success" id="loginError">
-                                                    <strong>Successful!</strong> Password Updated 
-                                                </div>
-                                            </div> 
-                                        </div> 
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="alert alert-danger" id="loginError">
-                                                    <strong>Error!</strong> Old password is wrong or new password does not match
-                                                </div>
-                                            </div> 
-                                        </div> 
-                                    </c:otherwise>
-                                </c:choose>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input value="Update Password" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
+        </div>
 
             <!-- Vendor -->
             <!--[if lt IE 9]>

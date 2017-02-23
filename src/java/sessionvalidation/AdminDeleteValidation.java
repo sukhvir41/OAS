@@ -43,7 +43,7 @@ public class AdminDeleteValidation implements Filter {
             session = req.getSession();
             if(((Login)session.getAttribute("admin")).getAdminType().equals(AdminType.Main.toString())){
                 chain.doFilter(request, response);
-            }
+            }//###
         } catch (Exception e) {
 
         }

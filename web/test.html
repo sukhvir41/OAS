@@ -4,9 +4,13 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Network Settings - Admin</title>	
+        <title>My Account - Admin</title>   
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -57,7 +61,7 @@
     </head>
     <body>
         <div class="body">
-            <!-- ### Header will come here -->
+            <!--<jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>-->
 
             <div role="main" class="main">
                 <section class="page-header">
@@ -66,13 +70,13 @@
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/admin">Home</a></li>
-                                    <li>Network Settings</li>
+                                    <li>My Account</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Network Settings</h1>
+                                <h1>My Account</h1>
                             </div>
                         </div>
                     </div>
@@ -81,35 +85,28 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/admin/networksettingspost" method="Post">
-                                
-                                <div class="row">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Username : <c:out value="${sessionScope.admin.username}"/></h2>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <dl>
+                                                <dt>Email Address</dt>
+                                                <dd>${sessionScope.admin.email}</dd>
+                                                <dt>Admin Type</dt>
+                                                <dd>${sessionScope.admin.adminType}</dd>
+                                                <dt><a class="###" href="/OAS/admin/admins/deleteadmin?username">Delete</a></dt>
+                                            </dl>
 
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>IP Address of the Server PC</label>
-                                            <input class="form-control input-lg" type="text" name="ipaddress" id="ipaddress" placeholder="123.123.123.123" required="true" value="${requestScope.ipaddress}">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>MAC Address of the Server PC</label>
-                                            <input class="form-control input-lg" type="text" name="macaddress" id="macaddress" placeholder="A1:B2:C3:D4:E5:F6" required="true"  value="${requestScope.macaddress}>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input value="Apply New Settings" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
+        </div>
 
             <!-- Vendor -->
             <!--[if lt IE 9]>

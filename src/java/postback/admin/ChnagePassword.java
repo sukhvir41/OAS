@@ -39,7 +39,7 @@ public class ChnagePassword extends HttpServlet {
                     session.getTransaction().commit();
                     session.close();
                     req.getSession().setAttribute("admin", admin);
-                    resp.sendRedirect("/OAS/admin/myaccount");
+                    resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=false");
                 } else {
                     resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=true");
                 }
