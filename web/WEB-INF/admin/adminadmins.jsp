@@ -2,51 +2,51 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 
-    <!-- Basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <!-- Basic -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-    <title>Admins - Admin</title>	
+        <title>Admins - Admin</title>	
 
 
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- Web Fonts  -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+        <!-- Web Fonts  -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
-    <!-- Vendor CSS -->
-    <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/OAS/vendor/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/OAS/vendor/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/OAS/vendor/magnific-popup/magnific-popup.css">
+        <!-- Vendor CSS -->
+        <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="/OAS/vendor/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="/OAS/vendor/simple-line-icons/css/simple-line-icons.css">
+        <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/OAS/vendor/owl.carousel/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="/OAS/vendor/magnific-popup/magnific-popup.css">
 
-    <!-- Theme CSS -->
-    <link rel="stylesheet" href="/OAS/css/theme.css">
-    <link rel="stylesheet" href="/OAS/css/theme-elements.css">
-    <link rel="stylesheet" href="/OAS/css/theme-blog.css">
-    <link rel="stylesheet" href="/OAS/css/theme-shop.css">
-    <link rel="stylesheet" href="/OAS/css/theme-animate.css">
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/OAS/css/theme.css">
+        <link rel="stylesheet" href="/OAS/css/theme-elements.css">
+        <link rel="stylesheet" href="/OAS/css/theme-blog.css">
+        <link rel="stylesheet" href="/OAS/css/theme-shop.css">
+        <link rel="stylesheet" href="/OAS/css/theme-animate.css">
 
-    <!-- Current Page CSS -->
-    <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/settings.css" media="screen">
-    <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/layers.css" media="screen">
-    <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/navigation.css" media="screen"> 
+        <!-- Current Page CSS -->
+        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/settings.css" media="screen">
+        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/layers.css" media="screen">
+        <link rel="stylesheet" href="/OAS/vendor/rs-plugin/css/navigation.css" media="screen"> 
 
-    <link rel="stylesheet" href="/OAS/vendor/circle-flip-slideshow/css/component.css" media="screen">
+        <link rel="stylesheet" href="/OAS/vendor/circle-flip-slideshow/css/component.css" media="screen">
 
-    <!-- Skin CSS -->
-    <link rel="stylesheet" href="/OAS/css/skins/default.css">
+        <!-- Skin CSS -->
+        <link rel="stylesheet" href="/OAS/css/skins/default.css">
 
-    <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="/OAS/css/custom.css">
+        <!-- Theme Custom CSS -->
+        <link rel="stylesheet" href="/OAS/css/custom.css">
 
-    <!-- Head Libs -->
-    <script src="/OAS/vendor/modernizr/modernizr.js"></script>
+        <!-- Head Libs -->
+        <script src="/OAS/vendor/modernizr/modernizr.js"></script>
 
         <!--[if IE]>
                 <link rel="stylesheet" href="css/ie.css">
@@ -57,10 +57,10 @@
                 <script src="vendor/excanvas/excanvas.js"></script>
                 <![endif]-->
 
-            </head>
-            <body>
-                <div class="body">
-                    <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
+    </head>
+    <body>
+        <div class="body">
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
 
                 <div role="main" class="main">
                     <section class="page-header">
@@ -86,7 +86,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form action="/OAS/admin/admins/addadminpost" method="post">
+                                        <form action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
                                             <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-4">
@@ -96,12 +96,34 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="usernametakenerror">
+                                                        <strong>Error!</strong> Username already exists
+                                                    </div>
+                                                </div> 
+                                            </div>
+
+                                            <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-4">
                                                         <label>Email</label>
                                                         <input class="form-control input-lg" placeholder="abc@xyz.com" type="text" name="email" id="email" required="true">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="emailtakenerror">
+                                                        <strong>Error!</strong> Email id already exists
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="emailerror">
+                                                        <strong>Error!</strong> Wrong Email address!!
+                                                    </div>
+                                                </div> 
                                             </div>
                                             <div class="row">
                                                 <div class="form-group">
@@ -112,6 +134,20 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="passwordshort">
+                                                        <strong>Error!</strong> Password must be between 8 to 40 characters long
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="passwordempty">
+                                                        <strong>Error!</strong> Password is empty!!!
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-4">
                                                         <label>Re Enter Password</label>
@@ -119,6 +155,14 @@
                                                     </div>
                                                 </div>  
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="passworderror">
+                                                        <strong>Error!</strong> Password does not match
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            
                                             <div class= "row">
                                                 <div class="form-group">
                                                     <div class="col-md-4">
@@ -133,14 +177,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Username</th>
-                                                <th>Email</th>
-                                                <th>Admin Type</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablebody">
+                                            <thead>
+                                                <tr>
+                                                    <th>Username</th>
+                                                    <th>Email</th>
+                                                    <th>Admin Type</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablebody">
                                             <c:forEach var="admin" items="${requestScope.admins}">
                                                 <tr>
                                                     <td>${admin.username}</td>
@@ -150,20 +194,21 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
 
-                <!-- Vendor -->
+                </div>
+            </div>
+
+            <!-- Vendor -->
             <!--[if lt IE 9]>
             <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
             <![endif]-->
             <!--[if gte IE 9]><!-->
             <script src="/OAS/vendor/jquery/jquery.js"></script>
+            <script src="/OAS/scripts/addadmin.js"></script>
             <!--<![endif]-->
             <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
             <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -219,7 +264,7 @@
                     })();
             
             </script>
-        -->
+            -->
 
     </body>
-    </html>
+</html>
