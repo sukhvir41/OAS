@@ -11,6 +11,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.pcap4j.core.BpfProgram;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
@@ -42,18 +46,21 @@ public class MacAddressUtil {
     private int timeOut = 5;
 
     public static boolean setAddresses(String macAddress, String ipAddress) {
+        ReadWriteLock write = new ReentrantReadWriteLock();
         try {
+            write.writeLock().lock();
             sourceMacAddress = MacAddress.getByName(macAddress);
             stringSourceIpAddress = ipAddress;
             sourceIpAddress = InetAddress.getByName(stringSourceIpAddress);
             nif = Pcaps.getDevByAddress(sourceIpAddress);
+            write.writeLock().unlock();
             return true;
         } catch (Exception e) {
+            write.writeLock().unlock();
             return false;
         }
     }
 
-    
     private String getMacAddressImpl(String destinationIpAddress) {
         handle = null;
         sendHandle = null;
@@ -154,6 +161,22 @@ public class MacAddressUtil {
 
     public void setTimeOut(int timeOut) {
         this.timeOut = timeOut;
+    }
+
+    public static String getSourceMacAddress() {
+        if (sourceMacAddress != null) {
+            return sourceMacAddress.toString();
+        } else {
+            return "";
+        }
+    }
+
+    public static String getSourceIpAddress() {
+        if (stringSourceIpAddress != null) {
+            return stringSourceIpAddress;
+        } else {
+            return "";
+        }
     }
 
 }

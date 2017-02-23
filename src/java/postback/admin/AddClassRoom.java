@@ -26,14 +26,10 @@ public class AddClassRoom extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Session session = Utils.openSession();
+        session.beginTransaction();
         try {
-            Enumeration<String> enums = req.getParameterNames();
-            while(enums.hasMoreElements()){
-                String string = enums.nextElement();
-                System.out.println(string);
-                System.out.println(req.getParameter(string));
-            }
-            
+
             int courseId = Integer.parseInt(req.getParameter("courseId"));
             String name = req.getParameter("classroomname");
             String division = req.getParameter("division");
@@ -41,8 +37,7 @@ public class AddClassRoom extends HttpServlet {
             int minimum = Integer.parseInt(req.getParameter("minimumsubjects"));
 
             ClassRoom classRoom = new ClassRoom(name, division, semister, minimum);
-            Session session = Utils.openSession();
-            session.beginTransaction();
+
             Course course = (Course) session.get(Course.class, courseId);
             course.addClassRoom(classRoom);
             session.save(classRoom);
@@ -56,7 +51,9 @@ public class AddClassRoom extends HttpServlet {
                 resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+
         }
     }
 

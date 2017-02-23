@@ -24,28 +24,35 @@ public class ChnagePassword extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String oldPassword = req.getParameter("oldpassword");
-        String newPassword = req.getParameter("newpassword");
-        String renewPassword = req.getParameter("renewpassword");
-        
-        Login admin = (Login) req.getSession().getAttribute("admin");
-        if (admin.checkPassword(oldPassword)) {
-            if (newPassword.length() >= 8 && newPassword.length() <= 40 && newPassword.equals(renewPassword)) {
-                admin.setPassword(newPassword);
-                Session session = Utils.openSession();
-                session.beginTransaction();
-                session.update(admin);
-                session.getTransaction().commit();
-                session.close();
-                req.getSession().setAttribute("admin", admin);
-                resp.sendRedirect("/OAS/admin/admindetails");
+        Session session = Utils.openSession();
+        session.beginTransaction();
+        try {
+            String oldPassword = req.getParameter("oldpassword");
+            String newPassword = req.getParameter("newpassword");
+            String renewPassword = req.getParameter("renewpassword");
+            
+            Login admin = (Login) req.getSession().getAttribute("admin");
+            if (admin.checkPassword(oldPassword)) {
+                if (newPassword.length() >= 8 && newPassword.length() <= 40 && newPassword.equals(renewPassword)) {
+                    admin.setPassword(newPassword);
+                    session.update(admin);
+                    session.getTransaction().commit();
+                    session.close();
+                    req.getSession().setAttribute("admin", admin);
+                    resp.sendRedirect("/OAS/admin/admindetails");
+                } else {
+                    resp.sendRedirect("/OAS/admin/admindetails/changepassword?error=true");
+                }
             } else {
                 resp.sendRedirect("/OAS/admin/admindetails/changepassword?error=true");
             }
-        } else {
-            resp.sendRedirect("/OAS/admin/admindetails/changepassword?error=true");
+            
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            
+            resp.sendRedirect("/OAS/error");
         }
-        
     }
     
 }

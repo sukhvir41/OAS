@@ -24,13 +24,21 @@ public class DeleteDepartment extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int departmentId = Integer.parseInt(req.getParameter("departmentId"));
         Session session = Utils.openSession();
         session.beginTransaction();
-        session.delete(session.get(Department.class, departmentId));
-        session.getTransaction().commit();
-        session.close();
-        resp.sendRedirect("/OAS/admin/departments");
+        try {
+            int departmentId = Integer.parseInt(req.getParameter("departmentId"));
+            session.delete(session.get(Department.class, departmentId));
+            session.getTransaction().commit();
+            session.close();
+            resp.sendRedirect("/OAS/admin/departments");
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            
+            resp.sendRedirect("/OAS/error");
+        }
+        
     }
     
     @Override

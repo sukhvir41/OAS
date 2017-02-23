@@ -22,29 +22,37 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/courses/addcourse")
 public class AddCourse extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int departmentId = Integer.parseInt(req.getParameter("departmentId"));
-        String name = req.getParameter("coursename");
         Session session = Utils.openSession();
         session.beginTransaction();
-        Department department = (Department) session.get(Department.class, departmentId);
-        Course course = new Course(name);
-        department.addCourse(course);
-        session.save(course);
-        session.getTransaction().commit();
-        session.close();
-        if (req.getParameter("from") != null) {
-            resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
-        } else {
-            resp.sendRedirect("/OAS/admin/courses");
+        try {
+            int departmentId = Integer.parseInt(req.getParameter("departmentId"));
+            String name = req.getParameter("coursename");
+            
+            Department department = (Department) session.get(Department.class, departmentId);
+            Course course = new Course(name);
+            department.addCourse(course);
+            session.save(course);
+            
+            if (req.getParameter("from") != null) {
+                resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
+            } else {
+                resp.sendRedirect("/OAS/admin/courses");
+            }
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            
+            resp.sendRedirect("/OAS/error");
         }
+        
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/OAS/admin");
     }
-
+    
 }

@@ -85,17 +85,20 @@ public class LoginCheck implements Filter {
                             case "students": {
                                 Student student = (Student) session.get(Student.class, login.getId());
                                 httpSession.setAttribute("student", student);
+                                httpSession.setAttribute("type", "student");
                                 resp.sendRedirect("/OAS/student");
                             }
                             break;
                             case "teacher": {
                                 Teacher teacher = (Teacher) session.get(Teacher.class, login.getId());
                                 httpSession.setAttribute("teacher", teacher);
+                                httpSession.setAttribute("type", "teacher");
                                 resp.sendRedirect("/OAS/teacher");
                             }
                             break;
                             case "admin": {
-                                httpSession.setAttribute("details", login);
+                                httpSession.setAttribute("admin", login);
+                                httpSession.setAttribute("type", "admin");
                                 resp.sendRedirect("/OAS/admin");
                             }
                             break;

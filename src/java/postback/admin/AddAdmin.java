@@ -22,27 +22,33 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/admins/addadminpost")
 public class AddAdmin extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        
-        Login admin = Login.createAdminLogin(username, password, email, AdminType.Sub);
         Session session = Utils.openSession();
         session.beginTransaction();
-        session.save(admin);
-        session.getTransaction().commit();
-        session.close();
-        
-        resp.sendRedirect("/OAS/admin/admins");
-        
+        try {
+            String username = req.getParameter("username");
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
+
+            Login admin = Login.createAdminLogin(username, password, email, AdminType.Sub);
+
+            session.save(admin);
+            session.getTransaction().commit();
+            session.close();
+
+            resp.sendRedirect("/OAS/admin/admins");
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            resp.sendRedirect("/OAS/error");
+        }
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/OAS/error");
     }
-    
+
 }

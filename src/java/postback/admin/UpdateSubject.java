@@ -29,14 +29,15 @@ public class UpdateSubject extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Session session = Utils.openSession();
+        session.beginTransaction();
         try {
             int subjectId = Integer.parseInt(req.getParameter("subjectId"));
             String name = req.getParameter("subjectname");
             boolean elective = Boolean.parseBoolean(req.getParameter("elective"));
 
             List<String> classes = new ArrayList<>(Arrays.asList(req.getParameterValues("classes")));
-            Session session = Utils.openSession();
-            session.beginTransaction();
+
             Subject subject = (Subject) session.get(Subject.class, subjectId);
             subject.setName(name);
             subject.setElective(elective);
@@ -54,7 +55,9 @@ public class UpdateSubject extends HttpServlet {
                 resp.sendRedirect("/OAS/admin/subjects#" + subjectId);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+
             resp.sendRedirect("/OAS/error");
         }
 

@@ -21,22 +21,30 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/adddepartment")
 public class AddDepartment extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("departmentname");
-        Department department = new Department(name);
         Session session = Utils.openSession();
         session.beginTransaction();
-        session.save(department);
-        session.getTransaction().commit();
-        session.close();
-        resp.sendRedirect("/OAS/admin/departments");
+        try {
+            String name = req.getParameter("departmentname");
+            Department department = new Department(name);
+            
+            session.save(department);
+            session.getTransaction().commit();
+            session.close();
+            resp.sendRedirect("/OAS/admin/departments");
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            
+            resp.sendRedirect("/OAS/error");
+        }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/OAS/admin/departments");
     }
-
+    
 }

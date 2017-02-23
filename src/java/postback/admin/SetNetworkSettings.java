@@ -5,46 +5,41 @@
  */
 package postback.admin;
 
-import entities.Course;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
-import utility.Utils;
+import utility.MacAddressUtil;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/courses/deletecourse")
-public class DeleteCourse extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/networksettingspost")
+public class SetNetworkSettings extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
+        
         try {
-            int courseId = Integer.parseInt(req.getParameter("courseId"));
+            String macAddress = req.getParameter("macaddress");
+            String ipaddress = req.getParameter("ipaddress");
             
-            Course course = (Course) session.get(Course.class, courseId);
-            session.delete(course);
-            session.getTransaction().commit();
-            session.close();
-            resp.sendRedirect("/OAS/admin/courses");
+            if (MacAddressUtil.setAddresses(macAddress, ipaddress)) {
+                resp.sendRedirect("/admin/networksettings?error=" + false);
+            } else {
+                resp.sendRedirect("/admin/networksettings?error=" + true);
+            }
         } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            
-            resp.sendRedirect("/OAS/error");
+            resp.sendError(500);
         }
     }
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/admin/courses");
+        resp.sendError(500);
     }
     
 }

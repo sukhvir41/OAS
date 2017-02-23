@@ -24,20 +24,28 @@ public class UpdateCourse extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int courseId = Integer.parseInt(req.getParameter("courseId"));
-        String name = req.getParameter("coursename");
         Session session = Utils.openSession();
         session.beginTransaction();
-        Course course = (Course) session.get(Course.class, courseId);
-        course.setName(name);
-        session.update(course);
-        session.getTransaction().commit();
-        session.close();
-        
-        if (req.getParameter("from").equals("")) {
-            resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
-        } else {
-            resp.sendRedirect("/OAS/admin/courses#" + courseId);
+        try {
+            int courseId = Integer.parseInt(req.getParameter("courseId"));
+            String name = req.getParameter("coursename");
+            
+            Course course = (Course) session.get(Course.class, courseId);
+            course.setName(name);
+            session.update(course);
+            session.getTransaction().commit();
+            session.close();
+            
+            if (req.getParameter("from").equals("")) {
+                resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
+            } else {
+                resp.sendRedirect("/OAS/admin/courses#" + courseId);
+            }
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            
+            resp.sendRedirect("/OAS/error");
         }
     }
     

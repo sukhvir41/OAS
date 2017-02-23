@@ -30,14 +30,14 @@ public class AddSubject extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("caled add subject");
+        Session session = Utils.openSession();
+        session.beginTransaction();
         try {
             String name = req.getParameter("subjectname");
             boolean elective = Boolean.parseBoolean(req.getParameter("elective"));
             int courseId = Integer.parseInt(req.getParameter("course"));
             ArrayList<String> classRooms = new ArrayList<>(Arrays.asList(req.getParameterValues("classes")));
-            Session session = Utils.openSession();
-            session.beginTransaction();
+            
             Subject subject = new Subject(name, elective);
             session.save(subject);
             Course course = (Course) session.get(Course.class, courseId);
@@ -59,7 +59,9 @@ public class AddSubject extends HttpServlet {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+            resp.sendRedirect("/OAS/error");
         }
     }
     

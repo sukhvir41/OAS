@@ -21,28 +21,35 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/departments/updatedepartment")
 public class UpdateDepartment extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int departmentId = Integer.parseInt(req.getParameter("departmentId"));
-        String name = req.getParameter("departmentname");
         Session session = Utils.openSession();
         session.beginTransaction();
-        Department department = (Department) session.get(Department.class, departmentId);
-        department.setName(name);
-        session.getTransaction().commit();
-        session.close();
-        String from = req.getParameter("from");
-        if (!from.equals("")) {
-            resp.sendRedirect("/OAS/admin/departments#" + departmentId);
-        } else {
-            resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
+        try {
+            int departmentId = Integer.parseInt(req.getParameter("departmentId"));
+            String name = req.getParameter("departmentname");
+            Department department = (Department) session.get(Department.class, departmentId);
+            department.setName(name);
+            session.getTransaction().commit();
+            session.close();
+            String from = req.getParameter("from");
+            if (!from.equals("")) {
+                resp.sendRedirect("/OAS/admin/departments#" + departmentId);
+            } else {
+                resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
+            }
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            
+            resp.sendRedirect("/OAS/error");
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/OAS/admin/departments");
     }
-
+    
 }

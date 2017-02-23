@@ -65,14 +65,30 @@
     </servlet-mapping>
     <!--expired page end-->
    
+    <!--error 404 page-->
+    <servlet>
+        <servlet-name>error404</servlet-name>
+        <jsp-file>/error404.jsp</jsp-file>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>error404</servlet-name>
+        <url-pattern>/error-404</url-pattern>
+    </servlet-mapping>
+    <!--error 404 page end-->
+   
     <!-- Uncaught exception -->
     <error-page>
         <error-code>500</error-code>
         <location>/error</location>
     </error-page>
     
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error-404</location>
+    </error-page>
     
-     <welcome-file-list>
+    <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
     

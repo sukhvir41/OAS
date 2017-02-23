@@ -21,23 +21,29 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/classrooms/deleteclassroom")
 public class DeleteClassRoom extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int classRoomId = Integer.parseInt(req.getParameter("classroomId"));
         Session session = Utils.openSession();
         session.beginTransaction();
-        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
-        session.delete(classRoom);
-        session.getTransaction().commit();
-        session.close();
-        resp.sendRedirect("/OAS/admin/classrooms");
-
+        try {
+            int classRoomId = Integer.parseInt(req.getParameter("classroomId"));
+            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
+            session.delete(classRoom);
+            session.getTransaction().commit();
+            session.close();
+            resp.sendRedirect("/OAS/admin/classrooms");
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            
+            resp.sendRedirect("/OAS/error");
+        }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/OAS/admin/classrooms");
     }
-
+    
 }
