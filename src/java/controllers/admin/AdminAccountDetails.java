@@ -5,7 +5,6 @@
  */
 package controllers.admin;
 
-import entities.Login;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/myaccount/changepassword")
-public class AdminChangePassword extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/myaccount")
+public class AdminAccountDetails extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +30,7 @@ public class AdminChangePassword extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        req.setAttribute("username", ((Login) req.getSession().getAttribute("admin")).getUsername());
-        req.getRequestDispatcher("/WEB-INF/admin/adminchangepassword.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminmyaccount.jsp").forward(req, resp);
     }
 
 }

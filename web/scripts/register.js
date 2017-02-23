@@ -269,7 +269,7 @@ var emailTakenCheck = function(){
 	}
 }
 
-//this method check if the username entred is valid not not
+//this method check if the email entred is valid not not
 var emailCheck = function(){
 	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
 	var email = $("#email").val();

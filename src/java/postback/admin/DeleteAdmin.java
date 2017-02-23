@@ -5,42 +5,44 @@
  */
 package postback.admin;
 
+import entities.Login;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utility.MacAddressUtil;
+import org.hibernate.Session;
+import utility.Utils;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/networksettingspost")
-public class SetNetworkSettings extends HttpServlet {
-
+@WebServlet(urlPatterns = "/admin/admins/deleteadmin")
+public class DeleteAdmin extends HttpServlet {
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        Session session = Utils.openSession();
+        session.beginTransaction();
         try {
-            String macAddress = req.getParameter("macaddress");
-            String ipaddress = req.getParameter("ipaddress");
-            System.out.println(macAddress + "  " + ipaddress);
-            if (MacAddressUtil.setAddresses(macAddress, ipaddress)) {
-                resp.sendRedirect("/OAS/admin/networksettings?error=" + false);
-            } else {
-                resp.sendRedirect("/OAS/admin/networksettings?error=" + true);
-            }
+            String username = req.getParameter("username");
+            Login admin = (Login) session.get(Login.class, username);
+            session.delete(admin);
+            session.getTransaction().commit();
+            session.close();
+            resp.sendRedirect("/OAS/admin/admins");
         } catch (Exception e) {
-            e.printStackTrace();
-            //resp.sendError(500);
+            session.getTransaction().rollback();
+            session.close();
+            resp.sendRedirect("/OAS/error");
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendError(500);
+        resp.sendRedirect("/OAS/error");
     }
-
+    
 }

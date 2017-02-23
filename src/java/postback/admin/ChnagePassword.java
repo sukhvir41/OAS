@@ -19,9 +19,9 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/admindetails/changepasswordpost")
+@WebServlet(urlPatterns = "/admin/myaccount/changepasswordpost")
 public class ChnagePassword extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = Utils.openSession();
@@ -30,7 +30,7 @@ public class ChnagePassword extends HttpServlet {
             String oldPassword = req.getParameter("oldpassword");
             String newPassword = req.getParameter("newpassword");
             String renewPassword = req.getParameter("renewpassword");
-            
+
             Login admin = (Login) req.getSession().getAttribute("admin");
             if (admin.checkPassword(oldPassword)) {
                 if (newPassword.length() >= 8 && newPassword.length() <= 40 && newPassword.equals(renewPassword)) {
@@ -39,20 +39,20 @@ public class ChnagePassword extends HttpServlet {
                     session.getTransaction().commit();
                     session.close();
                     req.getSession().setAttribute("admin", admin);
-                    resp.sendRedirect("/OAS/admin/admindetails");
+                    resp.sendRedirect("/OAS/admin/myaccount");
                 } else {
-                    resp.sendRedirect("/OAS/admin/admindetails/changepassword?error=true");
+                    resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=true");
                 }
             } else {
-                resp.sendRedirect("/OAS/admin/admindetails/changepassword?error=true");
+                resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=true");
             }
-            
+
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-            
+
             resp.sendRedirect("/OAS/error");
         }
     }
-    
+
 }

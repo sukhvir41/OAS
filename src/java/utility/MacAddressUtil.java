@@ -54,7 +54,11 @@ public class MacAddressUtil {
             sourceIpAddress = InetAddress.getByName(stringSourceIpAddress);
             nif = Pcaps.getDevByAddress(sourceIpAddress);
             write.writeLock().unlock();
-            return true;
+            if (nif != null) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             write.writeLock().unlock();
             return false;

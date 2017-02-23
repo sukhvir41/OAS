@@ -106,7 +106,7 @@
                                     <c:when test="${param.error =='false'}">
                                         <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
                                         <div class="row">
-                                            <div class="col-md-12 ">
+                                            <div class="col-md-4 ">
                                                 <div class="alert alert-success">
                                                     <strong>Success!</strong> IP address and MAC address updated
                                                 </div>
@@ -115,7 +115,7 @@
                                     </c:when>
                                     <c:when test="${param.error =='true'}">
                                         <div class="row">
-                                            <div class="col-md-12 ">
+                                            <div class="col-md-4 ">
                                                 <div class="alert alert-danger">
                                                     <strong>Error!</strong> IP address and MAC address not updated
                                                 </div>

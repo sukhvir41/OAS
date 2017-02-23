@@ -6,19 +6,23 @@
 package controllers.admin;
 
 import entities.Login;
+import entities.UserType;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import utility.Utils;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/myaccount/changepassword")
-public class AdminChangePassword extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/admins/admindetails")
+public class AdminAdminDetails extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +35,23 @@ public class AdminChangePassword extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Session session = Utils.openSession();
+        session.beginTransaction();
+        try {
+            String username = req.getParameter("username");
 
-        req.setAttribute("username", ((Login) req.getSession().getAttribute("admin")).getUsername());
-        req.getRequestDispatcher("/WEB-INF/admin/adminchangepassword.jsp").forward(req, resp);
+            Login admin = (Login) session.get(Login.class, username);
+            session.getTransaction().commit();
+            session.close();
+
+            req.setAttribute("admin", admin);
+            req.getRequestDispatcher("/WEB-INF/admin/adminadmindetails.jsp").forward(req, resp);
+
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            resp.sendRedirect("/OAS/error");
+        }
     }
 
 }

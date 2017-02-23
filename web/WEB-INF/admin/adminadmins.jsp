@@ -102,6 +102,20 @@
                                                     </div>
                                                 </div> 
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="usernameerror">
+                                                        <strong>Error!</strong> Username is empty
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="alert alert-danger" hidden id="usernamelengtherror">
+                                                        <strong>Error!</strong> Username must be between 8 to 20 characters long
+                                                    </div>
+                                                </div> 
+                                            </div>
 
                                             <div class="row">
                                                 <div class="form-group">

@@ -22,7 +22,9 @@ import org.hibernate.criterion.Restrictions;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-                
+        MacAddressUtil.setAddresses("08:00:27:5F:F2:E4", "192.168.1.10");
+        MacAddressUtil a = new MacAddressUtil();
+        System.out.println(a.getMacAddress("192.168.1.7"));
 
     }
 

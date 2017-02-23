@@ -84,7 +84,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/admin/admindetails/changepasswordpost" method="Post">
+                            <form action="/OAS/admin/myaccount/changepasswordpost" method="Post">
                                 <h4>Username : ${requestScope.username}</h4>
                                 <div class="row">
 

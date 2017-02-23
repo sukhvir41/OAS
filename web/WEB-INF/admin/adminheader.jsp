@@ -77,12 +77,9 @@
 															End Semister
 														</a>
 													</li>
-													<li class="dropdown">
-														<a class="dropdown-toggle">Account</a>
-														<ul class="dropdown-menu">
-															<li><a href="/OAS/admin/accountdetails">Details</a></li>
-															<li><a href="/OAS/admin/accountdetails/changepassword">Change Password</a></li>
-														</ul>
+													<li>
+                                                                                                            <a href="/OAS/admin/networksettings">Network settings</a>
+														
 													</li>
 													<li class="dropdown dropdown-mega dropdown-mega-signin signin logged" id="headerAccount">
 														<a class="dropdown-toggle" href="page-login.html">
