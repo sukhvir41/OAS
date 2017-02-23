@@ -86,7 +86,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form action="/OAS/admin/admins/addminpost" method="post">
+                                        <form action="/OAS/admin/admins/addadminpost" method="post">
                                             <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-4">
@@ -135,7 +135,6 @@
                                         <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Username</th>
                                                 <th>Email</th>
                                                 <th>Admin Type</th>
@@ -144,7 +143,6 @@
                                         <tbody id="tablebody">
                                             <c:forEach var="admin" items="${requestScope.admins}">
                                                 <tr>
-                                                    <td>${admin.id}</td>
                                                     <td>${admin.username}</td>
                                                     <td>${admin.email}</td>
                                                     <td>${admin.adminType}</td>

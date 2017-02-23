@@ -103,7 +103,7 @@
                                         <h4>Department</h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="admin/departments">Deatils</a>
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="admin/departments">Details</a>
                                     </div>
                                     <table class="table">
                                         <thead>
@@ -128,7 +128,7 @@
                                         <h4>Course</h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="admin/courses">Deatils</a>
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="admin/courses">Details</a>
                                     </div>
                                     <table class="table">
                                         <thead>
@@ -175,7 +175,7 @@
                                         <h4>Class Room</h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="/OAS/admin/classrooms">Deatils</a>
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="/OAS/admin/classrooms">Details</a>
                                     </div>
                                     <table class="table">
                                         <thead>
@@ -210,7 +210,7 @@
                                         <h4>Subjects</h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="/OAS/admin/subjects">Deatils</a>
+                                        <a class="mb-xs mt-xs mr-xs btn btn-primary pull-right" href="/OAS/admin/subjects">Details</a>
                                     </div>
 
                                     <table class="table">
