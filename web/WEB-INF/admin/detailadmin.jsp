@@ -99,8 +99,8 @@
                                                 <dt>Admin Type</dt>
                                                 <dd>${requestScope.admin.adminType}</dd>
                                             </dl>
-                                            <!--/OAS/admin/admins/deleteadmin?username-->
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                            <br>
                                             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -123,6 +123,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <br>
                                         </div>
                                     </div>
                                 </div>
