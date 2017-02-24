@@ -5,6 +5,7 @@
  */
 package postback.admin;
 
+import entities.AdminType;
 import entities.Login;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -29,8 +30,9 @@ public class DeleteAdmin extends HttpServlet {
         try {
             String username = req.getParameter("username");
             Login admin = (Login) session.get(Login.class, username);
-            session.delete(admin);
-            //###
+            if (admin.getAdminType().equals(AdminType.Sub.toString())) {
+                session.delete(admin);
+            }
             session.getTransaction().commit();
             session.close();
             resp.sendRedirect("/OAS/admin/admins");

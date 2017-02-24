@@ -41,11 +41,13 @@ public class AdminDeleteValidation implements Filter {
             resp = (HttpServletResponse) response;
             req = (HttpServletRequest) request;
             session = req.getSession();
-            if(((Login)session.getAttribute("admin")).getAdminType().equals(AdminType.Main.toString())){
+            if (((Login) session.getAttribute("admin")).getAdminType().equals(AdminType.Main.toString())) {
                 chain.doFilter(request, response);
-            }//###
+            } else {
+                resp.sendRedirect("/OAS/error");//### make access denied page
+            }
         } catch (Exception e) {
-
+            resp.sendRedirect("/OAS/error");
         }
     }
 

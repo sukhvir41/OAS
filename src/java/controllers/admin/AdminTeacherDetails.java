@@ -5,9 +5,10 @@
  */
 package controllers.admin;
 
-import entities.Login;
-import entities.UserType;
+import entities.Teacher;
+import entities.Teaching;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +22,8 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/admins/detailadmin")
-public class AdminAdminDetails extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/teachers/detailteacher")
+public class AdminTeacherDetails extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,21 +36,26 @@ public class AdminAdminDetails extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int teacherId;
         Session session = Utils.openSession();
         session.beginTransaction();
         try {
-            String username = req.getParameter("username");
-
-            Login admin = (Login) session.get(Login.class, username);
+            teacherId = Integer.parseInt(req.getParameter("teacherId"));
+            Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+            req.setAttribute("teacher", teacher);
+            List<Teaching> teachings = session.createCriteria(Teaching.class)
+                    .add(Restrictions.isNotNull("classRoom"))
+                    .add(Restrictions.isNotNull("subject"))
+                    .add(Restrictions.eq("teacher", teacher))
+                    .list();
+            req.setAttribute("details", teachings);
+            req.getRequestDispatcher("/WEB-INF/admin/detailteacher.jsp").forward(req, resp);
             session.getTransaction().commit();
             session.close();
-
-            req.setAttribute("admin", admin);
-            req.getRequestDispatcher("/WEB-INF/admin/detailadmin.jsp").forward(req, resp);
-
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
+
             resp.sendRedirect("/OAS/error");
         }
     }
