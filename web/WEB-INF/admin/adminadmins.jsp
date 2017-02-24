@@ -86,7 +86,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
+                                        <form id="adminform" action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
                                             <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-4">
@@ -180,7 +180,7 @@
                                             <div class= "row">
                                                 <div class="form-group">
                                                     <div class="col-md-4">
-                                                        <input type="submit" value="Add" class="btn btn-primary">
+                                                        <input type="submit" value="Add" class="btn btn-primary" data-loading-text="Loading...">
                                                     </div>
                                                 </div>
                                             </div>
