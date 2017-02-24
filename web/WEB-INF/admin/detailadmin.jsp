@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -70,13 +72,14 @@
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/admin">Home</a></li>
-                                    <li>My Account</li>
+                                    <li><a href="/OAS/admin/admins">Admins</a></li>
+                                    <li>Admin Details</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>My Account</h1>
+                                <h1>Admin Details</h1>
                             </div>
                         </div>
                     </div>
@@ -87,14 +90,14 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Username : <c:out value="${sessionScope.admin.username}"/></h2>
+                                    <h2>Username : <c:out value="${requestScope.admin.username}"/></h2>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <dl>
                                                 <dt>Email Address</dt>
-                                                <dd>${sessionScope.admin.email}</dd>
+                                                <dd>${requestScope.admin.email}</dd>
                                                 <dt>Admin Type</dt>
-                                                <dd>${sessionScope.admin.adminType}</dd>
+                                                <dd>${requestScope.admin.adminType}</dd>
                                             </dl>
                                             <!--/OAS/admin/admins/deleteadmin?username-->
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
@@ -108,7 +111,7 @@
                                                         <form class="form-horizontal mb-lg" action="/OAS/admin/admins/deleteadmin?username" method="post">
                                                             <div class="modal-body">
 
-                                                                <input type="hidden" name="username" value="${sessionScope.admin.username}">
+                                                                <input type="hidden" name="username" value="${requestScope.admin.username}">
                                                                 <label>You are about to delete one of the user with admin privileges.</label>
                                                                 <label><b>Are you sure about deleting one of the admin.</b></label>
                                                             </div>
