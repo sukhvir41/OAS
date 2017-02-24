@@ -47,6 +47,7 @@ public class AdminDeleteValidation implements Filter {
                 resp.sendRedirect("/OAS/error");//### make access denied page
             }
         } catch (Exception e) {
+            e.printStackTrace();
             resp.sendRedirect("/OAS/error");
         }
     }

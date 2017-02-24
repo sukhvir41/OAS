@@ -108,7 +108,7 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                             <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
                                                         </div>
-                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/admins/deleteadmin?username" method="post">
+                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/admins/deleteadmin" method="post">
                                                             <div class="modal-body">
 
                                                                 <input type="hidden" name="username" value="${requestScope.admin.username}">

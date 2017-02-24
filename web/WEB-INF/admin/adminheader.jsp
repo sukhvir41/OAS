@@ -91,7 +91,7 @@
 																	<div class="row">
 																		<div class="col-md-8">
 																			<div class="user-avatar">
-																				<p><strong>${sessionScope.admin.username}</strong><span>Administrator</span></p>
+																				<p><strong>${sessionScope.admin.username}</strong><span>Administrator ${sessionScope.admin.adminType}</span></p>
 																			</div>
 																		</div>
 																		<div class="col-md-4">
