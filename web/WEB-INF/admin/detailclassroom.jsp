@@ -114,7 +114,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã</button>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                             <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
                                                         </div>
                                                         <form class="form-horizontal mb-lg" action="/OAS/admin/classrooms/deleteclassroom" method="post">
