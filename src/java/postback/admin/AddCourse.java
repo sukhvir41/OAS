@@ -34,10 +34,12 @@ public class AddCourse extends HttpServlet {
             Department department = (Department) session.get(Department.class, departmentId);
             Course course = new Course(name);
             department.addCourse(course);
-            session.save(course);
-            
+            session.save(course);                
+            session.getTransaction().commit();
+            session.close();
             if (req.getParameter("from") != null) {
                 resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
+                
             } else {
                 resp.sendRedirect("/OAS/admin/courses");
             }

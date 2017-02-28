@@ -41,9 +41,13 @@ public class ChnagePassword extends HttpServlet {
                     req.getSession().setAttribute("admin", admin);
                     resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=false");
                 } else {
+                    session.getTransaction().rollback();
+                    session.close();
                     resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=true");
                 }
             } else {
+                session.getTransaction().rollback();
+                session.close();
                 resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=true");
             }
 
@@ -53,6 +57,11 @@ public class ChnagePassword extends HttpServlet {
 
             resp.sendRedirect("/OAS/error");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/OAS/admin");
     }
 
 }

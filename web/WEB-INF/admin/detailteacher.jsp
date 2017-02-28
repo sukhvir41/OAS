@@ -65,57 +65,58 @@
         <div class="body">
             <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
 
-            <div role="main" class="main">
-                <section class="page-header">
+                <div role="main" class="main">
+                    <section class="page-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                        <li><a href="/OAS/admin">Home</a></li>
+                                        <li><a href="/OAS/admin/teachers">Teachers</a></li>
+                                        <li>Teacher Details</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Teacher Details</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <ul class="breadcrumb">
-                                    <li><a href="/OAS/admin">Home</a></li>
-                                    <li><a href="/OAS/admin/teachers">Teachers</a></li>
-                                    <li>Teacher Details</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1>Teacher Details</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2>Name : ${requestScope.teacher.fName} ${requestScope.teacher.lName}</h2>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2>Name : ${requestScope.teacher.fName} ${requestScope.teacher.lName}</h2>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <dl>
                                                 <dt>Contact Number</dt>
                                                 <dd>${requestScope.teacher.number}</dd>
-                                                <dd>${requestScope.teacher.number}</dd>
                                                 <dt>Email</dt>
                                                 <dd>${requestScope.teacher.email}</dd>
                                                 <dt>Hod of </dt>
                                                 <dd>
-                                                <c:choose>
-                                                    <c:when test="${requestScope.teacher.hod}" >
-                                                        <c:forEach var="department" items="${requestScope.teacher.hodOf}">
-                                                           ${department.name}
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        Not Hod
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${requestScope.teacher.hod}" >
+                                                            <c:forEach var="department" items="${requestScope.teacher.hodOf}">
+                                                                ${department.name}<br>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Not Hod
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </dd>
                                                 <dt>Departments</dt>
-                                                <c:forEach var="department" items="${requestScope.teacher.department}">
-                                                   <dd> ${department.name}</dd><!--###reduce spacing-->
-                                                </c:forEach>
+                                                <dd>
+                                                    <c:forEach var="department" items="${requestScope.teacher.department}">
+                                                        ${department.name}<br>
+                                                    </c:forEach>
+                                                </dd>
                                                 <dt>Class Teacher of</dt>
                                                 <dd>${requestScope.teacher.classRoom.name}</dd>
                                             </dl>

@@ -39,28 +39,28 @@ public class MacAddressUtil {
     private static InetAddress sourceIpAddress;
     private static PcapNetworkInterface nif;
     private static String stringSourceIpAddress;
-
+    private static ReadWriteLock readwrite = new ReentrantReadWriteLock();
     private MacAddress destinationMacAddress;
     private PcapHandle handle;
     private PcapHandle sendHandle;
     private int timeOut = 5;
 
     public static boolean setAddresses(String macAddress, String ipAddress) {
-        ReadWriteLock write = new ReentrantReadWriteLock();
+
         try {
-            write.writeLock().lock();
+            readwrite.writeLock().lock();
             sourceMacAddress = MacAddress.getByName(macAddress);
             stringSourceIpAddress = ipAddress;
             sourceIpAddress = InetAddress.getByName(stringSourceIpAddress);
             nif = Pcaps.getDevByAddress(sourceIpAddress);
-            write.writeLock().unlock();
+            readwrite.writeLock().unlock();
             if (nif != null) {
                 return true;
             } else {
                 return false;
             }
         } catch (Exception e) {
-            write.writeLock().unlock();
+            readwrite.writeLock().unlock();
             return false;
         }
     }
@@ -69,7 +69,7 @@ public class MacAddressUtil {
         handle = null;
         sendHandle = null;
         ExecutorService service = null;
-
+        readwrite.readLock().lock();
         try {
             handle = nif.openLive(65536, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, 10);
             sendHandle = nif.openLive(65536, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, 10);
@@ -147,6 +147,7 @@ public class MacAddressUtil {
             } catch (Exception e) {
             }
         }
+        readwrite.readLock().unlock();
         if (destinationMacAddress != null) {
             return destinationMacAddress.toString();
         } else {

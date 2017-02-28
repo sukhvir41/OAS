@@ -53,7 +53,7 @@ public class AddClassRoom extends HttpServlet {
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-
+            resp.sendRedirect("/OAS/admin");
         }
     }
 
