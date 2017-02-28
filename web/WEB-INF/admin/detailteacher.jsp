@@ -117,10 +117,29 @@
                                                         ${department.name}<br>
                                                     </c:forEach>
                                                 </dd>
+
                                                 <dt>Class Teacher of</dt>
-                                                <dd>${requestScope.teacher.classRoom.name}</dd>
+                                                <c:choose>
+                                                    <c:when test="${requestScope.teacher.classRoom} == 'null'" >
+                                                        <dd>Not Class Teacher<dd>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <dd>${requestScope.teacher.classRoom.name}</dd>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <dt>Verified?</dt>
+                                                <dd>${requestScope.teacher.verified}</dd>
                                             </dl>
+                                            <c:choose>
+                                                <c:when test="${teacher.verified}">
+                                                    <button class="btn btn-danger" value="${teacher.id}">deverify</button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <button class="btn btn-success" value="${teacher.id}">verify</button>
+                                                </c:otherwise>
+                                            </c:choose>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+
                                             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -143,6 +162,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <!--Button to unaccount the teacher and edit teacher details.###-->
                                         </div>
                                     </div>
@@ -162,10 +182,10 @@
                                                 <tbody id="tablebody">
                                                     <c:forEach var="teaching" items="${requestScope.teacher.teaches}">
                                                         <tr>
-                                                            <td>${teaching.subject.name}</td>
-                                                            <td>${teaching.classRoom.name}</td>
-                                                            <td>${teaching.classRoom.course.name}</td>
-                                                            <td>${teaching.classRoom.course.department.name}</td>
+                                                            <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${teaching.subject.id}">${teaching.subject.name}</a></td>
+                                                            <td><a href="/OAS/admin/classrooms/detailclassroom?classroomId=${teaching.classRoom.id}">${teaching.classRoom.name}</a></td>
+                                                            <td><a href="/OAS/admin/courses/detailcourse?courseId=${teaching.classRoom.course.id}">${teaching.classRoom.course.name}</a></td>
+                                                            <td><a href="/OAS/admin/departments/detaildepartment?departmentId=${teaching.classRoom.course.department.id}">${teaching.classRoom.course.department.name}</a></td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>
