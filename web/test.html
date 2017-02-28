@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Admin Details - Admin</title>   
+        <title>Teacher Details - Admin</title>   
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
@@ -61,7 +61,7 @@
     </head>
     <body>
         <div class="body">
-            <!--<jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>-->
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
 
             <div role="main" class="main">
                 <section class="page-header">
@@ -70,13 +70,14 @@
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/admin">Home</a></li>
-                                    <li>My Account</li>
+                                    <li><a href="/OAS/admin/teachers">Teachers</a></li>
+                                    <li>Teacher Details</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>My Account</h1>
+                                <h1>Teacher Details</h1>
                             </div>
                         </div>
                     </div>
@@ -87,39 +88,32 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Username : <c:out value="${sessionScope.admin.username}"/></h2>
+                                    <h2>Name : <c:out value="${requestScope.teacher.fName}"/> <c:out value="${requestScope.teacher.lName}"/></h2>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <dl>
-                                                <dt>Email Address</dt>
-                                                <dd>${sessionScope.admin.email}</dd>
-                                                <dt>Admin Type</dt>
-                                                <dd>${sessionScope.admin.adminType}</dd>
+                                                <dt>Contact Number</dt>
+                                                <dd>${requestScope.teacher.number}</dd>
+                                                <dt>Email</dt>
+                                                <dd>${requestScope.teacher.email}</dd>
+                                                <dt>Hod of </dt>
+                                                <c:choose>
+                                                    <c:when test="${requestScope.teacher.hod} != 'null'" >
+                                                        <c:forEach var="department" items="${teacher.hodOf}">
+                                                            <dd>${department.name}</dd>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <dd>Not Hod</dd>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <dt>Departments</dt>
+                                                <c:forEach var="department" items="${teacher.department}">
+                                                    <dd>${department.name}</dd>
+                                                </c:forEach>
+                                                <dt>Class Teacher of</dt>
+                                                <dd>${requestScope.teacher.classRoom.name}</dd>
                                             </dl>
-                                            <!--/OAS/admin/admins/deleteadmin?username-->
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                            <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
-                                                        </div>
-                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/admins/deleteadmin?username" method="post">
-                                                            <div class="modal-body">
-
-                                                                <input type="hidden" name="username" value="${sessionScope.admin.username}">
-                                                                <label>You are about to delete one of the user with admin privileges.</label>
-                                                                <label><b>Are you sure about deleting one of the admin.</b></label>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <input type="submit" value="Delete" class="btn btn-danger">
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

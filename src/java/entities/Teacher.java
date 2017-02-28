@@ -56,7 +56,7 @@ public class Teacher implements Serializable {
     private ClassRoom classRoom;
 
     @OneToMany(mappedBy = "teacher")
-    private List<Teaching> teaches = new ArrayList();
+    private List<Teaching> teaches = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "teacher_department_link", joinColumns = @JoinColumn(name = "teacher_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))

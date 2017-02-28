@@ -43,19 +43,13 @@ public class AdminTeacherDetails extends HttpServlet {
             teacherId = Integer.parseInt(req.getParameter("teacherId"));
             Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
             req.setAttribute("teacher", teacher);
-            List<Teaching> teachings = session.createCriteria(Teaching.class)
-                    .add(Restrictions.isNotNull("classRoom"))
-                    .add(Restrictions.isNotNull("subject"))
-                    .add(Restrictions.eq("teacher", teacher))
-                    .list();
-            req.setAttribute("details", teachings);
             req.getRequestDispatcher("/WEB-INF/admin/detailteacher.jsp").forward(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
+            e.printStackTrace();
             session.getTransaction().rollback();
             session.close();
-
             resp.sendRedirect("/OAS/error");
         }
     }

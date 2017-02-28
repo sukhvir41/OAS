@@ -5,15 +5,8 @@
  */
 package utility;
 
-import entities.AdminType;
-import entities.Attendance;
-import entities.ClassRoom;
-import entities.Login;
-import entities.Student;
-import entities.UserType;
-import java.util.List;
+import entities.Teacher;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -22,10 +15,15 @@ import org.hibernate.criterion.Restrictions;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-        MacAddressUtil.setAddresses("08:00:27:5F:F2:E4", "192.168.1.10");
-        MacAddressUtil a = new MacAddressUtil();
-        System.out.println(a.getMacAddress("192.168.1.7"));
-
+       Session session = Utils.openSession();
+       session.beginTransaction();  
+           Teacher t = (Teacher) session.get(Teacher.class,1);
+           System.out.println(t.getfName());
+           t.getDepartment().stream()
+                   .forEach(e -> System.out.println(e.getName()));
+           
+       session.getTransaction().commit();
+       session.close();
     }
 
 }
