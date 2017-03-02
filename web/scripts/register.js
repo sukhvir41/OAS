@@ -44,25 +44,6 @@ $('input[name=type]', '#register').click(function(){
 	}
 });  
 
-var addDepartmentHod = function(){
-	var hod = $("#hod");
-	var selected = $('input[name=department]', '#register');
-	hod.empty();
-	hod.append($('<option>', {
-		value: "none",
-		text: "none"
-	}));
-	
-	selected.each(function(i){
-		if ($(this).is(':checked')) {
-			hod.append($('<option>', {
-				value: departments[i].id,
-				text: departments[i].name
-			}));
-		}
-	});
-	
-}
 
 var departmentCheck = function(){
 	var error = $("#departmenterror");
@@ -125,12 +106,9 @@ var getDepartments = function(){
 		dataType : "json",
 		method :"post",
 		success : function(data){
-			departments = data;
 			$.each(data,function(i,department){
 				departmentDiv.append(Mustache.render(template,department));
 			});
-			$('input[name=department]', '#register').change(function(){addDepartmentHod();});
-			addDepartmentHod();
 		}
 	});
 }
@@ -179,7 +157,7 @@ var getCourses = function(){
 //validation methods to call whem submit in clicked
 var submitCheck = function(){
 	if($('input[name=type]:checked', '#register').val()==='student'){
-		return passwordCheck()&&firstNameCheck()&&lastNameCheck()&&emailTakenCheck()&&numberCheck()&&subjectCheck();
+		return passwordCheck()&&firstNameCheck()&&lastNameCheck()&&emailTakenCheck()&&numberCheck()&&subjectCheck()&&rollNumberCheck();
 	}else{
 		return passwordCheck()&&firstNameCheck()&&lastNameCheck()&&emailTakenCheck()&&numberCheck()&&departmentCheck();
 	}
@@ -204,6 +182,7 @@ var numberCheck = function(){
 //calls the usernameCheck method first to check if the username entered is valid not not  
 var usernameTakenCheck = function(){
 	var error = $("#usernametakenerror");
+	var check;
 	if (usernameCheck()) {
 		$.ajax({
 			url: "ajax/checkusername",
@@ -214,14 +193,18 @@ var usernameTakenCheck = function(){
 			success: function (responseText) {
 				if (responseText==="false") {
 					error.show();
-					return false;
+					check = false;
 				}else{
 					error.hide();
-					return true;
+					check = true;
 				}
 			}
 		});
+		return check;
+	}else{
+		return false;
 	}
+	
 }
 
 //this method checks if the username entred is valid or not
@@ -249,6 +232,7 @@ var usernameCheck = function(){
 //this method checks if the email id is taken or not 
 var emailTakenCheck = function(){
 	var error = $("#emailtakenerror");
+	var check;
 	if (emailCheck()) {
 		$.ajax({
 			url: "ajax/checkemail",
@@ -259,14 +243,18 @@ var emailTakenCheck = function(){
 			success: function (responseText) {
 				if (responseText==="false") {
 					error.show();
-					return false;
+					check = false;
 				}else{
 					error.hide();
-					return true;
+					check = true;
 				}
 			}
 		});
+		return check;
+	}else{
+		return false;
 	}
+	
 }
 
 //this method check if the email entred is valid not not

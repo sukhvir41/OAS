@@ -139,6 +139,16 @@
 															</div> 
 														</div>
 														<div class="row">
+
+															<!-- SHOW THIS WHEN THRER IS AN ERROR -->
+
+															<div class="col-md-8" >
+																<div class="alert alert-danger" hidden="true" id="emailtakenerror">
+																	<strong>Error!</strong> The E-mail address is already in use
+																</div>
+															</div> 
+														</div>
+														<div class="row">
 															<div class="form-group">
 																<div class="col-md-8">
 																	<label>Username</label>
@@ -267,7 +277,7 @@
 																	
 																	<h4>Details</h4>
 																	<label>Roll number</label>
-																	<input class="form-control input-lg" placeholder="50" type="number" minlength="1" maxlength="3" name="rollnumber" id="rollnumber" required="true">
+																	<input class="form-control input-lg" placeholder="50" type="number" minlength="1" maxlength="3" name="rollnumber" id="rollnumber" >
 																	<!-- SHOW THIS WHEN THRER IS AN ERROR -->
 
 																	
@@ -323,10 +333,6 @@
 																			</div>
 																		</div> 
 																	</div>
-																	<label>Hod of</label>
-																	<select class="form-control mb-md"  id="hod" name="hod">
-																		
-																	</select>
 																</div>
 															</div>
 														</div>

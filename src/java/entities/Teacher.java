@@ -118,6 +118,7 @@ public class Teacher implements Serializable {
         if (!hodOf.contains(department)) {
             hodOf.add(department);
             department.setHod(this);
+            hod = true;
         }
     }
 

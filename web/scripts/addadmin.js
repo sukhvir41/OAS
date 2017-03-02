@@ -3,19 +3,19 @@
 $(document).ready(function () {
     $("#email").blur(function () {
     	console.log(emailTakenCheck());
-        
+
     });
     $("#username").blur(function () {
     	console.log(usernameTakenCheck());
-        
+
     });
     $("#password").blur(function () {
     	console.log(passwordCheck());
-        
+
     });
     $("#repassword").blur(function () {
     	console.log(passwordCheck());
-        
+
     });
     $("#adminform").submit(function () {
         submitCheck();
@@ -25,6 +25,7 @@ $(document).ready(function () {
 
 var usernameTakenCheck = function () {
     var error = $("#usernametakenerror");
+    var check;
     if (usernameCheck()) {
         $.ajax({
             url: "/OAS/ajax/checkusername",
@@ -35,18 +36,20 @@ var usernameTakenCheck = function () {
             success: function (responseText) {
                 if (responseText === "false") {
                     error.show();
-                    return false;
+                    check=false;
                 } else {
                     error.hide();
-                    return true;
+                    check=true;
                 }
             }
         });
     }
+    return check;
 };
 
 var emailTakenCheck = function () {
     var error = $("#emailtakenerror");
+    var check;
     if (emailCheck()) {
         $.ajax({
             url: "/OAS/ajax/checkemail",
@@ -57,14 +60,15 @@ var emailTakenCheck = function () {
             success: function (responseText) {
                 if (responseText === "false") {
                     error.show();
-                    return false;
+                    check=false;
                 } else {
                     error.hide();
-                    return true;
+                    check=true;
                 }
             }
         });
     }
+    return check;
 };
 
 var emailCheck = function () {
