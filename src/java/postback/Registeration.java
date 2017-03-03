@@ -68,18 +68,11 @@ public class Registeration extends HttpServlet {
             session.close();
             resp.sendRedirect("login");
         } else {
-            hod = req.getParameter("hod");
             departments = new ArrayList<>(Arrays.asList(req.getParameterValues("department")));
             Session session = Utils.openSession();
             session.beginTransaction();
             Teacher teacher;
-            if (hod.equals("none")) {
-                teacher = new Teacher(firstName, lastName, number, email, false);
-            } else {
-                teacher = new Teacher(firstName, lastName, number, email, true);
-                Department department = (Department) session.get(Department.class, Integer.parseInt(hod));
-                department.setHod(teacher);
-            }
+            teacher = new Teacher(firstName, lastName, number, email, false);
             session.save(teacher);
             departments.stream()
                     .map(Integer::parseInt)

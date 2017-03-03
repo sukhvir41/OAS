@@ -37,10 +37,11 @@ public class SearchTeacherByName extends HttpServlet {
         String name;
         PrintWriter out = resp.getWriter();
         resp.setContentType("text/json");
+        Session session = Utils.openSession();
+        session.beginTransaction();
         try {
             name = req.getParameter("name");
-            Session session = Utils.openSession();
-            session.beginTransaction();
+
             List<Teacher> teachers = session.createCriteria(Teacher.class)
                     .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
                     .list();
@@ -52,6 +53,9 @@ public class SearchTeacherByName extends HttpServlet {
             session.close();
             out.print(gson.toJson(jsonTeachers));
         } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
             out.print("error");
         } finally {
             out.close();
@@ -70,7 +74,7 @@ public class SearchTeacherByName extends HttpServlet {
         } else {
             teacher.addProperty("hodof", "not hod");
         }
-        teacher.addProperty("classteacher", e.getClassRoom().getName());
+        teacher.addProperty("classteacher", e.getClassRoom() == null ? "" : e.getClassRoom().getName());
         teacher.add("departments", addDepartment(e.getDepartment()));
         teacher.addProperty("verified", e.isVerified());
         jsonTeachers.add(teacher);

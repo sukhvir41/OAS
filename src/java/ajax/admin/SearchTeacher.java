@@ -85,11 +85,15 @@ public class SearchTeacher extends HttpServlet {
                     .forEach(e -> add(e));
             out.print(gson.toJson(jsonTeachers));
 
-        } catch (Exception e) {
-            out.print("error");
-        } finally {
             session.getTransaction().commit();
             session.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+            out.print("error");
+        } finally {
+
             out.close();
         }
     }
@@ -106,7 +110,7 @@ public class SearchTeacher extends HttpServlet {
         } else {
             teacher.addProperty("hodof", "not hod");
         }
-        teacher.addProperty("classteacher", e.getClassRoom().getName());
+        teacher.addProperty("classteacher", e.getClassRoom() == null ? "" : e.getClassRoom().getName());
         teacher.add("departments", addDepartment(e.getDepartment()));
         teacher.addProperty("verified", e.isVerified());
         jsonTeachers.add(teacher);
