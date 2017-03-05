@@ -36,8 +36,7 @@ public class EditDepartment extends HttpServlet {
         int departmentId = 1;
         try {
             departmentId = Integer.parseInt(req.getParameter("departmentId"));
-        } catch (Exception e) {
-        }
+        
         Session session = Utils.openSession();
         session.beginTransaction();
         Department department = (Department) session.get(Department.class, departmentId);
@@ -45,6 +44,9 @@ public class EditDepartment extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/admin/editdepartment.jsp").forward(req, resp);
         session.getTransaction().commit();
         session.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

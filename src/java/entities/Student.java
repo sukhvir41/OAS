@@ -51,6 +51,9 @@ public class Student implements Serializable {
     @Column(name = "mac_id")
     private String macId;
 
+    @Column(name = "unaccounted")
+    private boolean unaccounted;
+
     @ManyToOne
     @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
     private ClassRoom classRoom;
@@ -84,6 +87,12 @@ public class Student implements Serializable {
         this.email = email;
         this.verified = verified;
         addClassRoom(classRoom);
+    }
+
+    public void unaccount() {
+        if (!verified) {
+            unaccounted = true;
+        }
     }
 
     /**
@@ -202,6 +211,10 @@ public class Student implements Serializable {
 
     public void setMacId(String macId) {
         this.macId = macId;
+    }
+
+    public boolean isUnaccounted() {
+        return unaccounted;
     }
 
 }

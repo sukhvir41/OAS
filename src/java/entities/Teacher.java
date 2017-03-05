@@ -45,6 +45,9 @@ public class Teacher implements Serializable {
     @Column(name = "verified")
     private boolean verified = false;
 
+    @Column(name = "unaccounted")
+    private boolean unaccounted;
+
     @Column(name = "t_hod")
     private boolean hod;
 
@@ -81,6 +84,12 @@ public class Teacher implements Serializable {
         this.verified = verified;
         this.hod = hod;
         addClassRoom(classRoom);
+    }
+
+    public void unaccount() {
+        if (!verified) {
+            unaccounted = true;
+        }
     }
 
     /**
@@ -210,4 +219,7 @@ public class Teacher implements Serializable {
         this.hodOf = hodOf;
     }
 
+    public boolean isUnaccounted() {
+        return unaccounted;
+    }
 }

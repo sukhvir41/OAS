@@ -107,11 +107,10 @@
 											<div class="form-group">
 												<div class="col-md-8">
 													<label>Select Hod</label>
-													<select class="form-control input-lg mb-md"  name="departmenthod" id="departmenthod">
-														 <c:forEach var="teacher" items="${requestScope.department.teachers}"><!--###put ${requestScope.department.teachers}-->
-                                                            <option value="${teacher.id}">${teacher.name}</option>
+													<select class="form-control input-lg mb-md"  name="teacherId" id="departmenthod">
+														 <c:forEach var="teacher" items="${requestScope.department.teachers}">
+                                                            <option value="${teacher.id}">${teacher.fName} ${teacher.lName}</option>
                                                     	</c:forEach>
-                                                    	<option>test</option>
 													</select>
 												</div>
 											</div>

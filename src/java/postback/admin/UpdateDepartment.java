@@ -29,17 +29,19 @@ public class UpdateDepartment extends HttpServlet {
         session.beginTransaction();
         try {
             int departmentId = Integer.parseInt(req.getParameter("departmentId"));
-            int teacherId = Integer.parseInt(req.getParameter("teacherId"));
+            String teacherId = req.getParameter("teacherId");
             String name = req.getParameter("departmentname");
             Department department = (Department) session.get(Department.class, departmentId);
-            Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-            if (department.getHod() == null) {
-                teacher.addHodOf(department);
-            } else {
-                Teacher tempTeacher = department.getHod();
-                tempTeacher.getHodOf().remove(department);
-                department.setHod(null);
-                teacher.addHodOf(department);
+            if (teacherId != null) {
+                Teacher teacher = (Teacher) session.get(Teacher.class, Integer.parseInt(teacherId));
+                if (department.getHod() == null) {
+                    teacher.addHodOf(department);
+                } else {
+                    Teacher tempTeacher = department.getHod();
+                    tempTeacher.getHodOf().remove(department);
+                    department.setHod(null);
+                    teacher.addHodOf(department);
+                }
             }
             department.setName(name);
             session.getTransaction().commit();
@@ -53,7 +55,7 @@ public class UpdateDepartment extends HttpServlet {
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-
+            
             resp.sendRedirect("/OAS/error");
         }
     }

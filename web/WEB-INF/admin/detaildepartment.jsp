@@ -105,11 +105,11 @@
                                                 <dd>${requestScope.department.name}</dd>
                                                 <dt>Hod</dt>
                                                 <c:choose>
-                                                    <c:when test="${requestScope.hod} != 'null'" >
-                                                        <dd>${requestScope.hod.name}</dd>
+                                                    <c:when test="${requestScope.department.hod == null}" >
+                                                        <dd>No Hod</dd>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <dd>No Hod</dd>
+                                                        <dd>${requestScope.department.hod.fName} ${requestScope.department.hod.lName}</dd>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </dl>
