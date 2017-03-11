@@ -5,20 +5,43 @@
  */
 package utility;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.google.gson.Gson;
 
 /**
  *
  * @author sukhvir
  */
 public class Testing {
-
+    String name;
+    boolean mark;
     public static void main(String[] args) throws Exception {
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        Gson g = new Gson();
+        String s = "{name:sukhvir}";
+        Testing test = g.fromJson(s, Testing.class);
+        System.out.println(test.getName());
+        System.out.println(test.isMark());
         
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isMark() {
+        return mark;
+    }
+
+    public void setMark(boolean mark) {
+        this.mark = mark;
+    }
+    
+    
+    
+    
 
     
 }

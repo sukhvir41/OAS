@@ -150,16 +150,18 @@ public class Utils {
     public static String getLectureId() {
         Session session = openSession();
         session.beginTransaction();
-        Lecture lecture = (Lecture) session.get(Lecture.class, generateBase64());
+        String Id = generateBase64();
+        Lecture lecture = (Lecture) session.get(Lecture.class, Id);
         while (lecture != null) {
-            lecture = (Lecture) session.get(Lecture.class, generateBase64());
+            Id = generateBase64();
+            lecture = (Lecture) session.get(Lecture.class, Id);
         }
         session.getTransaction().commit();
         session.close();
-        return lecture.getId();
+        return Id;
     }
 
-    private static String generateBase64() {
+    public static String generateBase64() {
         SecureRandom random = new SecureRandom();
         StringBuilder number = new StringBuilder();
 

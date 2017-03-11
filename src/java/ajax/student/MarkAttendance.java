@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import teacher.websocket.LectureSessionHandler;
 import utility.MacAddressUtil;
 import utility.Utils;
 
@@ -30,7 +32,9 @@ import utility.Utils;
 @WebServlet(urlPatterns = "/student/ajax/markattendance")
 public class MarkAttendance extends HttpServlet {
 
-    //###
+    @Inject
+    LectureSessionHandler sessionHandler;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
@@ -62,6 +66,7 @@ public class MarkAttendance extends HttpServlet {
                             attendance.setLeave(false);
                             attendance.setMarkedByTeacher(false);
                             session.save(attendance);
+                            sessionHandler.sendMessageFromStudent(lectureId, student.getId());
                             out.print("true");
                         } else {
                             out.print("false");

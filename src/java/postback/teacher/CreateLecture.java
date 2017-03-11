@@ -5,13 +5,12 @@
  */
 package postback.teacher;
 
-import entities.ClassRoom;
 import entities.Lecture;
-import entities.Subject;
-import entities.Teacher;
 import entities.Teaching;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,38 +31,47 @@ public class CreateLecture extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int count;
-        int classroomId;
-        int subjectId;
+        int tcsId;
         Session session = Utils.openSession();
         session.beginTransaction();
-
+        String lectureId = Utils.getLectureId();
         try {
+            Date now = new Date();
+            Calendar future = Calendar.getInstance();
             count = Integer.parseInt(req.getParameter("count"));
-            classroomId = Integer.parseInt(req.getParameter("classroomId"));
-            subjectId = Integer.parseInt(req.getParameter("subjectId"));
-            Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
-            teacher = (Teacher) session.get(Teacher.class, teacher.getId());
-            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-            Subject subject = (Subject) session.get(Subject.class, subjectId);
-            Teaching teaching = (Teaching) session.createCriteria(Teaching.class)
-                    .add(Restrictions.eq("teacher", teacher))
-                    .add(Restrictions.eq("classRoom", classRoom))
-                    .add(Restrictions.eq("subject", subject))
-                    .list().get(0);
-            Lecture lecture = (Lecture) session.createCriteria(Lecture.class)
+            tcsId = Integer.parseInt(req.getParameter("tcsId"));
+            Teaching teaching = (Teaching) session.get(Teaching.class, tcsId);
+            List<Lecture> lectures = session.createCriteria(Lecture.class)
                     .add(Restrictions.eq("teaching", teaching))
                     .addOrder(Order.desc("date"))
-                    .setMaxResults(1)
-                    .list().get(0);
-            Date now = new Date();
-
-            
+                    .list();
+            if (lectures.size() > 0) {
+                Lecture lecture = lectures.get(0);
+                future.setTime(lecture.getDate());
+                future.add(Calendar.MINUTE, 50 * lecture.getCount());
+                if (lecture.getTeaching().equals(teaching) && now.after(lecture.getDate()) && now.before(future.getTime())) {
+                    resp.sendRedirect("/OAS/teacher");
+                } else {
+                    Lecture lec = new Lecture(count, teaching);
+                    lec.setId(lectureId);
+                    lec.setDate(now);
+                    session.save(lec);
+                    resp.sendRedirect("/OAS/teacher");
+                }
+            } else {
+                Lecture lec = new Lecture(count, teaching);
+                lec.setId(lectureId);
+                lec.setDate(now);
+                session.save(lec);
+                resp.sendRedirect("/OAS/teacher");
+            }
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-        } finally {
+            e.printStackTrace();
+            resp.sendRedirect("/OAS/error");
         }
     }
 
