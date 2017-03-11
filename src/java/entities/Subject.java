@@ -136,4 +136,10 @@ public class Subject implements Serializable {
         this.classRooms = classRoom;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+    
+
 }

@@ -131,4 +131,9 @@ public class Teaching implements Serializable {
         this.lectures = lectures;
     }
 
+    @Override
+    public String toString() {
+        return subject+"-"+classRoom;
+    }
+    
 }

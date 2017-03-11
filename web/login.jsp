@@ -134,7 +134,7 @@
                                                         <div class="col-md-6">
                                                             <span class="remember-box checkbox">
                                                                 <label for="rememberme">
-                                                                    <input type="checkbox" id="rememberme" name="rememberme" value="true">Remember Me
+                                                                    <input type="checkbox" id="rememberme" name="rememberme" value="true">Stay signed in
                                                                 </label>
                                                             </span>
                                                         </div>
