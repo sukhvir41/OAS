@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Teacher Details - Admin</title>   
+        <title>Teacher Subject Mapping - HOD</title>   
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
@@ -69,15 +69,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li><a href="/OAS/admin">Home</a></li>
-                                    <li><a href="/OAS/admin/teachers">Teachers</a></li>
+                                    <li><a href="/OAS/HOD">Home</a></li>
+                                    <li><a href="/OAS/HOD/teachersubjectmap">Teacher Subject Map</a></li>
                                     <li>Teacher Details</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Teacher Details</h1>
+                                <h1>Teacher Subject Mapping</h1>
                             </div>
                         </div>
                     </div>
@@ -88,32 +88,70 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Name : <c:out value="${requestScope.teacher.fName}"/> <c:out value="${requestScope.teacher.lName}"/></h2>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <dl>
-                                                <dt>Contact Number</dt>
-                                                <dd>${requestScope.teacher.number}</dd>
-                                                <dt>Email</dt>
-                                                <dd>${requestScope.teacher.email}</dd>
-                                                <dt>Hod of </dt>
-                                                <c:choose>
-                                                    <c:when test="${requestScope.teacher.hod} != 'null'" >
-                                                        <c:forEach var="department" items="${teacher.hodOf}">
-                                                            <dd>${department.name}</dd>
+                                    <div class="tabs tabs-vertical tabs-left">
+                                        <ul class="nav nav-tabs col-sm-3">
+                                            <c:forEach var="teacher" items="${requestScope.teachers}">
+                                                <li>
+                                                    <a href="#${teacher.id}" data-toggle="tab">${teacher.fName} ${teacher.lName}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <li class="test">
+                                                <a href="#test" data-toggle="tab">test</a>
+                                            </li>
+                                            <!--###data is coming from : teachers teachings-->
+                                            <!--###real code
+                                            <li class="active">
+                                                <a href="#popular11" data-toggle="tab">Popular</a>
+                                            </li>
+                                            <li>
+                                                <a href="#recent11" data-toggle="tab">Recent</a>
+                                            </li>-->
+                                        </ul>
+                                        <div class="tab-content">
+                                            <c:forEach var="teacher" items="${requestScope.teachers}">
+                                                <div id="${teacher.id}" class="tab-pane active">
+                                                    <ul class="list list-icons list-icons-sm">
+                                                        <c:forEach var="teaching" items="${requestScope.teacher.teaches}">
+                                                            <li value="${teaching.id}"><i class="fa fa-caret-right"></i>${teaching.classRoom.name}-${teaching.classRoom.division}-${teaching.classRoom.course}-${teaching.subject.name}<li>
                                                         </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <dd>Not Hod</dd>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <dt>Departments</dt>
-                                                <c:forEach var="department" items="${teacher.department}">
-                                                    <dd>${department.name}</dd>
+                                                        <li><i class="fa fa-caret-right"></i>test</li>
+                                                    </ul>
+                                                </div>    
+                                            </c:forEach>
+                                            <div id="test" class="tab-pane">
+                                                <p>test</p>
+                                                <p>this is for testing purpose.</p>
+                                                <ul class="list list-icons list-icons-sm">
+                                                    <li><i class="fa fa-caret-right"></i>test</li>
+                                                </ul>
+                                            </div>
+                                            <!--###real code
+                                            <div id="popular11" class="tab-pane active">
+                                                <p>Popular</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                            </div>
+                                            <div id="recent11" class="tab-pane">
+                                                <p>Recent</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tabs tabs-vertical tabs-left">
+                                        <ul class="nav nav-tabs col-sm-3">
+                                            <li class="active">
+                                                <a href="#popular11" data-toggle="tab">Unassigned Subjects with Class</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <ul class="list list-icons list-icons-sm">
+                                                <c:forEach var="teaching" items="${requestScope.teachings}">
+                                                    <li><i class="fa fa-caret-right"></i>${teaching.classRoom.name}-${teaching.classRoom.division}-${teaching.classRoom.course}-${teaching.subject.name}</li>
                                                 </c:forEach>
-                                                <dt>Class Teacher of</dt>
-                                                <dd>${requestScope.teacher.classRoom.name}</dd>
-                                            </dl>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -122,8 +160,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
             <!-- Vendor -->
             <!--[if lt IE 9]>
             <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

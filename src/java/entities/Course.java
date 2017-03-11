@@ -187,4 +187,9 @@ public class Course implements Serializable {
         this.subjects = subjects;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+    
 }

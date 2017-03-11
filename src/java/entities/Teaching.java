@@ -54,7 +54,7 @@ public class Teaching implements Serializable {
         this.subject = subject;
     }
 
-    public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
+        public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
         addTeacher(teacher);
         addClassRoom(classRoom);
         addSubject(subject);

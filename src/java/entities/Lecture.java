@@ -44,6 +44,9 @@ public class Lecture implements Serializable {
     @Column(name = "count")
     private int count = 1;
 
+    @Column(name = "ended")
+    private boolean ended = false;
+
     @OneToMany(mappedBy = "lecture")
     private List<Attendance> attendance = new ArrayList<Attendance>();
 
@@ -106,6 +109,14 @@ public class Lecture implements Serializable {
 
     public void setAttendance(List<Attendance> attendance) {
         this.attendance = attendance;
+    }
+
+    public boolean isEnded() {
+        return ended;
+    }
+
+    public void setEnded(boolean ended) {
+        this.ended = ended;
     }
 
 }

@@ -86,7 +86,8 @@ public class ClassRoom implements Serializable {
     }
 
     /**
-     * this methods adds the teacher as class teacher to the class Room and vice versa
+     * this methods adds the teacher as class teacher to the class Room and vice
+     * versa
      */
     final public void addClassTeacher(Teacher teacher) {
         teacher.setClassRoom(this);
@@ -192,4 +193,10 @@ public class ClassRoom implements Serializable {
         this.classTeacher = classTeacher;
     }
 
+    @Override
+    public String toString() {
+        return name+ "-" +division+ "-" +course.toString();
+    }
+
+    
 }

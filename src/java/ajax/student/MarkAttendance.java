@@ -10,12 +10,16 @@ import entities.Lecture;
 import entities.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.MacAddressUtil;
 import utility.Utils;
 
@@ -26,39 +30,59 @@ import utility.Utils;
 @WebServlet(urlPatterns = "/student/ajax/markattendance")
 public class MarkAttendance extends HttpServlet {
 
+    //###
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         Session session = Utils.openSession();
         session.beginTransaction();
-
+        Date date = new Date();
         try {
             String lectureId = req.getParameter("lectureId");
             Student student = (Student) req.getSession().getAttribute("student");
             student = (Student) session.get(Student.class, student.getId());
             Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
-            MacAddressUtil util = new MacAddressUtil();
-            String macId = util.getMacAddress(req.getRemoteAddr());
-            if (macId.equals(student.getMacId())) {
-                if (lecture.getTeaching().getClassRoom().equals(student.getClassRoom()) && student.getSubjects().contains(lecture.getTeaching().getSubject())) {
-                    Attendance attendance = new Attendance(lecture, student);
-                    attendance.setAttended(true);
-                    attendance.setLeave(false);
-                    attendance.setMarkedByTeacher(false);
-                    session.save(attendance);
-                    out.print("true");
+            if (lecture.getTeaching().getClassRoom().equals(student.getClassRoom()) && student.getSubjects().contains(lecture.getTeaching().getSubject()) && !lecture.isEnded()) {
+                Date lectureStartDate = lecture.getDate();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(lectureStartDate);
+                cal.add(Calendar.MINUTE, 30);
+
+                List<Attendance> attendanceList = session.createCriteria(Attendance.class)
+                        .add(Restrictions.eq("lecture", lecture))
+                        .add(Restrictions.eq("student", student))
+                        .list();
+                if (attendanceList.size() <= 0) {
+                    if (date.after(lectureStartDate) && date.before(cal.getTime())) {
+                        MacAddressUtil mac = new MacAddressUtil();
+                        String macAddr = mac.getMacAddress(req.getRemoteAddr());
+                        if (macAddr.equals(student.getMacId())) {
+                            Attendance attendance = new Attendance(lecture, student);
+                            attendance.setAttended(true);
+                            attendance.setLeave(false);
+                            attendance.setMarkedByTeacher(false);
+                            session.save(attendance);
+                            out.print("true");
+                        } else {
+                            out.print("false");
+                        }
+                    } else {
+                        out.print("false");
+                    }
                 } else {
                     out.print("false");
                 }
+
             } else {
                 out.print("false");
             }
+
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-            out.print("error");
+            out.print("false");
         } finally {
             out.close();
         }

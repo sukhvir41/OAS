@@ -5,8 +5,9 @@
  */
 package utility;
 
-import entities.Teacher;
-import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -15,15 +16,9 @@ import org.hibernate.Session;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-       Session session = Utils.openSession();
-       session.beginTransaction();  
-           Teacher t = (Teacher) session.get(Teacher.class,1);
-           System.out.println(t.getfName());
-           t.getDepartment().stream()
-                   .forEach(e -> System.out.println(e.getName()));
-           
-       session.getTransaction().commit();
-       session.close();
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        
     }
 
+    
 }

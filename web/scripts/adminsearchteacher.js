@@ -21,8 +21,8 @@ var searchByName =  function(){
 	var success = $("#success");
 	var name = $("#teachername").val(); 
 	var body = $("#tablebody");
-	var verified = '<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherid={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-danger mr-xs mb-sm action" value="{{id}}">deverify</button></td></tr>';
-	var notVerified ='<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherid={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-success mr-xs mb-sm action" value="{{id}}">verify</button></td></tr>';
+	var verified = '<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherId={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-danger mr-xs mb-sm action" value="{{id}}">deverify</button></td></tr>';
+	var notVerified ='<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherId={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-success mr-xs mb-sm action" value="{{id}}">verify</button></td></tr>';
 	error.hide();
 	success.hide();
 	if (name.length>=1) {
@@ -60,8 +60,8 @@ var search = function(){
 	var departmentId = $("#department").val();
 	var filter = $('input[name=filter]:checked').val();
 	var body = $("#tablebody");
-	var verified = '<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherid={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-danger mr-xs mb-sm action" value="{{id}}">deverify</button></td></tr>';
-	var notVerified ='<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherid={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-success mr-xs mb-sm action" value="{{id}}">verify</button></td></tr>';
+	var verified = '<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherId={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-danger mr-xs mb-sm action" value="{{id}}">deverify</button></td></tr>';
+	var notVerified ='<tr><td>{{id}}</td><td><a href="/OAS/admin/teachers/detailteacher?teacherId={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{hodof}}</td><td>{{classteacher}}</td><td>{{departments}}</td><td>{{verified}}</td></td><td><button class="btn btn-success mr-xs mb-sm action" value="{{id}}">verify</button></td></tr>';
 	error.hide();
 	success.hide();
 	$.ajax({

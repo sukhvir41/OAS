@@ -14,6 +14,7 @@ import entities.Teaching;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import utility.Utils;
  *
  * @author sukhvir
  */
+@WebServlet(urlPatterns = "/teacher/hod/teachersubjectmapping")
 public class TCSassigner extends HttpServlet {
 
     @Override
@@ -38,35 +40,41 @@ public class TCSassigner extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Teacher hod = (Teacher) req.getSession().getAttribute("teacher");
-        Department department = (Department) req.getSession().getAttribute("department");
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        department = (Department) session.get(Department.class, department.getId());
-        List<Teacher> teachers = department.getTeachers();
+        try {
+            Teacher hod = (Teacher) req.getSession().getAttribute("teacher");
+            //###Department department = (Department) req.getSession().getAttribute("department");
+            Session session = Utils.openSession();
+            session.beginTransaction();
+            hod = (Teacher) session.get(Teacher.class, hod.getId());
+            Department department = hod.getDepartment().get(0);
+            department = (Department) session.get(Department.class, department.getId());
+            List<Teacher> teachers = department.getTeachers();
 
-        for (Course course : department.getCourses()) {
-            for (ClassRoom classRoom : course.getClassRooms()) {
-                for (Subject subject : classRoom.getSubjects()) {
-                    List<Teaching> teachings = session.createCriteria(Teaching.class)
-                            .add(Restrictions.eq("classRoom", classRoom))
-                            .add(Restrictions.eq("subject", subject)).list();
-                    if (teachings.size() <= 0) {
-                        Teaching teaching = new Teaching(classRoom, subject);
-                        session.save(teaching);
+            for (Course course : department.getCourses()) {
+                for (ClassRoom classRoom : course.getClassRooms()) {
+                    for (Subject subject : classRoom.getSubjects()) {
+                        List<Teaching> teachings = session.createCriteria(Teaching.class)
+                                .add(Restrictions.eq("classRoom", classRoom))
+                                .add(Restrictions.eq("subject", subject)).list();
+                        if (teachings.size() <= 0) {
+                            Teaching teaching = new Teaching(classRoom, subject);
+                            session.save(teaching);
+                        }
                     }
                 }
             }
+
+            List<Teaching> unregistredTeaching = session.createCriteria(Teaching.class)
+                    .add(Restrictions.isNull("teacher")).list();
+
+            req.setAttribute("teachers", teachers);
+            req.setAttribute("teachings", unregistredTeaching);
+            req.getRequestDispatcher("/WEB-INF/hod/teachersubjectmapping.jsp").forward(req, resp);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        List<Teaching> unregistredTeaching = session.createCriteria(Teaching.class)
-                .add(Restrictions.isNull("teacher")).list();
-
-        req.setAttribute("teachers", teachers);
-        req.setAttribute("teachings", unregistredTeaching);
-        req.getRequestDispatcher("###").forward(req, resp);
-        session.getTransaction().commit();
-        session.close();
     }
 
 }

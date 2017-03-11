@@ -217,4 +217,9 @@ public class Student implements Serializable {
         return unaccounted;
     }
 
+    @Override
+    public String toString() {
+        return fName + lName;
+    }
+
 }

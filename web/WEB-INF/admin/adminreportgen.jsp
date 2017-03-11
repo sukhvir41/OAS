@@ -10,7 +10,7 @@
 
         <title>Home - Admin</title>	
 
-       
+
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -60,38 +60,38 @@
     </head>
     <body>
         <div class="body">
-           <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
 
-            <div role="main" class="main">
-                <section class="page-header">
+                <div role="main" class="main">
+                    <section class="page-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                        <li><a href="/OAS/admin">Home</a></li>
+                                        <li>Reports</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Reports</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <ul class="breadcrumb">
-                                    <li><a href="/OAS/admin">Home</a></li>
-                                    <li>Reports</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1>Reports</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form action="/OAS/admin/generatereportpost" method="post" target="_blank">
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-6">
-                                                <label>Course</label>
-                                                    <select class="form-control" name="course" id="course">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form action="/OAS/admin/generatereportpost" method="post" target="_blank">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <label>Course</label>
+                                                        <select class="form-control" name="course" id="course">
                                                         <c:forEach var="course" items="${requestScope.courses}">
                                                             <option value="${course.id}">${course.name}</option>
                                                         </c:forEach>
@@ -102,9 +102,9 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-6">
-                                                <label>Class Rooom</label>
+                                                    <label>Class Rooom</label>
                                                     <select required="true" class="form-control" name="classroom" id="classroom">
-                                                        
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -112,16 +112,16 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-6">
-                                                <label>Start Date</label>
-                                                    <input required="true" class="form-control" type="date" name="startdate">
+                                                    <label>Start Date</label>
+                                                    <input required="true" class="form-control datepicker" type="text" name="startdate">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-6">
-                                                <label>End Date</label>
-                                                    <input required="true" class="form-control" type="date" name="enddate">
+                                                    <label>End Date</label>
+                                                    <input required="true" class="form-control datepicker" type="text" name="enddate">
                                                 </div>
                                             </div>
                                         </div>
@@ -148,6 +148,7 @@
             <script src="/OAS/vendor/jquery/jquery.js"></script>
             <script src="/OAS/scripts/adminreport.js"></script>
             <script src="/OAS/scripts/mustache.js"></script>
+            <script src="/OAS/scripts/jquery-ui.js"></script>
             <!--<![endif]-->
             <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
             <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -189,21 +190,11 @@
             <!-- Theme Initialization Files -->
             <script src="/OAS/js/theme.init.js"></script>
 
-            <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-            <script type="text/javascript">
-            
-                    var _gaq = _gaq || [];
-                    _gaq.push(['_setAccount', 'UA-12345678-1']);
-                    _gaq.push(['_trackPageview']);
-            
-                    (function() {
-                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                    })();
-            
+            <script>
+                $(function () {
+                    $(".datepicker").datepicker();
+                });
             </script>
-            -->
 
     </body>
 </html>

@@ -126,4 +126,10 @@ public class Department implements Serializable {
         this.teachers = teachers;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    
 }

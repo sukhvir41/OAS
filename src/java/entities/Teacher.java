@@ -222,4 +222,11 @@ public class Teacher implements Serializable {
     public boolean isUnaccounted() {
         return unaccounted;
     }
+
+    @Override
+    public String toString() {
+        return fName+lName;
+    }
+    
+    
 }
