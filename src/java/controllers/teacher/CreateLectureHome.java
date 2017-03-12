@@ -65,11 +65,14 @@ public class CreateLectureHome extends HttpServlet {
                     lectures.remove(lecture);
                     req.setAttribute("active", lecture);
                     req.setAttribute("recent", lectures);
-                    List<Student> present = session.createCriteria(Student.class)
-                            .add(Restrictions.in("attendance", lecture.getAttendance().stream()
-                                    .filter(e -> e.isAttended())
-                                    .toArray()))
-                            .list();
+                    List<Student> present = new ArrayList<>();
+                    if (lecture.getAttendance().size() > 0) {
+                        present = session.createCriteria(Student.class)
+                                .add(Restrictions.in("attendance", lecture.getAttendance().stream()
+                                        .filter(e -> e.isAttended())
+                                        .toArray()))
+                                .list();
+                    }
                     List<Student> absent = lecture.getTeaching().getClassRoom().getStudents();
                     absent.removeAll(present);
                     req.setAttribute("present", present);
@@ -92,9 +95,12 @@ public class CreateLectureHome extends HttpServlet {
                     lectures.remove(lecture);
                     req.setAttribute("active", lecture);
                     req.setAttribute("recent", lectures);
-                    List<Student> present = session.createCriteria(Student.class)
-                            .add(Restrictions.in("attendance", lecture.getAttendance().stream().filter(e -> e.isAttended()).toArray()))
-                            .list();
+                    List<Student> present = new ArrayList<>();
+                    if (lecture.getAttendance().size() > 0) {
+                        present = session.createCriteria(Student.class)
+                                .add(Restrictions.in("attendance", lecture.getAttendance().stream().filter(e -> e.isAttended()).toArray()))
+                                .list();
+                    }
                     List<Student> absent = lecture.getTeaching().getClassRoom().getStudents();
                     absent.removeAll(present);
                     req.setAttribute("present", present);

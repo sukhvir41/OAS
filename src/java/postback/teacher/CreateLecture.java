@@ -39,7 +39,7 @@ public class CreateLecture extends HttpServlet {
             Date now = new Date();
             Calendar future = Calendar.getInstance();
             count = Integer.parseInt(req.getParameter("count"));
-            tcsId = Integer.parseInt(req.getParameter("tcsId"));
+            tcsId = Integer.parseInt(req.getParameter("teaching"));
             Teaching teaching = (Teaching) session.get(Teaching.class, tcsId);
             List<Lecture> lectures = session.createCriteria(Lecture.class)
                     .add(Restrictions.eq("teaching", teaching))

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package postback.teacher;
+package controllers.teacher;
 
 import entities.Lecture;
 import entities.Teacher;
@@ -25,11 +25,20 @@ public class EndLecture extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        process(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        process(req, resp);
+    }
+
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = Utils.openSession();
         session.getTransaction().begin();
         try {
             Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
-            int lectureId = Integer.parseInt(req.getParameter("lectureId"));
+            String lectureId = req.getParameter("lectureId");
             teacher = (Teacher) session.get(Teacher.class, teacher.getId());
             Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
             if (teacher.getTeaches().contains(lecture.getTeaching())) {
@@ -41,16 +50,11 @@ public class EndLecture extends HttpServlet {
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
+            e.printStackTrace();
             session.getTransaction().rollback();
             session.close();
             resp.sendRedirect("/OAS/error");
         }
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 
 }

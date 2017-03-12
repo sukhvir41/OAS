@@ -151,7 +151,7 @@ public class MacAddressUtil {
         if (destinationMacAddress != null) {
             return destinationMacAddress.toString();
         } else {
-            return null;
+            return "";
         }
     }
 

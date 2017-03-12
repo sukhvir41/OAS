@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import teacher.websocket.LectureSessionHandler;
 import utility.MacAddressUtil;
 import utility.Utils;
 
@@ -31,9 +30,6 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/student/ajax/markattendance")
 public class MarkAttendance extends HttpServlet {
-
-    @Inject
-    LectureSessionHandler sessionHandler;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,31 +56,36 @@ public class MarkAttendance extends HttpServlet {
                     if (date.after(lectureStartDate) && date.before(cal.getTime())) {
                         MacAddressUtil mac = new MacAddressUtil();
                         String macAddr = mac.getMacAddress(req.getRemoteAddr());
+                        System.out.println(macAddr + "  " + student.getMacId());
                         if (macAddr.equals(student.getMacId())) {
                             Attendance attendance = new Attendance(lecture, student);
                             attendance.setAttended(true);
                             attendance.setLeave(false);
                             attendance.setMarkedByTeacher(false);
                             session.save(attendance);
-                            sessionHandler.sendMessageFromStudent(lectureId, student.getId());
                             out.print("true");
                         } else {
+                            System.out.println("mac issuse");
                             out.print("false");
                         }
                     } else {
+                        System.out.println("timeissue");
                         out.print("false");
                     }
                 } else {
+                    System.out.println("marked");
                     out.print("false");
                 }
 
             } else {
+                System.out.println("wrong classroom");
                 out.print("false");
             }
 
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
+            e.printStackTrace();
             session.getTransaction().rollback();
             session.close();
             out.print("false");

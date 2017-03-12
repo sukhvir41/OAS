@@ -11,7 +11,7 @@ var markAttendance = function(){
 	var error = $("#error");
 	var success = $("#success");
 	success.hide();
-	if(lectureId.length===6){
+	if(lectureId.length==8){
 		$.ajax({
 			url: "/OAS/student/ajax/markattendance",
 			data : {
@@ -28,6 +28,7 @@ var markAttendance = function(){
 				}
 			},
 			error: function(){
+				console.log("error");
 				error.show();
 				success.hide();
 			}
