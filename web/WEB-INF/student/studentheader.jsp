@@ -1,3 +1,9 @@
+<%-- 
+    Document   : studentheader
+    Created on : 12 Mar, 2017, 12:10:13 PM
+    Author     : icr
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-10px", "stickyChangeLogo": true}'>
@@ -13,60 +19,28 @@
                             <nav>
                                 <ul class="nav nav-pills" id="mainNav">
                                     <li>
-                                        <a href="/OAS/teacher">
+                                        <a href="/OAS/student">
                                             Home
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/OAS/teacher/lectures">
+                                        <a href="/OAS/student/lectures">
                                             Lectures
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/OAS/teacher/students">
-                                            Students
+                                        <a href="/OAS/student/attendance">
+                                            Attendance
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/OAS/teacher/reports">
-                                            Reports
+                                        <a href="/OAS/student/resetmacid">
+                                            Reset MAC ID
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="/OAS/teacher/statistics">
-                                            Statistics
-                                        </a>
-                                    </li>
-                                    <c:choose>
-                                        <c:when test="${sessionScope.teacher.hod==true}" >
-                                            <li class="dropdown">
-                                                <a clasClassroomn-toggle">Switch Account</a>
-                                                <ul class="dropdown-menu">
-                                                    <c:forEach var="department" items="${sessionScope.teacher.hodOf}">
-                                                        <li>
-                                                            <a href="/OAS/teacher/hod?departmentId=${department.id}">${department}</a>
-                                                        </li>
-                                                    </c:forEach>
-                                                </ul>
-                                            </li>
-                                        </c:when>
-                                        <c:otherwise>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${sessionScope.teacher.classRoom!=null}" >
-                                            <li>
-                                                <a href="/OAS/teacher/classroom">
-                                                    Classroom
-                                                </a>
-                                            </li>   
-                                        </c:when>
-                                        <c:otherwise>
-                                        </c:otherwise>
-                                    </c:choose>
                                     <li class="dropdown dropdown-mega dropdown-mega-signin signin logged" id="headerAccount">
                                         <a class="dropdown-toggle">
-                                            <i class="fa fa-user"></i> ${sessionScope.teacher.username}
+                                            <i class="fa fa-user"></i> ${sessionScope.student.username}
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li>
@@ -74,7 +48,7 @@
                                                     <div class="row">
                                                         <div class="col-md-8">
                                                             <div class="user-avatar">
-                                                                <p><strong>${sessionScope.teacher.username}</strong><span>Teacher</span></p>
+                                                                <p><strong>${sessionScope.student.username}</strong><span>Student</span></p>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">

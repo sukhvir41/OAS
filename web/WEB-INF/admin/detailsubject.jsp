@@ -182,7 +182,7 @@
                                                     <c:forEach var="student" items="${requestScope.subject.students}">
                                                         <tr>
                                                             <td>${student.id}</td>
-                                                            <td><a href="#">${student.fName} ${student.lName}</a></td>
+                                                            <td><a href="/OAS/admin/studets/detailstudent?studentId=${student.id}">${student.fName} ${student.lName}</a></td>
                                                             <td>${student.rollNumber}</td>
                                                             <td>${student.email}</td>
                                                             <td>${student.number}</td>

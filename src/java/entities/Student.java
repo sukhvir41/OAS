@@ -53,7 +53,7 @@ public class Student implements Serializable {
 
     @Column(name = "unaccounted")
     private boolean unaccounted;
-
+    
     @ManyToOne
     @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
     private ClassRoom classRoom;

@@ -155,7 +155,7 @@
                                     <p>${requestScope.active.id}-${requestScope.active.teaching}</p>
                                     <input type="hidden" name="lectureId" value="${requestScope.active.id}">
                                     <c:choose>
-                                        <c:when test="${requestScope.active.ended=='false'}" >
+                                        <c:when test="${requestScope.active.ended==false}" >
                                             <a class="mb-xs mt-xs mr-xs btn btn-danger" href="/OAS/teacher?lectureId=${requestScope.active.id}">End Lecture</a>
                                         </c:when>
                                         <c:otherwise>

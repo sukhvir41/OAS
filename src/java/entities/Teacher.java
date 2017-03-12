@@ -51,7 +51,7 @@ public class Teacher implements Serializable {
     @Column(name = "t_hod")
     private boolean hod;
 
-    @OneToMany(mappedBy = "hod")
+    @OneToMany(mappedBy = "hod",fetch = FetchType.EAGER)
     private List<Department> hodOf = new ArrayList<>();
 
     @OneToOne
