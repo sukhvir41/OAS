@@ -195,7 +195,7 @@ public class ClassRoom implements Serializable {
 
     @Override
     public String toString() {
-        return name+ "-" +division+ "-" +course.toString();
+        return name+ " - " +division+ " - " +course.toString();
     }
 
     

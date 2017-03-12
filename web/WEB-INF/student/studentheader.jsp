@@ -40,7 +40,7 @@
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-signin signin logged" id="headerAccount">
                                         <a class="dropdown-toggle">
-                                            <i class="fa fa-user"></i> ${sessionScope.student.username}
+                                            <i class="fa fa-user"></i> ${sessionScope.student}
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li>
@@ -48,13 +48,13 @@
                                                     <div class="row">
                                                         <div class="col-md-8">
                                                             <div class="user-avatar">
-                                                                <p><strong>${sessionScope.student.username}</strong><span>Student</span></p>
+                                                                <p><strong>${sessionScope.student}</strong><span>Student</span></p>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <ul class="list-account-options">
                                                                 <li>
-                                                                    <a href="/OAS/admin/myaccount">My Account</a>
+                                                                    <a href="/OAS/student/myaccount">My Account</a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="/OAS/logout">Log Out</a>

@@ -133,7 +133,7 @@ public class Teaching implements Serializable {
 
     @Override
     public String toString() {
-        return subject+"-"+classRoom;
+        return subject+" - "+classRoom;
     }
     
 }
