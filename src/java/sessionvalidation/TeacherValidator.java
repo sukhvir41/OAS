@@ -5,6 +5,7 @@
  */
 package sessionvalidation;
 
+import entities.Teacher;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -44,7 +45,13 @@ public class TeacherValidator implements Filter {
         resp.setDateHeader("Expires", 0);
         try {
             if ((boolean) session.getAttribute("accept") == true && session.getAttribute("type").equals("teacher")) {
-                chain.doFilter(request, response);
+                Teacher teacher = (Teacher) session.getAttribute("teacher");
+                if (teacher.isVerified()) {
+                    checkCookie();
+                    chain.doFilter(request, response);
+                } else {
+                    resp.sendRedirect("/OAS/notverified.jsp");
+                }
             } else {
                 resp.sendRedirect("/OAS/login");
             }

@@ -9,6 +9,7 @@ import entities.Lecture;
 import entities.Student;
 import entities.Teacher;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +59,7 @@ public class CreateLectureHome extends HttpServlet {
                 if (teacher.getTeaches().contains(lecture.getTeaching())) {
                     List<Lecture> lectures = session.createCriteria(Lecture.class)
                             .add(Restrictions.in("teaching", teacher.getTeaches()))
-                            .add(Restrictions.between("date", past, now))
+                            .add(Restrictions.between("date", past.getTime(), now))
                             .addOrder(Order.desc("date"))
                             .list();
                     lectures.remove(lecture);
@@ -77,11 +78,15 @@ public class CreateLectureHome extends HttpServlet {
                     resp.sendRedirect("/OAS/error");
                 }
             } else {
-                List<Lecture> lectures = session.createCriteria(Lecture.class)
-                        .add(Restrictions.in("teaching", teacher.getTeaches()))
-                        .add(Restrictions.between("date", past, now))
-                        .addOrder(Order.desc("date"))
-                        .list();
+                List<Lecture> lectures = new ArrayList<>();
+                if (teacher.getTeaches().size() > 0) {
+                    lectures = session.createCriteria(Lecture.class)
+                            .add(Restrictions.in("teaching", teacher.getTeaches()))
+                            .add(Restrictions.between("date", past.getTime(), now))
+                            .addOrder(Order.desc("date")).
+                            list();
+                }
+
                 if (lectures.size() > 0) {
                     lecture = lectures.get(0);
                     lectures.remove(lecture);
@@ -96,7 +101,7 @@ public class CreateLectureHome extends HttpServlet {
                     req.setAttribute("absent", absent);
                 }
             }
-            req.getRequestDispatcher("").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp").forward(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {

@@ -73,6 +73,7 @@ public class LogOut extends HttpServlet {
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
+            e.printStackTrace();
             resp.sendRedirect("/OAS/error");
 
         } finally {

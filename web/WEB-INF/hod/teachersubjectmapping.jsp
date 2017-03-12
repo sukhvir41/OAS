@@ -82,9 +82,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-                                        <li><a href="/OAS/HOD">Home</a></li>
-                                        <li><a href="/OAS/HOD/teachersubjectmap">Teacher Subject Map</a></li>
-                                        <li>Teacher Details</li>
+                                        <li><a href="/OAS/teacher/hod">Home</a></li>
+                                        <li>Teacher Subject Map</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -100,7 +99,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h4>Drag and Drop subjects to respective teacher<button id="apply" class="btn btn-primary pull-right">Apply</button></h4>
-                                
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="tabs tabs-vertical tabs-left">
@@ -114,11 +113,14 @@
                                         <div class="tab-content">
                                             <c:forEach var="teacher" items="${requestScope.teachers}">
                                                 <div id="${teacher.id}" class="tab-pane active">
-                                                    <ul class="list list-icons list-icons-sm sort connectedSortable">
-                                                        <c:forEach var="teaching" items="${requestScope.teacher.teaches}">
+                                                    <ul id="${teacher.id}" class="list list-icons list-icons-sm sort connectedSortable">
+                                                        <c:forEach var="teaching" items="${teacher.teaches}">
                                                             <li value="${teaching.id}" class="active"><i class="fa fa-caret-right"></i>
-                                                                ${teaching.classRoom.name}-${teaching.classRoom.division}-${teaching.classRoom.course}-${teaching.subject.name}</li>
-                                                            </c:forEach>
+                                                                <c:if test="${teaching.classRoom.course.department.id eq requestScope.department.id}">
+                                                                    ${teaching}
+                                                                </c:if>
+                                                            </li>
+                                                        </c:forEach>
                                                     </ul>
                                                 </div>    
                                             </c:forEach>
@@ -137,8 +139,9 @@
                                         <div class="tab-content">
                                             <ul class="list list-icons list-icons-sm sort connectedSortable">
                                                 <c:forEach var="teaching" items="${requestScope.teachings}">
-                                                    <li><i class="fa fa-caret-right"></i>${teaching.classRoom.name}-${teaching.classRoom.division}-${teaching.classRoom.course}-${teaching.subject.name}</li>
-                                                    </c:forEach>
+                                                    <li value="${teaching.id}"><i class="fa fa-caret-right"></i>${teaching}
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -203,12 +206,47 @@
         <script src="/OAS/js/theme.init.js"></script>
 
         <script>
-
             $(function () {
                 $(".sort").sortable({
                     connectWith: ".connectedSortable"
                 }).disableSelection();
             });
+
+            $(document).ready(function () {
+                $("#apply").click(function(){
+                    console.log("clicked")
+                    sendData();
+                });
+            });
+
+            var sendData = function () {
+                $.ajax({
+                    url: "/OAS/teacher/hod/teachersubjectmappingpost",
+                    
+                    data: {
+                        <c:forEach var="teacher" items="${requestScope.teachers}">
+                        ${teacher.id} : gettcs($("#${teacher.id} li")),
+                        </c:forEach>
+                    },
+                    method: "post",
+                    success: function (data) {
+                       if (data =="true") {
+                            console.log("true")
+                       }else{
+                        console.log("false")
+                       }
+                    }
+                });
+
+            }
+
+            var gettcs = function (teacher) {
+                var values = new Array();
+                teacher.each(function () {
+                    values.push($(this).val());
+                });
+                return values;
+            }
         </script>
     </body>
 </html>

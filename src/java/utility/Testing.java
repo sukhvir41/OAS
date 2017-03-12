@@ -5,39 +5,26 @@
  */
 package utility;
 
-import com.google.gson.Gson;
+import entities.Teacher;
+import org.hibernate.Session;
 
 /**
  *
  * @author sukhvir
  */
 public class Testing {
-    String name;
-    boolean mark;
+   
     public static void main(String[] args) throws Exception {
-        Gson g = new Gson();
-        String s = "{name:sukhvir}";
-        Testing test = g.fromJson(s, Testing.class);
-        System.out.println(test.getName());
-        System.out.println(test.isMark());
+        Session session = Utils.openSession();
+        session.beginTransaction();  
+                Teacher t = (Teacher) session.get(Teacher.class,1);
+                System.out.println(t);
+                t.getTeaches().stream().forEach(e ->System.out.println(e.getSubject()));
+        session.getTransaction().commit();
+        session.close();
         
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isMark() {
-        return mark;
-    }
-
-    public void setMark(boolean mark) {
-        this.mark = mark;
-    }
     
     
     
