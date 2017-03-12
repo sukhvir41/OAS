@@ -153,7 +153,7 @@
                                 <div class="col-md-12">
                                     <label>Active Lecture</label><br>
                                     <p>${requestScope.active.id}-${requestScope.active.teaching}</p>
-                                    <input type="hidden" name="lectureId" value="${requestScope.active.id}">
+                                    <input type="hidden" name="lectureId" id="lectureId" value="${requestScope.active.id}">
                                     <c:choose>
                                         <c:when test="${requestScope.active.ended==false}" >
                                             <a class="mb-xs mt-xs mr-xs btn btn-danger" href="/OAS/teacher?lectureId=${requestScope.active.id}">End Lecture</a>
@@ -167,7 +167,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>Present Students</h4>
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="present">
                                         <thead>
                                             <tr>
                                                 <th>Roll No.</th>
@@ -177,11 +177,11 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach var="student" items="${requestScope.present}">
-                                                <tr>
+                                                <tr id="${student.id}">
                                                     <td>${student.rollNumber}</td>
                                                     <td>${student}</td>
                                                     <td>
-                                                        <button class="btn btn-danger" value="${student.id}">Absent</button>
+                                                        <button class="btn btn-danger action" id="${student.id}" value="${student.id}">Absent</button>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -190,7 +190,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <h4>Absent Students</h4>
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="absent">
                                         <thead>
                                             <tr>
                                                 <th>Roll No.</th>
@@ -200,11 +200,11 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach var="student" items="${requestScope.absent}">
-                                                <tr>
+                                                <tr id="${student.id}">
                                                     <td>${student.rollNumber}</td>
                                                     <td>${student}</td>
                                                     <td>
-                                                        <button class="btn btn-success" value="${student.id}">Present</button>
+                                                        <button class="btn btn-success action" id="${student.id}" value="${student.id}">Present</button>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

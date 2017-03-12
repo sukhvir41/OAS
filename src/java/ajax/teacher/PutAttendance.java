@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import teacher.websocket.LectureSessionHandler;
+import teacher.websocket.Message;
 import utility.Utils;
 
 /**
@@ -29,8 +32,10 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/teacher/ajax/putattendance")
 public class PutAttendance extends HttpServlet {
-
-    //###
+    
+    @Inject
+    LectureSessionHandler sessionHandler;
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
@@ -52,22 +57,35 @@ public class PutAttendance extends HttpServlet {
                     List<Attendance> attendance = session.createCriteria(Attendance.class)
                             .add(Restrictions.eq("lecture", lecture))
                             .add(Restrictions.eq("student", student))
-                            .setFetchSize(1)//###
+                            .setMaxResults(1)
                             .list();
                     if (attendance.size() > 0) {
                         attendance.get(0).setAttended(mark);
                         attendance.get(0).setMarkedByTeacher(true);
+                        Message message = new Message();
+                        message.setLectureId(lecture.getId());
+                        message.setMark(mark);
+                        message.setMarkedByTeacher(true);
+                        message.setStudentId(student.getId());
+                        sessionHandler.sendMessage(message);
+                        out.print("true");
                     } else {
                         Attendance attend = new Attendance(lecture, student);
                         attend.setAttended(mark);
                         attend.setMarkedByTeacher(true);
                         session.save(attend);
+                        Message message = new Message();
+                        message.setLectureId(lecture.getId());
+                        message.setMark(mark);
+                        message.setMarkedByTeacher(true);
+                        message.setStudentId(student.getId());
+                        sessionHandler.sendMessage(message);
                         out.print("true");
                     }
                 } else {
                     out.print("true");
                 }
-
+                
             } else {
                 out.print("false");
             }
@@ -81,10 +99,10 @@ public class PutAttendance extends HttpServlet {
             out.close();
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //###
     }
-
+    
 }

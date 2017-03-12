@@ -65,36 +65,37 @@
         <div class="body">
             <jsp:include page="/WEB-INF/student/studentheader.jsp"></jsp:include>
 
-            <div role="main" class="main">
-                <section class="page-header">
+                <div role="main" class="main">
+                    <section class="page-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                        <li>Home</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Home</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <ul class="breadcrumb">
-                                    <li>Home</li>
-                                </ul>
+                                <h4>Attend Lecture</h4>    
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Home</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Attend Lecture</h4>    
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Enter Lecture ID</label>
-                                    <input type="text" name="lectureId" id="lectureId" class="form-control input-lg">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Enter Lecture ID</label>
+                                        <input type="text" name="lectureId" id="lectureId" class="form-control input-lg">
+                                        <input type="hidden" name="studentId" id="studentId" value="${sessionScope.student.id}">
                                 </div>
                             </div>
                         </div>
@@ -103,11 +104,25 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <div class="col-md-4">
-                                    <button class="btn btn-primary" value="${sessionScope.student.id}">Mark Present</button>
+                                    <button class="btn btn-primary" id="mark">Mark Present</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="alert alert-danger" id="error" hidden>
+                                <strong>Error!</strong> Attendance already marked or network error or MacId issue
+                            </div>
+                        </div> 
+                    </div>   
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="alert alert-success" id="error" hidden>
+                                <strong>Success!</strong> Attendance Marked
+                            </div>
+                        </div> 
+                    </div>       
                 </div>
             </div>
         </div>
@@ -118,6 +133,7 @@
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
+        <script src="/OAS/scripts/studenthome.js"></script>
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

@@ -5,6 +5,8 @@
  */
 package teacher.websocket;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import entities.Attendance;
 import entities.Lecture;
 import entities.Student;
@@ -73,16 +75,23 @@ public class LectureSessionHandler {
                 }
                 Session ses = sessions.get(message.getLectureId());
                 if (ses != null) {
+//                    Gson g = new Gson();
+//                    JsonObject o = new JsonObject();
+//                    o.addProperty("rollnumber", student.getRollNumber());
+//                    o.addProperty("name", student.toString());
+//                    o.addProperty("mark", message.isMark());
                     ses.getBasicRemote().sendText("true");
                 }
-            }
-            Session ses = sessions.get(message.getLectureId());
-            if (ses != null) {
-                ses.getBasicRemote().sendText("false");
+            } else {
+                Session ses = sessions.get(message.getLectureId());
+                if (ses != null) {
+                    ses.getBasicRemote().sendText("false");
+                }
             }
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
+            e.printStackTrace();
             try {
                 session.getTransaction().rollback();
                 session.close();
