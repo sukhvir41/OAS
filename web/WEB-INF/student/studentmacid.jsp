@@ -131,7 +131,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="col-md-4">
-                                        <input type="text" name="macid" id="macid" class="form-control input-lg"/>
+                                        <input type="text" name="macid" id="macid"  required="true"  readonly="true" class="form-control input-lg"/>
                                     </div>
                                 </div>
                             </div>

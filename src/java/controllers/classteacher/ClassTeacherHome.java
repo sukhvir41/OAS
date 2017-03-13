@@ -3,27 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ajax.hod;
+package controllers.classteacher;
 
-import entities.ClassRoom;
-import entities.Department;
+import entities.Teacher;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.Utils;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet("/teacher/hod")
-public class HodHome extends HttpServlet {
+@WebServlet("/teacher/classteacher")
+public class ClassTeacherHome extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,23 +35,11 @@ public class HodHome extends HttpServlet {
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = Utils.openSession();
         session.beginTransaction();
-        String departmentString = req.getParameter("departmentId");
         try {
-            int departmentId;
-            if (departmentString != null) {
-                departmentId = Integer.valueOf(departmentString);
-            } else {
-                departmentId = ((Department) req.getSession().getAttribute("department")).getId();
-            }
-            Department department = (Department) session.get(Department.class, departmentId);
-            req.getSession().setAttribute("department", department);
-            req.setAttribute("courses", department.getCourses());
-            List<ClassRoom> classRooms = session.createCriteria(ClassRoom.class)
-                    .add(Restrictions.in("course", department.getCourses()))
-                    .list();
-            req.setAttribute("classRooms", classRooms);
-            req.setAttribute("teachers", department.getTeachers());
-            req.getRequestDispatcher("/WEB-INF/hod/hodhome.jsp").forward(req, resp);
+            Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
+            teacher = (Teacher) session.get(Teacher.class, teacher.getId());
+            req.setAttribute("classRoom", teacher.getClassRoom());
+            req.getRequestDispatcher("/WEB-INF/classteacher/classteacherhome.jsp").forward(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
@@ -64,7 +49,6 @@ public class HodHome extends HttpServlet {
             resp.sendRedirect("/OAS/error");
         } finally {
         }
-
     }
 
 }

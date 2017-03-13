@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ajax.hod;
+package controllers.admin;
 
-import entities.ClassRoom;
-import entities.Department;
+import entities.Login;
+import entities.Teacher;
+import entities.Teaching;
+import entities.UserType;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -22,8 +24,8 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet("/teacher/hod")
-public class HodHome extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/teachers/detailteacher")
+public class DetailTeacher extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,35 +38,28 @@ public class HodHome extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int teacherId;
         Session session = Utils.openSession();
         session.beginTransaction();
-        String departmentString = req.getParameter("departmentId");
         try {
-            int departmentId;
-            if (departmentString != null) {
-                departmentId = Integer.valueOf(departmentString);
-            } else {
-                departmentId = ((Department) req.getSession().getAttribute("department")).getId();
-            }
-            Department department = (Department) session.get(Department.class, departmentId);
-            req.getSession().setAttribute("department", department);
-            req.setAttribute("courses", department.getCourses());
-            List<ClassRoom> classRooms = session.createCriteria(ClassRoom.class)
-                    .add(Restrictions.in("course", department.getCourses()))
-                    .list();
-            req.setAttribute("classRooms", classRooms);
-            req.setAttribute("teachers", department.getTeachers());
-            req.getRequestDispatcher("/WEB-INF/hod/hodhome.jsp").forward(req, resp);
+            teacherId = Integer.parseInt(req.getParameter("teacherId"));
+            Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+            Login login = (Login) session.createCriteria(Login.class)
+                    .add(Restrictions.eq("id", teacher.getId()))
+                    .add(Restrictions.eq("type", UserType.Teacher.toString()))
+                    .list()
+                    .get(0);
+            req.setAttribute("teacher", teacher);
+            req.setAttribute("username", login.getUsername());
+            req.getRequestDispatcher("/WEB-INF/admin/detailteacher.jsp").forward(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
+            e.printStackTrace();
             session.getTransaction().rollback();
             session.close();
-            e.printStackTrace();
             resp.sendRedirect("/OAS/error");
-        } finally {
         }
-
     }
 
 }

@@ -3,21 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package postback.student;
+package controllers.admin;
 
+import entities.Student;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import utility.Utils;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet("/student")
-public class StudentHome extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/students/deactivatestudent")
+public class DeactivateStudent extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +33,23 @@ public class StudentHome extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/student/studenthome.jsp").forward(req, resp);
+        Session session = Utils.openSession();
+        session.beginTransaction();
+        try {
+            int studentId = Integer.parseInt(req.getParameter("studentId"));
+            Student student = (Student) session.get(Student.class, studentId);
+            student.setVerified(false);
+            session.getTransaction().commit();
+            session.close();
+            resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + student.getId());
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            e.printStackTrace();
+            resp.sendRedirect("/OAS/error");
+        } finally {
+
+        }
     }
 
 }

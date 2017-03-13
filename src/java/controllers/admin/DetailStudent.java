@@ -5,7 +5,9 @@
  */
 package controllers.admin;
 
+import entities.Login;
 import entities.Student;
+import entities.UserType;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.Utils;
 
 /**
@@ -39,7 +42,13 @@ public class DetailStudent extends HttpServlet {
         try {
             int studentId = Integer.valueOf(req.getParameter("studentId"));
             Student student = (Student) session.get(Student.class, studentId);
+            Login login = (Login) session.createCriteria(Login.class)
+                    .add(Restrictions.eq("id", student.getId()))
+                    .add(Restrictions.eq("type", UserType.Student.toString()))
+                    .list()
+                    .get(0);
             req.setAttribute("student", student);
+            req.setAttribute("username", login.getUsername());
             req.getRequestDispatcher("/WEB-INF/admin/detailstudent.jsp").forward(req, resp);
             session.getTransaction().commit();
             session.close();
