@@ -132,6 +132,16 @@
                                     </div>
                                 </div>
                             </form>
+                            <c:if test="${param.error =='true'}">
+                                <!-- SHOW THIS WHEN MARK ATTENDANCE ACTION FAILS -->
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="alert alert-danger">
+                                            <strong>Error!</strong> Failed to put attendance
+                                        </div>
+                                    </div> 
+                                </div> 
+                            </c:if>
                             <hr>
                             <div class="row">
                                 <div class="col-md-12">
@@ -147,7 +157,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <label>Active Lecture</label><br>
                                     <p>${requestScope.active.id}-${requestScope.active.teaching}</p>
                                     <input type="hidden" name="lectureId" id="lectureId" value="${requestScope.active.id}">
@@ -159,7 +169,18 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary pull-right" id="refresh" name="refresh">Refresh</button>
+                                </div>
                             </div>
+                            <!-- SHOW THIS WHEN CREATING LECTURE ACTION FAILS -->
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="alert alert-danger" id="###">
+                                            <strong>Error!</strong> Failed to put attendance
+                                        </div>
+                                    </div> 
+                                </div> 
                             <br>
                             <div class="row">
                                 <div class="col-md-6">

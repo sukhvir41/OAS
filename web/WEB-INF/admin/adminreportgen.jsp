@@ -139,62 +139,62 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- Vendor -->
+        <!--[if lt IE 9]>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <![endif]-->
+        <!--[if gte IE 9]><!-->
+        <script src="/OAS/vendor/jquery/jquery.js"></script>
+        <script src="/OAS/scripts/adminreport.js"></script>
+        <script src="/OAS/scripts/mustache.js"></script>
+        <script src="/OAS/scripts/jquery-ui.js"></script>
+        <!--<![endif]-->
+        <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
+        <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
+        <script src="/OAS/vendor/jquery-cookie/jquery-cookie.js"></script>
+        <script src="/OAS/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="/OAS/vendor/common/common.js"></script>
+        <script src="/OAS/vendor/jquery.validation/jquery.validation.js"></script>
+        <script src="/OAS/vendor/jquery.stellar/jquery.stellar.js"></script>
+        <script src="/OAS/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+        <script src="/OAS/vendor/jquery.gmap/jquery.gmap.js"></script>
+        <script src="/OAS/vendor/jquery.lazyload/jquery.lazyload.js"></script>
+        <script src="/OAS/vendor/isotope/jquery.isotope.js"></script>
+        <script src="/OAS/vendor/owl.carousel/owl.carousel.js"></script>
+        <script src="/OAS/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+        <script src="/OAS/vendor/vide/vide.js"></script>
 
-            <!-- Vendor -->
-            <!--[if lt IE 9]>
-            <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-            <![endif]-->
-            <!--[if gte IE 9]><!-->
-            <script src="/OAS/vendor/jquery/jquery.js"></script>
-            <script src="/OAS/scripts/adminreport.js"></script>
-            <script src="/OAS/scripts/mustache.js"></script>
-            <script src="/OAS/scripts/jquery-ui.js"></script>
-            <!--<![endif]-->
-            <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
-            <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
-            <script src="/OAS/vendor/jquery-cookie/jquery-cookie.js"></script>
-            <script src="/OAS/vendor/bootstrap/js/bootstrap.js"></script>
-            <script src="/OAS/vendor/common/common.js"></script>
-            <script src="/OAS/vendor/jquery.validation/jquery.validation.js"></script>
-            <script src="/OAS/vendor/jquery.stellar/jquery.stellar.js"></script>
-            <script src="/OAS/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
-            <script src="/OAS/vendor/jquery.gmap/jquery.gmap.js"></script>
-            <script src="/OAS/vendor/jquery.lazyload/jquery.lazyload.js"></script>
-            <script src="/OAS/vendor/isotope/jquery.isotope.js"></script>
-            <script src="/OAS/vendor/owl.carousel/owl.carousel.js"></script>
-            <script src="/OAS/vendor/magnific-popup/jquery.magnific-popup.js"></script>
-            <script src="/OAS/vendor/vide/vide.js"></script>
+        <!-- Theme Base, Components and Settings -->
+        <script src="/OAS/js/theme.js"></script>
 
-            <!-- Theme Base, Components and Settings -->
-            <script src="/OAS/js/theme.js"></script>
+        <!-- Specific Page Vendor and Views -->
+        <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.carousel.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+        <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
 
-            <!-- Specific Page Vendor and Views -->
-            <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.carousel.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
-            <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+        <script src="/OAS/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
+        <script src="/OAS/js/views/view.home.js"></script>
 
-            <script src="/OAS/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
-            <script src="/OAS/js/views/view.home.js"></script>
+        <!-- Theme Custom -->
+        <script src="/OAS/js/custom.js"></script>
 
-            <!-- Theme Custom -->
-            <script src="/OAS/js/custom.js"></script>
+        <!-- Theme Initialization Files -->
+        <script src="/OAS/js/theme.init.js"></script>
 
-            <!-- Theme Initialization Files -->
-            <script src="/OAS/js/theme.init.js"></script>
-
-            <script>
-                $(function () {
-                    $(".datepicker").datepicker();
-                });
-            </script>
+        <script>
+            $(function () {
+                $(".datepicker").datepicker();
+            });
+        </script>
 
     </body>
 </html>

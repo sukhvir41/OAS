@@ -71,32 +71,32 @@
         <div class="body">
             <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
 
-            <div role="main" class="main">
-                <section class="page-header">
+                <div role="main" class="main">
+                    <section class="page-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                        <li><a href="/OAS/admin">Home</a></li>
+                                        <li><a href="/OAS/admin/students">Students</a></li>
+                                        <li>Student Details</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Student Details</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <ul class="breadcrumb">
-                                    <li><a href="/OAS/admin">Home</a></li>
-                                    <li><a href="/OAS/admin/students">Students</a></li>
-                                    <li>Student Details</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1>Student Details</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2>Name : ${requestScope.student}</h2>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2>Name : ${requestScope.student}</h2>
                                 </div>
                             </div>
                             <div class="row">
@@ -146,7 +146,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                                                     <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete a student</h4>
                                                 </div>
                                                 <form class="form-horizontal mb-lg" action="/OAS/admin/students/deletestudent" method="post">
@@ -167,7 +167,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                                                     <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to unaccount the Teacher</h4>
                                                 </div>
                                                 <form class="form-horizontal mb-lg" action="/OAS/admin/studetns/unaccount" method="post">
