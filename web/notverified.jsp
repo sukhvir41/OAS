@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-md-12 center">
                             <h1 class="mb-sm small">Error</h1>
-                            <p class="lead">Your account is not verified yet!! <br>Contact adminstrative staff for further information.yg999999999999999</p>
+                            <p class="lead">Your account is not verified yet!! <br>Contact adminstrative staff for further information.</p>
                         </div>
                     </div>
                     <div class="row">
