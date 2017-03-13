@@ -49,7 +49,7 @@
                                                 <ul class="dropdown-menu">
                                                     <c:forEach var="department" items="${sessionScope.teacher.hodOf}">
                                                         <li>
-                                                            <a href="/OAS/teacher/hod?departmentId=${department.id}">${department}</a>
+                                                            <a href="/OAS/teacher/hod?departmentId=${department.id}">${department} - HOD</a>
                                                         </li>
                                                     </c:forEach>
                                                 </ul>

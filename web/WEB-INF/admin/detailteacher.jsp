@@ -96,6 +96,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <dl>
+                                        <dt>User Name</dt>
+                                        <dd>${requestScope.username}</dd>
                                         <dt>Contact Number</dt>
                                         <dd>${requestScope.teacher.number}</dd>
                                         <dt>Email</dt>

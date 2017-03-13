@@ -49,7 +49,6 @@
                                             Entities
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="/OAS/teacher/hod/departments">Department</a></li>
                                             <li><a href="/OAS/teacher/hod/courses">Courses</a></li>
                                             <li><a href="/OAS/teacher/hod/classrooms">Class Rooms</a></li>
                                             <li><a href="/OAS/teacher/hod/subjects">Subjects</a></li>
@@ -74,6 +73,11 @@
                                             Statistics
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="/OAS/teacher/hod/teachersubjectmapping">
+                                            Teacher - Subject Mapping
+                                        </a>
+                                    </li>
                                     <c:choose>
                                         <c:when test="${sessionScope.teacher.hod==true}" >
                                             <li class="dropdown">
@@ -84,7 +88,7 @@
                                                     </li>
                                                     <c:forEach var="department" items="${sessionScope.teacher.hodOf}">
                                                         <li>
-                                                            <a href="/OAS/teacher/hod?departmentId=${department.id}">${department}-hod</a>
+                                                            <a href="/OAS/teacher/hod?departmentId=${department.id}">${department} - HOD</a>
                                                         </li>
                                                     </c:forEach>
                                                 </ul>
@@ -103,7 +107,7 @@
                                                     <div class="row">
                                                         <div class="col-md-8">
                                                             <div class="user-avatar">
-                                                                <p><strong>${sessionScope.teacher}</strong><span>Teacher</span></p>
+                                                                <p><strong>${sessionScope.teacher}</strong><span>Head of Department</span></p>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
