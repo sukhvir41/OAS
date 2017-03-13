@@ -1,8 +1,10 @@
 
-$(document).ready(function(){
-	getClasses();
+$(document).ready(function () {
+    getClasses();
 
-	$("#course").change(function(){getClasses();});
+    $("#course").change(function () {
+        getClasses();
+    });
 
 });
 
@@ -25,22 +27,22 @@ $(document).ready(function(){
 
 // }
 
-var getClasses = function(){
-	var classes = $("#class");
-	var template = '<span class="checkbox"><label class="checkbox"><input type="checkbox" name="classes" value="{{id}}">{{name}}</label></span>';
-	classes.empty();
-	$.ajax({
-		url: "/OAS/ajax/getclass",
-		dataType: "json",
-		data: {
-			course: $('#course').val()
-		},
-		method: "post",
-		success: function (data) {
-			$.each(data,function(i,jsonclass){
-				classes.append(Mustache.render(template,jsonclass));
-			});
-		}
-	});
+var getClasses = function () {
+    var classes = $("#class");
+    var template = '<span class="checkbox"><label class="checkbox"><input type="checkbox" name="classes" value="{{id}}">{{name}}</label></span>';
+    classes.empty();
+    $.ajax({
+        url: "/OAS/ajax/getclass",
+        dataType: "json",
+        data: {
+            course: $('#course').val()
+        },
+        method: "post",
+        success: function (data) {
+            $.each(data, function (i, jsonclass) {
+                classes.append(Mustache.render(template, jsonclass));
+            });
+        }
+    });
 
 }

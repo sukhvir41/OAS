@@ -106,10 +106,10 @@
         <script src="/OAS/vendor/owl.carousel/owl.carousel.js"></script>
         <script src="/OAS/vendor/magnific-popup/jquery.magnific-popup.js"></script>
         <script src="/OAS/vendor/vide/vide.js"></script>
-        
+
         <!-- Theme Base, Components and Settings -->
         <script src="/OAS/js/theme.js"></script>
-        
+
         <!-- Specific Page Vendor and Views -->
         <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
         <script src="/OAS/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
@@ -122,13 +122,13 @@
         <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
         <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
         <script src="/OAS/vendor/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
-        
+
         <script src="/OAS/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
         <script src="/OAS/js/views/view.home.js"></script>
-        
+
         <!-- Theme Custom -->
         <script src="/OAS/js/custom.js"></script>
-        
+
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
 
@@ -146,7 +146,7 @@
             })();
         
         </script>
-         -->
+        -->
 
     </body>
 </html>

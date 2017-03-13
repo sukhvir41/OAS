@@ -185,14 +185,14 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tablebody">
-                                            <c:forEach var="subject" items="${requestScope.student.subjects}">
-                                                <tr>
-                                                    <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
-                                                    <td><a href="/OAS/admin/classrooms/detailclassroom?classroomId=${requestScope.student.classRoom.id}">${requestScope.student.classRoom.name}</a></td>
-                                                    <td><a href="/OAS/admin/courses/detailcourse?courseId=${requestScope.student.classRoom.course.id}">${requestScope.student.classRoom.course.name}</a></td>
-                                                    <td><a href="/OAS/admin/departments/detaildepartment?departmentId=${${requestScope.student.classRoom.course.department.id}">${requestScope.student.classRoom.course.department.name}</a></td>
-                                                </tr>
-                                            </c:forEach>
+                                        <c:forEach var="subject" items="${requestScope.student.subjects}">
+                                            <tr>
+                                                <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
+                                                <td><a href="/OAS/admin/classrooms/detailclassroom?classroomId=${requestScope.student.classRoom.id}">${requestScope.student.classRoom.name}</a></td>
+                                                <td><a href="/OAS/admin/courses/detailcourse?courseId=${requestScope.student.classRoom.course.id}">${requestScope.student.classRoom.course.name}</a></td>
+                                                <td><a href="/OAS/admin/departments/detaildepartment?departmentId=${${requestScope.student.classRoom.course.department.id}">${requestScope.student.classRoom.course.department.name}</a></td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

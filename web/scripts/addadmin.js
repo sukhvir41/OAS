@@ -2,19 +2,19 @@
 
 $(document).ready(function () {
     $("#email").blur(function () {
-    	console.log(emailTakenCheck());
+        console.log(emailTakenCheck());
 
     });
     $("#username").blur(function () {
-    	console.log(usernameTakenCheck());
+        console.log(usernameTakenCheck());
 
     });
     $("#password").blur(function () {
-    	console.log(passwordCheck());
+        console.log(passwordCheck());
 
     });
     $("#repassword").blur(function () {
-    	console.log(passwordCheck());
+        console.log(passwordCheck());
 
     });
     $("#adminform").submit(function () {
@@ -36,10 +36,10 @@ var usernameTakenCheck = function () {
             success: function (responseText) {
                 if (responseText === "false") {
                     error.show();
-                    check=false;
+                    check = false;
                 } else {
                     error.hide();
-                    check=true;
+                    check = true;
                 }
             }
         });
@@ -60,10 +60,10 @@ var emailTakenCheck = function () {
             success: function (responseText) {
                 if (responseText === "false") {
                     error.show();
-                    check=false;
+                    check = false;
                 } else {
                     error.hide();
-                    check=true;
+                    check = true;
                 }
             }
         });

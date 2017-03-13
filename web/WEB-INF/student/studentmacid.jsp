@@ -108,6 +108,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary" id="getmacid">Get MAC ID</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <form action="/OAS/student/updatemacid" method="post">
                         <div class="row">
                             <div class="col-md-12">
@@ -127,15 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        <button class="btn btn-primary" id="getmacid">Refresh MAC ID</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="row">
                             <div class="col-md-12 ">
