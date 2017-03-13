@@ -116,14 +116,20 @@
                                         <label>Current MAC ID</label>
                                         <br>
                                         <input type="text" name="macid" id="macid" class="form-control input-lg"/>
+                                        <br>
                                         <button id="refresh" name="refresh" class="btn btn-primary">Refresh MAC ID</button>
                                         <div class="row">
                                             <div class="col-md-12 ">
                                                 <div class="alert alert-danger" id="error" hidden="true">
-                                                    <strong>Error!</strong> Something went wrong! Try again                                                </div>
+                                                    <strong>Error!</strong> Something went wrong! Try again  
+                                                </div>
                                             </div> 
                                         </div>
-                                        <p><b>Note: If you update MAC ID your account will be deactivated!! Kindly contact class teacher to reactivate your account </b></p>
+                                        <div class="row">
+                                            <div class="col-md-12 ">
+                                                <p><b>Note: If you update MAC ID your account will be deactivated!! Kindly contact class teacher to reactivate your account </b></p>                                               </div>
+                                            </div> 
+                                        </div>
                                         <input type="submit" class="btn btn-primary" value="Update MAC ID"/>
                                     </div>
                                 </div>
