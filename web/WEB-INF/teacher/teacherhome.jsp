@@ -164,7 +164,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>Present Students</h4>
-                                    <table class="table table-hover" id="present">
+                                    <table class="table table-hover" >
                                         <thead>
                                             <tr>
                                                 <th>Roll No.</th>
@@ -172,7 +172,7 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="present">
                                             <c:forEach var="student" items="${requestScope.present}">
                                                 <tr id="${student.id}">
                                                     <td>${student.rollNumber}</td>
@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <h4>Absent Students</h4>
-                                    <table class="table table-hover" id="absent">
+                                    <table class="table table-hover" >
                                         <thead>
                                             <tr>
                                                 <th>Roll No.</th>
@@ -195,7 +195,7 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="absent">
                                             <c:forEach var="student" items="${requestScope.absent}">
                                                 <tr id="${student.id}">
                                                     <td>${student.rollNumber}</td>
@@ -222,6 +222,8 @@
     <![endif]-->
     <!--[if gte IE 9]><!-->
     <script src="/OAS/vendor/jquery/jquery.js"></script>
+    <script src="/OAS/scripts/teacherhome.js"></script>
+    <script src="/OAS/scripts/mustache.js"></script>
     <!--<![endif]-->
     <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
     <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

@@ -37,46 +37,52 @@ public class PutAttendance extends HttpServlet {
         Session session = Utils.openSession();
         session.getTransaction().begin();
         try {
-            int lectureId = Integer.parseInt(req.getParameter("lectureId"));
+            String lectureId = req.getParameter("lectureId");
             int studentId = Integer.parseInt(req.getParameter("studentId"));
             Boolean mark = Boolean.valueOf(req.getParameter("mark"));
             Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
             teacher = (Teacher) session.get(Teacher.class, teacher.getId());
             Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
             Student student = (Student) session.get(Student.class, studentId);
+            System.out.println(student + "   " + mark + "  " + lecture.getId());
             if (lecture.getTeaching().getTeacher().equals(teacher)) {
                 Date now = new Date();
                 Calendar cal = Calendar.getInstance();
+                cal.setTime(lecture.getDate());
                 cal.add(Calendar.HOUR, 3);
                 if (now.after(lecture.getDate()) && now.before(cal.getTime())) {
                     List<Attendance> attendance = session.createCriteria(Attendance.class)
                             .add(Restrictions.eq("lecture", lecture))
                             .add(Restrictions.eq("student", student))
-                            .setMaxResults(1)
                             .list();
                     if (attendance.size() > 0) {
                         attendance.get(0).setAttended(mark);
                         attendance.get(0).setMarkedByTeacher(true);
+                        session.update(attendance.get(0));
+                        System.out.println("marked already " + attendance.get(0).getStudent().toString());
                         out.print("true");
                     } else {
                         Attendance attend = new Attendance(lecture, student);
                         attend.setAttended(mark);
                         attend.setMarkedByTeacher(true);
                         session.save(attend);
+                        System.out.println("marked");
                         out.print("true");
                     }
                 } else {
-                    out.print("true");
+                    System.out.println("time out");
+                    out.print("false");
                 }
 
             } else {
                 out.print("false");
             }
-            session.getTransaction().rollback();
+            session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
+            e.printStackTrace();
             out.print("false");
         } finally {
             out.close();
@@ -85,7 +91,8 @@ public class PutAttendance extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //###
+        resp.getWriter().print("error");
+        resp.getWriter().close();
     }
 
 }

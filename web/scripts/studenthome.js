@@ -11,6 +11,8 @@ var markAttendance = function(){
 	var error = $("#error");
 	var success = $("#success");
 	success.hide();
+	error.hide();
+	$("#mark").prop( "disabled", true );
 	if(lectureId.length==8){
 		$.ajax({
 			url: "/OAS/student/ajax/markattendance",
@@ -26,16 +28,19 @@ var markAttendance = function(){
 					error.show();
 					success.hide();
 				}
+				$("#mark").prop( "disabled",false);
 			},
 			error: function(){
 				console.log("error");
 				error.show();
 				success.hide();
+				$("#mark").prop( "disabled",false);
 			}
 		});
 	}else{
 		success.hide();
 		error.show();
+		$("#mark").prop( "disabled",false);
 	}
 
 }

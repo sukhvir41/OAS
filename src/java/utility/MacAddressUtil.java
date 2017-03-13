@@ -159,7 +159,7 @@ public class MacAddressUtil {
         if (nif != null) {
             return getMacAddressImpl(destinationIpAddress);
         } else {
-            return null;
+            return "";
         }
 
     }

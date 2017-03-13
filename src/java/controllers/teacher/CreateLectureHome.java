@@ -5,6 +5,7 @@
  */
 package controllers.teacher;
 
+import entities.Attendance;
 import entities.Lecture;
 import entities.Student;
 import entities.Teacher;
@@ -65,18 +66,32 @@ public class CreateLectureHome extends HttpServlet {
                     lectures.remove(lecture);
                     req.setAttribute("active", lecture);
                     req.setAttribute("recent", lectures);
+
+                    List<Student> students = new ArrayList<>();
+                    lecture.getTeaching().getClassRoom()
+                            .getStudents()
+                            .stream()
+                            .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
+                            .forEach(e -> students.add(e));
+
                     List<Student> present = new ArrayList<>();
-                    if (lecture.getAttendance().size() > 0) {
-                        present = session.createCriteria(Student.class)
-                                .add(Restrictions.in("attendance", lecture.getAttendance().stream()
-                                        .filter(e -> e.isAttended())
-                                        .toArray()))
-                                .list();
-                    }
-                    List<Student> absent = lecture.getTeaching().getClassRoom().getStudents();
-                    absent.removeAll(present);
+                    lecture.getAttendance().stream()
+                            .filter(e -> e.isAttended())
+                            .forEach(e -> present.add(e.getStudent()));
+                    students.removeAll(present);
+
+//                    List<Student> present = new ArrayList<>();
+//                    if (lecture.getAttendance().size() > 0) {
+//                        present = session.createCriteria(Student.class)
+//                                .add(Restrictions.in("attendance", lecture.getAttendance().stream()
+//                                        .filter(e -> e.isAttended())
+//                                        .toArray()))
+//                                .list();
+//                    }
+//                    List<Student> absent = lecture.getTeaching().getClassRoom().getStudents();
+//                    absent.removeAll(present);
                     req.setAttribute("present", present);
-                    req.setAttribute("absent", absent);
+                    req.setAttribute("absent", students);
                 } else {
                     resp.sendRedirect("/OAS/error");
                 }
@@ -95,16 +110,35 @@ public class CreateLectureHome extends HttpServlet {
                     lectures.remove(lecture);
                     req.setAttribute("active", lecture);
                     req.setAttribute("recent", lectures);
+
+                    List<Student> students = new ArrayList<>();
+                    lecture.getTeaching().getClassRoom()
+                            .getStudents()
+                            .stream()
+                            .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
+                            .forEach(e -> students.add(e));
+
                     List<Student> present = new ArrayList<>();
-                    if (lecture.getAttendance().size() > 0) {
-                        present = session.createCriteria(Student.class)
-                                .add(Restrictions.in("attendance", lecture.getAttendance().stream().filter(e -> e.isAttended()).toArray()))
-                                .list();
-                    }
-                    List<Student> absent = lecture.getTeaching().getClassRoom().getStudents();
-                    absent.removeAll(present);
+                    lecture.getAttendance().stream()
+                            .filter(e -> e.isAttended())
+                            .forEach(e -> present.add(e.getStudent()));
+                    students.removeAll(present);
+//                    List<Student> present = new ArrayList<>();
+//                    if (lecture.getAttendance().size() > 0) {
+//                        List<Attendance> temp = new ArrayList<>();
+//                        lecture.getAttendance().stream()
+//                                .filter(e -> e.isAttended())
+//                                .forEach(e -> temp.add(e));
+//                        if (temp.size() > 0) {
+//                            present = session.createCriteria(Student.class)
+//                                    .add(Restrictions.in("attendance", temp))
+//                                    .list();
+//                        }
+//                    }
+//                    List<Student> absent = lecture.getTeaching().getClassRoom().getStudents();
+//                    absent.removeAll(present);
                     req.setAttribute("present", present);
-                    req.setAttribute("absent", absent);
+                    req.setAttribute("absent", students);
                 }
             }
             req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp").forward(req, resp);

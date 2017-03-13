@@ -50,7 +50,7 @@ public class CreateLecture extends HttpServlet {
                 future.setTime(lecture.getDate());
                 future.add(Calendar.MINUTE, 50 * lecture.getCount());
                 if (lecture.getTeaching().equals(teaching) && now.after(lecture.getDate()) && now.before(future.getTime())) {
-                    resp.sendRedirect("/OAS/teacher");
+                    resp.sendRedirect("/OAS/teacher?error=false");
                 } else {
                     Lecture lec = new Lecture(count, teaching);
                     lec.setId(lectureId);

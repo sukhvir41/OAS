@@ -56,8 +56,8 @@ public class MarkAttendance extends HttpServlet {
                     if (date.after(lectureStartDate) && date.before(cal.getTime())) {
                         MacAddressUtil mac = new MacAddressUtil();
                         String macAddr = mac.getMacAddress(req.getRemoteAddr());
-                        System.out.println(macAddr + "  " + student.getMacId());
-                        if (macAddr.equals(student.getMacId())) {
+                        System.out.println(macAddr.toLowerCase() + " : " + student.getMacId().toLowerCase() + "  : " + req.getRemoteAddr());
+                        if (macAddr.toLowerCase().equals(student.getMacId().toLowerCase())) {
                             Attendance attendance = new Attendance(lecture, student);
                             attendance.setAttended(true);
                             attendance.setLeave(false);

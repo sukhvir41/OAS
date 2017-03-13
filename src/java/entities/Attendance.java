@@ -45,6 +45,10 @@ public class Attendance implements Serializable {
     @JoinColumn(name = "student_fid")
     private Student student;
 
+    public Attendance() {
+    }
+
+    
     /**
      * this sets the attendance to true
      */
