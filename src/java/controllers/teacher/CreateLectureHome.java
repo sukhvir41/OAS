@@ -12,6 +12,7 @@ import entities.Teacher;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -73,13 +74,13 @@ public class CreateLectureHome extends HttpServlet {
                             .stream()
                             .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
                             .forEach(e -> students.add(e));
-
+                    Collections.sort(students);
                     List<Student> present = new ArrayList<>();
                     lecture.getAttendance().stream()
                             .filter(e -> e.isAttended())
                             .forEach(e -> present.add(e.getStudent()));
                     students.removeAll(present);
-
+                    Collections.sort(present);
 //                    List<Student> present = new ArrayList<>();
 //                    if (lecture.getAttendance().size() > 0) {
 //                        present = session.createCriteria(Student.class)
@@ -118,12 +119,13 @@ public class CreateLectureHome extends HttpServlet {
                             .stream()
                             .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
                             .forEach(e -> students.add(e));
-
+                    Collections.sort(students);
                     List<Student> present = new ArrayList<>();
                     lecture.getAttendance().stream()
                             .filter(e -> e.isAttended())
                             .forEach(e -> present.add(e.getStudent()));
                     students.removeAll(present);
+                    Collections.sort(present);
 //                    List<Student> present = new ArrayList<>();
 //                    if (lecture.getAttendance().size() > 0) {
 //                        List<Attendance> temp = new ArrayList<>();
@@ -140,6 +142,7 @@ public class CreateLectureHome extends HttpServlet {
 //                    absent.removeAll(present);
                     req.setAttribute("present", present);
                     req.setAttribute("absent", students);
+                    req.setAttribute("headcount", present.size());
                 }
             }
             req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp").forward(req, resp);

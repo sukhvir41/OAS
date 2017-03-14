@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "student")
-public class Student implements Serializable {
+public class Student implements Serializable, Comparable<Student> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +53,7 @@ public class Student implements Serializable {
 
     @Column(name = "unaccounted")
     private boolean unaccounted;
-    
+
     @ManyToOne
     @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
     private ClassRoom classRoom;
@@ -219,7 +219,12 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return fName +" "+ lName;
+        return fName + " " + lName;
+    }
+
+    @Override
+    public int compareTo(Student student) {
+        return this.getRollNumber() < student.getRollNumber() ? -1 : (this.getRollNumber() == student.getRollNumber()) ? 0 : 1;
     }
 
 }

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.servlet.ServletException;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -60,17 +64,71 @@ public class GenerateReport extends HttpServlet {
             System.out.println(req.getParameter("startdate"));
             start = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("startdate"));
             end = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("enddate"));
-
+            SimpleDateFormat dateForamt = new SimpleDateFormat("dd-mm-yyyy");
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
 
+            CellStyle style = workbook.createCellStyle();
+            style.setAlignment(HorizontalAlignment.LEFT);
+            Font font = workbook.createFont();
+            font.setBold(true);
+            CellStyle styleBold = workbook.createCellStyle();
+            styleBold.setFont(font);
             row = spreadsheet.createRow(0);
             c = row.createCell(0);
-            c.setCellValue(classRoom.getName() + " " + classRoom.getDivision() + "  " + classRoom.getCourse().getName()
-                    + " from " + start + " to " + end);
+            c.setCellValue("ClassRoom:");
+            c = row.createCell(1);
+            c.setCellValue(classRoom.getName());
+            c.setCellStyle(styleBold);
+            c = row.createCell(2);
+            c.setCellValue("Division:");
+            c = row.createCell(3);
+            c.setCellValue(classRoom.getDivision());
+            c.setCellStyle(styleBold);
+            c = row.createCell(4);
+            c.setCellValue("Semester:");
+            c = row.createCell(5);
+            c.setCellValue(classRoom.getSemister() + "");
+            c.setCellStyle(styleBold);
+            c = row.createCell(6);
+            c.setCellValue("Course:");
+            c = row.createCell(7);
+            c.setCellValue(classRoom.getCourse().getName());
+            c.setCellStyle(styleBold);
+            c = row.createCell(8);
+            c.setCellValue("From:" + dateForamt.format(start));
+            c.setCellStyle(styleBold);
+            c = row.createCell(9);
+            c.setCellValue("To:" + dateForamt.format(end));
+            c.setCellStyle(styleBold);
 
-            int rowNumber = 2;
-
+            row = spreadsheet.createRow(2);
+            c = row.createCell(0);
+            c.setCellValue("Roll Number");
+            c = row.createCell(1);
+            c.setCellValue("Name");
+            int cellnumberHead = 2;
+            int maxCellNumber = 0;
             for (Student student : classRoom.getStudents()) {
+                maxCellNumber = student.getSubjects().size() > maxCellNumber ? student.getSubjects().size() : maxCellNumber;
+            }
+            for (int i = cellnumberHead; i < maxCellNumber + 2; i++) {
+                c = row.createCell(cellnumberHead++);
+                c.setCellValue("Subject");
+                c = row.createCell(cellnumberHead++);
+                c.setCellValue("attended");
+                c = row.createCell(cellnumberHead++);
+                c.setCellValue("total");
+            }
+            c = row.createCell(cellnumberHead++);
+            c.setCellValue("leaves");
+            c = row.createCell(cellnumberHead++);
+            c.setCellValue("Overall total");
+            c = row.createCell(cellnumberHead++);
+            c.setCellValue("percentage");
+            int rowNumber = 4;
+            List<Student> students = classRoom.getStudents();
+            Collections.sort(students);
+            for (Student student : students) {
 
                 int cellNumber = 0;
                 int totalLectures = 0;
@@ -107,26 +165,43 @@ public class GenerateReport extends HttpServlet {
                             .map(attendance -> attendance.getLecture().getCount())
                             .reduce(0, (c, e) -> c + e);
 
-                    c = row.createCell(cellNumber);
-                    c.setCellValue(subject.getName() + " " + attendanceCount + "/" + lecturesCount);
-                    cellNumber++;
-                }
+                    c = row.createCell(cellNumber++);
+                    c.setCellValue(subject.getName());
 
+                    c = row.createCell(cellNumber++);
+                    c.setCellValue(attendanceCount);
+
+                    c = row.createCell(cellNumber++);
+                    c.setCellValue(lecturesCount);
+                    c.setCellStyle(style);
+
+                }
+                for (int i = 0; i < maxCellNumber - student.getSubjects().size(); i++) {
+                    c = row.createCell(cellNumber++);
+                    c.setCellValue("");
+                    c = row.createCell(cellNumber++);
+                    c.setCellValue("");
+                    c = row.createCell(cellNumber++);
+                    c.setCellValue("");
+                }
                 c = row.createCell(cellNumber);
-                c.setCellValue("leaves " + leaves);
+                c.setCellValue(leaves);
                 cellNumber++;
                 c = row.createCell(cellNumber);
-                c.setCellValue("total " + totalAttendance + "/" + totalLectures);
+                c.setCellValue(totalAttendance + "/" + totalLectures);
                 cellNumber++;
                 c = row.createCell(cellNumber);
                 if (totalLectures > 0) {
-                    c.setCellValue("percentage : " + ((totalAttendance / totalLectures) * 100));
+                    c.setCellValue((((double) totalAttendance / (double) totalLectures) * 100d) + "%");
                 } else {
-                    c.setCellValue("percentage : 100%");
+                    c.setCellValue("100%");
                 }
                 rowNumber++;
-            }
 
+            }
+            for (int i = 0; i < 30; i++) {
+                spreadsheet.autoSizeColumn(i);
+            }
             session.getTransaction().commit();
             session.close();
             workbook.write(out);

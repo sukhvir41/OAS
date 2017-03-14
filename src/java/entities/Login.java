@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import utility.BCrypt;
 import utility.Utils;
 
@@ -21,7 +22,8 @@ import utility.Utils;
  * @author sukhvir
  */
 @Entity
-@Table(name = "login")
+@Table(name = "login", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"email", "username"})})
 public class Login implements Serializable {
 
     @Id

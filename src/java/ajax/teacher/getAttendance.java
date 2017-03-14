@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,14 +48,13 @@ public class getAttendance extends HttpServlet {
                     .stream()
                     .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
                     .forEach(e -> students.add(e));
-
+            Collections.sort(students);
             List<Student> present = new ArrayList<>();
             lecture.getAttendance().stream()
                     .filter(e -> e.isAttended())
                     .forEach(e -> present.add(e.getStudent()));
             students.removeAll(present);
-            lecture.getAttendance().stream()
-                    .forEach(e -> System.out.println(e.getStudent().toString() + "  " + e.isAttended()));
+            Collections.sort(present);
 //            List<Student> absent = session.createCriteria(Student.class)
 //                    .add(Restrictions.eq("classRoom", lecture.getTeaching().getClassRoom()))
 //                    .addOrder(Order.asc("rollNumber"))
@@ -68,7 +68,6 @@ public class getAttendance extends HttpServlet {
 //                        .addOrder(Order.asc("rollNumber"))
 //                        .list();
 //            }
-            students.removeAll(present);
             JsonObject main = new JsonObject();
             JsonArray pjson = new JsonArray();
             JsonArray ajson = new JsonArray();
