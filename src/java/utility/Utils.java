@@ -81,12 +81,10 @@ public class Utils {
         Transport transport;
         String username, password;
         try {
-            //File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
-            //BufferedReader reader = new BufferedReader(new FileReader(file));
-            //password = reader.readLine();
-            //username = reader.readLine();
-            password = "adminoas@123";
-            username = "oasservice.mail";
+            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            password = reader.readLine();
+            username = reader.readLine();
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
