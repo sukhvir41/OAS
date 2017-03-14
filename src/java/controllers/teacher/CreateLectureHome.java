@@ -92,6 +92,7 @@ public class CreateLectureHome extends HttpServlet {
 //                    absent.removeAll(present);
                     req.setAttribute("present", present);
                     req.setAttribute("absent", students);
+                    req.setAttribute("headcount", present.size());
                 } else {
                     resp.sendRedirect("/OAS/error");
                 }

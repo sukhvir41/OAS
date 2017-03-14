@@ -82,7 +82,7 @@ var getAttendance = function () {
             success: function (data) {
                 presentTable.empty();
                 absentTable.empty();
-
+                $("#headconut").text(data.headcount);
                 $.each(data.present, function (i, student) {
 
                     presentTable.append((Mustache.render(present, student)));

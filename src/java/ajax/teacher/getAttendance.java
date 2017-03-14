@@ -78,6 +78,7 @@ public class getAttendance extends HttpServlet {
                     .forEach(e -> add(ajson, e));
             main.add("present", pjson);
             main.add("absent", ajson);
+            main.addProperty("headcount", present.size());
             Gson g = new Gson();
             out.print(g.toJson(main));
             session.getTransaction().commit();

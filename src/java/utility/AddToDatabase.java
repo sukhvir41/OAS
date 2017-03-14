@@ -39,11 +39,11 @@ public class AddToDatabase {
 
         Teaching t = new Teaching(teacher, classroom, subject);
         teacher.addTeaching(t);
-        Lecture lec = new Lecture(1, t);
-        lec.setDate(new Date());
-        lec.setId("lec1");
+//        Lecture lec = new Lecture(1, t);
+//        lec.setDate(new Date());
+//        lec.setId("lec1");
         session.save(t);
-        session.save(lec);
+        //session.save(lec);
 
         Login l = Login.createStudentLogin("asds", "asdasd", student.getId(), student.getEmail());
         Login l1 = Login.createTeacherLogin("asdasd", "adfdf", teacher.getId(), teacher.getEmail());

@@ -58,8 +58,8 @@ public class GenerateReport extends HttpServlet {
         try {
             int classroomId = Integer.parseInt(req.getParameter("classroom"));
             System.out.println(req.getParameter("startdate"));
-            //start = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("startdate"));
-            //end = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("enddate"));
+            start = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("startdate"));
+            end = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("enddate"));
 
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
 

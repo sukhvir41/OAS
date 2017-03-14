@@ -133,11 +133,11 @@
                                 </div>
                             </form>
                             <c:if test="${param.error =='true'}">
-                                <!-- SHOW THIS WHEN MARK ATTENDANCE ACTION FAILS -->
+                                <!-- SHOW THIS WHEN CREATING LECTURE ACTION FAILS -->
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <div class="alert alert-danger">
-                                            <strong>Error!</strong> Failed to put attendance
+                                            <strong>Error!</strong> Failed to create Lecture
                                         </div>
                                     </div> 
                                 </div> 
@@ -173,10 +173,10 @@
                                     <button class="btn btn-primary pull-right" id="refresh" name="refresh">Refresh</button>
                                 </div>
                             </div>
-                            <!-- SHOW THIS WHEN CREATING LECTURE ACTION FAILS -->
+                            <!-- SHOW THIS WHEN MARK ATTENDANCE ACTION FAILS -->
                             <div class="row">
-                                <div class="col-md-12 ">
-                                    <div class="alert alert-danger" id="###">
+                                <div class="col-md-4 ">
+                                    <div class="alert alert-danger" id="error" hidden>
                                         <strong>Error!</strong> Failed to put attendance
                                     </div>
                                 </div> 
@@ -187,7 +187,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Head Count:</label>
-                                            <input type="text" name="headcount" id="headcount"  required="true"  readonly="true" class="form-control input-lg"/>
+                                            <p id="headcount">${requestScope.headcount}</p>
                                         </div>
                                     </div>
                                 </div>

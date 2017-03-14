@@ -31,7 +31,7 @@ public class UpdateMAacId extends HttpServlet {
             Student student = (Student) req.getSession().getAttribute("student");
             student = (Student) session.get(Student.class, student.getId());
             if ((macId != null && !macId.equals("")) && !macId.equalsIgnoreCase(student.getMacId())) {
-                if (student.getMacId().equals("") || student.getMacId() == null) {
+                if (student.getMacId() == null) {
                     student.setMacId(macId);
                     resp.sendRedirect("/OAS/student/resetmacid");
                 } else {
