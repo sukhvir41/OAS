@@ -60,145 +60,145 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"/>
 
-                <div role="main" class="main">
-                    <section class="page-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="breadcrumb">
-                                        <li><a href="/OAS/admin">Home</a></li>
-                                        <li>Admins</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Admins</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
+            <div role="main" class="main">
+                <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form id="adminform" action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <label>Username</label>
-                                                        <input class="form-control input-lg" placeholder="Username" type="text" name="username" id="username" required="true">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="usernametakenerror">
-                                                        <strong>Error!</strong> Username already exists
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="usernameerror">
-                                                        <strong>Error!</strong> Username is empty
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="usernamelengtherror">
-                                                        <strong>Error!</strong> Username must be between 8 to 20 characters long
-                                                    </div>
-                                                </div> 
-                                            </div>
+                                <ul class="breadcrumb">
+                                    <li><a href="/OAS/admin">Home</a></li>
+                                    <li>Admins</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Admins</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <label>Email</label>
-                                                        <input class="form-control input-lg" placeholder="abc@xyz.com" type="text" name="email" id="email" required="true">
-                                                    </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form id="adminform" action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label>Username</label>
+                                                    <input class="form-control input-lg" placeholder="Username" type="text" name="username" id="username" required="true">
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="emailtakenerror">
-                                                        <strong>Error!</strong> Email id already exists
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="emailerror">
-                                                        <strong>Error!</strong> Wrong Email address!!
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <label>Password</label>
-                                                        <input class="form-control input-lg" type="Password" name="password" id="password" required="true">
-                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="usernametakenerror">
+                                                    <strong>Error!</strong> Username already exists
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="passwordshort">
-                                                        <strong>Error!</strong> Password must be between 8 to 40 characters long
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="passwordempty">
-                                                        <strong>Error!</strong> Password is empty!!!
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <label>Re Enter Password</label>
-                                                        <input class="form-control input-lg" type="Password" name="repassword" id="repassword" required="true">
-                                                    </div>
-                                                </div>  
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <div class="alert alert-danger" hidden id="passworderror">
-                                                        <strong>Error!</strong> Password does not match
-                                                    </div>
-                                                </div> 
-                                            </div>
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="usernameerror">
+                                                    <strong>Error!</strong> Username is empty
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="usernamelengtherror">
+                                                    <strong>Error!</strong> Username must be between 8 to 20 characters long
+                                                </div>
+                                            </div> 
+                                        </div>
 
-                                            <div class= "row">
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <input type="submit" value="Add" class="btn btn-primary" data-loading-text="Loading...">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label>Email</label>
+                                                    <input class="form-control input-lg" placeholder="abc@xyz.com" type="text" name="email" id="email" required="true">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="emailtakenerror">
+                                                    <strong>Error!</strong> Email id already exists
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="emailerror">
+                                                    <strong>Error!</strong> Wrong Email address!!
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label>Password</label>
+                                                    <input class="form-control input-lg" type="Password" name="password" id="password" required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="passwordshort">
+                                                    <strong>Error!</strong> Password must be between 8 to 40 characters long
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="passwordempty">
+                                                    <strong>Error!</strong> Password is empty!!!
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label>Re Enter Password</label>
+                                                    <input class="form-control input-lg" type="Password" name="repassword" id="repassword" required="true">
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="passworderror">
+                                                    <strong>Error!</strong> Password does not match
+                                                </div>
+                                            </div> 
+                                        </div>
+
+                                        <div class= "row">
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <input type="submit" value="Add" class="btn btn-primary" data-loading-text="Loading...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                                <hr class="tall">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Username</th>
-                                                    <th>Email</th>
-                                                    <th>Admin Type</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tablebody">
+                            </div>
+                            <hr class="tall">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Username</th>
+                                                <th>Email</th>
+                                                <th>Admin Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tablebody">
                                             <c:forEach var="admin" items="${requestScope.admins}">
                                                 <tr>
                                                     <td><a href="/OAS/admin/admins/detailadmin?username=${admin.username}">${admin.username}</a></td>

@@ -59,33 +59,33 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"/>
 
-                <div role="main" class="main">
-                    <section class="page-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="breadcrumb">
-                                        <li><a href="/OAS/admin">Home</a></li>
-                                        <li><a href="/OAS/admin/myaccount">My Account</a></li>
-                                        <li>Change Password</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Change Password</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
+            <div role="main" class="main">
+                <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="/OAS/admin/myaccount/changepasswordpost" method="Post">
-                                    <h4>Username : ${requestScope.username}</h4>
+                                <ul class="breadcrumb">
+                                    <li><a href="/OAS/admin">Home</a></li>
+                                    <li><a href="/OAS/admin/myaccount">My Account</a></li>
+                                    <li>Change Password</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Change Password</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/OAS/admin/myaccount/changepasswordpost" method="Post">
+                                <h4>Username : ${requestScope.username}</h4>
                                 <div class="row">
 
                                     <div class="form-group">

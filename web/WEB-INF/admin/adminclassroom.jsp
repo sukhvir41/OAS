@@ -66,71 +66,71 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"/>
 
-                <div role="main" class="main">
-                    <section class="page-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="breadcrumb">
-                                        <li><a href="/OAS/admin">Home</a></li>
-                                        <li>Class Rooms</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>CLass Rooms</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
+            <div role="main" class="main">
+                <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="/OAS/admin/classrooms/addclassroom" method="post">
-                                    <h4>Add Class Room</h4>
+                                <ul class="breadcrumb">
+                                    <li><a href="/OAS/admin">Home</a></li>
+                                    <li>Class Rooms</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>CLass Rooms</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label>Class Room Name</label>
-                                                <input class="form-control input-lg" placeholder="class room name" type="text" name="classroomname" id="classroomname" required="true">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/OAS/admin/classrooms/addclassroom" method="post">
+                                <h4>Add Class Room</h4>
 
-                                            </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Class Room Name</label>
+                                            <input class="form-control input-lg" placeholder="class room name" type="text" name="classroomname" id="classroomname" required="true">
+
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label>Division</label>
-                                                <input class="form-control input-lg" placeholder="A" type="text" name="division" id="division" required="true">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Division</label>
+                                            <input class="form-control input-lg" placeholder="A" type="text" name="division" id="division" required="true">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label>Semister</label>
-                                                <input class="form-control input-lg" placeholder="1" type="number" name="semister" id="semister" required="true">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Semister</label>
+                                            <input class="form-control input-lg" placeholder="1" type="number" name="semister" id="semister" required="true">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label>Minimmum Subjects</label>
-                                                <input class="form-control input-lg" placeholder="1" type="number" name="minimumsubjects" id="minimumsubjects" required="true">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Minimmum Subjects</label>
+                                            <input class="form-control input-lg" placeholder="1" type="number" name="minimumsubjects" id="minimumsubjects" required="true">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label>Course</label>
-                                                <select class="form-control mb-md"  id="course" name="courseId">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Course</label>
+                                            <select class="form-control mb-md"  id="course" name="courseId">
                                                 <c:forEach var="course" items="${requestScope.courses}">
                                                     <option value="${course.id}">${course.name}</option>
                                                 </c:forEach>

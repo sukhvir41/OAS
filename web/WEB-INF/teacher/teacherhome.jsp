@@ -174,14 +174,24 @@
                                 </div>
                             </div>
                             <!-- SHOW THIS WHEN CREATING LECTURE ACTION FAILS -->
-                                <div class="row">
-                                    <div class="col-md-12 ">
-                                        <div class="alert alert-danger" id="###">
-                                            <strong>Error!</strong> Failed to put attendance
-                                        </div>
-                                    </div> 
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="alert alert-danger" id="###">
+                                        <strong>Error!</strong> Failed to put attendance
+                                    </div>
                                 </div> 
+                            </div> 
                             <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Head Count:</label>
+                                            <input type="text" name="headcount" id="headcount"  required="true"  readonly="true" class="form-control input-lg"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>Present Students</h4>
