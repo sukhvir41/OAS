@@ -35,7 +35,7 @@ public class Attendance implements Serializable {
     private boolean attended;
 
     @Column(name = "leave")
-    private boolean leave;
+    private boolean leave = false;
 
     @ManyToOne
     @JoinColumn(name = "lecture_fid")
@@ -48,7 +48,6 @@ public class Attendance implements Serializable {
     public Attendance() {
     }
 
-    
     /**
      * this sets the attendance to true
      */

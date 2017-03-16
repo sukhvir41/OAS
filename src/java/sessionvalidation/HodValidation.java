@@ -25,7 +25,7 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebFilter(urlPatterns = {"/teacher/hod", "/teacher/hod/*"})
-public class HodValidator implements Filter {
+public class HodValidation implements Filter {
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

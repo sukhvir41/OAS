@@ -6,19 +6,15 @@
 package postback;
 
 import entities.ClassRoom;
-import entities.Course;
 import entities.Department;
 import entities.Login;
 import entities.Student;
 import entities.Subject;
 import entities.Teacher;
-import entities.UserType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

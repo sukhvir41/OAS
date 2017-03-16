@@ -5,7 +5,6 @@
  */
 package controllers.teacher;
 
-import entities.Attendance;
 import entities.Lecture;
 import entities.Student;
 import entities.Teacher;

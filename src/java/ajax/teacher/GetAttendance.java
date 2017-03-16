@@ -13,7 +13,6 @@ import entities.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -22,8 +21,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import utility.Utils;
 
 /**
@@ -31,7 +28,7 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/getattendance")
-public class getAttendance extends HttpServlet {
+public class GetAttendance extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

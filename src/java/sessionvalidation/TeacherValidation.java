@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  * @author sukhvir
  */
 @WebFilter(urlPatterns = {"/teacher/*", "/teacher"})
-public class TeacherValidator implements Filter {
+public class TeacherValidation implements Filter {
 
     HttpServletResponse resp;
     HttpServletRequest req;

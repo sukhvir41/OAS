@@ -26,7 +26,7 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/ajax/forgotpassword")
-public class forgotpassword extends HttpServlet {
+public class ForgotPassword extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

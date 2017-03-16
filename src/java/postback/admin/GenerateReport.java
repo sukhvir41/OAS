@@ -26,7 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -43,7 +46,7 @@ public class GenerateReport extends HttpServlet {
 
     private XSSFRow row;
     private Session session;
-    private XSSFCell c;
+    private XSSFCell cell;
     private Date start, end;
 
     @Override
@@ -69,62 +72,76 @@ public class GenerateReport extends HttpServlet {
 
             CellStyle style = workbook.createCellStyle();
             style.setAlignment(HorizontalAlignment.LEFT);
+            Font fontBold = workbook.createFont();
+            fontBold.setBold(true);
             Font font = workbook.createFont();
-            font.setBold(true);
-            CellStyle styleBold = workbook.createCellStyle();
-            styleBold.setFont(font);
+            font.setBold(false);
+            CellStyle styleCenter = workbook.createCellStyle();
+            styleCenter.setAlignment(HorizontalAlignment.CENTER);
+
             row = spreadsheet.createRow(0);
-            c = row.createCell(0);
-            c.setCellValue("ClassRoom:");
-            c = row.createCell(1);
-            c.setCellValue(classRoom.getName());
-            c.setCellStyle(styleBold);
-            c = row.createCell(2);
-            c.setCellValue("Division:");
-            c = row.createCell(3);
-            c.setCellValue(classRoom.getDivision());
-            c.setCellStyle(styleBold);
-            c = row.createCell(4);
-            c.setCellValue("Semester:");
-            c = row.createCell(5);
-            c.setCellValue(classRoom.getSemister() + "");
-            c.setCellStyle(styleBold);
-            c = row.createCell(6);
-            c.setCellValue("Course:");
-            c = row.createCell(7);
-            c.setCellValue(classRoom.getCourse().getName());
-            c.setCellStyle(styleBold);
-            c = row.createCell(8);
-            c.setCellValue("From:" + dateForamt.format(start));
-            c.setCellStyle(styleBold);
-            c = row.createCell(9);
-            c.setCellValue("To:" + dateForamt.format(end));
-            c.setCellStyle(styleBold);
+            spreadsheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 10));
+            cell = row.createCell(0);
+            XSSFRichTextString text = new XSSFRichTextString("Classroom: ");
+            text.append(classRoom.getName(), (XSSFFont) fontBold);
+            text.append("   Division:   ", (XSSFFont) font);
+            text.append(classRoom.getDivision(), (XSSFFont) fontBold);
+            text.append("   Semester:   ", (XSSFFont) font);
+            text.append(String.valueOf(classRoom.getSemister()), (XSSFFont) fontBold);
+            text.append("   Course:   ", (XSSFFont) font);
+            text.append(classRoom.getCourse().getName(), (XSSFFont) fontBold);
+            text.append("   From:   ", (XSSFFont) font);
+            text.append(dateForamt.format(start), (XSSFFont) fontBold);
+            text.append("   To:   ", (XSSFFont) font);
+            text.append(dateForamt.format(end), (XSSFFont) fontBold);
+            cell.setCellValue(text);
 
             row = spreadsheet.createRow(2);
-            c = row.createCell(0);
-            c.setCellValue("Roll Number");
-            c = row.createCell(1);
-            c.setCellValue("Name");
+            cell = row.createCell(0);
+            cell.setCellValue("Roll Number");
+            cell = row.createCell(1);
+            cell.setCellValue("Name");
             int cellnumberHead = 2;
             int maxCellNumber = 0;
             for (Student student : classRoom.getStudents()) {
                 maxCellNumber = student.getSubjects().size() > maxCellNumber ? student.getSubjects().size() : maxCellNumber;
             }
-            for (int i = cellnumberHead; i < maxCellNumber + 2; i++) {
-                c = row.createCell(cellnumberHead++);
-                c.setCellValue("Subject");
-                c = row.createCell(cellnumberHead++);
-                c.setCellValue("attended");
-                c = row.createCell(cellnumberHead++);
-                c.setCellValue("total");
+
+            row = spreadsheet.createRow(3);
+            XSSFCell cellTemp = row.createCell(1);
+            for (int i = 0; i < maxCellNumber; i++) {
+                spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, cellnumberHead, cellnumberHead + 2));
+                row = cell.getRow();
+                cell = row.createCell(cellnumberHead++);
+                cell.setCellValue("Subject");
+                cell.setCellStyle(styleCenter);
+                row = cellTemp.getRow();
+                cellTemp = row.createCell(cellnumberHead - 1);
+                cellTemp.setCellValue("Name");
+                cellTemp = row.createCell(cellnumberHead);
+                cellTemp.setCellValue("Attended");
+                cellTemp = row.createCell(cellnumberHead + 1);
+                cellTemp.setCellValue("Total");
+                row = cell.getRow();
+                cellnumberHead++;
+                cellnumberHead++;
             }
-            c = row.createCell(cellnumberHead++);
-            c.setCellValue("leaves");
-            c = row.createCell(cellnumberHead++);
-            c.setCellValue("Overall total");
-            c = row.createCell(cellnumberHead++);
-            c.setCellValue("percentage");
+
+            row = cell.getRow();
+            cell = row.createCell(cellnumberHead++);
+            cell.setCellValue("Leaves");
+            spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, cellnumberHead, cellnumberHead + 1));
+            cell = row.createCell(cellnumberHead++);
+            cell.setCellValue("Overall total");
+            cell.setCellStyle(styleCenter);
+            row = cellTemp.getRow();
+            cellTemp = row.createCell(cellnumberHead - 1);
+            cellTemp.setCellValue("Attended");
+            cellTemp = row.createCell(cellnumberHead);
+            cellTemp.setCellValue("Total");
+            row = cell.getRow();
+            cell = row.createCell(++cellnumberHead);
+            cell.setCellValue("Percentage");
             int rowNumber = 4;
             List<Student> students = classRoom.getStudents();
             Collections.sort(students);
@@ -136,11 +153,11 @@ public class GenerateReport extends HttpServlet {
                 int leaves = 0;
 
                 row = spreadsheet.createRow(rowNumber);
-                c = row.createCell(cellNumber);
-                c.setCellValue(student.getRollNumber());
+                cell = row.createCell(cellNumber);
+                cell.setCellValue(student.getRollNumber());
                 cellNumber++;
-                c = row.createCell(cellNumber);
-                c.setCellValue(student.getfName() + " " + student.getlName());
+                cell = row.createCell(cellNumber);
+                cell.setCellValue(student.getfName() + " " + student.getlName());
                 cellNumber++;
 
                 for (Subject subject : student.getSubjects()) {
@@ -165,41 +182,42 @@ public class GenerateReport extends HttpServlet {
                             .map(attendance -> attendance.getLecture().getCount())
                             .reduce(0, (c, e) -> c + e);
 
-                    c = row.createCell(cellNumber++);
-                    c.setCellValue(subject.getName());
+                    cell = row.createCell(cellNumber++);
+                    cell.setCellValue(subject.getName());
 
-                    c = row.createCell(cellNumber++);
-                    c.setCellValue(attendanceCount);
+                    cell = row.createCell(cellNumber++);
+                    cell.setCellValue(attendanceCount);
 
-                    c = row.createCell(cellNumber++);
-                    c.setCellValue(lecturesCount);
-                    c.setCellStyle(style);
+                    cell = row.createCell(cellNumber++);
+                    cell.setCellValue(lecturesCount);
+                    cell.setCellStyle(style);
 
                 }
                 for (int i = 0; i < maxCellNumber - student.getSubjects().size(); i++) {
-                    c = row.createCell(cellNumber++);
-                    c.setCellValue("");
-                    c = row.createCell(cellNumber++);
-                    c.setCellValue("");
-                    c = row.createCell(cellNumber++);
-                    c.setCellValue("");
+                    cell = row.createCell(cellNumber++);
+                    cell.setCellValue("");
+                    cell = row.createCell(cellNumber++);
+                    cell.setCellValue("");
+                    cell = row.createCell(cellNumber++);
+                    cell.setCellValue("");
                 }
-                c = row.createCell(cellNumber);
-                c.setCellValue(leaves);
-                cellNumber++;
-                c = row.createCell(cellNumber);
-                c.setCellValue(totalAttendance + "/" + totalLectures);
-                cellNumber++;
-                c = row.createCell(cellNumber);
+                cell = row.createCell(cellNumber++);
+                cell.setCellValue(leaves);
+                cell = row.createCell(cellNumber++);
+                cell.setCellValue(totalAttendance);
+                cell = row.createCell(cellNumber++);
+                cell.setCellValue(totalLectures);
+                cell.setCellStyle(style);
+                cell = row.createCell(cellNumber);
                 if (totalLectures > 0) {
-                    c.setCellValue((((double) totalAttendance / (double) totalLectures) * 100d) + "%");
+                    cell.setCellValue((((double) totalAttendance / (double) totalLectures) * 100d) + "%");
                 } else {
-                    c.setCellValue("100%");
+                    cell.setCellValue("100%");
                 }
                 rowNumber++;
 
             }
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i <= cellnumberHead; i++) {
                 spreadsheet.autoSizeColumn(i);
             }
             session.getTransaction().commit();
@@ -219,11 +237,14 @@ public class GenerateReport extends HttpServlet {
                 .add(Restrictions.eq("classRoom", classRoom))
                 .add(Restrictions.eq("subject", subject))
                 .list();
-
-        return session.createCriteria(Lecture.class)
-                .add(Restrictions.in("teaching", teaching))
-                //.add(Restrictions.between("date", start, end))
-                .list();
+        if (teaching.size() > 0) {
+            return session.createCriteria(Lecture.class)
+                    .add(Restrictions.in("teaching", teaching))
+                    //.add(Restrictions.between("date", start, end))
+                    .list();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     private List<Attendance> getStudentAttendance(Student student, List<Lecture> lectures) {

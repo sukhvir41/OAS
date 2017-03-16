@@ -20,7 +20,7 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/student/updatemacid")
-public class UpdateMAacId extends HttpServlet {
+public class UpdateMaacId extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

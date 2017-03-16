@@ -36,12 +36,13 @@ public class Course implements Serializable {
     @Column(name = "co_name")
     private String name;
 
+    //remove
     @Column(name = "start_date")
     private Date start;
-
+    //remove
     @Column(name = "end_date")
     private Date end;
-
+    //remove
     @Column(name = "started")
     private boolean started = false;
 

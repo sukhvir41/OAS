@@ -42,7 +42,7 @@ public class Teaching implements Serializable {
     @ManyToOne
     @JoinColumn(name = "subject_fid")
     private Subject subject;
-
+    
     @OneToMany(mappedBy = "teaching")
     List<Lecture> lectures = new ArrayList<>();
 
