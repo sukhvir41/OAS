@@ -9,6 +9,13 @@
     <div class="header-body" style=" min-height: 90px;">
         <div class="header-container container">
             <div class="header-row">
+            <div class="header-column">
+                        <div class="header-logo">
+                            <a href="/OAS/teacher">
+                            <img alt="Porto" width="111" height="54" d src="/OAS/image/logo.png">
+                            </a>
+                        </div>
+                    </div>
                 <div class="header-column">
                     <div class="header-nav">
                         <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">

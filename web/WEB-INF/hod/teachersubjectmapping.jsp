@@ -114,12 +114,10 @@
                                             <c:forEach var="teacher" items="${requestScope.teachers}">
                                                 <div id="${teacher.id}" class="tab-pane active">
                                                     <ul id="${teacher.id}" class="list list-icons list-icons-sm sort connectedSortable">
-                                                        <c:forEach var="teaching" items="${teacher.teaches}">
-                                                            <li value="${teaching.id}" class="active"><i class="fa fa-caret-right"></i>
+                                                        <c:forEach var="teaching" items="${teacher.teaches}"> 
                                                                 <c:if test="${teaching.classRoom.course.department.id eq requestScope.department.id}">
-                                                                    ${teaching}
+                                                                   <li value="${teaching.id}" class="active"><i class="fa fa-caret-right"></i> ${teaching}</li>
                                                                 </c:if>
-                                                            </li>
                                                         </c:forEach>
                                                     </ul>
                                                 </div>    
@@ -235,6 +233,7 @@
                        }else{
                         console.log("false")
                        }
+                       window.location.replace("/OAS/teacher/hod/teachersubjectmapping");
                     }
                 });
 

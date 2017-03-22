@@ -170,7 +170,7 @@
                                     </c:choose>
                                 </div>
                                 <div class="col-md-4">
-                                    <button class="btn btn-primary pull-right" id="refresh" name="refresh">Refresh</button>
+                                    <button class="btn btn-primary pull-right action " id="refresh" name="refresh">Refresh</button>
                                 </div>
                             </div>
                             <!-- SHOW THIS WHEN MARK ATTENDANCE ACTION FAILS -->

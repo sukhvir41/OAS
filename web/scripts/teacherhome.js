@@ -72,6 +72,7 @@ var getAttendance = function () {
     var present = '<tr id="{{id}}"><td>{{rollNumber}}</td><td>{{name}}</td><td><button class="btn btn-danger action" id="{{id}}" value="{{id}}">Absent</button></td></tr>';
     var absent = '<tr id="{{id}}"><td>{{rollNumber}}</td><td>{{name}}</td><td><button class="btn btn-success action" id="{{id}}" value="{{id}}">Present</button></td></tr>';
     if (lectureId.length > 0) {
+       $(".action").prop("disabled", true);
         $.ajax({
             url: "/OAS/teacher/getattendance",
             dataType: "json",
@@ -82,23 +83,24 @@ var getAttendance = function () {
             success: function (data) {
                 presentTable.empty();
                 absentTable.empty();
-                $("#headconut").text(data.headcount);
+                console.log(data.headcount);
+                $("#headcount").text(''+data.headcount);
                 $.each(data.present, function (i, student) {
-
                     presentTable.append((Mustache.render(present, student)));
                 });
 
                 $.each(data.absent, function (i, student) {
-
                     absentTable.append((Mustache.render(absent, student)));
                 });
                 error.hide();
                 $(".action").click(function () {
                     putAttendance($(this))
                 });
+                $(".action").prop("disabled", false);
             },
             error: function () {
                 error.show();
+                $(".action").prop("disabled", false);
             }
         });
     }
