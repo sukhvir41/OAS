@@ -40,14 +40,16 @@ public class TeacherValidation implements Filter {
         resp = (HttpServletResponse) response;
         req = (HttpServletRequest) request;
         session = req.getSession();
-        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-        resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-        resp.setDateHeader("Expires", 0);
         try {
-            if ((boolean) session.getAttribute("accept") == true && session.getAttribute("type").equals("teacher")) {
+            System.out.println(session.getAttribute("accept"));
+            System.out.println(session.getAttribute("type"));
+            if ((boolean) session.getAttribute("accept") && ((String) session.getAttribute("type")).equals("teacher")) {
                 Teacher teacher = (Teacher) session.getAttribute("teacher");
                 if (teacher.isVerified()) {
-                    checkCookie();
+
+                    resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+                    resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+                    resp.setDateHeader("Expires", 0);
                     chain.doFilter(request, response);
                 } else {
                     resp.sendRedirect("/OAS/notverified.jsp");
@@ -56,6 +58,8 @@ public class TeacherValidation implements Filter {
                 resp.sendRedirect("/OAS/login");
             }
         } catch (Exception e) {
+            System.out.println("body error");
+            e.printStackTrace();
             resp.sendRedirect("/OAS/login");
         }
     }
@@ -64,34 +68,4 @@ public class TeacherValidation implements Filter {
     public void destroy() {
 
     }
-
-    private void checkCookie() {
-        try {
-            if ((boolean) session.getAttribute("extenedCookie")) {
-                session.setAttribute("extenedCookie", false);
-                Cookie id = null, token = null;
-
-                for (Cookie cookie : req.getCookies()) {
-                    switch (cookie.getName()) {
-                        case "sid":
-                            id = cookie;
-                            break;
-                        case "stoken":
-                            token = cookie;
-                            break;
-                    }
-                }
-
-                id.setMaxAge(864000);
-                token.setMaxAge(864000);
-                resp.addCookie(id);
-                resp.addCookie(token);
-            }
-
-        } catch (Exception e) {
-            System.out.println("error in extend cookie");
-
-        }
-    }
-
 }

@@ -16,9 +16,11 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -147,6 +149,7 @@ public class CreateLectureHome extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp").forward(req, resp);
             session.getTransaction().commit();
             session.close();
+            extendCookie(req, resp);
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
@@ -156,4 +159,32 @@ public class CreateLectureHome extends HttpServlet {
 
     }
 
+    private void extendCookie(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        try {
+            if ((boolean) session.getAttribute("extenedCookie")) {
+                session.setAttribute("extenedCookie", false);
+                Cookie id = null, token = null;
+
+                for (Cookie cookie : req.getCookies()) {
+                    switch (cookie.getName()) {
+                        case "sid":
+                            id = cookie;
+                            break;
+                        case "stoken":
+                            token = cookie;
+                            break;
+                    }
+                }
+
+                id.setMaxAge(864000);
+                token.setMaxAge(864000);
+                resp.addCookie(id);
+                resp.addCookie(token);
+            }
+
+        } catch (Exception e) {
+            System.out.println("error in extend cookie");
+        }
+    }
 }
