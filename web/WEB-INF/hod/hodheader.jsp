@@ -84,7 +84,7 @@
                                         <a href="/OAS/teacher/hod/teachersubjectmapping">
                                             Teacher - Subject Mapping
                                         </a>
-                                    </li>
+                                    </li>   
                                     <c:choose>
                                         <c:when test="${sessionScope.teacher.hod==true}" >
                                             <li class="dropdown">

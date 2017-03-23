@@ -134,7 +134,7 @@
                                             <button class="btn btn-success" value="${requestScope.student.id}" href="/OAS/admin/students/deverifystudent?studentId=${requestScope.student.id}">Verify</button>
                                         </c:otherwise>
                                     </c:choose>
-                                    <a class="btn btn-primary" href="/OAS/admin/students/Grantleave?studentId=${requestScope.student.id}">Grant Leave</a>
+                                    <a class="btn btn-primary" href="/OAS/admin/students/grantleave?studentId=${requestScope.student.id}">Grant Leave</a>
                                     <c:if test="${requestScope.student.unaccounted==true}">
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
                                     </c:if>

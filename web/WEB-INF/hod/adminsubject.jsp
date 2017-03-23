@@ -1,9 +1,3 @@
-<%-- 
-    Document   : adminclassroom
-    Created on : Jan 12, 2017, 12:07:24 AM
-    Author     : sukhvir
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -12,9 +6,9 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Class Rooms - HOD</title>	
+        <title>Subjects - Admin</title>  
 
 
         <!-- Mobile Metas -->
@@ -66,55 +60,110 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
 
-            <div role="main" class="main">
-                <section class="page-header">
+                <div role="main" class="main">
+                    <section class="page-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                        <li><a href="/OAS/admin">Home</a></li>
+                                        <li>Subjects</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Subjects</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
-                                <ul class="breadcrumb">
-                                    <li><a href="/OAS/hod">Home</a></li>
-                                    <li>Class Rooms</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1>CLass Rooms</h1>
-                            </div>
+                            <div class="col-md-8">
+                                <form action="/OAS/admin/subjects/addsubject" method="post">
+                                    <h4>Add Subject</h4>
+                                    <input type="hidden" name="courseId" value="${requestScope.course.id}">
+                                <input type="hidden" name="from" value="">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            <label>Subject Name</label>
+                                            <input class="form-control input-lg" placeholder="subject name" type="text" name="subjectname" id="subjectname" required="true">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            <label>Elective</label>
+                                            <span class="checkbox">
+                                                <label class="checkbox"><input type="checkbox" name="elective" value="true">Elective</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            <label>Course</label>
+                                            <select class="form-control mb-md"  id="course" name="course">
+                                                <c:forEach var="course" items="${requestScope.courses}">
+                                                    <option value="${course.id}">${course.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            <label>Class Rooms</label>
+                                            <div id="class">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class= "row">
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            <input type="submit" value="Add" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </section>
-
-                <div class="container">
+                    <hr class="tall">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <!--ClassRooms-->
-                                    <h4>Class Rooms</h4>
+                                <div class="col-md-6">
+                                    <!--Subject-->
+                                    <h4>Subjects</h4>
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Divison</th>
-                                                <th>Semister</th>
                                                 <th>Course</th>
-                                                <th>MiniSubjects</th>
+                                                <th>Elective</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
-                                            <c:forEach var="classRoom" items="${requestScope.classrooms}">
+                                            <c:forEach var="subject" items="${requestScope.subjects}">
                                                 <tr>
-                                                    <td><a name="${classRoom.id}"></a>${classRoom.id}</td>
-                                                    <td><a href="/OAS/hod/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom.name}</a></td>
-                                                    <td>${classRoom.division}</td>
-                                                    <td>${classRoom.semister}</td>
-                                                    <td><a href="/OAS/hod/courses/detailcourse?courseId=${classRoom.course.id}">${classRoom.course.name}</a></td>
-                                                    <td>${classRoom.minimumSubjects}</td>
+                                                    <td><a name="${subject.id}"></a>${subject.id}</td>
+                                                    <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
+                                                    <td>${subject.course.name}</td>
+                                                    <td>${subject.elective}</td>
+                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/subjects/editsubject?subjectId=${subject.id}&from=subjects">Edit</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -132,6 +181,8 @@
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
+        <script src="/OAS/scripts/adminsubject.js"></script>
+        <script src="/OAS/scripts/mustache.js"></script>
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

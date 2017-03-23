@@ -1,9 +1,3 @@
-<%-- 
-    Document   : adminclassroom
-    Created on : Jan 12, 2017, 12:07:24 AM
-    Author     : sukhvir
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -12,10 +6,10 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Class Rooms - HOD</title>	
-
+        <title>Students - Admin</title> 
+        .
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -53,35 +47,24 @@
 
         <!-- Head Libs -->
         <script src="/OAS/vendor/modernizr/modernizr.js"></script>
-
-        <!--[if IE]>
-                <link rel="stylesheet" href="css/ie.css">
-                <![endif]-->
-
-        <!--[if lte IE 8]>
-                <script src="vendor/respond/respond.js"></script>
-                <script src="vendor/excanvas/excanvas.js"></script>
-                <![endif]-->
-
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
-
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"/>
             <div role="main" class="main">
                 <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li><a href="/OAS/hod">Home</a></li>
-                                    <li>Class Rooms</li>
+                                    <li><a href="/OAS/admin">Home</a></li>
+                                    <li>Students</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>CLass Rooms</h1>
+                                <h1>Students</h1>
                             </div>
                         </div>
                     </div>
@@ -92,46 +75,105 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!--ClassRooms-->
-                                    <h4>Class Rooms</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Courses</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="course" name="courseId">
+                                                <c:forEach var="course" items="${requestScope.courses}">
+                                                    <option value="${course.id}">${course.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <h4>Class Room</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="classroom" name="classroomId">
+
+                                            </select>
+                                            <h4>Subject</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
+
+                                            </select>
+                                            <h4>Filter</h4>
+                                            <div class="radio">
+                                                <label>
+                                                    <input id="filter" name="filter" value="all" checked type="radio">
+                                                    All
+                                                </label>&nbsp; &nbsp;
+                                                <label>
+                                                    <input id="filter" name="filter" value="true" type="radio">
+                                                    Verified
+                                                </label>&nbsp; &nbsp;
+                                                <label>
+                                                    <input id="filter" name="filter" value="false" type="radio">
+                                                    Not Verified
+                                                </label>&nbsp; &nbsp;
+                                            </div>
+                                            <button class="btn btn-primary" id ="search">Search</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h4>Search By Name</h4>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-8">
+                                                        <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
+                                                        <br>
+                                                        <button class="btn btn-primary" id ="searchname">Search</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                <div class="col-md-4">
+                                    <div class="alert alert-danger" hidden id="error">
+                                        <strong>Failure!</strong> Error in getting result
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                <div class="col-md-4">
+                                    <div class="alert alert-success" hidden id="success">
+                                        <strong>Success!</strong> Results below
+                                    </div>
+                                </div> 
+                            </div>
+                            <hr class="tall">
+                            <div class="row">
+                                <div class="col-md-12">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Divison</th>
-                                                <th>Semister</th>
-                                                <th>Course</th>
-                                                <th>MiniSubjects</th>
+                                                <th>Number</th>
+                                                <th>Email</th>
+                                                <th>Class Room</th>
+                                                <th>Roll Number</th>
+                                                <th>Subjects</th>
+                                                <th>Verified</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
+                                        <tbody id="tablebody">
 
-                                        <tbody>
-                                            <c:forEach var="classRoom" items="${requestScope.classrooms}">
-                                                <tr>
-                                                    <td><a name="${classRoom.id}"></a>${classRoom.id}</td>
-                                                    <td><a href="/OAS/hod/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom.name}</a></td>
-                                                    <td>${classRoom.division}</td>
-                                                    <td>${classRoom.semister}</td>
-                                                    <td><a href="/OAS/hod/courses/detailcourse?courseId=${classRoom.course.id}">${classRoom.course.name}</a></td>
-                                                    <td>${classRoom.minimumSubjects}</td>
-                                                </tr>
-                                            </c:forEach>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div>        
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Vendor -->
-        <!--[if lt IE 9]>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <![endif]-->
+        
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
+        <script src="/OAS/scripts/adminsearchstudent.js"></script>
+        <script src="/OAS/scripts/mustache.js"></script>
+
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -172,22 +214,5 @@
 
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
-
-        <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-        <script type="text/javascript">
-        
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-12345678-1']);
-                _gaq.push(['_trackPageview']);
-        
-                (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                })();
-        
-        </script>
-        -->
-
     </body>
 </html>

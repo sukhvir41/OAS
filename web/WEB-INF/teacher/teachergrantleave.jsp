@@ -1,7 +1,7 @@
 <%-- 
-    Document   : adminclassroom
-    Created on : Jan 12, 2017, 12:07:24 AM
-    Author     : sukhvir
+    Document   : teachergrantleave
+    Created on : 24 Mar, 2017, 12:04:47 AM
+    Author     : icr
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,16 +12,19 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Class Rooms - HOD</title>	
+        <title>Grant Leave - Class Teacher</title>   
 
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -66,7 +69,7 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp"></jsp:include>
 
             <div role="main" class="main">
                 <section class="page-header">
@@ -74,14 +77,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li><a href="/OAS/hod">Home</a></li>
-                                    <li>Class Rooms</li>
+                                    <li><a href="/OAS/teacher">Home</a></li>
+                                    <li><a href="/OAS/teacher/classteacher">Class Teacher</a></li>
+                                    <li>Grant Leave</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>CLass Rooms</h1>
+                                <h1>Grant Leave</h1>
                             </div>
                         </div>
                     </div>
@@ -92,33 +96,30 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!--ClassRooms-->
-                                    <h4>Class Rooms</h4>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Divison</th>
-                                                <th>Semister</th>
-                                                <th>Course</th>
-                                                <th>MiniSubjects</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <c:forEach var="classRoom" items="${requestScope.classrooms}">
-                                                <tr>
-                                                    <td><a name="${classRoom.id}"></a>${classRoom.id}</td>
-                                                    <td><a href="/OAS/hod/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom.name}</a></td>
-                                                    <td>${classRoom.division}</td>
-                                                    <td>${classRoom.semister}</td>
-                                                    <td><a href="/OAS/hod/courses/detailcourse?courseId=${classRoom.course.id}">${classRoom.course.name}</a></td>
-                                                    <td>${classRoom.minimumSubjects}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                    <h2>Name : ${requestScope.student}</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <dl>
+                                        <dt>Roll No.</dt>
+                                        <dd>${requestScope.student.rollNumber}</dd>
+                                        <dt>Classroom</dt>
+                                        <dd>${requestScope.student.classRoom}</dd>
+                                    </dl>
+                                    <form action="/OAS/tescher/classteacher/grantleavepost" method="post">
+                                        <div class="row">
+                                    		<div class="form-group">
+                                    			<div class="col-md-4">
+                                    				<label>Leave Start Date</label><br/>
+                                    				<input type="date" class="form-control input-lg" name="startdate" id="startdate"><br/>
+                                    				<label>Leave End Date</label><br/>
+                                    				<input type="date" class="form-control input-lg" name="enddate" id="enddate"><br/>
+                                    				<input type="submit" class="btn btn-primary push-bottom" value="Grant Leave">
+                                    			</div>
+                                    		</div>
+                                    	</div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -191,3 +192,4 @@
 
     </body>
 </html>
+
