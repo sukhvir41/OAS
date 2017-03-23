@@ -25,9 +25,8 @@ public abstract class AjaxController extends Controller {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       this.onError(req, resp);
+    final protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.onError(req, resp);
     }
 
-    
 }

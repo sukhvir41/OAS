@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class PostBackController extends Controller{
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    final protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        super.onError(req, resp);
     }
 

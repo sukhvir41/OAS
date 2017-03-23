@@ -8,7 +8,6 @@ package controllers.classteacher;
 import entities.Student;
 import entities.Teacher;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,18 +19,21 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet("/teacher/classteacher")
-public class ClassTeacherHome extends Controller {
-
+@WebServlet(urlPatterns = "/teacher/classteacher/grantleave")
+public class GrantLeave extends Controller {
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+        int studentId = Integer.parseInt(req.getParameter("studentId"));
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
-        req.setAttribute("classroom", teacher.getClassRoom());
-        List<Student> students = teacher.getClassRoom().getStudents();
-        req.setAttribute("students",students);
-        req.getRequestDispatcher("/WEB-INF/classteacher/classteacherhome.jsp").forward(req, resp);
-
+        Student student = (Student) session.get(Student.class, studentId);
+        if (student.getClassRoom().getId() == teacher.getClassRoom().getId()) {
+            req.setAttribute("student", student);
+            req.getRequestDispatcher("/WEB-INF/classteacher/teachergrantleave.jsp").forward(req, resp);
+        } else {
+            resp.sendRedirect("/OAS/accessdenied.jsp");
+        }
     }
-
+    
 }

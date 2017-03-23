@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-md-12 center">
                             <h1 class="mb-sm small">Error</h1>
-                            <p class="lead">Oops! an error occured. <br>Contact adminstrative staff for any problem</p>
+                            <p class="lead">Oops! an error occurred <br>Contact administrative staff for any problem</p>
                         </div>
                     </div>
                     <div class="row">

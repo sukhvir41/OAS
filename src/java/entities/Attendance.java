@@ -63,6 +63,13 @@ public class Attendance implements Serializable {
         addStudent(student);
     }
 
+    public Attendance(boolean attended, Lecture lecture, Student student, boolean markedByTeacher) {
+        this.attended = attended;
+        addLecture(lecture);
+        addStudent(student);
+        this.markedByTeacher = markedByTeacher;
+    }
+
     /**
      * this methods adds the student to attendance and vice versa
      */

@@ -21,7 +21,7 @@ import org.hibernate.Session;
 public abstract class Controller extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    final protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doProcess(req, resp);
     }
 
@@ -34,7 +34,7 @@ public abstract class Controller extends HttpServlet {
         resp.sendRedirect("/OAS/error");
     }
 
-    private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    final private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = Utils.openSession();
         session.beginTransaction();
         PrintWriter out = resp.getWriter();
