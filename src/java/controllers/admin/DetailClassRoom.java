@@ -43,7 +43,7 @@ public class DetailClassRoom extends HttpServlet {
         session.beginTransaction();
         classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
         req.setAttribute("classroom", classRoom);
-        req.getRequestDispatcher("/WEB-INF/admin/detailclassroom.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/detailclassroom.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
     }

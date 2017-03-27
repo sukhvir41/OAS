@@ -40,7 +40,7 @@ public class EditCourse extends HttpServlet {
         session.getTransaction().commit();
         session.close();
         req.setAttribute("course", course);
-        req.getRequestDispatcher("/WEB-INF/admin/editcourse.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/editcourse.jsp").include(req, resp);
     }
 
 }

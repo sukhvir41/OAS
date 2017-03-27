@@ -55,7 +55,7 @@ public class DetailDepartment extends HttpServlet {
         req.setAttribute("hod", hod);
         req.setAttribute("teachers", teachers);
         req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/admin/detaildepartment.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/detaildepartment.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
     }

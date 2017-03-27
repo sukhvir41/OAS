@@ -157,7 +157,7 @@ public class GenerateReport extends HttpServlet {
                 cell.setCellValue(student.getRollNumber());
                 cellNumber++;
                 cell = row.createCell(cellNumber);
-                cell.setCellValue(student.getfName() + " " + student.getlName());
+                cell.setCellValue(student.toString());
                 cellNumber++;
 
                 for (Subject subject : student.getSubjects()) {

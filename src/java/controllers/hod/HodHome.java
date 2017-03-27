@@ -54,7 +54,7 @@ public class HodHome extends HttpServlet {
                     .list();
             req.setAttribute("classRooms", classRooms);
             req.setAttribute("teachers", department.getTeachers());
-            req.getRequestDispatcher("/WEB-INF/hod/hodhome.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/hod/hodhome.jsp").include(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {

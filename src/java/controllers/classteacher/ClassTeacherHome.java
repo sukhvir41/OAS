@@ -30,7 +30,7 @@ public class ClassTeacherHome extends Controller {
         req.setAttribute("classroom", teacher.getClassRoom());
         List<Student> students = teacher.getClassRoom().getStudents();
         req.setAttribute("students",students);
-        req.getRequestDispatcher("/WEB-INF/classteacher/classteacherhome.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/classteacher/classteacherhome.jsp").include(req, resp);
 
     }
 

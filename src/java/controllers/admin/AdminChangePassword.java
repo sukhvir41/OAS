@@ -33,7 +33,7 @@ public class AdminChangePassword extends HttpServlet {
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("username", ((Login) req.getSession().getAttribute("admin")).getUsername());
-        req.getRequestDispatcher("/WEB-INF/admin/adminchangepassword.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminchangepassword.jsp").include(req, resp);
     }
 
 }

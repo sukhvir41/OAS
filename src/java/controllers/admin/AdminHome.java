@@ -11,42 +11,36 @@ import entities.Department;
 import entities.Subject;
 import utility.Utils;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.Controller;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin")
-public class AdminHome extends HttpServlet {
+public class AdminHome extends Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-
+    public boolean showErrorLog() {
+        return true; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-
-    }
-
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         List<Department> departments;
         List<Course> courses;
         List<ClassRoom> classRooms;
         List<Subject> subjects;
-        Session session = Utils.openSession();
-        session.beginTransaction();
+
         departments = (List<Department>) session.createQuery("from Department").list();
         courses = (List<Course>) session.createQuery("from Course").list();
         classRooms = (List<ClassRoom>) session.createQuery("from ClassRoom").list();
@@ -55,9 +49,8 @@ public class AdminHome extends HttpServlet {
         req.setAttribute("courses", courses);
         req.setAttribute("classRooms", classRooms);
         req.setAttribute("subjects", subjects);
-        session.getTransaction().commit();
-        session.close();
-        req.getRequestDispatcher("WEB-INF/admin/adminhome.jsp").forward(req, resp);
+
+        req.getRequestDispatcher("WEB-INF/admin/adminhome.jsp").include(req, resp);
         extendCookie(req, resp);
     }
 
@@ -89,5 +82,4 @@ public class AdminHome extends HttpServlet {
             System.out.println("error in extend cookie");
         }
     }
-
 }

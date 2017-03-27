@@ -109,7 +109,7 @@
                                                     <label>Select Hod</label>
                                                     <select class="form-control input-lg mb-md"  name="teacherId" id="departmenthod">
                                                         <c:forEach var="teacher" items="${requestScope.department.teachers}">
-                                                            <option value="${teacher.id}">${teacher.fName} ${teacher.lName}</option>
+                                                            <option value="${teacher.id}">${teacher}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>

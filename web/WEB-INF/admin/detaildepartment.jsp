@@ -109,7 +109,7 @@
                                                         <dd>No Hod</dd>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <dd>${requestScope.department.hod.fName} ${requestScope.department.hod.lName}</dd>
+                                                        <dd>${requestScope.department.hod}</dd>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </dl>
@@ -203,7 +203,7 @@
                                                     <c:forEach var="teacher" items="${requestScope.teachers}">
                                                         <tr>
                                                             <td>${teacher.id}</td>
-                                                            <td><a href="#">${teacher.fName} ${teacher.lName}</a></td>
+                                                            <td><a href="#">${teacher}</a></td>
                                                             <td>${teacher.email}</td>
                                                             <td>${teacher.verified}</td>
                                                         </tr>

@@ -34,7 +34,7 @@ import org.hibernate.cfg.Configuration;
  */
 public class Utils {
 
-    private static SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory = null;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
 
     private Utils() throws Exception {
@@ -58,8 +58,11 @@ public class Utils {
     }
 
     public static void closeSesssioFactory() {
-        if (sessionFactory != null) {
+        try {
             sessionFactory.close();
+            System.out.println("session factory closed!!!!!!!!!!!!!!!!!!!!!!!!!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

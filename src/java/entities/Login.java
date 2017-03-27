@@ -14,6 +14,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import utility.BCrypt;
 import utility.Utils;
 
@@ -28,37 +31,47 @@ public class Login implements Serializable {
 
     @Id
     @Column(name = "username")
+    @Getter @Setter
     private String username;
 
     @Column(name = "password")
+    @Getter(value = AccessLevel.PRIVATE)
     private String password;
 
     @Column(name = "type")
+    @Getter
     private String type;
 
     @Column(name = "ids")
+    @Getter @Setter
     private int id;
 
     @Column(name = "email")
+    @Getter @Setter
     private String email;
 
     @Column(name = "token")
+    @Getter @Setter
     private String token;
 
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
+    @Getter @Setter
     private Date date;
 
     @Column(name = "used")
+    @Getter @Setter
     private boolean used;
 
     @Column(name = "session_id")
+    @Getter @Setter
     private String sessionId;
 
     @Column(name = "session_token")
     private String sessionToken;
 
     @Column(name = "admin_type")
+    @Getter
     private String adminType;
 
     private Login() {
@@ -97,14 +110,6 @@ public class Login implements Serializable {
 
     }
 
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-
     public void setSessionToken(String sessionToken) {
         this.sessionToken = Utils.hash(sessionToken);
     }
@@ -114,22 +119,6 @@ public class Login implements Serializable {
      */
     public boolean matchSessionToken(String token) {
         return Utils.hashEquals(this.sessionToken, Utils.hash(token));
-    }
-
-    public boolean isUsed() {
-        return used;
-    }
-
-    public void setUsed(boolean used) {
-        this.used = used;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     /**
@@ -146,56 +135,8 @@ public class Login implements Serializable {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
     }
 
-    private String getPassword() {
-        return password;
-    }
-
-    private String getSessionToken() {
-        return sessionToken;
-    }
-
-    public String getType() {
-        return type;
-    }
-
     public void setType(UserType type) {
         this.type = type.toString();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getAdminType() {
-        return adminType;
     }
 
     public void setAdminType(AdminType adminType) {

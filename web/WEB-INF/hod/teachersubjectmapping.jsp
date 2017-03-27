@@ -106,7 +106,7 @@
                                             <ul class="nav nav-tabs col-sm-3">
                                             <c:forEach var="teacher" items="${requestScope.teachers}">
                                                 <li>
-                                                    <a href="#${teacher.id}" data-toggle="tab">${teacher.fName} ${teacher.lName}</a>
+                                                    <a href="#${teacher.id}" data-toggle="tab">${teacher}</a>
                                                 </li>
                                             </c:forEach>
                                         </ul>

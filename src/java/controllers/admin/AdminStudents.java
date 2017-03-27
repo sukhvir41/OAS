@@ -41,7 +41,7 @@ public class AdminStudents extends HttpServlet {
         session.getTransaction().commit();
         session.close();
         req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/admin/adminstudent.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminstudent.jsp").include(req, resp);
 
     }
 

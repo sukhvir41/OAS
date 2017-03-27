@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -29,23 +31,35 @@ public class Lecture implements Serializable {
 
     @Id
     @Column(name = "lec_id")
+    @Getter
+    @Setter
     private String id;
 
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
+    @Getter
+    @Setter
     private Date date;
 
     @ManyToOne
     @JoinColumn(name = "tcs_fid")
+    @Getter
+    @Setter
     Teaching teaching;
 
     @Column(name = "count")
+    @Getter
+    @Setter
     private int count = 1;
 
     @Column(name = "ended")
+    @Getter
+    @Setter
     private boolean ended = false;
 
     @OneToMany(mappedBy = "lecture")
+    @Getter
+    @Setter
     private List<Attendance> attendance = new ArrayList<Attendance>();
 
     public Lecture() {
@@ -68,53 +82,4 @@ public class Lecture implements Serializable {
         attendance.setLecture(this);
         this.attendance.add(attendance);
     }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Teaching getTeaching() {
-        return teaching;
-    }
-
-    public void setTeaching(Teaching teaching) {
-        this.teaching = teaching;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public List<Attendance> getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(List<Attendance> attendance) {
-        this.attendance = attendance;
-    }
-
-    public boolean isEnded() {
-        return ended;
-    }
-
-    public void setEnded(boolean ended) {
-        this.ended = ended;
-    }
-
 }

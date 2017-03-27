@@ -41,7 +41,7 @@ public class AdminDepartment extends HttpServlet {
         session.getTransaction().commit();
         session.close();
         req.setAttribute("departments", depsrtments);
-        req.getRequestDispatcher("/WEB-INF/admin/admindepartment.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/admindepartment.jsp").include(req, resp);
     }
     
 }

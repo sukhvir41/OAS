@@ -20,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -32,19 +34,24 @@ public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "d_id")
+    @Getter @Setter
     private int id;
 
     @Column(name = "d_name")
+    @Getter @Setter
     private String name;
 
     @ManyToOne
     @JoinTable(name = "department_hod_link", joinColumns = @JoinColumn(name = "department_fid"), inverseJoinColumns = @JoinColumn(name = "teacher_hod_fid"))
+    @Getter @Setter
     private Teacher hod;
 
     @OneToMany(mappedBy = "department")
+    @Getter @Setter
     private List<Course> courses = new ArrayList();
 
     @ManyToMany(mappedBy = "department")
+    @Getter @Setter
     private List<Teacher> teachers = new ArrayList();
 
     public Department() {
@@ -84,46 +91,6 @@ public class Department implements Serializable {
      */
     public void addHod(Teacher teacher) {
         teacher.addHodOf(this);
-    }
-
-    public Teacher getHod() {
-        return hod;
-    }
-
-    public void setHod(Teacher hod) {
-        this.hod = hod;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
     }
 
     @Override

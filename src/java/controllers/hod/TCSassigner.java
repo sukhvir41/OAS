@@ -70,7 +70,7 @@ public class TCSassigner extends HttpServlet {
             req.setAttribute("department", department);
             req.setAttribute("teachers", teachers);
             req.setAttribute("teachings", unregistredTeaching);
-            req.getRequestDispatcher("/WEB-INF/hod/teachersubjectmapping.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/hod/teachersubjectmapping.jsp").include(req, resp);
             
             session.getTransaction().commit();
             session.close();

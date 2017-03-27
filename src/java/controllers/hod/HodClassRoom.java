@@ -36,7 +36,7 @@ public class HodClassRoom extends Controller {
         department.getCourses().stream()
                 .forEach(course -> classRooms.addAll(course.getClassRooms()));
         req.setAttribute("classrooms", classRooms);
-        req.getRequestDispatcher("/WEB-INF/hod/hodclassroom.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/hod/hodclassroom.jsp").include(req, resp);
     }
 
 }

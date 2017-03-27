@@ -146,7 +146,7 @@ public class CreateLectureHome extends HttpServlet {
                     req.setAttribute("headcount", present.size());
                 }
             }
-            req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp").include(req, resp);
             session.getTransaction().commit();
             session.close();
             extendCookie(req, resp);

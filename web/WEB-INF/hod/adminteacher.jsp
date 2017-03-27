@@ -164,7 +164,7 @@
                                             <c:forEach var="teacher" items="${requestScope.teachers}">
                                                 <tr>
                                                     <td>${teacher.id}</td>
-                                                    <td><a href="/OAS/admin/teachers/detailteacher?teacherId=${teacher.id}">${teacher.fName} ${teacher.lName}</a></td>
+                                                    <td><a href="/OAS/admin/teachers/detailteacher?teacherId=${teacher.id}">${teacher}</a></td>
                                                     <td>${teacher.number}</td>
                                                     <td>${teacher.email}</td>
                                                     <td>

@@ -39,7 +39,7 @@ public class SetMacId extends HttpServlet {
             Student student = (Student) req.getSession().getAttribute("student");
             student = (Student) session.get(Student.class, student.getId());
             req.setAttribute("macid", student.getMacId());
-            req.getRequestDispatcher("/WEB-INF/student/studentmacid.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/student/studentmacid.jsp").include(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {

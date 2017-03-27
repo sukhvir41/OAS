@@ -90,7 +90,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Name : ${requestScope.teacher.fName} ${requestScope.teacher.lName}</h2>
+                                        <h2>Name : ${requestScope.teacher}</h2>
                                 </div>
                             </div>
                             <div class="row">

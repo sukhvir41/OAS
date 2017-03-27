@@ -33,7 +33,7 @@ public class AdminNetworkSettings extends HttpServlet {
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("macaddress", MacAddressUtil.getSourceMacAddress());
         req.setAttribute("ipaddress", MacAddressUtil.getSourceIpAddress());
-        req.getRequestDispatcher("/WEB-INF/admin/adminnetworksettings.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminnetworksettings.jsp").include(req, resp);
     }
 
 }

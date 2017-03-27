@@ -51,7 +51,7 @@ public class DetailTeacher extends HttpServlet {
                     .get(0);
             req.setAttribute("teacher", teacher);
             req.setAttribute("username", login.getUsername());
-            req.getRequestDispatcher("/WEB-INF/admin/detailteacher.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/admin/detailteacher.jsp").include(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {

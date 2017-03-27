@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -29,21 +31,31 @@ public class Teaching implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tcs_id")
+    @Getter
+    @Setter
     private int id;
 
     @ManyToOne
     @JoinColumn(name = "teacher_fid")
+    @Getter
+    @Setter
     private Teacher teacher;
 
     @ManyToOne
     @JoinColumn(name = "class_fid")
+    @Getter
+    @Setter
     private ClassRoom classRoom;
 
     @ManyToOne
     @JoinColumn(name = "subject_fid")
+    @Getter
+    @Setter
     private Subject subject;
-    
+
     @OneToMany(mappedBy = "teaching")
+    @Getter
+    @Setter
     List<Lecture> lectures = new ArrayList<>();
 
     public Teaching() {
@@ -54,7 +66,7 @@ public class Teaching implements Serializable {
         this.subject = subject;
     }
 
-        public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
+    public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
         addTeacher(teacher);
         addClassRoom(classRoom);
         addSubject(subject);
@@ -91,49 +103,9 @@ public class Teaching implements Serializable {
         teacher.addTeaching(this);
     }
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public ClassRoom getClassRoom() {
-        return classRoom;
-    }
-
-    public void setClassRoom(ClassRoom classRoom) {
-        this.classRoom = classRoom;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public List<Lecture> getLectures() {
-        return lectures;
-    }
-
-    public void setLectures(List<Lecture> lectures) {
-        this.lectures = lectures;
-    }
-
     @Override
     public String toString() {
-        return subject+" - "+classRoom;
+        return subject + " - " + classRoom;
     }
-    
+
 }

@@ -37,7 +37,7 @@ public class EditSubject extends HttpServlet {
         session.beginTransaction();  
         Subject subject = (Subject) session.get( Subject.class, subjectId);
         req.setAttribute("subject", subject);
-        req.getRequestDispatcher("/WEB-INF/admin/editsubject.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/editsubject.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
         

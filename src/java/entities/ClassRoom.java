@@ -20,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -32,32 +34,41 @@ public class ClassRoom implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_id")
+    @Getter @Setter
     private int id;
 
     @Column(name = "c_name")
+    @Getter @Setter
     private String name;
 
     @Column(name = "c_div")
+    @Getter @Setter
     private String division;
 
     @Column(name = "c_sem")
+    @Getter @Setter
     private int semister;
 
     @Column(name = "c_minimum_subs")
+    @Getter @Setter
     private int minimumSubjects;
 
     @ManyToOne
     @JoinTable(name = "course_class_link", joinColumns = @JoinColumn(name = "class_fid"), inverseJoinColumns = @JoinColumn(name = "course_fid"))
+    @Getter @Setter
     private Course course;
 
     @OneToOne(mappedBy = "classRoom")
+    @Getter @Setter
     private Teacher classTeacher;
 
     @OneToMany(mappedBy = "classRoom")
+    @Getter @Setter
     private List<Student> students = new ArrayList();
 
     @ManyToMany
     @JoinTable(name = "subject_class_link", joinColumns = @JoinColumn(name = "class_fid"), inverseJoinColumns = @JoinColumn(name = "subject_fid"))
+    @Getter @Setter
     private List<Subject> subjects = new ArrayList<>();
 
     public ClassRoom() {
@@ -119,78 +130,6 @@ public class ClassRoom implements Serializable {
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
         subject.getClassRooms().add(this);
-    }
-
-    public int getMinimumSubjects() {
-        return minimumSubjects;
-    }
-
-    public void setMinimumSubjects(int minimumSubjects) {
-        this.minimumSubjects = minimumSubjects;
-    }
-
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDivision() {
-        return division;
-    }
-
-    public void setDivision(String division) {
-        this.division = division;
-    }
-
-    public int getSemister() {
-        return semister;
-    }
-
-    public void setSemister(int semister) {
-        this.semister = semister;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    public Teacher getClassTeacher() {
-        return classTeacher;
-    }
-
-    public void setClassTeacher(Teacher classTeacher) {
-        this.classTeacher = classTeacher;
     }
 
     @Override

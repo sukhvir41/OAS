@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -26,23 +28,29 @@ public class Attendance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attendance_id")
+    @Getter @Setter
     private long id;
 
     @Column(name = "marked_ny_teacher")
+    @Getter @Setter
     private boolean markedByTeacher = false;
 
     @Column(name = "attended")
+    @Getter @Setter
     private boolean attended;
 
     @Column(name = "leave")
+    @Getter @Setter
     private boolean leave = false;
 
     @ManyToOne
     @JoinColumn(name = "lecture_fid")
+    @Getter @Setter
     private Lecture lecture;
 
     @ManyToOne
     @JoinColumn(name = "student_fid")
+    @Getter @Setter
     private Student student;
 
     public Attendance() {
@@ -83,53 +91,4 @@ public class Attendance implements Serializable {
     public final void addLecture(Lecture lecture) {
         lecture.addAttendance(this);
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public boolean isMarkedByTeacher() {
-        return markedByTeacher;
-    }
-
-    public void setMarkedByTeacher(boolean markedByTeacher) {
-        this.markedByTeacher = markedByTeacher;
-    }
-
-    public boolean isAttended() {
-        return attended;
-    }
-
-    public void setAttended(boolean attended) {
-        this.attended = attended;
-    }
-
-    public Lecture getLecture() {
-        return lecture;
-    }
-
-    public void setLecture(Lecture lecture) {
-        this.lecture = lecture;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public boolean isLeave() {
-        return leave;
-    }
-
-    public void setLeave(boolean leave) {
-        this.leave = leave;
-    }
-
 }

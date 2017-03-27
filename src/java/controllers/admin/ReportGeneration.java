@@ -40,7 +40,7 @@ public class ReportGeneration extends HttpServlet {
         session.getTransaction().commit();
         session.close();
         req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/admin/adminreportgen.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminreportgen.jsp").include(req, resp);
     }
 
 }

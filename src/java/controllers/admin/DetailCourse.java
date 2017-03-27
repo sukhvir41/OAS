@@ -43,7 +43,7 @@ public class DetailCourse extends HttpServlet {
         session.beginTransaction();
         course = (Course) session.get(Course.class, courseId);
         req.setAttribute("course", course);
-        req.getRequestDispatcher("/WEB-INF/admin/detailcourse.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/detailcourse.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
 

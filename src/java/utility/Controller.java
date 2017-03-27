@@ -19,21 +19,21 @@ import org.hibernate.Session;
  * @author sukhvir
  */
 public abstract class Controller extends HttpServlet {
-
+    
     @Override
     final protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doProcess(req, resp);
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doProcess(req, resp);
     }
-
+    
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/error");
+        resp.sendError(500);
     }
-
+    
     final private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = Utils.openSession();
         session.beginTransaction();
@@ -45,12 +45,18 @@ public abstract class Controller extends HttpServlet {
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-            //e.printStackTrace();
+            if (showErrorLog()) {
+                e.printStackTrace();
+            }
             this.onError(req, resp);
         } finally {
             out.close();
         }
     }
-
+    
+    public boolean showErrorLog() {
+        return false;
+    }
+    
     public abstract void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception;
 }

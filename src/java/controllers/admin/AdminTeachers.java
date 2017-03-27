@@ -42,7 +42,7 @@ public class AdminTeachers extends HttpServlet {
 
         req.setAttribute("teachers", teachers);
         req.setAttribute("departments", departments);
-        req.getRequestDispatcher("/WEB-INF/admin/adminteacher.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminteacher.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
     }

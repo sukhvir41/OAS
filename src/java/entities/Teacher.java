@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -28,41 +30,65 @@ public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "t_id")
+    @Getter
+    @Setter
     private int id;
 
     @Column(name = "t_fname")
+    @Getter
+    @Setter
     private String fName;
 
     @Column(name = "t_lname")
+    @Getter
+    @Setter
     private String lName;
 
     @Column(name = "t_number")
+    @Getter
+    @Setter
     private long number;
 
     @Column(name = "t_email")
+    @Getter
+    @Setter
     private String email;
 
     @Column(name = "verified")
+    @Getter
+    @Setter
     private boolean verified = false;
 
     @Column(name = "unaccounted")
+    @Getter
+    @Setter
     private boolean unaccounted;
 
     @Column(name = "t_hod")
+    @Getter
+    @Setter
     private boolean hod;
 
-    @OneToMany(mappedBy = "hod",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hod", fetch = FetchType.EAGER)
+    @Getter
+    @Setter
     private List<Department> hodOf = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "class_fid")
+    @Getter
+    @Setter
     private ClassRoom classRoom;
 
     @OneToMany(mappedBy = "teacher")
+    @Getter
+    @Setter
     private List<Teaching> teaches = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "teacher_department_link", joinColumns = @JoinColumn(name = "teacher_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))
+    @Getter
+    @Setter
     private List<Department> department = new ArrayList<>();
 
     public Teacher() {
@@ -131,102 +157,9 @@ public class Teacher implements Serializable {
         }
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fNname) {
-        this.fName = fNname;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    public boolean isVerified() {
-        return verified;
-    }
-
-    public void setVerified(boolean verified) {
-        this.verified = verified;
-    }
-
-    public boolean isHod() {
-        return hod;
-    }
-
-    public void setHod(boolean hod) {
-        this.hod = hod;
-    }
-
-    public ClassRoom getClassRoom() {
-        return classRoom;
-    }
-
-    public void setClassRoom(ClassRoom classRoom) {
-        this.classRoom = classRoom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Teaching> getTeaches() {
-        return teaches;
-    }
-
-    public void setTeaches(List<Teaching> teaches) {
-        this.teaches = teaches;
-    }
-
-    public List<Department> getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(List<Department> department) {
-        this.department = department;
-    }
-
-    public List<Department> getHodOf() {
-        return hodOf;
-    }
-
-    public void setHodOf(List<Department> hodOf) {
-        this.hodOf = hodOf;
-    }
-
-    public boolean isUnaccounted() {
-        return unaccounted;
-    }
-
     @Override
     public String toString() {
-        return fName+ " " +lName;
+        return fName + " " + lName;
     }
-    
-    
+
 }

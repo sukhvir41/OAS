@@ -55,7 +55,8 @@ public class DetailSubject extends HttpServlet {
                     .forEach(classroom::add);
             req.setAttribute("classrooms", classroom);
             req.setAttribute("subject", subject);
-            req.getRequestDispatcher("/WEB-INF/admin/detailsubject.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/admin/detailsubject.jsp").include(
+                    req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {

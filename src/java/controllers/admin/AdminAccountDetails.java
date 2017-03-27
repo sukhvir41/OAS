@@ -30,7 +30,7 @@ public class AdminAccountDetails extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/admin/adminmyaccount.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminmyaccount.jsp").include(req, resp);
     }
 
 }

@@ -49,7 +49,7 @@ public class DetailStudent extends HttpServlet {
                     .get(0);
             req.setAttribute("student", student);
             req.setAttribute("username", login.getUsername());
-            req.getRequestDispatcher("/WEB-INF/admin/detailstudent.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/admin/detailstudent.jsp").include(req, resp);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {

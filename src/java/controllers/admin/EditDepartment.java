@@ -41,7 +41,7 @@ public class EditDepartment extends HttpServlet {
         session.beginTransaction();
         Department department = (Department) session.get(Department.class, departmentId);
         req.setAttribute("department", department);
-        req.getRequestDispatcher("/WEB-INF/admin/editdepartment.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/editdepartment.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
         } catch (Exception e) {

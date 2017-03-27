@@ -45,7 +45,7 @@ public class AdminAdminDetails extends HttpServlet {
             session.close();
 
             req.setAttribute("admin", admin);
-            req.getRequestDispatcher("/WEB-INF/admin/detailadmin.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/admin/detailadmin.jsp").include(req, resp);
 
         } catch (Exception e) {
             session.getTransaction().rollback();

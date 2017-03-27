@@ -32,7 +32,7 @@ public class StudentHome extends HttpServlet {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/student/studenthome.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/student/studenthome.jsp").include(req, resp);
         extendCookie(req, resp);
     }
 

@@ -26,7 +26,7 @@ public class AdminGrantLeave extends Controller {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
         req.setAttribute("student", student);
-        req.getRequestDispatcher("/WEB-INF/admin/admingrantleave.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/admingrantleave.jsp").include(req, resp);
     }
 
 }

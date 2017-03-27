@@ -30,7 +30,7 @@ public class GrantLeave extends Controller {
         Student student = (Student) session.get(Student.class, studentId);
         if (student.getClassRoom().getId() == teacher.getClassRoom().getId()) {
             req.setAttribute("student", student);
-            req.getRequestDispatcher("/WEB-INF/classteacher/teachergrantleave.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/classteacher/teachergrantleave.jsp").include(req, resp);
         } else {
             resp.sendRedirect("/OAS/accessdenied.jsp");
         }

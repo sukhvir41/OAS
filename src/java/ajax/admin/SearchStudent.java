@@ -84,17 +84,17 @@ public class SearchStudent extends HttpServlet {
         }
     }
 
-    private void add(Student e) {
-        JsonObject student = new JsonObject();
-        student.addProperty("id", e.getId());
-        student.addProperty("name", e.getfName() + " " + e.getlName());
-        student.addProperty("email", e.getEmail());
-        student.addProperty("number", e.getNumber());
-        student.addProperty("classroom", e.getClassRoom().getName() + " " + e.getClassRoom().getDivision());
-        student.addProperty("rollnumber", e.getRollNumber());
-        student.addProperty("verified", e.isVerified());
-        student.add("subjects", addSubjects(e));
-        jsonStudents.add(student);
+    private void add(Student student) {
+        JsonObject studentJson = new JsonObject();
+        studentJson.addProperty("id", student.getId());
+        studentJson.addProperty("name", student.toString());
+        studentJson.addProperty("email", student.getEmail());
+        studentJson.addProperty("number", student.getNumber());
+        studentJson.addProperty("classroom", student.getClassRoom().getName() + " " + student.getClassRoom().getDivision());
+        studentJson.addProperty("rollnumber", student.getRollNumber());
+        studentJson.addProperty("verified", student.isVerified());
+        studentJson.add("subjects", addSubjects(student));
+        jsonStudents.add(studentJson);
     }
 
     private JsonElement addSubjects(Student e) {

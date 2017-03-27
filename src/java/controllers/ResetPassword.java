@@ -43,7 +43,7 @@ public class ResetPassword extends HttpServlet {
                     if (token.equals(login.getToken())) {
                         if ((Math.abs(now.getTime() - login.getDate().getTime()) / 60000d) <= 30d) {
                             req.setAttribute("username", login.getUsername());
-                            req.getRequestDispatcher("WEB-INF/resetpassword.jsp").forward(req, resp);
+                            req.getRequestDispatcher("WEB-INF/resetpassword.jsp").include(req, resp);
                         } else {
                             resp.sendRedirect("expired");
                         }

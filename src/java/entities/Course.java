@@ -19,6 +19,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -31,29 +33,37 @@ public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "co_id")
+    @Getter @Setter
     private int id;
 
     @Column(name = "co_name")
+    @Getter @Setter
     private String name;
 
     //remove
     @Column(name = "start_date")
+    @Getter @Setter
     private Date start;
     //remove
     @Column(name = "end_date")
+    @Getter @Setter
     private Date end;
     //remove
     @Column(name = "started")
+    @Getter @Setter
     private boolean started = false;
 
     @ManyToOne
     @JoinTable(name = "department_course_link", joinColumns = @JoinColumn(name = "course_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))
+    @Getter @Setter
     private Department department;
 
     @OneToMany(mappedBy = "course")
+    @Getter @Setter
     private List<ClassRoom> classRooms = new ArrayList();
 
     @OneToMany(mappedBy = "course")
+    @Getter @Setter
     private List<Subject> subjects = new ArrayList();
 
     public Course() {
@@ -122,70 +132,6 @@ public class Course implements Serializable {
             this.end = new Date();
             this.started = false;
         }
-    }
-
-    public Date getStart() {
-        return start;
-    }
-
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public Date getEnd() {
-        return end;
-    }
-
-    public void setEnd(Date end) {
-        this.end = end;
-    }
-
-    public boolean isStarted() {
-        return started;
-    }
-
-    public void setStarted(boolean started) {
-        this.started = started;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public List<ClassRoom> getClassRooms() {
-        return classRooms;
-    }
-
-    public void setClassRooms(List<ClassRoom> classRooms) {
-        this.classRooms = classRooms;
-    }
-
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<Subject> subjects) {
-        this.subjects = subjects;
     }
 
     @Override

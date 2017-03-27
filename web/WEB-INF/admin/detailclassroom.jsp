@@ -105,7 +105,7 @@
                                                 <dt>Course</dt>
                                                 <dd>${requestScope.classroom.course.name}</dd>
                                                 <dt>Class Teacher</dt>
-                                                <dd>${requestScope.classroom.classTeacher.fName} ${requestScope.classroom.classTeacher.lName}</dd>
+                                                <dd>${requestScope.classroom.classTeacher}</dd>
                                             </dl>
                                             <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/classrooms/editclassroom?classroomId=${requestScope.classroom.id}">Edit</a>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
@@ -212,7 +212,7 @@
                                                     <c:forEach var="student" items="${requestScope.classroom.students}">
                                                         <tr>
                                                             <td>${student.id}</td>
-                                                            <td><a href="#">${student.fName} ${student.lName}</a></td>
+                                                            <td><a href="#">${student}</a></td>
                                                             <td>${student.rollNumber}</td>
                                                             <td>${student.email}</td>
                                                             <td>${student.number}</td>

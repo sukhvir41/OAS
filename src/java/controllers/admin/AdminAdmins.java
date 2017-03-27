@@ -41,7 +41,7 @@ public class AdminAdmins extends HttpServlet {
         session.beginTransaction();
         admins = session.createCriteria(Login.class).add(Restrictions.eq("type", UserType.Admin.toString())).list();
         req.setAttribute("admins", admins);
-        req.getRequestDispatcher("/WEB-INF/admin/adminadmins.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminadmins.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
 

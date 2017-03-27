@@ -62,22 +62,22 @@ public class SearchTeacherByName extends HttpServlet {
         }
     }
 
-    private void add(Teacher e) {
-        JsonObject teacher = new JsonObject();
-        teacher.addProperty("id", e.getId());
-        teacher.addProperty("name", e.getfName() + " " + e.getlName());
-        teacher.addProperty("number", e.getNumber());
-        teacher.addProperty("email", e.getEmail());
-        teacher.addProperty("hod", e.isHod());
-        if (e.isHod()) {
-            teacher.add("hodof", addDepartment(e.getHodOf()));
+    private void add(Teacher teacher) {
+        JsonObject teacherJson = new JsonObject();
+        teacherJson.addProperty("id", teacher.getId());
+        teacherJson.addProperty("name", teacher.toString());
+        teacherJson.addProperty("number", teacher.getNumber());
+        teacherJson.addProperty("email", teacher.getEmail());
+        teacherJson.addProperty("hod", teacher.isHod());
+        if (teacher.isHod()) {
+            teacherJson.add("hodof", addDepartment(teacher.getHodOf()));
         } else {
-            teacher.addProperty("hodof", "not hod");
+            teacherJson.addProperty("hodof", "not hod");
         }
-        teacher.addProperty("classteacher", e.getClassRoom() == null ? "" : e.getClassRoom().getName());
-        teacher.add("departments", addDepartment(e.getDepartment()));
-        teacher.addProperty("verified", e.isVerified());
-        jsonTeachers.add(teacher);
+        teacherJson.addProperty("classteacher", teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName());
+        teacherJson.add("departments", addDepartment(teacher.getDepartment()));
+        teacherJson.addProperty("verified", teacher.isVerified());
+        jsonTeachers.add(teacherJson);
 
     }
 

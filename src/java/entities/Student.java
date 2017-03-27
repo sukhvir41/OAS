@@ -19,6 +19,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -31,41 +33,65 @@ public class Student implements Serializable, Comparable<Student> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "s_id")
+    @Getter
+    @Setter
     private int id;
 
     @Column(name = "s_rollnumber")
+    @Getter
+    @Setter
     private int rollNumber;
 
     @Column(name = "s_fname")
+    @Getter
+    @Setter
     private String fName;
 
     @Column(name = "s_lname")
+    @Getter
+    @Setter
     private String lName;
 
     @Column(name = "s_number")
+    @Getter
+    @Setter
     private long number;
 
     @Column(name = "s_email")
+    @Getter
+    @Setter
     private String email;
 
     @Column(name = "mac_id")
+    @Getter
+    @Setter
     private String macId;
 
     @Column(name = "unaccounted")
+    @Getter
+    @Setter
     private boolean unaccounted;
 
     @ManyToOne
     @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
+    @Getter
+    @Setter
     private ClassRoom classRoom;
 
     @Column(name = "verified")
+    @Getter
+    @Setter
     private boolean verified = false;
 
     @ManyToMany
     @JoinTable(name = "student_subject_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "sub_fid"))
+    @Getter
+    @Setter
     private List<Subject> subjects = new ArrayList();
 
     @OneToMany(mappedBy = "student")
+    @Getter
+    @Setter
     private List<Attendance> attendance = new ArrayList<>();
 
     public Student() {
@@ -123,98 +149,6 @@ public class Student implements Serializable, Comparable<Student> {
      */
     final public void addClassRoom(ClassRoom classRoom) {
         classRoom.addStudent(this);
-    }
-
-    public int getRollNumber() {
-        return rollNumber;
-    }
-
-    public void setRollNumber(int rollNumber) {
-        this.rollNumber = rollNumber;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public ClassRoom getClassRoom() {
-        return classRoom;
-    }
-
-    final public void setClassRoom(ClassRoom classRoom) {
-        this.classRoom = classRoom;
-    }
-
-    public boolean isVerified() {
-        return verified;
-    }
-
-    public void setVerified(boolean verified) {
-        this.verified = verified;
-    }
-
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
-    public List<Attendance> getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(List<Attendance> attendance) {
-        this.attendance = attendance;
-    }
-
-    public String getMacId() {
-        return macId;
-    }
-
-    public void setMacId(String macId) {
-        this.macId = macId;
-    }
-
-    public boolean isUnaccounted() {
-        return unaccounted;
     }
 
     @Override

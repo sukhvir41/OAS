@@ -43,7 +43,7 @@ public class AdminClassRoom extends HttpServlet {
         courses = (List<Course>) session.createCriteria(Course.class).list();
         req.setAttribute("classrooms", classRooms);
         req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/admin/adminclassroom.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminclassroom.jsp").include(req, resp);
         session.getTransaction().commit();
         session.close();
     }

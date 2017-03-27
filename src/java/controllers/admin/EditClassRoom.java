@@ -46,7 +46,7 @@ public class EditClassRoom extends HttpServlet {
         session.getTransaction().commit();
         session.close();
         req.setAttribute("classroom", classRoom);
-        req.getRequestDispatcher("/WEB-INF/admin/editclassroom.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/editclassroom.jsp").include(req, resp);
     }
 
 }
