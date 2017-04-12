@@ -29,9 +29,7 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/ajax/students/searchstudentbyname")
 public class SearchStudentByName extends HttpServlet {
-    
-    JsonArray jsonStudents;
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name;
@@ -44,10 +42,10 @@ public class SearchStudentByName extends HttpServlet {
             List<Student> students = session.createCriteria(Student.class)
                     .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
                     .list();
-            jsonStudents = new JsonArray();
+            JsonArray jsonStudents = new JsonArray();
             Gson gson = new Gson();
             students.stream()
-                    .forEach(e -> add(e));
+                    .forEach(student -> add(student, jsonStudents));
             out.print(gson.toJson(jsonStudents));
             session.getTransaction().commit();
             session.close();
@@ -59,10 +57,10 @@ public class SearchStudentByName extends HttpServlet {
         } finally {
             out.close();
         }
-        
+
     }
-    
-   private void add(Student student) {
+
+    private void add(Student student, JsonArray jsonStudents) {
         JsonObject studentJson = new JsonObject();
         studentJson.addProperty("id", student.getId());
         studentJson.addProperty("name", student.toString());
@@ -74,7 +72,7 @@ public class SearchStudentByName extends HttpServlet {
         studentJson.add("subjects", addSubjects(student));
         jsonStudents.add(studentJson);
     }
-    
+
     private JsonElement addSubjects(Student e) {
         JsonArray jsonSubjects = new JsonArray();
         e.getSubjects()
@@ -82,11 +80,11 @@ public class SearchStudentByName extends HttpServlet {
                 .forEach(subject -> jsonSubjects.add(subject.getName()));
         return jsonSubjects;
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().print("error");
         resp.getWriter().close();
     }
-    
+
 }

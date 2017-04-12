@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sun.security.ssl.Krb5Helper;
 import utility.MacAddressUtil;
+import utility.NewMacaddress;
 
 /**
  *
@@ -21,14 +22,16 @@ import utility.MacAddressUtil;
  */
 @WebServlet(urlPatterns = "/admin/ajax/configurenetwork")
 public class ConfigureNetwork extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         try {
             String mac = req.getParameter("macaddress");
             String ip = req.getParameter("ipaddress");
-            out.print(MacAddressUtil.setAddresses(mac, ip));
+            //out.print(MacAddressUtil.setAddresses(mac, ip));
+            out.print(NewMacaddress.setAddresses(mac, ip));
+            
             out.close();
         } catch (Exception e) {
             out.print("false");
@@ -36,12 +39,12 @@ public class ConfigureNetwork extends HttpServlet {
             out.close();
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         out.print("false");
         out.close();
     }
-
+    
 }

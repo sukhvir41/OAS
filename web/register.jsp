@@ -15,7 +15,23 @@
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            
+            <!-- Android devices meta-->
+            <meta name="theme-color" content="#0077b3">
+            <link rel="manifest" href="/OAS/manifest.json">
 
+            <!-- Apple devices metas -->
+            <link rel="apple-touch-startup-image" href="icon.png">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+            <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+            <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+            <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+            <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+
+            <!-- Windows devices metas-->
+            <meta name="msapplication-square70x70logo" content="icon_smalltile.png">
+            <meta name="msapplication-square150x150logo" content="icon_mediumtile.png">
+            <meta name="msapplication-wide310x150logo" content="icon_widetile.png">
         <!-- Web Fonts  -->
         
 

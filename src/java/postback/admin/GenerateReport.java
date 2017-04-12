@@ -44,21 +44,23 @@ import utility.Utils;
 @WebServlet(urlPatterns = "/admin/generatereportpost")
 public class GenerateReport extends HttpServlet {
 
-    private XSSFRow row;
-    private Session session;
-    private XSSFCell cell;
-    private Date start, end;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("APPLICATION/OCTET-STREAM");
-        resp.setHeader("Content-Disposition", "attachment; filename=report " + new Date() + ".xlsx");
+        resp.setContentType(
+                "APPLICATION/OCTET-STREAM");
+        resp.setHeader(
+                "Content-Disposition", "attachment; filename=report " + new Date() + ".xlsx");
+        XSSFRow row;
+        Session session;
+        XSSFCell cell;
+        Date start, end;
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet spreadsheet = workbook.createSheet(" Report ");
 
         session = Utils.openSession();
+
         session.beginTransaction();
         OutputStream out = resp.getOutputStream();
 
@@ -163,14 +165,14 @@ public class GenerateReport extends HttpServlet {
                 for (Subject subject : student.getSubjects()) {
 
                     //getting lectures of the class and subject
-                    List<Lecture> lectures = getLectures(classRoom, subject);
+                    List<Lecture> lectures = getLectures(classRoom, subject, session);
                     int lecturesCount = lectures.stream()
                             .map(e -> e.getCount())
                             .reduce(0, (c, e) -> c + e);
                     totalLectures += lecturesCount;
 
                     //getting student attendace according to the lectures and the subject 
-                    List<Attendance> studentAttendances = getStudentAttendance(student, lectures);
+                    List<Attendance> studentAttendances = getStudentAttendance(student, lectures, session);
                     int attendanceCount = studentAttendances.stream()
                             .map(e -> e.getLecture().getCount())
                             .reduce(0, (c, e) -> c + e);
@@ -232,24 +234,29 @@ public class GenerateReport extends HttpServlet {
         }
     }
 
-    private List<Lecture> getLectures(ClassRoom classRoom, Subject subject) {
-        List<Teaching> teaching = session.createCriteria(Teaching.class)
+    private List<Lecture> getLectures(ClassRoom classRoom, Subject subject, Session session) {
+        List<Teaching> teaching = session.createCriteria(Teaching.class
+        )
                 .add(Restrictions.eq("classRoom", classRoom))
                 .add(Restrictions.eq("subject", subject))
                 .list();
+
         if (teaching.size() > 0) {
-            return session.createCriteria(Lecture.class)
+            return session.createCriteria(Lecture.class
+            )
                     .add(Restrictions.in("teaching", teaching))
                     //.add(Restrictions.between("date", start, end))
                     .list();
         } else {
             return new ArrayList<>();
+
         }
     }
 
-    private List<Attendance> getStudentAttendance(Student student, List<Lecture> lectures) {
+    private List<Attendance> getStudentAttendance(Student student, List<Lecture> lectures, Session session) {
         if (lectures.size() > 0) {
-            return session.createCriteria(Attendance.class)
+            return session.createCriteria(Attendance.class
+            )
                     .add(Restrictions.in("lecture", lectures))
                     .add(Restrictions.eq("student", student))
                     .add(Restrictions.eqOrIsNull("attended", true))

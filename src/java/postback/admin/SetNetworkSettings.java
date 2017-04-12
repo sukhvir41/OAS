@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utility.MacAddressUtil;
+import utility.NewMacaddress;
 
 /**
  *
@@ -27,7 +28,8 @@ public class SetNetworkSettings extends HttpServlet {
             String macAddress = req.getParameter("macaddress");
             String ipaddress = req.getParameter("ipaddress");
             System.out.println(macAddress + "  " + ipaddress);
-            if (MacAddressUtil.setAddresses(macAddress, ipaddress)) {
+//            if (MacAddressUtil.setAddresses(macAddress, ipaddress)) {
+            if (NewMacaddress.setAddresses(macAddress, ipaddress)) {
                 resp.sendRedirect("/OAS/admin/networksettings?error=" + false);
             } else {
                 resp.sendRedirect("/OAS/admin/networksettings?error=" + true);

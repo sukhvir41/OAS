@@ -38,7 +38,7 @@ public class Utils {
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
 
     private Utils() throws Exception {
-        throw new Exception("dont use this contructor");
+        throw new Exception("don't create an instance of this class");
     }
 
     /**
@@ -58,11 +58,10 @@ public class Utils {
     }
 
     public static void closeSesssioFactory() {
-        try {
+        if (sessionFactory != null) {
             sessionFactory.close();
             System.out.println("session factory closed!!!!!!!!!!!!!!!!!!!!!!!!!");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            sessionFactory = null;
         }
     }
 

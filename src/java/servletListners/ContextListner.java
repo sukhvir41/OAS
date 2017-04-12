@@ -7,6 +7,7 @@ package servletListners;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import utility.NewMacaddress;
 import utility.Utils;
 
 /**
@@ -23,6 +24,7 @@ public class ContextListner implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         Utils.closeSesssioFactory();
+        NewMacaddress.stop();
         System.out.println("server closed !!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 

@@ -13,7 +13,7 @@
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+        <meta name="theme-color" content="#4285f4">
         <!-- Web Fonts  -->
         
 

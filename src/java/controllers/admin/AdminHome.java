@@ -31,7 +31,7 @@ public class AdminHome extends Controller {
 
     @Override
     public boolean showErrorLog() {
-        return true; //To change body of generated methods, choose Tools | Templates.
+        return true; 
     }
 
     @Override

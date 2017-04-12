@@ -19,26 +19,30 @@ import org.hibernate.criterion.Restrictions;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            Date now = new Date();
-            Calendar past = Calendar.getInstance();
-            past.add(Calendar.DAY_OF_YEAR, -7);
-            List<Lecture> lectures = session.createCriteria(Lecture.class)
-                    .add(Restrictions.between("date", past.getTime(), now))
-                    .list();
-            System.out.println(lectures.size());
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
+        NewMacaddress.setAddresses("08:00:27:5F:F2:E4", "192.168.1.9");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.1") + " 192.168.1.1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.2") + " 192.168.1.2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.3") + "192.168.1.3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.1") + " 192.168.1.1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.2") + " 192.168.1.2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.3") + "192.168.1.3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.1") + " 192.168.1.1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.2") + " 192.168.1.2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.3") + "192.168.1.3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.1") + " 192.168.1.1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.2") + " 192.168.1.2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.3") + "192.168.1.3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.1") + " 192.168.1.1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.2") + " 192.168.1.2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.3") + "192.168.1.3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.1") + " 192.168.1.1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.2") + " 192.168.1.2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.3") + "192.168.1.3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.1") + " 192.168.1.1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.2") + " 192.168.1.2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(NewMacaddress.getMacAddress("192.168.1.3") + "192.168.1.3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-        } finally {
-        }
-
+        NewMacaddress.stop();
     }
 
 }

@@ -31,8 +31,6 @@ import utility.Utils;
 @WebServlet(urlPatterns = "/admin/ajax/teachers/searchteacher")
 public class SearchTeacher extends HttpServlet {
 
-    JsonArray jsonTeachers;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
@@ -80,9 +78,9 @@ public class SearchTeacher extends HttpServlet {
             }
 
             Gson gson = new Gson();
-            jsonTeachers = new JsonArray();
+            JsonArray jsonTeachers = new JsonArray();
             teachers.stream()
-                    .forEach(e -> add(e));
+                    .forEach(teacher -> add(teacher, jsonTeachers));
             out.print(gson.toJson(jsonTeachers));
 
             session.getTransaction().commit();
@@ -98,10 +96,10 @@ public class SearchTeacher extends HttpServlet {
         }
     }
 
-    private void add(Teacher teacher) {
+    private void add(Teacher teacher, JsonArray jsonTeachers) {
         JsonObject teacherJson = new JsonObject();
         teacherJson.addProperty("id", teacher.getId());
-        teacherJson.addProperty("name",teacher.toString());
+        teacherJson.addProperty("name", teacher.toString());
         teacherJson.addProperty("number", teacher.getNumber());
         teacherJson.addProperty("email", teacher.getEmail());
         teacherJson.addProperty("hod", teacher.isHod());

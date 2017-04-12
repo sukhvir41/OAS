@@ -29,8 +29,6 @@ import utility.Utils;
 @WebServlet(urlPatterns = "/admin/ajax/searchstudent")
 public class SearchStudent extends HttpServlet {
 
-    private JsonArray jsonStudents;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
@@ -42,18 +40,18 @@ public class SearchStudent extends HttpServlet {
             String subjectId = req.getParameter("subject");
             String filter = req.getParameter("filter");
             Gson gson = new Gson();
-            jsonStudents = new JsonArray();
+            JsonArray jsonStudents = new JsonArray();
             if (subjectId.equals("all")) {
                 ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
                 if (filter.equals("all")) {
                     classRoom.getStudents()
                             .stream()
-                            .forEach(e -> add(e));
+                            .forEach(e -> add(e, jsonStudents));
                 } else {
                     classRoom.getStudents()
                             .stream()
                             .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
-                            .forEach(e -> add(e));
+                            .forEach(e -> add(e, jsonStudents));
                 }
             } else {
                 ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
@@ -61,14 +59,14 @@ public class SearchStudent extends HttpServlet {
                 if (filter.equals("all")) {
                     classRoom.getStudents()
                             .stream()
-                            .filter(e -> e.getSubjects().contains(subject))
-                            .forEach(e -> add(e));
+                            .filter(student -> student.getSubjects().contains(subject))
+                            .forEach(student -> add(student, jsonStudents));
                 } else {
                     classRoom.getStudents()
                             .stream()
                             .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
                             .filter(e -> e.getSubjects().contains(subject))
-                            .forEach(e -> add(e));
+                            .forEach(e -> add(e, jsonStudents));
                 }
 
             }
@@ -84,7 +82,7 @@ public class SearchStudent extends HttpServlet {
         }
     }
 
-    private void add(Student student) {
+    private void add(Student student, JsonArray jsonStudents) {
         JsonObject studentJson = new JsonObject();
         studentJson.addProperty("id", student.getId());
         studentJson.addProperty("name", student.toString());

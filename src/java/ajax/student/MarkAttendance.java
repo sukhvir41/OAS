@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.MacAddressUtil;
+import utility.NewMacaddress;
 import utility.Utils;
 
 /**
@@ -54,8 +55,9 @@ public class MarkAttendance extends HttpServlet {
                         .list();
                 if (attendanceList.size() <= 0) {
                     if (date.after(lectureStartDate) && date.before(cal.getTime())) {
-                        MacAddressUtil mac = new MacAddressUtil();
-                        String macAddr = mac.getMacAddress(req.getRemoteAddr());
+                        // MacAddressUtil mac = new MacAddressUtil();
+                        //String macAddr = mac.getMacAddress(req.getRemoteAddr());
+                        String macAddr = NewMacaddress.getMacAddress(req.getRemoteAddr());
                         System.out.println(macAddr.toLowerCase() + " : " + student.getMacId().toLowerCase() + "  : " + req.getRemoteAddr());
                         if (macAddr.toLowerCase().equals(student.getMacId().toLowerCase())) {
                             Attendance attendance = new Attendance(lecture, student);

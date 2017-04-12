@@ -30,7 +30,7 @@ import utility.Utils;
 @WebServlet(urlPatterns = "/admin/ajax/teachers/searchteacherbyname")
 public class SearchTeacherByName extends HttpServlet {
 
-    JsonArray jsonTeachers;
+    
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,9 +46,9 @@ public class SearchTeacherByName extends HttpServlet {
                     .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
                     .list();
             Gson gson = new Gson();
-            jsonTeachers = new JsonArray();
+            JsonArray jsonTeachers = new JsonArray();
             teachers.stream()
-                    .forEach(e -> add(e));
+                    .forEach(teacher -> add(teacher,jsonTeachers));
             session.getTransaction().commit();
             session.close();
             out.print(gson.toJson(jsonTeachers));
@@ -62,7 +62,7 @@ public class SearchTeacherByName extends HttpServlet {
         }
     }
 
-    private void add(Teacher teacher) {
+    private void add(Teacher teacher, JsonArray jsonTeachers) {
         JsonObject teacherJson = new JsonObject();
         teacherJson.addProperty("id", teacher.getId());
         teacherJson.addProperty("name", teacher.toString());

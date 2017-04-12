@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utility.MacAddressUtil;
+import utility.NewMacaddress;
 
 /**
  *
@@ -25,8 +26,9 @@ public class GetMacId extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         try {
-            MacAddressUtil mac = new MacAddressUtil();
-            String macid = mac.getMacAddress(req.getRemoteAddr());
+            //MacAddressUtil mac = new MacAddressUtil();
+            // String macid = mac.getMacAddress(req.getRemoteAddr());
+            String macid = NewMacaddress.getMacAddress(req.getRemoteAddr());
             System.out.println(macid + " :  " + req.getRemoteAddr());
             out.print(macid);
         } catch (Exception e) {
