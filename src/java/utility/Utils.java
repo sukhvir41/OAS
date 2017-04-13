@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -20,7 +21,6 @@ import javax.mail.Message;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.xml.bind.DatatypeConverter;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -152,28 +152,32 @@ public class Utils {
     public static String getLectureId() {
         Session session = openSession();
         session.beginTransaction();
-        String Id = generateBase64();
-        Lecture lecture = (Lecture) session.get(Lecture.class, Id);
-        while (lecture != null) {
+        String Id;
+        Lecture lecture;
+        do {
             Id = generateBase64();
             lecture = (Lecture) session.get(Lecture.class, Id);
-        }
+        } while (lecture != null);
         session.getTransaction().commit();
         session.close();
         return Id;
     }
 
+    /**
+     * this generates a base64 number of 8 digits long
+     *
+     * @return base64 number
+     */
     public static String generateBase64() {
-        SecureRandom random = new SecureRandom();
-        StringBuilder number = new StringBuilder();
-
-        Stream.iterate(0, e -> e + 1)
-                .limit(8)
-                .forEach((e) -> number.append(CODES.charAt(random.nextInt(63))));
-
-        return number.toString();
+        return generateBase64(8);
     }
 
+    /**
+     * this generates a base64 number of the given limit
+     *
+     * @param limit - the digits limit
+     * @return base64 number
+     */
     private static String generateBase64(int limit) {
         SecureRandom random = new SecureRandom();
         StringBuilder number = new StringBuilder();
@@ -192,14 +196,7 @@ public class Utils {
      * @return
      */
     public static String createToken() {
-        StringBuilder token = new StringBuilder();
-        SecureRandom random = new SecureRandom();
-        Stream.iterate(0, e -> e + 1)
-                .limit(50)
-                .forEach((e) -> token.append(CODES.charAt(random.nextInt(63))));
-
-        return token.toString();
-
+        return createToken(50);
     }
 
     public static String createToken(int limit) {
@@ -213,28 +210,63 @@ public class Utils {
     }
 
     //Todo: fromated body to match the template
+    @Deprecated
     public static String formatedBody(String message) {
         return message;
     }
 
+    /**
+     * does a regular expression matching but case sensitive
+     *
+     * @param string string to be compared with regex
+     *
+     * @param regex The expression to be compared
+     */
     public static boolean regexMatch(String regex, String string) {
         return Pattern.compile(regex).matcher(string).find();
     }
 
+    /**
+     * does a regular expression matching
+     *
+     * @param string string to be compared with regex
+     *
+     * @param regex The expression to be compared
+     *
+     * @param flags Match flags, a bit mask that may include null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
+     *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
+     *
+     * @return if the regex matches with string
+     *
+     */
     public static boolean regexMatch(String regex, String string, int flag) {
         return Pattern.compile(regex, flag).matcher(string).find();
     }
 
+    /**
+     * this method hashes the given string using SHA-256 and returns a base64
+     * string in case of ant error returns an empty string
+     *
+     * @return the base 64 string
+     */
     public static String hash(String string) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] h = md.digest(string.getBytes());
-            return DatatypeConverter.printHexBinary(h);
+            return Base64.getEncoder().encodeToString(h);
         } catch (Exception e) {
-            return null;
+            return "";
         }
     }
 
+    /**
+     * this method does a slow hash check of the given two has strings
+     *
+     * @param hash1 - the first hash string
+     * @param hash2 = the second hash string
+     * @return true if they match else false
+     */
     public static boolean hashEquals(String hash1, String hash2) {
         byte[] hashBytes = hash1.getBytes();
         byte[] plainBytes = hash2.getBytes();
@@ -245,19 +277,22 @@ public class Utils {
         return diff == 0;
     }
 
+    /**
+     * this method generate a unique session_id for the cookie
+     *
+     * @return the session id for the cookie
+     */
     public static String generateSessionId() {
         Session session = Utils.openSession();
         session.beginTransaction();
-        String id = generateBase64(12);
+        String id;
         List<Login> logins;
         Query query = session.createQuery("from Login where sessionId = :id");
-        query.setString("id", id);
-        logins = query.list();
-        while (logins.size() > 0) {
+        do {
             id = generateBase64(12);
             query.setString("id", id);
             logins = query.list();
-        }
+        } while (logins.size() > 0);
         session.getTransaction().commit();
         session.close();
         return id;

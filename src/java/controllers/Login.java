@@ -59,7 +59,6 @@ public class Login extends Controller {
 
     private void checkCookies(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession) throws Exception {
         Cookie id = null, token = null;
-
         for (Cookie cookie : req.getCookies()) {
             switch (cookie.getName()) {
                 case "sid":
@@ -78,6 +77,7 @@ public class Login extends Controller {
         if (login.matchSessionToken(token.getValue())) {
             forward(req, resp, login, session, httpSession);
         }
+
     }
 
     private void forward(HttpServletRequest req, HttpServletResponse resp, entities.Login login, Session session, HttpSession httpSession) throws Exception {
@@ -111,5 +111,4 @@ public class Login extends Controller {
 
         }
     }
-
 }
