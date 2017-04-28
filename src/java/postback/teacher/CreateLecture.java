@@ -8,6 +8,7 @@ package postback.teacher;
 import entities.Lecture;
 import entities.Teaching;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,8 +37,7 @@ public class CreateLecture extends HttpServlet {
         session.beginTransaction();
         String lectureId = Utils.getLectureId();
         try {
-            Date now = new Date();
-            Calendar future = Calendar.getInstance();
+            LocalDateTime presentTime = LocalDateTime.now();
             count = Integer.parseInt(req.getParameter("count"));
             tcsId = Integer.parseInt(req.getParameter("teaching"));
             Teaching teaching = (Teaching) session.get(Teaching.class, tcsId);
@@ -47,21 +47,19 @@ public class CreateLecture extends HttpServlet {
                     .list();
             if (lectures.size() > 0) {
                 Lecture lecture = lectures.get(0);
-                future.setTime(lecture.getDate());
-                future.add(Calendar.MINUTE, 50 * lecture.getCount());
-                if (lecture.getTeaching().equals(teaching) && now.after(lecture.getDate()) && now.before(future.getTime())) {
+                if (presentTime.isBefore(lecture.getDate().plusMinutes(50 * lecture.getCount()))) {
                     resp.sendRedirect("/OAS/teacher?error=true");
                 } else {
                     Lecture lec = new Lecture(count, teaching);
                     lec.setId(lectureId);
-                    lec.setDate(now);
+                    lec.setDate(presentTime);
                     session.save(lec);
                     resp.sendRedirect("/OAS/teacher");
                 }
             } else {
                 Lecture lec = new Lecture(count, teaching);
                 lec.setId(lectureId);
-                lec.setDate(now);
+                lec.setDate(presentTime);
                 session.save(lec);
                 resp.sendRedirect("/OAS/teacher");
             }

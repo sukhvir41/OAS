@@ -41,6 +41,9 @@ public class UpdateDepartment extends HttpServlet {
                     tempTeacher.getHodOf().remove(department);
                     department.setHod(null);
                     teacher.addHodOf(department);
+                    if (tempTeacher.getHodOf().isEmpty()) { // check if the teacher is hod of asome deaprtment or not if not remove as hod
+                        tempTeacher.setHod(false);
+                    }
                 }
             }
             department.setName(name);
@@ -55,7 +58,7 @@ public class UpdateDepartment extends HttpServlet {
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-            
+
             resp.sendRedirect("/OAS/error");
         }
     }

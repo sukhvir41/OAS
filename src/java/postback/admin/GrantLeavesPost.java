@@ -9,22 +9,17 @@ import entities.Attendance;
 import entities.Lecture;
 import entities.Student;
 import entities.Teaching;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Stream;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.PostBackController;
-import utility.Utils;
 
 /**
  *
@@ -32,7 +27,7 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/students/grantleavepost")
 public class GrantLeavesPost extends PostBackController {
-
+    // THIS WILL NOT WORK HABE TO FIX IT
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
@@ -47,7 +42,7 @@ public class GrantLeavesPost extends PostBackController {
         if (!teachings.isEmpty()) {
             lectures = session.createCriteria(Lecture.class)
                     .add(Restrictions.in("teaching", teachings))
-                    .add(Restrictions.between("date", start, end))
+                    .add(Restrictions.between("date", start, end))// this will not work
                     .list();
         }
 

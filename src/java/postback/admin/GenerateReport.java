@@ -39,7 +39,7 @@ import utility.Utils;
 
 /**
  *
- * @author sukhvir import org.hibernate.Session; import utility.Utils;
+ * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/generatereportpost")
 public class GenerateReport extends HttpServlet {
@@ -81,7 +81,9 @@ public class GenerateReport extends HttpServlet {
             CellStyle styleCenter = workbook.createCellStyle();
             styleCenter.setAlignment(HorizontalAlignment.CENTER);
 
-            row = spreadsheet.createRow(0);
+            // creating heading title of the exel sheet
+            row = spreadsheet.createRow(0);// new row
+
             spreadsheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 10));
             cell = row.createCell(0);
             XSSFRichTextString text = new XSSFRichTextString("Classroom: ");
@@ -98,18 +100,24 @@ public class GenerateReport extends HttpServlet {
             text.append(dateForamt.format(end), (XSSFFont) fontBold);
             cell.setCellValue(text);
 
-            row = spreadsheet.createRow(2);
+            //creating heaers of the table in execl sheet
+            row = spreadsheet.createRow(2);// new row
+
             cell = row.createCell(0);
             cell.setCellValue("Roll Number");
             cell = row.createCell(1);
             cell.setCellValue("Name");
             int cellnumberHead = 2;
             int maxCellNumber = 0;
+            //getting the maximum number a subjects a stuent has
             for (Student student : classRoom.getStudents()) {
-                maxCellNumber = student.getSubjects().size() > maxCellNumber ? student.getSubjects().size() : maxCellNumber;
+                if (student.getSubjects().size() > maxCellNumber) {
+                    maxCellNumber = student.getSubjects().size();
+                }
             }
 
-            row = spreadsheet.createRow(3);
+            row = spreadsheet.createRow(3);// new row
+
             XSSFCell cellTemp = row.createCell(1);
             for (int i = 0; i < maxCellNumber; i++) {
                 spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, cellnumberHead, cellnumberHead + 2));
@@ -129,7 +137,7 @@ public class GenerateReport extends HttpServlet {
                 cellnumberHead++;
             }
 
-            row = cell.getRow();
+            // row = cell.getRow();
             cell = row.createCell(cellnumberHead++);
             cell.setCellValue("Leaves");
             spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, cellnumberHead, cellnumberHead + 1));
@@ -144,6 +152,9 @@ public class GenerateReport extends HttpServlet {
             row = cell.getRow();
             cell = row.createCell(++cellnumberHead);
             cell.setCellValue("Percentage");
+            // end of setting headers of the exel sheet table
+
+            //start of adding actual data
             int rowNumber = 4;
             List<Student> students = classRoom.getStudents();
             Collections.sort(students);
@@ -167,22 +178,22 @@ public class GenerateReport extends HttpServlet {
                     //getting lectures of the class and subject
                     List<Lecture> lectures = getLectures(classRoom, subject, session);
                     int lecturesCount = lectures.stream()
-                            .map(e -> e.getCount())
-                            .reduce(0, (c, e) -> c + e);
+                            .mapToInt(e -> e.getCount())
+                            .sum();
                     totalLectures += lecturesCount;
 
                     //getting student attendace according to the lectures and the subject 
                     List<Attendance> studentAttendances = getStudentAttendance(student, lectures, session);
                     int attendanceCount = studentAttendances.stream()
-                            .map(e -> e.getLecture().getCount())
-                            .reduce(0, (c, e) -> c + e);
+                            .mapToInt(e -> e.getLecture().getCount())
+                            .sum();
                     totalAttendance += attendanceCount;
 
                     //calculating leaves according to the atendance
                     leaves += studentAttendances.stream()
                             .filter(attendance -> attendance.isLeave())
-                            .map(attendance -> attendance.getLecture().getCount())
-                            .reduce(0, (c, e) -> c + e);
+                            .mapToInt(attendance -> attendance.getLecture().getCount())
+                            .sum();
 
                     cell = row.createCell(cellNumber++);
                     cell.setCellValue(subject.getName());
@@ -214,11 +225,12 @@ public class GenerateReport extends HttpServlet {
                 if (totalLectures > 0) {
                     cell.setCellValue((((double) totalAttendance / (double) totalLectures) * 100d) + "%");
                 } else {
-                    cell.setCellValue("100%");
+                    cell.setCellValue("NA");
                 }
                 rowNumber++;
 
             }
+            //excel table to auto resize itself to fit everything
             for (int i = 0; i <= cellnumberHead; i++) {
                 spreadsheet.autoSizeColumn(i);
             }
@@ -234,16 +246,18 @@ public class GenerateReport extends HttpServlet {
         }
     }
 
+    /**
+     * gets the lectures of the classroom and the subject. requires hibernate
+     * session to do the search
+     */
     private List<Lecture> getLectures(ClassRoom classRoom, Subject subject, Session session) {
-        List<Teaching> teaching = session.createCriteria(Teaching.class
-        )
+        List<Teaching> teaching = session.createCriteria(Teaching.class)
                 .add(Restrictions.eq("classRoom", classRoom))
                 .add(Restrictions.eq("subject", subject))
                 .list();
 
         if (teaching.size() > 0) {
-            return session.createCriteria(Lecture.class
-            )
+            return session.createCriteria(Lecture.class)
                     .add(Restrictions.in("teaching", teaching))
                     //.add(Restrictions.between("date", start, end))
                     .list();
@@ -253,13 +267,16 @@ public class GenerateReport extends HttpServlet {
         }
     }
 
+    /**
+     * gets the list of attendance ie present attendance of the student for the
+     * given lectures
+     */
     private List<Attendance> getStudentAttendance(Student student, List<Lecture> lectures, Session session) {
         if (lectures.size() > 0) {
-            return session.createCriteria(Attendance.class
-            )
+            return session.createCriteria(Attendance.class)
                     .add(Restrictions.in("lecture", lectures))
                     .add(Restrictions.eq("student", student))
-                    .add(Restrictions.eqOrIsNull("attended", true))
+                    .add(Restrictions.eqOrIsNull("attended", true))//  check is eqOrIsnull is requird or eq is fine
                     .list();
 
         } else {

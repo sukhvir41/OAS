@@ -30,7 +30,8 @@ public class DeleteSubject extends HttpServlet {
             int subjectId = Integer.parseInt(req.getParameter("subjectId"));
             
             Subject subject = (Subject) session.get(Subject.class, subjectId);
-            subject.getClassRooms().stream()
+            subject.getClassRooms()
+                    .stream()
                     .forEach(e -> e.getSubjects().remove(subject));
             session.delete(subject);
             session.getTransaction().commit();

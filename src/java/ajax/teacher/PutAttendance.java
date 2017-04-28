@@ -11,6 +11,7 @@ import entities.Student;
 import entities.Teacher;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -45,11 +46,10 @@ public class PutAttendance extends HttpServlet {
             Student student = (Student) session.get(Student.class, studentId);
             System.out.println(student + "   " + mark + "  " + lecture.getId());
             if (lecture.getTeaching().getTeacher().equals(teacher)) {
-                Date now = new Date();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(lecture.getDate());
-                cal.add(Calendar.HOUR, 3);
-                if (now.after(lecture.getDate()) && now.before(cal.getTime())) {
+                LocalDateTime presentTime = LocalDateTime.now();
+                LocalDateTime lectureOffsetTime = lecture.getDate();
+                lectureOffsetTime.plusHours(3);
+                if (presentTime.isAfter(lecture.getDate()) && presentTime.isBefore(lectureOffsetTime)) {
                     List<Attendance> attendance = session.createCriteria(Attendance.class)
                             .add(Restrictions.eq("lecture", lecture))
                             .add(Restrictions.eq("student", student))

@@ -6,8 +6,10 @@
 package entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -31,7 +33,8 @@ public class Login implements Serializable {
 
     @Id
     @Column(name = "username")
-    @Getter @Setter
+    @Getter
+    @Setter
     private String username;
 
     @Column(name = "password")
@@ -43,28 +46,35 @@ public class Login implements Serializable {
     private String type;
 
     @Column(name = "ids")
-    @Getter @Setter
+    @Getter
+    @Setter
     private int id;
 
     @Column(name = "email")
-    @Getter @Setter
+    @Getter
+    @Setter
     private String email;
 
     @Column(name = "token")
-    @Getter @Setter
+    @Getter
+    @Setter
     private String token;
 
     @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @Getter @Setter
-    private Date date;
+    @Getter
+    @Setter
+    @Convert(converter = LocalDateTimeConverter.class)
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime date;
 
     @Column(name = "used")
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean used;
 
     @Column(name = "session_id")
-    @Getter @Setter
+    @Getter
+    @Setter
     private String sessionId;
 
     @Column(name = "session_token")
@@ -99,17 +109,16 @@ public class Login implements Serializable {
         this.email = email;
     }
 
-    private Login(String username, String password, UserType type, int id, String email, String token, Date date) {
-        this.username = username;
-        setPassword(password);
-        this.type = type.toString();
-        this.id = id;
-        this.email = email;
-        this.token = token;
-        this.date = date;
-
-    }
-
+//    private Login(String username, String password, UserType type, int id, String email, String token, Date date) {
+//        this.username = username;
+//        setPassword(password);
+//        this.type = type.toString();
+//        this.id = id;
+//        this.email = email;
+//        this.token = token;
+//        this.date = date;
+//
+//    }
     public void setSessionToken(String sessionToken) {
         this.sessionToken = Utils.hash(sessionToken);
     }

@@ -9,6 +9,8 @@ import entities.Login;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +33,7 @@ public class ResetPassword extends HttpServlet {
         String token = URLDecoder.decode(req.getParameter("token"), "UTF-8");
         Login login;
         if (username != null && !username.equals("") && token != null && !token.equals("")) {
-            Date now = new Date();
+            LocalDateTime presentTime = LocalDateTime.now();
             Session session = Utils.openSession();
             session.beginTransaction();
             login = (Login) session.get(Login.class, username);
@@ -41,7 +43,8 @@ public class ResetPassword extends HttpServlet {
             } else {
                 if (!login.isUsed()) {
                     if (token.equals(login.getToken())) {
-                        if ((Math.abs(now.getTime() - login.getDate().getTime()) / 60000d) <= 30d) {
+                        LocalDateTime endTime = LocalDateTime.of(login.getDate().toLocalDate(), login.getDate().toLocalTime()).plusMinutes(30);
+                        if (presentTime.isAfter(login.getDate()) && presentTime.isBefore(endTime)) {
                             req.setAttribute("username", login.getUsername());
                             req.getRequestDispatcher("WEB-INF/resetpassword.jsp").include(req, resp);
                         } else {

@@ -25,34 +25,34 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/subjects/addsubjecttoclassrooms")
 public class AddSubjectToClassRoom extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = Utils.openSession();
-        session.beginTransaction();        
+        session.beginTransaction();
         try {
             int subjectId = Integer.parseInt(req.getParameter("subjectId"));
-            List<String> classRooms = new ArrayList<>(Arrays.asList(req.getParameterValues("classes")));            
-            
+            List<String> classRooms = Arrays.asList(req.getParameterValues("classes"));
+
             Subject subject = (Subject) session.get(Subject.class, subjectId);
             classRooms.stream()
                     .map(Integer::parseInt)
-                    .map(e -> (ClassRoom) session.get(ClassRoom.class, e))
-                    .forEach(e -> subject.addClassRoom(e));
+                    .map(classroomId -> (ClassRoom) session.get(ClassRoom.class, classroomId))
+                    .forEach(classRoom -> subject.addClassRoom(classRoom));
             session.getTransaction().commit();
             session.close();
             resp.sendRedirect("/OAS/admin/subjects/detailsubject?subjectId=" + subjectId);
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.close();
-            
+
             resp.sendRedirect("/OAS/error");
         }
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/OAS/error");
     }
-    
+
 }

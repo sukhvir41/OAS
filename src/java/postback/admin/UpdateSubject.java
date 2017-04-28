@@ -26,7 +26,7 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/subjects/updatesubject")
 public class UpdateSubject extends HttpServlet {
-
+     // have to write a better code for this
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = Utils.openSession();

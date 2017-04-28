@@ -6,10 +6,11 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,10 +37,11 @@ public class Lecture implements Serializable {
     private String id;
 
     @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
     @Getter
     @Setter
-    private Date date;
+    @Convert(converter = LocalDateTimeConverter.class)
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "tcs_fid")
@@ -68,7 +70,7 @@ public class Lecture implements Serializable {
     public Lecture(int count, Teaching teaching) {
         this.count = count;
         addTeaching(teaching);
-        this.date = new Date();
+        this.date = LocalDateTime.now();
     }
 
     public final void addTeaching(Teaching teaching) {
