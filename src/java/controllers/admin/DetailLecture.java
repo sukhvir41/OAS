@@ -28,7 +28,7 @@ public class DetailLecture extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int lectureId = Integer.parseInt(req.getParameter("lectireId"));
+        String lectureId = req.getParameter("lectireId");
         Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
 
         List<Student> students = lecture.getTeaching()// this will contain all studentts first and then only absent students
@@ -37,7 +37,7 @@ public class DetailLecture extends Controller {
                 .stream()
                 .filter(student -> student.getSubjects().contains(lecture.getTeaching().getSubject()))
                 .collect(Collectors.toList());
-        
+
         Collections.sort(students);// sorting all studnets according to their roll number
 
         req.setAttribute("total", students.size());// setting the total size first as the list will have only absent students later
@@ -48,13 +48,13 @@ public class DetailLecture extends Controller {
                 .map(attendance -> attendance.getStudent())
                 .collect(Collectors.toList());
         students.removeAll(present);//removing all present students from the students list
-        
+
         Collections.sort(present);// sorting all students accordig to their to roll number
 
         req.setAttribute("present", present);
         req.setAttribute("absent", students);
         req.setAttribute("headcount", present.size());
-
+        req.setAttribute("lecture", lecture);
         req.getRequestDispatcher("/WEB-INF/admin/detaillecture.jsp").include(req, resp);
     }
 
