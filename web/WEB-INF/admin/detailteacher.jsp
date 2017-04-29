@@ -136,22 +136,26 @@
                                         <dt>Unaccounted?</dt>
                                         <dd>${requestScope.teacher.unaccounted}</dd>
                                     </dl>
+                                    <c:if test="${!requestScope.teacher.unaccounted}">
+                                        <c:choose>
+                                            <c:when test="${requestScope.teacher.verified}">
+                                                <a class="btn btn-danger" value="${requestScope.teacher.id}" href="/OAS/admin/teachers/deactivateteacher?teacherId=${requestScope.teacher.id}">Deverify</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="btn btn-success" value="${requestScope.teacher.id}" href="/OAS/admin/teachers/activateteacher?teacherId=${requestScope.teacher.id}">Verify</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
                                     <c:choose>
                                         <c:when test="${requestScope.teacher.verified}">
-                                            <button class="btn btn-danger" value="${requestScope.teacher.id}" href="/OAS/admin/teachers/verifyteacher?teacherId=${requestScope.teacher.id}">Deverify</button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button class="btn btn-success" value="${requestScope.teacher.id}" href="/OAS/admin/teachers/deverifyteacher?teacherId=${requestScope.teacher.id}">Verify</button>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                    <c:choose>
-                                        <c:when test="${requestScope.teacher.unaccounted}">
                                         </c:when>
                                         <c:otherwise>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#unaccountTeacher">Unaccout Teacher</button>
                                         </c:otherwise>
                                     </c:choose>
+                                    <c:if test="${requestScope.teacher.unaccounted}">
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>                                 
+                                    </c:if>
                                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -178,10 +182,10 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                                                     <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to unaccount the Teacher</h4>
                                                 </div>
-                                                <form class="form-horizontal mb-lg" action="###" method="post">
+                                                <form class="form-horizontal mb-lg" action="/OAS/admin/teachers/unaccountteacher" method="post">
                                                     <div class="modal-body">
                                                         <input type="hidden" name="teacherId" value="${requestScope.teacher.id}">
                                                         <label>Unaccounting teacher will remove all subjects and all classes from respective teacher.</label>
@@ -296,46 +300,4 @@
         -->
 
     </body>
-</html>
-
-35444
---88888888888888888888+888888888888888889*----------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-9-
-
-
-
-
-
-
-
-
-
-
-
-061#######8#8888188888888888
-8
-1
-
-277
-01222222222101*
-
-
-
-
-1*01525
--93-......................8*9
+</html>s

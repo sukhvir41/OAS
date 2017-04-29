@@ -126,19 +126,23 @@
                                         <dt>Unaccounted?</dt>
                                         <dd>${requestScope.student.unaccounted}</dd>
                                     </dl>
-                                    <c:choose>
-                                        <c:when test="${requestScope.student.verified}">
-                                            <button class="btn btn-danger" value="${requestScope.student.id}" href="/OAS/admin/students/verifystudent?studentId=${requestScope.student.id}">Deverify</button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button class="btn btn-success" value="${requestScope.student.id}" href="/OAS/admin/students/deverifystudent?studentId=${requestScope.student.id}">Verify</button>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <a class="btn btn-primary" href="/OAS/admin/students/grantleave?studentId=${requestScope.student.id}">Grant Leave</a>
-                                    <c:if test="${requestScope.student.unaccounted==true}">
+                                    <c:if test="${!requestScope.student.unaccounted}">    
+                                        <c:choose>
+                                            <c:when test="${requestScope.student.verified}">
+                                                <a class="btn btn-danger" value="${requestScope.student.id}" href="/OAS/admin/students/deactivatestudent?studentId=${requestScope.student.id}">Deverify</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="btn btn-success" value="${requestScope.student.id}" href="/OAS/admin/students/activatestudent?studentId=${requestScope.student.id}">Verify</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
+                                    <c:if test="${!requestScope.student.unaccounted}">
+                                        <a class="btn btn-primary" href="/OAS/admin/students/grantleave?studentId=${requestScope.student.id}">Grant Leave</a>
+                                    </c:if>
+                                    <c:if test="${requestScope.student.unaccounted}">
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
                                     </c:if>
-                                    <c:if test="${requestScope.student.unaccounted==false}">
+                                    <c:if test="${!requestScope.student.verified}">
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#unaccountStudent">Unaccout Student</button>
                                     </c:if>
 
@@ -170,7 +174,7 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
                                                     <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to unaccount the Teacher</h4>
                                                 </div>
-                                                <form class="form-horizontal mb-lg" action="/OAS/admin/studetns/unaccount" method="post">
+                                                <form class="form-horizontal mb-lg" action="/OAS/admin/studetns/unaccountstudent" method="post">
                                                     <div class="modal-body">
                                                         <input type="hidden" name="studentId" value="${requestScope.student.id}">
                                                         <label>Unaccounting student will remove all subjects and his/her class from respective student.</label>

@@ -88,7 +88,7 @@
                                     <c:choose>
                                         <c:when test="${sessionScope.teacher.hod==true}" >
                                             <li class="dropdown">
-                                                <a class="Classroomn-toggle">Switch Account</a>
+                                                <a class="dropdown-toggle">Switch Account</a>
                                                 <ul class="dropdown-menu">
                                                     <li>
                                                         <a href="/OAS/teacher"> As a Teacher</a>

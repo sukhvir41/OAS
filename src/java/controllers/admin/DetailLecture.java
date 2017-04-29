@@ -28,7 +28,7 @@ public class DetailLecture extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        String lectureId = req.getParameter("lectireId");
+        String lectureId = req.getParameter("lectureId");
         Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
 
         List<Student> students = lecture.getTeaching()// this will contain all studentts first and then only absent students

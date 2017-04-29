@@ -52,7 +52,7 @@
                                     <c:choose>
                                         <c:when test="${sessionScope.teacher.hod==true}" >
                                             <li class="dropdown">
-                                                <a clasClassroomn-toggle">Switch Account</a>
+                                                <a class="dropdown-toggle">Switch Account</a>
                                                 <ul class="dropdown-menu">
                                                     <c:forEach var="department" items="${sessionScope.teacher.hodOf}">
                                                         <li>

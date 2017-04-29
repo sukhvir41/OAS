@@ -90,7 +90,7 @@
                                             <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-6">
-                                                        <label>Course</label>
+                                                        <h4>Course</h4>
                                                         <select class="form-control" name="course" id="course">
                                                         <c:forEach var="course" items="${requestScope.courses}">
                                                             <option value="${course.id}">${course.name}</option>
@@ -102,7 +102,7 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-6">
-                                                    <label>Class Rooom</label>
+                                                    <h4>Class Rooom</h4>
                                                     <select required="true" class="form-control" name="classroom" id="classroom">
 
                                                     </select>
@@ -112,7 +112,7 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-6">
-                                                    <label>Start Date</label>
+                                                    <h4>Start Date</h4>
                                                     <input required="true" class="form-control" type="date" name="startdate">
                                                 </div>
                                             </div>
@@ -120,7 +120,7 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-6">
-                                                    <label>End Date</label>
+                                                    <h4>End Date</h4>
                                                     <input required="true" class="form-control" type="date" name="enddate">
                                                 </div>
                                             </div>

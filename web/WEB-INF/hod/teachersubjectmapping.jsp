@@ -162,6 +162,7 @@
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
         <script src="/OAS/scripts/jquery-ui.js"></script>
+        <script src="/OAS/scripts/jquery-ui-touch.js"></script>
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
