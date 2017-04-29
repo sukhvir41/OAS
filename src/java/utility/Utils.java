@@ -37,6 +37,15 @@ public class Utils {
     private static SessionFactory sessionFactory = null;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
 
+    static {
+        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+        StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
+        sb.applySettings(cfg.getProperties());
+        StandardServiceRegistry standardServiceRegistry = sb.build();
+        sessionFactory = cfg.buildSessionFactory(standardServiceRegistry);
+        
+    }
+
     private Utils() throws Exception {
         throw new Exception("don't create an instance of this class");
     }
@@ -48,11 +57,7 @@ public class Utils {
      */
     public static Session openSession() {
         if (sessionFactory == null) {
-            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-            StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
-            sb.applySettings(cfg.getProperties());
-            StandardServiceRegistry standardServiceRegistry = sb.build();
-            sessionFactory = cfg.buildSessionFactory(standardServiceRegistry);
+            throw new NullPointerException();
         }
         return sessionFactory.openSession();
     }
@@ -233,7 +238,8 @@ public class Utils {
      *
      * @param regex The expression to be compared
      *
-     * @param flags Match flags, a bit mask that may include null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * @param flags Match flags, a bit mask that may include null null null null
+     * null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *

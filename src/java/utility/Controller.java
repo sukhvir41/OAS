@@ -47,7 +47,7 @@ public abstract class Controller extends HttpServlet {
     }
     
     public boolean showErrorLog() {
-        return false;
+        return true;
     }
     
     public abstract void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception;
