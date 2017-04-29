@@ -84,4 +84,11 @@ public class Lecture implements Serializable {
         attendance.setLecture(this);
         this.attendance.add(attendance);
     }
+
+    @Override
+    public String toString() {
+        return getId() + " "+ getTeaching();
+    }
+    
+    
 }

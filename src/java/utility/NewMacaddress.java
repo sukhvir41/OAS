@@ -51,6 +51,8 @@ public class NewMacaddress {
 
     @Getter
     private static String stringSourceIpAddress;
+    @Getter
+    private static String stringSourceMacAddress;
 
     public NewMacaddress() throws InstantiationException {
         throw new InstantiationException();
@@ -60,12 +62,14 @@ public class NewMacaddress {
         try {
             readwrite.writeLock().lock();
             sourceMacAddress = MacAddress.getByName(macAddress);
-            stringSourceIpAddress = ipAddress;
-            sourceIpAddress = InetAddress.getByName(stringSourceIpAddress);
+
+            sourceIpAddress = InetAddress.getByName(ipAddress);
             nif = Pcaps.getDevByAddress(sourceIpAddress);
             readwrite.writeLock().unlock();
             if (nif != null) {
                 System.out.println("nif set");
+                stringSourceIpAddress = ipAddress;
+                stringSourceMacAddress = macAddress;
                 packetService = Executors.newFixedThreadPool(10, new MyThreadFactory(nif));
                 removeService = Executors.newSingleThreadExecutor();
                 map = new ConcurrentHashMap<>();

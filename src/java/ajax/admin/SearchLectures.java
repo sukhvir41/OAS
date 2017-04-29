@@ -70,6 +70,7 @@ public class SearchLectures extends AjaxController {
         
         JsonObject lecture = new JsonObject();
         lecture.addProperty("id", theLecture.getId());
+        lecture.addProperty("lecture", theLecture.toString());
         lecture.addProperty("count", theLecture.getCount());
         lecture.addProperty("date", theLecture.getDate().toString());
         lecture.addProperty("present", attendentStudent);

@@ -9,6 +9,7 @@ import entities.Lecture;
 import entities.Student;
 import entities.Teacher;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -52,9 +53,9 @@ public class CreateLectureHome extends HttpServlet {
             Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
             teacher = (Teacher) session.get(Teacher.class, teacher.getId());
             req.setAttribute("teaching", teacher.getTeaches());
-            Date now = new Date();
-            Calendar past = Calendar.getInstance();
-            past.add(Calendar.HOUR, -3);
+
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime past = now.minusHours(3);
             Lecture lecture;
             if (lectureId != null) {
 
@@ -62,7 +63,7 @@ public class CreateLectureHome extends HttpServlet {
                 if (teacher.getTeaches().contains(lecture.getTeaching())) {
                     List<Lecture> lectures = session.createCriteria(Lecture.class)
                             .add(Restrictions.in("teaching", teacher.getTeaches()))
-                            .add(Restrictions.between("date", past.getTime(), now))
+                            .add(Restrictions.between("date", past, now))
                             .addOrder(Order.desc("date"))
                             .list();
                     lectures.remove(lecture);
@@ -103,7 +104,7 @@ public class CreateLectureHome extends HttpServlet {
                 if (teacher.getTeaches().size() > 0) {
                     lectures = session.createCriteria(Lecture.class)
                             .add(Restrictions.in("teaching", teacher.getTeaches()))
-                            .add(Restrictions.between("date", past.getTime(), now))
+                            .add(Restrictions.between("date", past, now))
                             .addOrder(Order.desc("date")).
                             list();
                 }
@@ -118,8 +119,8 @@ public class CreateLectureHome extends HttpServlet {
                     lecture.getTeaching().getClassRoom()
                             .getStudents()
                             .stream()
-                            .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
-                            .forEach(e -> students.add(e));
+                            .filter(student -> student.getSubjects().contains(lecture.getTeaching().getSubject()))
+                            .forEach(student -> students.add(student));
                     Collections.sort(students);
                     List<Student> present = new ArrayList<>();
                     lecture.getAttendance().stream()
@@ -128,7 +129,7 @@ public class CreateLectureHome extends HttpServlet {
                     students.removeAll(present);
                     Collections.sort(present);
 //                    List<Student> present = new ArrayList<>();
-//                    if (lecture.getAttendance().size() > 0) {
+//                    if (lecture.getAttendance().size() > 0) {       have to chekcth uis why it is removed
 //                        List<Attendance> temp = new ArrayList<>();
 //                        lecture.getAttendance().stream()
 //                                .filter(e -> e.isAttended())

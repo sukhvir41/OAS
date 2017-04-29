@@ -46,10 +46,12 @@ public class SearchStudent extends HttpServlet {
                 if (filter.equals("all")) {
                     classRoom.getStudents()
                             .stream()
-                            .forEach(e -> add(e, jsonStudents));
+                            .filter(student -> !student.isUnaccounted())
+                            .forEach(student -> add(student, jsonStudents));
                 } else {
                     classRoom.getStudents()
                             .stream()
+                            .filter(student -> !student.isUnaccounted())
                             .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
                             .forEach(e -> add(e, jsonStudents));
                 }
@@ -59,11 +61,13 @@ public class SearchStudent extends HttpServlet {
                 if (filter.equals("all")) {
                     classRoom.getStudents()
                             .stream()
+                            .filter(student -> !student.isUnaccounted())
                             .filter(student -> student.getSubjects().contains(subject))
                             .forEach(student -> add(student, jsonStudents));
                 } else {
                     classRoom.getStudents()
                             .stream()
+                            .filter(student -> !student.isUnaccounted())
                             .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
                             .filter(e -> e.getSubjects().contains(subject))
                             .forEach(e -> add(e, jsonStudents));

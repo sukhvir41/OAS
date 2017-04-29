@@ -5,31 +5,32 @@
  */
 package controllers.admin;
 
-import java.io.IOException;
+import entities.Teacher;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.Controller;
-import utility.MacAddressUtil;
-import utility.NewMacaddress;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/networksettings")
-public class AdminNetworkSettings extends Controller {
-
+@WebServlet(urlPatterns = "/admin/teachers/unaccounted")
+public class AdminUnaccountedTeachers extends Controller {
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        req.setAttribute("macaddress", NewMacaddress.getStringSourceMacAddress());
-        req.setAttribute("ipaddress", NewMacaddress.getStringSourceIpAddress());
-        req.getRequestDispatcher("/WEB-INF/admin/adminnetworksettings.jsp").include(req, resp);
+        List<Teacher> teachers = session.createCriteria(Teacher.class)
+                .add(Restrictions.eq("unaccounted", true))
+                .list();
+        
+        req.setAttribute("teachers", teachers);
+        req.getRequestDispatcher("/WEB-INF/admin/unaccountedteacher.jsp").include(req, resp);
     }
-
+    
 }
