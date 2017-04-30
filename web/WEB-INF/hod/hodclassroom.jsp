@@ -81,7 +81,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>CLass Rooms</h1>
+                                <h1>Class Rooms</h1>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                                             <c:forEach var="classRoom" items="${requestScope.classrooms}">
                                                 <tr>
                                                     <td><a name="${classRoom.id}"></a>${classRoom.id}</td>
-                                                    <td><a href="/OAS/hod/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom.name}</a></td>
+                                                    <td><a href="/OAS/teacher/hod/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom.name}</a></td>
                                                     <td>${classRoom.division}</td>
                                                     <td>${classRoom.semister}</td>
                                                     <td><a href="/OAS/hod/courses/detailcourse?courseId=${classRoom.course.id}">${classRoom.course.name}</a></td>

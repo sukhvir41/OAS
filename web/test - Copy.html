@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Class Room Details - HOD</title> 
+        <title>Update Class Teacher - HOD</title>   
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
@@ -72,13 +72,13 @@
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/teacher/hod">Home</a></li>
                                     <li><a href="/OAS/teacher/hod/classrooms">Class Rooms</a></li>
-                                    <li>Class Room Deatil</li>
+                                    <li>Update Class Teacher</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Class Room Detail</h1>
+                                <h1>Update Class Teacher</h1>
                             </div>
                         </div>
                     </div>
@@ -87,84 +87,31 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2>Class Room : <c:out value="${requestScope.classroom.name}" /></h2>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4>Deatils</h4>
-                                            <dl>
-                                                <dt>Name</dt>
-                                                <dd>${requestScope.classroom.name}</dd>
-                                                <dt>Division</dt>   
-                                                <dd>${requestScope.classroom.division}</dd>
-                                                <dt>Semister</dt>
-                                                <dd>${requestScope.classroom.semister}</dd>
-                                                <dt>Minimum Subjects</dt>
-                                                <dd>${requestScope.classroom.minimumSubjects}</dd>
-                                                <dt>Course</dt>
-                                                <dd>${requestScope.classroom.course.name}</dd>
-                                                <dt>Class Teacher</dt>
-                                                <dd>${requestScope.classroom.classTeacher}</dd>
-                                            </dl>   
+                            <form action="/OAS/teacher/hod/clasrooms/updateclassteacher" method="Post">    
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2>Class Room : <c:out value="${requestScope.classroom.name}" /></h2>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input type="hidden" name="classroomId" value="${requestScope.classroom.id}">
+                                                <label>Select Class Teacher</label>
+                                                <select class="form-control input-lg mb-md"  name="teacherId" id="teacherId">
+                                                    <c:forEach var="teacher" items="${requestScope.teachers}">
+                                                        <option value="${teacher.id}">${teacher}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr class="tall">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4>Subjects</h4>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Name</th>
-                                                        <th>Elective</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    <c:forEach var="subject" items="${requestScope.classroom.subjects}">
-                                                        <tr>
-                                                            <td>${subject.id}</td>
-                                                            <td><a href="/OAS/teacher/hod/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
-                                                            <td>${subject.elective}</td>
-                                                        </tr>
-                                                    </c:forEach>
-
-                                                </tbody>
-                                            </table>
-                                            <hr class="tall">
-                                            <h4>Students</h4>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Name</th>
-                                                        <th>Roll Number</th>
-                                                        <th>Email</th>
-                                                        <th>Number</th>
-                                                        <th>Verified</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    <c:forEach var="student" items="${requestScope.classroom.students}">
-                                                        <tr>
-                                                            <td>${student.id}</td>
-                                                            <td><a href="http://localhost:8080/OAS/teacher/hod/students/detailstudent?studentId=${student.id}">${student}</a></td>
-                                                            <td>${student.rollNumber}</td>
-                                                            <td>${student.email}</td>
-                                                            <td>${student.number}</td>
-                                                            <td>${student.verified}</td>
-                                                        </tr>
-                                                    </c:forEach>
-
-                                                </tbody>
-                                            </table>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <input type="submit" value="Update" class="btn btn-primary">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
