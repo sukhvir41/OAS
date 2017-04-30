@@ -30,11 +30,14 @@ public class HodClassRoom extends Controller {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
+        
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
+        
         List<ClassRoom> classRooms = new ArrayList<>();
         department.getCourses().stream()
                 .forEach(course -> classRooms.addAll(course.getClassRooms()));
+        
         req.setAttribute("classrooms", classRooms);
         req.getRequestDispatcher("/WEB-INF/hod/hodclassroom.jsp").include(req, resp);
     }

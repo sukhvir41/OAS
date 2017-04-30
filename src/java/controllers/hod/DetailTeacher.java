@@ -5,6 +5,8 @@
  */
 package controllers.hod;
 
+import entities.Department;
+import entities.Login;
 import entities.Teacher;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.Controller;
 
 /**
@@ -20,14 +23,26 @@ import utility.Controller;
  */
 @WebServlet(urlPatterns = "/teacher/hod/teachers/detailteacher")
 public class DetailTeacher extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-        
-        req.setAttribute("teacher", teacher);
-        req.getRequestDispatcher("/WEB-INF/hod/detailteacher.jsp").include(req, resp);
+
+        Department department = (Department) httpSession.getAttribute("department");
+        department = (Department) session.get(Department.class, department.getId());
+
+        if (teacher.getDepartment().contains(department)) {
+            Login login = (Login) session.createCriteria(Login.class)
+                    .add(Restrictions.eq("id", teacherId))
+                    .list()
+                    .get(0);
+            req.setAttribute("username", login.getUsername());
+            req.setAttribute("teacher", teacher);
+            req.getRequestDispatcher("/WEB-INF/hod/detailteacher.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("/OAS/error");
+        }
     }
-    
+
 }

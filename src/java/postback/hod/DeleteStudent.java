@@ -5,6 +5,7 @@
  */
 package postback.hod;
 
+import entities.Department;
 import entities.Student;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
@@ -25,11 +26,18 @@ public class DeleteStudent extends PostBackController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
-        if (student.isUnaccounted()) {
-            session.delete(student);
-            resp.sendRedirect("/OAS/teacher/hod/students");
-        } else {
-            resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + studentId);
+        Department department = (Department) httpSession.getAttribute("department");
+        department = (Department) session.get(Department.class, department.getId());
+
+        if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
+            if (student.isUnaccounted()) {
+                session.delete(student);
+                resp.sendRedirect("/OAS/teacher/hod/students");
+            } else {
+                resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + studentId);
+            }
+        }else{
+            resp.sendRedirect("/OAS/error");
         }
     }
 

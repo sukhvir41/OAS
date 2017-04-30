@@ -5,6 +5,7 @@
  */
 package controllers.hod;
 
+import entities.Department;
 import entities.Subject;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +21,21 @@ import utility.Controller;
  */
 @WebServlet(urlPatterns = "/teacher/hod/subejcts/detailsubject")
 public class DetailSubject extends Controller {
-
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int subjectId = Integer.parseInt(req.getParameter("subjectId"));
         Subject subject = (Subject) session.get(Subject.class, subjectId);
-
-        req.setAttribute("subject", subject);
-        req.getRequestDispatcher("/WEB-INF/hod/detailsubject.jsp").include(req, resp);
-
+        
+        Department department = (Department) httpSession.getAttribute("department");
+        department = (Department) session.get(Department.class, department.getId());
+        
+        if (subject.getCourse().getDepartment().getId() == department.getId()) {
+            req.setAttribute("subject", subject);
+            req.getRequestDispatcher("/WEB-INF/hod/detailsubject.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("/OAS/error");
+        }
     }
-
+    
 }

@@ -5,14 +5,18 @@
  */
 package controllers.hod;
 
+import entities.Department;
 import entities.Student;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.Controller;
 import utility.Utils;
 
 /**
@@ -20,36 +24,23 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/students/deactivatestudent")
-public class DeactivateStudent extends HttpServlet {
-
+public class DeactivateStudent extends Controller {
+    
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
-
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            int studentId = Integer.parseInt(req.getParameter("studentId"));
-            Student student = (Student) session.get(Student.class, studentId);
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+        int studentId = Integer.parseInt(req.getParameter("studentId"));
+        
+        Student student = (Student) session.get(Student.class, studentId);
+        
+        Department department = (Department) httpSession.getAttribute("department");
+        department = (Department) session.get(Department.class, department.getId());
+        
+        if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
             student.setVerified(false);
-            session.getTransaction().commit();
-            session.close();
             resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + student.getId());
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
+        } else {
             resp.sendRedirect("/OAS/error");
-        } finally {
-
         }
     }
-
+    
 }
