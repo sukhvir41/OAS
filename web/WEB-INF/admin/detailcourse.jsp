@@ -285,6 +285,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
+                                                <th>Class Room</th>
                                                 <th>Course</th>
                                                 <th>Elective</th>
                                             </tr>
@@ -294,6 +295,11 @@
                                                 <tr>
                                                     <td>${subject.id}</td>
                                                     <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
+                                                    <td>
+                                                        <c:forEach var="classRoom" items="${subject.classRooms}">
+                                                            <a href="/OAS/admin/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom}<br></a>
+                                                        </c:forEach>
+                                                    </td>
                                                     <td>${subject.course.name}</td>
                                                     <td>${subject.elective}</td>
                                                 </tr>

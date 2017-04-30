@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -7,16 +6,16 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Courses - HOD</title>	
+        <title>Subjects - HOD</title>  
 
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-
+        
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -63,56 +62,68 @@
         <div class="body">
             <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
 
-            <div role="main" class="main">
-                <section class="page-header">
+                <div role="main" class="main">
+                    <section class="page-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                        <li><a href="/OAS/teacher/hod">Home</a></li>
+                                        <li>Subjects</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Subjects</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <ul class="breadcrumb">
-                                    <li><a href="/OAS/teacher/hod">Home</a></li>
-                                    <li>Courses</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1>Courses</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!--Course-->
-                                    <h4>Course</h4>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Department Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="course" items="${requestScope.courses}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!--Subject-->
+                                        <h4>Subjects</h4>
+                                        <table class="table">
+                                            <thead>
                                                 <tr>
-                                                    <td>${course.id}<a name="${course.id}"></a></td>
-                                                    <td><a href="/OAS/teacher/hod/courses/detailcourse?courseId=${course.id}">${course.name}</a></td>
-                                                    <td>${course.department.name}</td>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Class Rooms</th>
+                                                    <th>Course</th>
+                                                    <th>Elective</th>
+                                                    <th>Action</th>
                                                 </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="subject" items="${requestScope.subjects}">
+                                                    <tr>
+                                                        <td><a name="${subject.id}"></a>${subject.id}</td>
+                                                        <td><a href="/OAS/teacher/hod
+                                                        /subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
+                                                        <td>
+                                                            <c:forEach var="classRoom" items="${subject.classRooms}">
+                                                                <a href="/OAS/teacher/hod/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom}<br></a>
+                                                            </c:forEach>
+                                                        </td>
+                                                        <td>${subject.course.name}</td>
+                                                        <td>${subject.elective}</td>
+                                                        <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/
+                                                        /subjects/editsubject?subjectId=${subject.id}&from=subjects">Edit</a></td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <!-- Vendor -->
         <!--[if lt IE 9]>
@@ -120,6 +131,7 @@
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
+        <script src="/OAS/scripts/mustache.js"></script>
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

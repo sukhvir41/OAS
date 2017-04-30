@@ -174,7 +174,7 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
                                                     <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to unaccount the Teacher</h4>
                                                 </div>
-                                                <form class="form-horizontal mb-lg" action="/OAS/admin/studetns/unaccountstudent" method="post">
+                                                <form class="form-horizontal mb-lg" action="/OAS/admin/students/unaccountstudent" method="post">
                                                     <div class="modal-body">
                                                         <input type="hidden" name="studentId" value="${requestScope.student.id}">
                                                         <label>Unaccounting student will remove all subjects and his/her class from respective student.</label>

@@ -8,8 +8,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Subjects - Admin</title>  
-
+        <title>Teachers - HOD</title> 
+        .
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -60,7 +60,7 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/hod/hodheader.jsp"></jsp:include>
 
                 <div role="main" class="main">
                     <section class="page-header">
@@ -68,14 +68,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-                                        <li><a href="/OAS/admin">Home</a></li>
-                                        <li>Subjects</li>
+                                        <li><a href="/OAS/teacher/hod">Home</a></li>
+                                        <li>Teachers</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h1>Subjects</h1>
+                                    <h1>Teachers</h1>
                                 </div>
                             </div>
                         </div>
@@ -83,106 +83,112 @@
 
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-8">
-                                <form action="/OAS/admin/subjects/addsubject" method="post">
-                                    <h4>Add Subject</h4>
-                                    <input type="hidden" name="courseId" value="${requestScope.course.id}">
-                                <input type="hidden" name="from" value="">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                            <label>Subject Name</label>
-                                            <input class="form-control input-lg" placeholder="subject name" type="text" name="subjectname" id="subjectname" required="true">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                            <label>Elective</label>
-                                            <span class="checkbox">
-                                                <label class="checkbox"><input type="checkbox" name="elective" value="true">Elective</label>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                            <label>Course</label>
-                                            <select class="form-control mb-md"  id="course" name="course">
-                                                <c:forEach var="course" items="${requestScope.courses}">
-                                                    <option value="${course.id}">${course.name}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                            <label>Class Rooms</label>
-                                            <div id="class">
-
+                                    <div class="col-md-6">
+                                        <h4>Serach By Name</h4>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <input class="form-control input-lg" placeholder="name" type="text" name="teachername" id="teachername">
+                                                    <br>
+                                                    <button class="btn btn-primary" id ="searchname">Search</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class= "row">
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                            <input type="submit" value="Add" class="btn btn-primary">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <hr class="tall">
-                    <div class="row">
-                        <div class="col-md-12">
+                            </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <!--Subject-->
-                                    <h4>Subjects</h4>
+                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                <div class="col-md-4">
+                                    <div class="alert alert-danger" hidden id="error">
+                                        <strong>Failure!</strong> Error in getting result
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                <div class="col-md-4">
+                                    <div class="alert alert-success" hidden id="success">
+                                        <strong>Success!</strong> Results below
+                                    </div>
+                                </div> 
+                            </div>
+                            <hr class="tall">
+                            <div class="row">
+                                <div class="col-md-12">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Course</th>
-                                                <th>Elective</th>
+                                                <th>Number</th>
+                                                <th>Email</th>
+                                                <th>HOD</th>
+                                                <th>Class Teacher</th>
+                                                <th>Departments</th>
+                                                <th>Verified</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <c:forEach var="subject" items="${requestScope.subjects}">
+                                        <tbody id="tablebody">
+                                            <c:forEach var="teacher" items="${requestScope.teachers}">
                                                 <tr>
-                                                    <td><a name="${subject.id}"></a>${subject.id}</td>
-                                                    <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
-                                                    <td>${subject.course.name}</td>
-                                                    <td>${subject.elective}</td>
-                                                    <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/subjects/editsubject?subjectId=${subject.id}&from=subjects">Edit</a></td>
+                                                    <td>${teacher.id}</td>
+                                                    <td><a href="/OAS/teacher/hod/teachers/detailteacher?teacherId=${teacher.id}">${teacher}</a></td>
+                                                    <td>${teacher.number}</td>
+                                                    <td>${teacher.email}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${teacher.hod}">
+                                                                <c:forEach var="department" items="${teacher.hodOf}">
+                                                                    ${department.name}<br>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                not Hod
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>${teacher.classRoom.name}</td>  
+                                                    <td>
+                                                        <c:forEach var="department" items="${teacher.department}">
+                                                            ${department.name}<br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>${teacher.verified}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${teacher.verified}">
+                                                                <button class="btn btn-danger mr-xs mb-sm action" value="${teacher.id}">deverify</button>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <button class="btn btn-success mr-xs mb-sm action" value="${teacher.id}">verify</button>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>                                                  
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div>        
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Vendor -->
         <!--[if lt IE 9]>
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <script src="/OAS/scripts/adminsubject.js"></script>
+        <script src="/OAS/scripts/adminsearchteacher.js"></script>
         <script src="/OAS/scripts/mustache.js"></script>
+
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

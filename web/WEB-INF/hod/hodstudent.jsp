@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Teachers - Admin</title> 
+        <title>Students - HOD</title> 
         .
 
         <!-- Mobile Metas -->
@@ -47,53 +47,49 @@
 
         <!-- Head Libs -->
         <script src="/OAS/vendor/modernizr/modernizr.js"></script>
-
-        <!--[if IE]>
-                <link rel="stylesheet" href="css/ie.css">
-                <![endif]-->
-
-        <!--[if lte IE 8]>
-                <script src="vendor/respond/respond.js"></script>
-                <script src="vendor/excanvas/excanvas.js"></script>
-                <![endif]-->
-
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
-
-                <div role="main" class="main">
-                    <section class="page-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="breadcrumb">
-                                        <li><a href="/OAS/admin">Home</a></li>
-                                        <li>Teachers</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Teachers</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
+            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+            <div role="main" class="main">
+                <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h4>Departments</h4>
-                                                <select class="form-control mb-md" style="width: 50%;" id="department" name="departmentId">
-                                                    <option value="all">All</option>
-                                                <c:forEach var="department" items="${requestScope.departments}">
-                                                    <option value="${department.id}">${department.name}</option>
+                                <ul class="breadcrumb">
+                                    <li><a href="/OAS/teacher/hod">Home</a></li>
+                                    <li>Students</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Students</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Courses</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="course" name="courseId">
+                                                <c:forEach var="course" items="${requestScope.courses}">
+                                                    <option value="${course.id}">${course.name}</option>
                                                 </c:forEach>
+                                            </select>
+                                            <h4>Class Room</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="classroom" name="classroomId">
+
+                                            </select>
+                                            <h4>Subject</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
+
                                             </select>
                                             <h4>Filter</h4>
                                             <div class="radio">
@@ -113,11 +109,11 @@
                                             <button class="btn btn-primary" id ="search">Search</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <h4>Serach By Name</h4>
+                                            <h4>Search By Name</h4>
                                             <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-8">
-                                                        <input class="form-control input-lg" placeholder="name" type="text" name="teachername" id="teachername">
+                                                        <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
                                                         <br>
                                                         <button class="btn btn-primary" id ="searchname">Search</button>
                                                     </div>
@@ -127,6 +123,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <!-- SHOW THIS WHEN THRER IS AN ERROR -->
                                 <div class="col-md-4">
@@ -153,51 +150,15 @@
                                                 <th>Name</th>
                                                 <th>Number</th>
                                                 <th>Email</th>
-                                                <th>HOD</th>
-                                                <th>Class Teacher</th>
-                                                <th>Departments</th>
+                                                <th>Class Room</th>
+                                                <th>Roll Number</th>
+                                                <th>Subjects</th>
                                                 <th>Verified</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tablebody">
-                                            <c:forEach var="teacher" items="${requestScope.teachers}">
-                                                <tr>
-                                                    <td>${teacher.id}</td>
-                                                    <td><a href="/OAS/admin/teachers/detailteacher?teacherId=${teacher.id}">${teacher}</a></td>
-                                                    <td>${teacher.number}</td>
-                                                    <td>${teacher.email}</td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${teacher.hod}">
-                                                                <c:forEach var="department" items="${teacher.hodOf}">
-                                                                    ${department.name}<br>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                not Hod
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </td>
-                                                    <td>${teacher.classRoom.name}</td>  
-                                                    <td>
-                                                        <c:forEach var="department" items="${teacher.department}">
-                                                            ${department.name}<br>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>${teacher.verified}</td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${teacher.verified}">
-                                                                <button class="btn btn-danger mr-xs mb-sm action" value="${teacher.id}">deverify</button>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <button class="btn btn-success mr-xs mb-sm action" value="${teacher.id}">verify</button>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </td>                                                  
-                                                </tr>
-                                            </c:forEach>
+
                                         </tbody>
                                     </table>
                                 </div>        
@@ -207,14 +168,10 @@
                 </div>
             </div>
         </div>
-
-        <!-- Vendor -->
-        <!--[if lt IE 9]>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <![endif]-->
+        
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <script src="/OAS/scripts/adminsearchteacher.js"></script>
+        
         <script src="/OAS/scripts/mustache.js"></script>
 
         <!--<![endif]-->
@@ -257,22 +214,5 @@
 
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
-
-        <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-        <script type="text/javascript">
-        
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-12345678-1']);
-                _gaq.push(['_trackPageview']);
-        
-                (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                })();
-        
-        </script>
-        -->
-
     </body>
 </html>

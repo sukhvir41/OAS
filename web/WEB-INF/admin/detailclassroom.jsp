@@ -78,7 +78,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>CLass Room Detail</h1>
+                                <h1>Class Room Detail</h1>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>CLass Room : <c:out value="${requestScope.classroom.name}" /></h2>
+                                    <h2>Class Room : <c:out value="${requestScope.classroom.name}" /></h2>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h4>Deatils</h4>
@@ -212,7 +212,7 @@
                                                     <c:forEach var="student" items="${requestScope.classroom.students}">
                                                         <tr>
                                                             <td>${student.id}</td>
-                                                            <td><a href="#">${student}</a></td>
+                                                            <td><a href="http://localhost:8080/OAS/admin/students/detailstudent?studentId=${student.id}">${student}</a></td>
                                                             <td>${student.rollNumber}</td>
                                                             <td>${student.email}</td>
                                                             <td>${student.number}</td>

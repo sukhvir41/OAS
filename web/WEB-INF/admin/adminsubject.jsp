@@ -151,6 +151,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
+                                                <th>Class Rooms</th>
                                                 <th>Course</th>
                                                 <th>Elective</th>
                                                 <th>Action</th>
@@ -161,6 +162,11 @@
                                                 <tr>
                                                     <td><a name="${subject.id}"></a>${subject.id}</td>
                                                     <td><a href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
+                                                    <td>
+                                                        <c:forEach var="classRoom" items="${subject.classRooms}">
+                                                            <a href="/OAS/admin/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom}<br></a>
+                                                        </c:forEach>
+                                                    </td>
                                                     <td>${subject.course.name}</td>
                                                     <td>${subject.elective}</td>
                                                     <td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/subjects/editsubject?subjectId=${subject.id}&from=subjects">Edit</a></td>
