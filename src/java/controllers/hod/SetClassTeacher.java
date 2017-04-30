@@ -5,6 +5,7 @@
  */
 package controllers.hod;
 
+import entities.ClassRoom;
 import entities.Department;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
@@ -18,17 +19,26 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/hod/lectures")
-public class HodLectures extends Controller {
+@WebServlet("/teacher/hod/classrooms/setclassteacher")
+public class SetClassTeacher extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
 
-        req.setAttribute("courses", department.getCourses());
-        req.getRequestDispatcher("/WEB-INF/hod/hodlectures.jsp").include(req, resp);
+        int classrommId = Integer.parseInt(req.getParameter("classroomId"));
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classrommId);
+
+        if (classRoom.getCourse().getDepartment().getId() == department.getId()) {
+            req.setAttribute("teachers", department.getTeachers());
+            req.setAttribute("classroom", classRoom);
+            req.getRequestDispatcher("/WEB-INF/hod/setclassteacher.jsp");
+
+        } else {
+            resp.sendRedirect("/OAS/error");
+
+        }
     }
 
 }
