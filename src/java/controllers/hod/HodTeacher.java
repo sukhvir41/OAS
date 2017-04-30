@@ -27,7 +27,7 @@ public class HodTeacher extends Controller {
         department = (Department) session.get(Department.class, department.getId());
         
         req.setAttribute("teachers", department.getTeachers());
-        req.getRequestDispatcher("/WEB-INF/hod/hodteachers.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/hod/hodteacher.jsp").include(req, resp);
     }
 
 }
