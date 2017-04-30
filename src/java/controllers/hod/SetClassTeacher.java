@@ -33,7 +33,7 @@ public class SetClassTeacher extends Controller {
         if (classRoom.getCourse().getDepartment().getId() == department.getId()) {
             req.setAttribute("teachers", department.getTeachers());
             req.setAttribute("classroom", classRoom);
-            req.getRequestDispatcher("/WEB-INF/hod/setclassteacher.jsp");
+            req.getRequestDispatcher("/WEB-INF/hod/setclassteacher.jsp").include(req, resp);
 
         } else {
             resp.sendRedirect("/OAS/error");
