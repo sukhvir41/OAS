@@ -41,11 +41,12 @@ public class AdminSubject extends HttpServlet {
         session.beginTransaction();
         subjects = (List<Subject>) session.createCriteria(Subject.class).list();
         courses = (List<Course>) session.createCriteria(Course.class).list();
-        session.getTransaction().commit();
-        session.close();
         req.setAttribute("subjects", subjects);
         req.setAttribute("courses", courses);
         req.getRequestDispatcher("/WEB-INF/admin/adminsubject.jsp").include(req, resp);
+        session.getTransaction().commit();
+        session.close();
+        
     }
 
 }
