@@ -5,6 +5,7 @@
  */
 package controllers.admin;
 
+import entities.Attendance;
 import entities.Student;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/students/unaccountteacher")
+//@WebServlet(urlPatterns = "/admin/students/unaccountstudent")
 public class UnaccountStudent extends Controller {
     
     @Override
@@ -30,8 +31,29 @@ public class UnaccountStudent extends Controller {
             resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + studentId);
         } else {
             student.setUnaccounted(true);
+            
+            student.getSubjects()
+                    .stream()
+                    .forEach(subject -> subject.getStudents().remove(student));
+            student.getSubjects().clear();
+            
+            student.getAttendance()
+                    .stream()
+                    .forEach(attendance -> removeAttendance(attendance, session));
+            student.getAttendance().clear();
+            
+            student.getClassRoom().getStudents().remove(student);
+            
+            student.setClassRoom(null);
+            
             resp.sendRedirect("/OAS/admin/students");
         }
+    }
+    
+    private void removeAttendance(Attendance attendance, Session session) {
+        attendance.setStudent(null);
+        attendance.setLecture(null);
+        session.delete(attendance);
     }
     
 }

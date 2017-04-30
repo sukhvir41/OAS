@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 
@@ -30,54 +31,71 @@ import utility.AjaxController;
  */
 @WebServlet(urlPatterns = "/admin/ajax/searchlecture")
 public class SearchLectures extends AjaxController {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int classId = Integer.parseInt(req.getParameter("classId"));
-        int subjectId = Integer.parseInt(req.getParameter("subjectId"));
+        int classId = Integer.parseInt(req.getParameter("classroomId"));
+        String subjectId = req.getParameter("subjectId");
         //LocalDateTime start = LocalDateTime.parse(req.getParameter("startdate"), DateTimeFormatter.) todo: fix date evrywhere
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
-        Subject subject = (Subject) session.get(Subject.class, subjectId);
-        Teaching teaching = (Teaching) session.createCriteria(Teaching.class)
-                .add(Restrictions.eq("subject", subject))
-                .add(Restrictions.eq("classRoom", classRoom))
-                .list()
-                .get(0);
-        
+
+        List<Teaching> teaching;
+        if (subjectId.equals("all")) {
+            teaching = session.createCriteria(Teaching.class)
+                    .add(Restrictions.eq("classRoom", classRoom))
+                    .list();
+
+        } else {
+            Subject subject = (Subject) session.get(Subject.class, Integer.parseInt(subjectId));
+            teaching = session.createCriteria(Teaching.class)
+                    .add(Restrictions.eq("subject", subject))
+                    .add(Restrictions.eq("classRoom", classRoom))
+                    .list();
+
+        }
+
         List<Lecture> lectures = session.createCriteria(Lecture.class)
-                .add(Restrictions.eq("teaching", teaching))
+                .add(Restrictions.in("teaching", teaching))
+                .addOrder(Order.desc("date"))
                 //add date here     .add()
                 .list();
-        
+
         JsonArray jsonLectures = new JsonArray();
-        
+
         lectures.stream()
                 .forEach(lecture -> add(jsonLectures, lecture));
-        
+
         Gson gson = new Gson();
         out.print(gson.toJson(jsonLectures));
-        
+
     }
-    
+
     private void add(JsonArray jsonLectures, Lecture theLecture) {
-        
+
         int attendentStudent = theLecture.getAttendance()
                 .stream()
                 .filter(attendance -> attendance.isAttended())
                 .collect(Collectors.toList())
                 .size();
-        int totalStudents = theLecture.getTeaching().getClassRoom().getStudents().size();
-        
+        int totalStudents = theLecture.getTeaching()
+                .getClassRoom()
+                .getStudents()
+                .stream()
+                .filter(student -> student.getSubjects().contains(theLecture.getTeaching().getSubject()))
+                .collect(Collectors.toList())
+                .size();
+
         JsonObject lecture = new JsonObject();
         lecture.addProperty("id", theLecture.getId());
-        lecture.addProperty("lecture", theLecture.toString());
+        lecture.addProperty("class", theLecture.getTeaching().getClassRoom().toString());
+        lecture.addProperty("subject", theLecture.getTeaching().getSubject().toString());
         lecture.addProperty("count", theLecture.getCount());
         lecture.addProperty("date", theLecture.getDate().toString());
         lecture.addProperty("present", attendentStudent);
         lecture.addProperty("absent", totalStudents - attendentStudent);
-        
+
         jsonLectures.add(lecture);
-        
+
     }
-    
+
 }

@@ -18,7 +18,7 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/teachers/unaccountteacher")
+//@WebServlet(urlPatterns = "/admin/teachers/unaccountteacher")
 public class UnaccountTeacher extends Controller {
     
     @Override
@@ -30,6 +30,30 @@ public class UnaccountTeacher extends Controller {
             resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacherId);
         } else {
             teacher.setUnaccounted(true);
+            
+            teacher.getTeaches()
+                    .stream()
+                    .forEach(teaching -> teaching.setTeacher(null));
+            
+            teacher.getTeaches().clear();
+            
+            if(teacher.getClassRoom()!=null){
+                teacher.getClassRoom().setClassTeacher(null);
+            }
+            
+            if(teacher.isHod()){
+                teacher.setHod(false);
+                teacher.getHodOf()
+                        .stream()
+                        .forEach(department -> department.setHod(null));
+                teacher.getHodOf().clear();
+            }
+            
+            teacher.getDepartment()
+                    .stream()
+                    .forEach(department -> department.getTeachers().remove(teacher));
+            
+            teacher.getDepartment().clear();
             resp.sendRedirect("/OAS/admin/teachers");
         }
     }
