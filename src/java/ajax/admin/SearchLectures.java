@@ -13,7 +13,6 @@ import entities.Lecture;
 import entities.Subject;
 import entities.Teaching;
 import java.io.PrintWriter;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
