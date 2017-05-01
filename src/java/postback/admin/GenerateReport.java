@@ -45,7 +45,7 @@ import utility.Utils;
 public class GenerateReport extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType(
                 "APPLICATION/OCTET-STREAM");

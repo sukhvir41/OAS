@@ -171,7 +171,7 @@
         
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        
+        <script src="/OAS/scripts/hodstudents.js"></script>
         <script src="/OAS/scripts/mustache.js"></script>
 
         <!--<![endif]-->

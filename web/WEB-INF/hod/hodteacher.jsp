@@ -93,6 +93,7 @@
                                                     <input class="form-control input-lg" placeholder="name" type="text" name="teachername" id="teachername">
                                                     <br>
                                                     <button class="btn btn-primary" id ="searchname">Search</button>
+                                                    <button class="btn-primary btn" id="showall">Show All</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -186,7 +187,7 @@
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <script src="/OAS/scripts/adminsearchteacher.js"></script>
+         <script src="/OAS/scripts/hodteacher.js"></script>
         <script src="/OAS/scripts/mustache.js"></script>
 
         <!--<![endif]-->

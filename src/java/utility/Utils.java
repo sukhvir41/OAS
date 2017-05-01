@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -43,7 +44,7 @@ public class Utils {
         sb.applySettings(cfg.getProperties());
         StandardServiceRegistry standardServiceRegistry = sb.build();
         sessionFactory = cfg.buildSessionFactory(standardServiceRegistry);
-        
+
     }
 
     private Utils() throws Exception {
@@ -239,7 +240,7 @@ public class Utils {
      * @param regex The expression to be compared
      *
      * @param flags Match flags, a bit mask that may include null null null null
-     * null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *

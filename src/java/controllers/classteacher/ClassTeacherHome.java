@@ -8,6 +8,7 @@ package controllers.classteacher;
 import entities.Student;
 import entities.Teacher;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet("/teacher/classteacher")
+@WebServlet("/teacher/classroom")
 public class ClassTeacherHome extends Controller {
 
     @Override
@@ -29,8 +30,9 @@ public class ClassTeacherHome extends Controller {
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
         req.setAttribute("classroom", teacher.getClassRoom());
         List<Student> students = teacher.getClassRoom().getStudents();
+        Collections.sort(students);
         req.setAttribute("students",students);
-        req.getRequestDispatcher("/WEB-INF/classteacher/classteacherhome.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/classteacher/classteacher.jsp").include(req, resp);
 
     }
 

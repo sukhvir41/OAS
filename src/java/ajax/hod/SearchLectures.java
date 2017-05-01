@@ -29,7 +29,7 @@ import utility.AjaxController;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/hod/ajax/searchLectures")
+@WebServlet(urlPatterns = "/teacher/hod/ajax/searchlectures")
 public class SearchLectures extends AjaxController {
 
     @Override
@@ -74,7 +74,7 @@ public class SearchLectures extends AjaxController {
 
         } else {
 
-            resp.sendRedirect("/OAS/error");
+            out.print("error");
 
         }
 

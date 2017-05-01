@@ -18,7 +18,7 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/hod/report")
+@WebServlet(urlPatterns = "/teacher/hod/reports")
 public class HodReport extends Controller {
 
     @Override
@@ -26,8 +26,8 @@ public class HodReport extends Controller {
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
 
-        req.setAttribute("course", department.getCourses());
-        req.getRequestDispatcher("/WEB-INF/hod/report.jsp").include(req, resp);
+        req.setAttribute("courses", department.getCourses());
+        req.getRequestDispatcher("/WEB-INF/hod/hodreportgen.jsp").include(req, resp);
     }
 
 }

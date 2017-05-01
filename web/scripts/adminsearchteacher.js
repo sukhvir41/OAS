@@ -92,7 +92,7 @@ var search = function () {
 
 var activateOrDeacticate = function (button) {
     var action = button.text();
-    ;
+    
     var teacherId = button.val();
     console.log("called");
     if (action === "verify" || action === "deverify") {

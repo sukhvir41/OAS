@@ -28,8 +28,6 @@ public class HodClassRoom extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
-        teacher = (Teacher) session.get(Teacher.class, teacher.getId());
         
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());

@@ -32,7 +32,7 @@ public class SearchStudent extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+     
         int classroomId = Integer.parseInt(req.getParameter("classroom"));
         String subjectId = req.getParameter("subject");
         String filter = req.getParameter("filter");
@@ -75,10 +75,12 @@ public class SearchStudent extends AjaxController {
                 }
                 
             }
+            out.print(gson.toJson(jsonStudents));
         } else {
             
-            resp.sendRedirect("/OAS/error");
+            out.print("error");
         }
+
     }
     
     private void add(Student student, JsonArray jsonStudents) {

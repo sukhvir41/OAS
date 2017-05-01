@@ -3,38 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.hod;
+package ajax.hod;
 
 import entities.Department;
-import entities.Subject;
+import entities.Teacher;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Controller;
+import utility.AjaxController;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/hod/subjects/detailsubject")
-public class DetailSubject extends Controller {
+@WebServlet(urlPatterns = "/teacher/hod/ajax/activateordeactivateteacher")
+public class ActivateOrDeactivateTeacher extends AjaxController {
     
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int subjectId = Integer.parseInt(req.getParameter("subjectId"));
-        Subject subject = (Subject) session.get(Subject.class, subjectId);
+        int teacherId = Integer.parseInt(req.getParameter("teacherId"));
+        String action = req.getParameter("action");
         
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
         
-        if (subject.getCourse().getDepartment().getId() == department.getId()) {
-            req.setAttribute("subject", subject);
-            req.getRequestDispatcher("/WEB-INF/hod/detailsubject.jsp").include(req, resp);
+        Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+        if (teacher.getDepartment().contains(department)) {
+            if (action.equals("verify")) {
+                teacher.setVerified(true);
+            } else {
+                teacher.setVerified(false);
+            }
+            out.print(true);
         } else {
-            resp.sendRedirect("/OAS/error");
+            out.print(false);
         }
     }
     

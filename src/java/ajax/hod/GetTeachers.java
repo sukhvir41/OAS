@@ -18,34 +18,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/hod/ajax/searchteacherbyname")
-public class SearchTeacherByName extends AjaxController {
-
+@WebServlet(urlPatterns = "/teacher/hod/ajax/getteachers")
+public class GetTeachers extends AjaxController {
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        String name = req.getParameter("name");
-
         Department department = (Department) httpSession.getAttribute("department");
-        Department currentDepartment = (Department) session.get(Department.class, department.getId());
-
-        List<Teacher> teachers = session.createCriteria(Teacher.class)
-                .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
-                .list();
+        department = (Department) session.get(Department.class, department.getId());
+        
         Gson gson = new Gson();
         JsonArray jsonTeachers = new JsonArray();
-        teachers.stream()
-                .filter(teacher -> teacher.getDepartment().contains(currentDepartment))
+        
+        department.getTeachers()
+                .stream()
                 .forEach(teacher -> add(teacher, jsonTeachers));
+        
         out.print(gson.toJson(jsonTeachers));
+        
     }
-
+    
     private void add(Teacher teacher, JsonArray jsonTeachers) {
         JsonObject teacherJson = new JsonObject();
         teacherJson.addProperty("id", teacher.getId());
@@ -62,9 +59,9 @@ public class SearchTeacherByName extends AjaxController {
         teacherJson.add("departments", addDepartment(teacher.getDepartment()));
         teacherJson.addProperty("verified", teacher.isVerified());
         jsonTeachers.add(teacherJson);
-
+        
     }
-
+    
     private JsonElement addDepartment(List<Department> departments) {
         JsonArray department = new JsonArray();
         departments.stream()

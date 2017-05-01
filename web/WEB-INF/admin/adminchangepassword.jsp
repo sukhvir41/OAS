@@ -125,7 +125,7 @@
                                     <c:otherwise>
                                         <div class="row">
                                             <div class="col-md-4 ">
-                                                <div class="alert alert-danger" id="loginError">
+                                                <div class="alert alert-danger" hidden id="loginError">
                                                     <strong>Error!</strong> Old password is wrong or new password does not match
                                                 </div>
                                             </div> 
