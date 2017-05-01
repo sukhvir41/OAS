@@ -5,35 +5,36 @@
  */
 package controllers.classteacher;
 
+import entities.Login;
 import entities.Student;
-import entities.Teacher;
 import java.io.PrintWriter;
-import java.util.Collections;
-import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.Controller;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet("/teacher/classteacher")
-public class ClassTeacherHome extends Controller {
+@WebServlet(urlPatterns = "/teacher/classteacher/students/detailstudent")
+public class DetailStudent extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
-        teacher = (Teacher) session.get(Teacher.class, teacher.getId());
-        req.setAttribute("classroom", teacher.getClassRoom());
-        List<Student> students = teacher.getClassRoom().getStudents();
-        Collections.sort(students);
-        req.setAttribute("students",students);
-        req.getRequestDispatcher("/WEB-INF/classteacher/classteacher.jsp").include(req, resp);
+        int studentId = Integer.parseInt(req.getParameter("studenrId"));
 
+        Student student = (Student) session.get(Student.class, studentId);
+        Login login = (Login) session.createCriteria(Login.class)
+                .add(Restrictions.eq("id", student.getId()))
+                .list()
+                .get(0);
+        req.setAttribute("username", login.getUsername());
+        req.setAttribute("student", student);
+        req.getRequestDispatcher("/WEB-INF/classteacher/detailstudent.jsp").include(req, resp);
     }
 
 }

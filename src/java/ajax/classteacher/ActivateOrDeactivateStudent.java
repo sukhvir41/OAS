@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.classteacher;
+package ajax.classteacher;
 
 import entities.Student;
 import entities.Teacher;
@@ -13,27 +13,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Controller;
+import utility.AjaxController;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/classteacher/grantleave")
-public class GrantLeave extends Controller {
-    
+@WebServlet(urlPatterns = "/teacher/classteacher/ajax/activatedeactivateteacher")
+public class ActivateOrDeactivateStudent extends AjaxController {
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int studentId = Integer.parseInt(req.getParameter("studentId"));
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
+
+        int studentId = Integer.parseInt(req.getParameter("studentId"));
+        String action = req.getParameter("action");
+
         Student student = (Student) session.get(Student.class, studentId);
-        if (student.getClassRoom().getId() == teacher.getClassRoom().getId()) {
-            req.setAttribute("student", student);
-            req.getRequestDispatcher("/WEB-INF/classteacher/classteachergrantleave.jsp").include(req, resp);
+
+        if (teacher.getClassRoom().getStudents().contains(student)) {
+            switch (action) {
+                case "verify": {
+                    student.setVerified(true);
+                    out.print(true);
+                    break;
+                }
+                case "deverify": {
+                    student.setVerified(false);
+                    out.print(true);
+                    break;
+                }
+                default: {
+                    out.print("error");
+                }
+            }
         } else {
-            resp.sendRedirect("/OAS/accessdenied.jsp");
+            out.print("error");
         }
     }
-    
+
 }

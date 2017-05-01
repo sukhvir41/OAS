@@ -68,8 +68,8 @@ public class SearchStudent extends HttpServlet {
                     classRoom.getStudents()
                             .stream()
                             .filter(student -> !student.isUnaccounted())
-                            .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
-                            .filter(e -> e.getSubjects().contains(subject))
+                            .filter(student -> student.isVerified() == Boolean.parseBoolean(filter))
+                            .filter(student -> student.getSubjects().contains(subject))
                             .forEach(e -> add(e, jsonStudents));
                 }
 
