@@ -67,10 +67,22 @@
                                     </c:choose>
                                     <c:choose>
                                         <c:when test="${sessionScope.teacher.classRoom!=null}" >
-                                            <li>
-                                                <a href="/OAS/teacher/classroom">
-                                                    Classroom
+                                            <li class="dropdown">
+                                                <a class="dropdown-toggle">
+                                                    Class Teacher
                                                 </a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="/OAS/teacher/classteacher">
+                                                            Class Room
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/OAS/teacher/classteacher/reports">
+                                                            Report of Class
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </li>   
                                         </c:when>
                                         <c:otherwise>

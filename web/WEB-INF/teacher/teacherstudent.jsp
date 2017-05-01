@@ -77,35 +77,13 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h4>Courses</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="course" name="courseId">
-                                                <c:forEach var="course" items="${requestScope.courses}">
-                                                    <option value="${course.id}">${course.name}</option>
+                                            <h4>Select Subject</h4>
+                                            <select class="form-control input-lg" style="width: 50%;" id="teaching" name="teachingId">
+                                                <c:forEach var="teaching" items="${requestScope.teachings}">
+                                                    <option value="${teaching.id}">${teaching}</option>
                                                 </c:forEach>
                                             </select>
-                                            <h4>Class Room</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="classroom" name="classroomId">
-
-                                            </select>
-                                            <h4>Subject</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
-
-                                            </select>
-                                            <h4>Filter</h4>
-                                            <div class="radio">
-                                                <label>
-                                                    <input id="filter" name="filter" value="all" checked type="radio">
-                                                    All
-                                                </label>&nbsp; &nbsp;
-                                                <label>
-                                                    <input id="filter" name="filter" value="true" type="radio">
-                                                    Verified
-                                                </label>&nbsp; &nbsp;
-                                                <label>
-                                                    <input id="filter" name="filter" value="false" type="radio">
-                                                    Not Verified
-                                                </label>&nbsp; &nbsp;
-                                            </div>
+                                            <br />
                                             <button class="btn btn-primary" id ="search">Search</button>
                                         </div>
                                         <div class="col-md-6">

@@ -107,7 +107,7 @@
                                         <dt>Classroom</dt>
                                         <dd>${requestScope.student.classRoom}</dd>
                                     </dl>
-                                    <form action="/OAS/tescher/classteacher/grantleavepost" method="post">
+                                    <form action="/OAS/teacher/classteacher/grantleavepost" method="post">
                                         <div class="row">
                                     		<div class="form-group">
                                     			<div class="col-md-4">

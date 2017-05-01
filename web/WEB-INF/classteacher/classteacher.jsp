@@ -50,7 +50,7 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
             <div role="main" class="main">
                 <section class="page-header">
                     <div class="container">

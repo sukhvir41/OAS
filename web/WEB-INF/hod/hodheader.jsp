@@ -35,12 +35,10 @@
                                             Users
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="dropdown-submenu">
-                                                <a>Teacher</a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="/OAS/teacher/hod/teachers">Teachers</a></li>
-                                                    <li><a href="/OAS/teacher/hod/teachers/unaccountedteachers">Unaccounted Teachers</a></li>
-                                                </ul>
+                                            <li>
+                                                <a href="/OAS/teacher/hod/teachers">
+                                                    Teachers
+                                                </a>
                                             </li>
                                             <li class="dropdown-submenu">
                                                 <a>Student</a>

@@ -8,8 +8,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Reports - Teacher</title>    
-
+        <title>Class Teacher - Teacher</title> 
+        
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -47,98 +47,117 @@
 
         <!-- Head Libs -->
         <script src="/OAS/vendor/modernizr/modernizr.js"></script>
-
-        <!--[if IE]>
-                <link rel="stylesheet" href="css/ie.css">
-                <![endif]-->
-
-        <!--[if lte IE 8]>
-                <script src="vendor/respond/respond.js"></script>
-                <script src="vendor/excanvas/excanvas.js"></script>
-                <![endif]-->
-
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
-
-                <div role="main" class="main">
-                    <section class="page-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="breadcrumb">
-                                        <li><a href="/OAS/teacher">Home</a></li>
-                                        <li>Reports</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Reports</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
+            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+            <div role="main" class="main">
+                <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <form action="/OAS/teacher/generatereportpost" method="post" target="_blank">
+                                <ul class="breadcrumb">
+                                    <li><a href="/OAS/teacher">Home</a></li>
+                                    <li>Class Teacher</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Class Teacher</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Search By Name</h4>
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <h4>Select Subject</h4>
-                                                        <select class="form-control" name="teaching" id="teachingId">
-                                                        <c:forEach var="teaching" items="${requestScope.teachings}">
-                                                            <option value="${teaching.id}">${teaching}</option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
+                                                        <br>
+                                                        <button class="btn btn-primary" id ="searchname">Search</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-6">
-                                                    <h4>Start Date</h4>
-                                                    <input required="true" class="form-control" type="date" name="startdate">
-                                                </div>
+                                            <h4>Filter</h4>
+                                            <div class="radio">
+                                                <label>
+                                                    <input id="filter" name="filter" value="all" checked type="radio">
+                                                    All
+                                                </label>&nbsp; &nbsp;
+                                                <label>
+                                                    <input id="filter" name="filter" value="true" type="radio">
+                                                    Verified
+                                                <label>
+                                                    <input id="filter" name="filter" value="false" type="radio">
+                                                    Not Verified
+                                                </label>&nbsp; &nbsp;
                                             </div>
+                                            <button class="btn btn-primary" id ="search">Search</button>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-6">
-                                                    <h4>End Date</h4>
-                                                    <input required="true" class="form-control" type="date" name="enddate">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <input value="Generate Report" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                <div class="col-md-4">
+                                    <div class="alert alert-danger" hidden id="error">
+                                        <strong>Failure!</strong> Error in getting result
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                <div class="col-md-4">
+                                    <div class="alert alert-success" hidden id="success">
+                                        <strong>Success!</strong> Results below
+                                    </div>
+                                </div> 
+                            </div>
+                            <hr class="tall">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Number</th>
+                                                <th>Email</th>
+                                                <th>Class Room</th>
+                                                <th>Roll Number</th>
+                                                <th>Subjects</th>
+                                                <th>Verified</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tablebody">
+
+                                        </tbody>
+                                    </table>
+                                </div>        
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Vendor -->
-        <!--[if lt IE 9]>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <![endif]-->
+        
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
         
         <script src="/OAS/scripts/mustache.js"></script>
-        <script src="/OAS/scripts/jquery-ui.js"></script>
+
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -179,12 +198,5 @@
 
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
-
-        <script>
-            $(function () {
-                $(".datepicker").datepicker();
-            });
-        </script>
-
     </body>
 </html>

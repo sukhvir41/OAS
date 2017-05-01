@@ -63,7 +63,7 @@
     <body>
         <div class="body">
             <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
-			<div role="main" class="main">
+            <div role="main" class="main">
                 <section class="page-header">
                     <div class="container">
                         <div class="row">
@@ -86,90 +86,86 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                            	<div class="col-md-12">
-                            		<div class="row">
-                            			<div class="col-md-6">
-                            				<h4>Courses</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="course" name="courseId">
-                                                <c:forEach var="course" items="${requestScope.courses}">
-                                                    <option value="${course.id}">${course.name}</option>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Select subject</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="teaching" name="techingId">
+                                                <c:forEach var="teaching" items="${requestScope.teachings}">
+                                                    <option value="${teaching.id}">${teaching}</option>
                                                 </c:forEach>
                                             </select>
-                                            <h4>Class Room</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="classroom" name="classroomId">
-                                            </select>
-                                            <h4>Subject</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
-                                            </select>
-                            			</div>
-                            			<div class="col-md-6">
-                            				<div class="row">
-                                            	<div class="form-group">
-                                                	<div class="col-md-6">
-                                                    	<h4>Start Date</h4>
-                                                    	<input required="true" class="form-control" type="date" name="startdate">
-                                                	</div>
-                                            	</div>
-                                        	</div>
-                                        	<div class="row">
-                                            	<div class="form-group">
-                                                	<div class="col-md-6">
-                                                    	<h4>End Date</h4>
-                                                    	<input required="true" class="form-control" type="date" name="enddate">
-                                                	</div>
-                                            	</div>
-                                        	</div>
-                                        	<br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <h4>Start Date</h4>
+                                                        <input required="true" class="form-control" type="date" name="startdate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <h4>End Date</h4>
+                                                        <input required="true" class="form-control" type="date" name="enddate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
 
-                                        	<div class="row">
-                                            	<div class="col-md-6">
-                                                	<input value="Search Lectures" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit" id="search">
-                                            	</div>
-                                        	</div>
-										</div>
-                            		</div>
-                            		<div class="row">
-                            			<div class="col-md-12">
-                            				<div class="row">
-                                				<!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                				<div class="col-md-4">
-                                    				<div class="alert alert-danger" hidden id="error">
-                                        				<strong>Failure!</strong> Error in getting result
-                                    				</div>
-                                				</div> 
-                            				</div>
-                            				<div class="row">
-                                			<!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                				<div class="col-md-4">
-                                    				<div class="alert alert-success" hidden id="success">
-                                        				<strong>Succss!</strong> Results below
-                                    				</div>
-                                				</div> 
-                            				</div>
-										</div>
-                            		</div>
-                            		<hr class="tall">
-		                            <div class="row">
-		                                <div class="col-md-12">
-		                                    <table class="table">
-		                                        <thead>
-		                                            <tr>
-		                                                <th>#</th>
-		                                                <th>Class</th>
-		                                                <th>Subject</th>
-		                                                <th>Count</th>
-		                                                <th>Date</th>
-		                                                <th>No. of Present Student</th>
-		                                                <th>No. of Absent Student</th>
-		                                            </tr>
-		                                        </thead>
-		                                        <tbody id="tablebody">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input value="Search Lectures" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit" id="search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                                <div class="col-md-4">
+                                                    <div class="alert alert-danger" hidden id="error">
+                                                        <strong>Failure!</strong> Error in getting result
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
+                                            <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                                <div class="col-md-4">
+                                                    <div class="alert alert-success" hidden id="success">
+                                                        <strong>Succss!</strong> Results below
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="tall">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Class</th>
+                                                        <th>Subject</th>
+                                                        <th>Count</th>
+                                                        <th>Date</th>
+                                                        <th>No. of Present Student</th>
+                                                        <th>No. of Absent Student</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tablebody">
 
-		                                        </tbody>
-		                                    </table>
-		                                </div>        
-		                            </div>
-                            	</div>	
+                                                </tbody>
+                                            </table>
+                                        </div>        
+                                    </div>
+                                </div>  
                             </div>
                         </div>
                     </div>

@@ -8,14 +8,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Reports - Teacher</title>    
+        <title>Search Lecture - Student</title>   
 
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -60,70 +62,109 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
-
-                <div role="main" class="main">
-                    <section class="page-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="breadcrumb">
-                                        <li><a href="/OAS/teacher">Home</a></li>
-                                        <li>Reports</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Reports</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
+            <jsp:include page="/WEB-INF/student/studentheader.jsp" />
+            <div role="main" class="main">
+                <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <form action="/OAS/teacher/generatereportpost" method="post" target="_blank">
+                                <ul class="breadcrumb">
+                                    <li><a href="/OAS/teacher">Home</a></li>
+                                    <li>Lectures</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Search Lectures</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Select subject</h4>
+                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
+                                                <c:forEach var="subject" items="${requestScope.subjects}">
+                                                    <option value="${subject.id}">${subject}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
                                             <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-md-6">
-                                                        <h4>Select Subject</h4>
-                                                        <select class="form-control" name="teaching" id="teachingId">
-                                                        <c:forEach var="teaching" items="${requestScope.teachings}">
-                                                            <option value="${teaching.id}">${teaching}</option>
-                                                        </c:forEach>
-                                                    </select>
+                                                        <h4>Start Date</h4>
+                                                        <input required="true" class="form-control" type="date" name="startdate">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-6">
-                                                    <h4>Start Date</h4>
-                                                    <input required="true" class="form-control" type="date" name="startdate">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <h4>End Date</h4>
+                                                        <input required="true" class="form-control" type="date" name="enddate">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-6">
-                                                    <h4>End Date</h4>
-                                                    <input required="true" class="form-control" type="date" name="enddate">
-                                                </div>
-                                            </div>
-                                        </div>
+                                            <br>
 
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <input value="Generate Report" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input value="Search Lectures" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit" id="search">
+                                                </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                                <div class="col-md-4">
+                                                    <div class="alert alert-danger" hidden id="error">
+                                                        <strong>Failure!</strong> Error in getting result
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
+                                            <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                                <div class="col-md-4">
+                                                    <div class="alert alert-success" hidden id="success">
+                                                        <strong>Succss!</strong> Results below
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="tall">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Class</th>
+                                                        <th>Subject</th>
+                                                        <th>Count</th>
+                                                        <th>Date</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tablebody">
+
+                                                </tbody>
+                                            </table>
+                                        </div>        
+                                    </div>
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -136,9 +177,8 @@
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        
         <script src="/OAS/scripts/mustache.js"></script>
-        <script src="/OAS/scripts/jquery-ui.js"></script>
+
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -180,11 +220,21 @@
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
 
-        <script>
-            $(function () {
-                $(".datepicker").datepicker();
-            });
+        <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+        <script type="text/javascript">
+        
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-12345678-1']);
+                _gaq.push(['_trackPageview']);
+        
+                (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+        
         </script>
+        -->
 
     </body>
 </html>

@@ -118,7 +118,7 @@
                     </div>   
                     <div class="row">
                         <div class="col-md-12 ">
-                            <div class="alert alert-success" id="error" hidden>
+                            <div class="alert alert-success" id="success" hidden>
                                 <strong>Success!</strong> Attendance Marked
                             </div>
                         </div> 
