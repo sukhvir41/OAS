@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Student Details - HOD</title>   
+        <title>Student Details - Teacher</title>   
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
@@ -69,7 +69,7 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
 
                 <div role="main" class="main">
                     <section class="page-header">
@@ -77,8 +77,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-                                        <li><a href="/OAS/teacher/hod">Home</a></li>
-                                        <li><a href="/OAS/teacher/hod/students">Students</a></li>
+                                        <li><a href="/OAS/teacher">Home</a></li>
+                                        <li><a href="/OAS/teacher/students">Students</a></li>
                                         <li>Student Details</li>
                                     </ul>
                                 </div>
@@ -113,12 +113,11 @@
                                         <dt>Mac ID</dt>
                                         <dd>${requestScope.student.macId}</dd>
                                         <dt>Classroom</dt>
-                                        <dd><a href="/OAS/teacher/hod/classrooms/detailclassroom?classroomId=${requestScope.student.classRoom}">${requestScope.student.classRoom}</a></dd>
+                                        <dd>${requestScope.student.classRoom}</dd>
                                         <dt>Subjects</dt>
                                         <dd>
                                             <c:forEach var="subject" items="${requestScope.student.subjects}">
-                                                <a href="/OAS/teacher/hod/subjects/detailsubject?subjectId=${subject.id}">${subject}</a>
-                                                <br>
+                                                ${subject}<br>
                                             </c:forEach>
                                         </dd>
                                         <dt>Verified?</dt>
@@ -126,68 +125,6 @@
                                         <dt>Unaccounted?</dt>
                                         <dd>${requestScope.student.unaccounted}</dd>
                                     </dl>
-                                    <c:if test="${!requestScope.student.unaccounted}">    
-                                        <c:choose>
-                                            <c:when test="${requestScope.student.verified}">
-                                                <a class="btn btn-danger" value="${requestScope.student.id}" href="/OAS/teacher/hod/students/deactivatestudent?studentId=${requestScope.student.id}">Deverify</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a class="btn btn-success" value="${requestScope.student.id}" href="/OAS/teacher/hod/students/activatestudent?studentId=${requestScope.student.id}">Verify</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:if>
-                                    <c:if test="${!requestScope.student.unaccounted}">
-                                        <a class="btn btn-primary" href="/OAS/teacher/hod/students/grantleave?studentId=${requestScope.student.id}">Grant Leave</a>
-                                    </c:if>
-                                    <c:if test="${requestScope.student.unaccounted}">
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                    </c:if>
-                                    <c:if test="${!requestScope.student.verified}">
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#unaccountStudent">Unaccout Student</button>
-                                    </c:if>
-
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
-                                                    <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete a student</h4>
-                                                </div>
-                                                <form class="form-horizontal mb-lg" action="/OAS/teacher/hod/students/deletestudent" method="post">
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="studentId" value="${requestScope.student.id}">
-                                                        <label>Deleting the student directly will make the system unpredictable and may cause some problems</label>
-                                                        <label><b>It is advised to unaccount student first before deleting the student.</b></label>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <input type="submit" value="Delete" class="btn btn-danger">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade" id="unaccountStudent" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
-                                                    <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to unaccount the Teacher</h4>
-                                                </div>
-                                                <form class="form-horizontal mb-lg" action="/OAS/teacher/hod/students/unaccountstudent" method="post">
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="studentId" value="${requestScope.student.id}">
-                                                        <label>Unaccounting student will remove all subjects and his/her class from respective student.</label>
-                                                        <label><b>Click on unaccount button to unaccount student.</b></label>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <input type="submit" value="Unaccout Student" class="btn btn-danger">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

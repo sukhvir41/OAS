@@ -33,7 +33,7 @@ public class HodSubjects extends Controller {
                 .stream()
                 .forEach(course -> subejcts.addAll(course.getSubjects()));
         req.setAttribute("subjects", subejcts);
-        req.getRequestDispatcher("/WEB-INF/hod/hodsubjects.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/hod/hodsubject.jsp").include(req, resp);
     }
 
 }

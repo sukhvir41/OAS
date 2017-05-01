@@ -103,8 +103,7 @@
                                                 <c:forEach var="subject" items="${requestScope.subjects}">
                                                     <tr>
                                                         <td><a name="${subject.id}"></a>${subject.id}</td>
-                                                        <td><a href="/OAS/teacher/hod
-                                                        /subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
+                                                        <td><a href="/OAS/teacher/hod/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a></td>
                                                         <td>
                                                             <c:forEach var="classRoom" items="${subject.classRooms}">
                                                                 <a href="/OAS/teacher/hod/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom}<br></a>

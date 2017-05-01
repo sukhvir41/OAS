@@ -136,7 +136,7 @@
                                             <c:forEach var="student" items="${requestScope.present}">
                                                 <tr id="${student.id}">
                                                     <td>${student.rollNumber}</td>
-                                                    <td>${student}</td>
+                                                    <td><a href="/OAS/admin/students/detailstudent?studentId=${student.id}">${student}</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -155,7 +155,7 @@
                                             <c:forEach var="student" items="${requestScope.absent}">
                                                 <tr id="${student.id}">
                                                     <td>${student.rollNumber}</td>
-                                                    <td>${student}</td>
+                                                    <td><a href="/OAS/admin/students/detailstudent?studentId=${student.id}">${student}</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

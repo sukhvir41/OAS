@@ -63,7 +63,7 @@
     </head>
     <body>
         <div class="body">
-            <!--<jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>-->
+            <jsp:include page="/WEB-INF/admin/adminheader.jsp"></jsp:include>
 
                 <div role="main" class="main">
                     <section class="page-header">

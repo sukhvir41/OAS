@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li><a href="/OAS/hod">Home</a></li>
+                                    <li><a href="/OAS/teacher/hod">Home</a></li>
                                     <li>Class Rooms</li>
                                 </ul>
                             </div>

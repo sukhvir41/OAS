@@ -69,7 +69,7 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
 
             <div role="main" class="main">
                 <section class="page-header">

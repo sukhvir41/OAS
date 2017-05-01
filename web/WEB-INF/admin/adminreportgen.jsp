@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-        <title>Home - Admin</title>	
+        <title>Reports - Admin</title>	
 
 
         <!-- Mobile Metas -->

@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Student Details - HOD</title>   
+        <title>Lecture Details - HOD</title>   
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
@@ -78,14 +78,14 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                         <li><a href="/OAS/teacher/hod">Home</a></li>
-                                        <li><a href="/OAS/teacher/hod/students">Students</a></li>
-                                        <li>Student Details</li>
+                                        <li><a href="/OAS/teacher/hod/lectures">Lectures</a></li>
+                                        <li>Lecture Details</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h1>Student Details</h1>
+                                    <h1>Lecture Details</h1>
                                 </div>
                             </div>
                         </div>
@@ -96,98 +96,70 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Name : ${requestScope.student}</h2>
+                                        <h2>Lecture Id : ${requestScope.lecture.id}</h2>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <dl>
-                                        <dt>User Name</dt>
-                                        <dd>${requestScope.username}</dd>
-                                        <dt>Roll No.</dt>
-                                        <dd>${requestScope.student.rollNumber}</dd>
-                                        <dt>Contact Number</dt>
-                                        <dd>${requestScope.student.number}</dd>
-                                        <dt>Email</dt>
-                                        <dd>${requestScope.student.email}</dd>
-                                        <dt>Mac ID</dt>
-                                        <dd>${requestScope.student.macId}</dd>
-                                        <dt>Classroom</dt>
-                                        <dd><a href="/OAS/teacher/hod/classrooms/detailclassroom?classroomId=${requestScope.student.classRoom}">${requestScope.student.classRoom}</a></dd>
-                                        <dt>Subjects</dt>
-                                        <dd>
-                                            <c:forEach var="subject" items="${requestScope.student.subjects}">
-                                                <a href="/OAS/teacher/hod/subjects/detailsubject?subjectId=${subject.id}">${subject}</a>
-                                                <br>
-                                            </c:forEach>
-                                        </dd>
-                                        <dt>Verified?</dt>
-                                        <dd>${requestScope.student.verified}</dd>
-                                        <dt>Unaccounted?</dt>
-                                        <dd>${requestScope.student.unaccounted}</dd>
+                                        <dt>Lecture Date</dt>
+                                        <dd>${requestScope.lecture.date}</dd>
+                                        <dt>Cource</dt>
+                                        <dd>${requestScope.lecture.teaching.classRoom.course}</dd>
+                                        <dt>Class Room</dt>
+                                        <dd>${requestScope.lecture.teaching.classRoom}</dd>
+                                        <dt>Subject</dt>
+                                        <dd>${requestScope.lecture.teaching.subject}</dd>
+                                        <dt>Teacher</dt>
+                                        <dd>${requestScope.lecture.teaching.teacher}</dd>
+                                        <dt>Total number of student</dt>
+                                        <dd>${requestScope.total}</dd>
+                                        <dt>Total number of present student</dt>
+                                        <dd>${requestScope.headcount}</dd>
+                                        <dt>Total number of absent student</dt>
+                                        <dd>${requestScope.total-requestScope.headcount}</dd>
                                     </dl>
-                                    <c:if test="${!requestScope.student.unaccounted}">    
-                                        <c:choose>
-                                            <c:when test="${requestScope.student.verified}">
-                                                <a class="btn btn-danger" value="${requestScope.student.id}" href="/OAS/teacher/hod/students/deactivatestudent?studentId=${requestScope.student.id}">Deverify</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a class="btn btn-success" value="${requestScope.student.id}" href="/OAS/teacher/hod/students/activatestudent?studentId=${requestScope.student.id}">Verify</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:if>
-                                    <c:if test="${!requestScope.student.unaccounted}">
-                                        <a class="btn btn-primary" href="/OAS/teacher/hod/students/grantleave?studentId=${requestScope.student.id}">Grant Leave</a>
-                                    </c:if>
-                                    <c:if test="${requestScope.student.unaccounted}">
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                    </c:if>
-                                    <c:if test="${!requestScope.student.verified}">
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#unaccountStudent">Unaccout Student</button>
-                                    </c:if>
-
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
-                                                    <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete a student</h4>
-                                                </div>
-                                                <form class="form-horizontal mb-lg" action="/OAS/teacher/hod/students/deletestudent" method="post">
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="studentId" value="${requestScope.student.id}">
-                                                        <label>Deleting the student directly will make the system unpredictable and may cause some problems</label>
-                                                        <label><b>It is advised to unaccount student first before deleting the student.</b></label>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <input type="submit" value="Delete" class="btn btn-danger">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade" id="unaccountStudent" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
-                                                    <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to unaccount the Teacher</h4>
-                                                </div>
-                                                <form class="form-horizontal mb-lg" action="/OAS/teacher/hod/students/unaccountstudent" method="post">
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="studentId" value="${requestScope.student.id}">
-                                                        <label>Unaccounting student will remove all subjects and his/her class from respective student.</label>
-                                                        <label><b>Click on unaccount button to unaccount student.</b></label>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <input type="submit" value="Unaccout Student" class="btn btn-danger">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
+                            <hr class="tall">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Present Students</h4>
+                                    <table class="table table-hover" >
+                                        <thead>
+                                            <tr>
+                                                <th>Roll No.</th>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="present">
+                                            <c:forEach var="student" items="${requestScope.present}">
+                                                <tr id="${student.id}">
+                                                    <td>${student.rollNumber}</td>
+                                                    <td><a href="/OAS/teacher/hod/students/detailstudent?studentId=${student.id}">${student}</a></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>Absent Students</h4>
+                                    <table class="table table-hover" >
+                                        <thead>
+                                            <tr>
+                                                <th>Roll No.</th>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="absent">
+                                            <c:forEach var="student" items="${requestScope.absent}">
+                                                <tr id="${student.id}">
+                                                    <td>${student.rollNumber}</td>
+                                                    <td><a href="/OAS/teacher/hod/students/detailstudent?studentId=${student.id}">${student}</a></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
