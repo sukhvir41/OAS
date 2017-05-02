@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Edit Profile - Teacher</title>   
+        <title>Edit Profile - Student</title>   
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -59,14 +59,7 @@
     </head>
     <body>
         <div class="body">
-            <c:choose>
-                <c:when test="${hod =='true'}">
-                    <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
-                </c:when>
-                <c:otherwise>
-                    <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
-                </c:otherwise>
-            </c:choose>
+            <jsp:include page="/WEB-INF/student/studentheader.jsp" />
 
             <div role="main" class="main">
                 <section class="page-header">
@@ -74,14 +67,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <c:choose>
-                                        <c:when test="${hod =='true'}">
-                                            <li><a href="/OAS/teacher/hod">Home</a></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li><a href="/OAS/teacher">Home</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <li><a href="/OAS/student">Home</a></li>
                                     <li><a href="/OAS/teacher/myaccount">My Account</a></li>
                                     <li>Edit Profile</li>
                                 </ul>
@@ -98,13 +84,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/account/updateteacher" method="Post">
+                            <form action="/OAS/account/updatestudent" method="Post">
                                 <h4>Username : ${requestScope.username}</h4>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>First Name</label>
-                                            <input class="form-control input-lg" type="text" name="fname" id="fname" required="true" value="${requestScope.teacher.fname}">
+                                            <input class="form-control input-lg" type="text" name="fname" id="fname" required="true" value="${requestScope.student.fname}">
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +106,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Last Name</label>
-                                            <input class="form-control input-lg" type="text" name="lname" id="lname" required="true" value="${requestScope.teacher.lname}">
+                                            <input class="form-control input-lg" type="text" name="lname" id="lname" required="true" value="${requestScope.student.lname}">
                                         </div>
                                     </div>
                                 </div>
@@ -129,14 +115,30 @@
                                     <div class="col-md-8" >
                                         <div class="alert alert-danger" hidden="true" id="lastnameerror">
                                             <strong>Error!</strong> PLease enter valid Last Name
-                                                            </div>
-                                                        </div> 
-                                                    </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Roll Number</label>
+                                            <input class="form-control input-lg" type="number" name="number" id="number" required="true" value="${requestScope.student.rollNumber}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8" >
+                                        <div class="alert alert-danger" hidden="true" id="rollnumbererror">
+                                            <strong>Error!</strong> enter valid roll number
+                                        </div>
+                                    </div> 
+                                </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Email Address</label>
-                                            <input class="form-control input-lg" type="text" name="email" id="email" required="true" value="${requestScope.teacher.email}">
+                                            <input class="form-control input-lg" type="text" name="email" id="email" required="true" value="${requestScope.student.email}">
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +162,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Contact Number</label>
-                                            <input class="form-control input-lg" type="number" name="number" id="number" required="true" value="${requestScope.teacher.number}">
+                                            <input class="form-control input-lg" type="number" name="number" id="number" required="true" value="${requestScope.student.number}">
                                         </div>
                                     </div>
                                 </div>
@@ -172,15 +174,62 @@
                                         </div>
                                     </div> 
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <c:forEach var="department" items="${requestScope.teacher.department}">
-                                            <input type="checkbox" name="department" value="${department.id}">${department}<br />
-                                        </c:forEach>
-                                        <c:forEach var="department" items="${requestScope.departments}">
-                                            <input type="checkbox" name="department" value="${department.id}">${department}<br />
-                                        </c:forEach>
-                                    </label>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Current Course : </label>
+                                            <label>${requestScope.student.course}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Select  Course</label>
+                                            <select class="form-control mb-md"  id="course" name="course">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Current Classroom : </label>
+                                            <label>${requestScope.student.classRoom}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <select class="form-control mb-md" id="class" name="class">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Current Subjects : </label><br />
+                                            <label>
+                                                <c:forEach var="subject" items="${requestScope.student.Subjects}">
+                                                    ${subject}
+                                                </c:forEach>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Select Subjects</label>
+                                            <div id="subjects">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2">

@@ -6,9 +6,10 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Change Password - Teacher</title>	
+        <title>Unaccounted Students - HOD</title> 
+        
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -59,111 +60,81 @@
     </head>
     <body>
         <div class="body">
-            <c:choose>
-                <c:when test="${hod =='true'}">
-                    <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
-                </c:when>
-                <c:otherwise>
-                    <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
-                </c:otherwise>
-            </c:choose>
+            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
 
-            <div role="main" class="main">
-                <section class="page-header">
+                <div role="main" class="main">
+                    <section class="page-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                    <li><a href="/OAS/teacher/hod">Home</a></li>
+                                    <li>Unaccounted Students</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Unaccounted Student</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="breadcrumb">
-                                    <c:choose>
-                                        <c:when test="${hod =='true'}">
-                                            <li><a href="/OAS/teacher/hod">Home</a></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li><a href="/OAS/teacher">Home</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <li><a href="/OAS/teacher/myaccount">My Account</a></li>
-                                    <li><a href="/OAS/teacher/myaccount/editprofile">Edit Profile</a></li>
-                                    <li>Change Password</li>
-                                </ul>
+                        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Number</th>
+                                                <th>Email</th>
+                                                <th>Class Room</th>
+                                                <th>Roll Number</th>
+                                                <th>Subjects</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tablebody">
+                                            <c:forEach var="student" items="${requestScope.students}">
+                                                <tr>
+                                                    <td>${student.id}</td>
+                                                    <td><a href="/OAS/teacher/hod/students/detailstudent?studentId=${student.id}">${student}</a></td>
+                                                    <td>${student.number}</td>
+                                                    <td>${student.email}</td>
+                                                    <td>${student.classRoom}</td>
+                                                    <td>${student.rollNumber}</td> 
+                                                    <td>
+                                                        <c:forEach var="subject" items="${student.subjects}">
+                                                            ${subject}<br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-danger" href="/OAS/teacher/hod/students/detailstudent?studentId=${student.id}">Delete</a>
+                                                    </td>                                                  
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>        
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1>Edit Profile</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="/OAS/teacher/myaccount/changepasswordpost" method="Post">
-                                <h4>Username : ${requestScope.username}</h4>
-                                <div class="row">
-
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>Old Password</label>
-                                            <input class="form-control input-lg" type="Password" name="oldpassword" id="oldpassword" required="true">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>New Password</label>
-                                            <input class="form-control input-lg" type="Password" name="newpassword" id="newpassword" required="true">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>Re Enter New Password</label>
-                                            <input class="form-control input-lg" type="Password" name="renewpassword" id="renewpassword" required="true">
-                                        </div>
-                                    </div>
-                                </div>
-                                <c:choose>
-                                    <c:when test="${param.error =='false'}">
-                                        <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="alert alert-success" hidden id="loginError">
-                                                    <strong>Successful!</strong> Password Updated 
-                                                </div>
-                                            </div> 
-                                        </div> 
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="alert alert-danger" hidden id="loginError">
-                                                    <strong>Error!</strong> Old password is wrong or new password does not match
-                                                </div>
-                                            </div> 
-                                        </div> 
-                                    </c:otherwise>
-                                </c:choose>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input value="Update Password" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>    
+                        
                 </div>
             </div>
         </div>
+
         <!-- Vendor -->
         <!--[if lt IE 9]>
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
+        
+        <script src="/OAS/scripts/mustache.js"></script>
+
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

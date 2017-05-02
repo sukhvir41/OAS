@@ -310,7 +310,7 @@
                                                                 <select class="form-control mb-md" id="class" name="class">
 
 
-                                                                </select>`<br>
+                                                                </select><br>
                                                                 <label>Subjects</label>
                                                                 <div id="subjects">
 

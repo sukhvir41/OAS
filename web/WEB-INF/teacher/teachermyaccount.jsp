@@ -109,8 +109,6 @@
                                             <dl>
                                                 <dt>Name:</dt>
                                                 <dd>${requestScope.teacher.fname} ${requestScope.teacher.lname}</dd>
-                                                <dt>Contact Number</dt>
-                                                <dd>${requestScope.teacher.numnber}</dd>
                                                 <dt>Email Address</dt>
                                                 <dd>${requestScope.teacher.email}</dd>
                                                 <dt>Contact Number</dt>
@@ -137,17 +135,24 @@
                                                 <c:forEach var="department" items="${requestScope.teacher.department}">
                                                     <dd>${department}</dd>
                                                 </c:forEach> 
-                                                <c:choose>
-                                                    <c:when test="${hod =='true'}">
-                                                         <dt><a href="/OAS/teacher/myaccount/editprofile?hod=true">Edit Profile</a></dt>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <dt><a href="/OAS/teacher/myaccount/editprofile">Edit Profile</a></dt>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <dt><a href="/OAS/teacher/myaccount/editprofile">Edit Profile</a></dt>
+                                                
                                             </dl>
-
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <c:choose>
+                                                        <c:when test="${hod =='true'}">
+                                                            <a class="btn btn-primary" href="/OAS/teacher/myaccount/editprofile?hod=true">Edit Profile</a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a class="btn btn-primary" href="/OAS/account/editteacher">Edit Profile</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a class="btn btn-primary" href="/OAS/teacher/changepassword">Change Password</a>
+                                                </div>
+                                                <hr class="tall">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

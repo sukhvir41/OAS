@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Edit Profile - Teacher</title>   
+        <title>Change Password - Student</title>  
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -59,7 +59,7 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
+            <jsp:include page="/WEB-INF/student/studentheader.jsp" />
 
             <div role="main" class="main">
                 <section class="page-header">
@@ -67,23 +67,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <c:choose>
-                                        <c:when test="${hod =='true'}">
-                                            <li><a href="/OAS/teacher/hod">Home</a></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li><a href="/OAS/teacher">Home</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <li><a href="/OAS/teacher">Home</a></li>
-                                    <li><a href="/OAS/teacher/myaccount">My Account</a></li>
-                                    <li>Edit Profile</li>
+                                    <li><a href="/OAS/student">Home</a></li>
+                                    <li><a href="/OAS/student/myaccount">My Account</a></li>
+                                    <li>Change Password</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Edit Profile</h1>
+                                <h1>Change Password</h1>
                             </div>
                         </div>
                     </div>
@@ -92,75 +84,59 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/teacher/myaccount/editprofilepost" method="Post">
+                            <form action="/OAS/student/updatepassword" method="Post">
                                 <h4>Username : ${requestScope.username}</h4>
                                 <div class="row">
+
                                     <div class="form-group">
                                         <div class="col-md-4">
-                                            <label>First Name</label>
-                                            <input class="form-control input-lg" type="text" name="firstname" id="firstname" required="true" value="${requestScope.teacher.fname}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8">
-                                        <div class="alert alert-danger" hidden="true" id="firstnameerror">
-                                            <strong>Error!</strong> Please enter valid First Name
-                                        </div>
-                                    </div> 
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>Last Name</label>
-                                            <input class="form-control input-lg" type="text" name="lastname" id="lastname" required="true" value="${requestScope.teacher.lname}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8" >
-                                        <div class="alert alert-danger" hidden="true" id="lastnameerror">
-                                            <strong>Error!</strong> PLease enter valid Last Name
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label>Email Address</label>
-                                            <input class="form-control input-lg" type="text" name="email" id="email" required="true" value="${requestScope.teacher.email}">
+                                            <label>Old Password</label>
+                                            <input class="form-control input-lg" type="Password" name="oldpassword" id="oldpassword" required="true">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
-                                            <label>Contact Number</label>
-                                            <input class="form-control input-lg" type="number" name="number" id="number" required="true" value="${requestScope.teacher.number}">
+                                            <label>New Password</label>
+                                            <input class="form-control input-lg" type="Password" name="newpassword" id="newpassword" required="true">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <c:forEach var="department" items="${requestScope.teacher.department}">
-                                            <input type="checkbox" name="department" value="${department.id}">${department}<br />
-                                        </c:forEach>
-                                        <c:forEach var="department" items="${requestScope.departments}">
-                                            <input type="checkbox" name="department" value="${department.id}">${department}<br />
-                                        </c:forEach>
-                                    </label>
-                                </div>
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <input value="Update Profile" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a class="btn btn-primary" href="/OAS/teacher/myaccount/changepassword">Change Password</a>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Re Enter New Password</label>
+                                            <input class="form-control input-lg" type="Password" name="renewpassword" id="renewpassword" required="true">
+                                        </div>
                                     </div>
                                 </div>
-                                <dt><a href="/OAS/admin/myaccount/changepassword">Change Password</a></dt>
+                                <c:choose>
+                                    <c:when test="${param.error =='false'}">
+                                        <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-success" hidden id="loginError">
+                                                    <strong>Successful!</strong> Password Updated 
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="loginError">
+                                                    <strong>Error!</strong> Old password is wrong or new password does not match
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                    </c:otherwise>
+                                </c:choose>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input value="Update Password" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>    

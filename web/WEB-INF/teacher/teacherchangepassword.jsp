@@ -6,18 +6,15 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-        <title>Search Lecture - Student</title>   
-
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <title>Change Password - Teacher</title>	
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
+        
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -62,21 +59,37 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/student/studentheader.jsp" />
+            <c:choose>
+                <c:when test="${hod =='true'}">
+                    <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+                </c:when>
+                <c:otherwise>
+                    <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
+                </c:otherwise>
+            </c:choose>
+
             <div role="main" class="main">
                 <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li><a href="/OAS/student">Home</a></li>
-                                    <li>Lectures</li>
+                                    <c:choose>
+                                        <c:when test="${hod =='true'}">
+                                            <li><a href="/OAS/teacher/hod">Home</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a href="/OAS/teacher">Home</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <li><a href="/OAS/teacher/myaccount">My Account</a></li>s
+                                    <li>Change Password</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Search Lectures</h1>
+                                <h1>Edit Profile</h1>
                             </div>
                         </div>
                     </div>
@@ -85,89 +98,62 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h4>Select subject</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
-                                                <c:forEach var="subject" items="${requestScope.subjects}">
-                                                    <option value="${subject.id}">${subject}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <h4>Start Date</h4>
-                                                        <input required="true" class="form-control" type="date" name="startdate" id="startdate">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <h4>End Date</h4>
-                                                        <input required="true" class="form-control" type="date" name="enddate" id="enddate">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br>
+                            <form action="/OAS/teacher/updatepassword" method="Post">
+                                <h4>Username : ${requestScope.username}</h4>
+                                <div class="row">
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <input value="Search Lectures" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit" id="search">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Old Password</label>
+                                            <input class="form-control input-lg" type="Password" name="oldpassword" id="oldpassword" required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>New Password</label>
+                                            <input class="form-control input-lg" type="Password" name="newpassword" id="newpassword" required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Re Enter New Password</label>
+                                            <input class="form-control input-lg" type="Password" name="renewpassword" id="renewpassword" required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <c:choose>
+                                    <c:when test="${param.error =='false'}">
+                                        <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-success" hidden id="loginError">
+                                                    <strong>Successful!</strong> Password Updated 
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </div> 
+                                        </div> 
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="loginError">
+                                                    <strong>Error!</strong> Old password is wrong or new password does not match
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                    </c:otherwise>
+                                </c:choose>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input value="Update Password" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                                <div class="col-md-4">
-                                                    <div class="alert alert-danger" hidden id="error">
-                                                        <strong>Failure!</strong> Error in getting result
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                            <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                                <div class="col-md-4">
-                                                    <div class="alert alert-success" hidden id="success">
-                                                        <strong>Succss!</strong> Results below
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr class="tall">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Class</th>
-                                                        <th>Subject</th>
-                                                        <th>Count</th>
-                                                        <th>Date</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tablebody">
-
-                                                </tbody>
-                                            </table>
-                                        </div>        
-                                    </div>
-                                </div>  
-                            </div>
+                                </div>
+                            </form>
                         </div>
-                    </div>
+                    </div>    
                 </div>
             </div>
         </div>
@@ -177,9 +163,6 @@
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <script src="/OAS/scripts/mustache.js"></script>
-        <script src="/OAS/scripts/studentlectures.js"></script>
-
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

@@ -104,7 +104,7 @@
                                                         <div class="col-md-4">
                                                             <ul class="list-account-options">
                                                                 <li>
-                                                                    <a href="/OAS/admin/myaccount">My Account</a>
+                                                                    <a href="/OAS/teacher/myaccount">My Account</a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="/OAS/logout">Log Out</a>
