@@ -19,7 +19,7 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-//@WebServlet(urlPatterns = "/admin/students/unaccountstudent")
+@WebServlet(urlPatterns = "/admin/students/unaccountstudent")
 public class UnaccountStudent extends Controller {
     
     @Override
