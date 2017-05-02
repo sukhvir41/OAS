@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.teacher;
+package controllers.classteacher;
 
 import entities.Teacher;
 import java.io.PrintWriter;
@@ -18,16 +18,16 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/reports")
-public class TeacherReports extends Controller {
-
+@WebServlet(urlPatterns = "/teacher/classteacher/reports")
+public class ClassTeacherReport extends Controller {
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
-
-        req.setAttribute("teachings", teacher.getTeaches());
-        req.getRequestDispatcher("/WEB-INF/teacher/teacherreportgen.jsp").include(req, resp);
+        
+        req.setAttribute("classroom", teacher.getClassRoom());
+        req.getRequestDispatcher("/WEB-INF/classteacher/classteacherreportgen.jsp").include(req, resp);
     }
-
+    
 }

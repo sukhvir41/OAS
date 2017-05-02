@@ -132,7 +132,7 @@
                                                 <th>Roll Number</th>
                                                 <th>Subjects</th>
                                                 <th>Verified</th>
-                                                <th>Action</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="tablebody">
@@ -149,7 +149,7 @@
         
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        
+        <script src="/OAS/scripts/teacherstudent.js"></script>
         <script src="/OAS/scripts/mustache.js"></script>
 
         <!--<![endif]-->

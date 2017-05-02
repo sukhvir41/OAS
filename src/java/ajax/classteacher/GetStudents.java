@@ -51,6 +51,8 @@ public class GetStudents extends AjaxController {
                     .sorted()
                     .forEach(student -> add(student, jsonStudent));
         }
+        
+        out.print(gson.toJson(jsonStudent));
     }
     
     private void add(Student student, JsonArray jsonStudents) {

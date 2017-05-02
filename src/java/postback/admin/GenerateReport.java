@@ -100,7 +100,7 @@ public class GenerateReport extends HttpServlet {
             text.append(dateForamt.format(end), (XSSFFont) fontBold);
             cell.setCellValue(text);
 
-            //creating heaers of the table in execl sheet
+            //creating headers of the table in execl sheet
             row = spreadsheet.createRow(2);// new row
 
             cell = row.createCell(0);

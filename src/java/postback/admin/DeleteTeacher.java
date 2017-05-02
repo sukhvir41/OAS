@@ -5,7 +5,10 @@
  */
 package postback.admin;
 
+import entities.Login;
+import entities.Student;
 import entities.Teacher;
+import entities.UserType;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.Utils;
 
 /**
@@ -30,6 +34,12 @@ public class DeleteTeacher extends HttpServlet {
             int teacherId = Integer.parseInt(req.getParameter("teacherId"));
             Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
             if (teacher.isUnaccounted()) {
+                 Login login = (Login) session.createCriteria(Student.class)
+                        .add(Restrictions.eq("type", UserType.Teacher.toString()))
+                        .add(Restrictions.eq("id", teacher.getId()))
+                        .list()
+                        .get(0);
+                session.delete(login);
                 session.delete(teacher);
                 resp.sendRedirect("/OAS/admin/teacherd");
             } else {

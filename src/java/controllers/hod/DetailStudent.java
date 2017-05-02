@@ -8,6 +8,7 @@ package controllers.hod;
 import entities.Department;
 import entities.Login;
 import entities.Student;
+import entities.UserType;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,10 +34,12 @@ public class DetailStudent extends Controller {
         department = (Department) session.get(Department.class, department.getId());
 
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
-            Login login = (Login) session.createCriteria(Login.class)
-                    .add(Restrictions.eq("id", studentId))
+            Login login = (Login) session.createCriteria(Student.class)
+                    .add(Restrictions.eq("type", UserType.Student.toString()))
+                    .add(Restrictions.eq("id", student.getId()))
                     .list()
                     .get(0);
+
             req.setAttribute("username", login.getUsername());
             req.setAttribute("student", student);
             req.getRequestDispatcher("/WEB-INF/hod/detailstudent.jsp").include(req, resp);

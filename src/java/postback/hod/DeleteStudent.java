@@ -6,13 +6,16 @@
 package postback.hod;
 
 import entities.Department;
+import entities.Login;
 import entities.Student;
+import entities.UserType;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.PostBackController;
 
 /**
@@ -31,12 +34,18 @@ public class DeleteStudent extends PostBackController {
 
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
             if (student.isUnaccounted()) {
+                Login login = (Login) session.createCriteria(Student.class)
+                        .add(Restrictions.eq("type", UserType.Student.toString()))
+                        .add(Restrictions.eq("id", student.getId()))
+                        .list()
+                        .get(0);
+                session.delete(login);
                 session.delete(student);
                 resp.sendRedirect("/OAS/teacher/hod/students");
             } else {
                 resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + studentId);
             }
-        }else{
+        } else {
             resp.sendRedirect("/OAS/error");
         }
     }

@@ -20,7 +20,7 @@ import utility.Controller;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/students/deactivatestudent")
-public class DeactivateTeacher extends Controller {
+public class DeactivateStudent extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
