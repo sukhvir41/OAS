@@ -12,6 +12,7 @@ import entities.Teacher;
 import entities.Teaching;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.Utils;
 
 /**
@@ -71,9 +73,8 @@ public class GenerateReport extends HttpServlet {
         int teachingId = Integer.parseInt(req.getParameter("teaching"));
         Teaching teaching = (Teaching) session.get(Teaching.class, teachingId);
 
-        Date start = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("startdate")); // have to change date
-        Date end = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("enddate"));
-        SimpleDateFormat dateForamt = new SimpleDateFormat("dd-mm-yyyy");
+        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         ClassRoom classRoom = teaching.getClassRoom();
 
@@ -84,7 +85,10 @@ public class GenerateReport extends HttpServlet {
                 .sorted()
                 .collect(Collectors.toList());
 
-        List<Lecture> lectures = teaching.getLectures();
+        List<Lecture> lectures = session.createCriteria(Lecture.class)
+                .add(Restrictions.eq("teaching", teaching))
+                .add(Restrictions.between("date", startDate, endDate))
+                .list();
 
         int totalLecture = lectures.stream()
                 .mapToInt(lecture -> lecture.getCount())
@@ -116,9 +120,9 @@ public class GenerateReport extends HttpServlet {
         text.append("   Course:   ", (XSSFFont) font);
         text.append(classRoom.getCourse().getName(), (XSSFFont) fontBold);
         text.append("   From:   ", (XSSFFont) font);
-        text.append(dateForamt.format(start), (XSSFFont) fontBold);
+        text.append(startDate.toString(), (XSSFFont) fontBold);
         text.append("   To:   ", (XSSFFont) font);
-        text.append(dateForamt.format(end), (XSSFFont) fontBold);
+        text.append(endDate.toString(), (XSSFFont) fontBold);
         cell.setCellValue(text);
 
         row = spreadsheet.createRow(2);
@@ -163,9 +167,9 @@ public class GenerateReport extends HttpServlet {
 
             cell = row.createCell(4);
             if (totalLecture > 0) {
-                double percentage = ((double)attended / (double)totalLecture) * 100d;
+                double percentage = ((double) attended / (double) totalLecture) * 100d;
                 System.out.println(percentage);
-                cell.setCellValue(percentage +"%");
+                cell.setCellValue(percentage + "%");
             } else {
                 cell.setCellValue("NA");
             }

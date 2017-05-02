@@ -11,6 +11,7 @@ import entities.Student;
 import entities.Teaching;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.PostBackController;
+import utility.Utils;
 
 /**
  *
@@ -27,13 +29,17 @@ import utility.PostBackController;
  */
 @WebServlet(urlPatterns = "/admin/students/grantleavepost")
 public class GrantLeavesPost extends PostBackController {
-    // THIS WILL NOT WORK HABE TO FIX IT
+
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
-        Date start = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("startdate"));
-        Date end = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("enddate"));
+
+        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
+
         Student student = (Student) session.get(Student.class, studentId);
+       
         List<Teaching> teachings = session.createCriteria(Teaching.class)
                 .add(Restrictions.eq("classRoom", student.getClassRoom()))
                 .add(Restrictions.in("subject", student.getSubjects()))
@@ -42,7 +48,7 @@ public class GrantLeavesPost extends PostBackController {
         if (!teachings.isEmpty()) {
             lectures = session.createCriteria(Lecture.class)
                     .add(Restrictions.in("teaching", teachings))
-                    .add(Restrictions.between("date", start, end))// this will not work
+                    .add(Restrictions.between("date", startDate, endDate))
                     .list();
         }
 
@@ -60,7 +66,7 @@ public class GrantLeavesPost extends PostBackController {
                 .add(Restrictions.eq("student", student))
                 .list();
 
-        return attendances.size() > 0 ? true : false;
+        return attendances.size() > 0;
 
     }
 

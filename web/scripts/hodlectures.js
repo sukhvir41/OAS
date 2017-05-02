@@ -77,7 +77,7 @@ var getLectures = function(){
 	var course = $("#course").val();
 	var classRoom = $("#classroom").val();
 	var subject = $("#subject").val();
-	var startdate = $("#stardate").val();
+	var startdate = $("#startdate").val();
 	var enddate = $("#enddate").val();
 	var tableBody = $("#tablebody");
 	var template = '<tr><td><a href="/OAS/teacher/hod/lectures/detaillecture?lectureId={{id}}">{{id}}</a></td><td>{{class}}</td><td>{{subject}}</td><td>{{count}}</td><td>{{date}}</td><td>{{present}}</td><td>{{absent}}</td></tr>';

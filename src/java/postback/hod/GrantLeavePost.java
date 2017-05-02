@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package postback.classteacher;
+package postback.hod;
 
 import entities.Attendance;
+import entities.Department;
 import entities.Lecture;
 import entities.Student;
-import entities.Teacher;
 import entities.Teaching;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,21 +26,21 @@ import utility.Utils;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/teacher/classteacher/grantleavepost")
+@WebServlet(urlPatterns = "/teacher/hod/students/grantleavepost")
 public class GrantLeavePost extends PostBackController {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-
-        int studentId = Integer.parseInt(req.getParameter("studentId"));
+        Department department = (Department) httpSession.getAttribute("department");
+        department = (Department) session.get(Department.class, department.getId());
 
         LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
-        Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
-        teacher = (Teacher) session.get(Teacher.class, teacher.getId());
+        int studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
-        if (student.getClassRoom().getId() == teacher.getClassRoom().getId()) {
+
+        if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
             List<Teaching> teachings = session.createCriteria(Teaching.class)
                     .add(Restrictions.eq("classRoom", student.getClassRoom()))
                     .add(Restrictions.in("subject", student.getSubjects()))
@@ -60,10 +58,11 @@ public class GrantLeavePost extends PostBackController {
                         .filter(lecture -> !checkAttendance(lecture, student, session))
                         .forEach(lecture -> session.save(new Attendance(true, lecture, student, true)));
             }
-            resp.sendRedirect("/OAS/teacher/classteacher/detailstudent?studentId=" + studentId);
+            resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + studentId);
         } else {
-            resp.sendRedirect("/OAS/accessdenied.jsp");
+            resp.sendRedirect("/OAS/error");
         }
+
     }
 
     private boolean checkAttendance(Lecture lecture, Student student, Session session) {

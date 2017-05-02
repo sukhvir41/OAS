@@ -14,6 +14,7 @@ import entities.Teaching;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.servlet.ServletException;
@@ -34,6 +35,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import utility.Utils;
 
@@ -54,7 +56,7 @@ public class GenerateReport extends HttpServlet {
         XSSFRow row;
         Session session;
         XSSFCell cell;
-        Date start, end;
+        LocalDateTime start, end;
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet spreadsheet = workbook.createSheet(" Report ");
@@ -66,10 +68,10 @@ public class GenerateReport extends HttpServlet {
 
         try {
             int classroomId = Integer.parseInt(req.getParameter("classroom"));
-            System.out.println(req.getParameter("startdate"));
-            start = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("startdate"));
-            end = new SimpleDateFormat("yyyy-mm-dd").parse(req.getParameter("enddate"));
-            SimpleDateFormat dateForamt = new SimpleDateFormat("dd-mm-yyyy");
+
+            start = Utils.getStartdate(req.getParameter("startdate"));
+            end = Utils.getEndDate(req.getParameter("enddate"));
+
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
 
             CellStyle style = workbook.createCellStyle();
@@ -95,9 +97,9 @@ public class GenerateReport extends HttpServlet {
             text.append("   Course:   ", (XSSFFont) font);
             text.append(classRoom.getCourse().getName(), (XSSFFont) fontBold);
             text.append("   From:   ", (XSSFFont) font);
-            text.append(dateForamt.format(start), (XSSFFont) fontBold);
+            text.append(start.toString(), (XSSFFont) fontBold);
             text.append("   To:   ", (XSSFFont) font);
-            text.append(dateForamt.format(end), (XSSFFont) fontBold);
+            text.append(end.toString(), (XSSFFont) fontBold);
             cell.setCellValue(text);
 
             //creating headers of the table in execl sheet
@@ -176,7 +178,7 @@ public class GenerateReport extends HttpServlet {
                 for (Subject subject : student.getSubjects()) {
 
                     //getting lectures of the class and subject
-                    List<Lecture> lectures = getLectures(classRoom, subject, session);
+                    List<Lecture> lectures = getLectures(classRoom, subject, session, start, end);
                     int lecturesCount = lectures.stream()
                             .mapToInt(e -> e.getCount())
                             .sum();
@@ -250,7 +252,7 @@ public class GenerateReport extends HttpServlet {
      * gets the lectures of the classroom and the subject. requires hibernate
      * session to do the search
      */
-    private List<Lecture> getLectures(ClassRoom classRoom, Subject subject, Session session) {
+    private List<Lecture> getLectures(ClassRoom classRoom, Subject subject, Session session, LocalDateTime start, LocalDateTime end) {
         List<Teaching> teaching = session.createCriteria(Teaching.class)
                 .add(Restrictions.eq("classRoom", classRoom))
                 .add(Restrictions.eq("subject", subject))
@@ -259,7 +261,8 @@ public class GenerateReport extends HttpServlet {
         if (teaching.size() > 0) {
             return session.createCriteria(Lecture.class)
                     .add(Restrictions.in("teaching", teaching))
-                    //.add(Restrictions.between("date", start, end))
+                    .add(Restrictions.between("date", start, end))
+                    .addOrder(Order.desc("date"))
                     .list();
         } else {
             return new ArrayList<>();

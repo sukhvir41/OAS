@@ -14,6 +14,7 @@ import entities.Lecture;
 import entities.Subject;
 import entities.Teaching;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
+import utility.Utils;
 
 /**
  *
@@ -39,7 +41,10 @@ public class SearchLectures extends AjaxController {
 
         int classId = Integer.parseInt(req.getParameter("classroomId"));
         String subjectId = req.getParameter("subjectId");
-        //LocalDateTime start = LocalDateTime.parse(req.getParameter("startdate"), DateTimeFormatter.) todo: fix date evrywhere
+
+        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
+
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
 
         if (classRoom.getCourse().getDepartment().getId() == department.getId()) {
@@ -60,8 +65,8 @@ public class SearchLectures extends AjaxController {
 
             List<Lecture> lectures = session.createCriteria(Lecture.class)
                     .add(Restrictions.in("teaching", teaching))
+                    .add(Restrictions.between("date", startDate, endDate))
                     .addOrder(Order.desc("date"))
-                    //add date here     .add()
                     .list();
 
             JsonArray jsonLectures = new JsonArray();

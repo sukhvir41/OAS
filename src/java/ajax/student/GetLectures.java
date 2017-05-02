@@ -14,6 +14,7 @@ import entities.Student;
 import entities.Subject;
 import entities.Teaching;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
+import utility.Utils;
 
 /**
  *
@@ -36,6 +38,9 @@ public class GetLectures extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Student student = (Student) req.getSession().getAttribute("student");
         Student currentStudent = (Student) session.get(Student.class, student.getId());
+
+        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         int subjectId = Integer.parseInt(req.getParameter("subjectId"));
 
@@ -50,7 +55,7 @@ public class GetLectures extends AjaxController {
 
             List<Lecture> lectures = session.createCriteria(Lecture.class)
                     .add(Restrictions.eq("teaching", teaching))
-                    //.add   add date here
+                    .add(Restrictions.between("date", startDate, endDate))
                     .addOrder(Order.desc("date"))
                     .list();
 
@@ -59,7 +64,7 @@ public class GetLectures extends AjaxController {
 
             lectures.stream()
                     .forEach(lecture -> add(lecture, currentStudent, jsonLectures));
-            
+
             out.print(gson.toJson(jsonLectures));
 
         } else {
@@ -81,7 +86,7 @@ public class GetLectures extends AjaxController {
                 .collect(Collectors.toList());
         System.out.println(attendaces.size());
         attendaces.stream()
-                .forEach(attendace -> System.out.println(attendace.isAttended() + "   "+ attendace.getLecture().getId() +  "    " +attendace.getStudent().toString()+ "    "+ attendace.getStudent().getId()));
+                .forEach(attendace -> System.out.println(attendace.isAttended() + "   " + attendace.getLecture().getId() + "    " + attendace.getStudent().toString() + "    " + attendace.getStudent().getId()));
         if (attendaces.size() > 0) {
             if (attendaces.get(0).isAttended()) {
                 lecture.addProperty("status", "present");
@@ -91,7 +96,7 @@ public class GetLectures extends AjaxController {
         } else {
             lecture.addProperty("status", "absent");
         }
-        
+
         jsonLectures.add(lecture);
     }
 

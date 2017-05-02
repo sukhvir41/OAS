@@ -34,7 +34,7 @@ public class DetailStudent extends Controller {
         department = (Department) session.get(Department.class, department.getId());
 
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
-            Login login = (Login) session.createCriteria(Student.class)
+            Login login = (Login) session.createCriteria(Login.class)
                     .add(Restrictions.eq("type", UserType.Student.toString()))
                     .add(Restrictions.eq("id", student.getId()))
                     .list()
