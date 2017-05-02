@@ -86,16 +86,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <c:forEach var="subject" items="${requestScope.holder.subject}">
+                                <c:forEach var="hold" items="${requestScope.holder}">
                                     <div class="col-md-4">
-                                        <label>${subject}</label>
-                                        <canvas id="${subject.id}" width="200" height="200"></canvas>
+                                        <h4>${hold.subject}</h4>
+                                        <canvas id="${hold.subject.id}" width="200" height="200"></canvas>
                                     </div>
                                 </c:forEach>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label>Total</label>
+                                    <h4>Total</h4>
                                     <canvas id="total" width="200" height="200"></canvas>
                                 </div>
                             </div>
@@ -104,18 +104,17 @@
                 </div>
             </div>
         </div>
+
+       
         <!-- Vendor -->
         <!--[if lt IE 9]>
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <script src="/OAS/scripts/mustache.js"></script>
-        <script src="/OAS/scripts/studentlectures.js"></script>
-        <script type="text/javascript">
-            
-            
-        </script>
+        
+        <script src="/OAS/scripts/Chart.min.js"></script>
+
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -172,6 +171,66 @@
         
         </script>
         -->
+
+         <script type="text/javascript">
+            <c:forEach var="hold" items="${requestScope.holder}">
+            new Chart($("#${hold.subject.id}"), {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        "present",
+                        "absent"
+                    ],
+                    datasets: [
+                        {
+                            data: [${hold.present}, ${hold.absent}],
+                            backgroundColor: [
+                                "#36A2EB",
+                                "#282B2B"
+                            ],
+                            hoverBackgroundColor: [
+                                "#36A2EB",
+                                "#282B2B"
+                            ]
+                        }]
+                },
+                options: {
+                    responsive: false,
+                    animation: {
+                        animateScale: true
+                    }
+                }
+            });
+            </c:forEach>
+
+             new Chart($("#total"), {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        "present",
+                        "absent"
+                    ],
+                    datasets: [
+                        {
+                            data: [${requestScope.totalpresent}, ${requestScope.totalabsent}],
+                            backgroundColor: [
+                                "#36A2EB",
+                                "#282B2B"
+                            ],
+                            hoverBackgroundColor: [
+                                "#36A2EB",
+                                "#282B2B"
+                            ]
+                        }]
+                },
+                options: {
+                    responsive: false,
+                    animation: {
+                        animateScale: true
+                    }
+                }
+            });
+        </script>
 
     </body>
 </html>
