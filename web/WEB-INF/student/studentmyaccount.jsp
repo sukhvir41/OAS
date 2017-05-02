@@ -94,7 +94,7 @@
                                         <div class="col-md-12">
                                             <dl>
                                                 <dt>Name:</dt>
-                                                <dd>${requestScope.student.fname} ${requestScope.student.lname}</dd>
+                                                <dd>${requestScope.student.fName} ${requestScope.student.lName}</dd>
                                                 <dt>Email Address</dt>
                                                 <dd>${requestScope.student.email}</dd>
                                                 <dt>Contact Number</dt>

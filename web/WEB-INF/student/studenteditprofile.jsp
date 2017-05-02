@@ -90,7 +90,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>First Name</label>
-                                            <input class="form-control input-lg" type="text" name="fname" id="fname" required="true" value="${requestScope.student.fname}">
+                                            <input class="form-control input-lg" type="text" name="fname" id="fname" required="true" value="${requestScope.student.fName}">
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Last Name</label>
-                                            <input class="form-control input-lg" type="text" name="lname" id="lname" required="true" value="${requestScope.student.lname}">
+                                            <input class="form-control input-lg" type="text" name="lname" id="lname" required="true" value="${requestScope.student.lName}">
                                         </div>
                                     </div>
                                 </div>
