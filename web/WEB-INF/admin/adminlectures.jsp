@@ -107,7 +107,7 @@
                                             	<div class="form-group">
                                                 	<div class="col-md-6">
                                                     	<h4>Start Date</h4>
-                                                    	<input required="true" class="form-control" type="date" name="startdate">
+                                                    	<input required="true" class="form-control" type="date" id="startdate" name="startdate">
                                                 	</div>
                                             	</div>
                                         	</div>
@@ -115,7 +115,7 @@
                                             	<div class="form-group">
                                                 	<div class="col-md-6">
                                                     	<h4>End Date</h4>
-                                                    	<input required="true" class="form-control" type="date" name="enddate">
+                                                    	<input required="true" class="form-control" id="enddate" type="date" name="enddate">
                                                 	</div>
                                             	</div>
                                         	</div>

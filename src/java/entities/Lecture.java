@@ -28,7 +28,7 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "lecture")
-public class Lecture implements Serializable {
+public class Lecture implements Serializable{
 
     @Id
     @Column(name = "lec_id")
@@ -88,7 +88,6 @@ public class Lecture implements Serializable {
     @Override
     public String toString() {
         return getId() + " "+ getTeaching();
-    }
-    
+    }  
     
 }

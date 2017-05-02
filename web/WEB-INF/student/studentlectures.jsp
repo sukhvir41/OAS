@@ -178,6 +178,7 @@
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
         <script src="/OAS/scripts/mustache.js"></script>
+        <script src="/OAS/scripts/studentlectures.js"></script>
 
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>

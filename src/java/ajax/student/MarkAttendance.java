@@ -40,8 +40,10 @@ public class MarkAttendance extends HttpServlet {
         try {
             String lectureId = req.getParameter("lectureId");
             Student student = (Student) req.getSession().getAttribute("student");
+            
             student = (Student) session.get(Student.class, student.getId());
             Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
+            
             if (lecture.getTeaching().getClassRoom().equals(student.getClassRoom()) && student.getSubjects().contains(lecture.getTeaching().getSubject()) && !lecture.isEnded()) {
                 LocalDateTime lectureStartTime = lecture.getDate();
                 LocalDateTime lectureOffsetTime = lectureStartTime.plusMinutes(30);

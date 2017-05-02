@@ -12,6 +12,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -240,7 +244,7 @@ public class Utils {
      * @param regex The expression to be compared
      *
      * @param flags Match flags, a bit mask that may include null null null null
-     * null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *
@@ -303,5 +307,20 @@ public class Utils {
         session.getTransaction().commit();
         session.close();
         return id;
+    }
+
+    public static LocalDateTime getStartdate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        LocalTime localTime = LocalTime.parse("00:00:00");
+        return LocalDateTime.of(localDate, localTime);
+
+    }
+
+    public static  LocalDateTime getEndDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        LocalTime localTime = LocalTime.parse("11:59:59");
+        return LocalDateTime.of(localDate, localTime);
     }
 }

@@ -40,26 +40,34 @@ public class PutAttendance extends HttpServlet {
             String lectureId = req.getParameter("lectureId");
             int studentId = Integer.parseInt(req.getParameter("studentId"));
             Boolean mark = Boolean.valueOf(req.getParameter("mark"));
+
             Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
             teacher = (Teacher) session.get(Teacher.class, teacher.getId());
+
             Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
             Student student = (Student) session.get(Student.class, studentId);
+
             System.out.println(student + "   " + mark + "  " + lecture.getId());
+
             if (lecture.getTeaching().getTeacher().equals(teacher)) {
+                
                 LocalDateTime presentTime = LocalDateTime.now();
-                LocalDateTime lectureOffsetTime = lecture.getDate();
-                lectureOffsetTime.plusHours(3);
+                LocalDateTime lectureTime = lecture.getDate();
+                LocalDateTime lectureOffsetTime = lectureTime.plusHours(3);
+                
                 if (presentTime.isAfter(lecture.getDate()) && presentTime.isBefore(lectureOffsetTime)) {
                     List<Attendance> attendance = session.createCriteria(Attendance.class)
                             .add(Restrictions.eq("lecture", lecture))
                             .add(Restrictions.eq("student", student))
                             .list();
+                    
                     if (attendance.size() > 0) {
                         attendance.get(0).setAttended(mark);
                         attendance.get(0).setMarkedByTeacher(true);
                         session.update(attendance.get(0));
                         System.out.println("marked already " + attendance.get(0).getStudent().toString());
                         out.print("true");
+                    
                     } else {
                         Attendance attend = new Attendance(lecture, student);
                         attend.setAttended(mark);
@@ -67,6 +75,7 @@ public class PutAttendance extends HttpServlet {
                         session.save(attend);
                         System.out.println("marked");
                         out.print("true");
+                   
                     }
                 } else {
                     System.out.println("time out");
