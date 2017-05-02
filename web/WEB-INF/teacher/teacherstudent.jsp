@@ -86,18 +86,6 @@
                                             <br />
                                             <button class="btn btn-primary" id ="search">Search</button>
                                         </div>
-                                        <div class="col-md-6">
-                                            <h4>Search By Name</h4>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
-                                                        <br>
-                                                        <button class="btn btn-primary" id ="searchname">Search</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

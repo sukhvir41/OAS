@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Reports - Teacher</title>    
+        <title>Reports - Class Teacher</title>    
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -85,16 +85,11 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <form action="/OAS/teacher/generatereportpost" method="post" target="_blank">
+                                        <form action="/OAS/teacher/classteacher/generatereportpost" method="post" target="_blank">
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <h4>Select Subject</h4>
-                                                        <select class="form-control" name="teaching" id="teachingId">
-                                                            <c:forEach var="teaching" items="${requestScope.teachings}">
-                                                                <option value="${teaching.id}">${teaching}</option>
-                                                            </c:forEach>
-                                                        </select>
+                                                    <div class="col-md-12">
+                                                        <h4>Class Room : ${requestScope.classroom}</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,6 +98,7 @@
                                                     <div class="col-md-6">
                                                         <h4>Start Date</h4>
                                                         <input required="true" class="form-control" type="date" name="startdate">
+                                                        <input typt="text" name="classroom" id="classroom" value="${requestScope.classroom.id}" hidden="true">
                                                     </div>
                                                 </div>
                                             </div>

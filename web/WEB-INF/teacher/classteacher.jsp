@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Class Teacher - Teacher</title> 
+        <title>Class Room - Teacher</title> 
         
 
         <!-- Mobile Metas -->
@@ -50,7 +50,7 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
             <div role="main" class="main">
                 <section class="page-header">
                     <div class="container">

@@ -8,7 +8,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Reports - Teacher</title>    
+        <title>My Account - Teacher</title>   
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -67,14 +71,24 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
+                                        
+                                        <c:choose>
+                                            <c:when test="${hod =='true'}">
+                                                 <li><a href="/OAS/teacher/hod">Home</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li><a href="/OAS/teacher">Home</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                         <li><a href="/OAS/teacher">Home</a></li>
-                                        <li>Class Reports</li>
+                                        <li>My Account</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h1>Class Reports</h1>
+                                    <h1>My Account</h1>
                                 </div>
                             </div>
                         </div>
@@ -84,60 +98,56 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <form action="/OAS/teacher/generatereportpost" method="post" target="_blank">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <h4>Select Subject</h4>
-                                                        <select class="form-control" name="teaching" id="teachingId">
-                                                            <c:forEach var="teaching" items="${requestScope.teachings}">
-                                                                <option value="${teaching.id}">${teaching}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <h4>Start Date</h4>
-                                                        <input required="true" class="form-control" type="date" name="startdate">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <h4>End Date</h4>
-                                                        <input required="true" class="form-control" type="date" name="enddate">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div class="col-md-12">
+                                        <h2>Username : <c:out value="${requestScope.username}"/></h2>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <dl>
+                                                <dt>Name:</dt>
+                                                <dd>${requestScope.teacher.fname} ${requestScope.teacher.lname}</dd>
+                                                <dt>Contact Number</dt>
+                                                <dd>${requestScope.teacher.numnber}</dd>
+                                                <dt>Email Address</dt>
+                                                <dd>${requestScope.teacher.email}</dd>
+                                                <dt>Contact Number</dt>
+                                                <dd>${requestScope.teacher.numnber}</dd>
+                                                <dt>Verified?</dt>
+                                                <dd>${requestScope.teacher.verified}</dd>
+                                                <dt>Unaccounted?</dt>
+                                                <dd>${requestScope.teacher.unaccounted}</dd>
+                                                <dt>HOD?</dt>
+                                                <dd>${requestScope.teacher.hod}</dd>
+                                                <c:if test="${requestScope.teacher.hod}">
+                                                    <dt>HOD of following Department</dt>
+                                                    <c:forEach var="department" items="${requestScope.teacher.hodOf}">
+                                                        <dd>${department}</dd>
+                                                    </c:forEach> 
+                                                </c:if>
+                                                <dt>Class Teacher of Following Class</dt>
+                                                <dd>${requestScope.teacher.classRoom}</dd>
+                                                <dt>Teacher theaches following subjects in respective classes</dt>
+                                                <c:forEach var="teaching" items="${requestScope.teacher.teaches}">
+                                                    <dd>${teaching}</dd>
+                                                </c:forEach> 
+                                                <dt><a href="/OAS/teacher/myaccount/editprofile">Change Password</a></dt>
+                                            </dl>
 
-
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <input value="Generate Report" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
-                                                </div>
-                                            </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
+
         <!-- Vendor -->
         <!--[if lt IE 9]>
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        
-        <script src="/OAS/scripts/mustache.js"></script>
-        <script src="/OAS/scripts/jquery-ui.js"></script>
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -179,11 +189,21 @@
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
 
-        <script>
-            $(function () {
-                $(".datepicker").datepicker();
-            });
+        <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+        <script type="text/javascript">
+        
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-12345678-1']);
+                _gaq.push(['_trackPageview']);
+        
+                (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+        
         </script>
+        -->
 
     </body>
 </html>
