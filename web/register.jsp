@@ -155,8 +155,7 @@
                                                         </div> 
                                                     </div>
                                                     <div class="row">
-
-                                                        <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
 
                                                         <div class="col-md-8" >
                                                             <div class="alert alert-danger" hidden="true" id="emailtakenerror">
@@ -311,8 +310,7 @@
                                                                 <select class="form-control mb-md" id="class" name="class">
 
 
-                                                                </select>
-                                                                <br>
+                                                                </select>`<br>
                                                                 <label>Subjects</label>
                                                                 <div id="subjects">
 

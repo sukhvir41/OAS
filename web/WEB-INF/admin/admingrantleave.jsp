@@ -112,9 +112,9 @@
                                     		<div class="form-group">
                                     			<div class="col-md-4">
                                     				<label>Leave Start Date</label><br/>
-                                    				<input type="date" class="form-control input-lg" name="startdate" id="startdate"><br/>
+                                    				<input type="date" class="form-control input-lg" name="startdate" id="startdate" required="true"><br/>
                                     				<label>Leave End Date</label><br/>
-                                    				<input type="date" class="form-control input-lg" name="enddate" id="enddate"><br/>
+                                    				<input type="date" class="form-control input-lg" name="enddate" id="enddate" required="true"><br/>
                                     				<input type="submit" class="btn btn-primary push-bottom" value="Grant Leave">
                                     			</div>
                                     		</div>

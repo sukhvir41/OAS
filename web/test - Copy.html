@@ -103,6 +103,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8">
+                                        <div class="alert alert-danger" hidden="true" id="firstnameerror">
+                                            <strong>Error!</strong> Please enter valid First Name
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Last Name</label>
@@ -110,6 +118,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8" >
+                                        <div class="alert alert-danger" hidden="true" id="lastnameerror">
+                                            <strong>Error!</strong> PLease enter valid Last Name
+                                                            </div>
+                                                        </div> 
+                                                    </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
@@ -128,11 +144,6 @@
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" value="">
-                                            Option one is this and that—be sure to include why it's great option one<br />
-                                        <input type="checkbox" value="">
-                                            Option one is this and that—be sure to include why it's great option one<br />
-
                                         <c:forEach var="department" items="${requestScope.teacher.department}">
                                             <input type="checkbox" name="department" value="${department.id}">${department}<br />
                                         </c:forEach>
@@ -142,10 +153,14 @@
                                     </label>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-2">
                                         <input value="Update Profile" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
                                     </div>
+                                    <div class="col-md-2">
+                                        <a class="btn btn-primary" href="/OAS/teacher/myaccount/changepassword">Change Password</a>
+                                    </div>
                                 </div>
+                                <dt><a href="/OAS/admin/myaccount/changepassword">Change Password</a></dt>
                             </form>
                         </div>
                     </div>    

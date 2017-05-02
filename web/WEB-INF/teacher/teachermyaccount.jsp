@@ -63,15 +63,21 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
-
+            
+                <c:choose>
+                    <c:when test="${hod =='true'}">
+                        <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+                    </c:when>
+                    <c:otherwise>
+                        <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
+                    </c:otherwise>
+                </c:choose>
                 <div role="main" class="main">
                     <section class="page-header">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-                                        
                                         <c:choose>
                                             <c:when test="${hod =='true'}">
                                                  <li><a href="/OAS/teacher/hod">Home</a></li>
@@ -80,8 +86,6 @@
                                                 <li><a href="/OAS/teacher">Home</a></li>
                                             </c:otherwise>
                                         </c:choose>
-
-                                        <li><a href="/OAS/teacher">Home</a></li>
                                         <li>My Account</li>
                                     </ul>
                                 </div>
@@ -119,8 +123,8 @@
                                                 <dd>${requestScope.teacher.hod}</dd>
                                                 <c:if test="${requestScope.teacher.hod}">
                                                     <dt>HOD of following Department</dt>
-                                                    <c:forEach var="department" items="${requestScope.teacher.hodOf}">
-                                                        <dd>${department}</dd>
+                                                    <c:forEach var="hodofdepartment" items="${requestScope.teacher.hodOf}">
+                                                        <dd>${hodofdepartment}</dd>
                                                     </c:forEach> 
                                                 </c:if>
                                                 <dt>Class Teacher of Following Class</dt>
@@ -129,7 +133,19 @@
                                                 <c:forEach var="teaching" items="${requestScope.teacher.teaches}">
                                                     <dd>${teaching}</dd>
                                                 </c:forEach> 
-                                                <dt><a href="/OAS/teacher/myaccount/editprofile">Change Password</a></dt>
+                                                <dt>Teacher is associated with following departments</dt>
+                                                <c:forEach var="department" items="${requestScope.teacher.department}">
+                                                    <dd>${department}</dd>
+                                                </c:forEach> 
+                                                <c:choose>
+                                                    <c:when test="${hod =='true'}">
+                                                         <dt><a href="/OAS/teacher/myaccount/editprofile?hod=true">Edit Profile</a></dt>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <dt><a href="/OAS/teacher/myaccount/editprofile">Edit Profile</a></dt>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <dt><a href="/OAS/teacher/myaccount/editprofile">Edit Profile</a></dt>
                                             </dl>
 
                                         </div>

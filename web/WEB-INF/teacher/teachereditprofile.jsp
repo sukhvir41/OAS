@@ -6,9 +6,9 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Edit Profile - Teacher</title>	
+        <title>Edit Profile - Teacher</title>   
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -59,7 +59,14 @@
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
+            <c:choose>
+                <c:when test="${hod =='true'}">
+                    <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+                </c:when>
+                <c:otherwise>
+                    <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
+                </c:otherwise>
+            </c:choose>
 
             <div role="main" class="main">
                 <section class="page-header">
@@ -75,7 +82,6 @@
                                             <li><a href="/OAS/teacher">Home</a></li>
                                         </c:otherwise>
                                     </c:choose>
-                                    <li><a href="/OAS/teacher">Home</a></li>
                                     <li><a href="/OAS/teacher/myaccount">My Account</a></li>
                                     <li>Edit Profile</li>
                                 </ul>
@@ -103,6 +109,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8">
+                                        <div class="alert alert-danger" hidden="true" id="firstnameerror">
+                                            <strong>Error!</strong> Please enter valid First Name
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Last Name</label>
@@ -110,6 +124,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8" >
+                                        <div class="alert alert-danger" hidden="true" id="lastnameerror">
+                                            <strong>Error!</strong> PLease enter valid Last Name
+                                                            </div>
+                                                        </div> 
+                                                    </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
@@ -119,6 +141,22 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8" >
+                                        <div class="alert alert-danger" hidden="true" id="emailerror">
+                                            <strong>Error!</strong> Enter valid E-mail Address
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8" >
+                                        <div class="alert alert-danger" hidden="true" id="emailtakenerror">
+                                            <strong>Error!</strong> The E-mail address is already in use
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Contact Number</label>
@@ -126,23 +164,30 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
+                                <div class="row">
+                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
+                                    <div class="col-md-8" >
+                                        <div class="alert alert-danger" hidden="true" id="numbererror">
+                                            <strong>Error!</strong> number should be of 10 digits
+                                        </div>
+                                    </div> 
+                                </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" value="">
-                                            Option one is this and that—be sure to include why it's great option one1
-                                        <input type="checkbox" value="">
-                                            Option one is this and that—be sure to include why it's great option one2
-                                        <input type="checkbox" value="">
-                                            Option one is this and that—be sure to include why it's great option one3
+                                        <c:forEach var="department" items="${requestScope.teacher.department}">
+                                            <input type="checkbox" name="department" value="${department.id}">${department}<br />
+                                        </c:forEach>
+                                        <c:forEach var="department" items="${requestScope.departments}">
+                                            <input type="checkbox" name="department" value="${department.id}">${department}<br />
+                                        </c:forEach>
                                     </label>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-2">
                                         <input value="Update Profile" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="btn btn-primary" href="/OAS/teacher/myaccount/changepassword">Change Password</a>
                                     </div>
                                 </div>
                             </form>

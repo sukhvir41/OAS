@@ -137,7 +137,7 @@
 
                                                                 <input type="hidden" name="courseId" value="${requestScope.course.id}">
                                                                 <label>Deleting the course directly will make the system unpredictable and may cause some problems</label>
-                                                                <label><b>Its is advised to delete the course respective data first before deleting it</b></label>
+                                                                <label><b>It is advised to delete the course respective data first before deleting it</b></label>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

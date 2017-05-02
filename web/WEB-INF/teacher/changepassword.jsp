@@ -6,10 +6,9 @@
 
         <!-- Basic -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-        <title>Class Room - Teacher</title> 
-        
+        <title>Change Password - Teacher</title>	
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -47,117 +46,124 @@
 
         <!-- Head Libs -->
         <script src="/OAS/vendor/modernizr/modernizr.js"></script>
+
+        <!--[if IE]>
+                <link rel="stylesheet" href="css/ie.css">
+                <![endif]-->
+
+        <!--[if lte IE 8]>
+                <script src="vendor/respond/respond.js"></script>
+                <script src="vendor/excanvas/excanvas.js"></script>
+                <![endif]-->
+
     </head>
     <body>
         <div class="body">
-            <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
+            <c:choose>
+                <c:when test="${hod =='true'}">
+                    <jsp:include page="/WEB-INF/hod/hodheader.jsp" />
+                </c:when>
+                <c:otherwise>
+                    <jsp:include page="/WEB-INF/teacher/teacherheader.jsp" />
+                </c:otherwise>
+            </c:choose>
+
             <div role="main" class="main">
                 <section class="page-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
-                                    <li><a href="/OAS/teacher">Home</a></li>
-                                    <li>Class Teacher</li>
+                                    <c:choose>
+                                        <c:when test="${hod =='true'}">
+                                            <li><a href="/OAS/teacher/hod">Home</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a href="/OAS/teacher">Home</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <li><a href="/OAS/teacher/myaccount">My Account</a></li>
+                                    <li><a href="/OAS/teacher/myaccount/editprofile">Edit Profile</a></li>
+                                    <li>Change Password</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Class Teacher</h1>
+                                <h1>Edit Profile</h1>
                             </div>
                         </div>
                     </div>
                 </section>
 
-
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h4>Search By Name</h4>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
-                                                        <br>
-                                                        <button class="btn btn-primary" id ="searchname">Search</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <h4>Filter</h4>
-                                            <div class="radio">
-                                                <label>
-                                                    <input id="filter" name="filter" value="all" checked type="radio">
-                                                    All
-                                                </label>&nbsp; &nbsp;
-                                                <label>
-                                                    <input id="filter" name="filter" value="true" type="radio">
-                                                    Verified
-                                                <label>
-                                                    <input id="filter" name="filter" value="false" type="radio">
-                                                    Not Verified
-                                                </label>&nbsp; &nbsp;
-                                            </div>
-                                            <button class="btn btn-primary" id ="search">Search</button>
+                            <form action="/OAS/teacher/myaccount/changepasswordpost" method="Post">
+                                <h4>Username : ${requestScope.username}</h4>
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Old Password</label>
+                                            <input class="form-control input-lg" type="Password" name="oldpassword" id="oldpassword" required="true">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                <div class="col-md-4">
-                                    <div class="alert alert-danger" hidden id="error">
-                                        <strong>Failure!</strong> Error in getting result
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>New Password</label>
+                                            <input class="form-control input-lg" type="Password" name="newpassword" id="newpassword" required="true">
+                                        </div>
                                     </div>
-                                </div> 
-                            </div>
-                            <div class="row">
-                                <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                <div class="col-md-4">
-                                    <div class="alert alert-success" hidden id="success">
-                                        <strong>Success!</strong> Results below
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>Re Enter New Password</label>
+                                            <input class="form-control input-lg" type="Password" name="renewpassword" id="renewpassword" required="true">
+                                        </div>
                                     </div>
-                                </div> 
-                            </div>
-                            <hr class="tall">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Number</th>
-                                                <th>Email</th>
-                                                <th>Class Room</th>
-                                                <th>Roll Number</th>
-                                                <th>Subjects</th>
-                                                <th>Verified</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablebody">
-
-                                        </tbody>
-                                    </table>
-                                </div>        
-                            </div>
+                                </div>
+                                <c:choose>
+                                    <c:when test="${param.error =='false'}">
+                                        <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-success" hidden id="loginError">
+                                                    <strong>Successful!</strong> Password Updated 
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="alert alert-danger" hidden id="loginError">
+                                                    <strong>Error!</strong> Old password is wrong or new password does not match
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                    </c:otherwise>
+                                </c:choose>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input value="Update Password" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </div>
+                    </div>    
                 </div>
             </div>
         </div>
-        
+        <!-- Vendor -->
+        <!--[if lt IE 9]>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        
-        <script src="/OAS/scripts/mustache.js"></script>
-
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
@@ -198,5 +204,22 @@
 
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
+
+        <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+        <script type="text/javascript">
+        
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-12345678-1']);
+                _gaq.push(['_trackPageview']);
+        
+                (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+        
+        </script>
+        -->
+
     </body>
 </html>
