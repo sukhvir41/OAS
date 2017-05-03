@@ -130,7 +130,7 @@
                                         <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
                                         <div class="row">
                                             <div class="col-md-4 ">
-                                                <div class="alert alert-success" hidden id="loginError">
+                                                <div class="alert alert-success" id="loginError">
                                                     <strong>Successful!</strong> Password Updated 
                                                 </div>
                                             </div> 

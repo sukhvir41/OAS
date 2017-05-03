@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,59 +31,59 @@ public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "t_id")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private int id;
 
     @Column(name = "t_fname")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private String fName;
 
     @Column(name = "t_lname")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private String lName;
 
     @Column(name = "t_number")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private long number;
 
     @Column(name = "t_email")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private String email;
 
     @Column(name = "verified")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private boolean verified = false;
 
     @Column(name = "unaccounted")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private boolean unaccounted;
 
     @Column(name = "t_hod")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private boolean hod;
 
     @OneToMany(mappedBy = "hod", fetch = FetchType.EAGER)
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private List<Department> hodOf = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "class_fid")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private ClassRoom classRoom;
 
     @OneToMany(mappedBy = "teacher")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private List<Teaching> teaches = new ArrayList<>();
 
     @ManyToMany

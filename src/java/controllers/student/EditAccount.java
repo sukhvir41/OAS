@@ -43,7 +43,7 @@ public class EditAccount extends Controller {
         req.setAttribute("username", login.getUsername());
         req.setAttribute("student", student);
         req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/student/studenteditaccount.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/student/studenteditprofile.jsp").include(req, resp);
     }
 
 }

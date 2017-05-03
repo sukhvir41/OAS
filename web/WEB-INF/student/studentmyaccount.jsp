@@ -94,7 +94,7 @@
                                         <div class="col-md-12">
                                             <dl>
                                                 <dt>Name:</dt>
-                                                <dd>${requestScope.student.fName} ${requestScope.student.lName}</dd>
+                                                <dd>${requestScope.student}</dd>
                                                 <dt>Email Address</dt>
                                                 <dd>${requestScope.student.email}</dd>
                                                 <dt>Contact Number</dt>
@@ -104,9 +104,9 @@
                                                 <dt>Unaccounted?</dt>
                                                 <dd>${requestScope.student.unaccounted}</dd>
                                                 <dt>Department</dt>
-                                                <dd>${requestScope.student.course.department}</dd>
+                                                <dd>${requestScope.student.classRoom.course.department}</dd>
                                                 <dt>Course</dt>
-                                                <dd>${requestScope.student.course}</dd>
+                                                <dd>${requestScope.student.classRoom.course}</dd>
                                                 <dt>Class Room</dt>
                                                 <dd>${requestScope.student.classRoom}</dd>
                                                 <dt>Subjects</dt>

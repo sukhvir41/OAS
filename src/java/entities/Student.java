@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,65 +34,65 @@ public class Student implements Serializable, Comparable<Student> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "s_id")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private int id;
 
     @Column(name = "s_rollnumber")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private int rollNumber;
 
     @Column(name = "s_fname")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private String fName;
 
     @Column(name = "s_lname")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private String lName;
 
     @Column(name = "s_number")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private long number;
 
     @Column(name = "s_email")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private String email;
 
     @Column(name = "mac_id")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private String macId;
 
     @Column(name = "unaccounted")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private boolean unaccounted;
 
     @ManyToOne
     @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private ClassRoom classRoom;
 
     @Column(name = "verified")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private boolean verified = false;
 
     @ManyToMany
     @JoinTable(name = "student_subject_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "sub_fid"))
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private List<Subject> subjects = new ArrayList();
 
     @OneToMany(mappedBy = "student")
-    @Getter
-    @Setter
+    @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PUBLIC)
     private List<Attendance> attendance = new ArrayList<>();
 
     public Student() {

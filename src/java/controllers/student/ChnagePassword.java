@@ -18,7 +18,7 @@ import utility.Controller;
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/student/changepasssword")
+@WebServlet(urlPatterns = "/student/changepassword")
 public class ChnagePassword extends Controller {
 
     @Override

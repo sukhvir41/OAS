@@ -58,7 +58,7 @@ public class DetailLecture extends Controller {
             req.setAttribute("absent", students);
             req.setAttribute("headcount", present.size());
             req.setAttribute("lecture", lecture);
-            req.getRequestDispatcher("/WEB-INF/admin/detaillecture.jsp").include(req, resp);
+            req.getRequestDispatcher("/WEB-INF/teacher/detaillecture.jsp").include(req, resp);
         } else {
             resp.sendRedirect("/OAS/error");
         }

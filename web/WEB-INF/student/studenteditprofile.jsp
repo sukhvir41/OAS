@@ -68,7 +68,7 @@
                             <div class="col-md-12">
                                 <ul class="breadcrumb">
                                     <li><a href="/OAS/student">Home</a></li>
-                                    <li><a href="/OAS/teacher/myaccount">My Account</a></li>
+                                    <li><a href="/OAS/student/myaccount">My Account</a></li>
                                     <li>Edit Profile</li>
                                 </ul>
                             </div>
@@ -90,7 +90,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>First Name</label>
-                                            <input class="form-control input-lg" type="text" name="fname" id="fname" required="true" value="${requestScope.student.fName}">
+                                            <input class="form-control input-lg" type="text" name="fname" id="fname" required="true" value="${requestScope.student.FName}">
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Last Name</label>
-                                            <input class="form-control input-lg" type="text" name="lname" id="lname" required="true" value="${requestScope.student.lName}">
+                                            <input class="form-control input-lg" type="text" name="lname" id="lname" required="true" value="${requestScope.student.LName}">
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Current Course : </label>
-                                            <label>${requestScope.student.course}</label>
+                                            <label>${requestScope.student.classRoom.course}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
                                         <div class="col-md-4">
                                             <label>Current Subjects : </label><br />
                                             <label>
-                                                <c:forEach var="subject" items="${requestScope.student.Subjects}">
+                                                <c:forEach var="subject" items="${requestScope.student.subjects}">
                                                     ${subject}
                                                 </c:forEach>
                                             </label>
