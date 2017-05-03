@@ -12,7 +12,7 @@ var getStudents = function(){
 	var error = $("#error");
     var success = $("#success");
     var teaching = $("#teaching").val();
-    var template = '<tr><td>{{id}}</td><td><a href="/OAS/admin/students/detailstudent?studentId={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{classroom}}</td><td>{{rollnumber}}</td><td>{{subjects}}</td><td>{{verified}}</td></tr>';
+    var template = '<tr><td>{{id}}</td><td><a href="/OAS/teacher/students/detailstudent?studentId={{id}}">{{name}}</a></td><td>{{number}}</td><td>{{email}}</td><td>{{classroom}}</td><td>{{rollnumber}}</td><td>{{subjects}}</td><td>{{verified}}</td></tr>';
     
     var body = $("#tablebody");
     error.hide();

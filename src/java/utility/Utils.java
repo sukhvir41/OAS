@@ -93,10 +93,12 @@ public class Utils {
         Transport transport;
         String username, password;
         try {
-            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            password = reader.readLine();
-            username = reader.readLine();
+            //File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
+            //BufferedReader reader = new BufferedReader(new FileReader(file));
+            // password = reader.readLine();
+            //username = reader.readLine();
+            password = "adminoas@123";
+            username = "oasservice.mail";
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
@@ -128,11 +130,13 @@ public class Utils {
         Transport transport;
         String username, password;
         try {
-            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
-            System.out.println(file.exists());
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            password = reader.readLine();
-            username = reader.readLine();
+//            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
+//            System.out.println(file.exists());
+//            BufferedReader reader = new BufferedReader(new FileReader(file));
+//            password = reader.readLine();
+//            username = reader.readLine();
+            password = "adminoas@123";
+            username = "oasservice.mail";
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
@@ -244,7 +248,7 @@ public class Utils {
      * @param regex The expression to be compared
      *
      * @param flags Match flags, a bit mask that may include null null null null
-     * null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *
@@ -317,7 +321,7 @@ public class Utils {
 
     }
 
-    public static  LocalDateTime getEndDate(String date) {
+    public static LocalDateTime getEndDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         LocalTime localTime = LocalTime.parse("11:59:59");

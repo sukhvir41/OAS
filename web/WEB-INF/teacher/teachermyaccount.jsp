@@ -108,11 +108,11 @@
                                         <div class="col-md-12">
                                             <dl>
                                                 <dt>Name:</dt>
-                                                <dd>${requestScope.teacher.fName} ${requestScope.teacher.lName}</dd>
+                                                <dd>${requestScope.teacher.FName} ${requestScope.teacher.LName}</dd>
                                                 <dt>Email Address</dt>
                                                 <dd>${requestScope.teacher.email}</dd>
                                                 <dt>Contact Number</dt>
-                                                <dd>${requestScope.teacher.numnber}</dd>
+                                                <dd>${requestScope.teacher.number}</dd>
                                                 <dt>Verified?</dt>
                                                 <dd>${requestScope.teacher.verified}</dd>
                                                 <dt>Unaccounted?</dt>
