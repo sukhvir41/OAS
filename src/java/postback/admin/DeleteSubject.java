@@ -7,12 +7,15 @@ package postback.admin;
 
 import entities.Subject;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.PostBackController;
 import utility.Utils;
 
 /**
@@ -20,34 +23,21 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/subjects/deletesubject")
-public class DeleteSubject extends HttpServlet {
-    
+public class DeleteSubject extends PostBackController {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            int subjectId = Integer.parseInt(req.getParameter("subjectId"));
-            
-            Subject subject = (Subject) session.get(Subject.class, subjectId);
-            subject.getClassRooms()
-                    .stream()
-                    .forEach(e -> e.getSubjects().remove(subject));
-            session.delete(subject);
-            session.getTransaction().commit();
-            session.close();
-            resp.sendRedirect("/OAS/admin/subjects");
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            
-            resp.sendRedirect("/OAS/error");
-        }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        int subjectId = Integer.parseInt(req.getParameter("subjectId"));
+
+        Subject subject = (Subject) session.get(Subject.class, subjectId);
+        subject.getClassRooms()
+                .stream()
+                .forEach(e -> e.getSubjects().remove(subject));
+        session.delete(subject);
+
+        resp.sendRedirect("/OAS/admin/subjects");
+
     }
-    
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/admin/subejcts");
-    }
-    
+
 }

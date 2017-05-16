@@ -7,7 +7,6 @@ package postback.student;
 
 import entities.ClassRoom;
 import entities.Course;
-import entities.Login;
 import entities.Student;
 import entities.Subject;
 import entities.UserType;
@@ -43,25 +42,14 @@ public class UpdateAccount extends PostBackController {
         int rollnumber = Integer.parseInt(req.getParameter("rollnumber"));
         
         if (!student.getEmail().equals(email)) {
-            List<Login> logins = session.createCriteria(Login.class)
-                    .add(Restrictions.eq("email", email))
-                    .list();
             
-            logins = logins.stream()
-                    .filter(login -> !(login.getType().equals(UserType.Student.toString()) && login.getId() == student.getId()))
-                    .collect(Collectors.toList());
-            
-            if (logins.isEmpty()) {
-                student.setEmail(email);
-                student.setVerified(false);
-                student.setUnaccounted(false);
-                resp.sendRedirect("/OAS/logout");
-                
-            } else {
-                resp.sendRedirect("/OAS/account/editstudent?error=true");
-                return;
-            }
+            student.setEmail(email);
+            resp.sendRedirect("/OAS/logout");
+        } else {
+            resp.sendRedirect("/OAS/account/editstudent");
         }
+        student.setVerified(false);
+        student.setUnaccounted(false);
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, Integer.parseInt(req.getParameter("classroom")));
         
         student.getClassRoom().getStudents().remove(student);

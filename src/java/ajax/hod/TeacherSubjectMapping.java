@@ -17,7 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.AjaxController;
 import utility.Utils;
 
 /**
@@ -26,43 +28,7 @@ import utility.Utils;
  */
 //### remove subject from teachrer and not assisgn is left
 @WebServlet(urlPatterns = "/teacher/hod/teachersubjectmappingpost")
-public class TeacherSubjectMapping extends HttpServlet {
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            Enumeration name = req.getParameterNames();
-            while (name.hasMoreElements()) {
-                String tempname = name.nextElement().toString();
-                int teacherId = Integer.valueOf(tempname.replace("[]", ""));
-                Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-                List<String> values = Arrays.asList(req.getParameterValues(String.valueOf(tempname)));
-                values.stream()
-                        .map(Integer::valueOf)
-                        .map(e -> (Teaching) session.get(Teaching.class, e))
-                        .forEach(e -> addTeacher(e, teacher));
-            }
-
-            session.getTransaction().commit();
-            session.close();
-            out.print("true");
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
-            out.print("false");
-        } finally {
-            out.close();
-        }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
+public class TeacherSubjectMapping extends AjaxController {
 
     private void addTeacher(Teaching e, Teacher teacher) {
         if (e.getTeacher() != null) {
@@ -71,6 +37,25 @@ public class TeacherSubjectMapping extends HttpServlet {
             e.setTeacher(null);
         }
         e.addTeacher(teacher);
+    }
+
+    @Override
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        Enumeration name = req.getParameterNames();
+        while (name.hasMoreElements()) {
+            String tempname = name.nextElement().toString();
+            int teacherId = Integer.valueOf(tempname.replace("[]", ""));
+            Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+            List<String> values = Arrays.asList(req.getParameterValues(String.valueOf(tempname)));
+            values.stream()
+                    .map(Integer::valueOf)
+                    .map(e -> (Teaching) session.get(Teaching.class, e))
+                    .forEach(e -> addTeacher(e, teacher));
+        }
+
+        out.print("true");
+
     }
 
 }

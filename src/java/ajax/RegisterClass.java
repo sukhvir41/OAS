@@ -18,7 +18,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.AjaxController;
 import utility.Utils;
 
 /**
@@ -26,45 +28,31 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/ajax/getclass")
-public class RegisterClass extends HttpServlet {
-    
-    JsonArray jsonClasses;
-    
+public class RegisterClass extends AjaxController {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         String courseId = req.getParameter("course");
         resp.setContentType("text/json");
         if (courseId != null && !courseId.equals("")) {
-                int courseid = Integer.parseInt(courseId);
-                PrintWriter out = resp.getWriter();
-                Session session = Utils.openSession();
-                session.beginTransaction();
-                Course course = (Course) session.get(Course.class, courseid);
-                List<ClassRoom> classes = course.getClassRooms();
-                Gson gson = new Gson();
-                jsonClasses = new JsonArray();
-                classes.stream()
-                        .forEach(e -> add(e));
-                out.print(gson.toJson(jsonClasses));
-                session.getTransaction().commit();
-                session.close();
-                out.close();         
+            int courseid = Integer.parseInt(courseId);
+
+            Course course = (Course) session.get(Course.class, courseid);
+            List<ClassRoom> classes = course.getClassRooms();
+            Gson gson = new Gson();
+            JsonArray jsonClasses = new JsonArray();
+            classes.stream()
+                    .forEach(e -> add(e, jsonClasses));
+            out.print(gson.toJson(jsonClasses));
+
         }
     }
-    
-    private void add(ClassRoom e) {
+
+    private void add(ClassRoom e, JsonArray jsonClasses) {
         JsonObject o = new JsonObject();
         o.addProperty("id", e.getId());
         o.addProperty("name", e.getName());
         jsonClasses.add(o);
     }
-    
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        PrintWriter out = resp.getWriter();
-        out.print("error");
-        out.close();
-    }
-    
+
 }

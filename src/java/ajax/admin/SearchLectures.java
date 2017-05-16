@@ -13,9 +13,7 @@ import entities.Lecture;
 import entities.Subject;
 import entities.Teaching;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
@@ -34,49 +32,49 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/ajax/searchlecture")
 public class SearchLectures extends AjaxController {
-
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int classId = Integer.parseInt(req.getParameter("classroomId"));
         String subjectId = req.getParameter("subjectId");
         LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
-
+        
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
-
+        
         List<Teaching> teaching;
         if (subjectId.equals("all")) {
             teaching = session.createCriteria(Teaching.class)
                     .add(Restrictions.eq("classRoom", classRoom))
                     .list();
-
+            
         } else {
             Subject subject = (Subject) session.get(Subject.class, Integer.parseInt(subjectId));
             teaching = session.createCriteria(Teaching.class)
                     .add(Restrictions.eq("subject", subject))
                     .add(Restrictions.eq("classRoom", classRoom))
                     .list();
-
+            
         }
-
+        
         List<Lecture> lectures = session.createCriteria(Lecture.class)
                 .add(Restrictions.in("teaching", teaching))
                 .add(Restrictions.between("date", startDate, endDate))
                 .addOrder(Order.desc("date"))
                 .list();
-
+        
         JsonArray jsonLectures = new JsonArray();
-
+        
         lectures.stream()
                 .forEach(lecture -> add(jsonLectures, lecture));
-
+        
         Gson gson = new Gson();
         out.print(gson.toJson(jsonLectures));
-
+        
     }
-
+    
     private void add(JsonArray jsonLectures, Lecture theLecture) {
-
+        
         int attendentStudent = theLecture.getAttendance()
                 .stream()
                 .filter(attendance -> attendance.isAttended())
@@ -89,18 +87,18 @@ public class SearchLectures extends AjaxController {
                 .filter(student -> student.getSubjects().contains(theLecture.getTeaching().getSubject()))
                 .collect(Collectors.toList())
                 .size();
-
+        
         JsonObject lecture = new JsonObject();
         lecture.addProperty("id", theLecture.getId());
         lecture.addProperty("class", theLecture.getTeaching().getClassRoom().toString());
         lecture.addProperty("subject", theLecture.getTeaching().getSubject().toString());
         lecture.addProperty("count", theLecture.getCount());
-        lecture.addProperty("date", theLecture.getDate().toString());
+        lecture.addProperty("date", Utils.formatDateTime(theLecture.getDate()));
         lecture.addProperty("present", attendentStudent);
         lecture.addProperty("absent", totalStudents - attendentStudent);
-
+        
         jsonLectures.add(lecture);
-
+        
     }
-
+    
 }

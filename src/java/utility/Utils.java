@@ -6,7 +6,8 @@
 package utility;
 
 import entities.Lecture;
-import entities.Login;
+import entities.User;
+import entities.UserType;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,7 +18,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -26,6 +26,7 @@ import javax.mail.Message;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +42,10 @@ public class Utils {
 
     private static SessionFactory sessionFactory = null;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
+    private static ApplicationStats stats = new ApplicationStats();
+    private static ThreadLocal<Session> sessions = new ThreadLocal<>(); // stores session for each thread
 
+    //creating Session factory on class load
     static {
         Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
         StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
@@ -51,8 +55,8 @@ public class Utils {
 
     }
 
-    private Utils() throws Exception {
-        throw new Exception("don't create an instance of this class");
+    private Utils() throws InstantiationException {
+        throw new InstantiationException("don't create an instance of this class");
     }
 
     /**
@@ -64,7 +68,19 @@ public class Utils {
         if (sessionFactory == null) {
             throw new NullPointerException();
         }
-        return sessionFactory.openSession();
+
+        if (sessions.get() == null) {
+            Session session = sessionFactory.openSession();
+            sessions.set(session);
+        }
+        return sessions.get();
+    }
+
+    public static void closeSession() {
+        if (sessions.get() != null) {
+            sessions.get().close();
+            sessions.remove();
+        }
     }
 
     public static void closeSesssioFactory() {
@@ -93,12 +109,11 @@ public class Utils {
         Transport transport;
         String username, password;
         try {
-            //File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
-            //BufferedReader reader = new BufferedReader(new FileReader(file));
-            // password = reader.readLine();
-            //username = reader.readLine();
-            password = "adminoas@123";
-            username = "oasservice.mail";
+            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            password = reader.readLine();
+            username = reader.readLine();
+
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
@@ -130,13 +145,12 @@ public class Utils {
         Transport transport;
         String username, password;
         try {
-//            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
-//            System.out.println(file.exists());
-//            BufferedReader reader = new BufferedReader(new FileReader(file));
-//            password = reader.readLine();
-//            username = reader.readLine();
-            password = "adminoas@123";
-            username = "oasservice.mail";
+            File file = new File("C:\\Users\\sukhvir\\Documents\\OAS\\login.txt");
+            System.out.println(file.exists());
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            password = reader.readLine();
+            username = reader.readLine();
+
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
@@ -162,18 +176,18 @@ public class Utils {
 
     /**
      * this gives a unique lecture id in base64 of 8 characters long
+     *
+     * @param session - hibernate session to do transaction
+     * @return Session id for the lecture
      */
-    public static String getLectureId() {
-        Session session = openSession();
-        session.beginTransaction();
+    public static String getLectureId(Session session) {
+
         String Id;
         Lecture lecture;
         do {
             Id = generateBase64();
             lecture = (Lecture) session.get(Lecture.class, Id);
         } while (lecture != null);
-        session.getTransaction().commit();
-        session.close();
         return Id;
     }
 
@@ -248,7 +262,9 @@ public class Utils {
      * @param regex The expression to be compared
      *
      * @param flags Match flags, a bit mask that may include null null null null
-     * null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null null null null null null null null null
+     * null null null null null null null null null null null null null null
+     * null null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *
@@ -301,18 +317,25 @@ public class Utils {
         Session session = Utils.openSession();
         session.beginTransaction();
         String id;
-        List<Login> logins;
-        Query query = session.createQuery("from Login where sessionId = :id");
+        List<User> users;
+        Query query = session.createQuery("from User where sessionId = :id");
         do {
             id = generateBase64(12);
             query.setString("id", id);
-            logins = query.list();
-        } while (logins.size() > 0);
+            users = query.list();
+        } while (!users.isEmpty());
         session.getTransaction().commit();
-        session.close();
+        Utils.closeSession();
         return id;
     }
 
+    /**
+     * Converts string date to LocalDateTime where the string contains only date
+     * and not the time and it set the time to 0:0:0
+     *
+     * @param date - date in string form
+     * @return LocalDateTime of the give date in string format
+     */
     public static LocalDateTime getStartdate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
@@ -321,10 +344,87 @@ public class Utils {
 
     }
 
+    /**
+     * Converts string date to LocalDateTime where the string contains only date
+     * and not the time and it sets the time to 23:59:59
+     *
+     * @param date - date in string form
+     * @return LocalDateTime of the give date in string format
+     */
     public static LocalDateTime getEndDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
-        LocalTime localTime = LocalTime.parse("11:59:59");
+        LocalTime localTime = LocalTime.parse("23:59:59");
         return LocalDateTime.of(localDate, localTime);
     }
+
+    /**
+     * formats the date time to dd/MM/yyyy hh:mm
+     *
+     * @param date time to be formated
+     * @return formated date time
+     */
+    public static String formatDateTime(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  kk:mm"));
+    }
+
+    /**
+     * increments the type off user logged in
+     *
+     * @param session - to know which user logged in
+     */
+    public static void userLoggedIn(HttpSession session) {
+        switch ((UserType) session.getAttribute("type")) {
+            case Student:
+                stats.incrementStudent();
+                break;
+            case Teacher:
+                stats.incrementTeacher();
+                break;
+            case Admin:
+                stats.incrementAdmin();
+                break;
+        }
+    }
+
+    /**
+     * decrements the type off user logged in
+     *
+     * @param session - to know which user logged in
+     */
+    public static void userLoggedOut(HttpSession session) {
+        switch ((UserType) session.getAttribute("type")) {
+            case Student:
+                stats.decrementStudent();
+                break;
+            case Teacher:
+                stats.decrementTeacher();
+                break;
+            case Admin:
+                stats.decrementAdmin();
+                break;
+        }
+    }
+
+    /**
+     *
+     */
+    public int getAdminCount() {
+        return stats.getAdmins().get();
+    }
+
+    /**
+     *
+     */
+    public int getStudentCount() {
+        return stats.getStudents().get();
+    }
+
+    /**
+     *
+     */
+    public int getTeacherCount() {
+        return stats.getTeachers().get();
+    }
+
 }

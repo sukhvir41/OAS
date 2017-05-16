@@ -5,8 +5,12 @@
  */
 package controllers;
 
+import entities.Admin;
+import entities.DefaultVisitor;
 import entities.Student;
 import entities.Teacher;
+import entities.User;
+import entities.UserType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.Controller;
+import utility.Utils;
 
 /**
  *
@@ -31,14 +36,14 @@ public class Login extends Controller {
         System.out.println("login called");
         if (httpSession.getAttribute("accept") != null) {
             if ((boolean) httpSession.getAttribute("accept")) {
-                switch ((String) httpSession.getAttribute("type")) {
-                    case "student":
+                switch ((UserType) httpSession.getAttribute("type")) {
+                    case Student:
                         resp.sendRedirect("/OAS/student");
                         break;
-                    case "teacher":
+                    case Teacher:
                         resp.sendRedirect("/OAS/teacher");
                         break;
-                    case "admin":
+                    case Admin:
                         resp.sendRedirect("/OAS/admin");
                         break;
                 }
@@ -69,46 +74,63 @@ public class Login extends Controller {
                     break;
             }
         }
-        entities.Login login = (entities.Login) session.createCriteria(entities.Login.class)
+
+        User user = (User) session.createCriteria(User.class)
                 .add(Restrictions.eq("sessionId", id.getValue()))
                 .list()
                 .get(0);
 
-        if (login.matchSessionToken(token.getValue())) {
-            forward(req, resp, login, session, httpSession);
+        if (user.matchSessionToken(token.getValue())) {
+            forward(req, resp, user, session, httpSession);
+        } else {
+            onError(req, resp);
         }
 
     }
 
-    private void forward(HttpServletRequest req, HttpServletResponse resp, entities.Login login, Session session, HttpSession httpSession) throws Exception {
-        switch (login.getType()) {
-            case "admin": {
-                httpSession.setAttribute("accept", true);
-                httpSession.setAttribute("extenedCookie", true);
-                httpSession.setAttribute("type", "admin");
-                httpSession.setAttribute("admin", login);
-                resp.sendRedirect("/OAS/admin");
-                break;
-            }
-            case "student": {
-                httpSession.setAttribute("accept", true);
-                httpSession.setAttribute("extenedCookie", true);
-                httpSession.setAttribute("type", "student");
-                Student student = (Student) session.get(Student.class, login.getId());
-                httpSession.setAttribute("student", student);
-                resp.sendRedirect("/OAS/student");
-                break;
-            }
-            case "teacher": {
-                httpSession.setAttribute("accept", true);
-                httpSession.setAttribute("extenedCookie", true);
-                httpSession.setAttribute("type", "teacher");
-                Teacher teacher = (Teacher) session.get(Teacher.class, login.getId());
-                httpSession.setAttribute("teacher", teacher);
-                resp.sendRedirect("/OAS/teacher");
-                break;
-            }
+    private void forward(HttpServletRequest req, HttpServletResponse resp, User user, Session session, HttpSession httpSession) throws Exception {
 
+        User loggedUser = user.accept(DefaultVisitor.getInstance());
+
+        System.out.println(loggedUser.getClass().getName());   // print statement
+
+        if (loggedUser instanceof Student) {
+
+            httpSession.setAttribute("accept", true);
+            httpSession.setAttribute("extenedCookie", true);
+            httpSession.setAttribute("type", UserType.Student);
+            httpSession.setAttribute("student", (Student) loggedUser);
+
+            Utils.userLoggedIn(httpSession);
+
+            resp.sendRedirect("/OAS/student");
+
+            return;
+        } else if (loggedUser instanceof Teacher) {
+            httpSession.setAttribute("accept", true);
+            httpSession.setAttribute("extenedCookie", true);
+            httpSession.setAttribute("type", UserType.Teacher);
+            httpSession.setAttribute("teacher", (Teacher) loggedUser);
+
+            Utils.userLoggedIn(httpSession);
+
+            resp.sendRedirect("/OAS/teacher");
+
+            return;
+        } else if (loggedUser instanceof Admin) {
+            httpSession.setAttribute("accept", true);
+            httpSession.setAttribute("extenedCookie", true);
+            httpSession.setAttribute("type", UserType.Admin);
+            httpSession.setAttribute("admin", (Admin) loggedUser);
+
+            Utils.userLoggedIn(httpSession);
+
+            resp.sendRedirect("/OAS/admin");
+
+            return;
+        } else {
+            onError(req, resp);
         }
+
     }
 }

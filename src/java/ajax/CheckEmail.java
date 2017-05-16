@@ -13,8 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import utility.AjaxController;
 import utility.Utils;
 
 /**
@@ -22,16 +24,13 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/ajax/checkemail")
-public class CheckEmail extends HttpServlet {
+public class CheckEmail extends AjaxController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
         String email = req.getParameter("email");
         if (email != null && !email.equals("")) {
-            Session session = Utils.openSession();
-            session.beginTransaction();
             Query query = session.createQuery("from Login where email = :email");
             query.setString("email", email);
             List list = query.list();
@@ -40,16 +39,6 @@ public class CheckEmail extends HttpServlet {
             } else {
                 out.print("true");
             }
-            session.getTransaction().commit();
-            session.close();
         }
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("error");
-        out.close();
     }
 }

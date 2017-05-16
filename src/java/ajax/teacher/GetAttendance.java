@@ -20,7 +20,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.AjaxController;
 import utility.Utils;
 
 /**
@@ -28,30 +30,36 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/getattendance")
-public class GetAttendance extends HttpServlet {
+public class GetAttendance extends AjaxController {
+
+    private void add(JsonArray json, Student e) {
+        JsonObject object = new JsonObject();
+        object.addProperty("rollNumber", e.getRollNumber());
+        object.addProperty("name", e.toString());
+        object.addProperty("id", e.getId());
+        json.add(object);
+    }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        Session session = Utils.openSession();
-        session.beginTransaction();
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
         resp.setContentType("text/json");
-        try {
-            String lectureId = req.getParameter("lectureId");
-            Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
-            List<Student> students = new ArrayList<>();
-            lecture.getTeaching().getClassRoom()
-                    .getStudents()
-                    .stream()
-                    .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
-                    .forEach(e -> students.add(e));
-            Collections.sort(students);
-            List<Student> present = new ArrayList<>();
-            lecture.getAttendance().stream()
-                    .filter(e -> e.isAttended())
-                    .forEach(e -> present.add(e.getStudent()));
-            students.removeAll(present);
-            Collections.sort(present);
+
+        String lectureId = req.getParameter("lectureId");
+        Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
+        List<Student> students = new ArrayList<>();
+        lecture.getTeaching().getClassRoom()
+                .getStudents()
+                .stream()
+                .filter(e -> e.getSubjects().contains(lecture.getTeaching().getSubject()))
+                .forEach(e -> students.add(e));
+        Collections.sort(students);
+        List<Student> present = new ArrayList<>();
+        lecture.getAttendance().stream()
+                .filter(e -> e.isAttended())
+                .forEach(e -> present.add(e.getStudent()));
+        students.removeAll(present);
+        Collections.sort(present);
 //            List<Student> absent = session.createCriteria(Student.class)
 //                    .add(Restrictions.eq("classRoom", lecture.getTeaching().getClassRoom()))
 //                    .addOrder(Order.asc("rollNumber"))
@@ -65,42 +73,18 @@ public class GetAttendance extends HttpServlet {
 //                        .addOrder(Order.asc("rollNumber"))
 //                        .list();
 //            }
-            JsonObject main = new JsonObject();
-            JsonArray pjson = new JsonArray();
-            JsonArray ajson = new JsonArray();
-            present.stream()
-                    .forEach(e -> add(pjson, e));
-            students.stream()
-                    .forEach(e -> add(ajson, e));
-            main.add("present", pjson);
-            main.add("absent", ajson);
-            main.addProperty("headcount", present.size());
-            Gson g = new Gson();
-            out.print(g.toJson(main));
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
-            out.print("error");
-        } finally {
-            out.close();
-        }
+        JsonObject main = new JsonObject();
+        JsonArray pjson = new JsonArray();
+        JsonArray ajson = new JsonArray();
+        present.stream()
+                .forEach(e -> add(pjson, e));
+        students.stream()
+                .forEach(e -> add(ajson, e));
+        main.add("present", pjson);
+        main.add("absent", ajson);
+        main.addProperty("headcount", present.size());
+        Gson g = new Gson();
+        out.print(g.toJson(main));
 
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("error");
-        resp.getWriter().close();
-    }
-
-    private void add(JsonArray json, Student e) {
-        JsonObject object = new JsonObject();
-        object.addProperty("rollNumber", e.getRollNumber());
-        object.addProperty("name", e.toString());
-        object.addProperty("id", e.getId());
-        json.add(object);
     }
 }

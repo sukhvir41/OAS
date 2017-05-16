@@ -9,6 +9,7 @@ import entities.ClassRoom;
 import entities.Course;
 import entities.Subject;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,54 +21,44 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import utility.Utils;
 import static java.lang.System.out;
+import javax.servlet.http.HttpSession;
+import utility.PostBackController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/subjects/addsubject")
-public class AddSubject extends HttpServlet {
-    
+public class AddSubject extends PostBackController {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            String name = req.getParameter("subjectname");
-            boolean elective = Boolean.parseBoolean(req.getParameter("elective"));
-            int courseId = Integer.parseInt(req.getParameter("course"));
-            ArrayList<String> classRooms = new ArrayList<>(Arrays.asList(req.getParameterValues("classes")));
-            
-            Subject subject = new Subject(name, elective);
-            session.save(subject);
-            Course course = (Course) session.get(Course.class, courseId);
-            subject.addCourse(course);
-            classRooms.stream()
-                    .map(Integer::parseInt)
-                    .map(e -> (ClassRoom) session.get(ClassRoom.class, e))
-                    .forEach(e -> e.addSubject(subject));
-            session.getTransaction().commit();
-            session.close();
-            String from = req.getParameter("from");
-            if (from == null || from.equals("")) {
-                resp.sendRedirect("/OAS/admin/subjects");
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        String name = req.getParameter("subjectname");
+        boolean elective = Boolean.parseBoolean(req.getParameter("elective"));
+        int courseId = Integer.parseInt(req.getParameter("course"));
+        ArrayList<String> classRooms = new ArrayList<>(Arrays.asList(req.getParameterValues("classes")));
+
+        Subject subject = new Subject(name, elective);
+        session.save(subject);
+        Course course = (Course) session.get(Course.class, courseId);
+        subject.addCourse(course);
+        classRooms.stream()
+                .map(Integer::parseInt)
+                .map(e -> (ClassRoom) session.get(ClassRoom.class, e))
+                .forEach(e -> e.addSubject(subject));
+
+        String from = req.getParameter("from");
+        if (from == null || from.equals("")) {
+            resp.sendRedirect("/OAS/admin/subjects");
+        } else {
+            if (from.equals("classroom")) {
+                resp.sendRedirect("/OAS/admin/classrooms/detailclassroom?classroomId=" + classRooms.get(0));
             } else {
-                if (from.equals("classroom")) {
-                    resp.sendRedirect("/OAS/admin/classrooms/detailclassroom?classroomId=" + classRooms.get(0));
-                } else {
-                    resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
-                }
+                resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
             }
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            resp.sendRedirect("/OAS/error");
         }
+
     }
-    
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/error");
-    }
-    
+
 }

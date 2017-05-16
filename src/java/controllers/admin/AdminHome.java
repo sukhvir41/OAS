@@ -30,11 +30,6 @@ import utility.Controller;
 public class AdminHome extends Controller {
 
     @Override
-    public boolean showErrorLog() {
-        return true; 
-    }
-
-    @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         List<Department> departments;
         List<Course> courses;

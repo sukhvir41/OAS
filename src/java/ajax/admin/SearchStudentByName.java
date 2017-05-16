@@ -10,55 +10,22 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Student;
-import entities.Teacher;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import utility.Utils;
+import utility.AjaxController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/students/searchstudentbyname")
-public class SearchStudentByName extends HttpServlet {
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name;
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("text/json");
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            name = req.getParameter("name");
-            List<Student> students = session.createCriteria(Student.class)
-                    .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
-                    .list();
-            JsonArray jsonStudents = new JsonArray();
-            Gson gson = new Gson();
-            students.stream()
-                    .forEach(student -> add(student, jsonStudents));
-            out.print(gson.toJson(jsonStudents));
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            out.print("error");
-            e.printStackTrace();
-        } finally {
-            out.close();
-        }
-
-    }
+public class SearchStudentByName extends AjaxController {
 
     private void add(Student student, JsonArray jsonStudents) {
         JsonObject studentJson = new JsonObject();
@@ -82,9 +49,20 @@ public class SearchStudentByName extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("error");
-        resp.getWriter().close();
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        resp.setContentType("text/json");
+
+        String name = req.getParameter("name");
+        List<Student> students = session.createCriteria(Student.class)
+                .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
+                .list();
+        JsonArray jsonStudents = new JsonArray();
+        Gson gson = new Gson();
+        students.stream()
+                .forEach(student -> add(student, jsonStudents));
+        out.print(gson.toJson(jsonStudents));
+
     }
 
 }

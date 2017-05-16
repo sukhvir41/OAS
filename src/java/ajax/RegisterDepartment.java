@@ -17,8 +17,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import utility.AjaxController;
 import utility.Utils;
 
 /**
@@ -26,42 +28,30 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/ajax/getdepartment")
-public class RegisterDepartment extends HttpServlet {
-
-    JsonArray jsonDepartments;
+public class RegisterDepartment extends AjaxController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         resp.setContentType("text/json");
-        PrintWriter out = resp.getWriter();
-        Session session = Utils.openSession();
+
         session.beginTransaction();
         Query query = session.createQuery("from Department");
         List<Department> deparments = (List<Department>) query.list();
 
-        jsonDepartments = new JsonArray();
+        JsonArray jsonDepartments = new JsonArray();
         deparments.stream()
-                .forEach(e -> add(e));
+                .forEach(e -> add(e, jsonDepartments));
 
         Gson gson = new Gson();
         out.print(gson.toJson(jsonDepartments));
-        session.getTransaction().commit();
-        session.close();
-        out.close();
+
     }
 
-    private void add(Department e) {
+    private void add(Department e, JsonArray jsonDepartments) {
         JsonObject o = new JsonObject();
         o.addProperty("id", e.getId());
         o.addProperty("name", e.getName());
         jsonDepartments.add(o);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("error");
-        out.close();
     }
 
 }

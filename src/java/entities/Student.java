@@ -5,21 +5,17 @@
  */
 package entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,91 +25,66 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "student")
-public class Student implements Serializable, Comparable<Student> {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "s_id")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
-    private int id;
+@PrimaryKeyJoinColumn(name = "id")
+public class Student extends User implements Comparable<Student> {
 
     @Column(name = "s_rollnumber")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private int rollNumber;
 
     @Column(name = "s_fname")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private String fName;
 
     @Column(name = "s_lname")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private String lName;
 
-    @Column(name = "s_number")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
-    private long number;
-
-    @Column(name = "s_email")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
-    private String email;
-
     @Column(name = "mac_id")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private String macId;
 
     @Column(name = "unaccounted")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private boolean unaccounted;
 
     @ManyToOne
     @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private ClassRoom classRoom;
 
     @Column(name = "verified")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
-    private boolean verified = false;
+    @Getter
+    @Setter
+    private boolean verified;
 
     @ManyToMany
     @JoinTable(name = "student_subject_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "sub_fid"))
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private List<Subject> subjects = new ArrayList();
 
     @OneToMany(mappedBy = "student")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
+    @Getter
+    @Setter
     private List<Attendance> attendance = new ArrayList<>();
 
     public Student() {
     }
 
-    public Student(int rollNumber, String fName, String lName, long number, String email) {
+    public Student(int rollNumber, String fName, String lName, ClassRoom classRoom, String username, String password, String email, long number) {
+        super(username, password, email, number);
         this.rollNumber = rollNumber;
         this.fName = fName;
         this.lName = lName;
-        this.number = number;
-        this.email = email;
-    }
-
-    public Student(int rollNumber, String fName, String lName, long number, String email, ClassRoom classRoom, Boolean verified) {
-        this.rollNumber = rollNumber;
-        this.fName = fName;
-        this.lName = lName;
-        this.number = number;
-        this.email = email;
-        this.verified = verified;
         addClassRoom(classRoom);
+        setVerified(false);
     }
 
     public void unaccount() {
@@ -160,6 +131,11 @@ public class Student implements Serializable, Comparable<Student> {
     @Override
     public int compareTo(Student student) {
         return this.getRollNumber() < student.getRollNumber() ? -1 : (this.getRollNumber() == student.getRollNumber()) ? 0 : 1;
+    }
+
+    @Override
+    public User accept(Visitor visitor) {
+        return visitor.visit(this);
     }
 
 }

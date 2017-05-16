@@ -5,6 +5,7 @@
  */
 package sessionvalidation;
 
+import entities.UserType;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -41,7 +41,7 @@ public class AdminValidation implements Filter {
         session = req.getSession();
 
         try {
-            if ((boolean) session.getAttribute("accept") == true && session.getAttribute("type").equals("admin")) {
+            if ((boolean) session.getAttribute("accept") == true && session.getAttribute("type").equals(UserType.Admin)) {
                 resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
                 resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
                 resp.setDateHeader("Expires", 0);

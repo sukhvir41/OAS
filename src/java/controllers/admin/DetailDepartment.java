@@ -9,13 +9,16 @@ import entities.Course;
 import entities.Department;
 import entities.Teacher;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.Controller;
 import utility.Utils;
 
 /**
@@ -23,41 +26,23 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/departments/detaildepartment")
-public class DetailDepartment extends HttpServlet {
+public class DetailDepartment extends Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+        int departmentID = Integer.parseInt(req.getParameter("departmentId"));
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+        Department department = (Department) session.get(Department.class, departmentID);
+        List<Teacher> teachers = department.getTeachers();
+        List<Course> courses = department.getCourses();
+        Teacher hod = department.getHod();
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException , IOException{
-        int departmentID = 1;
-        try {
-            departmentID = Integer.parseInt(req.getParameter("departmentId"));
-        } catch (Exception e) {
-        }
-        Department department;
-        List<Teacher> teachers;
-        List<Course> courses;
-        Teacher hod;
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        department = (Department) session.get(Department.class, departmentID);
-        teachers = department.getTeachers();
-        courses = department.getCourses();
-        hod = department.getHod();
         req.setAttribute("department", department);
         req.setAttribute("hod", hod);
         req.setAttribute("teachers", teachers);
         req.setAttribute("courses", courses);
         req.getRequestDispatcher("/WEB-INF/admin/detaildepartment.jsp").include(req, resp);
-        session.getTransaction().commit();
-        session.close();
+
     }
 
 }

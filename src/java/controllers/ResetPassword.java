@@ -5,70 +5,67 @@
  */
 package controllers;
 
-import entities.Login;
-import java.io.IOException;
+import entities.User;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import org.hibernate.criterion.Restrictions;
+import utility.Controller;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/resetpassword")
-public class ResetPassword extends HttpServlet {
+public class ResetPassword extends Controller {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         String username = req.getParameter("username");
         String token = URLDecoder.decode(req.getParameter("token"), "UTF-8");
-        Login login;
+
         if (username != null && !username.equals("") && token != null && !token.equals("")) {
             LocalDateTime presentTime = LocalDateTime.now();
-            Session session = Utils.openSession();
-            session.beginTransaction();
-            login = (Login) session.get(Login.class, username);
+
+            User user = (User) session.createCriteria(User.class)
+                    .add(Restrictions.eq("username", username))
+                    .list()
+                    .get(0);
+
             System.out.println(token);
-            if (login == null) {
-                resp.sendRedirect("error");
-            } else {
-                if (!login.isUsed()) {
-                    if (token.equals(login.getToken())) {
-                        LocalDateTime endTime = LocalDateTime.of(login.getDate().toLocalDate(), login.getDate().toLocalTime()).plusMinutes(30);
-                        if (presentTime.isAfter(login.getDate()) && presentTime.isBefore(endTime)) {
-                            req.setAttribute("username", login.getUsername());
-                            req.getRequestDispatcher("WEB-INF/resetpassword.jsp").include(req, resp);
-                        } else {
-                            resp.sendRedirect("expired");
-                        }
+
+            if (!user.isUsed()) {
+
+                if (token.equals(user.getToken())) {
+
+                    LocalDateTime endTime = LocalDateTime.of(user.getDate().toLocalDate(), user.getDate().toLocalTime()).plusMinutes(30);
+
+                    if (presentTime.isAfter(user.getDate()) && presentTime.isBefore(endTime)) {
+
+                        req.setAttribute("username", user.getUsername());
+                        req.getRequestDispatcher("WEB-INF/resetpassword.jsp").include(req, resp);
 
                     } else {
-                        resp.sendRedirect("error");
+
+                        resp.sendRedirect("expired");
                     }
+
                 } else {
                     resp.sendRedirect("error");
                 }
+            } else {
+                resp.sendRedirect("error");
             }
-            session.getTransaction().commit();
-            session.close();
+
         } else {
             resp.sendRedirect("error");
         }
 
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("error");
-        out.close();
     }
 
 }

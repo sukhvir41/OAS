@@ -7,32 +7,29 @@ package postback;
 
 import entities.ClassRoom;
 import entities.Department;
-import entities.Login;
 import entities.Student;
 import entities.Subject;
 import entities.Teacher;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import utility.PostBackController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/registerpost")
-public class Registeration extends HttpServlet {
+public class Registeration extends PostBackController {
 
     //validation done in filter
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         String firstName = req.getParameter("firstname");
         String lastName = req.getParameter("lastname");
         String email = req.getParameter("email");
@@ -44,49 +41,33 @@ public class Registeration extends HttpServlet {
         ArrayList<String> subjects;
         ArrayList<String> departments;
         String hod = null;
+
         if (type.equals("student")) {
             subjects = new ArrayList<>(Arrays.asList(req.getParameterValues("subject")));
             classId = Integer.parseInt(req.getParameter("class"));
             rollNumber = Integer.parseInt(req.getParameter("rollnumber"));
-            Student student = new Student(rollNumber, firstName, lastName, number, email);
-            Session session = Utils.openSession();
-            session.beginTransaction();
+
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
+            Student student = new Student(rollNumber, type, lastName, classRoom, userName, password, email, number);
+
             session.save(student);
             subjects.stream()
                     .map(Integer::parseInt)
-                    .map(e -> (Subject) session.get(Subject.class, e))
+                    .map(subjectId -> (Subject) session.get(Subject.class, subjectId))
                     .forEachOrdered(student::addSubject);
             student.addClassRoom(classRoom);
-            Login login = Login.createStudentLogin(userName, password, student.getId(), email);
-            session.save(login);
-            session.getTransaction().commit();
-            session.close();
-            resp.sendRedirect("login");
+
         } else {
             departments = new ArrayList<>(Arrays.asList(req.getParameterValues("department")));
-            Session session = Utils.openSession();
-            session.beginTransaction();
-            Teacher teacher;
-            teacher = new Teacher(firstName, lastName, number, email, false);
+
+            Teacher teacher = new Teacher(firstName, lastName, userName, password, email, number);
             session.save(teacher);
+
             departments.stream()
                     .map(Integer::parseInt)
                     .map(e -> (Department) session.get(Department.class, e))
                     .forEachOrdered(teacher::addDepartment);
-            Login login = Login.createTeacherLogin(userName, password, teacher.getId(), email);
-            session.save(login);
-            session.getTransaction().commit();
-            session.close();
-            resp.sendRedirect("login");
         }
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("error");
-        out.close();
+        resp.sendRedirect("login");
     }
 }

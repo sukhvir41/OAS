@@ -7,54 +7,39 @@ package postback.admin;
 
 import entities.Course;
 import entities.Department;
-import java.io.IOException;
-import javax.servlet.ServletException;
+import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import utility.PostBackController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/courses/addcourse")
-public class AddCourse extends HttpServlet {
-    
+public class AddCourse extends PostBackController {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            int departmentId = Integer.parseInt(req.getParameter("departmentId"));
-            String name = req.getParameter("coursename");
-            
-            Department department = (Department) session.get(Department.class, departmentId);
-            Course course = new Course(name);
-            department.addCourse(course);
-            session.save(course);                
-            session.getTransaction().commit();
-            session.close();
-            if (req.getParameter("from") != null) {
-                resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
-                
-            } else {
-                resp.sendRedirect("/OAS/admin/courses");
-            }
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            
-            resp.sendRedirect("/OAS/error");
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        int departmentId = Integer.parseInt(req.getParameter("departmentId"));
+        String name = req.getParameter("coursename");
+
+        Department department = (Department) session.get(Department.class, departmentId);
+        Course course = new Course(name);
+        department.addCourse(course);
+        session.save(course);
+
+        if (req.getParameter("from") != null) {
+            resp.sendRedirect("/OAS/admin/departments/detaildepartment?departmentId=" + departmentId);
+
+        } else {
+            resp.sendRedirect("/OAS/admin/courses");
         }
-        
+
     }
-    
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/admin");
-    }
-    
+
 }

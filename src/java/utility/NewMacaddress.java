@@ -197,10 +197,10 @@ class MyThread extends Thread {
     @Getter
     PcapHandle receiveHandle;
 
-    MyThread(Runnable r, PcapHandle handle1, PcapHandle handle2) {
+    MyThread(Runnable r, PcapHandle thesendHandle, PcapHandle thereceiveHnadle) {
         super(r);
-        sendHandle = handle1;
-        receiveHandle = handle2;
+        sendHandle = thesendHandle;
+        receiveHandle = thereceiveHnadle;
     }
 
     public void sendPacket(Packet packet) throws Exception {

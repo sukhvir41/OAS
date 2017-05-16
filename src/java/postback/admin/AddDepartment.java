@@ -7,12 +7,15 @@ package postback.admin;
 
 import entities.Department;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.PostBackController;
 import utility.Utils;
 
 /**
@@ -20,31 +23,18 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/adddepartment")
-public class AddDepartment extends HttpServlet {
-    
+public class AddDepartment extends PostBackController {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            String name = req.getParameter("departmentname");
-            Department department = new Department(name);
-            
-            session.save(department);
-            session.getTransaction().commit();
-            session.close();
-            resp.sendRedirect("/OAS/admin/departments");
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            
-            resp.sendRedirect("/OAS/error");
-        }
-    }
-    
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        String name = req.getParameter("departmentname");
+        Department department = new Department(name);
+
+        session.save(department);
+
         resp.sendRedirect("/OAS/admin/departments");
+
     }
-    
+
 }

@@ -105,7 +105,7 @@ public class SearchLectures extends AjaxController {
         lecture.addProperty("class", theLecture.getTeaching().getClassRoom().toString());
         lecture.addProperty("subject", theLecture.getTeaching().getSubject().toString());
         lecture.addProperty("count", theLecture.getCount());
-        lecture.addProperty("date", theLecture.getDate().toString());
+        lecture.addProperty("date", Utils.formatDateTime(theLecture.getDate()));
         lecture.addProperty("present", attendentStudent);
         lecture.addProperty("absent", totalStudents - attendentStudent);
 

@@ -5,17 +5,18 @@
  */
 package controllers.admin;
 
-import entities.Login;
 import entities.Student;
-import entities.UserType;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import utility.Controller;
 import utility.Utils;
 
 /**
@@ -23,42 +24,20 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/students/detailstudent")
-public class DetailStudent extends HttpServlet {
+public class DetailStudent extends Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+        int studentId = Integer.valueOf(req.getParameter("studentId"));
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
+        Student student = (Student) session.get(Student.class, studentId);
 
-        try {
-            int studentId = Integer.valueOf(req.getParameter("studentId"));
-            Student student = (Student) session.get(Student.class, studentId);
-            Login login = (Login) session.createCriteria(Login.class)
-                    .add(Restrictions.eq("id", student.getId()))
-                    .add(Restrictions.eq("type", UserType.Student.toString()))
-                    .list()
-                    .get(0);
-            req.setAttribute("student", student);
-            req.setAttribute("username", login.getUsername());
-            req.getRequestDispatcher("/WEB-INF/admin/detailstudent.jsp").include(req, resp);
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
-            resp.sendRedirect("/OAS/error");
-        } finally {
-        }
+        req.setAttribute("student", student);
+        req.setAttribute("username", student.getUsername());
+
+        req.getRequestDispatcher("/WEB-INF/admin/detailstudent.jsp").include(req, resp);
+
     }
 
 }

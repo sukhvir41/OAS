@@ -7,46 +7,33 @@ package controllers.admin;
 
 import entities.Course;
 import entities.Subject;
-import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import utility.Controller;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/subjects")
-public class AdminSubject extends HttpServlet {
+public class AdminSubject extends Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+     
+        List<Subject> subjects = (List<Subject>) session.createCriteria(Subject.class).list();
+        List<Course> courses = (List<Course>) session.createCriteria(Course.class).list();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
-
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Subject> subjects;
-        List<Course> courses;
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        subjects = (List<Subject>) session.createCriteria(Subject.class).list();
-        courses = (List<Course>) session.createCriteria(Course.class).list();
         req.setAttribute("subjects", subjects);
         req.setAttribute("courses", courses);
+
         req.getRequestDispatcher("/WEB-INF/admin/adminsubject.jsp").include(req, resp);
-        session.getTransaction().commit();
-        session.close();
-        
+
     }
 
 }

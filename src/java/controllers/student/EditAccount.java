@@ -6,9 +6,7 @@
 package controllers.student;
 
 import entities.Course;
-import entities.Login;
 import entities.Student;
-import entities.UserType;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.Controller;
 
 /**
@@ -31,16 +28,10 @@ public class EditAccount extends Controller {
         Student student = (Student) req.getSession().getAttribute("student");
         student = (Student) session.get(Student.class, student.getId());
 
-        Login login = (Login) session.createCriteria(Login.class)
-                .add(Restrictions.eq("id", student.getId()))
-                .add(Restrictions.eq("type", UserType.Student.toString()))
-                .list()
-                .get(0);
-
         List<Course> courses = session.createCriteria(Course.class)
                 .list();
 
-        req.setAttribute("username", login.getUsername());
+        req.setAttribute("username", student.getUsername());
         req.setAttribute("student", student);
         req.setAttribute("courses", courses);
         req.getRequestDispatcher("/WEB-INF/student/studenteditprofile.jsp").include(req, resp);

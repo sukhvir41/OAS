@@ -6,7 +6,6 @@
 package utility;
 
 import entities.*;
-import java.util.Date;
 import org.hibernate.Session;
 
 /**
@@ -19,19 +18,12 @@ public class AddToDatabase {
 
         Session session = Utils.openSession();
         session.beginTransaction();
-        
-        session.save(Login.createAdminLogin("adminsukhvir", "qwertyuiop", "sukhvir41@gmail.com", AdminType.Main));
-        session.save(Login.createAdminLogin("adminkalpesh", "qwertyuiop", "kalpeshrawal96@gmail.com", AdminType.Main));
-        
+
+        session.save(new Admin("adminsukhvir", "qwertyuiop", "sukhvir41@gmail.com", AdminType.Main));
 
         session.getTransaction().commit();
-        session.close();
-
-        session = Utils.openSession();
-        session.beginTransaction();
-        //have to test cascaade
-        session.getTransaction().commit();
-        session.close();
+        Utils.closeSession();
+        Utils.closeSesssioFactory();
 
     }
 

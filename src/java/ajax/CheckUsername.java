@@ -5,50 +5,36 @@
  */
 package ajax;
 
-import entities.Login;
-import java.io.IOException;
+import entities.User;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import org.hibernate.criterion.Restrictions;
+import utility.AjaxController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/ajax/checkusername")
-public class CheckUsername extends HttpServlet {
+public class CheckUsername extends AjaxController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
+
         String username = req.getParameter("username");
         if (username != null && !username.equals("")) {
-            Session session = Utils.openSession();
-            session.beginTransaction();
-            Login login = (Login) session.get(Login.class, username);
-            if (login == null) {
-                out.print("true");
-            } else {
-                out.print("false");
-            }
-            session.getTransaction().commit();
-            session.close();
+
+            List<User> users = session.createCriteria(User.class)
+                    .add(Restrictions.eq("username", username))
+                    .list();
+            out.print(users.isEmpty());
         }
-
-        out.close();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("error");
-        out.close();
     }
 
 }

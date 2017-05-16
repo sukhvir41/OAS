@@ -5,53 +5,36 @@
  */
 package controllers.admin;
 
-import entities.Login;
-import entities.UserType;
-import java.io.IOException;
-import javax.servlet.ServletException;
+import entities.Admin;
+import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import utility.Utils;
+import utility.Controller;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/admins/detailadmin")
-public class AdminAdminDetails extends HttpServlet {
+public class AdminAdminDetails extends Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+        String username = req.getParameter("username");
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            String username = req.getParameter("username");
+        Admin admin = (Admin) session.createCriteria(Admin.class)
+                .add(Restrictions.eq("username", username))
+                .list()
+                .get(0);
 
-            Login admin = (Login) session.get(Login.class, username);
-            session.getTransaction().commit();
-            session.close();
+        req.setAttribute("admin", admin);
+        req.getRequestDispatcher("/WEB-INF/admin/detailadmin.jsp").include(req, resp);
 
-            req.setAttribute("admin", admin);
-            req.getRequestDispatcher("/WEB-INF/admin/detailadmin.jsp").include(req, resp);
-
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            resp.sendRedirect("/OAS/error");
-        }
     }
 
 }

@@ -12,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
+import utility.AjaxController;
 import utility.MacAddressUtil;
 import utility.NewMacaddress;
 
@@ -20,28 +23,17 @@ import utility.NewMacaddress;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/student/ajax/getmacid")
-public class GetMacId extends HttpServlet {
+public class GetMacId extends AjaxController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        try {
-            //MacAddressUtil mac = new MacAddressUtil();
-            // String macid = mac.getMacAddress(req.getRemoteAddr());
-            String macid = NewMacaddress.getMacAddress(req.getRemoteAddr());
-            System.out.println(macid + " :  " + req.getRemoteAddr());
-            out.print(macid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            out.close();
-        }
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("error");
-        resp.getWriter().close();
+        //MacAddressUtil mac = new MacAddressUtil();
+        // String macid = mac.getMacAddress(req.getRemoteAddr());
+        String macid = NewMacaddress.getMacAddress(req.getRemoteAddr());
+        System.out.println(macid + " :  " + req.getRemoteAddr());
+        out.print(macid);
+
     }
 
 }

@@ -5,50 +5,36 @@
  */
 package postback.admin;
 
+import entities.Admin;
 import entities.AdminType;
-import entities.Login;
-import java.io.IOException;
-import javax.servlet.ServletException;
+import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import utility.PostBackController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/admins/addadminpost")
-public class AddAdmin extends HttpServlet {
+public class AddAdmin extends PostBackController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            String username = req.getParameter("username");
-            String email = req.getParameter("email");
-            String password = req.getParameter("password");
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-            Login admin = Login.createAdminLogin(username, password, email, AdminType.Sub);
+        String username = req.getParameter("username");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
 
-            session.save(admin);
-            session.getTransaction().commit();
-            session.close();
+        Admin admin = new Admin(username, password, email, AdminType.Sub);
 
-            resp.sendRedirect("/OAS/admin/admins");
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            resp.sendRedirect("/OAS/error");
-        }
-    }
+        session.save(admin);
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/error");
+        resp.sendRedirect("/OAS/admin/admins");
+
     }
 
 }

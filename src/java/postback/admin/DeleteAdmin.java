@@ -5,48 +5,40 @@
  */
 package postback.admin;
 
+import entities.Admin;
 import entities.AdminType;
-import entities.Login;
-import java.io.IOException;
-import javax.servlet.ServletException;
+import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import org.hibernate.criterion.Restrictions;
+import utility.PostBackController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/admins/deleteadmin")
-public class DeleteAdmin extends HttpServlet {
+public class DeleteAdmin extends PostBackController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            String username = req.getParameter("username");
-            Login login = (Login) session.get(Login.class, username);
-            if (login.getAdminType().equals(AdminType.Sub.toString())) {
-                session.delete(login);
-            }
-            session.getTransaction().commit();
-            session.close();
-            resp.sendRedirect("/OAS/admin/admins");
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
-            resp.sendRedirect("/OAS/error");
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        String username = req.getParameter("username");
+
+        Admin admin = (Admin) session.createCriteria(Admin.class)
+                .add(Restrictions.eq("username", username))
+                .list()
+                .get(0);
+
+        if (admin.getType().equals(AdminType.Sub)) {
+            session.delete(admin);
         }
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/error");
+        resp.sendRedirect("/OAS/admin/admins");
+
     }
 
 }

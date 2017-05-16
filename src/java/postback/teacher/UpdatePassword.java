@@ -5,16 +5,13 @@
  */
 package postback.teacher;
 
-import entities.Login;
 import entities.Teacher;
-import entities.UserType;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.PostBackController;
 
 /**
@@ -33,16 +30,10 @@ public class UpdatePassword extends PostBackController {
         String newPassword = req.getParameter("newpassword");
         String renewPassword = req.getParameter("renewpassword");
 
-        Login login = (Login) session.createCriteria(Login.class)
-                .add(Restrictions.eq("type", UserType.Student.toString()))
-                .add(Restrictions.eq("id", teacher.getId()))
-                .list()
-                .get(0);
-
-        if (login.checkPassword(oldPassword)) {
+        if (teacher.checkPassword(oldPassword)) {
             if (newPassword.length() >= 8 && newPassword.length() <= 40 && newPassword.equals(renewPassword)) {
-                login.setPassword(newPassword);
-                session.update(login);
+                teacher.setPassword(newPassword);
+                session.update(teacher);
                 resp.sendRedirect("/OAS/teacher/changepassword?error=false");
             } else {
                 resp.sendRedirect("/OAS/teacher/changepassword?error=true");

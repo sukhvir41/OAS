@@ -12,7 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 import sun.security.ssl.Krb5Helper;
+import utility.AjaxController;
 import utility.MacAddressUtil;
 import utility.NewMacaddress;
 
@@ -21,30 +24,16 @@ import utility.NewMacaddress;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/configurenetwork")
-public class ConfigureNetwork extends HttpServlet {
-    
+public class ConfigureNetwork extends AjaxController {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        try {
-            String mac = req.getParameter("macaddress");
-            String ip = req.getParameter("ipaddress");
-            //out.print(MacAddressUtil.setAddresses(mac, ip));
-            out.print(NewMacaddress.setAddresses(mac, ip));
-            
-            out.close();
-        } catch (Exception e) {
-            out.print("false");
-        } finally {
-            out.close();
-        }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        String mac = req.getParameter("macaddress");
+        String ip = req.getParameter("ipaddress");
+        //out.print(MacAddressUtil.setAddresses(mac, ip));
+        out.print(NewMacaddress.setAddresses(mac, ip));
+
     }
-    
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("false");
-        out.close();
-    }
-    
+
 }

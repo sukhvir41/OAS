@@ -6,7 +6,7 @@
 package sessionvalidation;
 
 import entities.AdminType;
-import entities.Login;
+import entities.Admin;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -41,7 +41,7 @@ public class AdminDeleteValidation implements Filter {
             resp = (HttpServletResponse) response;
             req = (HttpServletRequest) request;
             session = req.getSession();
-            if (((Login) session.getAttribute("admin")).getAdminType().equals(AdminType.Main.toString())) {
+            if (((Admin) session.getAttribute("admin")).getType().equals(AdminType.Main.toString())) {
                 chain.doFilter(request, response);
             } else {
                 resp.sendRedirect("/OAS/error");//### make access denied page

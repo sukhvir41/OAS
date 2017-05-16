@@ -7,12 +7,15 @@ package postback.admin;
 
 import entities.ClassRoom;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.PostBackController;
 import utility.Utils;
 
 /**
@@ -20,44 +23,30 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/classrooms/updateclassroom")
-public class UpdateClassRoom extends HttpServlet {
+public class UpdateClassRoom extends PostBackController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            int classroomId = Integer.parseInt(req.getParameter("classroomId"));
-            String name = req.getParameter("classroomname");
-            String division = req.getParameter("division");
-            int semister = Integer.parseInt(req.getParameter("semister"));
-            int minimumSubjects = Integer.parseInt(req.getParameter("minimumsubjects"));
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-            classRoom.setName(name);
-            classRoom.setDivision(division);
-            classRoom.setMinimumSubjects(minimumSubjects);
-            classRoom.setSemister(semister);
-            session.update(classRoom);
-            session.getTransaction().commit();
-            session.close();
+        int classroomId = Integer.parseInt(req.getParameter("classroomId"));
+        String name = req.getParameter("classroomname");
+        String division = req.getParameter("division");
+        int semister = Integer.parseInt(req.getParameter("semister"));
+        int minimumSubjects = Integer.parseInt(req.getParameter("minimumsubjects"));
 
-            if (req.getParameter("from").equals("")) {
-                resp.sendRedirect("/OAS/admin/classrooms/detailclassroom?classroomId=" + classroomId);
-            } else {
-                resp.sendRedirect("/OAS/admin/classrooms#" + classroomId);
-            }
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
+        classRoom.setName(name);
+        classRoom.setDivision(division);
+        classRoom.setMinimumSubjects(minimumSubjects);
+        classRoom.setSemister(semister);
+        session.update(classRoom);
 
-            resp.sendRedirect("/OAS/error");
+        if (req.getParameter("from").equals("")) {
+            resp.sendRedirect("/OAS/admin/classrooms/detailclassroom?classroomId=" + classroomId);
+        } else {
+            resp.sendRedirect("/OAS/admin/classrooms#" + classroomId);
         }
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/error");
     }
 
 }

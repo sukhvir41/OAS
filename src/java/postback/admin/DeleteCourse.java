@@ -7,12 +7,15 @@ package postback.admin;
 
 import entities.Course;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.PostBackController;
 import utility.Utils;
 
 /**
@@ -20,31 +23,18 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/courses/deletecourse")
-public class DeleteCourse extends HttpServlet {
-    
+public class DeleteCourse extends PostBackController {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            int courseId = Integer.parseInt(req.getParameter("courseId"));
-            
-            Course course = (Course) session.get(Course.class, courseId);
-            session.delete(course);
-            session.getTransaction().commit();
-            session.close();
-            resp.sendRedirect("/OAS/admin/courses");
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            
-            resp.sendRedirect("/OAS/error");
-        }
-    }
-    
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        int courseId = Integer.parseInt(req.getParameter("courseId"));
+
+        Course course = (Course) session.get(Course.class, courseId);
+        session.delete(course);
+
         resp.sendRedirect("/OAS/admin/courses");
+
     }
-    
+
 }

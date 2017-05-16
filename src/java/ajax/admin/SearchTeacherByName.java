@@ -19,8 +19,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import utility.AjaxController;
 import utility.Utils;
 
 /**
@@ -28,39 +30,7 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/teachers/searchteacherbyname")
-public class SearchTeacherByName extends HttpServlet {
-
-    
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name;
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("text/json");
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            name = req.getParameter("name");
-
-            List<Teacher> teachers = session.createCriteria(Teacher.class)
-                    .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
-                    .list();
-            Gson gson = new Gson();
-            JsonArray jsonTeachers = new JsonArray();
-            teachers.stream()
-                    .forEach(teacher -> add(teacher,jsonTeachers));
-            session.getTransaction().commit();
-            session.close();
-            out.print(gson.toJson(jsonTeachers));
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-            session.close();
-            out.print("error");
-        } finally {
-            out.close();
-        }
-    }
+public class SearchTeacherByName extends AjaxController {
 
     private void add(Teacher teacher, JsonArray jsonTeachers) {
         JsonObject teacherJson = new JsonObject();
@@ -91,10 +61,23 @@ public class SearchTeacherByName extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("error");
-        resp.getWriter().close();
-        //doPost(req, resp);
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+        String name;
+
+        resp.setContentType("text/json");
+
+        name = req.getParameter("name");
+
+        List<Teacher> teachers = session.createCriteria(Teacher.class)
+                .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
+                .list();
+        Gson gson = new Gson();
+        JsonArray jsonTeachers = new JsonArray();
+        teachers.stream()
+                .forEach(teacher -> add(teacher, jsonTeachers));
+
+        out.print(gson.toJson(jsonTeachers));
+
     }
 
 }

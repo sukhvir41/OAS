@@ -7,13 +7,16 @@ package controllers.admin;
 
 import entities.Course;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.Controller;
 import utility.Utils;
 
 /**
@@ -21,24 +24,14 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/reports")
-public class ReportGeneration extends HttpServlet {
+public class ReportGeneration extends Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+        List<Course> courses = session.createCriteria(Course.class)
+                .list();
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        List<Course> courses = session.createCriteria(Course.class).list();
-        session.getTransaction().commit();
-        session.close();
         req.setAttribute("courses", courses);
         req.getRequestDispatcher("/WEB-INF/admin/adminreportgen.jsp").include(req, resp);
     }

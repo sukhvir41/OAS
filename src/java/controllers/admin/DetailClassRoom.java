@@ -7,12 +7,15 @@ package controllers.admin;
 
 import entities.ClassRoom;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.Controller;
 import utility.Utils;
 
 /**
@@ -20,32 +23,23 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/classrooms/detailclassroom")
-public class DetailClassRoom extends HttpServlet {
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+public class DetailClassRoom extends Controller {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int classRoomId = 1;
-        try {
-            classRoomId = Integer.parseInt(req.getParameter("classroomId"));
-        } catch (Exception e) {
-        }
-        ClassRoom classRoom;
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
+
+    }
+
+    @Override
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        int classRoomId = Integer.parseInt(req.getParameter("classroomId"));
+
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
+        
         req.setAttribute("classroom", classRoom);
+        
         req.getRequestDispatcher("/WEB-INF/admin/detailclassroom.jsp").include(req, resp);
-        session.getTransaction().commit();
-        session.close();
+
     }
 
 }

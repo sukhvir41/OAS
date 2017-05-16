@@ -5,45 +5,31 @@
  */
 package controllers.admin;
 
-import entities.Login;
-import entities.UserType;
-import java.io.IOException;
+import entities.Admin;
+import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-import utility.Utils;
+import utility.Controller;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/admins")
-public class AdminAdmins extends HttpServlet {
+public class AdminAdmins extends Controller {
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+        List<Admin> admins = session.createCriteria(Admin.class)
+                .list();
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Login> admins;
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        admins = session.createCriteria(Login.class).add(Restrictions.eq("type", UserType.Admin.toString())).list();
         req.setAttribute("admins", admins);
         req.getRequestDispatcher("/WEB-INF/admin/adminadmins.jsp").include(req, resp);
-        session.getTransaction().commit();
-        session.close();
 
     }
 

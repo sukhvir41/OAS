@@ -11,90 +11,23 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Department;
 import entities.Teacher;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import utility.Utils;
+import utility.AjaxController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/teachers/searchteacher")
-public class SearchTeacher extends HttpServlet {
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("text/json");
-        String departmentId;
-        String verified;
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        List<Teacher> teachers;
-        try {
-            departmentId = req.getParameter("departmentId");
-            verified = req.getParameter("verified");
-            if (departmentId.equals("all")) {
-                if (verified.equals("all")) {
-                    teachers = session.createCriteria(Teacher.class).list();
-                } else {
-                    if (Boolean.parseBoolean(verified)) {
-                        teachers = session.createCriteria(Teacher.class)
-                                .add(Restrictions.eq("verified", true))
-                                .list();
-                    } else {
-                        teachers = session.createCriteria(Teacher.class)
-                                .add(Restrictions.eq("verified", false))
-                                .list();
-                    }
-                }
-            } else {
-                if (verified.equals("all")) {
-                    teachers = ((Department) session.get(Department.class, Integer.parseInt(departmentId))).getTeachers();
-                } else {
-                    teachers = ((Department) session.get(Department.class, Integer.parseInt(departmentId))).getTeachers();
-                    List<Teacher> temp = new ArrayList<>();
-                    if (Boolean.parseBoolean(verified)) {
-                        teachers.stream()
-                                .filter(e -> e.isVerified() == true)
-                                .forEach(temp::add);
-                        teachers = temp;
-                    } else {
-                        teachers.stream()
-                                .filter(e -> e.isVerified() == false)
-                                .forEach(temp::add);
-                        teachers = temp;
-                    }
-                }
-            }
-
-            Gson gson = new Gson();
-            JsonArray jsonTeachers = new JsonArray();
-            teachers.stream()
-                    .forEach(teacher -> add(teacher, jsonTeachers));
-            out.print(gson.toJson(jsonTeachers));
-
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-            session.close();
-            out.print("error");
-        } finally {
-
-            out.close();
-        }
-    }
+public class SearchTeacher extends AjaxController {
 
     private void add(Teacher teacher, JsonArray jsonTeachers) {
         JsonObject teacherJson = new JsonObject();
@@ -125,10 +58,56 @@ public class SearchTeacher extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("error");
-        resp.getWriter().close();
-        //doPost(req, resp);
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        resp.setContentType("text/json");
+        String departmentId;
+        String verified;
+
+        List<Teacher> teachers;
+
+        departmentId = req.getParameter("departmentId");
+        verified = req.getParameter("verified");
+        if (departmentId.equals("all")) {
+            if (verified.equals("all")) {
+                teachers = session.createCriteria(Teacher.class).list();
+            } else {
+                if (Boolean.parseBoolean(verified)) {
+                    teachers = session.createCriteria(Teacher.class)
+                            .add(Restrictions.eq("verified", true))
+                            .list();
+                } else {
+                    teachers = session.createCriteria(Teacher.class)
+                            .add(Restrictions.eq("verified", false))
+                            .list();
+                }
+            }
+        } else {
+            if (verified.equals("all")) {
+                teachers = ((Department) session.get(Department.class, Integer.parseInt(departmentId))).getTeachers();
+            } else {
+                teachers = ((Department) session.get(Department.class, Integer.parseInt(departmentId))).getTeachers();
+                List<Teacher> temp = new ArrayList<>();
+                if (Boolean.parseBoolean(verified)) {
+                    teachers.stream()
+                            .filter(e -> e.isVerified() == true)
+                            .forEach(temp::add);
+                    teachers = temp;
+                } else {
+                    teachers.stream()
+                            .filter(e -> e.isVerified() == false)
+                            .forEach(temp::add);
+                    teachers = temp;
+                }
+            }
+        }
+
+        Gson gson = new Gson();
+        JsonArray jsonTeachers = new JsonArray();
+        teachers.stream()
+                .forEach(teacher -> add(teacher, jsonTeachers));
+        out.print(gson.toJson(jsonTeachers));
+
     }
 
 }

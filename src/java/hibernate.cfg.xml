@@ -26,7 +26,7 @@
         <property name="hbm2ddl.auto">
             update
         </property>
-        
+       
         <property name="hibernate.c3p0.min_size">
             5
         </property>
@@ -42,19 +42,19 @@
         <property name="hibernate.c3p0.idle_test_period">
             3000
         </property>
-
+        
         
         <mapping class="entities.ClassRoom"/>
         <mapping class="entities.Course"/>
         <mapping class="entities.Department"/>
         <mapping class="entities.Lecture"/>
-        <mapping class="entities.Login"/>
-        <mapping class="entities.Student"/>
         <mapping class="entities.Subject"/>
-        <mapping class="entities.Teacher"/>
         <mapping class="entities.Teaching"/>
         <mapping class="entities.Attendance"/>
-        
+        <mapping class="entities.Teacher"/>
+        <mapping class="entities.Student"/>
+        <mapping class="entities.Admin"/>
+        <mapping class="entities.User"/>        
         
     </session-factory>
 </hibernate-configuration>

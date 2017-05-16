@@ -29,24 +29,24 @@ public abstract class Controller extends HttpServlet {
         Session session = Utils.openSession();
         session.beginTransaction();
         PrintWriter out = resp.getWriter();
-        
+
         try {
-            
+
             process(req, resp, session, req.getSession(), out);
-            
+
             session.getTransaction().commit();
-            session.close();
+            Utils.closeSession();
         } catch (Exception e) {
-            
+
             session.getTransaction().rollback();
-            session.close();
-            
+            Utils.closeSession();
+
             if (showErrorLog()) {
                 e.printStackTrace();
             }
-            
+
             this.onError(req, resp);
-        
+
         } finally {
             out.close();
         }

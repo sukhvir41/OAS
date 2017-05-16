@@ -11,6 +11,7 @@ import entities.Student;
 import entities.Teacher;
 import entities.Teaching;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -34,6 +35,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import utility.ReportPostBackController;
 import utility.Utils;
 
 /**
@@ -41,32 +43,10 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/generatereportpost")
-public class GenerateReport extends HttpServlet {
+public class GenerateReport extends ReportPostBackController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            process(req, resp, session, req.getSession());
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
-            resp.sendRedirect("/OAS/error");
-        } finally {
-
-        }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/OAS/error");
-    }
-
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession) throws Exception {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, OutputStream out) throws Exception {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
 
@@ -181,8 +161,7 @@ public class GenerateReport extends HttpServlet {
         resp.setHeader(
                 "Content-Disposition", "attachment; filename=report " + new Date() + ".xlsx");
 
-        workbook.write(resp.getOutputStream());
-        resp.getOutputStream().close();
+        workbook.write(out);
 
     }
 
@@ -194,5 +173,4 @@ public class GenerateReport extends HttpServlet {
                 .mapToInt(attendance -> lecture.getCount())
                 .sum();
     }
-
 }

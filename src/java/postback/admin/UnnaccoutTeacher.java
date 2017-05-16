@@ -7,12 +7,15 @@ package postback.admin;
 
 import entities.Teacher;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.PostBackController;
 import utility.Utils;
 
 /**
@@ -20,51 +23,35 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/teachers/unaacountteacher")
-public class UnnaccoutTeacher extends HttpServlet {
+public class UnnaccoutTeacher extends PostBackController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            int teacherId = Integer.parseInt(req.getParameter("teacherId"));
-            
-            Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-            
-            if (!teacher.isVerified()) {
-                teacher.getClassRoom().setClassTeacher(null);
-                teacher.setClassRoom(null);
-                
-                teacher.getDepartment().stream()
-                        .forEach(e -> e.getTeachers().remove(teacher));
-             
-                teacher.getHodOf().stream()
-                        .forEach(e -> e.setHod(null));
-                
-                teacher.getTeaches().stream()
-                        .forEach(e -> e.setTeacher(null));
-                
-                teacher.getTeaches().clear();
-                
-                teacher.setHod(false);
-              
-                teacher.unaccount();
-            } 
-               resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacherId);
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            e.printStackTrace();
-            resp.sendRedirect("/OAS/error");
-        } finally {
+        int teacherId = Integer.parseInt(req.getParameter("teacherId"));
+
+        Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+
+        if (!teacher.isVerified()) {
+            teacher.getClassRoom().setClassTeacher(null);
+            teacher.setClassRoom(null);
+
+            teacher.getDepartment().stream()
+                    .forEach(e -> e.getTeachers().remove(teacher));
+
+            teacher.getHodOf().stream()
+                    .forEach(e -> e.setHod(null));
+
+            teacher.getTeaches().stream()
+                    .forEach(e -> e.setTeacher(null));
+
+            teacher.getTeaches().clear();
+
+            teacher.setHod(false);
+
+            teacher.unaccount();
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacherId);
 
     }
 

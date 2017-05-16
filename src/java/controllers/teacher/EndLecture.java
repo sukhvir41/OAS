@@ -8,12 +8,14 @@ package controllers.teacher;
 import entities.Lecture;
 import entities.Teacher;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.Controller;
 import utility.Utils;
 
 /**
@@ -21,40 +23,22 @@ import utility.Utils;
  * @author icr
  */
 @WebServlet(urlPatterns = "/teacher/endlecture")
-public class EndLecture extends HttpServlet {
+public class EndLecture extends Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
-
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = Utils.openSession();
-        session.getTransaction().begin();
-        try {
-            Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
-            String lectureId = req.getParameter("lectureId");
-            teacher = (Teacher) session.get(Teacher.class, teacher.getId());
-            Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
-            if (teacher.getTeaches().contains(lecture.getTeaching())) {
-                lecture.setEnded(true);
-                resp.sendRedirect("/OAS/teacher?lectureId" + lectureId);
-            } else {
-                resp.sendRedirect("/OAS/teacher");
-            }
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-            session.close();
-            resp.sendRedirect("/OAS/error");
+        Teacher teacher = (Teacher) req.getSession().getAttribute("teacher");
+        String lectureId = req.getParameter("lectureId");
+        teacher = (Teacher) session.get(Teacher.class, teacher.getId());
+        Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
+        if (teacher.getTeaches().contains(lecture.getTeaching())) {
+            lecture.setEnded(true);
+            resp.sendRedirect("/OAS/teacher?lectureId" + lectureId);
+        } else {
+            resp.sendRedirect("/OAS/teacher");
         }
+
     }
 
 }

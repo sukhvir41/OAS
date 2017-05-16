@@ -6,6 +6,7 @@
 package sessionvalidation;
 
 import entities.Teacher;
+import entities.UserType;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,7 +43,7 @@ public class TeacherValidation implements Filter {
         try {
             System.out.println(session.getAttribute("accept"));
             System.out.println(session.getAttribute("type"));
-            if ((boolean) session.getAttribute("accept") && ((String) session.getAttribute("type")).equals("teacher")) {
+            if ((boolean) session.getAttribute("accept") && (session.getAttribute("type")).equals(UserType.Teacher)) {
                 Teacher teacher = (Teacher) session.getAttribute("teacher");
                 if (teacher.isVerified()) {
 

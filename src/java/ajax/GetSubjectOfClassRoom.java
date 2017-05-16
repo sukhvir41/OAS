@@ -10,65 +10,42 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import entities.ClassRoom;
 import entities.Subject;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.Utils;
+import utility.AjaxController;
 
 /**
  *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/ajax/getsubjectsofclass")
-public class GetSubjectOfClassRoom extends HttpServlet {
-
-    JsonArray jsonSubjects;
+public class GetSubjectOfClassRoom extends AjaxController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
         resp.setContentType("text/json");
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        try {
-            int classroomId = Integer.parseInt(req.getParameter("classroom"));
-            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-            List<Subject> subjects = classRoom.getSubjects();
-            jsonSubjects = new JsonArray();
-            Gson gson = new Gson();
-            subjects.stream()
-                    .forEach(e -> add(e));
-            session.getTransaction().commit();
-            session.close();
-            out.print(gson.toJson(jsonSubjects));
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            session.close();
-            out.print("error");
-        } finally {
-            out.close();
-        }
+
+        int classroomId = Integer.parseInt(req.getParameter("classroom"));
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
+        List<Subject> subjects = classRoom.getSubjects();
+        JsonArray jsonSubjects = new JsonArray();
+        Gson gson = new Gson();
+        subjects.stream()
+                .forEach(e -> add(e, jsonSubjects));
+        out.print(gson.toJson(jsonSubjects));
 
     }
 
-    private void add(Subject e) {
+    private void add(Subject e, JsonArray jsonSubjects) {
         JsonObject subejct = new JsonObject();
         subejct.addProperty("id", e.getId());
         subejct.addProperty("name", e.getName());
         jsonSubjects.add(subejct);
     }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.print("error");
-        out.close();
-    }
-
 }

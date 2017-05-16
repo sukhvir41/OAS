@@ -6,7 +6,6 @@
 package postback.teacher;
 
 import entities.Department;
-import entities.Login;
 import entities.Teacher;
 import entities.UserType;
 import java.io.PrintWriter;
@@ -27,53 +26,43 @@ import utility.PostBackController;
  */
 @WebServlet(urlPatterns = "/account/updateteacher")
 public class UpdateAccount extends PostBackController {
-
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Teacher sessionTeacher = (Teacher) httpSession.getAttribute("teacher");
         Teacher teacher = (Teacher) session.get(Teacher.class, sessionTeacher.getId());
-
+        
         String email = req.getParameter("email");
         String number = req.getParameter("number");
         String fName = req.getParameter("fname");
         String lName = req.getParameter("lname");
-
+        
         if (!teacher.getEmail().equals(email)) {
-            List<Login> logins = session.createCriteria(Login.class)
-                    .add(Restrictions.eq("email", email))
-                    .list();
-
-            logins = logins.stream()
-                    .filter(login -> !(login.getType().equals(UserType.Teacher.toString()) && login.getId() == teacher.getId()))
-                    .collect(Collectors.toList());
-
-            if (logins.isEmpty()) {
-                teacher.setEmail(email);
-                teacher.setVerified(false);
-                teacher.setUnaccounted(false);
-                resp.sendRedirect("/OAS/logout");
-
-            } else {
-                resp.sendRedirect("/OAS/account/editteacher?error=true");
-                return;
-            }
+            
+            teacher.setEmail(email);
+            resp.sendRedirect("/OAS/logout");
+        } else {
+            resp.sendRedirect("/OAS/account/editteacher");
         }
-
+        
+        teacher.setVerified(false);
+        teacher.setUnaccounted(false);
+        
         teacher.getDepartment()
                 .stream()
                 .forEach(department -> department.getTeachers().remove(teacher));
-
+        
         teacher.setDepartment(null);
-
+        
         Arrays.asList(req.getParameterValues("department"))
                 .stream()
                 .map(department -> Integer.parseInt(department))
                 .map(department -> (Department) session.get(Department.class, department))
                 .forEach(department -> department.addTeacher(teacher));
-
+        
         teacher.setFName(fName);//adding
         teacher.setNumber(Long.parseLong(number));//adding
         teacher.setLName(lName);//adding
     }
-
+    
 }

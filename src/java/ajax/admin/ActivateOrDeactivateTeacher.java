@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import utility.AjaxController;
 import utility.Utils;
 
 /**
@@ -21,49 +23,28 @@ import utility.Utils;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/teachers/activateordeactivateteacher")
-public class ActivateOrDeactivateTeacher extends HttpServlet {
+public class ActivateOrDeactivateTeacher extends AjaxController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        Session session = Utils.openSession();
-        session.beginTransaction();
-        PrintWriter out = resp.getWriter();
-
-        try {
-            String action = req.getParameter("action");
-            int teacherId = Integer.parseInt(req.getParameter("teacherId"));
-            Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-            switch (action) {
-                case "verify": {
-                    teacher.setVerified(true);
-                    out.print("true");
-                    break;
-                }
-                case "deverify": {
-                    teacher.setVerified(false);
-                    out.print("true");
-                    break;
-                }
-                default:
-                    out.print("false");
+        String action = req.getParameter("action");
+        int teacherId = Integer.parseInt(req.getParameter("teacherId"));
+        Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+        switch (action) {
+            case "verify": {
+                teacher.setVerified(true);
+                out.print("true");
+                break;
             }
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            out.print("false");
-            session.getTransaction().rollback();
-            session.close();
-        } finally {
-            out.close();
+            case "deverify": {
+                teacher.setVerified(false);
+                out.print("true");
+                break;
+            }
+            default:
+                out.print("false");
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("error");
-        resp.getWriter().close();
     }
 
 }
