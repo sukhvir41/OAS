@@ -5,16 +5,16 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">
-            com.microsoft.sqlserver.jdbc.SQLServerDriver
+            org.postgresql.Driver
         </property>
         <property name="hibernate.dialect">
-            org.hibernate.dialect.SQLServer2012Dialect
+            org.hibernate.dialect.PostgreSQLDialect
         </property>        
         <property name="hibernate.connection.url">
-            jdbc:sqlserver://127.0.0.1\SQLEXPRESS:1433;databaseName=oasdb
+            jdbc:postgresql://127.0.0.1:5432/OASdb
         </property>
         <property name="hibernate.connection.username">
-            sa
+            OASuser
         </property>
         <property name="hibernate.connection.password">
             admin@oas

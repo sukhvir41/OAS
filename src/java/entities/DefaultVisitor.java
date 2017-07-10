@@ -11,14 +11,14 @@ package entities;
  */
 public class DefaultVisitor implements Visitor {
 
-    private static DefaultVisitor instance;
+    private static final DefaultVisitor INSTANCE;
 
     static {
-        instance = new DefaultVisitor();
+        INSTANCE = new DefaultVisitor();
     }
 
     public static DefaultVisitor getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     private DefaultVisitor() {
