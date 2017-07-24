@@ -203,7 +203,7 @@
                                                 <tr>
                                                     <td><a href="/OAS/admin/admins/detailadmin?username=${admin.username}">${admin.username}</a></td>
                                                     <td>${admin.email}</td>
-                                                    <td>${admin.adminType}</td>
+                                                    <td>${admin.type}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

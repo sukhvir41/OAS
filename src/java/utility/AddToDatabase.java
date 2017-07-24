@@ -20,7 +20,7 @@ public class AddToDatabase {
         session.beginTransaction();
 
         session.save(new Admin("adminsukhvir", "qwertyuiop", "sukhvir41@gmail.com", AdminType.Main));
-
+        session.save(new Admin("adminkalpesh", "qwertyuiop", "kalpeshrawal96@gmail.com", AdminType.Main));
         session.getTransaction().commit();
         Utils.closeSession();
         Utils.closeSesssioFactory();

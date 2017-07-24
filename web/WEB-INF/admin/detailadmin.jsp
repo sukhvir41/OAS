@@ -97,7 +97,7 @@
                                                 <dt>Email Address</dt>
                                                 <dd>${requestScope.admin.email}</dd>
                                                 <dt>Admin Type</dt>
-                                                <dd>${requestScope.admin.adminType}</dd>
+                                                <dd>${requestScope.admin.type}</dd>
                                             </dl>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
                                             <br>

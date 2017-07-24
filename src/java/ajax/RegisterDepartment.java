@@ -9,19 +9,15 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import entities.Department;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import utility.AjaxController;
-import utility.Utils;
 
 /**
  *
@@ -34,7 +30,7 @@ public class RegisterDepartment extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         resp.setContentType("text/json");
 
-        session.beginTransaction();
+      
         Query query = session.createQuery("from Department");
         List<Department> deparments = (List<Department>) query.list();
 
