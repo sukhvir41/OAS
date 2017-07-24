@@ -5,21 +5,19 @@
  */
 package postback.teacher;
 
+import entities.Attendance;
 import entities.ClassRoom;
 import entities.Lecture;
 import entities.Student;
+import entities.Subject;
 import entities.Teacher;
 import entities.Teaching;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,6 +32,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import utility.ReportPostBackController;
 import utility.Utils;
@@ -44,6 +43,14 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/teacher/generatereportpost")
 public class GenerateReport extends ReportPostBackController {
+
+//    private List<Student> getStudents(Session session, ClassRoom classRoom, Subject subject) {
+//
+//        return session.createCriteria(Student.class)
+//                .add(Restrictions.eq("classRoom", classRoom))
+//                .add
+//    
+//    }
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, OutputStream out) throws Exception {
@@ -166,6 +173,7 @@ public class GenerateReport extends ReportPostBackController {
     }
 
     private int getAttended(Lecture lecture, Student student) {
+
         return lecture.getAttendance()
                 .stream()
                 .filter(attendace -> attendace.isAttended())
@@ -173,4 +181,13 @@ public class GenerateReport extends ReportPostBackController {
                 .mapToInt(attendance -> lecture.getCount())
                 .sum();
     }
+
+//    private int getAttendedCount(Lecture lecture, Student student, Session session) {
+//
+//        session.createCriteria(Attendance.class)
+//                .add(Restrictions.eq("lecture", lecture))
+//                .add(Restrictions.eq("student", student))
+//                .setProjection(Projections.sum(""))
+//        
+//    }
 }

@@ -11,17 +11,13 @@ import entities.Lecture;
 import entities.Student;
 import entities.Subject;
 import entities.Teaching;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.servlet.ServletException;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,7 +32,10 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import utility.ReportPostBackController;
 import utility.Utils;
@@ -174,24 +173,30 @@ public class GenerateReport extends ReportPostBackController {
             for (Subject subject : student.getSubjects()) {
 
                 //getting lectures of the class and subject
-                List<Lecture> lectures = getLectures(classRoom, subject, session, start, end);
-                int lecturesCount = lectures.stream()
-                        .mapToInt(e -> e.getCount())
-                        .sum();
+//                List<Lecture> lectures = getLectures(classRoom, subject, session, start, end);
+//                int lecturesCount = lectures.stream()
+//                        .mapToInt(e -> e.getCount())
+//                        .sum();
+//                totalLectures += lecturesCount;
+                int lecturesCount = getLectureCount(classRoom, subject, session, start, end);
+
                 totalLectures += lecturesCount;
 
                 //getting student attendace according to the lectures and the subject 
-                List<Attendance> studentAttendances = getStudentAttendance(student, lectures, session);
-                int attendanceCount = studentAttendances.stream()
-                        .mapToInt(e -> e.getLecture().getCount())
-                        .sum();
+//                List<Attendance> studentAttendances = getStudentAttendance(student, lectures, session);
+//                int attendanceCount = studentAttendances.stream()
+//                        .mapToInt(e -> e.getLecture().getCount())
+//                        .sum();
+//                totalAttendance += attendanceCount;
+                int attendanceCount = getStudentAttendanceCount(classRoom, subject, session, start, end, student);
                 totalAttendance += attendanceCount;
 
                 //calculating leaves according to the atendance
-                leaves += studentAttendances.stream()
-                        .filter(attendance -> attendance.isLeave())
-                        .mapToInt(attendance -> attendance.getLecture().getCount())
-                        .sum();
+//                leaves += studentAttendances.stream()
+//                        .filter(attendance -> attendance.isLeave())
+//                        .mapToInt(attendance -> attendance.getLecture().getCount())
+//                        .sum();
+                leaves += getStudentAttendanceLeaveCount(classRoom, subject, session, start, end, student);
 
                 cell = row.createCell(cellNumber++);
                 cell.setCellValue(subject.getName());
@@ -242,23 +247,33 @@ public class GenerateReport extends ReportPostBackController {
      * session to do the search
      */
     private List<Lecture> getLectures(ClassRoom classRoom, Subject subject, Session session, LocalDateTime start, LocalDateTime end) {
-        List<Teaching> teaching = session.createCriteria(Teaching.class
-        )
+
+        DetachedCriteria teachingCriteria = DetachedCriteria.forClass(Teaching.class)
                 .add(Restrictions.eq("classRoom", classRoom))
-                .add(Restrictions.eq("subject", subject))
+                .add(Restrictions.eq("subject", subject));
+
+        return session.createCriteria(Lecture.class)
+                .add(Property.forName("teaching").in(teachingCriteria))
+                .add(Restrictions.between("date", start, end))
+                .addOrder(Order.desc("date"))
                 .list();
 
-        if (teaching.size() > 0) {
-            return session.createCriteria(Lecture.class
-            )
-                    .add(Restrictions.in("teaching", teaching))
-                    .add(Restrictions.between("date", start, end))
-                    .addOrder(Order.desc("date"))
-                    .list();
-        } else {
-            return new ArrayList<>();
-
-        }
+//        
+//        List<Teaching> teaching = session.createCriteria(Teaching.class)
+//                .add(Restrictions.eq("classRoom", classRoom))
+//                .add(Restrictions.eq("subject", subject))
+//                .list();
+//
+//        if (teaching.size() > 0) {
+//            return session.createCriteria(Lecture.class)
+//                    .add(Restrictions.in("teaching", teaching))
+//                    .add(Restrictions.between("date", start, end))
+//                    .addOrder(Order.desc("date"))
+//                    .list();
+//        } else {
+//            return new ArrayList<>();
+//
+//        }
     }
 
     /**
@@ -267,8 +282,7 @@ public class GenerateReport extends ReportPostBackController {
      */
     private List<Attendance> getStudentAttendance(Student student, List<Lecture> lectures, Session session) {
         if (lectures.size() > 0) {
-            return session.createCriteria(Attendance.class
-            )
+            return session.createCriteria(Attendance.class)
                     .add(Restrictions.in("lecture", lectures))
                     .add(Restrictions.eq("student", student))
                     .add(Restrictions.eqOrIsNull("attended", true))//  check is eqOrIsnull is requird or eq is fine
@@ -277,6 +291,59 @@ public class GenerateReport extends ReportPostBackController {
         } else {
             return new ArrayList<>();
         }
+    }
+
+    private int getLectureCount(ClassRoom classRoom, Subject subject, Session session, LocalDateTime start, LocalDateTime end) {
+
+        DetachedCriteria teachingCriteria = DetachedCriteria.forClass(Teaching.class)
+                .add(Restrictions.eq("classRoom", classRoom))
+                .add(Restrictions.eq("subject", subject));
+
+        return (int) session.createCriteria(Lecture.class)
+                .add(Property.forName("teaching").in(teachingCriteria))
+                .add(Restrictions.between("date", start, end))
+                .setProjection(Projections.sum("count"))
+                .uniqueResult();
+
+    }
+
+    private int getStudentAttendanceCount(ClassRoom classRoom, Subject subject, Session session, LocalDateTime start, LocalDateTime end, Student student) {
+
+        DetachedCriteria teachingCriteria = DetachedCriteria.forClass(Teaching.class)
+                .add(Restrictions.eq("classRoom", classRoom))
+                .add(Restrictions.eq("subject", subject));
+
+        DetachedCriteria attendanceCriteria = DetachedCriteria.forClass(Attendance.class)
+                .add(Restrictions.eq("student", student))
+                .add(Restrictions.eqOrIsNull("attended", true));
+
+        return (int) session.createCriteria(Lecture.class)
+                .add(Property.forName("teaching").in(teachingCriteria))
+                .add(Restrictions.between("date", start, end))
+                .add(Property.forName("attendance").in(attendanceCriteria))
+                .setProjection(Projections.sum("count"))
+                .uniqueResult();
+
+    }
+
+    private int getStudentAttendanceLeaveCount(ClassRoom classRoom, Subject subject, Session session, LocalDateTime start, LocalDateTime end, Student student) {
+
+        DetachedCriteria teachingCriteria = DetachedCriteria.forClass(Teaching.class)
+                .add(Restrictions.eq("classRoom", classRoom))
+                .add(Restrictions.eq("subject", subject));
+
+        DetachedCriteria attendanceCriteria = DetachedCriteria.forClass(Attendance.class)
+                .add(Restrictions.eq("student", student))
+                .add(Restrictions.eqOrIsNull("attended", true))
+                .add(Restrictions.eq("leave", true));
+
+        return (int) session.createCriteria(Lecture.class)
+                .add(Property.forName("teaching").in(teachingCriteria))
+                .add(Restrictions.between("date", start, end))
+                .add(Property.forName("attendance").in(attendanceCriteria))
+                .setProjection(Projections.sum("count"))
+                .uniqueResult();
+
     }
 
 }
