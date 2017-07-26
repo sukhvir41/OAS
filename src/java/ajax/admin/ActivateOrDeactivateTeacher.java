@@ -6,17 +6,13 @@
 package ajax.admin;
 
 import entities.Teacher;
-import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import utility.AjaxController;
-import utility.Utils;
 
 /**
  *
@@ -29,21 +25,21 @@ public class ActivateOrDeactivateTeacher extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
         String action = req.getParameter("action");
-        int teacherId = Integer.parseInt(req.getParameter("teacherId"));
+        long teacherId = Long.parseLong(req.getParameter("teacherId"));
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
         switch (action) {
             case "verify": {
-                teacher.setVerified(true);
-                out.print("true");
+                teacher.setVerified(Boolean.TRUE);
+                out.print(Boolean.TRUE);
                 break;
             }
             case "deverify": {
-                teacher.setVerified(false);
-                out.print("true");
+                teacher.setVerified(Boolean.FALSE);
+                out.print(Boolean.TRUE);
                 break;
             }
             default:
-                out.print("false");
+                out.print(Boolean.FALSE);
         }
     }
 

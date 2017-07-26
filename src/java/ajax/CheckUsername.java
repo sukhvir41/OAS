@@ -7,12 +7,12 @@ package ajax;
 
 import entities.User;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 
@@ -25,16 +25,20 @@ public class CheckUsername extends AjaxController {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        resp.setContentType("text/html");
 
         String username = req.getParameter("username");
-        if (username != null && !username.equals("")) {
 
-            List<User> users = session.createCriteria(User.class)
-                    .add(Restrictions.eq("username", username))
-                    .list();
-            out.print(users.isEmpty());
+        int resultCount = (int) session.createCriteria(User.class)
+                .add(Restrictions.eq("username", username))
+                .setProjection(Projections.sum("username"))
+                .uniqueResult();
+
+        if (resultCount <= 0) {
+            out.print(Boolean.TRUE);
+        } else {
+            out.print(Boolean.FALSE);
         }
-    }
 
+    }
 }
+

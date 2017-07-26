@@ -30,24 +30,24 @@ public class RegisterDepartment extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         resp.setContentType("text/json");
 
-      
-        Query query = session.createQuery("from Department");
-        List<Department> deparments = (List<Department>) query.list();
+        List<Department> deparments = (List) session.createCriteria(Department.class)
+                .list();
 
         JsonArray jsonDepartments = new JsonArray();
-        deparments.stream()
-                .forEach(e -> add(e, jsonDepartments));
+
+        deparments.forEach(department -> add(department, jsonDepartments));
 
         Gson gson = new Gson();
+
         out.print(gson.toJson(jsonDepartments));
 
     }
 
-    private void add(Department e, JsonArray jsonDepartments) {
-        JsonObject o = new JsonObject();
-        o.addProperty("id", e.getId());
-        o.addProperty("name", e.getName());
-        jsonDepartments.add(o);
+    private void add(Department theDepartment, JsonArray jsonDepartments) {
+        JsonObject department = new JsonObject();
+        department.addProperty("id", theDepartment.getId());
+        department.addProperty("name", theDepartment.getName());
+        jsonDepartments.add(department);
     }
 
 }

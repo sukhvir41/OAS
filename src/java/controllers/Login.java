@@ -105,7 +105,6 @@ public class Login extends Controller {
 
             resp.sendRedirect("/OAS/student");
 
-            return;
         } else if (loggedUser instanceof Teacher) {
             httpSession.setAttribute("accept", true);
             httpSession.setAttribute("extenedCookie", true);
@@ -116,7 +115,6 @@ public class Login extends Controller {
 
             resp.sendRedirect("/OAS/teacher");
 
-            return;
         } else if (loggedUser instanceof Admin) {
             httpSession.setAttribute("accept", true);
             httpSession.setAttribute("extenedCookie", true);
@@ -127,7 +125,6 @@ public class Login extends Controller {
 
             resp.sendRedirect("/OAS/admin");
 
-            return;
         } else {
             onError(req, resp);
         }

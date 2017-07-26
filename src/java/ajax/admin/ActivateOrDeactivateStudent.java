@@ -5,19 +5,14 @@
  */
 package ajax.admin;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import entities.Student;
-import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import utility.AjaxController;
-import utility.Utils;
 
 /**
  *
@@ -29,22 +24,22 @@ public class ActivateOrDeactivateStudent extends AjaxController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        int studentId = Integer.parseInt(req.getParameter("studentId"));
+        long studentId = Long.parseLong(req.getParameter("studentId"));
         String action = req.getParameter("action");
         Student student = (Student) session.get(Student.class, studentId);
         switch (action) {
             case "verify": {
-                student.setVerified(true);
-                out.print("true");
+                student.setVerified(Boolean.TRUE);
+                out.print(Boolean.TRUE);
                 break;
             }
             case "deverify": {
-                student.setVerified(false);
-                out.print("true");
+                student.setVerified(Boolean.FALSE);
+                out.print(Boolean.TRUE);
                 break;
             }
             default: {
-                out.print("false");
+                out.print(Boolean.FALSE);
             }
         }
 

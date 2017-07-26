@@ -27,35 +27,36 @@ import utility.AjaxController;
 @WebServlet(urlPatterns = "/ajax/getsubjects")
 public class RegisterSubjects extends AjaxController {
 
+    private final String ID = "id";
+    private final String NAME = "name";
+    private final String ELECTIVE = "elective";
+    private final String SUBJECTS = "subjects";
+    private final String MINSUBJECTS = "minimumsubjects";
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         resp.setContentType("text/json");
-        String courseId = req.getParameter("course");
-        String classId = req.getParameter("class");
-        if (courseId != null && !courseId.equals("") && classId != null && !classId.equals("")) {
-            int courseid = Integer.parseInt(courseId);
 
-            Course course = (Course) session.get(Course.class, courseid);
-            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, Integer.parseInt(classId));
-            JsonArray jsonSubjects = new JsonArray();
-            List<Subject> subjects = classRoom.getSubjects();
-            subjects.stream()
-                    .forEach(e -> add(e, jsonSubjects));
+        int classId = Integer.parseInt(req.getParameter("class"));
 
-            Gson gson = new Gson();
-            JsonObject subject = new JsonObject();
-            subject.add("subjects", jsonSubjects);
-            subject.addProperty("minimumsubjects", classRoom.getMinimumSubjects());
-            out.print(gson.toJson(subject));
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
+        JsonArray jsonSubjects = new JsonArray();
+        List<Subject> subjects = classRoom.getSubjects();
+        subjects.forEach(e -> add(e, jsonSubjects));
 
-        }
+        Gson gson = new Gson();
+        JsonObject subject = new JsonObject();
+        subject.add(SUBJECTS, jsonSubjects);
+        subject.addProperty(MINSUBJECTS, classRoom.getMinimumSubjects());
+        out.print(gson.toJson(subject));
+
     }
 
     private void add(Subject e, JsonArray jsonSubjects) {
         JsonObject o = new JsonObject();
-        o.addProperty("id", e.getId());
-        o.addProperty("name", e.getName());
-        o.addProperty("elective", e.isElective());
+        o.addProperty(ID, e.getId());
+        o.addProperty(NAME, e.getName());
+        o.addProperty(ELECTIVE, e.isElective());
         jsonSubjects.add(o);
     }
 

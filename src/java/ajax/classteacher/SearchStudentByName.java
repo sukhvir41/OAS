@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
+import static utility.Constants.*;
 
 /**
  *
@@ -51,14 +52,16 @@ public class SearchStudentByName extends AjaxController {
 
     private void add(Student student, JsonArray jsonStudents) {
         JsonObject studentJson = new JsonObject();
-        studentJson.addProperty("id", student.getId());
-        studentJson.addProperty("name", student.toString());
-        studentJson.addProperty("email", student.getEmail());
-        studentJson.addProperty("number", student.getNumber());
-        studentJson.addProperty("classroom", student.getClassRoom().getName() + " " + student.getClassRoom().getDivision());
-        studentJson.addProperty("rollnumber", student.getRollNumber());
-        studentJson.addProperty("verified", student.isVerified());
-        studentJson.add("subjects", addSubjects(student));
+
+        studentJson.addProperty(ID, student.getId());
+        studentJson.addProperty(NAME, student.toString());
+        studentJson.addProperty(EMAIL, student.getEmail());
+        studentJson.addProperty(NUMBER, student.getNumber());
+        studentJson.addProperty(CLASSROOM, student.getClassRoom().getName() + " " + student.getClassRoom().getDivision());
+        studentJson.addProperty(ROLLNUMBER, student.getRollNumber());
+        studentJson.addProperty(VERIFIED, student.isVerified());
+        studentJson.add(SUBJECTS, addSubjects(student));
+
         jsonStudents.add(studentJson);
     }
 

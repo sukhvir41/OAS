@@ -5,6 +5,7 @@
  */
 package ajax.classteacher;
 
+import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import entities.Student;
 import entities.Teacher;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import utility.AjaxController;
+import static utility.Constants.ERROR;
 
 /**
  *
@@ -35,21 +37,21 @@ public class ActivateOrDeactivateStudent extends AjaxController {
         if (teacher.getClassRoom().getStudents().contains(student)) {
             switch (action) {
                 case "verify": {
-                    student.setVerified(true);
-                    out.print(true);
+                    student.setVerified(Boolean.TRUE);
+                    out.print(Boolean.TRUE);
                     break;
                 }
                 case "deverify": {
-                    student.setVerified(false);
-                    out.print(true);
+                    student.setVerified(Boolean.FALSE);
+                    out.print(Boolean.TRUE);
                     break;
                 }
                 default: {
-                    out.print("error");
+                    out.print(ERROR);
                 }
             }
         } else {
-            out.print("error");
+            out.print(ERROR);
         }
     }
 

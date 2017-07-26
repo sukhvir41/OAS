@@ -11,19 +11,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Department;
 import entities.Teacher;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
-import utility.Utils;
+import static utility.Constants.*;
 
 /**
  *
@@ -31,34 +28,6 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/ajax/teachers/searchteacherbyname")
 public class SearchTeacherByName extends AjaxController {
-
-    private void add(Teacher teacher, JsonArray jsonTeachers) {
-        JsonObject teacherJson = new JsonObject();
-        teacherJson.addProperty("id", teacher.getId());
-        teacherJson.addProperty("name", teacher.toString());
-        teacherJson.addProperty("number", teacher.getNumber());
-        teacherJson.addProperty("email", teacher.getEmail());
-        teacherJson.addProperty("hod", teacher.isHod());
-        if (teacher.isHod()) {
-            teacherJson.add("hodof", addDepartment(teacher.getHodOf()));
-        } else {
-            teacherJson.addProperty("hodof", "not hod");
-        }
-        teacherJson.addProperty("classteacher", teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName());
-        teacherJson.add("departments", addDepartment(teacher.getDepartment()));
-        teacherJson.addProperty("verified", teacher.isVerified());
-        jsonTeachers.add(teacherJson);
-
-    }
-
-    private JsonElement addDepartment(List<Department> departments) {
-        JsonArray department = new JsonArray();
-        departments.stream()
-                .forEach(e -> {
-                    department.add(e.getName());
-                });
-        return department;
-    }
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
@@ -78,6 +47,34 @@ public class SearchTeacherByName extends AjaxController {
 
         out.print(gson.toJson(jsonTeachers));
 
+    }
+
+    private void add(Teacher teacher, JsonArray jsonTeachers) {
+        JsonObject teacherJson = new JsonObject();
+        teacherJson.addProperty(ID, teacher.getId());
+        teacherJson.addProperty(NAME, teacher.toString());
+        teacherJson.addProperty(NUMBER, teacher.getNumber());
+        teacherJson.addProperty(EMAIL, teacher.getEmail());
+        teacherJson.addProperty(HOD, teacher.isHod());
+        if (teacher.isHod()) {
+            teacherJson.add(HODOF, addDepartment(teacher.getHodOf()));
+        } else {
+            teacherJson.addProperty(HODOF, "not hod");
+        }
+        teacherJson.addProperty(CLASSTEACHER, teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName());
+        teacherJson.add(DEPARTMENTS, addDepartment(teacher.getDepartment()));
+        teacherJson.addProperty(VERIFIED, teacher.isVerified());
+        jsonTeachers.add(teacherJson);
+
+    }
+
+    private JsonElement addDepartment(List<Department> departments) {
+        JsonArray department = new JsonArray();
+        departments.stream()
+                .forEach(e -> {
+                    department.add(e.getName());
+                });
+        return department;
     }
 
 }

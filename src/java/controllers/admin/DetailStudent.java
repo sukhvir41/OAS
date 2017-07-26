@@ -29,7 +29,7 @@ public class DetailStudent extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        int studentId = Integer.valueOf(req.getParameter("studentId"));
+        long studentId = Integer.valueOf(req.getParameter("studentId"));
 
         Student student = (Student) session.get(Student.class, studentId);
 

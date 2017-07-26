@@ -28,7 +28,7 @@ public class ActivateStudent extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        int studentId = Integer.parseInt(req.getParameter("studentId"));
+        long studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
         student.setVerified(true);
         resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + student.getId());

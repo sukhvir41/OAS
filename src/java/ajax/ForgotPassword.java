@@ -48,19 +48,19 @@ public class ForgotPassword extends AjaxController {
                 session.update(user);
                 String url = "192.168.1.1/OAS/resetpassword?username=" + user.getUsername() + "&token=" + URLEncoder.encode(token, "UTF-8");
                 Utils.sendMail(email, "Password reset.  OAS system", body + url);
-                out.print("true");
+                out.print(Boolean.TRUE);
 
             } else {
-                out.print("false");
+                out.print(Boolean.FALSE);
             }
         } else {
-            out.print("false");
+            out.print(Boolean.FALSE);
         }
     }
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print(true);
+        resp.getWriter().print(Boolean.TRUE);
     }
 
 }

@@ -26,6 +26,9 @@ import utility.AjaxController;
 @WebServlet(urlPatterns = "/ajax/getsubjectsofclass")
 public class GetSubjectOfClassRoom extends AjaxController {
 
+    private final String ID = "id";
+    private final String NAME = "name";
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
@@ -44,8 +47,8 @@ public class GetSubjectOfClassRoom extends AjaxController {
 
     private void add(Subject e, JsonArray jsonSubjects) {
         JsonObject subejct = new JsonObject();
-        subejct.addProperty("id", e.getId());
-        subejct.addProperty("name", e.getName());
+        subejct.addProperty(ID, e.getId());
+        subejct.addProperty(NAME, e.getName());
         jsonSubjects.add(subejct);
     }
 }
