@@ -46,7 +46,7 @@ public class NewMacaddress {
     private static MacAddress sourceMacAddress;
     private static InetAddress sourceIpAddress;
     private static PcapNetworkInterface nif;
-    private static ReadWriteLock readwrite = new ReentrantReadWriteLock();
+    private static final ReadWriteLock readwrite = new ReentrantReadWriteLock();
     private static PacketListener listener;
 
     @Getter
@@ -79,8 +79,9 @@ public class NewMacaddress {
                 return false;
             }
         } catch (Exception e) {
-            readwrite.writeLock().unlock();
             return false;
+        } finally {
+            readwrite.writeLock().unlock();
         }
     }
 
@@ -247,7 +248,7 @@ class MyRunnable implements Runnable {
     MyRunnable(Packet packet, PacketListener listener) {
         this.packet = packet;
         this.listener = listener;
-        bool = new AtomicBoolean(Boolean.TRUE);
+        bool = new AtomicBoolean(true);
     }
 
     @Override
@@ -268,7 +269,7 @@ class MyRunnable implements Runnable {
         if (this.thread != null) {
             thread.stopLoop();
         } else {
-            bool.set(Boolean.FALSE);
+            bool.set(false);
         }
     }
 }

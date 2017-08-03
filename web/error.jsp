@@ -77,6 +77,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            <center>
+                                <a  class="" href="/OAS/logout">Log Out</a>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <hr class="tall">
                         </div>
                     </div>

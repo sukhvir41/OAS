@@ -118,5 +118,5 @@ public abstract class User implements Serializable, Visitable<User> {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
     }
 
-    // have to implement the visitor pattern
+    public abstract UserType getUserType();
 }

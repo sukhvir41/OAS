@@ -57,7 +57,7 @@ public class LogOut extends Controller {
             session.update(user);
         }
 
-        resp.sendRedirect("login");
+        resp.sendRedirect("/OAS/login");
 
     }
 

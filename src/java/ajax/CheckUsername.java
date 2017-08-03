@@ -34,9 +34,9 @@ public class CheckUsername extends AjaxController {
                 .uniqueResult();
 
         if (resultCount <= 0) {
-            out.print(Boolean.TRUE);
+            out.print(true);
         } else {
-            out.print(Boolean.FALSE);
+            out.print(false);
         }
 
     }

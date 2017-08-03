@@ -41,4 +41,9 @@ public class Admin extends User {
         return visitor.visit(this);
     }
 
+    @Override
+    public UserType getUserType() {
+        return UserType.Admin;
+    }
+
 }

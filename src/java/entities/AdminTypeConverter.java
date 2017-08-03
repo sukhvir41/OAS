@@ -6,13 +6,12 @@
 package entities;
 
 import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 
 /**
  *
  * @author sukhvir
  */
-@Converter(autoApply = true)
+
 public class AdminTypeConverter implements AttributeConverter<AdminType, String> {
 
     @Override

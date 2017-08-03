@@ -5,20 +5,27 @@
  */
 package entities;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 /**
  *
  * @author sukhvir
  */
 public enum UserType {
 
-    Admin("admin"),
-    Student("student"),
-    Teacher("teacher");
+    Admin("admin", "admin"),
+    Student("student", "student"),
+    Teacher("teacher", "teacher");
 
     final private String type;
 
-    private UserType(String type) {
+    @Getter(AccessLevel.PUBLIC)
+    final private String homeLink;
+
+    private UserType(String type, String theLink) {
         this.type = type;
+        this.homeLink = theLink;
     }
 
     @Override

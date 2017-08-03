@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -72,7 +72,14 @@
                     <div class="row">
                         <div class="col-md-12 center">
                             <h1 class="mb-sm small">Error</h1>
-                            <p class="lead">Your account is not verified yet!! <br>Contact adminstrative staff for further information.</p>
+                            <p class="lead">Your account is not verified yet!! <br>Contact administrative staff for further information.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <center>
+                                <a  class="" href="/OAS/logout">Log Out</a>
+                            </center>
                         </div>
                     </div>
                     <div class="row">

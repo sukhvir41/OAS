@@ -15,7 +15,7 @@ import javax.persistence.Converter;
  *
  * @author sukhvir
  */
-@Converter(autoApply = true)
+
 public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, Date> {
 
     @Override

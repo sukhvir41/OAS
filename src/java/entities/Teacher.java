@@ -140,4 +140,9 @@ public class Teacher extends User {
         return visitor.visit(this);
     }
 
+    @Override
+    public final UserType getUserType() {
+        return UserType.Teacher;
+    }
+
 }

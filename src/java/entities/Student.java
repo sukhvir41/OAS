@@ -138,4 +138,9 @@ public class Student extends User implements Comparable<Student> {
         return visitor.visit(this);
     }
 
+    @Override
+    public final UserType getUserType() {
+        return UserType.Student;
+    }
+
 }

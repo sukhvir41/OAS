@@ -6,9 +6,7 @@
 package ajax;
 
 import entities.User;
-import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,23 +22,23 @@ import utility.AjaxController;
  */
 @WebServlet(urlPatterns = "/ajax/checkemail")
 public class CheckEmail extends AjaxController {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        
+
         String email = req.getParameter("email");
-        
+
         int resultCount = (int) session.createCriteria(User.class)
                 .add(Restrictions.eq("email", email))
                 .setProjection(Projections.sum("email"))
                 .uniqueResult();
-        
+
         if (resultCount <= 0) {
-            out.print(Boolean.TRUE);
+            out.print(true);
         } else {
-            out.print(Boolean.FALSE);
+            out.print(false);
         }
-        
+
     }
-    
+
 }
