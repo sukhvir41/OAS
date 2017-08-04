@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 /**
  *
@@ -53,11 +54,13 @@ public class Subject implements Serializable {
     private Course course;
 
     @ManyToMany(mappedBy = "subjects")
+    @BatchSize(size = 20)
     @Getter
     @Setter
     private List<ClassRoom> classRooms = new ArrayList<>();
 
     @ManyToMany(mappedBy = "subjects")
+    @BatchSize(size = 40)
     @Getter
     @Setter
     List<Student> students = new ArrayList<>();

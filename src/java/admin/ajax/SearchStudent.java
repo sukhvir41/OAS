@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 import static utility.Constants.*;
 
@@ -43,6 +44,12 @@ public class SearchStudent extends AjaxController {
 
         if (subjectId.equals("all")) {
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
+
+            // have to check this has any performance issue
+//            session.createCriteria(Student.class)
+//                    .add(Restrictions.eq("classRoom", classRoom))
+//                    .add(Restrictions.eq("unaccounted", false));
+//                    
             if (filter.equals("all")) {
                 classRoom.getStudents()
                         .stream()

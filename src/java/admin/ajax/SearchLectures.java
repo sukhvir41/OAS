@@ -17,7 +17,6 @@ import entities.Teaching;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,13 +91,21 @@ public class SearchLectures extends AjaxController {
 //                .size();
 //        
         //todo: have to optimize this.
-        int totalStudents = theLecture.getTeaching()
-                .getClassRoom()
-                .getStudents()
-                .stream()
-                .filter(student -> student.getSubjects().contains(theLecture.getTeaching().getSubject()))
-                .collect(Collectors.toList())
-                .size();
+        Subject[] subjects = {theLecture.getTeaching().getSubject()};//experimental
+        
+        int totalStudents = (int) session.createCriteria(Student.class) //experimental 
+                .add(Restrictions.eq("classRoom", theLecture.getTeaching().getClassRoom()))
+                .add(Restrictions.in("subjects",subjects ))
+                .setProjection(Projections.rowCount())
+                .uniqueResult();
+        
+//        int totalStudents = theLecture.getTeaching()
+//                .getClassRoom()
+//                .getStudents()
+//                .stream()
+//                .filter(student -> student.getSubjects().contains(theLecture.getTeaching().getSubject()))
+//                .collect(Collectors.toList())
+//                .size();
 
         JsonObject lecture = new JsonObject();
         lecture.addProperty(ID, theLecture.getId());

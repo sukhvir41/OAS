@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 /**
  *
@@ -54,6 +55,7 @@ public class Teaching implements Serializable {
     private Subject subject;
 
     @OneToMany(mappedBy = "teaching")
+    @BatchSize(size = 40)
     @Getter
     @Setter
     List<Lecture> lectures = new ArrayList<>();

@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 /**
  *
@@ -58,6 +59,7 @@ public class Lecture implements Serializable{
     private boolean ended = false;
 
     @OneToMany(mappedBy = "lecture")
+    @BatchSize(size = 20)
     @Getter
     @Setter
     private List<Attendance> attendance = new ArrayList<Attendance>();

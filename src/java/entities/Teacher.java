@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 /**
  *
@@ -64,12 +65,14 @@ public class Teacher extends User {
     private ClassRoom classRoom;
 
     @OneToMany(mappedBy = "teacher")
+    @BatchSize(size = 20)
     @Getter
     @Setter
     private List<Teaching> teaches = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "teacher_department_link", joinColumns = @JoinColumn(name = "teacher_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))
+    @BatchSize(size = 2)
     @Getter
     @Setter
     private List<Department> department = new ArrayList<>();

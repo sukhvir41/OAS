@@ -43,39 +43,29 @@ public class SearchTeacher extends AjaxController {
         departmentId = req.getParameter("departmentId");
         verified = req.getParameter("verified");
         if (departmentId.equals("all")) {
+
             if (verified.equals("all")) {
                 teachers = session.createCriteria(Teacher.class)
                         .list();
             } else {
-                if (Boolean.parseBoolean(verified)) {
-                    teachers = session.createCriteria(Teacher.class)
-                            .add(Restrictions.eq("verified", true))
-                            .list();
-                } else {
-                    teachers = session.createCriteria(Teacher.class)
-                            .add(Restrictions.eq("verified", false))
-                            .list();
-                }
+                teachers = session.createCriteria(Teacher.class)
+                        .add(Restrictions.eq("verified", Boolean.parseBoolean(verified)))
+                        .list();
+
             }
         } else {
+            Department department = (Department) session.get(Department.class, Integer.parseInt(departmentId));
+
             if (verified.equals("all")) {
-                teachers = ((Department) session.get(Department.class, Integer.parseInt(departmentId)))
-                        .getTeachers();
+                teachers = department.getTeachers();
+
             } else {
-                teachers = ((Department) session.get(Department.class, Integer.parseInt(departmentId)))
-                        .getTeachers();
 
-                if (Boolean.parseBoolean(verified)) {
-                    teachers = teachers.stream()
-                            .filter(e -> e.isVerified() == true)
-                            .collect(Collectors.toList());
+                teachers = session.createCriteria(Teacher.class)
+                        .add(Restrictions.eq("department", department))
+                        .add(Restrictions.eq("verified", Boolean.parseBoolean(verified)))
+                        .list();
 
-                } else {
-                    teachers.stream()
-                            .filter(e -> e.isVerified() == false)
-                            .collect(Collectors.toList());
-
-                }
             }
         }
 
@@ -89,7 +79,7 @@ public class SearchTeacher extends AjaxController {
 
     private void add(Teacher teacher, JsonArray jsonTeachers) {
         JsonObject teacherJson = new JsonObject();
-        
+
         teacherJson.addProperty(ID, teacher.getId());
         teacherJson.addProperty(NAME, teacher.toString());
         teacherJson.addProperty(NUMBER, teacher.getNumber());
@@ -103,17 +93,17 @@ public class SearchTeacher extends AjaxController {
         teacherJson.addProperty(CLASSTEACHER, teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName());
         teacherJson.add(DEPARTMENTS, addDepartment(teacher.getDepartment()));
         teacherJson.addProperty(VERIFIED, teacher.isVerified());
-        
+
         jsonTeachers.add(teacherJson);
 
     }
 
     private JsonElement addDepartment(List<Department> departments) {
         JsonArray department = new JsonArray();
+
         departments.stream()
-                .forEach(e -> {
-                    department.add(e.getName());
-                });
+                .forEach(e -> department.add(e.getName()));
+
         return department;
     }
 

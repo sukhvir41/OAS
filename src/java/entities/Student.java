@@ -18,6 +18,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 /**
  *
@@ -66,11 +67,13 @@ public class Student extends User implements Comparable<Student> {
 
     @ManyToMany
     @JoinTable(name = "student_subject_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "sub_fid"))
+    @BatchSize(size = 20)
     @Getter
     @Setter
     private List<Subject> subjects = new ArrayList();
 
     @OneToMany(mappedBy = "student")
+    @BatchSize(size = 40)
     @Getter
     @Setter
     private List<Attendance> attendance = new ArrayList<>();

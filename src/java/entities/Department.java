@@ -18,10 +18,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 /**
  *
@@ -34,24 +34,31 @@ public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "d_id")
-    @Getter @Setter
+    @Getter
+    @Setter
     private int id;
 
     @Column(name = "d_name")
-    @Getter @Setter
+    @Getter
+    @Setter
     private String name;
 
     @ManyToOne
     @JoinTable(name = "department_hod_link", joinColumns = @JoinColumn(name = "department_fid"), inverseJoinColumns = @JoinColumn(name = "teacher_hod_fid"))
-    @Getter @Setter
+    @Getter
+    @Setter
     private Teacher hod;
 
     @OneToMany(mappedBy = "department")
-    @Getter @Setter
+    @BatchSize(size = 20)
+    @Getter
+    @Setter
     private List<Course> courses = new ArrayList();
 
     @ManyToMany(mappedBy = "department")
-    @Getter @Setter
+    @BatchSize(size = 20)
+    @Getter
+    @Setter
     private List<Teacher> teachers = new ArrayList();
 
     public Department() {
@@ -98,5 +105,4 @@ public class Department implements Serializable {
         return name;
     }
 
-    
 }

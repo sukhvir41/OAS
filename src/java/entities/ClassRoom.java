@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 /**
  *
@@ -63,11 +64,13 @@ public class ClassRoom implements Serializable {
     private Teacher classTeacher;
 
     @OneToMany(mappedBy = "classRoom")
+    @BatchSize(size = 40)
     @Getter @Setter
     private List<Student> students = new ArrayList();
 
     @ManyToMany
     @JoinTable(name = "subject_class_link", joinColumns = @JoinColumn(name = "class_fid"), inverseJoinColumns = @JoinColumn(name = "subject_fid"))
+    @BatchSize(size = 10)
     @Getter @Setter
     private List<Subject> subjects = new ArrayList<>();
 
