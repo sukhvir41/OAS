@@ -7,7 +7,6 @@ package utility;
 
 import entities.Lecture;
 import entities.User;
-import entities.UserType;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,7 +25,6 @@ import javax.mail.Message;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,7 +40,6 @@ public class Utils {
 
     private static SessionFactory sessionFactory = null;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
-    private static ApplicationStats stats = new ApplicationStats();
     private static ThreadLocal<Session> sessions = new ThreadLocal<>(); // stores session for each thread
 
     //creating Session factory on class load
@@ -264,7 +261,7 @@ public class Utils {
      * @param flags Match flags, a bit mask that may include null null null null
      * null null null null null null null null null null null null null null
      * null null null null null null null null null null null null null null
-     * null null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *
@@ -366,65 +363,6 @@ public class Utils {
      */
     public static String formatDateTime(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  kk:mm"));
-    }
-
-    /**
-     * increments the type off user logged in
-     *
-     * @param session - to know which user logged in
-     */
-    public static void userLoggedIn(HttpSession session) {
-        switch ((UserType) session.getAttribute("type")) {
-            case Student:
-                stats.incrementStudent();
-                break;
-            case Teacher:
-                stats.incrementTeacher();
-                break;
-            case Admin:
-                stats.incrementAdmin();
-                break;
-        }
-    }
-
-    /**
-     * decrements the type off user logged in
-     *
-     * @param session - to know which user logged in
-     */
-    public static void userLoggedOut(HttpSession session) {
-        switch ((UserType) session.getAttribute("type")) {
-            case Student:
-                stats.decrementStudent();
-                break;
-            case Teacher:
-                stats.decrementTeacher();
-                break;
-            case Admin:
-                stats.decrementAdmin();
-                break;
-        }
-    }
-
-    /**
-     *
-     */
-    public int getAdminCount() {
-        return stats.getAdmins().get();
-    }
-
-    /**
-     *
-     */
-    public int getStudentCount() {
-        return stats.getStudents().get();
-    }
-
-    /**
-     *
-     */
-    public int getTeacherCount() {
-        return stats.getTeachers().get();
     }
 
 }

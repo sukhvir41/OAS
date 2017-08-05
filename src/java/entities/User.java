@@ -40,7 +40,7 @@ public abstract class User implements Serializable, Visitable<User> {
     @Setter
     private long id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     @Getter
     @Setter
     private String username;
@@ -49,7 +49,7 @@ public abstract class User implements Serializable, Visitable<User> {
     @Getter(value = AccessLevel.PRIVATE)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @Getter
     @Setter
     private String email;

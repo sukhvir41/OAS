@@ -23,15 +23,16 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/admin/teachers/activateteacher")
 public class ActivateTeacher extends Controller {
-
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-
+        
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+        teacher.setUnaccounted(false);
         teacher.setVerified(true);
-
+        
         resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacher.getId());
     }
-
+    
 }

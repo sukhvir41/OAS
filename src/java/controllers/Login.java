@@ -27,14 +27,14 @@ import utility.Utils;
  */
 @WebServlet({"/login",})
 public class Login extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        
+
         if (httpSession.getAttribute("accept") != null) {
             if ((boolean) httpSession.getAttribute("accept")) {
                 UserType user = (UserType) httpSession.getAttribute("type");
-                
+
                 resp.sendRedirect("/OAS/" + user.getHomeLink());
 
 //                switch ((UserType) httpSession.getAttribute("type")) {
@@ -52,9 +52,9 @@ public class Login extends Controller {
         } else {
             checkCookies(req, resp, session, httpSession);
         }
-        
+
     }
-    
+
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -62,7 +62,7 @@ public class Login extends Controller {
         resp.setDateHeader("Expires", 0);
         req.getRequestDispatcher("/WEB-INF/login.jsp").include(req, resp);
     }
-    
+
     private void checkCookies(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession) throws Exception {
         Cookie id = null, token = null;
         for (Cookie cookie : req.getCookies()) {
@@ -75,33 +75,34 @@ public class Login extends Controller {
                     break;
             }
         }
-        
+
         User user = (User) session.createCriteria(User.class)
                 .add(Restrictions.eq("sessionId", id.getValue()))
                 .list()
                 .get(0);
-        
+
         if (user.matchSessionToken(token.getValue())) {
             forward(req, resp, user, session, httpSession);
         } else {
             onError(req, resp);
         }
-        
+
     }
-    
+
     private void forward(HttpServletRequest req, HttpServletResponse resp, User user, Session session, HttpSession httpSession) throws Exception {
-        
+
         User loggedUser = user.accept(DefaultVisitor.getInstance());
-        
+
         System.out.println(loggedUser.getClass().getName());   // print statement
 
         httpSession.setAttribute("accept", true);
         httpSession.setAttribute("extenedCookie", true);
         httpSession.setAttribute("type", loggedUser.getUserType());
         httpSession.setAttribute(loggedUser.getUserType().toString(), loggedUser);
-        
-        Utils.userLoggedIn(httpSession);
-        
+
+        loggedUser.getUserType()
+                .incrementCount();
+
         resp.sendRedirect("/OAS/" + loggedUser.getUserType().getHomeLink());
 
 //        if (loggedUser instanceof Student) {
@@ -139,5 +140,5 @@ public class Login extends Controller {
 //            onError(req, resp);
 //        }
     }
-    
+
 }

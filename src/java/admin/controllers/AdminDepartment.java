@@ -29,7 +29,8 @@ public class AdminDepartment extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        List<Department> depsrtments = session.createQuery("from Department").list();
+        List<Department> depsrtments = session.createQuery("from Department")
+                .list();
 
         req.setAttribute("departments", depsrtments);
 

@@ -5,7 +5,7 @@
  */
 package entities;
 
-import lombok.AccessLevel;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.Getter;
 
 /**
@@ -20,17 +20,32 @@ public enum UserType {
 
     final private String type;
 
-    @Getter(AccessLevel.PUBLIC)
+    private final AtomicInteger count;
+
+    @Getter
     final private String homeLink;
 
     private UserType(String type, String theLink) {
         this.type = type;
         this.homeLink = theLink;
+        this.count = new AtomicInteger();
     }
 
     @Override
     public String toString() {
         return type;
+    }
+
+    public void incrementCount() {
+        count.incrementAndGet();
+    }
+
+    public int getCount() {
+        return count.get();
+    }
+    
+    public void decrementCount(){
+        count.decrementAndGet();
     }
 
 }

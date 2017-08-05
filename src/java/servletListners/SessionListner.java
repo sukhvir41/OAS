@@ -16,15 +16,15 @@ import utility.Utils;
  */
 @WebListener
 public class SessionListner implements HttpSessionListener {
-    
+
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-       
+
     }
-    
+
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        Utils.userLoggedOut(se.getSession());
+
     }
-    
+
 }

@@ -6,15 +6,14 @@
 package controllers;
 
 import entities.User;
+import entities.UserType;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.Controller;
 import utility.Utils;
 
@@ -24,20 +23,14 @@ import utility.Utils;
  */
 @WebServlet(urlPatterns = "/logout")
 public class LogOut extends Controller {
-
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        Utils.userLoggedOut(httpSession);
-
-        httpSession.removeAttribute("accept");
-        httpSession.invalidate();
-
-        String sessionId = "";
-
+//        String sessionId = "";
         for (Cookie c : req.getCookies()) {
             if (c.getName().equals("sid")) {
-                sessionId = c.getValue();
+//                sessionId = c.getValue();
                 c.setMaxAge(0);
                 resp.addCookie(c);
             } else if (c.getName().equals("stoken")) {
@@ -45,20 +38,31 @@ public class LogOut extends Controller {
                 resp.addCookie(c);
             }
         }
+        
+        User loggedUser = (User) httpSession.getAttribute(((UserType) httpSession.getAttribute("type")).toString());
+        loggedUser.getUserType()
+                .decrementCount();
+        
+        User user = (User) session.get(User.class, loggedUser.getId());
+        
+        user.setSessionId(null);
+        user.setSessionToken("" + Utils.generateBase64());
+        
+        httpSession.removeAttribute("accept");
+        httpSession.invalidate();
 
-        List<User> users = session.createCriteria(User.class)
-                .add(Restrictions.eq("sessionId", sessionId))
-                .list();
-
-        if (users.size() > 0) {
-            User user = users.get(0);
-            user.setSessionId(null);
-            user.setSessionToken("" + Utils.generateBase64());
-            session.update(user);
-        }
-
+//        List<User> users = session.createCriteria(User.class)
+//                .add(Restrictions.eq("sessionId", sessionId))
+//                .list();
+//
+//        if (users.size() > 0) {
+//            User user = users.get(0);
+//            user.setSessionId(null);
+//            user.setSessionToken("" + Utils.generateBase64());
+//            session.update(user);
+//        }
         resp.sendRedirect("/OAS/login");
-
+        
     }
-
+    
 }

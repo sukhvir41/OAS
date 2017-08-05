@@ -36,10 +36,15 @@ public class AdminHome extends Controller {
         List<ClassRoom> classRooms;
         List<Subject> subjects;
 
-        departments = (List<Department>) session.createQuery("from Department").list();
-        courses = (List<Course>) session.createQuery("from Course").list();
-        classRooms = (List<ClassRoom>) session.createQuery("from ClassRoom").list();
-        subjects = (List<Subject>) session.createQuery("from Subject").list();
+        departments = (List<Department>) session.createQuery("from Department")
+                .list();
+        courses = (List<Course>) session.createQuery("from Course")
+                .list();
+        classRooms = (List<ClassRoom>) session.createQuery("from ClassRoom")
+                .list();
+        subjects = (List<Subject>) session.createQuery("from Subject")
+                .list();
+        
         req.setAttribute("departments", departments);
         req.setAttribute("courses", courses);
         req.setAttribute("classRooms", classRooms);

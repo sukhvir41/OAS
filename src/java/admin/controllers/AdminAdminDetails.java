@@ -25,6 +25,7 @@ public class AdminAdminDetails extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
+        //todo: should be getting a admin id over here
         String username = req.getParameter("username");
 
         Admin admin = (Admin) session.createCriteria(Admin.class)

@@ -7,7 +7,6 @@ package servletListners;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import utility.ApplicationStats;
 import utility.NewMacaddress;
 import utility.Utils;
 
@@ -19,15 +18,14 @@ public class ContextListner implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ApplicationStats stats = new ApplicationStats();
-        sce.getServletContext().setAttribute("stats", stats);
+       
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         Utils.closeSesssioFactory();
         NewMacaddress.stop();
-        System.out.println("server closed !!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        
     }
 
 }

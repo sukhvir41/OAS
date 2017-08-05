@@ -30,8 +30,10 @@ public class AdminClassRoom extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        List<ClassRoom> classRooms = (List<ClassRoom>) session.createCriteria(ClassRoom.class).list();
-        List<Course> courses = (List<Course>) session.createCriteria(Course.class).list();
+        List<ClassRoom> classRooms = (List<ClassRoom>) session.createCriteria(ClassRoom.class)
+                .list();
+        List<Course> courses = (List<Course>) session.createCriteria(Course.class)
+                .list();
         
         req.setAttribute("classrooms", classRooms);
         req.setAttribute("courses", courses);

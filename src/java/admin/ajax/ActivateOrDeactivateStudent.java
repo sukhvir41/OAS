@@ -20,13 +20,14 @@ import utility.AjaxController;
  */
 @WebServlet(urlPatterns = "/admin/ajax/students/activateordeactivatestudent")
 public class ActivateOrDeactivateStudent extends AjaxController {
-
+    
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-
+        
         long studentId = Long.parseLong(req.getParameter("studentId"));
         String action = req.getParameter("action");
         Student student = (Student) session.get(Student.class, studentId);
+        student.setUnaccounted(false);
         switch (action) {
             case "verify": {
                 student.setVerified(true);
@@ -42,7 +43,7 @@ public class ActivateOrDeactivateStudent extends AjaxController {
                 out.print(false);
             }
         }
-
+        
     }
-
+    
 }
