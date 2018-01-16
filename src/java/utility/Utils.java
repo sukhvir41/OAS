@@ -12,13 +12,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.mail.Message;
@@ -261,7 +265,7 @@ public class Utils {
      * @param flags Match flags, a bit mask that may include null null null null
      * null null null null null null null null null null null null null null
      * null null null null null null null null null null null null null null
-     * null null null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *
@@ -365,4 +369,54 @@ public class Utils {
         return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  kk:mm"));
     }
 
+    /**
+     * this methods is for doing stuff in database and handle losing connection
+     * and commit data and error handling
+     */
+    public static void doInDB(Consumer<Session> todo, Consumer<Exception> error) {
+        Session session = openSession();
+        session.beginTransaction();
+        try {
+            todo.accept(session);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            error.accept(e);
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public static <V> Optional<V> getFromDB(Function<Session, V> todo, Consumer<Exception> error) {
+        Session session = openSession();
+        session.beginTransaction();
+        V value = null;
+        try {
+            value = todo.apply(session);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            error.accept(e);
+        } finally {
+            session.close();
+        }
+        return Optional.of(value);
+    }
+    
+     public static <V> Optional<V> getFromDbDB(Function<Session, V> todo) throws Exception{
+        Session session = openSession();
+        session.beginTransaction();
+        V value = null;
+        try {
+            value = todo.apply(session);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            throw new Exception(e);
+        } finally {
+            session.close();
+        }
+        return Optional.of(value);
+    }
 }

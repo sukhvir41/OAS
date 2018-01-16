@@ -24,8 +24,6 @@ public class Testing {
 
     public static void main(String[] args) throws Exception {
 
-        // have to see server side events and async context and hoe does it work 
-        // use sigar for system info
     }
 
 }
