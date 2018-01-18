@@ -7,6 +7,7 @@ package AttendanceWebScokets;
 
 import entities.Lecture;
 import entities.Student;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,9 +25,14 @@ public class StudentWsInfo {
     @Setter
     private Lecture Lecutre;
 
-    public StudentWsInfo(Student student, Lecture Lecutre) {
+    @Getter
+    @Setter
+    private LocalDateTime time;
+
+    public StudentWsInfo(Student student, Lecture Lecutre, LocalDateTime theTime) {
         this.student = student;
         this.Lecutre = Lecutre;
+        time = theTime;
     }
 
 }

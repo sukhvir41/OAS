@@ -5,6 +5,7 @@
  */
 package utility;
 
+import com.google.gson.JsonObject;
 import entities.Lecture;
 import entities.UserType;
 import java.util.Calendar;
@@ -23,7 +24,9 @@ import org.hyperic.sigar.Sigar;
 public class Testing {
 
     public static void main(String[] args) throws Exception {
-
+            JsonObject obj = new JsonObject();
+            obj.addProperty("h", "asdsd");
+            System.out.println(obj.get("h").getAsString());
     }
 
 }

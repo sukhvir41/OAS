@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalUnit;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -265,7 +266,8 @@ public class Utils {
      * @param flags Match flags, a bit mask that may include null null null null
      * null null null null null null null null null null null null null null
      * null null null null null null null null null null null null null null
-     * null null null null null null null null null null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null null null null null null null null null
+     * null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *
@@ -403,8 +405,8 @@ public class Utils {
         }
         return Optional.of(value);
     }
-    
-     public static <V> Optional<V> getFromDbDB(Function<Session, V> todo) throws Exception{
+
+    public static <V> Optional<V> getFromDB(Function<Session, V> todo) {
         Session session = openSession();
         session.beginTransaction();
         V value = null;
@@ -413,10 +415,15 @@ public class Utils {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
-            throw new Exception(e);
+            //throw new Exception(e);
         } finally {
             session.close();
         }
         return Optional.of(value);
+    }
+
+    public static boolean checkTimeFactorStudentAttendance(LocalDateTime lectureTime, LocalDateTime studentTime) {
+        LocalDateTime offset = lectureTime.plusMinutes(15);
+        return studentTime.isBefore(offset);
     }
 }
