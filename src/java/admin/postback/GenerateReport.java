@@ -106,16 +106,35 @@ public class GenerateReport extends ReportPostBackController {
         cell.setCellValue("Name");
         int cellnumberHead = 2;
         int maxCellNumber = 0;
-        //getting the maximum number a subjects a stuent has
-        for (Student student : classRoom.getStudents()) {
-            if (student.getSubjects().size() > maxCellNumber) {
-                maxCellNumber = student.getSubjects().size();
-            }
-        }
 
+        //getting the maximum number a subjects a stuent has
+//        for (Student student : classRoom.getStudents()) {
+//            if (student.getSubjects().size() > maxCellNumber) {
+//                maxCellNumber = student.getSubjects().size();
+//            }
+//        }
+        maxCellNumber = classRoom.getStudents()
+                .stream()
+                .map(student -> student.getSubjects())
+                .mapToInt(subejcts -> subejcts.size())
+                .max()
+                .getAsInt();
+
+        /* moving to row three for the folling type of formatting
+           row 2 -----          Subejct
+           row 3 ----- name | attedened | total|
+        */
         row = spreadsheet.createRow(3);// new row
 
         XSSFCell cellTemp = row.createCell(1);
+        /*
+        this creates the folling format 
+   
+                Subejct
+        name | attedened | total|
+        
+        this happend maxCellNumber times
+        */
         for (int i = 0; i < maxCellNumber; i++) {
             spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, cellnumberHead, cellnumberHead + 2));
             row = cell.getRow();
@@ -155,6 +174,7 @@ public class GenerateReport extends ReportPostBackController {
         int rowNumber = 4;
         List<Student> students = classRoom.getStudents();
         Collections.sort(students);
+
         for (Student student : students) {
 
             int cellNumber = 0;

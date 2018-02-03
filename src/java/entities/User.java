@@ -31,7 +31,7 @@ import utility.Utils;
 @Table(name = "users", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"email", "username"})})
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User implements Serializable, Visitable<User> {
+public abstract class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

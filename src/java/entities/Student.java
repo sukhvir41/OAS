@@ -136,10 +136,7 @@ public class Student extends User implements Comparable<Student> {
         return this.getRollNumber() < student.getRollNumber() ? -1 : (this.getRollNumber() == student.getRollNumber()) ? 0 : 1;
     }
 
-    @Override
-    public User accept(Visitor visitor) {
-        return visitor.visit(this);
-    }
+    
 
     @Override
     public final UserType getUserType() {

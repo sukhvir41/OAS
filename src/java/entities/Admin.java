@@ -37,11 +37,6 @@ public class Admin extends User {
     }
 
     @Override
-    public User accept(Visitor visitor) {
-        return visitor.visit(this);
-    }
-
-    @Override
     public UserType getUserType() {
         return UserType.Admin;
     }

@@ -5,7 +5,6 @@
  */
 package controllers;
 
-import entities.DefaultVisitor;
 import entities.User;
 import entities.UserType;
 import java.io.IOException;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.Controller;
-import utility.Utils;
 
 /**
  *
@@ -91,19 +89,15 @@ public class Login extends Controller {
 
     private void forward(HttpServletRequest req, HttpServletResponse resp, User user, Session session, HttpSession httpSession) throws Exception {
 
-        User loggedUser = user.accept(DefaultVisitor.getInstance());
-
-        System.out.println(loggedUser.getClass().getName());   // print statement
-
         httpSession.setAttribute("accept", true);
         httpSession.setAttribute("extenedCookie", true);
-        httpSession.setAttribute("type", loggedUser.getUserType());
-        httpSession.setAttribute(loggedUser.getUserType().toString(), loggedUser);
+        httpSession.setAttribute("type", user.getUserType());
+        httpSession.setAttribute(user.getUserType().toString(), user);
 
-        loggedUser.getUserType()
+        user.getUserType()
                 .incrementCount();
 
-        resp.sendRedirect("/OAS/" + loggedUser.getUserType().getHomeLink());
+        resp.sendRedirect("/OAS/" + user.getUserType().getHomeLink());
 
 //        if (loggedUser instanceof Student) {
 //
