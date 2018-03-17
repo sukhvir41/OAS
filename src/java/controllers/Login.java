@@ -34,18 +34,6 @@ public class Login extends Controller {
                 UserType user = (UserType) httpSession.getAttribute("type");
 
                 resp.sendRedirect("/OAS/" + user.getHomeLink());
-
-//                switch ((UserType) httpSession.getAttribute("type")) {
-//                    case Student:
-//                        resp.sendRedirect("/OAS/student");
-//                        break;
-//                    case Teacher:
-//                        resp.sendRedirect("/OAS/teacher");
-//                        break;
-//                    case Admin:
-//                        resp.sendRedirect("/OAS/admin");
-//                        break;
-//                }
             }
         } else {
             checkCookies(req, resp, session, httpSession);
@@ -99,40 +87,6 @@ public class Login extends Controller {
 
         resp.sendRedirect("/OAS/" + user.getUserType().getHomeLink());
 
-//        if (loggedUser instanceof Student) {
-//
-//            httpSession.setAttribute("accept", true);
-//            httpSession.setAttribute("extenedCookie", true);
-//            httpSession.setAttribute("type", UserType.Student);
-//            httpSession.setAttribute("student", loggedUser);
-//
-//            Utils.userLoggedIn(httpSession);
-//
-//            resp.sendRedirect("/OAS/student");
-//
-//        } else if (loggedUser instanceof Teacher) {
-//            httpSession.setAttribute("accept", true);
-//            httpSession.setAttribute("extenedCookie", true);
-//            httpSession.setAttribute("type", UserType.Teacher);
-//            httpSession.setAttribute("teacher", loggedUser);
-//
-//            Utils.userLoggedIn(httpSession);
-//
-//            resp.sendRedirect("/OAS/teacher");
-//
-//        } else if (loggedUser instanceof Admin) {
-//            httpSession.setAttribute("accept", true);
-//            httpSession.setAttribute("extenedCookie", true);
-//            httpSession.setAttribute("type", UserType.Admin);
-//            httpSession.setAttribute("admin", loggedUser);
-//
-//            Utils.userLoggedIn(httpSession);
-//
-//            resp.sendRedirect("/OAS/admin");
-//
-//        } else {
-//            onError(req, resp);
-//        }
     }
 
 }

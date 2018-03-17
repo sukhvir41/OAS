@@ -7,121 +7,149 @@ package AttendanceWebScokets;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import entities.Attendance;
 import entities.Lecture;
 import entities.Student;
-import entities.Teaching;
-import java.time.LocalDateTime;
-import java.util.concurrent.CompletableFuture;
+import entities.UserType;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
+import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.Hibernate;
 import utility.Utils;
 
 /**
  *
  * @author development
  */
-@ServerEndpoint("/studentWebsocket")
+@ServerEndpoint(value = "", configurator = GlobalWsConfig.class) // have add the url
 public class StudentWebSocket {
 
-    private final Gson gson = new Gson();
+    private static final String MESSAGE = "message";
+    private static final String CONNECTION = "connection";
+    private static final Gson gson = new Gson();
+    private static final JsonObject genricErrorMessage = new JsonObject();
+
+    static {
+        genricErrorMessage.addProperty(MESSAGE, "Wamp! Wamp! Wamp! something went horribaly wrong or did it? ;-/)");
+    }
 
     @OnOpen
-    public void open(Session session) {
-        StudentSessions.addSession(session, null);
-        WsMessages.sendConnectionSucessfull(session);
+    public void open(Session session, EndpointConfig conf) {
+        try {
+
+            HttpSession httpSession = (HttpSession) conf.getUserProperties().get("session");
+            Student student = (Student) httpSession.getAttribute(UserType.Student.toString());
+
+            if ((boolean) httpSession.getAttribute("accept")) {
+
+                StudentWsSession stduentSession = new StudentWsSession(student, session);
+                StudentWsSession.addSession(session, stduentSession);
+
+                JsonObject json = new JsonObject();
+                json.addProperty(CONNECTION, true);
+
+                session.getAsyncRemote()
+                        .sendText(StudentMessage.CONNECTION.jsonToString(json));
+
+            } else {
+                throw new Exception();
+            }
+
+        } catch (Exception exception) {
+            sendGenericErrorMessage(session);
+        }
     }
 
     @OnClose
     public void close(Session session) {
-        WsMessages.sendConnectionTerminated(session);
-        StudentSessions.removeSession(session);
-
+        StudentWsSession.removeSession(session);
     }
 
     @OnError
     public void onError(Throwable error) {
-        // have to see what todo here
+        // have to cehcck what to do here
     }
 
+    /*
+        json format 
+        
+        {
+        lectureId : Ab123h 
+        }
+     */
     @OnMessage
-    public void handleMessage(String message, Session session) throws Exception {
-
-        CompletableFuture.supplyAsync(() -> gson.fromJson(message, StudentSentInfo.class))
-                .exceptionally((error) -> throwError())
-                .thenApply(sentInfo -> getStudentWsInfo(sentInfo))
-                .exceptionally(error -> throwErrorOnWs(session, "Something is wrong"))
-                .thenAccept(info -> markAttendance(info, session));
-    }
-
-    private void markAttendance(StudentWsInfo info, Session session) {
-        boolean marked = Utils.getFromDB((dbSession) -> checkAttendance(dbSession, info), error -> WsMessages.sendErrorMessage(session, "Error in marking attendace"))
-                .orElse(false);
-
-        JsonObject json = new JsonObject();
-        json.addProperty("lectureId", info.getLecutre().getId());
-        json.addProperty("attendance marked", marked);
-        if (marked) {
-            json.addProperty("message", "attendance marked");
-            //todo: send teacher notofication about student marked attendance
-        } else {
-            json.addProperty("message", "coudn't mark attendance");
-        }
-
-        WsMessages.sendAttendanceMessage(session, json);
-
-    }
-
-    private Boolean checkAttendance(org.hibernate.Session session, StudentWsInfo info) {
-        Student student = (Student) session.get(Student.class, info.getStudent().getId());
-        Lecture lecture = (Lecture) session.get(Lecture.class, info.getLecutre().getId());
-        Teaching lectureTeaching = lecture.getTeaching();
-
-        if (student.getClassRoom().equals(lectureTeaching.getClassRoom()) && student.getSubjects().contains(lectureTeaching.getSubject())) {
-            if (Utils.checkTimeFactorStudentAttendance(lecture.getDate(), info.getTime())) {
-                int count = (int) session.createCriteria(Attendance.class)
-                        .add(Restrictions.eq("lecture", lecture))
-                        .add(Restrictions.eq("student", student))
-                        .setProjection(Projections.rowCount())
-                        .uniqueResult();
-                return count <= 0;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    private <V> V throwError() {
-        throw new RuntimeException("error");
-    }
-
-    private StudentWsInfo getStudentWsInfo(StudentSentInfo info) {
+    public void handleMessage(String message, Session session) {
         try {
-            Student student = Utils.getFromDB(session -> (Student) session.get(Student.class, info.getStudentId()))
-                    .orElseThrow(NullPointerException::new);
 
-            Lecture lecture = Utils.getFromDB(session -> (Lecture) session.get(Lecture.class, info.getLectureId()))
-                    .orElseThrow(NullPointerException::new);
+            StudentWsSession stduentSession = StudentWsSession.getSession(session)
+                    .orElseThrow(Exception::new);
 
-            return new StudentWsInfo(student, lecture, LocalDateTime.now());
-        } catch (Exception e) {
-            return null;
+            StudentJsonMessage jsonMessage = gson.fromJson(message, StudentJsonMessage.class);
+
+            Lecture lecture = Utils.getFromDB(
+                    dbSession -> (Lecture) dbSession.get(Lecture.class, jsonMessage.lectureId))
+                    .orElseThrow(Exception::new);
+
+            stduentSession.setLecture(lecture);
+
+            if (isValidStudent(stduentSession)) {
+                
+                
+                
+            } else {
+                throw new Exception();
+            }
+
+        } catch (Exception exception) {
+            sendGenericErrorMessage(session);
         }
 
     }
 
-    private <V> V throwErrorOnWs(Session session, String message) {
-        WsMessages.sendErrorMessage(session, message);
+    private boolean isValidStudent(StudentWsSession studentSession) {
+        return Utils.getFromDB(dbSession -> checkingStudentValid(dbSession, studentSession))
+                .orElse(false);
+    }
 
-        throwError();
-        return null;
+    private boolean checkingStudentValid(org.hibernate.Session dbSession, StudentWsSession studentSession) {
+        Lecture lecture = (Lecture) dbSession.get(Lecture.class, studentSession.getLecture().getId());
+        Student student = (Student) dbSession.get(Student.class, studentSession.getStudent().getId());
+
+        return student.getClassRoom().getId() == lecture.getTeaching().getClassRoom().getId();
+    }
+
+    private void sendGenericErrorMessage(Session session) {
+        session.getAsyncRemote()
+                .sendText(StudentMessage.ERROR.jsonToString(genricErrorMessage));
+    }
+
+    private StudentWsSession getStudnet(Session sesssion, Map<Student, StudentWsSession> wsSessions) {
+        return wsSessions.entrySet()
+                .stream()
+                .map(entry -> entry.getValue())
+                .filter(studentSession -> studentSession.getWsSession().equals(sesssion))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private class StudentJsonMessage {
+
+        @Getter
+        @Setter
+
+        String lectureId;
+
+        public StudentJsonMessage(String lectureId) {
+            this.lectureId = lectureId;
+
+        }
+
     }
 }
