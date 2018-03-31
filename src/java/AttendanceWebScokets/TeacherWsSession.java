@@ -22,35 +22,34 @@ import lombok.Setter;
 public class TeacherWsSession {
 
     @Getter
-    @Setter
     private Teacher teacher;
 
     @Getter
-    @Setter
     private Session wsSession;
 
     @Getter
     @Setter
     private Lecture lecture;
 
-    public TeacherWsSession(Teacher teacher, Session wsSession, Lecture lecture) {
+    public TeacherWsSession(Teacher teacher, Session wsSession) {
         this.teacher = teacher;
         this.wsSession = wsSession;
-        this.lecture = lecture;
+
     }
 
-    private static final Map<Lecture, TeacherWsSession> sessions = new ConcurrentHashMap<>();
+    //==========================================================================
+    private static final Map<Session, TeacherWsSession> sessions = new ConcurrentHashMap<>();
 
-    public static void addSession(Lecture theLecture, TeacherWsSession theSession) {
-        sessions.put(theLecture, theSession);
+    public static void addSession(Session wsSession, TeacherWsSession theSession) {
+        sessions.put(wsSession, theSession);
     }
 
-    public static Optional<TeacherWsSession> getSession(Function<Map<Lecture, TeacherWsSession>, TeacherWsSession> get) {
+    public static Optional<TeacherWsSession> getSession(Function<Map<Session, TeacherWsSession>, TeacherWsSession> get) {
         return Optional.of(get.apply(sessions));
     }
 
-    public static void removeSession(Lecture theLecture) {
-        sessions.remove(theLecture);
+    public static void removeSession(Session wsSession) {
+        sessions.remove(wsSession);
     }
 
 }

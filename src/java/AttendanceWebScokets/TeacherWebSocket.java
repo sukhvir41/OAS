@@ -9,7 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import entities.Lecture;
 import entities.Teacher;
-import java.util.Map;
+import entities.UserType;
+import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -25,7 +26,7 @@ import utility.Utils;
  *
  * @author development
  */
-@ServerEndpoint(value = "", configurator = GlobalWsConfig.class)//set the url
+@ServerEndpoint(value = "/ljlkf", configurator = GlobalWsConfig.class)//set the url
 public class TeacherWebSocket {
 
     private static final Gson gson = new Gson();
@@ -39,22 +40,24 @@ public class TeacherWebSocket {
 
     @OnOpen
     public void open(Session session, EndpointConfig conf) {
+        try {
+            HttpSession httpSession = (HttpSession) conf.getUserProperties().get("session");
+            Teacher teacher = (Teacher) httpSession.getAttribute(UserType.Teacher.toString());
+
+            if ((boolean) httpSession.getAttribute("accept")) {
+                TeacherWsSession teacherSession = new TeacherWsSession(teacher, session);
+
+            }
+
+        } catch (Exception exception) {
+        }
 
     }
 
     @OnClose
     public void close(Session session) {
-        TeacherWsSession.getSession((map) -> searchTeacherWsSession(session, map))
-                .ifPresent(wsSession -> TeacherWsSession.removeSession(wsSession.getLecture()));
-    }
+        TeacherWsSession.removeSession(session);
 
-    private TeacherWsSession searchTeacherWsSession(Session session, Map<Lecture, TeacherWsSession> maps) {
-        return maps.entrySet()
-                .stream()
-                .map(entry -> entry.getValue())
-                .filter(teacherSession -> teacherSession.getWsSession().equals(session))
-                .findFirst()
-                .orElse(null);
     }
 
     @OnError
@@ -86,8 +89,8 @@ public class TeacherWebSocket {
                 Teacher teacher = Utils.getFromDB((dbSession) -> (Teacher) dbSession.get(Teacher.class, jsonMessage.teacherId))
                         .orElseThrow(Exception::new);
 
-                TeacherWsSession wsSession = new TeacherWsSession(teacher, session, lecture);
-                TeacherWsSession.addSession(lecture, wsSession);
+                TeacherWsSession wsSession = new TeacherWsSession(teacher, session);
+                TeacherWsSession.addSession(session, wsSession);
 
                 JsonObject json = new JsonObject();
                 json.addProperty(CONNECTION, true);

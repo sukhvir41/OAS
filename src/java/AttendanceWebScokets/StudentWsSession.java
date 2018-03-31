@@ -40,6 +40,9 @@ public class StudentWsSession {
         this.wsSession = wsSession;
     }
 
+    
+    //==========================================================================
+    
     private static final Map<Session, StudentWsSession> sessions = new ConcurrentHashMap<>();
 
     public static void addSession(Session wsSession, StudentWsSession theSession) {

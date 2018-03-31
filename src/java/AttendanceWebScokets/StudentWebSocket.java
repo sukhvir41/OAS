@@ -28,7 +28,7 @@ import utility.Utils;
  *
  * @author development
  */
-@ServerEndpoint(value = "", configurator = GlobalWsConfig.class) // have add the url
+@ServerEndpoint(value = "/jsjdvjsdavj", configurator = GlobalWsConfig.class) // have add the url
 public class StudentWebSocket {
 
     private static final String MESSAGE = "message";
