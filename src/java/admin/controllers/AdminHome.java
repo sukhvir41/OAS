@@ -9,11 +9,9 @@ import entities.ClassRoom;
 import entities.Course;
 import entities.Department;
 import entities.Subject;
-import utility.Utils;
-import java.io.IOException;
+import entities.UserType;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -31,25 +29,12 @@ public class AdminHome extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        List<Department> departments;
-        List<Course> courses;
-        List<ClassRoom> classRooms;
-        List<Subject> subjects;
-
-        departments = (List<Department>) session.createQuery("from Department")
-                .list();
-        courses = (List<Course>) session.createQuery("from Course")
-                .list();
-        classRooms = (List<ClassRoom>) session.createQuery("from ClassRoom")
-                .list();
-        subjects = (List<Subject>) session.createQuery("from Subject")
-                .list();
         
-        req.setAttribute("departments", departments);
-        req.setAttribute("courses", courses);
-        req.setAttribute("classRooms", classRooms);
-        req.setAttribute("subjects", subjects);
-
+        
+        req.setAttribute(UserType.Student.toString(), UserType.Student.getCount());
+        req.setAttribute(UserType.Admin.toString(), UserType.Admin.getCount());
+        req.setAttribute(UserType.Teacher.toString(), UserType.Student.getCount());
+        
         req.getRequestDispatcher("WEB-INF/admin/adminhome.jsp").include(req, resp);
         extendCookie(req, resp);
     }
