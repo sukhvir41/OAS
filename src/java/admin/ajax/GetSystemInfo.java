@@ -8,7 +8,9 @@ package admin.ajax;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import entities.UserType;
+import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,10 +26,11 @@ import utility.AjaxController;
 @WebServlet(urlPatterns = "/admin/ajax/systeminfo")
 public class GetSystemInfo extends AjaxController {
 
-    private static final String MEMORY_USED = "memory_used";
-    private static final String MEMORY_TOTAL = "memory_total";
-    private static final String MEMORY_USED_PERC = "memory_used_perc";
-    private static final String CPU_USED = "cpu_used";
+    private static final String MEMORY_USED = "memoryUsed";
+    private static final String MEMORY_TOTAL = "memoryTotal";
+    private static final String MEMORY_USED_PERC = "memoryUsedPerc";
+    private static final String CPU_USED_PERC = "cpuUsedPerc";
+
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
@@ -37,14 +40,22 @@ public class GetSystemInfo extends AjaxController {
         info.addProperty(MEMORY_USED, sigar.getMem().getActualUsed());
         info.addProperty(MEMORY_TOTAL, sigar.getMem().getTotal());
         info.addProperty(MEMORY_USED_PERC, sigar.getMem().getUsedPercent());
-        info.addProperty(CPU_USED, 1d - sigar.getCpuPerc().getIdle());
+        info.addProperty(CPU_USED_PERC, (1d - sigar.getCpuPerc().getIdle())*100);
         info.addProperty(UserType.Admin.toString(), UserType.Admin.getCount());
         info.addProperty(UserType.Student.toString(), UserType.Student.getCount());
         info.addProperty(UserType.Teacher.toString(), UserType.Teacher.getCount());
         sigar.close();
-
-        out.print(gson.toJson(info));
+        System.out.println(gson.toJson(info));
+        out.println(gson.toJson(info));
 
     }
+
+    @Override
+    public boolean showErrorLog() {
+        return true;
+    }
+
+   
+    
 
 }

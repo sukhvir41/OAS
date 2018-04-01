@@ -180,8 +180,8 @@
     <![endif]-->
     <!--[if gte IE 9]><!-->
 
-    <script src="/OAS/scripts/adminhome.js"></script>
-    <script src="/OAS/vendor/jquery/jquery.js"></script>
+
+
 
     <script src="vendor/jquery/jquery.js"></script>
     <!--<![endif]-->
@@ -224,6 +224,9 @@
 
     <!-- Theme Initialization Files -->
     <script src="js/theme.init.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" integrity="sha256-CfcERD4Ov4+lKbWbYqXD6aFM9M51gN4GUEtDhkWABMo=" crossorigin="anonymous"></script>
+    <script src="/OAS/scripts/adminhome.js"></script>
 
         <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
         <script type="text/javascript">

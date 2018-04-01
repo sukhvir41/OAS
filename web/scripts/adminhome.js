@@ -4,29 +4,95 @@ var memChartCtx;
 var cpuChartCtx;
 var memChart;
 var cpuChart;
-
+var labels = [];
+var memData = [];
+var cpuData = [];
 
 
 $(document).ready(function(){
 
-	memChart = $("#memChart");
-	cpuChart = $("#cpuChart");
+	memChartCtx = $("#memChart");
+	cpuChartCtx = $("#cpuChart");
 
-
+	drawChart();
+	setInterval(getData, 10000);
 
 });
 
 
 var drawChart = function(){
-	memChart = new Chart(memChartCtx,{
-		type:'line',
-		data: [1,2,3,43,5,4,2,]
+
+	memChart = new Chart(memChartCtx, {
+		type: 'line',
+		data: {
+			labels: labels,
+			datasets : [{label : "Memory", data : memData, lineTension : 0.5}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						suggestedMin: 0,
+						suggestedMax: 100
+					}
+				}]
+			}
+		}
 	});
 
+	cpuChart = new Chart(cpuChartCtx, {
+		type: 'line',
+		data: {
+			labels: labels,
+			datasets : [{label : "CPU", data : cpuData, lineTension : 0.5}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						suggestedMin: 0,
+						suggestedMax: 100
+					}
+				}]
+			}
+		}
+	});	
+}
 
 
-	new Chart(document.getElementById("chartjs-0"),
-		{"type":"line",
-		"data":{"labels":["January","February","March","April","May","June","July"],"datasets":[{"label":"My First Dataset","data":[65,59,80,81,56,55,40],"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},"options":{}});
+var addData = function(mem,cpu){
 
+	for (var i = 0; i < labels.length; i++) {
+		labels[i] = labels[i]-10;
+	}
+
+	labels.push(0);
+	memData.push(mem);
+	cpuData.push(cpu);
+
+	if (labels.length == 20) {
+		labels.shift(1);
+		memData.shift(1);
+		cpuData.shift(1);
+	}
+
+	memChart.update();
+	cpuChart.update();
+
+}
+
+var getData = function(){
+
+	$.ajax({
+			url: "/OAS/admin/ajax/systeminfo",
+			dataType: "json",
+			method: "post",
+			success: function (sysdata) {
+				addData(sysdata.memoryUsedPerc,sysdata.cpuUsedPerc);
+				
+			},
+			error: function (){
+				
+			}
+		});
 }

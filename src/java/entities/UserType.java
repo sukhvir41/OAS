@@ -28,7 +28,7 @@ public enum UserType {
     private UserType(String type, String theLink) {
         this.type = type;
         this.homeLink = theLink;
-        this.count = new AtomicInteger();
+        this.count = new AtomicInteger(0);
     }
 
     @Override
@@ -43,9 +43,11 @@ public enum UserType {
     public int getCount() {
         return count.get();
     }
-    
-    public void decrementCount(){
-        count.decrementAndGet();
+
+    public void decrementCount() {
+        if (count.get() != 0) {
+            count.decrementAndGet();
+        }
     }
 
 }
