@@ -1,19 +1,17 @@
 'use strict';
 
-var memChartCtx;
-var cpuChartCtx;
-var memChart;
-var cpuChart;
+var chartCtx;
+var resourceChart;
 var labels = [];
 var memData = [];
 var cpuData = [];
+var chartError;
 
 
 $(document).ready(function(){
 
-	memChartCtx = $("#memChart");
-	cpuChartCtx = $("#cpuChart");
-
+	chartCtx = $("#chart");
+	chartError = $("#chartError");
 	drawChart();
 	setInterval(getData, 10000);
 
@@ -22,11 +20,12 @@ $(document).ready(function(){
 
 var drawChart = function(){
 
-	memChart = new Chart(memChartCtx, {
+	resourceChart = new Chart(chartCtx, {
 		type: 'line',
 		data: {
 			labels: labels,
-			datasets : [{label : "Memory", data : memData, lineTension : 0.5}]
+			datasets : [{label : "Memory", data : memData, lineTension : 0,borderColor: '#b34ad6',backgroundColor: '#b34ad6',fill: false},
+			{label : "CPU", data : cpuData, lineTension : 0,borderColor: '#14c4ff',backgroundColor: '#14c4ff', fill:false}]
 		},
 		options: {
 			scales: {
@@ -40,23 +39,6 @@ var drawChart = function(){
 		}
 	});
 
-	cpuChart = new Chart(cpuChartCtx, {
-		type: 'line',
-		data: {
-			labels: labels,
-			datasets : [{label : "CPU", data : cpuData, lineTension : 0.5}]
-		},
-		options: {
-			scales: {
-				yAxes: [{
-					ticks: {
-						suggestedMin: 0,
-						suggestedMax: 100
-					}
-				}]
-			}
-		}
-	});	
 }
 
 
@@ -71,28 +53,26 @@ var addData = function(mem,cpu){
 	cpuData.push(cpu);
 
 	if (labels.length == 20) {
-		labels.shift(1);
-		memData.shift(1);
-		cpuData.shift(1);
+		labels.shift();
+		memData.shift();
+		cpuData.shift();
 	}
 
-	memChart.update();
-	cpuChart.update();
-
+	resourceChart.update();
 }
 
 var getData = function(){
 
 	$.ajax({
-			url: "/OAS/admin/ajax/systeminfo",
-			dataType: "json",
-			method: "post",
-			success: function (sysdata) {
-				addData(sysdata.memoryUsedPerc,sysdata.cpuUsedPerc);
-				
-			},
-			error: function (){
-				
-			}
-		});
+		url: "/OAS/admin/ajax/systeminfo",
+		dataType: "json",
+		method: "post",
+		success: function (sysdata) {
+			addData(sysdata.memoryUsedPerc,sysdata.cpuUsedPerc);
+			chartError.hide();
+		},
+		error: function (){
+			chartError.show();
+		}
+	});
 }

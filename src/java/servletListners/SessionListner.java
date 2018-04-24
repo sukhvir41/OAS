@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import utility.Utils;
 
 /**
  *
@@ -28,12 +27,17 @@ public class SessionListner implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
 
-        HttpSession session = se.getSession();
-        if ((boolean) session.getAttribute("accept")) {
-            User loggedUser = (User) session.getAttribute(((UserType) session.getAttribute("type")).toString());
-            System.out.println(loggedUser.getUserType().getCount());
-            loggedUser.getUserType()
-                    .decrementCount();
+        try {
+            HttpSession session = se.getSession();
+            if ((boolean) session.getAttribute("accept")) {
+                User loggedUser = (User) session.getAttribute(((UserType) session.getAttribute("type")).toString());
+                System.out.println(loggedUser.getUserType().getCount());
+                loggedUser.getUserType()
+                        .decrementCount();
+            }
+
+        } catch (Exception exception) {
+            System.out.println("decrement error session context");
         }
 
     }

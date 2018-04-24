@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -84,16 +84,42 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="/OAS/admin/networksettingspost" method="Post">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-warning">
+                                                <strong>Warning!</strong> Once Mac and Ip has been set it cant be chnaged. You have been warned.
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row">
+                                        <div class="col-md-12">
+                                        <c:choose>
+                                            <c:when test="${requestScope.handlerReady}">
+                                                <div class="alert alert-success">
+                                                    <strong>Well Admin!</strong> Good job on network settings
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="alert alert-danger">
+                                                    <strong>Hey Admin!</strong> set the network settings. Just look below this message
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div>
 
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label>IP Address of the Server PC</label>
-                                                <input class="form-control input-lg" type="text" name="ipaddress" id="ipaddress" placeholder="123.123.123.123" required="true" value="${requestScope.ipaddress}">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label>IP Address of the Server PC</label>
+                                            <input class="form-control input-lg" type="text" name="ipaddress" id="ipaddress" placeholder="123.123.123.123" required="true" value="${requestScope.ipaddress}">
                                         </div>
                                     </div>
                                 </div>
+
+
+
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
@@ -102,17 +128,11 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
+
                                 <c:choose>
-                                    <c:when test="${param.error =='false'}">
-                                        <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="alert alert-success">
-                                                    <strong>Success!</strong> IP address and MAC address updated
-                                                </div>
-                                            </div> 
-                                        </div> 
-                                    </c:when>
                                     <c:when test="${param.error =='true'}">
                                         <div class="row">
                                             <div class="col-md-4 ">
@@ -127,6 +147,8 @@
                                     </c:otherwise>
 
                                 </c:choose>
+
+
 
                                 <div class="row">
                                     <div class="col-md-12">

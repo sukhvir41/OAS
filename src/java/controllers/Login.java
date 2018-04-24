@@ -32,7 +32,6 @@ public class Login extends Controller {
         if (httpSession.getAttribute("accept") != null) {
             if ((boolean) httpSession.getAttribute("accept")) {
                 UserType user = (UserType) httpSession.getAttribute("type");
-
                 resp.sendRedirect("/OAS/" + user.getHomeLink());
             }
         } else {

@@ -51,16 +51,6 @@ public class LogOut extends Controller {
         httpSession.removeAttribute("accept");
         httpSession.invalidate();
 
-//        List<User> users = session.createCriteria(User.class)
-//                .add(Restrictions.eq("sessionId", sessionId))
-//                .list();
-//
-//        if (users.size() > 0) {
-//            User user = users.get(0);
-//            user.setSessionId(null);
-//            user.setSessionToken("" + Utils.generateBase64());
-//            session.update(user);
-//        }
         resp.sendRedirect("/OAS/login");
         
     }

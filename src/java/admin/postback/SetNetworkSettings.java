@@ -5,13 +5,15 @@
  */
 package admin.postback;
 
+import AttendanceServices.MacHandlers;
+import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import utility.NewMacaddress;
 import utility.PostBackController;
 
 /**
@@ -26,14 +28,16 @@ public class SetNetworkSettings extends PostBackController {
 
         String macAddress = req.getParameter("macaddress");
         String ipaddress = req.getParameter("ipaddress");
-        System.out.println(macAddress + "  " + ipaddress);
-//            if (MacAddressUtil.setAddresses(macAddress, ipaddress)) {
-        if (NewMacaddress.setAddresses(macAddress, ipaddress)) {
-            resp.sendRedirect("/OAS/admin/networksettings?error=" + false);
-        } else {
-            resp.sendRedirect("/OAS/admin/networksettings?error=" + true);
-        }
 
+        MacHandlers.setHandles(ipaddress, macAddress);
+        resp.sendRedirect("/OAS/admin/networksettings");
+
+//       
+    }
+
+    @Override
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/OAS/admin/networksettings?error=" + true);
     }
 
 }

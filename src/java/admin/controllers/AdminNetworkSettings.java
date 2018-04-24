@@ -5,18 +5,14 @@
  */
 package admin.controllers;
 
-import java.io.IOException;
+import AttendanceServices.MacHandlers;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.MacAddressUtil;
-import utility.NewMacaddress;
 
 /**
  *
@@ -27,8 +23,9 @@ public class AdminNetworkSettings extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        req.setAttribute("macaddress", NewMacaddress.getStringSourceMacAddress());
-        req.setAttribute("ipaddress", NewMacaddress.getStringSourceIpAddress());
+        req.setAttribute("macaddress", MacHandlers.getMachineMac());
+        req.setAttribute("ipaddress", MacHandlers.getMachineIp());
+        req.setAttribute("handlerReady", MacHandlers.isHandlerReady());
         req.getRequestDispatcher("/WEB-INF/admin/adminnetworksettings.jsp").include(req, resp);
     }
 

@@ -315,9 +315,7 @@ public class Utils {
      *
      * @return the session id for the cookie
      */
-    public static String generateSessionId() {
-        Session session = Utils.openSession();
-        session.beginTransaction();
+    public static String generateSessionId(Session session) {
         String id;
         List<User> users;
         Query query = session.createQuery("from User where sessionId = :id");
@@ -326,8 +324,6 @@ public class Utils {
             query.setString("id", id);
             users = query.list();
         } while (!users.isEmpty());
-        session.getTransaction().commit();
-        Utils.closeSession();
         return id;
     }
 

@@ -5,13 +5,9 @@
  */
 package admin.controllers;
 
-import entities.ClassRoom;
-import entities.Course;
-import entities.Department;
-import entities.Subject;
+import AttendanceServices.MacHandlers;
 import entities.UserType;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +25,14 @@ public class AdminHome extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        
-        
+
         req.setAttribute(UserType.Student.toString(), UserType.Student.getCount());
         req.setAttribute(UserType.Admin.toString(), UserType.Admin.getCount());
         req.setAttribute(UserType.Teacher.toString(), UserType.Student.getCount());
-        
+
+        req.setAttribute("handlerReady", MacHandlers.isHandlerReady());
+        req.setAttribute("details", MacHandlers.getDetails());
+
         req.getRequestDispatcher("WEB-INF/admin/adminhome.jsp").include(req, resp);
         extendCookie(req, resp);
     }
@@ -64,6 +62,7 @@ public class AdminHome extends Controller {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("error in extend cookie");
         }
     }
