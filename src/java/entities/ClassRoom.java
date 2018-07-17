@@ -36,7 +36,7 @@ public class ClassRoom implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_id")
     @Getter @Setter
-    private int id;
+    private long id;
 
     @Column(name = "c_name")
     @Getter @Setter

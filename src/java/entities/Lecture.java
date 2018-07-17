@@ -58,7 +58,7 @@ public class Lecture implements Serializable{
     @Setter
     private boolean ended = false;
 
-    @OneToMany(mappedBy = "lecture")
+    @OneToMany(mappedBy = "id.lecture")
     @BatchSize(size = 20)
     @Getter
     @Setter

@@ -11,7 +11,7 @@ public abstract class PostBackController extends Controller{
 
     @Override
     final protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       resp.sendError(403);
+       resp.sendError(404);
     }
 
     

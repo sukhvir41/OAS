@@ -34,7 +34,7 @@ public class Teaching implements Serializable {
     @Column(name = "tcs_id")
     @Getter
     @Setter
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "teacher_fid")

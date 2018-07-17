@@ -5,6 +5,7 @@
  */
 package AttendanceWebScokets;
 
+import WebSocketSettings.GlobalWsConfig;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import entities.Lecture;

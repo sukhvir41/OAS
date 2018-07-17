@@ -35,7 +35,7 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "co_id")
     @Getter @Setter
-    private int id;
+    private long id;
 
     @Column(name = "co_name")
     @Getter @Setter

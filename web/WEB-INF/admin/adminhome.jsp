@@ -149,7 +149,7 @@
                                     <c:choose>
                                         <c:when test="${requestScope.handlerReady}">
                                             <div class="alert alert-success">
-                                                <strong>Well Admin!</strong> Good job on network settings. Details ${requestScope.details}
+                                                <strong>Well Done Admin!</strong> Good job on network settings. Details ${requestScope.details}
                                             </div>
                                         </c:when>
                                         <c:otherwise>

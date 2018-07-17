@@ -6,6 +6,7 @@
 package admin.postback;
 
 import entities.Admin;
+import entities.UserType;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,20 +29,19 @@ public class ChnagePassword extends PostBackController {
         String newPassword = req.getParameter("newpassword");
         String renewPassword = req.getParameter("renewpassword");
 
-        Admin admin = (Admin) req.getSession().getAttribute("admin");
+        Admin admin = (Admin) httpSession.getAttribute(UserType.Admin.toString());
+        admin = (Admin) session.get(Admin.class, admin.getId());
         if (admin.checkPassword(oldPassword)) {
             if (newPassword.length() >= 8 && newPassword.length() <= 40 && newPassword.equals(renewPassword)) {
                 admin.setPassword(newPassword);
                 session.update(admin);
 
-                req.getSession().setAttribute("admin", admin);
-                resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=false");
+                req.getSession().setAttribute(UserType.Admin.toString(), admin);
+                resp.sendRedirect("/OAS/admin/myaccount/changepassword?success=true");
             } else {
-
                 resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=true");
             }
         } else {
-
             resp.sendRedirect("/OAS/admin/myaccount/changepassword?error=true");
         }
 

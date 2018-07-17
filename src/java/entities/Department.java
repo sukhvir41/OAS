@@ -36,7 +36,7 @@ public class Department implements Serializable {
     @Column(name = "d_id")
     @Getter
     @Setter
-    private int id;
+    private long id;
 
     @Column(name = "d_name")
     @Getter

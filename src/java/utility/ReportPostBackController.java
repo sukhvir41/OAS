@@ -43,16 +43,16 @@ public abstract class ReportPostBackController extends HttpServlet {
 
             process(req, resp, session, req.getSession(), out);
             session.getTransaction().commit();
-            Utils.closeSession();
 
         } catch (Exception e) {
 
             session.getTransaction().rollback();
-            Utils.closeSession();
+
             //e.printStackTrace();
             resp.sendError(500);
 
         } finally {
+            session.close();
             out.close();
         }
     }

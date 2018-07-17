@@ -33,7 +33,7 @@ public class HodHome extends Controller {
 
         String departmentString = req.getParameter("departmentId");
 
-        int departmentId;
+        long departmentId;
         if (departmentString != null) {
             departmentId = Integer.valueOf(departmentString);
         } else {

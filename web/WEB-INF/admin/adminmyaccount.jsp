@@ -89,14 +89,14 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Username : <c:out value="${sessionScope.admin.username}"/></h2>
+                                        <h4>Username : <c:out value="${requestScope.admin.username}"/></h4>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <dl>
                                                 <dt>Email Address</dt>
-                                                <dd>${sessionScope.admin.email}</dd>
+                                                <dd>${requestScope.admin.email}</dd>
                                                 <dt>Admin Type</dt>
-                                                <dd>${sessionScope.admin.adminType}</dd>
+                                                <dd>${requestScope.admin.type}</dd>
                                                 <dt><a href="/OAS/admin/myaccount/changepassword">Change Password</a></dt>
                                             </dl>
 

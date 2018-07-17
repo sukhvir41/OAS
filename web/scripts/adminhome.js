@@ -6,17 +6,69 @@ var labels = [];
 var memData = [];
 var cpuData = [];
 var chartError;
+var wsSocket;
+var adminCount;
+var teacherCount;
+var studentCount;
 
 
 $(document).ready(function(){
 
 	chartCtx = $("#chart");
 	chartError = $("#chartError");
+	adminCount = $("#adminCount")
+	studentCount = $("#studentCount");
+	teacherCount = $("#teacherCount");
+	chartError.show();
+	wsSocket = new WebSocket(getURL());
+	wsSocket.onopen = wsOnOpen();
+	wsSocket.onmessage = function(event){ wsOnMessage(event)}
 	drawChart();
-	setInterval(getData, 10000);
+	
 
 });
 
+
+
+var wsOnMessage = function(event){	
+	try{
+		var rawData = JSON.parse(event.data);
+		if (rawData.type =="data") {
+			var sysdata = rawData.message;
+			addData(sysdata.memoryUsedPerc,sysdata.cpuUsedPerc);
+			adminCount.text( sysdata.admin);
+			studentCount.text(sysdata.student);
+			teacherCount.text(sysdata.teacher);
+		}else{
+			chartError.show();
+		}
+	}catch(err){
+		console.log(err);
+		chartError.show();
+	}
+
+
+}
+
+var wsOnOpen = function(){
+	chartError.hide();
+}
+
+
+
+
+
+var getURL = function (){
+	var loc = window.location, new_uri;
+	if (loc.protocol === "https:") {
+		new_uri = "wss:";
+	} else {
+		new_uri = "ws:";
+	}
+	new_uri += "//" + loc.host;
+	new_uri += loc.pathname + "/ws/systemInfo";
+	return new_uri;
+}
 
 var drawChart = function(){
 
@@ -45,14 +97,14 @@ var drawChart = function(){
 var addData = function(mem,cpu){
 
 	for (var i = 0; i < labels.length; i++) {
-		labels[i] = labels[i]-10;
+		labels[i] = labels[i]-15;
 	}
 
 	labels.push(0);
 	memData.push(mem);
 	cpuData.push(cpu);
 
-	if (labels.length == 20) {
+	if (labels.length === 21) {
 		labels.shift();
 		memData.shift();
 		cpuData.shift();
@@ -76,3 +128,5 @@ var getData = function(){
 		}
 	});
 }
+
+

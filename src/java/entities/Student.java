@@ -72,7 +72,7 @@ public class Student extends User implements Comparable<Student> {
     @Setter
     private List<Subject> subjects = new ArrayList();
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "id.student")
     @BatchSize(size = 40)
     @Getter
     @Setter

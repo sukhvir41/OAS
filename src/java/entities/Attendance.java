@@ -7,13 +7,10 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,35 +21,42 @@ import lombok.Setter;
 @Entity
 @Table(name = "attendance")
 public class Attendance implements Serializable {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "attendance_id", nullable = false)
+//    @Getter @Setter
+//    private long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "attendance_id")
-    @Getter @Setter
-    private long id;
+    @EmbeddedId
+    @Getter
+    @Setter(AccessLevel.PROTECTED)
+    private AttendanceId id;
 
     @Column(name = "marked_ny_teacher")
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean markedByTeacher = false;
 
     @Column(name = "attended")
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean attended;
 
     @Column(name = "leave")
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean leave = false;
 
-    @ManyToOne
-    @JoinColumn(name = "lecture_fid")
-    @Getter @Setter
-    private Lecture lecture;
-
-    @ManyToOne
-    @JoinColumn(name = "student_fid")
-    @Getter @Setter
-    private Student student;
-
+//    @ManyToOne
+//    @JoinColumn(name = "lecture_fid")
+//    @Getter @Setter
+//    private Lecture lecture;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "student_fid")
+//    @Getter @Setter
+//    private Student student;
     public Attendance() {
     }
 
@@ -90,5 +94,21 @@ public class Attendance implements Serializable {
      */
     public final void addLecture(Lecture lecture) {
         lecture.addAttendance(this);
+    }
+
+    protected void setLecture(Lecture theLecture) {
+        this.id.setLecture(theLecture);
+    }
+
+    protected void setStudent(Student theStudent) {
+        this.id.setStudent(theStudent);
+    }
+
+    public Lecture getLecture() {
+        return this.id.getLecture();
+    }
+
+    public Student getStudent() {
+        return this.id.getStudent();
     }
 }

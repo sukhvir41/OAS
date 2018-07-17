@@ -13,25 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import utility.Controller;
 import utility.PostBackController;
 
 /**
  *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/admins/deleteadmin")
-public class DeleteAdmin extends PostBackController {
+@WebServlet(urlPatterns = "/admin/admins/deleteadminpost")
+public class DeleteAdmin extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        String username = req.getParameter("username");
+       
+        Long adminId = Long.parseLong(req.getParameter("adminId"));
 
-        Admin admin = (Admin) session.createCriteria(Admin.class)
-                .add(Restrictions.eq("username", username))
-                .list()
-                .get(0);
+        Admin admin = (Admin) session.get(Admin.class, adminId);
 
         if (admin.getType().equals(AdminType.Sub)) {
             session.delete(admin);
@@ -39,6 +37,11 @@ public class DeleteAdmin extends PostBackController {
 
         resp.sendRedirect("/OAS/admin/admins");
 
+    }
+
+    @Override
+    public boolean showErrorLog() {
+        return true;
     }
 
 }

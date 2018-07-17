@@ -43,8 +43,6 @@ public class Utils {
 
     private static SessionFactory sessionFactory = null;
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/=";
-    private static ThreadLocal<Session> sessions = new ThreadLocal<>(); // stores session for each thread
-    
 
     //creating Session factory on class load
     static {
@@ -70,19 +68,10 @@ public class Utils {
             throw new NullPointerException();
         }
 
-        if (sessions.get() == null) {
-            Session session = sessionFactory.openSession();
-            sessions.set(session);
-        }
-        return sessions.get();
+        return sessionFactory.openSession();
     }
 
-    public static void closeSession() {
-        if (sessions.get() != null) {
-            sessions.get().close();
-            sessions.remove();
-        }
-    }
+    
 
     public static void closeSesssioFactory() {
         if (sessionFactory != null) {
@@ -266,7 +255,7 @@ public class Utils {
      * null null null null null null null null null null null null null null
      * null null null null null null null null null null null null null null
      * null null null null null null null null null null null null null null
-     * null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
+     * null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
      *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
      *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
      *
@@ -418,8 +407,8 @@ public class Utils {
     }
 
     /**
-     * this method check id the student is eligible to mark attendance i.e. if he
-     * is within 15 minutes
+     * this method check id the student is eligible to mark attendance i.e. if
+     * he is within 15 minutes
      */
     public static boolean checkTimeFactorStudentAttendance(LocalDateTime lectureTime, LocalDateTime studentTime) {
         LocalDateTime offset = lectureTime.plusMinutes(15);

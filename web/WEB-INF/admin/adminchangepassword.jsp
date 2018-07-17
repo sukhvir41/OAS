@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -49,12 +49,12 @@
 
         <!--[if IE]>
                 <link rel="stylesheet" href="css/ie.css">
-                <![endif]-->
+            <![endif]-->
 
         <!--[if lte IE 8]>
                 <script src="vendor/respond/respond.js"></script>
                 <script src="vendor/excanvas/excanvas.js"></script>
-                <![endif]-->
+            <![endif]-->
 
     </head>
     <body>
@@ -84,7 +84,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/OAS/admin/myaccount/changepasswordpost" method="Post">
+                            <form action="/OAS/admin/myaccount/changepasswordpost" method="Post" onsubmit="return isInputValid()">
                                 <h4>Username : ${requestScope.username}</h4>
                                 <div class="row">
 
@@ -111,27 +111,55 @@
                                         </div>
                                     </div>
                                 </div>
-                                <c:choose>
-                                    <c:when test="${param.error =='false'}">
-                                        <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="alert alert-success" id="loginError">
-                                                    <strong>Successful!</strong> Password Updated 
-                                                </div>
-                                            </div> 
+
+                                <c:if  test="${param.error}">
+                                    <div class="row">
+                                        <div class="col-md-4 ">
+                                            <div class="alert alert-danger">
+                                                <strong>Error!</strong> Old password is wrong or new password does not match. How hard can it be?
+                                            </div>
                                         </div> 
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="alert alert-danger" hidden id="loginError">
-                                                    <strong>Error!</strong> Old password is wrong or new password does not match
-                                                </div>
-                                            </div> 
+                                    </div> 
+                                </c:if>
+
+
+                                <c:if test="${param.success}">
+                                    <div class="row">
+                                        <div class="col-md-4 ">
+                                            <div class="alert alert-success">
+                                                <strong>Successful!</strong> Password Updated. Wasn't it easy.
+                                            </div>
                                         </div> 
-                                    </c:otherwise>
-                                </c:choose>
+                                    </div> 
+                                </c:if>
+
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <div class="alert alert-danger" hidden="true" id="passwordLengthError">
+                                            <strong>Error!</strong> Password is not between 8 to 40 characters. You can do it.
+                                        </div>
+                                    </div> 
+                                </div> 
+
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <div class="alert alert-danger" hidden="true" id="newPasswordLengthError">
+                                            <strong>Error!</strong> New password is not between 8 to 40 characters. Take your time
+                                        </div>
+                                    </div> 
+                                </div> 
+
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <div class="alert alert-danger" hidden="true" id="passwordMatchError">
+                                            <strong>Error!</strong> the password don't match. Focus!!
+                                        </div>
+                                    </div> 
+                                </div> 
+
+
+
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <input value="Update Password" class="btn btn-primary pull-left push-bottom" data-loading-text="Loading..." type="submit">
@@ -146,7 +174,7 @@
         <!-- Vendor -->
         <!--[if lt IE 9]>
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <![endif]-->
+    <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
         <!--<![endif]-->
@@ -189,6 +217,8 @@
 
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
+
+        <script src="/OAS/scripts/adminChangePassword.js"></script>
 
         <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
         <script type="text/javascript">

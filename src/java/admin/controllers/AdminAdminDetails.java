@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.Controller;
 
 /**
@@ -25,13 +24,11 @@ public class AdminAdminDetails extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        //todo: should be getting a admin id over here
-        String username = req.getParameter("username");
+        System.out.println("callld  this methods to show");
+        
+        Long adminId = Long.parseLong(req.getParameter("adminId"));
 
-        Admin admin = (Admin) session.createCriteria(Admin.class)
-                .add(Restrictions.eq("username", username))
-                .list()
-                .get(0);
+        Admin admin = (Admin) session.get(Admin.class, adminId);
 
         req.setAttribute("admin", admin);
         req.getRequestDispatcher("/WEB-INF/admin/detailadmin.jsp").include(req, resp);

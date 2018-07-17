@@ -5,6 +5,8 @@
  */
 package admin.controllers;
 
+import entities.Admin;
+import entities.UserType;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,9 @@ public class AdminAccountDetails extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+        Admin admin = (Admin) httpSession.getAttribute(UserType.Admin.toString());
+        admin = (Admin) session.get(Admin.class, admin.getId());
+        req.setAttribute("admin", admin);
         req.getRequestDispatcher("/WEB-INF/admin/adminmyaccount.jsp").include(req, resp);
     }
 

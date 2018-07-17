@@ -85,8 +85,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <form id="adminform" action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
+                                <div class="col-md-12" >
+                                    <form id="adminForm" action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-4">
@@ -121,7 +121,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     <label>Email</label>
-                                                    <input class="form-control input-lg" placeholder="abc@xyz.com" type="text" name="email" id="email" required="true">
+                                                    <input class="form-control input-lg" autocomplete="email" placeholder="abc@xyz.com" type="text" name="email" id="email" required="true">
                                                 </div>
                                             </div>
                                         </div>
@@ -201,7 +201,7 @@
                                         <tbody id="tablebody">
                                             <c:forEach var="admin" items="${requestScope.admins}">
                                                 <tr>
-                                                    <td><a href="/OAS/admin/admins/detailadmin?username=${admin.username}">${admin.username}</a></td>
+                                                    <td><a href="/OAS/admin/admins/detailadmin?adminId=${admin.id}">${admin.username}</a></td>
                                                     <td>${admin.email}</td>
                                                     <td>${admin.type}</td>
                                                 </tr>
@@ -221,8 +221,9 @@
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <![endif]-->
         <!--[if gte IE 9]><!-->
+        <script src="/OAS/scripts/vue.js"></script>
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <script src="/OAS/scripts/addadmin.js"></script>
+        <script src="/OAS/scripts/admin/addadmin.js"></script>
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>

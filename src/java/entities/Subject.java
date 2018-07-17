@@ -35,7 +35,7 @@ public class Subject implements Serializable {
     @Column(name = "sub_id")
     @Getter
     @Setter
-    private int id;
+    private long id;
 
     @Column(name = "sub_name")
     @Getter

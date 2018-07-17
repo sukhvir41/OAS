@@ -17,7 +17,7 @@ $(document).ready(function () {
         console.log(passwordCheck());
 
     });
-    $("#adminform").submit(function () {
+    $("#adminForm").submit(function () {
         submitCheck();
     });
 });

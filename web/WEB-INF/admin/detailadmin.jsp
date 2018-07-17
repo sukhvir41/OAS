@@ -18,7 +18,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -90,7 +90,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Username : <c:out value="${requestScope.admin.username}"/></h2>
+                                        <h4>Username : <c:out value="${requestScope.admin.username}"/></h4>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <dl>
@@ -108,10 +108,10 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                             <h4 class="modal-title" id="formModalLabel">Alert! Are you sure you want to delete</h4>
                                                         </div>
-                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/admins/deleteadmin" method="post">
+                                                        <form class="form-horizontal mb-lg" action="/OAS/admin/admins/deleteadminpost" method="POST">
                                                             <div class="modal-body">
 
-                                                                <input type="hidden" name="username" value="${requestScope.admin.username}">
+                                                                <input type="hidden" name="adminId" value="${requestScope.admin.id}">
                                                                 <label>You are about to delete one of the user with admin privileges.</label>
                                                                 <label><b>Are you sure about deleting one of the admin.</b></label>
                                                             </div>

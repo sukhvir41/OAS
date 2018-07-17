@@ -51,8 +51,8 @@ public class UnaccountStudent extends Controller {
     }
     
     private void removeAttendance(Attendance attendance, Session session) {
-        attendance.setStudent(null);
-        attendance.setLecture(null);
+        //attendance.setStudent(null);
+        //attendance.setLecture(null);
         session.delete(attendance);
     }
     
