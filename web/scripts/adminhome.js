@@ -22,10 +22,17 @@ $(document).ready(function(){
 	chartError.show();
 	wsSocket = new WebSocket(getURL());
 	wsSocket.onopen = wsOnOpen();
-	wsSocket.onmessage = function(event){ wsOnMessage(event)}
+	wsSocket.onmessage = function(event){ wsOnMessage(event)};
+	wsSocket.onerror = function(){ chartError.show()};
 	drawChart();
 	
 
+});
+
+$(window).unload(function() {
+  if(wsSocket !==null){
+  	wsSocket.close();
+  }
 });
 
 
@@ -33,13 +40,13 @@ $(document).ready(function(){
 var wsOnMessage = function(event){	
 	try{
 		var rawData = JSON.parse(event.data);
-		if (rawData.type =="data") {
+		if (rawData.type ==="data") {
 			var sysdata = rawData.message;
 			addData(sysdata.memoryUsedPerc,sysdata.cpuUsedPerc);
 			adminCount.text( sysdata.admin);
 			studentCount.text(sysdata.student);
 			teacherCount.text(sysdata.teacher);
-		}else{
+		}else if (rawData.type === "error"){
 			chartError.show();
 		}
 	}catch(err){

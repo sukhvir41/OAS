@@ -31,6 +31,7 @@ public class SetNetworkSettings extends PostBackController {
 
         MacHandlers.setHandles(ipaddress, macAddress);
         resp.sendRedirect("/OAS/admin/networksettings");
+        req.getServletContext().setAttribute("ready", true);
 
 //       
     }
@@ -38,6 +39,7 @@ public class SetNetworkSettings extends PostBackController {
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/OAS/admin/networksettings?error=" + true);
+        req.getServletContext().setAttribute("ready", false);
     }
 
 }

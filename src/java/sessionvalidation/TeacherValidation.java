@@ -26,10 +26,6 @@ import javax.servlet.http.HttpSession;
 @WebFilter(urlPatterns = {"/teacher/*", "/teacher"})
 public class TeacherValidation implements Filter {
 
-    HttpServletResponse resp;
-    HttpServletRequest req;
-    HttpSession session;
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -37,25 +33,30 @@ public class TeacherValidation implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletResponse resp;
+        HttpServletRequest req;
+        HttpSession session;
         resp = (HttpServletResponse) response;
         req = (HttpServletRequest) request;
         session = req.getSession();
         try {
-            System.out.println(session.getAttribute("accept"));
-            System.out.println(session.getAttribute("type"));
-            if ((boolean) session.getAttribute("accept") && (session.getAttribute("type")).equals(UserType.Teacher)) {
-                Teacher teacher = (Teacher) session.getAttribute("teacher");
-                if (teacher.isVerified()) {
+            if ((boolean) req.getServletContext().getAttribute("ready")) {
+                if ((boolean) session.getAttribute("accept") && (session.getAttribute("type")).equals(UserType.Teacher)) {
+                    Teacher teacher = (Teacher) session.getAttribute("teacher");
+                    if (teacher.isVerified()) {
 
-                    resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-                    resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-                    resp.setDateHeader("Expires", 0);
-                    chain.doFilter(request, response);
+                        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+                        resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+                        resp.setDateHeader("Expires", 0);
+                        chain.doFilter(request, response);
+                    } else {
+                        resp.sendRedirect("/OAS/notverified.jsp");
+                    }
                 } else {
-                    resp.sendRedirect("/OAS/notverified.jsp");
+                    resp.sendRedirect("/OAS/login");
                 }
             } else {
-                resp.sendRedirect("/OAS/login");
+                resp.sendRedirect("/OAS/accessdenied.jsp");
             }
         } catch (Exception e) {
             System.out.println("body error");

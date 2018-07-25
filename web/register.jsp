@@ -99,12 +99,12 @@
                                             <div class="box-content">
                                                 <h4 class="heading-primary text-uppercase mb-md">Register An Account</h4>
                                                 <!-- from tag starts from here-->
-                                                <form action="registerpost" id="register" method="post" onsubmit="return submitCheck()">
+                                                <form id="register" method="post" action="registerpost">
                                                     <div class="row">
                                                         <div class="form-group">
                                                             <div class="col-md-8">
                                                                 <label>First Name</label>
-                                                                <input class="form-control input-lg" placeholder="sam" type="text" name="firstname" id="firstname" required="true">
+                                                                <input class="form-control input-lg" placeholder="sam" type="text" name="firstname" id="firstname">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,7 +122,7 @@
                                                         <div class="form-group">
                                                             <div class="col-md-8">
                                                                 <label>Last Name</label>
-                                                                <input class="form-control input-lg" placeholder="smith" type="text" name="lastname" id="lastname" required="true">
+                                                                <input class="form-control input-lg" placeholder="smith" type="text" name="lastname" id="lastname">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -140,7 +140,7 @@
                                                         <div class="form-group">
                                                             <div class="col-md-8">
                                                                 <label>E-mail Address</label>
-                                                                <input class="form-control input-lg" placeholder="sam.smith@mail.com" type="text" name="email" id="email" required="true">
+                                                                <input class="form-control input-lg" placeholder="sam.smith@mail.com" type="text" name="email" id="email">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,7 +167,7 @@
                                                         <div class="form-group">
                                                             <div class="col-md-8">
                                                                 <label>Username</label>
-                                                                <input  class="form-control input-lg" placeholder="samsmart" type="text" name="username" id="username" required="true">
+                                                                <input  class="form-control input-lg" placeholder="samsmart" type="text" name="username" id="username">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -205,7 +205,7 @@
                                                         <div class="form-group">
                                                             <div class="col-md-8">
                                                                 <label>Password</label>
-                                                                <input class="form-control input-lg" placeholder="********" type="password" name="password" id="password1" required="true" minlength="8" maxlength="40">
+                                                                <input class="form-control input-lg" placeholder="********" type="password" name="password" id="password">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -213,7 +213,7 @@
                                                         <div class="form-group">
                                                             <div class="col-md-8">
                                                                 <label>Re-enter Password</label>
-                                                                <input class="form-control input-lg" placeholder="********" type="password" id="password2" minlength="8" maxlength="20" required="true">
+                                                                <input class="form-control input-lg" placeholder="********" type="password" id="repassword" name="repassword">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -251,7 +251,7 @@
                                                         <div class="form-group">
                                                             <div class="col-md-8">
                                                                 <label>Number</label>
-                                                                <input class="form-control input-lg" placeholder="9922288888" type="number" name="number" id="number" required="true">
+                                                                <input class="form-control input-lg" placeholder="9922288888" type="number" name="number" id="number">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -292,7 +292,7 @@
 
                                                                 <h4>Details</h4>
                                                                 <label>Roll number</label>
-                                                                <input class="form-control input-lg" placeholder="50" type="number" minlength="1" maxlength="3" name="rollnumber" id="rollnumber" >
+                                                                <input class="form-control input-lg" placeholder="50" type="number" name="rollnumber" id="rollnumber" >
                                                                 <!-- SHOW THIS WHEN THRER IS AN ERROR -->
 
 
@@ -376,6 +376,7 @@
         <!--[if gte IE 9]><!-->
 
         <script src="vendor/jquery/jquery.js"></script>
+        <script src="scripts/jquery.validate.min.js"></script>
         <script src="scripts/mustache.js"></script>
         <script src="scripts/register.js"></script>
         <!--<![endif]-->

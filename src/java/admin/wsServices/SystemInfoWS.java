@@ -24,15 +24,6 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/admin/ws/systemInfo", configurator = GlobalWsConfig.class)
 public class SystemInfoWS {
     
-    private static final String ERROR = "error";
-    private static final String TYPE = "type";
-    
-    private static JsonObject ERRORJSON = new JsonObject();
-    
-    static {
-        ERRORJSON.addProperty(TYPE, ERROR);
-    }
-    
     @OnOpen
     public void open(Session session, EndpointConfig conf) {
         System.out.println("connection opened");
@@ -55,6 +46,8 @@ public class SystemInfoWS {
     
     @OnError
     public void onError(Throwable error) {
+        System.out.println("error in WS Admin web socket");
+        error.printStackTrace();
         // have to cehcck what to do here
     }
     

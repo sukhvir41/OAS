@@ -11,8 +11,6 @@ import com.google.gson.JsonObject;
 import entities.UserType;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.websocket.Session;
 import org.hyperic.sigar.Sigar;
 

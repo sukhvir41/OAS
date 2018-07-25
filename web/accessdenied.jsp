@@ -8,14 +8,14 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
-        <title>Access Denied</title>    
+        <title>Access denied</title>    
 
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -48,14 +48,7 @@
         <!-- Head Libs -->
         <script src="/OAS/vendor/modernizr/modernizr.js"></script>
 
-        <!--[if IE]>
-            <link rel="stylesheet" href="css/ie.css">
-        <![endif]-->
 
-        <!--[if lte IE 8]>
-            <script src="vendor/respond/respond.js"></script>
-            <script src="vendor/excanvas/excanvas.js"></script>
-        <![endif]-->
 
     </head>
     <body>
@@ -71,8 +64,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 center">
-                            <h1 class="mb-sm small">Error</h1>
-                            <p class="lead">Access Denied!! <br>You don't have privileges to access this page or resource. </p>
+                            <h1 class="mb-sm small">Attention!</h1>
+                            <p class="lead">We are not ready<br>The application is not configured. Please Contact administration if the application is not ready in a few minute</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <center>
+                                <a  class="" href="/OAS/logout">Log Out</a>
+                            </center>
                         </div>
                     </div>
                     <div class="row">
@@ -85,13 +85,9 @@
 
         </div>
 
-        <!-- Vendor -->
-        <!--[if lt IE 9]>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <![endif]-->
-        <!--[if gte IE 9]><!-->
+        
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <!--<![endif]-->
+   
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
         <script src="/OAS/vendor/jquery.easing/jquery.easing.js"></script>
         <script src="/OAS/vendor/jquery-cookie/jquery-cookie.js"></script>
@@ -131,22 +127,6 @@
 
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
-
-        <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-        <script type="text/javascript">
-        
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-12345678-1']);
-            _gaq.push(['_trackPageview']);
-        
-            (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        
-        </script>
-        -->
 
     </body>
 </html>

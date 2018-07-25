@@ -75,7 +75,7 @@
                                             <div class="box-content">
                                                 <h4 class="heading-primary text-uppercase mb-md">Please Login</h4>
                                                 <!-- from tag starts from here-->
-                                                <form action="loginpost"  method="post" onsubmit="return submitCheck()">
+                                                <form action="loginpost"  method="post" id="loginForm">
                                                     <div class="row">
                                                         <div class="form-group">
                                                             <div class="col-md-12">

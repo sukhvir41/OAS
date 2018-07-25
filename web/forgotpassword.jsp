@@ -81,7 +81,7 @@
                                             <div class="box-content">
                                                 <h4 class="heading-primary text-uppercase mb-md">Forgot Password</h4>
                                                 <!-- from tag starts from here-->
-                                                <form>
+                                                <form id="forgotForm">
                                                     <div class="row">
                                                         <div class="form-group">
                                                             <div class="col-md-12">
@@ -110,7 +110,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <button type="button" class="btn btn-primary pull-right"  tabindex="2" id="submit">Submit</button>
+                                                            <input type="submit" class="btn btn-primary pull-right"  tabindex="2" id="submit" value="Submit">
                                                         </div>
                                                     </div>
                                                 </form>

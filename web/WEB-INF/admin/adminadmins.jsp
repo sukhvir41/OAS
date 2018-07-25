@@ -86,12 +86,12 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12" >
-                                    <form id="adminForm" action="/OAS/admin/admins/addadminpost" method="post" onsubmit="return submitCheck()">
+                                    <form id="adminForm"  action="/OAS/admin/admins/addadminpost" method="post">
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     <label>Username</label>
-                                                    <input class="form-control input-lg" placeholder="Username" type="text" name="username" id="username" required="true">
+                                                    <input class="form-control input-lg" placeholder="Username" type="text" name="username" id="username">
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     <label>Email</label>
-                                                    <input class="form-control input-lg" autocomplete="email" placeholder="abc@xyz.com" type="text" name="email" id="email" required="true">
+                                                    <input class="form-control input-lg" autocomplete="email" placeholder="abc@xyz.com" type="text" name="email" id="email">
                                                 </div>
                                             </div>
                                         </div>
@@ -143,7 +143,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     <label>Password</label>
-                                                    <input class="form-control input-lg" type="Password" name="password" id="password" required="true">
+                                                    <input class="form-control input-lg" type="Password" name="password" id="password">
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +165,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     <label>Re Enter Password</label>
-                                                    <input class="form-control input-lg" type="Password" name="repassword" id="repassword" required="true">
+                                                    <input class="form-control input-lg" type="Password" name="repassword" id="repassword">
                                                 </div>
                                             </div>  
                                         </div>
@@ -216,13 +216,9 @@
                 </div>
             </div>
         </div>
-        <!-- Vendor -->
-        <!--[if lt IE 9]>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <![endif]-->
-        <!--[if gte IE 9]><!-->
-        <script src="/OAS/scripts/vue.js"></script>
+        
         <script src="/OAS/vendor/jquery/jquery.js"></script>
+        <script src="/OAS/scripts/jquery.validate.min.js"></script>
         <script src="/OAS/scripts/admin/addadmin.js"></script>
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>
@@ -265,21 +261,7 @@
         <!-- Theme Initialization Files -->
         <script src="/OAS/js/theme.init.js"></script>
 
-        <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-        <script type="text/javascript">
         
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-12345678-1']);
-                _gaq.push(['_trackPageview']);
-        
-                (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                })();
-        
-        </script>
-        -->
 
     </body>
 </html>

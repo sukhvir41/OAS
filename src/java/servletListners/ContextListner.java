@@ -24,6 +24,7 @@ public class ContextListner implements ServletContextListener {
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        sce.getServletContext().setAttribute("ready", false);
         executorService.scheduleWithFixedDelay(new SystemInfoService(), 10, 15, TimeUnit.SECONDS);
     }
 

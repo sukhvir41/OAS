@@ -28,12 +28,12 @@ public class CheckUsername extends AjaxController {
 
         String username = req.getParameter("username");
 
-        int resultCount = (int) session.createCriteria(User.class)
+        long resultCount = (long) session.createCriteria(User.class)
                 .add(Restrictions.eq("username", username))
-                .setProjection(Projections.sum("username"))
+                .setProjection(Projections.count("username"))
                 .uniqueResult();
 
-        if (resultCount <= 0) {
+        if (resultCount <= 0l) {
             out.print(true);
         } else {
             out.print(false);

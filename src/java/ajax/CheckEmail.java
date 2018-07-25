@@ -28,12 +28,12 @@ public class CheckEmail extends AjaxController {
 
         String email = req.getParameter("email");
 
-        int resultCount = (int) session.createCriteria(User.class)
+        long resultCount = (long) session.createCriteria(User.class)
                 .add(Restrictions.eq("email", email))
-                .setProjection(Projections.sum("email"))
+                .setProjection(Projections.count("email"))
                 .uniqueResult();
 
-        if (resultCount <= 0) {
+        if (resultCount <= 0l) {
             out.print(true);
         } else {
             out.print(false);

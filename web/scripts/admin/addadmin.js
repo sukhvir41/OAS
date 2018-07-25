@@ -1,30 +1,73 @@
 'use strict';
 
 $(document).ready(function () {
-    $("#email").blur(function () {
-        console.log(emailTakenCheck());
+    /*$("#email").blur(function () {
+        emailTakenCheck();
 
     });
     $("#username").blur(function () {
-        console.log(usernameTakenCheck());
+      usernameTakenCheck();
 
-    });
+  });
     $("#password").blur(function () {
-        console.log(passwordCheck());
+        passwordCheck();
 
     });
     $("#repassword").blur(function () {
-        console.log(passwordCheck());
+        passwordCheck();
 
+    });*/
+
+
+    $('#adminForm').validate({
+        rules:{
+            username:{
+                required: true,
+                minlength : 8,
+                maxlength: 20,
+                remote:{
+                    url: "/OAS/ajax/checkusername",
+                    type: "post"
+                },
+            },
+            email: {
+                required : true,
+                email: true,
+                remote:{
+                    url: "/OAS/ajax/checkemail",
+                    type: "post"
+                }
+            },
+            password: {
+                required: true,
+                minlength: 8,
+                maxlength: 40
+            },
+            repassword: {
+                required: true,
+                minlength: 8,
+                maxlength: 40,
+                equalTo: "#password"
+            }
+        },
+        messages:{
+            username:{
+                required: "Please enter your username",
+                remote: $.validator.format("Username: {0} is taken"),
+                minlength: $.validator.format("Enter at least {0} characters"),
+                maxlength: $.validator.format("At max {0} characters") 
+            },
+            email: {
+                remote: $.validator.format("Email: {0} is in use")
+            }
+        }
     });
-    $("#adminForm").submit(function () {
-        submitCheck();
-    });
+
 });
 
 
 var usernameTakenCheck = function () {
-    var error = $("#usernametakenerror");
+    var errorDialog = $("#usernametakenerror");
     var check;
     if (usernameCheck()) {
         $.ajax({
@@ -34,41 +77,80 @@ var usernameTakenCheck = function () {
             },
             method: "post",
             success: function (responseText) {
-                if (responseText === "false") {
-                    error.show();
-                    check = false;
-                } else {
-                    error.hide();
-                    check = true;
+                if(responseText ===true){
+                    errorDialog.hide();
+                    return true;
+                }else{
+                    errorDialog.show();
+                    return false;
                 }
+                    //presponse(responseText);
+                },
+                error: function(){
+                    //perror(false);
+                    errorDialog.show();
+                    return false;
+                },
+                async : false
+            });
+        /*try{   
+            var data = await promise;
+            
+            if(data ===true){
+                errorDialog.hide();
+                return true;
+            }else{
+                errorDialog.show();
+                return false;
             }
-        });
-    }
-    return check;
+        }catch(err){
+            errorDialog.show();
+            return false;
+        }
+    }else{
+        return false;
+    }*/
+}
 };
 
-var emailTakenCheck = function () {
+
+var emailTakenCheck = async function () {
     var error = $("#emailtakenerror");
     var check;
     if (emailCheck()) {
-        $.ajax({
-            url: "/OAS/ajax/checkemail",
-            data: {
-                email: $('#email').val()
-            },
-            method: 'post',
-            success: function (responseText) {
-                if (responseText === "false") {
-                    error.show();
-                    check = false;
-                } else {
-                    error.hide();
-                    check = true;
+
+        var promise = await new Promise((presponse,perror) => {
+            $.ajax({
+                url: "/OAS/ajax/checkemail",
+                data: {
+                    email: $('#email').val()
+                },
+                method: 'post',
+                success: function (responseText) {
+                    presponse(responseText)
+
+                },
+                error: function(){
+                    perror(false);
                 }
-            }
+            });
         });
+        try{
+            var data = promise;
+            if (data === true) {
+                error.hide();
+                return true;
+            }else{
+                error.show();
+                return false;
+            }
+        }catch(err){
+            error.show()
+            return false;
+        }
+        
     }
-    return check;
+
 };
 
 var emailCheck = function () {
@@ -142,5 +224,7 @@ var usernameCheck = function () {
 };
 
 var submitCheck = function () {
-    return emailTakenCheck() && passwordCheck() && usernameTakenCheck();
+    var promise = emailTakenCheck() && passwordCheck() && usernameTakenCheck();
+    return promise === true;
+    
 };

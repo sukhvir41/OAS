@@ -39,14 +39,13 @@ public class LoginPost extends PostBackController {
 
             user = (User) session.createCriteria(User.class)
                     .add(Restrictions.eq("email", username))
-                    .list()
-                    .get(0);
+                    .uniqueResult();
 
         } else {
             user = (User) session.createCriteria(User.class)
                     .add(Restrictions.eq("username", username))
-                    .list()
-                    .get(0);
+                    .uniqueResult();
+
         }
 
         if (user.checkPassword(password)) {
