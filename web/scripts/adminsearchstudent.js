@@ -1,5 +1,7 @@
 'use strict';
 var calledFunction = 1;
+
+
 $(document).ready(function () {
     getClasses();
 
@@ -11,17 +13,56 @@ $(document).ready(function () {
         getSubjects();
     });
 
-    $("#search").click(function () {
-        searchStudents();
-    });
-
-    $("#searchname").click(function () {
-        searchByName();
-    });
-
     $(".action").click(function () {
         activateOrDeacticate($(this));
     });
+
+
+    $('#searchNameForm').validate({
+        rules:{
+            studentname:{
+                required: true
+            }
+        },
+        messages:{
+            studentname:{
+                required: 'Please enter a name'
+            }
+        },
+        submitHandler: function(){
+            searchByName();
+        }
+    });
+
+    $('#searchStudentForm').validate({
+        rules:{
+            course:{
+                required: true,
+            },
+            subject:{
+                required: true,
+            },
+            classroom:{
+                required: true,
+            }
+        },
+        messages:{
+            course:{
+                required: 'Please select a course'
+            },
+            subject:{
+                required: 'PLease select a subject'
+            },
+            classroom:{
+                required: 'Please select a Classroom'
+            }
+        },
+        submitHandler: function(){
+            searchStudents();  
+        }
+    });
+
+    
 
 });
 
@@ -110,6 +151,9 @@ var searchStudents = function () {
                 activateOrDeacticate($(this));
             });
             success.show();
+        },
+        error: function(){
+            error.show();
         }
     });
 
@@ -147,6 +191,9 @@ var searchByName = function () {
                     activateOrDeacticate($(this));
                 });
                 success.show();
+            },
+            error: function(){
+                error.show();
             }
         });
     }
@@ -155,7 +202,7 @@ var searchByName = function () {
 
 var activateOrDeacticate = function (button) {
     var action = button.text();
-    ;
+    
     var studentId = button.val();
     if (action === "verify" || action === "deverify") {
         $.ajax({
@@ -166,14 +213,17 @@ var activateOrDeacticate = function (button) {
             },
             method: "post",
             success: function (data) {
-                console.log("called");
-                if (data === "true") {
+
+                if (data === true) {
                     if (calledFunction === 1) {
                         searchStudents();
                     } else if (calledFunction == 2) {
                         searchByName();
                     }
                 }
+            },
+            error: function(){
+                error.show();
             }
         });
     }

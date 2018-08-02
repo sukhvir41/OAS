@@ -8,18 +8,14 @@ package admin.controllers;
 import entities.Course;
 import entities.Department;
 import entities.Teacher;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.Utils;
 
 /**
  *
@@ -30,7 +26,7 @@ public class DetailDepartment extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int departmentID = Integer.parseInt(req.getParameter("departmentId"));
+        long departmentID = Long.parseLong(req.getParameter("departmentId"));
 
         Department department = (Department) session.get(Department.class, departmentID);
         List<Teacher> teachers = department.getTeachers();

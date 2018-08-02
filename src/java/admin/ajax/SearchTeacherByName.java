@@ -33,7 +33,7 @@ public class SearchTeacherByName extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         String name;
 
-        resp.setContentType("text/json");
+        resp.setContentType("application/json");
 
         name = req.getParameter("name");
 
@@ -61,6 +61,7 @@ public class SearchTeacherByName extends AjaxController {
         } else {
             teacherJson.addProperty(HODOF, "not hod");
         }
+        
         teacherJson.addProperty(CLASSTEACHER, teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName());
         teacherJson.add(DEPARTMENTS, addDepartment(teacher.getDepartment()));
         teacherJson.addProperty(VERIFIED, teacher.isVerified());
@@ -71,9 +72,7 @@ public class SearchTeacherByName extends AjaxController {
     private JsonElement addDepartment(List<Department> departments) {
         JsonArray department = new JsonArray();
         departments.stream()
-                .forEach(e -> {
-                    department.add(e.getName());
-                });
+                .forEach(e -> department.add(e.getName()));
         return department;
     }
 

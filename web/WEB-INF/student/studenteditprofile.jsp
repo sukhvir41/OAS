@@ -90,73 +90,33 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>First Name</label>
-                                            <input class="form-control input-lg" type="text" name="fname" id="fname" required="true" value="${requestScope.student.FName}">
+                                            <input class="form-control input-lg" type="text" name="fname" id="fname" value="${requestScope.fname}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8">
-                                        <div class="alert alert-danger" hidden="true" id="firstnameerror">
-                                            <strong>Error!</strong> Please enter valid First Name
-                                        </div>
-                                    </div> 
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Last Name</label>
-                                            <input class="form-control input-lg" type="text" name="lname" id="lname" required="true" value="${requestScope.student.LName}">
+                                            <input class="form-control input-lg" type="text" name="lname" id="lname" value="${requestScope.lname}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8" >
-                                        <div class="alert alert-danger" hidden="true" id="lastnameerror">
-                                            <strong>Error!</strong> PLease enter valid Last Name
-                                        </div>
-                                    </div> 
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Roll Number</label>
-                                            <input class="form-control input-lg" type="number" name="number" id="number" required="true" value="${requestScope.student.rollNumber}">
+                                            <input class="form-control input-lg" type="number" name="rollnumber" id="rollnumber" value="${requestScope.student.rollNumber}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8" >
-                                        <div class="alert alert-danger" hidden="true" id="rollnumbererror">
-                                            <strong>Error!</strong> enter valid roll number
-                                        </div>
-                                    </div> 
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label>Email Address</label>
-                                            <input class="form-control input-lg" type="text" name="email" id="email" required="true" value="${requestScope.student.email}">
+                                            <input class="form-control input-lg" type="text" name="email" id="email" value="${requestScope.student.email}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8" >
-                                        <div class="alert alert-danger" hidden="true" id="emailerror">
-                                            <strong>Error!</strong> Enter valid E-mail Address
-                                        </div>
-                                    </div> 
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8" >
-                                        <div class="alert alert-danger" hidden="true" id="emailtakenerror">
-                                            <strong>Error!</strong> The E-mail address is already in use
-                                        </div>
-                                    </div> 
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -165,14 +125,6 @@
                                             <input class="form-control input-lg" type="number" name="number" id="number" required="true" value="${requestScope.student.number}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                    <div class="col-md-8" >
-                                        <div class="alert alert-danger" hidden="true" id="numbererror">
-                                            <strong>Error!</strong> number should be of 10 digits
-                                        </div>
-                                    </div> 
                                 </div>
                                 <div class="row">
                                     <div class="form-group">

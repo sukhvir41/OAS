@@ -9,13 +9,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
         <title>Students - Admin</title> 
-        
+
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -77,48 +77,56 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h4>Courses</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="course" name="courseId">
-                                                <c:forEach var="course" items="${requestScope.courses}">
-                                                    <option value="${course.id}">${course.name}</option>
-                                                </c:forEach>
-                                            </select>
-                                            <h4>Class Room</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="classroom" name="classroomId">
+                                            <form id="searchStudentForm">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h4>Courses</h4>
+                                                        <select class="form-control mb-md" style="width: 60%;" id="course" name="course">
+                                                            <c:forEach var="course" items="${requestScope.courses}">
+                                                                <option value="${course.id}">${course.name}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                        <h4>Class Room</h4>
+                                                        <select class="form-control mb-md" style="width: 60%;" id="classroom" name="classroom">
 
-                                            </select>
-                                            <h4>Subject</h4>
-                                            <select class="form-control mb-md" style="width: 50%;" id="subject" name="subjectId">
+                                                        </select>
+                                                        <h4>Subject</h4>
+                                                        <select class="form-control mb-md" style="width: 60%;" id="subject" name="subject">
 
-                                            </select>
-                                            <h4>Filter</h4>
-                                            <div class="radio">
-                                                <label>
-                                                    <input id="filter" name="filter" value="all" checked type="radio">
-                                                    All
-                                                </label>&nbsp; &nbsp;
-                                                <label>
-                                                    <input id="filter" name="filter" value="true" type="radio">
-                                                    Verified
-                                                </label>&nbsp; &nbsp;
-                                                <label>
-                                                    <input id="filter" name="filter" value="false" type="radio">
-                                                    Not Verified
-                                                </label>&nbsp; &nbsp;
-                                            </div>
-                                            <button class="btn btn-primary" id ="search">Search</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h4>Search By Name</h4>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-8">
-                                                        <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
-                                                        <br>
-                                                        <button class="btn btn-primary" id ="searchname">Search</button>
+                                                        </select>
+                                                        <h4>Filter</h4>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input id="filter" name="filter" value="all" checked type="radio">
+                                                                All
+                                                            </label>&nbsp; &nbsp;
+                                                            <label>
+                                                                <input id="filter" name="filter" value="true" type="radio">
+                                                                Verified
+                                                            </label>&nbsp; &nbsp;
+                                                            <label>
+                                                                <input id="filter" name="filter" value="false" type="radio">
+                                                                Not Verified
+                                                            </label>&nbsp; &nbsp;
+                                                        </div>
+                                                        <input type="submit" class="btn btn-primary" id ="search" value="Search">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form id="searchNameForm">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <h4>Search By Name</h4>
+                                                            <input class="form-control input-lg" placeholder="name" type="text" name="studentname" id="studentname">
+                                                            <br>
+                                                            <input type="submit" class="btn btn-primary" id ="searchname" value="Search">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -168,11 +176,11 @@
                 </div>
             </div>
         </div>
-        
+
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        <script src="/OAS/scripts/adminsearchstudent.js"></script>
         <script src="/OAS/scripts/mustache.js"></script>
+        <script src="/OAS/scripts/adminsearchstudent.js"></script>
 
         <!--<![endif]-->
         <script src="/OAS/vendor/jquery.appear/jquery.appear.js"></script>

@@ -36,7 +36,7 @@ public class AddSubject extends PostBackController {
 
         String name = req.getParameter("subjectname");
         boolean elective = Boolean.parseBoolean(req.getParameter("elective"));
-        int courseId = Integer.parseInt(req.getParameter("course"));
+        long courseId = Long.parseLong(req.getParameter("course"));
         ArrayList<String> classRooms = new ArrayList<>(Arrays.asList(req.getParameterValues("classes")));
 
         Subject subject = new Subject(name, elective);
@@ -44,7 +44,7 @@ public class AddSubject extends PostBackController {
         Course course = (Course) session.get(Course.class, courseId);
         subject.addCourse(course);
         classRooms.stream()
-                .map(Integer::parseInt)
+                .map(Long::parseLong)
                 .map(e -> (ClassRoom) session.get(ClassRoom.class, e))
                 .forEach(e -> e.addSubject(subject));
 

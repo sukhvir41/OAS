@@ -15,7 +15,7 @@ import org.hibernate.Session;
 import utility.AjaxController;
 
 /**
- *
+ * have to fix this and figure out what to o when teacher is deactivated. 
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/teachers/activateordeactivateteacher")

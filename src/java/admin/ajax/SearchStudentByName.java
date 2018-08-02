@@ -31,16 +31,18 @@ public class SearchStudentByName extends AjaxController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        resp.setContentType("text/json");
+        resp.setContentType("application/json");
 
         String name = req.getParameter("name");
         List<Student> students = session.createCriteria(Student.class)
                 .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
                 .list();
+        
         JsonArray jsonStudents = new JsonArray();
         Gson gson = new Gson();
         students.stream()
                 .forEach(student -> add(student, jsonStudents));
+        
         out.print(gson.toJson(jsonStudents));
 
     }
@@ -61,7 +63,7 @@ public class SearchStudentByName extends AjaxController {
     }
 
     private JsonElement addSubjects(Student e) {
-
+        //Todo: check search students for the prper way to do this 
         JsonArray jsonSubjects = new JsonArray();
 
         e.getSubjects()

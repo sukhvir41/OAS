@@ -7,18 +7,14 @@ package admin.controllers;
 
 import entities.ClassRoom;
 import entities.Course;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.Utils;
 
 /**
  *
@@ -38,7 +34,8 @@ public class AdminClassRoom extends Controller {
         req.setAttribute("classrooms", classRooms);
         req.setAttribute("courses", courses);
         
-        req.getRequestDispatcher("/WEB-INF/admin/adminclassroom.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminclassroom.jsp")
+                .include(req, resp);
 
     }
 

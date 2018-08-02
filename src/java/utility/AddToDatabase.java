@@ -21,7 +21,7 @@ public class AddToDatabase {
 
         session.save(new Admin("adminsukhvir", "qwertyuiop", "sukhvir41@gmail.com", AdminType.Main));
         session.save(new Admin("adminkalpesh", "qwertyuiop", "kalpeshrawal96@gmail.com", AdminType.Main));
-        session.save(new Department("test"));
+      
         session.getTransaction().commit();
         session.close();
         Utils.closeSesssioFactory();

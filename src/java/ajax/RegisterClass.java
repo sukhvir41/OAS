@@ -34,7 +34,7 @@ public class RegisterClass extends AjaxController {
 
         resp.setContentType("text/json");
 
-        int courseid = Integer.parseInt(req.getParameter("course"));
+        long courseid = Long.parseLong(req.getParameter("course"));
 
         Course course = (Course) session.get(Course.class, courseid);
         List<ClassRoom> classes = course.getClassRooms();

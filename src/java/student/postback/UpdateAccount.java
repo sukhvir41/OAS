@@ -6,21 +6,15 @@
 package student.postback;
 
 import entities.ClassRoom;
-import entities.Course;
 import entities.Student;
 import entities.Subject;
-import entities.UserType;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-import utility.Controller;
 import utility.PostBackController;
 
 /**
@@ -50,7 +44,7 @@ public class UpdateAccount extends PostBackController {
         }
         student.setVerified(false);
         student.setUnaccounted(false);
-        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, Integer.parseInt(req.getParameter("classroom")));
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, Long.parseLong(req.getParameter("classroom")));
         
         student.getClassRoom().getStudents().remove(student);
         student.addClassRoom(classRoom); // addding

@@ -37,14 +37,15 @@ public class Registeration extends PostBackController {
         String password = req.getParameter("password");
         long number = Long.parseLong(req.getParameter("number"));
         String type = req.getParameter("type");
-        int rollNumber = 0, classId = 0;
+        int rollNumber = 0; 
+        long classId = 0;
         ArrayList<String> subjects;
         ArrayList<String> departments;
         String hod = null;
 
         if (type.equals("student")) {
             subjects = new ArrayList<>(Arrays.asList(req.getParameterValues("subject")));
-            classId = Integer.parseInt(req.getParameter("class"));
+            classId = Long.parseLong(req.getParameter("class"));
             rollNumber = Integer.parseInt(req.getParameter("rollnumber"));
 
             ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
@@ -52,7 +53,7 @@ public class Registeration extends PostBackController {
 
             session.save(student);
             subjects.stream()
-                    .map(Integer::parseInt)
+                    .map(Long::parseLong)
                     .map(subjectId -> (Subject) session.get(Subject.class, subjectId))
                     .forEachOrdered(student::addSubject);
             student.addClassRoom(classRoom);
@@ -64,7 +65,7 @@ public class Registeration extends PostBackController {
             session.save(teacher);
 
             departments.stream()
-                    .map(Integer::parseInt)
+                    .map(Long::parseLong)
                     .map(e -> (Department) session.get(Department.class, e))
                     .forEachOrdered(teacher::addDepartment);
         }

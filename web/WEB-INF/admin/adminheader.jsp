@@ -42,14 +42,14 @@
                                                     <a>Teacher</a>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="/OAS/admin/teachers">Teachers</a></li>
-                                                        <li><a href="/OAS/admin/teachers/unaccountedteachers">Unaccounted Teachers</a></li>
+                                                        <li><a href="/OAS/admin/teachers/unaccounted">Unaccounted Teachers</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown-submenu">
                                                     <a>Student</a>
                                                     <ul class= "dropdown-menu">
                                                         <li><a href="/OAS/admin/students">Students</a></li>
-                                                        <li><a href="/OAS/admin/students/unaccountedstudents">Unaccounted Students</a></li>
+                                                        <li><a href="/OAS/admin/students/unaccounted">Unaccounted Students</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>

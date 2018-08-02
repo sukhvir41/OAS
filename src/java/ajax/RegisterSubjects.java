@@ -37,7 +37,7 @@ public class RegisterSubjects extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         resp.setContentType("text/json");
 
-        int classId = Integer.parseInt(req.getParameter("class"));
+        long classId = Long.parseLong(req.getParameter("class"));
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
         JsonArray jsonSubjects = new JsonArray();

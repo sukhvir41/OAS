@@ -23,8 +23,6 @@ public class AdminAdminDetails extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-
-        System.out.println("callld  this methods to show");
         
         Long adminId = Long.parseLong(req.getParameter("adminId"));
 

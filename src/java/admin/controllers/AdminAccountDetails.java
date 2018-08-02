@@ -27,7 +27,8 @@ public class AdminAccountDetails extends Controller {
         Admin admin = (Admin) httpSession.getAttribute(UserType.Admin.toString());
         admin = (Admin) session.get(Admin.class, admin.getId());
         req.setAttribute("admin", admin);
-        req.getRequestDispatcher("/WEB-INF/admin/adminmyaccount.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminmyaccount.jsp")
+                .include(req, resp);
     }
 
 }

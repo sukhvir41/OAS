@@ -25,7 +25,7 @@ public class AddClassRoom extends PostBackController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        int courseId = Integer.parseInt(req.getParameter("courseId"));
+        long courseId = Long.parseLong(req.getParameter("courseId"));
         String name = req.getParameter("classroomname");
         String division = req.getParameter("division");
         int semister = Integer.parseInt(req.getParameter("semister"));

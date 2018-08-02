@@ -54,7 +54,7 @@ public class AdminHome extends Controller {
                             break;
                     }
                 }
-
+                if(id != null && token != null)
                 id.setMaxAge(864000);
                 token.setMaxAge(864000);
                 resp.addCookie(id);

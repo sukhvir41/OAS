@@ -20,16 +20,19 @@ import utility.Controller;
  */
 @WebServlet(urlPatterns = "/admin/students/activatestudent")
 public class ActivateStudent extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        
+
         long studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
-        student.setUnaccounted(false);
-        student.setVerified(true);
-        resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + student.getId());
-        
+
+        if (student.isUnaccounted()) {
+            resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + student.getId() + "&error=true");
+        } else {
+            student.setVerified(true);
+            resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + student.getId());
+        }
     }
-    
+
 }

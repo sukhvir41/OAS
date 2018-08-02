@@ -29,7 +29,7 @@ public class StartCourse extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int courseId = Integer.parseInt(req.getParameter("courseId"));
+        long courseId = Long.parseLong(req.getParameter("courseId"));
 
         Course course = (Course) session.get(Course.class, courseId);
         course.startCourse();

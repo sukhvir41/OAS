@@ -6,8 +6,8 @@
 package admin.wsServices;
 
 import WebSocketSettings.GlobalWsConfig;
-import com.google.gson.JsonObject;
 import entities.UserType;
+import java.io.IOException;
 import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
@@ -30,12 +30,19 @@ public class SystemInfoWS {
         try {
             HttpSession httpSession = (HttpSession) conf.getUserProperties().get(GlobalWsConfig.SESSION);
             if ((boolean) httpSession.getAttribute("accept") == true && httpSession.getAttribute("type").equals(UserType.Admin)) {
+                session.setMaxIdleTimeout(120000l);
                 SystemInfoService.addSession(session);
             } else {
                 SystemInfoService.sendError(session);
+                session.close();
             }
         } catch (Exception exception) {
             SystemInfoService.sendError(session);
+            try {
+                session.close();
+            } catch (IOException ex) {
+                //do nothing
+            }
         }
     }
     

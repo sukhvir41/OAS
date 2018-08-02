@@ -34,7 +34,7 @@ public class GetSubjectOfClassRoom extends AjaxController {
 
         resp.setContentType("text/json");
 
-        int classroomId = Integer.parseInt(req.getParameter("classroom"));
+        long classroomId = Long.parseLong(req.getParameter("classroom"));
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
         List<Subject> subjects = classRoom.getSubjects();
         JsonArray jsonSubjects = new JsonArray();

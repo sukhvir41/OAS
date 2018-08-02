@@ -37,8 +37,10 @@ public class SearchLectures extends AjaxController {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-
-        int classId = Integer.parseInt(req.getParameter("classroomId"));
+        
+        resp.setContentType("application/json");
+        
+        long classId = Long.parseLong(req.getParameter("classroomId"));
         String subjectId = req.getParameter("subjectId");
         LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
@@ -53,7 +55,7 @@ public class SearchLectures extends AjaxController {
                     .list();
 
         } else {
-            Subject subject = (Subject) session.get(Subject.class, Integer.parseInt(subjectId));
+            Subject subject = (Subject) session.get(Subject.class, Long.parseLong(subjectId));
             teaching = session.createCriteria(Teaching.class)
                     .add(Restrictions.eq("subject", subject))
                     .add(Restrictions.eq("classRoom", classRoom))

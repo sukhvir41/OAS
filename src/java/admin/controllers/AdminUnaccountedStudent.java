@@ -30,7 +30,7 @@ public class AdminUnaccountedStudent extends Controller {
                 .list();
         
         req.setAttribute("students", students);
-        req.getRequestDispatcher("/WEB-INF/admin/unaccountedstudents.jsp").include(req, resp);
-    }
-    
+        req.getRequestDispatcher("/WEB-INF/admin/unaccountedstudents.jsp")
+                .include(req, resp);
+    }    
 }

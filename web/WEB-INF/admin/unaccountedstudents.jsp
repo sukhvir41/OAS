@@ -9,13 +9,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
 
         <title>Unaccounted Students - Admin</title> 
-        
+
 
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Web Fonts  -->
-        
+
 
         <!-- Vendor CSS -->
         <link rel="stylesheet" href="/OAS/vendor/bootstrap/css/bootstrap.css">
@@ -62,67 +62,71 @@
         <div class="body">
             <jsp:include page="/WEB-INF/admin/adminheader.jsp" />
 
-                <div role="main" class="main">
-                    <section class="page-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="breadcrumb">
-                                        <li><a href="/OAS/admin">Home</a></li>
-                                        <li>Unaccounted Student</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Unaccounted Student</h1>
-                                </div>
+            <div role="main" class="main">
+                <section class="page-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="breadcrumb">
+                                    <li><a href="/OAS/admin">Home</a></li>
+                                    <li>Unaccounted Student</li>
+                                </ul>
                             </div>
                         </div>
-                    </section>
-
-                    <div class="container">
-                        
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Number</th>
-                                                <th>Email</th>
-                                                <th>Class Room</th>
-                                                <th>Roll Number</th>
-                                                <th>Subjects</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablebody">
-                                            <c:forEach var="student" items="${requestScope.students}">
-                                                <tr>
-                                                    <td>${student.id}</td>
-                                                    <td><a href="/OAS/admin/students/detailstudent?studentrId=${student.id}">${student}</a></td>
-                                                    <td>${student.number}</td>
-                                                    <td>${student.email}</td>
-                                                    <td>${student.classRoom}</td>
-                                                    <td>${student.rollNumber}</td>
-                                                    <td>${teacher.classRoom.name}</td>  
-                                                    <td>
-                                                        <c:forEach var="subject" items="${student.subjects}">
-                                                            ${subject}<br>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-danger" href="/OAS/admin/students/detailstudent?studentId=${student.id}">Delete</a>
-                                                    </td>                                                  
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Unaccounted Student</h1>
                             </div>
-                        
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            //todo: add delete all button like delete in delete department
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Number</th>
+                                        <th>Email</th>
+                                        <th>Class Room</th>
+                                        <th>Roll Number</th>
+                                        <th>Subjects</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablebody">
+                                    <c:forEach var="student" items="${requestScope.students}">
+                                        <tr>
+                                            <td>${student.id}</td>
+                                            <td><a href="/OAS/admin/students/detailstudent?studentrId=${student.id}">${student}</a></td>
+                                            <td>${student.number}</td>
+                                            <td>${student.email}</td>
+                                            <td>${student.classRoom}</td>
+                                            <td>${student.rollNumber}</td>
+                                            <td>${teacher.classRoom.name}</td>  
+                                            <td>
+                                                <c:forEach var="subject" items="${student.subjects}">
+                                                    ${subject}<br>
+                                                </c:forEach>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" href="/OAS/admin/students/detailstudent?studentId=${student.id}">Delete</a>
+                                            </td>                                                  
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>        
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -133,7 +137,7 @@
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="/OAS/vendor/jquery/jquery.js"></script>
-        
+
         <script src="/OAS/scripts/mustache.js"></script>
 
         <!--<![endif]-->

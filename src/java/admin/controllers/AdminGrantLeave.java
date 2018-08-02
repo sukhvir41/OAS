@@ -23,10 +23,11 @@ public class AdminGrantLeave extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int studentId = Integer.parseInt(req.getParameter("studentId"));
+        long studentId = Long.parseLong(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
         req.setAttribute("student", student);
-        req.getRequestDispatcher("/WEB-INF/admin/admingrantleave.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/admingrantleave.jsp")
+                .include(req, resp);
     }
 
 }

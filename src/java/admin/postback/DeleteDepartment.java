@@ -28,7 +28,7 @@ public class DeleteDepartment extends PostBackController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        int departmentId = Integer.parseInt(req.getParameter("departmentId"));
+        Long departmentId = Long.parseLong(req.getParameter("departmentId"));
         session.delete(session.get(Department.class, departmentId));
 
         resp.sendRedirect("/OAS/admin/departments");

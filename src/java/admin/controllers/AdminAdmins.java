@@ -29,7 +29,8 @@ public class AdminAdmins extends Controller {
                 .list();
 
         req.setAttribute("admins", admins);
-        req.getRequestDispatcher("/WEB-INF/admin/adminadmins.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminadmins.jsp")
+                .include(req, resp);
 
     }
 

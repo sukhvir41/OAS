@@ -24,7 +24,8 @@ public class AdminChangePassword extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         req.setAttribute("username", ((Admin) req.getSession().getAttribute("admin")).getUsername());
-        req.getRequestDispatcher("/WEB-INF/admin/adminchangepassword.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/adminchangepassword.jsp")
+                .include(req, resp);
     }
 
 }

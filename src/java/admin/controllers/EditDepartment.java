@@ -27,7 +27,7 @@ public class EditDepartment extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int departmentId = Integer.parseInt(req.getParameter("departmentId"));
+        long departmentId = Long.parseLong(req.getParameter("departmentId"));
 
         Department department = (Department) session.get(Department.class, departmentId);
 

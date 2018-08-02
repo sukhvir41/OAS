@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
@@ -34,45 +35,27 @@ public class SearchTeacher extends AjaxController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        resp.setContentType("text/json");
-        String departmentId;
-        String verified;
+        resp.setContentType("application/json");
+        String departmentId = req.getParameter("departmentId");
+        String verified  = req.getParameter("verified");
 
-        List<Teacher> teachers;
+        Criteria teacherCriteria = session.createCriteria(Teacher.class)
+                .add(Restrictions.eq("unaccounted", false));
 
-        departmentId = req.getParameter("departmentId");
-        verified = req.getParameter("verified");
-        if (departmentId.equals("all")) {
-
-            if (verified.equals("all")) {
-                teachers = session.createCriteria(Teacher.class)
-                        .list();
-            } else {
-                teachers = session.createCriteria(Teacher.class)
-                        .add(Restrictions.eq("verified", Boolean.parseBoolean(verified)))
-                        .list();
-
-            }
-        } else {
-            Department department = (Department) session.get(Department.class, Integer.parseInt(departmentId));
-
-            if (verified.equals("all")) {
-                teachers = department.getTeachers();
-
-            } else {
-
-                teachers = session.createCriteria(Teacher.class)
-                        .add(Restrictions.eq("department", department))
-                        .add(Restrictions.eq("verified", Boolean.parseBoolean(verified)))
-                        .list();
-
-            }
+        if(!departmentId.equals("all")){
+            Department department = (Department) session.get(Department.class, Long.parseLong(departmentId));
+            teacherCriteria = teacherCriteria.add(Restrictions.eq("department", department));
         }
-
+        
+        if(!verified.equals("all")){
+           teacherCriteria =  teacherCriteria.add(Restrictions.eq("verified", Boolean.parseBoolean(verified)));
+        }  
+    
         Gson gson = new Gson();
         JsonArray jsonTeachers = new JsonArray();
-        teachers.stream()
-                .forEach(teacher -> add(teacher, jsonTeachers));
+        teacherCriteria.list()
+                .stream()
+                .forEach(teacher -> add((Teacher)teacher, jsonTeachers));
         out.print(gson.toJson(jsonTeachers));
 
     }

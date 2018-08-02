@@ -29,90 +29,47 @@ import static utility.Constants.*;
  */
 @WebServlet(urlPatterns = "/admin/ajax/searchstudent")
 public class SearchStudent extends AjaxController {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        
-        resp.setContentType("text/json");
-        
-        int classroomId = Integer.parseInt(req.getParameter("classroom"));
+
+        resp.setContentType("application/json");
+
+        long classroomId = Long.parseLong(req.getParameter("classroom"));
         String subjectId = req.getParameter("subject");
         String filter = req.getParameter("filter");
-        
+
         Gson gson = new Gson();
-        
+
         JsonArray jsonStudents = new JsonArray();
-        
+
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-        
+
         Criteria studentCriteria = session.createCriteria(Student.class)
                 .add(Restrictions.eq("classRoom", classRoom))
                 .add(Restrictions.eq("unaccounted", false));
-        
-        if (subjectId.equals("all")) {
-//            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
 
-            // have to check this has any performance issue
-//            Criteria studentCriteria = session.createCriteria(Student.class)
-//                    .add(Restrictions.eq("classRoom", classRoom))
-//                    .add(Restrictions.eq("unaccounted", false));
-            if (filter.equals("all")) {
-//                classRoom.getStudents()
-//                        .stream()
-//                        .filter(student -> !student.isUnaccounted())
-//                        .forEach(student -> add(student, jsonStudents));
-                studentCriteria.list()
-                        .forEach(student -> add((Student) student, jsonStudents));
-                
-            } else {
-//                classRoom.getStudents()
-//                        .stream()
-//                        .filter(student -> !student.isUnaccounted())
-//                        .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
-//                        .forEach(e -> add(e, jsonStudents));
-
-                studentCriteria.add(Restrictions.eq("verified", Boolean.parseBoolean(filter)))
-                        .list()
-                        .forEach(student -> add((Student) student, jsonStudents));
-            }
-        } else {
-//            ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-            Subject subject = (Subject) session.get(Subject.class, Integer.parseInt(subjectId));
-            
-            Subject[] subjects = {subject};
-            if (filter.equals("all")) {
-//                classRoom.getStudents()
-//                        .stream()
-//                        .filter(student -> !student.isUnaccounted())
-//                        .filter(student -> student.getSubjects().contains(subject))
-//                        .forEach(student -> add(student, jsonStudents));
-                studentCriteria.add(Restrictions.in("subjects", subjects))
-                        .list()
-                        .forEach(student -> add((Student) student, jsonStudents));
-                
-            } else {
-                studentCriteria.add(Restrictions.in("subjects", subjects))
-                        .add(Restrictions.eq("verified", Boolean.parseBoolean(filter)))
-                        .list()
-                        .forEach(student -> add((Student) student, jsonStudents));
-
-//                classRoom.getStudents()
-//                        .stream()
-//                        .filter(student -> !student.isUnaccounted())
-//                        .filter(student -> student.isVerified() == Boolean.parseBoolean(filter))
-//                        .filter(student -> student.getSubjects().contains(subject))
-//                        .forEach(e -> add(e, jsonStudents));
-            }
-            
+        if (!filter.equals("all")) {
+            studentCriteria = studentCriteria.add(Restrictions.eq("verified", Boolean.parseBoolean(filter)));
         }
+
+        if (!subjectId.equals("all")) {
+            Subject subject = (Subject) session.get(Subject.class, Long.parseLong(subjectId));
+            Subject[] subjects = {subject};
+            studentCriteria = studentCriteria.add(Restrictions.eq("subjects", subjects));
+        }
+
+        studentCriteria.list()
+                .forEach(student -> add((Student) student, jsonStudents));
+
         out.print(gson.toJson(jsonStudents));
-        
+
     }
-    
+
     private void add(Student student, JsonArray jsonStudents) {
-        
+
         JsonObject studentJson = new JsonObject();
-        
+
         studentJson.addProperty(ID, student.getId());
         studentJson.addProperty(NAME, student.toString());
         studentJson.addProperty(EMAIL, student.getEmail());
@@ -121,17 +78,17 @@ public class SearchStudent extends AjaxController {
         studentJson.addProperty(ROLLNUMBER, student.getRollNumber());
         studentJson.addProperty(VERIFIED, student.isVerified());
         studentJson.add(SUBJECTS, addSubjects(student));
-        
+
         jsonStudents.add(studentJson);
     }
-    
-    private JsonElement addSubjects(Student e) {
+
+    private JsonElement addSubjects(Student theStudent) {
         JsonArray jsonSubjects = new JsonArray();
-        
-        e.getSubjects()
+
+        theStudent.getSubjects()
                 .forEach(subject -> jsonSubjects.add(subject.getName()));
-        
+
         return jsonSubjects;
     }
-    
+
 }

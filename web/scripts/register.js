@@ -130,7 +130,7 @@ $(document).ready(function(){
             email:{
                 required:'Please enter your email address',
                 email: 'Enter a vaild email address',
-                remote: 'Email: {0} is in use'
+                remote: $.validator.format('Email: {0} is in use')
             },
             username:{
                 required: "Please enter your username",

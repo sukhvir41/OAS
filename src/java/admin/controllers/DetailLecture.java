@@ -8,7 +8,6 @@ package admin.controllers;
 import entities.Lecture;
 import entities.Student;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

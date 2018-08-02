@@ -26,14 +26,16 @@ public class AdminSubject extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
      
-        List<Subject> subjects = (List<Subject>) session.createCriteria(Subject.class).list();
-        List<Course> courses = (List<Course>) session.createCriteria(Course.class).list();
+        List<Subject> subjects = (List<Subject>) session.createCriteria(Subject.class)
+                .list();
+        List<Course> courses = (List<Course>) session.createCriteria(Course.class)
+                .list();
 
         req.setAttribute("subjects", subjects);
         req.setAttribute("courses", courses);
 
-        req.getRequestDispatcher("/WEB-INF/admin/adminsubject.jsp").include(req, resp);
-
+        req.getRequestDispatcher("/WEB-INF/admin/adminsubject.jsp")
+                .include(req, resp);
     }
 
 }
