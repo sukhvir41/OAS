@@ -12,6 +12,7 @@ import entities.ClassRoom;
 import entities.Subject;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +37,7 @@ public class GetSubjectOfClassRoom extends AjaxController {
 
         long classroomId = Long.parseLong(req.getParameter("classroom"));
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-        List<Subject> subjects = classRoom.getSubjects();
+        Set<Subject> subjects = classRoom.getSubjects();
         JsonArray jsonSubjects = new JsonArray();
         Gson gson = new Gson();
         subjects.stream()

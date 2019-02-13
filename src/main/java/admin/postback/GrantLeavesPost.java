@@ -5,10 +5,8 @@
  */
 package admin.postback;
 
-import entities.Attendance;
-import entities.Lecture;
-import entities.Student;
-import entities.Teaching;
+import entities.*;
+
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -53,7 +51,7 @@ public class GrantLeavesPost extends PostBackController {
         if (lectures != null && !lectures.isEmpty()) {
             lectures.stream()
                     .filter(lecture -> !checkAttendance(lecture, student, session))
-                    .forEach(lecture -> session.save(new Attendance(true, lecture, student, true)));
+                    .forEach(lecture -> session.save(new Attendance(new AttendanceId(lecture, student),true, true,true)));
         }
         resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + studentId);
     }

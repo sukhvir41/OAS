@@ -6,6 +6,7 @@
 package student.ajax;
 
 import entities.Attendance;
+import entities.AttendanceId;
 import entities.Lecture;
 import entities.Student;
 import java.io.PrintWriter;
@@ -53,7 +54,7 @@ public class MarkAttendance extends AjaxController {
                     String macAddr = NewMacaddress.getMacAddress(req.getRemoteAddr());
                     System.out.println(macAddr.toLowerCase() + " : " + student.getMacId().toLowerCase() + "  : " + req.getRemoteAddr());
                     if (macAddr.toLowerCase().equals(student.getMacId().toLowerCase())) {
-                        Attendance attendance = new Attendance(lecture, student);
+                        Attendance attendance = new Attendance(new AttendanceId(lecture, student),false,true, false);
                         attendance.setAttended(true);
                         attendance.setLeave(false);
                         attendance.setMarkedByTeacher(false);

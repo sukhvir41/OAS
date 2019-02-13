@@ -6,22 +6,18 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.FetchProfile;
+import org.junit.FixMethodOrder;
 
 /**
- *
  * @author sukhvir
  */
 @Entity
@@ -29,22 +25,22 @@ import org.hibernate.annotations.BatchSize;
 @PrimaryKeyJoinColumn(name = "id")
 public class Student extends User implements Comparable<Student> {
 
-    @Column(name = "s_rollnumber")
+    @Column(name = "rollnumber")
     @Getter
     @Setter
     private int rollNumber;
 
-    @Column(name = "s_fname")
+    @Column(name = "fName")
     @Getter
     @Setter
     private String fName;
 
-    @Column(name = "s_lname")
+    @Column(name = "lName")
     @Getter
     @Setter
     private String lName;
 
-    @Column(name = "mac_id")
+    @Column(name = "macId")
     @Getter
     @Setter
     private String macId;
@@ -54,8 +50,8 @@ public class Student extends User implements Comparable<Student> {
     @Setter
     private boolean unaccounted;
 
-    @ManyToOne
-    @JoinTable(name = "class_student_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "class_fid"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classFid", foreignKey = @ForeignKey(name = "studentForeignKey"))
     @Getter
     @Setter
     private ClassRoom classRoom;
@@ -65,18 +61,15 @@ public class Student extends User implements Comparable<Student> {
     @Setter
     private boolean verified;
 
-    @ManyToMany
-    @JoinTable(name = "student_subject_link", joinColumns = @JoinColumn(name = "student_fid"), inverseJoinColumns = @JoinColumn(name = "sub_fid"))
-    @BatchSize(size = 20)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "studentSubjectLink",
+            joinColumns = @JoinColumn(name = "studentFid"),
+            inverseJoinColumns = @JoinColumn(name = "subjectFid"),
+            foreignKey = @ForeignKey(name = "studentSubjectLinkStudentForeignKey"),
+            inverseForeignKey = @ForeignKey(name = "studentSubjectLinkSubjectForeignKey"))
     @Getter
     @Setter
-    private List<Subject> subjects = new ArrayList();
-
-    @OneToMany(mappedBy = "id.student")
-    @BatchSize(size = 40)
-    @Getter
-    @Setter
-    private List<Attendance> attendance = new ArrayList<>();
+    private Set<Subject> subjects = new HashSet<>();
 
     public Student() {
     }
@@ -94,14 +87,6 @@ public class Student extends User implements Comparable<Student> {
         if (!verified) {
             unaccounted = true;
         }
-    }
-
-    /**
-     * this method adds attendance to the student and vice versa
-     */
-    public void addAttendance(Attendance attendance) {
-        attendance.setStudent(this);
-        this.attendance.add(attendance);
     }
 
     /**
@@ -136,7 +121,6 @@ public class Student extends User implements Comparable<Student> {
         return this.getRollNumber() < student.getRollNumber() ? -1 : (this.getRollNumber() == student.getRollNumber()) ? 0 : 1;
     }
 
-    
 
     @Override
     public final UserType getUserType() {

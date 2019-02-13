@@ -36,11 +36,12 @@ public class UnaccountStudent extends Controller {
                     .stream()
                     .forEach(subject -> subject.getStudents().remove(student));
             student.getSubjects().clear();
-            
-            student.getAttendance()
+
+            // todo: write sql for this
+          /*  student.getAttendance()
                     .stream()
                     .forEach(attendance -> removeAttendance(attendance, session));
-            student.getAttendance().clear();
+            student.getAttendance().clear();*/
             
             student.getClassRoom().getStudents().remove(student);
             

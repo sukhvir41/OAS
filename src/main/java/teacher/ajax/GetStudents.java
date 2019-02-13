@@ -55,7 +55,7 @@ public class GetStudents extends AjaxController {
     
     private void add(Student student, JsonArray jsonStudents) {
         JsonObject studentJson = new JsonObject();
-        studentJson.addProperty("id", student.getId());
+        studentJson.addProperty("id", student.getId().toString());
         studentJson.addProperty("name", student.toString());
         studentJson.addProperty("email", student.getEmail());
         studentJson.addProperty("number", student.getNumber());

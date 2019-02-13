@@ -7,17 +7,11 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
@@ -31,13 +25,13 @@ import org.hibernate.annotations.BatchSize;
 public class Subject implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sub_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     @Getter
     @Setter
     private long id;
 
-    @Column(name = "sub_name")
+    @Column(name = "name")
     @Getter
     @Setter
     private String name;
@@ -47,23 +41,21 @@ public class Subject implements Serializable {
     @Setter
     private boolean elective;
 
-    @ManyToOne
-    @JoinTable(name = "course_subject_link", joinColumns = @JoinColumn(name = "subject_fid"), inverseJoinColumns = @JoinColumn(name = "course_fid"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "courseFid", foreignKey = @ForeignKey(name = "subjectCourseForeignKey"))
     @Getter
     @Setter
     private Course course;
 
-    @ManyToMany(mappedBy = "subjects")
-    @BatchSize(size = 20)
+    @ManyToMany(mappedBy = "subjects", fetch = FetchType.LAZY)
     @Getter
     @Setter
-    private List<ClassRoom> classRooms = new ArrayList<>();
+    private Set<ClassRoom> classRooms = new HashSet<>();
 
-    @ManyToMany(mappedBy = "subjects")
-    @BatchSize(size = 40)
+    @ManyToMany(mappedBy = "subjects", fetch = FetchType.LAZY)
     @Getter
     @Setter
-    List<Student> students = new ArrayList<>();
+    private Set<Student> students = new HashSet<>();
 
     public Subject() {
     }

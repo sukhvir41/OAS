@@ -31,6 +31,8 @@ import javax.mail.internet.MimeMessage;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -46,12 +48,15 @@ public class Utils {
 
     //creating Session factory on class load
     static {
-        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-        StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
-        sb.applySettings(cfg.getProperties());
-        StandardServiceRegistry standardServiceRegistry = sb.build();
-        sessionFactory = cfg.buildSessionFactory(standardServiceRegistry);
-
+        StandardServiceRegistry standardRegistry =
+                new StandardServiceRegistryBuilder()
+                        .configure("hibernate.cfg.xml")
+                        .build();
+        Metadata metaData =
+                new MetadataSources(standardRegistry)
+                        .getMetadataBuilder()
+                        .build();
+        sessionFactory = metaData.getSessionFactoryBuilder().build();
     }
 
     private Utils() throws InstantiationException {
@@ -251,14 +256,7 @@ public class Utils {
      *
      * @param regex The expression to be compared
      *
-     * @param flags Match flags, a bit mask that may include null null null null
-     * null null null null null null null null null null null null null null
-     * null null null null null null null null null null null null null null
-     * null null null null null null null null null null null null null null
-     * null null null null null null     {@link #CASE_INSENSITIVE}, {@link #MULTILINE}, {@link #DOTALL},
-     *         {@link #UNICODE_CASE}, {@link #CANON_EQ}, {@link #UNIX_LINES},
-     *         {@link #LITERAL}, {@link #UNICODE_CHARACTER_CLASS} and {@link #COMMENTS}
-     *
+     * @param flag Match flags, a bit mask that may include null
      * @return if the regex matches with string
      *
      */
@@ -348,7 +346,7 @@ public class Utils {
     /**
      * formats the date time to dd/MM/yyyy hh:mm
      *
-     * @param date time to be formated
+     * @param dateTime to be formated
      * @return formated date time
      */
     public static String formatDateTime(LocalDateTime dateTime) {

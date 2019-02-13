@@ -14,6 +14,7 @@ import entities.Teaching;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +41,7 @@ public class TCSassigner extends Controller {
 
         hod = (Teacher) session.get(Teacher.class, hod.getId());
         department = (Department) session.get(Department.class, department.getId());
-        List<Teacher> teachers = department.getTeachers();
+        Set<Teacher> teachers = department.getTeachers();
 
         for (Course course : department.getCourses()) {
             for (ClassRoom classRoom : course.getClassRooms()) {

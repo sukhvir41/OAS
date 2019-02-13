@@ -70,7 +70,7 @@ public class SearchStudent extends AjaxController {
 
         JsonObject studentJson = new JsonObject();
 
-        studentJson.addProperty(ID, student.getId());
+        studentJson.addProperty(ID, student.getId().toString());
         studentJson.addProperty(NAME, student.toString());
         studentJson.addProperty(EMAIL, student.getEmail());
         studentJson.addProperty(NUMBER, student.getNumber());

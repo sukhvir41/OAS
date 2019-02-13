@@ -5,10 +5,8 @@
  */
 package teacher.ajax;
 
-import entities.Attendance;
-import entities.Lecture;
-import entities.Student;
-import entities.Teacher;
+import entities.*;
+
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -62,9 +60,7 @@ public class PutAttendance extends AjaxController {
                     out.print("true");
 
                 } else {
-                    Attendance attend = new Attendance(lecture, student);
-                    attend.setAttended(mark);
-                    attend.setMarkedByTeacher(true);
+                    Attendance attend = new Attendance(new AttendanceId(lecture, student),true,mark,false);
                     session.save(attend);
                     System.out.println("marked");
                     out.print("true");

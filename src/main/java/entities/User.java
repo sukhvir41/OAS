@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -17,28 +18,31 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import utility.BCrypt;
 import utility.Utils;
 
 /**
- *
  * @author sukhvir
  */
 @Entity
 @Table(name = "users", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"email", "username"})})
+        @UniqueConstraint(columnNames = {"email", "username"})})
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User implements Serializable{
+public abstract class User implements Serializable {
 
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "UUID")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     @Getter
     @Setter
-    private long id;
+    private UUID id;
+
 
     @Column(name = "username", unique = true)
     @Getter
@@ -57,7 +61,7 @@ public abstract class User implements Serializable{
     @Column(name = "token")
     @Getter
     @Setter
-    private String token;
+    private String token; // used for forget password
 
     @Column(name = "number")
     @Getter
@@ -67,21 +71,21 @@ public abstract class User implements Serializable{
     @Column(name = "used")
     @Getter
     @Setter
-    private boolean used;
+    private boolean used; // used to check if the forget password is used or not
 
-    @Column(name = "sessionid")
+    @Column(name = "sessionId")
     @Getter
     @Setter
     private String sessionId;
 
-    @Column(name = "sessiontoken")
+    @Column(name = "sessionToken")
     private String sessionToken;
 
     @Column(name = "date")
     @Getter
     @Setter
     @Convert(converter = LocalDateTimeConverter.class)
-    private LocalDateTime date; // used check the token expiry date
+    private LocalDateTime date; // used check the forget password token expiry date
 
     public User() {
     }

@@ -21,19 +21,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "attendance")
 public class Attendance implements Serializable {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "attendance_id", nullable = false)
-//    @Getter @Setter
-//    private long id;
 
     @EmbeddedId
     @Getter
     @Setter(AccessLevel.PROTECTED)
     private AttendanceId id;
 
-    @Column(name = "marked_ny_teacher")
+    @Column(name = "markedByTeacher")
     @Getter
     @Setter
     private boolean markedByTeacher = false;
@@ -48,52 +42,20 @@ public class Attendance implements Serializable {
     @Setter
     private boolean leave = false;
 
-//    @ManyToOne
-//    @JoinColumn(name = "lecture_fid")
-//    @Getter @Setter
-//    private Lecture lecture;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "student_fid")
-//    @Getter @Setter
-//    private Student student;
     public Attendance() {
     }
 
-    /**
-     * this sets the attendance to true
-     */
-    public Attendance(Lecture lecture, Student student) {
-        addLecture(lecture);
-        addStudent(student);
-        attended = true;
-    }
-
-    public Attendance(boolean attended, Lecture lecture, Student student) {
-        this.attended = attended;
-        addLecture(lecture);
-        addStudent(student);
-    }
-
-    public Attendance(boolean attended, Lecture lecture, Student student, boolean markedByTeacher) {
-        this.attended = attended;
-        addLecture(lecture);
-        addStudent(student);
+    public Attendance(AttendanceId id, boolean markedByTeacher, boolean attended, boolean leave) {
+        this.id = id;
         this.markedByTeacher = markedByTeacher;
+        this.attended = attended;
+        this.leave = leave;
     }
 
-    /**
-     * this methods adds the student to attendance and vice versa
-     */
-    public final void addStudent(Student student) {
-        student.addAttendance(this);
-    }
-
-    /**
-     * this methods adds attendance to lecture and vice versa
-     */
-    public final void addLecture(Lecture lecture) {
-        lecture.addAttendance(this);
+    public Attendance(AttendanceId id, boolean attended, boolean leave) {
+        this.id = id;
+        this.attended = attended;
+        this.leave = leave;
     }
 
     protected void setLecture(Lecture theLecture) {

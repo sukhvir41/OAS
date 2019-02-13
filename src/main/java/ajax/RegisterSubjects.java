@@ -13,6 +13,7 @@ import entities.Course;
 import entities.Subject;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +42,7 @@ public class RegisterSubjects extends AjaxController {
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
         JsonArray jsonSubjects = new JsonArray();
-        List<Subject> subjects = classRoom.getSubjects();
+        Set<Subject> subjects = classRoom.getSubjects();
         subjects.forEach(e -> add(e, jsonSubjects));
 
         Gson gson = new Gson();

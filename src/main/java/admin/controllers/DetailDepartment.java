@@ -10,6 +10,7 @@ import entities.Department;
 import entities.Teacher;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class DetailDepartment extends Controller {
         long departmentID = Long.parseLong(req.getParameter("departmentId"));
 
         Department department = (Department) session.get(Department.class, departmentID);
-        List<Teacher> teachers = department.getTeachers();
+        Set<Teacher> teachers = department.getTeachers();
         List<Course> courses = department.getCourses();
         Teacher hod = department.getHod();
 

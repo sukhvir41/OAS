@@ -36,7 +36,7 @@ public class GetAttendance extends AjaxController {
         JsonObject object = new JsonObject();
         object.addProperty("rollNumber", e.getRollNumber());
         object.addProperty("name", e.toString());
-        object.addProperty("id", e.getId());
+        object.addProperty("id", e.getId().toString());
         json.add(object);
     }
 
@@ -55,11 +55,12 @@ public class GetAttendance extends AjaxController {
                 .forEach(e -> students.add(e));
         Collections.sort(students);
         List<Student> present = new ArrayList<>();
-        lecture.getAttendance().stream()
+        // todo: write sql for this
+        /* lecture.getAttendance().stream()
                 .filter(e -> e.isAttended())
                 .forEach(e -> present.add(e.getStudent()));
         students.removeAll(present);
-        Collections.sort(present);
+        Collections.sort(present);*/
 //            List<Student> absent = session.createCriteria(Student.class)
 //                    .add(Restrictions.eq("classRoom", lecture.getTeaching().getClassRoom()))
 //                    .addOrder(Order.asc("rollNumber"))

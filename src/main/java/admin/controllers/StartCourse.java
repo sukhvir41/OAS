@@ -32,7 +32,7 @@ public class StartCourse extends Controller {
         long courseId = Long.parseLong(req.getParameter("courseId"));
 
         Course course = (Course) session.get(Course.class, courseId);
-        course.startCourse();
+
 
         resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
     }

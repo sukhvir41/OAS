@@ -40,7 +40,10 @@ public class UnaccountStudent extends PostBackController {
             student.getSubjects().clear();
             //student.getAttendance().stream()
             //        .forEach(e -> e.setStudent(null));
-            student.getAttendance().clear();
+
+            //todo: rewrite sql for this
+            //student.getAttendance().clear();
+
             session.createCriteria(Attendance.class)
                     .add(Restrictions.isNull("student"))
                     .list()

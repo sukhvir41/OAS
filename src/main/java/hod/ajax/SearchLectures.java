@@ -87,11 +87,12 @@ public class SearchLectures extends AjaxController {
 
     private void add(JsonArray jsonLectures, Lecture theLecture) {
 
-        int attendentStudent = theLecture.getAttendance()
+        // todo: write sql for this
+       /* int attendentStudent = theLecture.getAttendance()
                 .stream()
                 .filter(attendance -> attendance.isAttended())
                 .collect(Collectors.toList())
-                .size();
+                .size();*/
         int totalStudents = theLecture.getTeaching()
                 .getClassRoom()
                 .getStudents()
@@ -106,8 +107,9 @@ public class SearchLectures extends AjaxController {
         lecture.addProperty("subject", theLecture.getTeaching().getSubject().toString());
         lecture.addProperty("count", theLecture.getCount());
         lecture.addProperty("date", Utils.formatDateTime(theLecture.getDate()));
-        lecture.addProperty("present", attendentStudent);
-        lecture.addProperty("absent", totalStudents - attendentStudent);
+        // todo: write sql for this
+        //lecture.addProperty("present", attendentStudent);
+        //lecture.addProperty("absent", totalStudents - attendentStudent);
 
         jsonLectures.add(lecture);
 

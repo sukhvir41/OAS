@@ -38,7 +38,7 @@ public class UpdateClassRoom extends PostBackController {
         classRoom.setName(name);
         classRoom.setDivision(division);
         classRoom.setMinimumSubjects(minimumSubjects);
-        classRoom.setSemister(semister);
+        classRoom.setSemester(semister);
         session.update(classRoom);
 
         if (req.getParameter("from").equals("")) {

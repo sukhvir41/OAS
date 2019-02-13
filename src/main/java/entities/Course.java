@@ -9,22 +9,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 /**
- *
  * @author sukhvir
  */
 @Entity
@@ -32,41 +23,35 @@ import org.hibernate.annotations.BatchSize;
 public class Course implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "co_id")
-    @Getter @Setter
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    @Getter
+    @Setter
     private long id;
 
-    @Column(name = "co_name")
-    @Getter @Setter
+    @Column(name = "name")
+    @Getter
+    @Setter
     private String name;
 
-    //remove
-    @Column(name = "start_date")
-    @Getter @Setter
-    private Date start;
-    //remove
-    @Column(name = "end_date")
-    @Getter @Setter
-    private Date end;
-    //remove
-    @Column(name = "started")
-    @Getter @Setter
-    private boolean started = false;
-
-    @ManyToOne
-    @JoinTable(name = "department_course_link", joinColumns = @JoinColumn(name = "course_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))
-    @Getter @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "departmentCourseLink",
+            joinColumns = @JoinColumn(name = "courseFid"),
+            inverseJoinColumns = @JoinColumn(name = "departmentFid"),
+            foreignKey = @ForeignKey(name = "departmentCourseLinkCourseForeignKey"),
+            inverseForeignKey = @ForeignKey(name = "departmentCourseLinkDepartmentForeignKey"))
+    @Getter
+    @Setter
     private Department department;
 
-    @OneToMany(mappedBy = "course")
-    @BatchSize(size = 20)
-    @Getter @Setter
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @Getter
+    @Setter
     private List<ClassRoom> classRooms = new ArrayList();
 
-    @OneToMany(mappedBy = "course")
-    @BatchSize(size = 20)
-    @Getter @Setter
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @Getter
+    @Setter
     private List<Subject> subjects = new ArrayList();
 
     public Course() {
@@ -116,30 +101,9 @@ public class Course implements Serializable {
         }
     }
 
-    /**
-     * this methods starts the course if not started
-     */
-    public void startCourse() {
-        if (!this.started) {
-            this.start = new Date();
-            this.end = null;
-            this.started = true;
-        }
-    }
-
-    /**
-     * this method stops the course if not stopped
-     */
-    public void stopCourse() {
-        if (started) {
-            this.end = new Date();
-            this.started = false;
-        }
-    }
-
     @Override
     public String toString() {
         return name;
     }
-    
+
 }

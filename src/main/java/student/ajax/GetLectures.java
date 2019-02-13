@@ -79,11 +79,13 @@ public class GetLectures extends AjaxController {
         lecture.addProperty("subject", theLecture.getTeaching().getSubject().toString());
         lecture.addProperty("count", theLecture.getCount());
         lecture.addProperty("date", Utils.formatDateTime(theLecture.getDate()));
-        
-        List<Attendance> attendaces = theLecture.getAttendance()
+
+        //todo : write sql for this
+        /*
+       *//* List<Attendance> attendaces = theLecture.getAttendance()
                 .stream()
                 .filter(attendance -> attendance.getStudent().getId() == student.getId())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*//*
         System.out.println(attendaces.size());
         attendaces.stream()
                 .forEach(attendace -> System.out.println(attendace.isAttended() + "   " + attendace.getLecture().getId() + "    " + attendace.getStudent().toString() + "    " + attendace.getStudent().getId()));
@@ -95,7 +97,7 @@ public class GetLectures extends AjaxController {
             }
         } else {
             lecture.addProperty("status", "absent");
-        }
+        }*/
         
         jsonLectures.add(lecture);
     }

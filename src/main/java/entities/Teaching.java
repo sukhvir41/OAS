@@ -6,15 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import lombok.Getter;
@@ -30,32 +22,31 @@ import org.hibernate.annotations.BatchSize;
 public class Teaching implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tcs_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     @Getter
     @Setter
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_fid")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacherFid", foreignKey = @ForeignKey(name = "tcsTeacherForeignKey"))
     @Getter
     @Setter
     private Teacher teacher;
 
-    @ManyToOne
-    @JoinColumn(name = "class_fid")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classFid", foreignKey = @ForeignKey(name = "tcsClassForeignKey"))
     @Getter
     @Setter
     private ClassRoom classRoom;
 
-    @ManyToOne
-    @JoinColumn(name = "subject_fid")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subjectFid", foreignKey = @ForeignKey(name = "tcsSubjectForeignKey"))
     @Getter
     @Setter
     private Subject subject;
 
-    @OneToMany(mappedBy = "teaching")
-    @BatchSize(size = 40)
+    @OneToMany(mappedBy = "teaching", fetch = FetchType.LAZY)
     @Getter
     @Setter
     List<Lecture> lectures = new ArrayList<>();

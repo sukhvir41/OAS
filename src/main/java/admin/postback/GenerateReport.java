@@ -88,7 +88,7 @@ public class GenerateReport extends ReportPostBackController {
         text.append("   Division:   ", (XSSFFont) font);
         text.append(classRoom.getDivision(), (XSSFFont) fontBold);
         text.append("   Semester:   ", (XSSFFont) font);
-        text.append(String.valueOf(classRoom.getSemister()), (XSSFFont) fontBold);
+        text.append(String.valueOf(classRoom.getSemester()), (XSSFFont) fontBold);
         text.append("   Course:   ", (XSSFFont) font);
         text.append(classRoom.getCourse().getName(), (XSSFFont) fontBold);
         text.append("   From:   ", (XSSFFont) font);

@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import entities.Department;
 import entities.Teacher;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +52,7 @@ public class SearchTeacherByName extends AjaxController {
 
     private void add(Teacher teacher, JsonArray jsonTeachers) {
         JsonObject teacherJson = new JsonObject();
-        teacherJson.addProperty(ID, teacher.getId());
+        teacherJson.addProperty(ID, teacher.getId().toString());
         teacherJson.addProperty(NAME, teacher.toString());
         teacherJson.addProperty(NUMBER, teacher.getNumber());
         teacherJson.addProperty(EMAIL, teacher.getEmail());
@@ -69,7 +70,7 @@ public class SearchTeacherByName extends AjaxController {
 
     }
 
-    private JsonElement addDepartment(List<Department> departments) {
+    private JsonElement addDepartment(Collection<Department> departments) {
         JsonArray department = new JsonArray();
         departments.stream()
                 .forEach(e -> department.add(e.getName()));

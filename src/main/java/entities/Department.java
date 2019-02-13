@@ -7,18 +7,11 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
@@ -32,34 +25,32 @@ import org.hibernate.annotations.BatchSize;
 public class Department implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "d_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     @Getter
     @Setter
     private long id;
 
-    @Column(name = "d_name")
+    @Column(name = "name")
     @Getter
     @Setter
     private String name;
 
-    @ManyToOne
-    @JoinTable(name = "department_hod_link", joinColumns = @JoinColumn(name = "department_fid"), inverseJoinColumns = @JoinColumn(name = "teacher_hod_fid"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hodTeacherFid", foreignKey = @ForeignKey(name = "departmentHodTeacherForeignKey"))
     @Getter
     @Setter
     private Teacher hod;
 
-    @OneToMany(mappedBy = "department")
-    @BatchSize(size = 20)
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     @Getter
     @Setter
     private List<Course> courses = new ArrayList();
 
     @ManyToMany(mappedBy = "department")
-    @BatchSize(size = 20)
     @Getter
     @Setter
-    private List<Teacher> teachers = new ArrayList();
+    private Set<Teacher> teachers = new HashSet();
 
     public Department() {
     }

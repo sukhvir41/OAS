@@ -6,19 +6,21 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 /**
- *
  * @author sukhvir
  */
 @Entity
@@ -26,12 +28,12 @@ import org.hibernate.annotations.BatchSize;
 @PrimaryKeyJoinColumn(name = "id")
 public class Teacher extends User {
 
-    @Column(name = "t_fname")
+    @Column(name = "fName")
     @Getter
     @Setter
     private String fName;
 
-    @Column(name = "t_lname")
+    @Column(name = "lName")
     @Getter
     @Setter
     private String lName;
@@ -46,34 +48,36 @@ public class Teacher extends User {
     @Setter
     private boolean unaccounted;
 
-    @Column(name = "t_hod")
+    @Column(name = "isHod")
     @Getter
     @Setter
     private boolean hod;
 
-    @OneToMany(mappedBy = "hod", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hod", fetch = FetchType.LAZY)
     @Getter
     @Setter
     private List<Department> hodOf = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "class_fid")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classFid", foreignKey = @ForeignKey(name = "classTeacherClassForeignKey"))
     @Getter
     @Setter
-    private ClassRoom classRoom;
+    private ClassRoom classRoom; // class teacher classroom
 
-    @OneToMany(mappedBy = "teacher")
-    @BatchSize(size = 20)
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
     @Getter
     @Setter
     private List<Teaching> teaches = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "teacher_department_link", joinColumns = @JoinColumn(name = "teacher_fid"), inverseJoinColumns = @JoinColumn(name = "department_fid"))
-    @BatchSize(size = 2)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "teacherDepartmentLink",
+            joinColumns = @JoinColumn(name = "teacherFid"),
+            inverseJoinColumns = @JoinColumn(name = "departmentFid"),
+            foreignKey = @ForeignKey(name = "teacherDepartmentLinkTeacherForeignKey"),
+            inverseForeignKey = @ForeignKey(name = "teacherDepartmentLinkDepartmentForeignKey"))
     @Getter
     @Setter
-    private List<Department> department = new ArrayList<>();
+    private Set<Department> department = new HashSet<>();
 
     public Teacher() {
     }

@@ -63,9 +63,10 @@ public class CreateLectureHome extends Controller {
                         .forEach(e -> students.add(e));
                 Collections.sort(students);
                 List<Student> present = new ArrayList<>();
-                lecture.getAttendance().stream()
+                //todo: rewrite sql for this
+                /*lecture.getAttendance().stream()
                         .filter(e -> e.isAttended())
-                        .forEach(e -> present.add(e.getStudent()));
+                        .forEach(e -> present.add(e.getStudent()));*/
                 students.removeAll(present);
                 Collections.sort(present);
 //                    List<Student> present = new ArrayList<>();
@@ -108,9 +109,10 @@ public class CreateLectureHome extends Controller {
                         .forEach(student -> students.add(student));
                 Collections.sort(students);
                 List<Student> present = new ArrayList<>();
-                lecture.getAttendance().stream()
+                //todo: rewrite sql for this
+                /*lecture.getAttendance().stream()
                         .filter(e -> e.isAttended())
-                        .forEach(e -> present.add(e.getStudent()));
+                        .forEach(e -> present.add(e.getStudent()));*/
                 students.removeAll(present);
                 Collections.sort(present);
 //                    List<Student> present = new ArrayList<>();

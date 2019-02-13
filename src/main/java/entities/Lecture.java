@@ -9,14 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
@@ -30,7 +24,7 @@ import org.hibernate.annotations.BatchSize;
 public class Lecture implements Serializable{
 
     @Id
-    @Column(name = "lec_id")
+    @Column(name = "id")
     @Getter
     @Setter
     private String id;
@@ -39,11 +33,10 @@ public class Lecture implements Serializable{
     @Getter
     @Setter
     @Convert(converter = LocalDateTimeConverter.class)
-    //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
 
-    @ManyToOne
-    @JoinColumn(name = "tcs_fid")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tcsFid", foreignKey = @ForeignKey(name = "lectureTcsForeignKey"))
     @Getter
     @Setter
     Teaching teaching;
@@ -58,12 +51,6 @@ public class Lecture implements Serializable{
     @Setter
     private boolean ended = false;
 
-    @OneToMany(mappedBy = "id.lecture")
-    @BatchSize(size = 20)
-    @Getter
-    @Setter
-    private List<Attendance> attendance = new ArrayList<Attendance>();
-
     public Lecture() {
     }
 
@@ -75,14 +62,6 @@ public class Lecture implements Serializable{
 
     public final void addTeaching(Teaching teaching) {
         teaching.addLecture(this);
-    }
-
-    /**
-     * this method adds attendance to lecture and vice versa
-     */
-    public void addAttendance(Attendance attendance) {
-        attendance.setLecture(this);
-        this.attendance.add(attendance);
     }
 
     @Override

@@ -5,11 +5,8 @@
  */
 package classteacher.postback;
 
-import entities.Attendance;
-import entities.Lecture;
-import entities.Student;
-import entities.Teacher;
-import entities.Teaching;
+import entities.*;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -19,13 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.PostBackController;
 import utility.Utils;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/grantleavepost")
@@ -58,7 +55,7 @@ public class GrantLeavePost extends PostBackController {
             if (lectures != null && !lectures.isEmpty()) {
                 lectures.stream()
                         .filter(lecture -> !checkAttendance(lecture, student, session))
-                        .forEach(lecture -> session.save(new Attendance(true, lecture, student, true)));
+                        .forEach(lecture -> session.save(new Attendance(new AttendanceId(lecture, student), true, true, true)));
             }
             resp.sendRedirect("/OAS/teacher/classteacher/detailstudent?studentId=" + studentId);
         } else {

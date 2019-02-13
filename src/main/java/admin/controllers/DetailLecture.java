@@ -41,7 +41,8 @@ public class DetailLecture extends Controller {
 
         req.setAttribute("total", students.size());// setting the total size first as the list will have only absent students later
 
-        List<Student> present = lecture.getAttendance()
+        // todo: write sql for this
+       /* List<Student> present = lecture.getAttendance()
                 .stream()
                 .filter(attendance -> attendance.isAttended())
                 .map(attendance -> attendance.getStudent())
@@ -49,10 +50,12 @@ public class DetailLecture extends Controller {
         students.removeAll(present);//removing all present students from the students list
 
         Collections.sort(present);// sorting all students accordig to their to roll number
-
-        req.setAttribute("present", present);
+*/
+        // todo: write sql for this
+        //req.setAttribute("present", present);
         req.setAttribute("absent", students);
-        req.setAttribute("headcount", present.size());
+        // todo: write sql for this
+        //req.setAttribute("headcount", present.size());
         req.setAttribute("lecture", lecture);
         req.getRequestDispatcher("/WEB-INF/admin/detaillecture.jsp").include(req, resp);
     }

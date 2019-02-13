@@ -7,25 +7,16 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 /**
- *
  * @author sukhvir
  */
 @Entity
@@ -33,68 +24,80 @@ import org.hibernate.annotations.BatchSize;
 public class ClassRoom implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "c_id")
-    @Getter @Setter
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    @Getter
+    @Setter
     private long id;
 
-    @Column(name = "c_name")
-    @Getter @Setter
+    @Column(name = "name")
+    @Getter
+    @Setter
     private String name;
 
-    @Column(name = "c_div")
-    @Getter @Setter
+    @Column(name = "division")
+    @Getter
+    @Setter
     private String division;
 
-    @Column(name = "c_sem")
-    @Getter @Setter
-    private int semister;
+    @Column(name = "semester")
+    @Getter
+    @Setter
+    private int semester;
 
-    @Column(name = "c_minimum_subs")
-    @Getter @Setter
+    // do we need this
+    @Column(name = "minimumSubjects")
+    @Getter
+    @Setter
     private int minimumSubjects;
 
-    @ManyToOne
-    @JoinTable(name = "course_class_link", joinColumns = @JoinColumn(name = "class_fid"), inverseJoinColumns = @JoinColumn(name = "course_fid"))
-    @Getter @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "courseFid", foreignKey = @ForeignKey(name = "classCourseForeignKey"))
+    @Getter
+    @Setter
     private Course course;
 
-    @OneToOne(mappedBy = "classRoom")
-    @Getter @Setter
+    @OneToOne(mappedBy = "classRoom", fetch = FetchType.LAZY)
+    @Getter
+    @Setter
     private Teacher classTeacher;
 
-    @OneToMany(mappedBy = "classRoom")
-    @BatchSize(size = 40)
-    @Getter @Setter
+    @OneToMany(mappedBy = "classRoom" , fetch = FetchType.LAZY)
+    @Getter
+    @Setter
     private List<Student> students = new ArrayList();
 
-    @ManyToMany
-    @JoinTable(name = "subject_class_link", joinColumns = @JoinColumn(name = "class_fid"), inverseJoinColumns = @JoinColumn(name = "subject_fid"))
-    @BatchSize(size = 10)
-    @Getter @Setter
-    private List<Subject> subjects = new ArrayList<>();
+    @ManyToMany(fetch =  FetchType.LAZY)
+    @JoinTable(name = "subjectClassLink",
+            joinColumns = @JoinColumn(name = "classFid"),
+            inverseJoinColumns = @JoinColumn(name = "subjectFid"),
+            foreignKey = @ForeignKey(name = "subjectClassLinkClassForeignKey"),
+            inverseForeignKey = @ForeignKey(name = "subjectClassLinkSubjectForeignKey"))
+    @Getter
+    @Setter
+    private Set<Subject> subjects = new HashSet<>();
 
     public ClassRoom() {
     }
 
-    public ClassRoom(String name, String division, int semister, int minimumSubecjts) {
+    public ClassRoom(String name, String division, int semester, int minimumSubjects) {
         this.name = name;
         this.division = division;
-        this.semister = semister;
-        this.minimumSubjects = minimumSubecjts;
+        this.semester = semester;
+        this.minimumSubjects = minimumSubjects;
     }
 
-    public ClassRoom(String name, String division, int semister, Course course) {
+    public ClassRoom(String name, String division, int semester, Course course) {
         this.name = name;
         this.division = division;
-        this.semister = semister;
+        this.semester = semester;
         this.course = course;
     }
 
-    public ClassRoom(String name, String division, int semister, Course course, int minimumSubjects) {
+    public ClassRoom(String name, String division, int semester, Course course, int minimumSubjects) {
         this.name = name;
         this.division = division;
-        this.semister = semister;
+        this.semester = semester;
         this.minimumSubjects = minimumSubjects;
         addCourse(course);
     }
@@ -137,8 +140,8 @@ public class ClassRoom implements Serializable {
 
     @Override
     public String toString() {
-        return name+ " - " +division+ " - " +course.toString();
+        return name + " - " + division + " - " + course.toString();
     }
 
-    
+
 }
