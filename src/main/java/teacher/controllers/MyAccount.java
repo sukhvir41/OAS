@@ -5,13 +5,15 @@
  */
 package teacher.controllers;
 
-import entities.Teacher;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
+
+import entities.Teacher;
 import utility.Controller;
 
 /**
@@ -26,7 +28,7 @@ public class MyAccount extends Controller {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
 
-        req.setAttribute("username", teacher.getUsername());
+        req.setAttribute("username", teacher.getUser().getUsername());
         req.setAttribute("teacher", teacher);
 
         req.getRequestDispatcher("/WEB-INF/teacher/teachermyaccount.jsp").include(req, resp);

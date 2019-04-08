@@ -5,16 +5,16 @@
  */
 package hod.controllers;
 
-import entities.Department;
-import entities.Student;
-import entities.UserType;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+
+import entities.Department;
+import entities.Student;
 import utility.Controller;
 
 /**
@@ -34,7 +34,7 @@ public class DetailStudent extends Controller {
 
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
 
-            req.setAttribute("username", student.getUsername());
+            req.setAttribute("username", student.getUser().getUsername());
             req.setAttribute("student", student);
             req.getRequestDispatcher("/WEB-INF/hod/detailstudent.jsp").include(req, resp);
         } else {

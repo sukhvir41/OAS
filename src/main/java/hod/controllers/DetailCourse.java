@@ -5,14 +5,16 @@
  */
 package hod.controllers;
 
-import entities.Course;
-import entities.Department;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
+
+import entities.Course;
+import entities.Department;
 import utility.Controller;
 
 /**

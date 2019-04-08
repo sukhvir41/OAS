@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
-import lombok.Getter;
+
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;

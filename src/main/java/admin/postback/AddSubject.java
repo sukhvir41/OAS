@@ -5,23 +5,19 @@
  */
 package admin.postback;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+
 import entities.ClassRoom;
 import entities.Course;
 import entities.Subject;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
-import utility.Utils;
-import static java.lang.System.out;
-import javax.servlet.http.HttpSession;
 import utility.PostBackController;
 
 /**

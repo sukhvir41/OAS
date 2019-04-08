@@ -6,71 +6,118 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
+
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 /**
- *
  * @author sukhvir
  */
-@Entity
+@Entity(name = "Attendance")
 @Table(name = "attendance")
 public class Attendance implements Serializable {
 
-    @EmbeddedId
-    @Getter
-    @Setter(AccessLevel.PROTECTED)
-    private AttendanceId id;
+	@EmbeddedId
+	@Getter
+	@Setter(AccessLevel.PRIVATE)
+	@NonNull
+	private AttendanceId id;
 
-    @Column(name = "markedByTeacher")
-    @Getter
-    @Setter
-    private boolean markedByTeacher = false;
+	@Column(name = "marked_by_teacher", nullable = false)
+	@Getter
+	@Setter
+	private boolean markedByTeacher = false;
 
-    @Column(name = "attended")
-    @Getter
-    @Setter
-    private boolean attended;
+	@Column(name = "attended", nullable = false)
+	@Getter
+	@Setter
+	private boolean attended;
 
-    @Column(name = "leave")
-    @Getter
-    @Setter
-    private boolean leave = false;
+	@Column(name = "leave", nullable = false)
+	@Getter
+	@Setter
+	private boolean leave = false;
 
-    public Attendance() {
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId("lectureId")
+	@JoinColumn(name = "lecture_fid", foreignKey = @ForeignKey(name = "lecture_foreign_key"), nullable = false)
+	@NonNull
+	private Lecture lecture;
 
-    public Attendance(AttendanceId id, boolean markedByTeacher, boolean attended, boolean leave) {
-        this.id = id;
-        this.markedByTeacher = markedByTeacher;
-        this.attended = attended;
-        this.leave = leave;
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId("studentId")
+	@JoinColumn(name = "student_fid", foreignKey = @ForeignKey(name = "student_foreign_key"), nullable = false)
+	@NonNull
+	private Student student;
 
-    public Attendance(AttendanceId id, boolean attended, boolean leave) {
-        this.id = id;
-        this.attended = attended;
-        this.leave = leave;
-    }
 
-    protected void setLecture(Lecture theLecture) {
-        this.id.setLecture(theLecture);
-    }
+	public Attendance() {
+	}
 
-    protected void setStudent(Student theStudent) {
-        this.id.setStudent(theStudent);
-    }
+	public Attendance(Lecture theLecture, Student theStudent, boolean attended) {
+		this.lecture = theLecture;
+		this.student = theStudent;
+		this.attended = attended;
+		this.id = new AttendanceId( lecture.getId(), student.getId() );
+	}
 
-    public Lecture getLecture() {
-        return this.id.getLecture();
-    }
+	public Attendance(
+			@NonNull Lecture lecture,
+			@NonNull Student student,
+			boolean attended,
+			boolean markedByTeacher,
+			boolean leave) {
+		this.markedByTeacher = markedByTeacher;
+		this.attended = attended;
+		this.leave = leave;
+		this.lecture = lecture;
+		this.student = student;
+		this.id = new AttendanceId( lecture.getId(), student.getId() );
+	}
 
-    public Student getStudent() {
-        return this.id.getStudent();
-    }
+	protected void setLecture(Lecture theLecture) {
+		this.id.setLectureId( theLecture.getId() );
+	}
+
+	protected void setStudent(Student theStudent) {
+		this.id.setStudentId( theStudent.getId() );
+	}
+
+	public Lecture getLecture() {
+		return this.lecture;
+	}
+
+	public Student getStudent() {
+		return this.student;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if ( this == o ) {
+			return true;
+		}
+		if ( o == null || getClass() != o.getClass() ) {
+			return false;
+		}
+		Attendance that = (Attendance) o;
+		return lecture.equals( that.lecture ) &&
+				student.equals( that.student );
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash( lecture, student );
+	}
 }

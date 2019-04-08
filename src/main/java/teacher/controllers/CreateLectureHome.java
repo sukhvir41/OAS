@@ -5,9 +5,6 @@
  */
 package teacher.controllers;
 
-import entities.Lecture;
-import entities.Student;
-import entities.Teacher;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,9 +15,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+
+import entities.Lecture;
+import entities.Student;
+import entities.Teacher;
 import utility.Controller;
 
 /**

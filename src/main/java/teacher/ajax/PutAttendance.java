@@ -5,8 +5,6 @@
  */
 package teacher.ajax;
 
-import entities.*;
-
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,12 +12,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+
+import entities.Attendance;
+import entities.Lecture;
+import entities.Student;
+import entities.Teacher;
 import utility.AjaxController;
 
 /**
- *
  * @author icr
  */
 @WebServlet(urlPatterns = "/teacher/ajax/putattendance")
@@ -60,7 +63,7 @@ public class PutAttendance extends AjaxController {
                     out.print("true");
 
                 } else {
-                    Attendance attend = new Attendance(new AttendanceId(lecture, student),true,mark,false);
+                    Attendance attend = new Attendance(lecture, student, mark, true, false);
                     session.save(attend);
                     System.out.println("marked");
                     out.print("true");

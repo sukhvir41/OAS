@@ -5,7 +5,6 @@
  */
 package ajax;
 
-import entities.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -16,8 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+
+import entities.User;
 import utility.AjaxController;
 import utility.Utils;
 

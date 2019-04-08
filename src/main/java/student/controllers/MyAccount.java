@@ -5,31 +5,37 @@
  */
 package student.controllers;
 
-import entities.Student;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
+
+import entities.Student;
 import utility.Controller;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/student/myaccount")
 public class MyAccount extends Controller {
 
-    @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        Student student = (Student) req.getSession().getAttribute("student");
-        student = (Student) session.get(Student.class, student.getId());
+	@Override
+	public void process(
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			Session session,
+			HttpSession httpSession,
+			PrintWriter out) throws Exception {
+		Student student = (Student) req.getSession().getAttribute( "student" );
+		student = (Student) session.get( Student.class, student.getId() );
 
-        req.setAttribute("username", student.getUsername());
-        req.setAttribute("student", student);
+		req.setAttribute( "username", student.getUser().getUsername() );
+		req.setAttribute( "student", student );
 
-        req.getRequestDispatcher("/WEB-INF/student/studentmyaccount.jsp").include(req, resp);
-    }
+		req.getRequestDispatcher( "/WEB-INF/student/studentmyaccount.jsp" ).include( req, resp );
+	}
 
 }

@@ -5,12 +5,6 @@
  */
 package teacher.ajax;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import entities.Lecture;
-import entities.Teacher;
-import entities.Teaching;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
@@ -18,9 +12,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import entities.Lecture;
+import entities.Teacher;
+import entities.Teaching;
 import utility.AjaxController;
 import utility.Utils;
 
@@ -36,7 +38,7 @@ public class GetLectures extends AjaxController {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
 
-        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         int teachingId = Integer.parseInt(req.getParameter("teachingId"));

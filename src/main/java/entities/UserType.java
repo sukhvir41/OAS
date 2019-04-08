@@ -6,48 +6,57 @@
 package entities;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import lombok.Getter;
 
 /**
- *
  * @author sukhvir
  */
 public enum UserType {
 
-    Admin("admin", "admin"),
-    Student("student", "student"),
-    Teacher("teacher", "teacher");
+	Admin( "Admin", "admin", Admin.class ,"entities.Admin"),
+	Student( "Student", "student", Student.class,"entities.Student" ),
+	Teacher( "Teacher", "teacher", Teacher.class , "entities.Teacher");
 
-    final private String type;
+	@Getter
+	final private String type;
 
-    private final AtomicInteger count;
+	private final AtomicInteger count;
 
-    @Getter
-    final private String homeLink;
+	@Getter
+	final private String homeLink;
 
-    private UserType(String type, String theLink) {
-        this.type = type;
-        this.homeLink = theLink;
-        this.count = new AtomicInteger(0);
-    }
+	@Getter
+	final private Class userClass;
 
-    @Override
-    public String toString() {
-        return type;
-    }
+	@Getter
+	final private String entityName;
 
-    public void incrementCount() {
-        count.incrementAndGet();
-    }
+	UserType(String type, String theLink, Class userClass, String entityName) {
+		this.type = type;
+		this.homeLink = theLink;
+		this.count = new AtomicInteger( 0 );
+		this.userClass = userClass;
+		this.entityName = entityName;
+	}
 
-    public int getCount() {
-        return count.get();
-    }
+	@Override
+	public String toString() {
+		return type;
+	}
 
-    public void decrementCount() {
-        if (count.get() != 0) {
-            count.decrementAndGet();
-        }
-    }
+	public void incrementCount() {
+		count.incrementAndGet();
+	}
+
+	public int getCount() {
+		return count.get();
+	}
+
+	public void decrementCount() {
+		if ( count.get() != 0 ) {
+			count.decrementAndGet();
+		}
+	}
 
 }

@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -14,113 +15,141 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import utility.BCrypt;
 import utility.Utils;
 
 /**
  * @author sukhvir
  */
-@Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"email", "username"})})
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User implements Serializable {
-
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(columnDefinition = "UUID")
-    @Id
-    @Getter
-    @Setter
-    private UUID id;
+@Entity(name = "User")
+@Table(name = "users")
+public final class User implements Serializable {
 
 
-    @Column(name = "username", unique = true)
-    @Getter
-    @Setter
-    private String username;
+	@Id
+	@Column
+	@Getter
+	@Setter
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+			name = "UUID",
+			strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	private UUID id;
 
-    @Column(name = "password")
-    @Getter(value = AccessLevel.PRIVATE)
-    private String password;
 
-    @Column(name = "email", unique = true)
-    @Getter
-    @Setter
-    private String email;
+	@Column(name = "username", unique = true, nullable = false, length = 40)
+	@Getter
+	@Setter
+	private String username;
 
-    @Column(name = "token")
-    @Getter
-    @Setter
-    private String token; // used for forget password
+	@Column(name = "password", nullable = false, length = 100)
+	@Getter(value = AccessLevel.PRIVATE)
+	private String password;
 
-    @Column(name = "number")
-    @Getter
-    @Setter
-    private long number;
+	@Column(name = "email", unique = true, nullable = false, length = 40)
+	@Getter
+	@Setter
+	private String email;
 
-    @Column(name = "used")
-    @Getter
-    @Setter
-    private boolean used; // used to check if the forget password is used or not
+	@Column(name = "token")
+	@Getter
+	@Setter
+	private String token; // used for forget password
 
-    @Column(name = "sessionId")
-    @Getter
-    @Setter
-    private String sessionId;
+	@Column(name = "number", nullable = false)
+	@Getter
+	@Setter
+	private long number;
 
-    @Column(name = "sessionToken")
-    private String sessionToken;
+	@Column(name = "used")
+	@Getter
+	@Setter
+	private boolean used; // used to check if the forget password is used or not
 
-    @Column(name = "date")
-    @Getter
-    @Setter
-    @Convert(converter = LocalDateTimeConverter.class)
-    private LocalDateTime date; // used check the forget password token expiry date
+	@Column(name = "session_id")
+	@Getter
+	@Setter
+	private String sessionId; //used for cookie login
 
-    public User() {
-    }
+	@Column(name = "session_token")
+	private String sessionToken; // used for cookie login
 
-    public User(String username, String password, String email, long number) {
-        this.username = username;
-        this.setPassword(password);
-        this.email = email;
-        this.number = number;
-    }
+	@Column(name = "date")
+	@Getter
+	@Setter
+	@Convert(converter = LocalDateTimeConverter.class)
+	private LocalDateTime date; // used check the forget password token expiry date
 
-    final public void setSessionToken(String sessionToken) {
-        this.sessionToken = Utils.hash(sessionToken);
-    }
+	@Column(name = "user_type", nullable = false)
+	@Convert(converter = UserTypeConverter.class)
+	@Setter
+	private UserType userType;
 
-    /**
-     * this method matches the given session token with the stored session token
-     */
-    final public boolean matchSessionToken(String token) {
-        return Utils.hashEquals(this.sessionToken, Utils.hash(token));
-    }
+	public User() {
+	}
 
-    /**
-     * this method checks the given password matches with the stored password
-     */
-    final public boolean checkPassword(String passwordPlainText) {
-        return BCrypt.checkpw(passwordPlainText, this.password);
-    }
+	public User(String username, String password, String email, long number, UserType userType) {
+		this.username = username;
+		this.setPassword( password );
+		this.email = email;
+		this.number = number;
+		this.userType = userType;
+	}
 
-    /**
-     * this method hashes the password and sets it
-     */
-    final public void setPassword(String password) {
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
-    }
+	final public void setSessionToken(String sessionToken) {
+		this.sessionToken = Utils.hash( sessionToken );
+	}
 
-    public abstract UserType getUserType();
+	/**
+	 * this method matches the given session token with the stored session token
+	 */
+	 public boolean matchSessionToken(String token) {
+		return Utils.hashEquals( this.sessionToken, Utils.hash( token ) );
+	}
+
+	/**
+	 * this method checks the given password matches with the stored password
+	 */
+	final public boolean checkPassword(String passwordPlainText) {
+		return BCrypt.checkpw( passwordPlainText, this.password );
+	}
+
+	/**
+	 * this method hashes the password and sets it
+	 */
+	public void setPassword(String password) {
+		this.password = BCrypt.hashpw( password, BCrypt.gensalt( 10 ) );
+	}
+
+	public UserType getUserType() {
+		return this.userType;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if ( this == o ) {
+			return true;
+		}
+		if ( o == null || getClass() != o.getClass() ) {
+			return false;
+		}
+		User user = (User) o;
+		return id.equals( user.id ) &&
+				username.equals( user.username ) &&
+				email.equals( user.email );
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash( id, username, email );
+	}
 }

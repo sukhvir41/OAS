@@ -5,32 +5,49 @@
  */
 package admin.controllers;
 
-import entities.Department;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
+
+import entities.Department;
+import entities.Department_;
 import utility.Controller;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/departments")
 public class AdminDepartment extends Controller {
 
-    @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+	@Override
+	public void process(
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			Session session,
+			HttpSession httpSession,
+			PrintWriter out) throws Exception {
 
-        List<Department> depsrtments = session.createCriteria(Department.class)
-                .list();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Department> query = builder.createQuery( Department.class );
+		Root<Department> departmentRoot = query.from( Department.class );
+		query.orderBy( builder.asc( departmentRoot.get( Department_.NAME ) ) );
 
-        req.setAttribute("departments", depsrtments);
+		List<Department> departments = session.createQuery( query )
+				.setReadOnly( true )
+				.list();
 
-        req.getRequestDispatcher("/WEB-INF/admin/admindepartment.jsp").include(req, resp);
-    }
+		req.setAttribute( "departments", departments );
+
+		req.getRequestDispatcher( "/WEB-INF/admin/admin-department.jsp" )
+				.include( req, resp );
+	}
 
 }

@@ -5,12 +5,6 @@
  */
 package admin.postback;
 
-import entities.Attendance;
-import entities.ClassRoom;
-import entities.Lecture;
-import entities.Student;
-import entities.Subject;
-import entities.Teaching;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,23 +14,32 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFRichTextString;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+
+import entities.Attendance;
+import entities.ClassRoom;
+import entities.Lecture;
+import entities.Student;
+import entities.Subject;
+import entities.Teaching;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.RichTextString;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.CellRangeAddress;
 import utility.ReportPostBackController;
 import utility.Utils;
 
@@ -53,12 +56,12 @@ public class GenerateReportFast extends ReportPostBackController {
         resp.setHeader(
                 "Content-Disposition", "attachment; filename=report " + new Date() + ".xlsx");
 
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet spreadsheet = workbook.createSheet(" Report ");
-
+        Workbook workbook = WorkbookFactory.create(true);
+        Sheet spreadsheet = workbook.createSheet(" Report ");
+        CreationHelper createHelper = workbook.getCreationHelper();
         //request parameters 
         final int classroomId = Integer.parseInt(req.getParameter("classroom"));
-        final LocalDateTime start = Utils.getStartdate(req.getParameter("startdate"));
+        final LocalDateTime start = Utils.getStartDate(req.getParameter("startdate"));
         final LocalDateTime end = Utils.getEndDate(req.getParameter("enddate"));
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
@@ -80,23 +83,24 @@ public class GenerateReportFast extends ReportPostBackController {
         styleCenter.setAlignment(HorizontalAlignment.CENTER);
 
         //creating  row for title of the exel document
-        XSSFRow row = spreadsheet.createRow(0);
+        Row row = spreadsheet.createRow(0);
 
         //adding the header of the spreadsheet my merginf columns of the first row
         spreadsheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 10));
-        XSSFCell cell = row.createCell(0);
-        XSSFRichTextString text = new XSSFRichTextString("Classroom: ");
-        text.append(classRoom.getName(), (XSSFFont) fontBold);
-        text.append("   Division:   ", (XSSFFont) font);
-        text.append(classRoom.getDivision(), (XSSFFont) fontBold);
-        text.append("   Semester:   ", (XSSFFont) font);
-        text.append(String.valueOf(classRoom.getSemester()), (XSSFFont) fontBold);
-        text.append("   Course:   ", (XSSFFont) font);
-        text.append(classRoom.getCourse().getName(), (XSSFFont) fontBold);
-        text.append("   From:   ", (XSSFFont) font);
-        text.append(start.toString(), (XSSFFont) fontBold);
-        text.append("   To:   ", (XSSFFont) font);
-        text.append(end.toString(), (XSSFFont) fontBold);
+        Cell cell = row.createCell(0);
+        RichTextString text = createHelper.createRichTextString("Classroom: " +
+                classRoom.getName() +
+                "   Division:   " +
+                classRoom.getDivision() +
+                "   Semester:   " +
+                classRoom.getSemester() +
+                "   Course:   " +
+                classRoom.getCourse().getName() +
+                "   From:   " +
+                start.toString() +
+                "   To:   " +
+                end.toString());
+
         cell.setCellValue(text);
 
         //data title headers row
@@ -126,7 +130,7 @@ public class GenerateReportFast extends ReportPostBackController {
         row = spreadsheet.createRow(3);// new row
 
         //used fow creating cells in row 3 for name,attended,total
-        XSSFCell cellTemp = row.createCell(1);
+        Cell cellTemp = row.createCell(1);
 
         /*
         this creates the folling format 
@@ -199,20 +203,20 @@ public class GenerateReportFast extends ReportPostBackController {
         workbook.write(out);
     }
 
-    private boolean isRowEmpty(XSSFRow row) {
-        return row.getCell(0).getRawValue().equals("") || row.getCell(0).getRawValue() == null;
+    private boolean isRowEmpty(Row row) {
+        return row.getCell(0).getStringCellValue().equals("");
     }
 
-    private void addRowOfStudentDetails(StudentRowDetails details, XSSFSheet workSheet, int startRowNumber, int maxCellNumber, CellStyle style) {
+    private void addRowOfStudentDetails(StudentRowDetails details, Sheet workSheet, int startRowNumber, int maxCellNumber, CellStyle style) {
 
         if (!details.checkEquality()) {
             throw new RuntimeException("equaity check failed");
         }
 
-        XSSFRow row = workSheet.createRow(startRowNumber + details.getRollNumber());
+        Row row = workSheet.createRow(startRowNumber + details.getRollNumber());
         int cellNumber = 0;
 
-        XSSFCell cell = row.createCell(cellNumber);
+        Cell cell = row.createCell(cellNumber);
         cell.setCellValue(details.getRollNumber());
         cellNumber++;
 

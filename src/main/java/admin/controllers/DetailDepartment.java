@@ -5,9 +5,6 @@
  */
 package admin.controllers;
 
-import entities.Course;
-import entities.Department;
-import entities.Teacher;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
@@ -15,31 +12,41 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
+
+import entities.Course;
+import entities.Department;
+import entities.Teacher;
 import utility.Controller;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/departments/detaildepartment")
+@WebServlet(urlPatterns = "/admin/departments/department-details")
 public class DetailDepartment extends Controller {
 
-    @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        long departmentID = Long.parseLong(req.getParameter("departmentId"));
+	@Override
+	public void process(
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			Session session,
+			HttpSession httpSession,
+			PrintWriter out) throws Exception {
+		long departmentID = Long.parseLong( req.getParameter( "departmentId" ) );
 
-        Department department = (Department) session.get(Department.class, departmentID);
-        Set<Teacher> teachers = department.getTeachers();
-        List<Course> courses = department.getCourses();
-        Teacher hod = department.getHod();
+		Department department = Department.getDepartment( departmentID, session );
+		Set<Teacher> teachers = department.getTeachers();
+		List<Course> courses = department.getCourses();
+		Teacher hod = department.getHod();
 
-        req.setAttribute("department", department);
-        req.setAttribute("hod", hod);
-        req.setAttribute("teachers", teachers);
-        req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/admin/detaildepartment.jsp").include(req, resp);
+		req.setAttribute( "department", department );
+		req.setAttribute( "hod", hod );
+		req.setAttribute( "teachers", teachers );
+		req.setAttribute( "courses", courses );
+		req.getRequestDispatcher( "/WEB-INF/admin/department-details.jsp" )
+				.include( req, resp );
 
-    }
+	}
 
 }

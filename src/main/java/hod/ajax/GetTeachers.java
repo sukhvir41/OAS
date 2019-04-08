@@ -5,20 +5,21 @@
  */
 package hod.ajax;
 
+import java.io.PrintWriter;
+import java.util.Collection;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Department;
 import entities.Teacher;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.List;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.hibernate.Session;
 import utility.AjaxController;
 
 /**
@@ -48,8 +49,8 @@ public class GetTeachers extends AjaxController {
         JsonObject teacherJson = new JsonObject();
         teacherJson.addProperty("id", teacher.getId().toString());
         teacherJson.addProperty("name", teacher.toString());
-        teacherJson.addProperty("number", teacher.getNumber());
-        teacherJson.addProperty("email", teacher.getEmail());
+        teacherJson.addProperty("number", teacher.getUser().getNumber());
+        teacherJson.addProperty("email", teacher.getUser().getEmail());
         teacherJson.addProperty("hod", teacher.isHod());
         if (teacher.isHod()) {
             teacherJson.add("hodof", addDepartment(teacher.getHodOf()));

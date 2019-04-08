@@ -5,6 +5,19 @@
  */
 package admin.ajax;
 
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.util.List;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -14,20 +27,16 @@ import entities.Lecture;
 import entities.Student;
 import entities.Subject;
 import entities.Teaching;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.util.List;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 import utility.Utils;
-import static utility.Constants.*;
+
+import static utility.Constants.ABSENT;
+import static utility.Constants.CLASS;
+import static utility.Constants.COUNT;
+import static utility.Constants.DATE;
+import static utility.Constants.ID;
+import static utility.Constants.PRESENT;
+import static utility.Constants.SUBJECT;
 /**
  *
  * @author sukhvir
@@ -42,7 +51,7 @@ public class SearchLectures extends AjaxController {
         
         long classId = Long.parseLong(req.getParameter("classroomId"));
         String subjectId = req.getParameter("subjectId");
-        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);

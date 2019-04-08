@@ -5,12 +5,8 @@
  */
 package classteacher.postback;
 
-import entities.*;
-
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +15,12 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+
+import entities.Attendance;
+import entities.Lecture;
+import entities.Student;
+import entities.Teacher;
+import entities.Teaching;
 import utility.PostBackController;
 import utility.Utils;
 
@@ -33,7 +35,7 @@ public class GrantLeavePost extends PostBackController {
 
         int studentId = Integer.parseInt(req.getParameter("studentId"));
 
-        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
@@ -55,7 +57,7 @@ public class GrantLeavePost extends PostBackController {
             if (lectures != null && !lectures.isEmpty()) {
                 lectures.stream()
                         .filter(lecture -> !checkAttendance(lecture, student, session))
-                        .forEach(lecture -> session.save(new Attendance(new AttendanceId(lecture, student), true, true, true)));
+                        .forEach(lecture -> session.save(new Attendance(lecture, student, true, true, true)));
             }
             resp.sendRedirect("/OAS/teacher/classteacher/detailstudent?studentId=" + studentId);
         } else {

@@ -5,77 +5,95 @@
  */
 package classteacher.ajax;
 
+import java.io.PrintWriter;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Student;
 import entities.Teacher;
-import java.io.PrintWriter;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.hibernate.Session;
 import utility.AjaxController;
-import static utility.Constants.*;
+
+import static utility.Constants.CLASSROOM;
+import static utility.Constants.EMAIL;
+import static utility.Constants.ID;
+import static utility.Constants.NAME;
+import static utility.Constants.NUMBER;
+import static utility.Constants.ROLLNUMBER;
+import static utility.Constants.SUBJECTS;
+import static utility.Constants.VERIFIED;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/ajax/getstudents")
 public class GetStudents extends AjaxController {
 
-    @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        String filter = req.getParameter("filter");
+	@Override
+	public void process(
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			Session session,
+			HttpSession httpSession,
+			PrintWriter out) throws Exception {
+		String filter = req.getParameter( "filter" );
 
-        Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
-        teacher = (Teacher) session.get(Teacher.class, teacher.getId());
+		Teacher teacher = (Teacher) httpSession.getAttribute( "teacher" );
+		teacher = (Teacher) session.get( Teacher.class, teacher.getId() );
 
-        Gson gson = new Gson();
-        JsonArray jsonStudent = new JsonArray();
+		Gson gson = new Gson();
+		JsonArray jsonStudent = new JsonArray();
 
-        if (filter.equals("all")) {
-            teacher.getClassRoom()
-                    .getStudents()
-                    .stream()
-                    .sorted()
-                    .forEach(student -> add(student, jsonStudent));
+		if ( filter.equals( "all" ) ) {
+			teacher.getClassRoom()
+					.getStudents()
+					.stream()
+					.sorted()
+					.forEach( student -> add( student, jsonStudent ) );
 
-        } else {
-            teacher.getClassRoom()
-                    .getStudents()
-                    .stream()
-                    .filter(student -> student.isVerified() == Boolean.parseBoolean(filter))
-                    .sorted()
-                    .forEach(student -> add(student, jsonStudent));
-        }
+		}
+		else {
+			teacher.getClassRoom()
+					.getStudents()
+					.stream()
+					.filter( student -> student.isVerified() == Boolean.parseBoolean( filter ) )
+					.sorted()
+					.forEach( student -> add( student, jsonStudent ) );
+		}
 
-        out.print(gson.toJson(jsonStudent));
-    }
+		out.print( gson.toJson( jsonStudent ) );
+	}
 
-    private void add(Student student, JsonArray jsonStudents) {
-        JsonObject studentJson = new JsonObject();
+	private void add(Student student, JsonArray jsonStudents) {
+		JsonObject studentJson = new JsonObject();
 
-        studentJson.addProperty(ID, student.getId().toString());
-        studentJson.addProperty(NAME, student.toString());
-        studentJson.addProperty(EMAIL, student.getEmail());
-        studentJson.addProperty(NUMBER, student.getNumber());
-        studentJson.addProperty(CLASSROOM, student.getClassRoom().getName() + " " + student.getClassRoom().getDivision());
-        studentJson.addProperty(ROLLNUMBER, student.getRollNumber());
-        studentJson.addProperty(VERIFIED, student.isVerified());
-        studentJson.add(SUBJECTS, addSubjects(student));
+		studentJson.addProperty( ID, student.getId().toString() );
+		studentJson.addProperty( NAME, student.toString() );
+		studentJson.addProperty( EMAIL, student.getUser().getEmail() );
+		studentJson.addProperty( NUMBER, student.getUser().getNumber() );
+		studentJson.addProperty(
+				CLASSROOM,
+				student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
+		);
+		studentJson.addProperty( ROLLNUMBER, student.getRollNumber() );
+		studentJson.addProperty( VERIFIED, student.isVerified() );
+		studentJson.add( SUBJECTS, addSubjects( student ) );
 
-        jsonStudents.add(studentJson);
-    }
+		jsonStudents.add( studentJson );
+	}
 
-    private JsonElement addSubjects(Student e) {
-        JsonArray jsonSubjects = new JsonArray();
-        e.getSubjects()
-                .stream()
-                .forEach(subject -> jsonSubjects.add(subject.getName()));
-        return jsonSubjects;
-    }
+	private JsonElement addSubjects(Student e) {
+		JsonArray jsonSubjects = new JsonArray();
+		e.getSubjects()
+				.stream()
+				.forEach( subject -> jsonSubjects.add( subject.getName() ) );
+		return jsonSubjects;
+	}
 }

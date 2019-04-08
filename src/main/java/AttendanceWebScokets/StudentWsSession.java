@@ -5,14 +5,15 @@
  */
 package AttendanceWebScokets;
 
-import entities.Lecture;
-import entities.Student;
 import java.net.InetAddress;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import javax.websocket.Session;
+
+import entities.Lecture;
+import entities.Student;
 import lombok.Getter;
 import lombok.Setter;
 

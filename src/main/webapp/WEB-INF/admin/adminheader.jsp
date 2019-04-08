@@ -76,7 +76,7 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/OAS/admin/reports">Reports</a></li>
-                                                <li><a href="/OAS/admin/oldreports">Old Reports</a></li>
+                                                <li><a href="/OAS/admin/old-reports">Old Reports</a></li>
                                             </ul>
                                         </li>
                                         <li>
@@ -90,7 +90,7 @@
                                         </li>
                                         <li class="dropdown dropdown-mega dropdown-mega-signin signin logged" id="headerAccount">
                                             <a class="dropdown-toggle">
-                                                <i class="fa fa-user"></i> ${sessionScope.admin.username}
+                                                <i class="fa fa-user"></i> ${sessionScope.admin.user.username}
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>
@@ -98,7 +98,7 @@
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="user-avatar">
-                                                                    <p><strong>${sessionScope.admin.username}</strong><span>Administrator ${sessionScope.admin.type}</span></p>
+                                                                    <p><strong>${sessionScope.admin.user.username}</strong><span>Administrator ${sessionScope.admin.type}</span></p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">

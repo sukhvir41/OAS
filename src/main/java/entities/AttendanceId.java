@@ -6,32 +6,58 @@
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Objects;
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
+
 /**
- *
  * @author development
  */
 @Embeddable
 public class AttendanceId implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lectureFid", foreignKey = @ForeignKey(name = "attendanceLectureForeignKey"))
-    @Getter
-    @Setter
-    private Lecture lecture;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "studentFid", foreignKey = @ForeignKey(name = "attendanceStudentForeignKey"))
-    @Getter
-    @Setter
-    private Student student;
+	@Column(name = "lecture_fid", nullable = false, length = 8) // 8 or 6 ?
+	@Getter
+	@Setter
+	@NonNull
+	private String lectureId;
 
-    public AttendanceId(Lecture lecture, Student student) {
-        this.lecture = lecture;
-        this.student = student;
-    }
+	@Column(name = "student_fid", columnDefinition = "uuid", nullable = false)
+	@Getter
+	@Setter
+	@NonNull
+	private UUID studentId;
+
+	public AttendanceId() {
+	}
+
+	public AttendanceId(String lectureId, UUID studentId) {
+		this.lectureId = lectureId;
+		this.studentId = studentId;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if ( this == o ) {
+			return true;
+		}
+		if ( o == null || getClass() != o.getClass() ) {
+			return false;
+		}
+		AttendanceId that = (AttendanceId) o;
+		return lectureId.equals( that.lectureId ) &&
+				studentId.equals( that.studentId );
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash( lectureId, studentId );
+	}
 }

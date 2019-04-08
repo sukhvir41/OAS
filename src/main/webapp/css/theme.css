@@ -5,6 +5,7 @@ Version: 		4.2.0
 */
 html {
 	direction: ltr;
+	min-height: 100%;
 }
 
 body {

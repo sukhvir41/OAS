@@ -5,8 +5,6 @@
  */
 package teacher.postback;
 
-import entities.Lecture;
-import entities.Teaching;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,9 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+
+import entities.Lecture;
+import entities.Teaching;
 import utility.PostBackController;
 import utility.Utils;
 

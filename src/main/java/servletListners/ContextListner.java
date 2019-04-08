@@ -5,13 +5,14 @@
  */
 package servletListners;
 
-import AttendanceServices.MacHandlers;
-import admin.wsServices.SystemInfoService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import AttendanceServices.MacHandlers;
+import admin.wsServices.SystemInfoService;
 import utility.Utils;
 
 /**
@@ -30,7 +31,7 @@ public class ContextListner implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        Utils.closeSesssioFactory();
+        Utils.closeSessionFactory();
         MacHandlers.closeHandles();
         executorService.shutdown();
     }

@@ -5,14 +5,6 @@
  */
 package hod.ajax;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import entities.ClassRoom;
-import entities.Department;
-import entities.Lecture;
-import entities.Subject;
-import entities.Teaching;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,9 +13,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import entities.ClassRoom;
+import entities.Department;
+import entities.Lecture;
+import entities.Subject;
+import entities.Teaching;
 import utility.AjaxController;
 import utility.Utils;
 
@@ -42,7 +44,7 @@ public class SearchLectures extends AjaxController {
         int classId = Integer.parseInt(req.getParameter("classroomId"));
         String subjectId = req.getParameter("subjectId");
 
-        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);

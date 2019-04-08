@@ -49,6 +49,14 @@
             }
         </style>
 
+		<!--[if IE]>
+        	<link rel="stylesheet" href="css/ie.css">
+        	            <![endif]-->
+
+        	        <!--[if lte IE 8]>
+        	            <script src="vendor/respond/respond.js"></script>
+        	            <script src="vendor/excanvas/excanvas.js"></script>
+        	            <![endif]-->
 
     </head>
     <body>
@@ -75,7 +83,7 @@
                                             <div class="box-content">
                                                 <h4 class="heading-primary text-uppercase mb-md">Please Login</h4>
                                                 <!-- from tag starts from here-->
-                                                <form action="loginpost"  method="post" id="loginForm">
+                                                <form action="/OAS/login-post"  method="post" id="loginForm">
                                                     <div class="row">
                                                         <div class="form-group">
                                                             <div class="col-md-12">
@@ -93,40 +101,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <c:choose>
-                                                        <c:when test="${param.verified =='false'}">
-                                                            <!-- SHOW THIS WHEN USERNAME AND PASSWORD IS INVLAID -->
-                                                            <div class="row">
-                                                                <div class="col-md-12 ">
-                                                                    <div class="alert alert-danger" id="loginError">
-                                                                        <strong>Error!</strong> Username or Password is wrong
-                                                                    </div>
-                                                                </div> 
-                                                            </div> 
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <div class="row">
-                                                                <div class="col-md-12 ">
-                                                                    <div class="alert alert-danger" hidden id="loginError">
-                                                                        <strong>Error!</strong> Username or Password is wrong
-                                                                    </div>
-                                                                </div> 
-                                                            </div> 
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <div class="row">
-                                                        <!-- SHOW THIS WHEN THRER IS AN ERROR -->
-                                                        <div class="col-md-12 ">
-                                                            <div class="alert alert-danger" hidden id="loginblank">
-                                                                <strong>Error!</strong> Username or Password is empty
-                                                            </div>
-                                                        </div> 
-                                                    </div>
+                                                    
+                                                    <jsp:include page="/WEB-INF/message-box" />
+
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <span class="remember-box checkbox">
                                                                 <label for="rememberme">
-                                                                    <input type="checkbox" id="rememberme" name="rememberme" value="true">Stay signed in
+                                                                    <input type="checkbox" id="rememberme" name="rememberMe" value="true">Stay signed in
                                                                 </label>
                                                             </span>
                                                         </div>

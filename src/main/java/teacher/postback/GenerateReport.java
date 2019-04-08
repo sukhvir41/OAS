@@ -5,13 +5,6 @@
  */
 package teacher.postback;
 
-import entities.Attendance;
-import entities.ClassRoom;
-import entities.Lecture;
-import entities.Student;
-import entities.Subject;
-import entities.Teacher;
-import entities.Teaching;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -21,19 +14,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import entities.ClassRoom;
+import entities.Lecture;
+import entities.Student;
+import entities.Teacher;
+import entities.Teaching;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.RichTextString;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFRichTextString;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import utility.ReportPostBackController;
 import utility.Utils;
 
@@ -60,7 +60,7 @@ public class GenerateReport extends ReportPostBackController {
         int teachingId = Integer.parseInt(req.getParameter("teaching"));
         Teaching teaching = (Teaching) session.get(Teaching.class, teachingId);
 
-        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         ClassRoom classRoom = teaching.getClassRoom();
@@ -81,8 +81,9 @@ public class GenerateReport extends ReportPostBackController {
                 .mapToInt(lecture -> lecture.getCount())
                 .sum();
 
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet spreadsheet = workbook.createSheet(" Report ");
+        Workbook workbook = WorkbookFactory.create(true);
+        Sheet spreadsheet = workbook.createSheet(" Report ");
+        CreationHelper createHelper = workbook.getCreationHelper();
 
         CellStyle style = workbook.createCellStyle();
         style.setAlignment(HorizontalAlignment.LEFT);
@@ -94,22 +95,24 @@ public class GenerateReport extends ReportPostBackController {
         styleCenter.setAlignment(HorizontalAlignment.CENTER);
 
         // creating heading title of the exel sheet
-        XSSFRow row = spreadsheet.createRow(0);// new row
+        Row row = spreadsheet.createRow(0);// new row
 
         spreadsheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 10));
-        XSSFCell cell = row.createCell(0);
-        XSSFRichTextString text = new XSSFRichTextString("Classroom: ");
-        text.append(classRoom.getName(), (XSSFFont) fontBold);
-        text.append("   Division:   ", (XSSFFont) font);
-        text.append(classRoom.getDivision(), (XSSFFont) fontBold);
-        text.append("   Semester:   ", (XSSFFont) font);
-        text.append(String.valueOf(classRoom.getSemester()), (XSSFFont) fontBold);
-        text.append("   Course:   ", (XSSFFont) font);
-        text.append(classRoom.getCourse().getName(), (XSSFFont) fontBold);
-        text.append("   From:   ", (XSSFFont) font);
-        text.append(startDate.toString(), (XSSFFont) fontBold);
-        text.append("   To:   ", (XSSFFont) font);
-        text.append(endDate.toString(), (XSSFFont) fontBold);
+        Cell cell = row.createCell(0);
+
+        RichTextString text = createHelper.createRichTextString("Classroom: " +
+                classRoom.getName() +
+                "   Division:   " +
+                classRoom.getDivision() +
+                "   Semester:   " +
+                classRoom.getSemester() +
+                "   Course:   " +
+                classRoom.getCourse().getName() +
+                "   From:   " +
+                startDate.toString() +
+                "   To:   " +
+                endDate.toString());
+
         cell.setCellValue(text);
 
         row = spreadsheet.createRow(2);

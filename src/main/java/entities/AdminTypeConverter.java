@@ -8,24 +8,19 @@ package entities;
 import javax.persistence.AttributeConverter;
 
 /**
- *
  * @author sukhvir
  */
 
 public class AdminTypeConverter implements AttributeConverter<AdminType, String> {
 
-    @Override
-    public String convertToDatabaseColumn(AdminType attribute) {
-        return attribute.toString();
-    }
+	@Override
+	public String convertToDatabaseColumn(AdminType attribute) {
+		return attribute.toString();
+	}
 
-    @Override
-    public AdminType convertToEntityAttribute(String string) {
-        if (AdminType.Main.toString().equals(string)) {
-            return AdminType.Main;
-        } else {
-            return AdminType.Sub;
-        }
-    }
+	@Override
+	public AdminType convertToEntityAttribute(String string) {
+		return AdminType.valueOf( string );
+	}
 
 }

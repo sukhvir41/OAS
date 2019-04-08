@@ -5,12 +5,6 @@
  */
 package AttendanceWebScokets;
 
-import WebSocketSettings.GlobalWsConfig;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import entities.Lecture;
-import entities.Teacher;
-import entities.UserType;
 import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
@@ -19,6 +13,13 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
+import WebSocketSettings.GlobalWsConfig;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import entities.Lecture;
+import entities.Teacher;
+import entities.UserType;
 import lombok.Getter;
 import lombok.Setter;
 import utility.Utils;

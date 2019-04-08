@@ -5,14 +5,19 @@
  */
 package admin.controllers;
 
-import entities.Admin;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
+
+import entities.Admin;
 import utility.Controller;
 
 /**
@@ -25,11 +30,16 @@ public class AdminAdmins extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        List<Admin> admins = session.createCriteria(Admin.class)
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Admin> query = builder.createQuery( Admin.class );
+        Root<Admin> admin = query.from( Admin.class );
+
+        List<Admin> admins = session.createQuery( query )
+                .applyLoadGraph( session.getEntityGraph( "userAdmin" ) )
                 .list();
 
         req.setAttribute("admins", admins);
-        req.getRequestDispatcher("/WEB-INF/admin/adminadmins.jsp")
+        req.getRequestDispatcher("/WEB-INF/admin/admin-admins.jsp")
                 .include(req, resp);
 
     }

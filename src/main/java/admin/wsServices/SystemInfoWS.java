@@ -5,8 +5,6 @@
  */
 package admin.wsServices;
 
-import WebSocketSettings.GlobalWsConfig;
-import entities.UserType;
 import java.io.IOException;
 import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
@@ -16,6 +14,9 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
+import WebSocketSettings.GlobalWsConfig;
+import entities.UserType;
 
 /**
  *
@@ -29,7 +30,7 @@ public class SystemInfoWS {
         System.out.println("connection opened");
         try {
             HttpSession httpSession = (HttpSession) conf.getUserProperties().get(GlobalWsConfig.SESSION);
-            if ((boolean) httpSession.getAttribute("accept") == true && httpSession.getAttribute("type").equals(UserType.Admin)) {
+            if ((boolean) httpSession.getAttribute("accept") && httpSession.getAttribute("type").equals(UserType.Admin)) {
                 session.setMaxIdleTimeout(120000l);
                 SystemInfoService.addSession(session);
             } else {

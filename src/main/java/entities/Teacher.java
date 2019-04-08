@@ -5,144 +5,162 @@
  */
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.MapsId;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.*;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
 
 /**
  * @author sukhvir
  */
-@Entity
+
+@NamedEntityGraph(name = "userTeacher",
+		attributeNodes = @NamedAttributeNode("user"))
+@Entity(name = "Teacher")
 @Table(name = "teacher")
-@PrimaryKeyJoinColumn(name = "id")
-public class Teacher extends User {
+//@PrimaryKeyJoinColumn(name = "id")
+public class Teacher implements Serializable {
 
-    @Column(name = "fName")
-    @Getter
-    @Setter
-    private String fName;
+	@Id
+	@Getter
+	private UUID id;
 
-    @Column(name = "lName")
-    @Getter
-    @Setter
-    private String lName;
+	@OneToOne(fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColumn(name = "id", nullable = false)
+	@Getter
+	private User user;
 
-    @Column(name = "verified")
-    @Getter
-    @Setter
-    private boolean verified;
+	@Column(name = "f_name", nullable = false, length = 40)
+	@Getter
+	@Setter
+	private String fName;
 
-    @Column(name = "unaccounted")
-    @Getter
-    @Setter
-    private boolean unaccounted;
+	@Column(name = "l_name", nullable = false, length = 40)
+	@Getter
+	@Setter
+	private String lName;
 
-    @Column(name = "isHod")
-    @Getter
-    @Setter
-    private boolean hod;
+	@Column(name = "verified", nullable = false)
+	@Getter
+	@Setter
+	private boolean verified;
 
-    @OneToMany(mappedBy = "hod", fetch = FetchType.LAZY)
-    @Getter
-    @Setter
-    private List<Department> hodOf = new ArrayList<>();
+	@Column(name = "unaccounted", nullable = false)
+	@Getter
+	@Setter
+	private boolean unaccounted;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "classFid", foreignKey = @ForeignKey(name = "classTeacherClassForeignKey"))
-    @Getter
-    @Setter
-    private ClassRoom classRoom; // class teacher classroom
+	@Column(name = "is_hod", nullable = false)
+	@Getter
+	@Setter
+	private boolean hod;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
-    @Getter
-    @Setter
-    private List<Teaching> teaches = new ArrayList<>();
+	@OneToMany(mappedBy = "hod", fetch = FetchType.LAZY)
+	@Getter
+	@Setter
+	private List<Department> hodOf = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "teacherDepartmentLink",
-            joinColumns = @JoinColumn(name = "teacherFid"),
-            inverseJoinColumns = @JoinColumn(name = "departmentFid"),
-            foreignKey = @ForeignKey(name = "teacherDepartmentLinkTeacherForeignKey"),
-            inverseForeignKey = @ForeignKey(name = "teacherDepartmentLinkDepartmentForeignKey"))
-    @Getter
-    @Setter
-    private Set<Department> department = new HashSet<>();
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "class_teacher_class_foreign_key"))
+	@Getter
+	@Setter
+	private ClassRoom classRoom; // class teacher classroom
 
-    public Teacher() {
-    }
+	@OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
+	@Getter
+	@Setter
+	private List<Teaching> teaches = new ArrayList<>();
 
-    public Teacher(String fName, String lName, String username, String password, String email, long number) {
-        super(username, password, email, number);
-        this.fName = fName;
-        this.lName = lName;
-        setVerified(false);
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "teacher_department_link",
+			joinColumns = @JoinColumn(name = "teacher_fid"),
+			inverseJoinColumns = @JoinColumn(name = "department_fid"),
+			foreignKey = @ForeignKey(name = "teacher_department_link_teacher_foreign_key"),
+			inverseForeignKey = @ForeignKey(name = "teacher_department_link_department_foreign_key"))
+	@Getter
+	@Setter
+	private Set<Department> department = new HashSet<>();
 
-    }
+	public Teacher() {
+	}
 
-    public void unaccount() {
-        if (!verified) {
-            unaccounted = true;
-        }
-    }
+	public Teacher(String fName, String lName, String username, String password, String email, long number) {
+		//super(username, password, email, number);
+		this.user = new User( username, password, email, number, UserType.Teacher );
+		this.fName = fName;
+		this.lName = lName;
+		setVerified( false );
 
-    /**
-     * this method adds class room to class teacher and vice versa
-     */
-    public final void addClassRoom(ClassRoom classRoom) {
-        classRoom.addClassTeacher(this);
-    }
+	}
 
-    /**
-     * this methods adds the teaching to teacher and vice versa
-     */
-    public final void addTeaching(Teaching teaching) {
-        if (!teaches.contains(teaching)) {
-            this.teaches.add(teaching);
-            teaching.setTeacher(this);
-        }
-    }
+	public void unaccount() {
+		if ( !verified ) {
+			unaccounted = true;
+		}
+	}
 
-    /**
-     * this methods adds the teacher to the department and the department to the
-     * teacher
-     *
-     * @param department
-     */
-    public void addDepartment(Department department) {
-        department.addTeacher(this);
-    }
+	/**
+	 * this method adds class room to class teacher and vice versa
+	 */
+	public final void addClassRoom(ClassRoom classRoom) {
+		classRoom.addClassTeacher( this );
+	}
 
-    /**
-     * this method adds department hod to teacher and vice versa but does not
-     * mark hod to true
-     */
-    public void addHodOf(Department department) {
-        if (!hodOf.contains(department)) {
-            hodOf.add(department);
-            department.setHod(this);
-            hod = true;
-        }
-    }
+	/**
+	 * this methods adds the teaching to teacher and vice versa
+	 */
+	public final void addTeaching(Teaching teaching) {
+		if ( !teaches.contains( teaching ) ) {
+			this.teaches.add( teaching );
+			teaching.setTeacher( this );
+		}
+	}
 
-    @Override
-    public String toString() {
-        return fName + " " + lName;
-    }
+	/**
+	 * this methods adds the teacher to the department and the department to the
+	 * teacher
+	 *
+	 * @param department
+	 */
+	public void addDepartment(Department department) {
+		department.addTeacher( this );
+	}
 
-    @Override
-    public final UserType getUserType() {
-        return UserType.Teacher;
-    }
+	/**
+	 * this method adds department hod to teacher and vice versa but does not
+	 * mark hod to true
+	 */
+	public void addHodOf(Department department) {
+		if ( !hodOf.contains( department ) ) {
+			hodOf.add( department );
+			department.setHod( this );
+			hod = true;
+		}
+	}
 
+	@Override
+	public String toString() {
+		return fName + " " + lName;
+	}
 }

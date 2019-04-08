@@ -5,8 +5,6 @@
  */
 package admin.postback;
 
-import entities.*;
-
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,8 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+
+import entities.Attendance;
+import entities.Lecture;
+import entities.Student;
+import entities.Teaching;
 import utility.PostBackController;
 import utility.Utils;
 
@@ -31,7 +35,7 @@ public class GrantLeavesPost extends PostBackController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
 
-        LocalDateTime startDate = Utils.getStartdate(req.getParameter("startdate"));
+        LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         Student student = (Student) session.get(Student.class, studentId);
@@ -51,7 +55,7 @@ public class GrantLeavesPost extends PostBackController {
         if (lectures != null && !lectures.isEmpty()) {
             lectures.stream()
                     .filter(lecture -> !checkAttendance(lecture, student, session))
-                    .forEach(lecture -> session.save(new Attendance(new AttendanceId(lecture, student),true, true,true)));
+                    .forEach(lecture -> session.save(new Attendance(lecture, student,true, true,true)));
         }
         resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + studentId);
     }

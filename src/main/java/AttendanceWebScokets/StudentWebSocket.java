@@ -5,12 +5,6 @@
  */
 package AttendanceWebScokets;
 
-import WebSocketSettings.GlobalWsConfig;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import entities.Lecture;
-import entities.Student;
-import entities.UserType;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
@@ -20,9 +14,15 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
+import WebSocketSettings.GlobalWsConfig;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import entities.Lecture;
+import entities.Student;
+import entities.UserType;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 import utility.Utils;
 
 /**

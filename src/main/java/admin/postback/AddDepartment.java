@@ -5,36 +5,56 @@
  */
 package admin.postback;
 
-import entities.Department;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
+
+import entities.Department;
 import utility.PostBackController;
-import utility.Utils;
+import utility.UrlParameters;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/adddepartment")
+@WebServlet(urlPatterns = "/admin/add-department-post")
 public class AddDepartment extends PostBackController {
 
-    @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+	@Override
+	public void process(
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			Session session,
+			HttpSession httpSession,
+			PrintWriter out) throws Exception {
 
-        String name = req.getParameter("departmentname");
-        Department department = new Department(name);
+		String name = req.getParameter( "departmentName" );
+		Department department = new Department( name );
 
-        session.save(department);
+		session.save( department );
 
-        resp.sendRedirect("/OAS/admin/departments");
+		resp.sendRedirect(
+				new UrlParameters()
+						.addSuccessParameter()
+						.addMessage( name + " was added" )
+						.getUrl( "/OAS/admin/departments" )
+		);
 
-    }
+	}
 
+	@Override
+	public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String name = req.getParameter( "departmentName" );
+		resp.sendRedirect(
+				new UrlParameters()
+						.addErrorParameter()
+						.addMessage( "Error occurred while adding department " + name )
+						.getUrl( "/OAS/admin/departments" )
+		);
+	}
 }

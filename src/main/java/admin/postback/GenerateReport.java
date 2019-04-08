@@ -5,12 +5,6 @@
  */
 package admin.postback;
 
-import entities.Attendance;
-import entities.ClassRoom;
-import entities.Lecture;
-import entities.Student;
-import entities.Subject;
-import entities.Teaching;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,27 +15,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFRichTextString;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+
+import entities.Attendance;
+import entities.ClassRoom;
+import entities.Lecture;
+import entities.Student;
+import entities.Subject;
+import entities.Teaching;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.RichTextString;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.CellRangeAddress;
 import utility.ReportPostBackController;
 import utility.Utils;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/generatereportpost")
@@ -54,17 +56,18 @@ public class GenerateReport extends ReportPostBackController {
                 "APPLICATION/OCTET-STREAM");
         resp.setHeader(
                 "Content-Disposition", "attachment; filename=report " + new Date() + ".xlsx");
-        XSSFRow row;
+        Row row;
 
-        XSSFCell cell;
+        Cell cell;
         LocalDateTime start, end;
 
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet spreadsheet = workbook.createSheet(" Report ");
+        Workbook workbook = WorkbookFactory.create(true);
+        Sheet spreadsheet = workbook.createSheet(" Report ");
+        CreationHelper createHelper = workbook.getCreationHelper();
 
         int classroomId = Integer.parseInt(req.getParameter("classroom"));
 
-        start = Utils.getStartdate(req.getParameter("startdate"));
+        start = Utils.getStartDate(req.getParameter("startdate"));
         end = Utils.getEndDate(req.getParameter("enddate"));
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
@@ -83,18 +86,19 @@ public class GenerateReport extends ReportPostBackController {
 
         spreadsheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 10));
         cell = row.createCell(0);
-        XSSFRichTextString text = new XSSFRichTextString("Classroom: ");
-        text.append(classRoom.getName(), (XSSFFont) fontBold);
-        text.append("   Division:   ", (XSSFFont) font);
-        text.append(classRoom.getDivision(), (XSSFFont) fontBold);
-        text.append("   Semester:   ", (XSSFFont) font);
-        text.append(String.valueOf(classRoom.getSemester()), (XSSFFont) fontBold);
-        text.append("   Course:   ", (XSSFFont) font);
-        text.append(classRoom.getCourse().getName(), (XSSFFont) fontBold);
-        text.append("   From:   ", (XSSFFont) font);
-        text.append(start.toString(), (XSSFFont) fontBold);
-        text.append("   To:   ", (XSSFFont) font);
-        text.append(end.toString(), (XSSFFont) fontBold);
+        RichTextString text = createHelper.createRichTextString("Classroom: " +
+                classRoom.getName() +
+                "   Division:   " +
+                classRoom.getDivision() +
+                "   Semester:   " +
+                classRoom.getSemester() +
+                "   Course:   " +
+                classRoom.getCourse().getName() +
+                "   From:   " +
+                start.toString() +
+                "   To:   " +
+                end.toString());
+
         cell.setCellValue(text);
 
         //creating headers of the table in execl sheet
@@ -126,7 +130,7 @@ public class GenerateReport extends ReportPostBackController {
         */
         row = spreadsheet.createRow(3);// new row
 
-        XSSFCell cellTemp = row.createCell(1);
+        Cell cellTemp = row.createCell(1);
         /*
         this creates the folling format 
    

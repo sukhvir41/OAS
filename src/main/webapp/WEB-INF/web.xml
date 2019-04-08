@@ -13,18 +13,6 @@
         <session-timeout>30</session-timeout>
     </session-config>
     
-    <!-- register-->
-    <servlet>
-        <servlet-name>register</servlet-name>
-        <jsp-file>/register.jsp</jsp-file>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>register</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <!--register end-->
-    
     <!--forgot password-->
     <servlet>
         <servlet-name>forgot</servlet-name>

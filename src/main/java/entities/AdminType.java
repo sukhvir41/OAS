@@ -6,22 +6,21 @@
 package entities;
 
 /**
- *
  * @author sukhvir
  */
 public enum AdminType {
-    Main("main"),
-    Sub("sub");
+	Main( "Main" ),
+	Sub( "Sub" );
 
-    final private String type;
+	final private String type;
 
-    private AdminType(String type) {
-        this.type = type;
-    }
+	AdminType(String type) {
+		this.type = type;
+	}
 
-    @Override
-    public String toString() {
-        return type;
-    }
+	@Override
+	public String toString() {
+		return type;
+	}
 
 }

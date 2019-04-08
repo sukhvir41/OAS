@@ -5,126 +5,160 @@
  */
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.*;
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.FetchProfile;
-import org.junit.FixMethodOrder;
 
 /**
  * @author sukhvir
  */
-@Entity
+
+@NamedEntityGraph(name = "userStudent",
+		attributeNodes = @NamedAttributeNode("user"))
+@Entity(name = "Student")
 @Table(name = "student")
-@PrimaryKeyJoinColumn(name = "id")
-public class Student extends User implements Comparable<Student> {
+public class Student implements Serializable, Comparable<Student> {
 
-    @Column(name = "rollnumber")
-    @Getter
-    @Setter
-    private int rollNumber;
+	@Id
+	@Getter
+	private UUID id;
 
-    @Column(name = "fName")
-    @Getter
-    @Setter
-    private String fName;
-
-    @Column(name = "lName")
-    @Getter
-    @Setter
-    private String lName;
-
-    @Column(name = "macId")
-    @Getter
-    @Setter
-    private String macId;
-
-    @Column(name = "unaccounted")
-    @Getter
-    @Setter
-    private boolean unaccounted;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "classFid", foreignKey = @ForeignKey(name = "studentForeignKey"))
-    @Getter
-    @Setter
-    private ClassRoom classRoom;
-
-    @Column(name = "verified")
-    @Getter
-    @Setter
-    private boolean verified;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "studentSubjectLink",
-            joinColumns = @JoinColumn(name = "studentFid"),
-            inverseJoinColumns = @JoinColumn(name = "subjectFid"),
-            foreignKey = @ForeignKey(name = "studentSubjectLinkStudentForeignKey"),
-            inverseForeignKey = @ForeignKey(name = "studentSubjectLinkSubjectForeignKey"))
-    @Getter
-    @Setter
-    private Set<Subject> subjects = new HashSet<>();
-
-    public Student() {
-    }
-
-    public Student(int rollNumber, String fName, String lName, ClassRoom classRoom, String username, String password, String email, long number) {
-        super(username, password, email, number);
-        this.rollNumber = rollNumber;
-        this.fName = fName;
-        this.lName = lName;
-        addClassRoom(classRoom);
-        setVerified(false);
-    }
-
-    public void unaccount() {
-        if (!verified) {
-            unaccounted = true;
-        }
-    }
-
-    /**
-     * this method adds the subject to the student the subject to the student
-     *
-     * @param subject subject to be added
-     */
-    public void addSubject(Subject subject) {
-        if (!subjects.contains(subject)) {
-            subjects.add(subject);
-            subject.getStudents().add(this);
-        }
-    }
-
-    /**
-     * this methods adds the student to the classroom the classroom to the
-     * student
-     *
-     * @param classRoom classroom to be added
-     */
-    final public void addClassRoom(ClassRoom classRoom) {
-        classRoom.addStudent(this);
-    }
-
-    @Override
-    public String toString() {
-        return fName + " " + lName;
-    }
-
-    @Override
-    public int compareTo(Student student) {
-        return this.getRollNumber() < student.getRollNumber() ? -1 : (this.getRollNumber() == student.getRollNumber()) ? 0 : 1;
-    }
+	@OneToOne(fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColumn(name = "id", nullable = false)
+	@Getter
+	private User user;
 
 
-    @Override
-    public final UserType getUserType() {
-        return UserType.Student;
-    }
+	@Column(name = "roll_number", nullable = false)
+	@Getter
+	@Setter
+	private int rollNumber;
+
+	@Column(name = "first_name", nullable = false, length = 40)
+	@Getter
+	@Setter
+	private String fName;
+
+	@Column(name = "last_name", nullable = false, length = 40)
+	@Getter
+	@Setter
+	private String lName;
+
+	@Column(name = "mac_id", length = 17) // or should 18 ?
+	@Getter
+	@Setter
+	private String macId;
+
+	@Column(name = "unaccounted")
+	@Getter
+	@Setter
+	private boolean unaccounted;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "student_foreign_key"))
+	@Getter
+	@Setter
+	private ClassRoom classRoom;
+
+	@Column(name = "verified", nullable = false)
+	@Getter
+	@Setter
+	private boolean verified;
+
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+	@Getter
+	private List<Attendance> attendances = new ArrayList<>();
+
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "student_subject_link",
+			joinColumns = @JoinColumn(name = "student_fid"),
+			inverseJoinColumns = @JoinColumn(name = "subject_fid"),
+			foreignKey = @ForeignKey(name = "student_subject_link_student_foreign_key"),
+			inverseForeignKey = @ForeignKey(name = "student_subject_link_subject_foreign_key"))
+	@Getter
+	@Setter
+	private Set<Subject> subjects = new HashSet<>();
+
+	public Student() {
+	}
+
+	public Student(
+			int rollNumber,
+			String fName,
+			String lName,
+			ClassRoom classRoom,
+			String username,
+			String password,
+			String email,
+			long number) {
+		this.user = new User( username, password, email, number, UserType.Student );
+		this.rollNumber = rollNumber;
+		this.fName = fName;
+		this.lName = lName;
+		//addClassRoom( classRoom );
+		setVerified( false );
+	}
+
+	public void unaccount() {
+		if ( !verified ) {
+			unaccounted = true;
+		}
+	}
+
+	/**
+	 * this method adds the subject to the student the subject to the student
+	 *
+	 * @param subject subject to be added
+	 */
+	public void addSubject(Subject subject) {
+		if ( !subjects.contains( subject ) ) {
+			subjects.add( subject );
+			subject.getStudents().add( this );
+		}
+	}
+
+	/**
+	 * this methods adds the student to the classroom the classroom to the
+	 * student
+	 *
+	 * @param classRoom classroom to be added
+	 */
+	final public void addClassRoom(ClassRoom classRoom) {
+		classRoom.addStudent( this );
+	}
+
+	@Override
+	public String toString() {
+		return fName + " " + lName;
+	}
+
+	@Override
+	public int compareTo(Student student) {
+		return Integer.compare( this.getRollNumber(), student.getRollNumber() );
+	}
 
 }
