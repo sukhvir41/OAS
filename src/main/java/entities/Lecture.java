@@ -53,7 +53,7 @@ public class Lecture implements Serializable {
 	@Column(name = "date", nullable = false)
 	@Getter
 	@Setter
-	@Convert(converter = LocalDateTimeConverter.class)
+	//@Convert(converter = LocalDateTimeConverter.class)
 	@NonNull
 	private LocalDateTime date;
 

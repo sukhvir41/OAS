@@ -94,7 +94,7 @@ public class LoginPost extends PostBackController {
 				cookieSessionId.setMaxAge( 864000 );
 				user.setSessionId( id );
 
-				String token = Utils.createToken( 12 );
+				String token = Utils.createToken( 20 );
 				Cookie cookieSessionToken = new Cookie( "sessionToken", token );
 				//keeping the cookie valid for 10 days
 				cookieSessionToken.setMaxAge( 864000 );

@@ -33,7 +33,7 @@ import lombok.Setter;
  * @author sukhvir
  */
 @Entity(name = "ClassRoom")
-@Table(name = "class")
+@Table(name = "class_room")
 public class ClassRoom implements Serializable {
 
 	@Id

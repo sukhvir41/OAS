@@ -10,14 +10,13 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -37,6 +36,7 @@ public final class User implements Serializable {
 	@Column
 	@Getter
 	@Setter
+	@Type(type = "pg-uuid")
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(
@@ -75,7 +75,7 @@ public final class User implements Serializable {
 	@Setter
 	private boolean used; // used to check if the forget password is used or not
 
-	@Column(name = "session_id")
+	@Column(name = "session_id", unique = true, length = 50)
 	@Getter
 	@Setter
 	private String sessionId; //used for cookie login
@@ -86,13 +86,13 @@ public final class User implements Serializable {
 	@Column(name = "date")
 	@Getter
 	@Setter
-	@Convert(converter = LocalDateTimeConverter.class)
+	//@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime date; // used check the forget password token expiry date
 
 	@Column(name = "user_type", nullable = false)
-	@Convert(converter = UserTypeConverter.class)
+	//@Convert(converter = UserTypeConverter.class)
 	@Setter
-	private UserType userType;
+	private String userType;
 
 	public User() {
 	}
@@ -102,7 +102,7 @@ public final class User implements Serializable {
 		this.setPassword( password );
 		this.email = email;
 		this.number = number;
-		this.userType = userType;
+		this.userType = userType.toString();
 	}
 
 	final public void setSessionToken(String sessionToken) {
@@ -112,7 +112,7 @@ public final class User implements Serializable {
 	/**
 	 * this method matches the given session token with the stored session token
 	 */
-	 public boolean matchSessionToken(String token) {
+	public boolean matchSessionToken(String token) {
 		return Utils.hashEquals( this.sessionToken, Utils.hash( token ) );
 	}
 
@@ -131,7 +131,7 @@ public final class User implements Serializable {
 	}
 
 	public UserType getUserType() {
-		return this.userType;
+		return UserType.valueOf( userType );
 	}
 
 	@Override

@@ -148,7 +148,6 @@ public class MacHandlers {
                 .type(EtherType.ARP)
                 .payloadBuilder(arpBuilder)
                 .paddingAtBuild(true);
-        Packet packet = etherBuilder.build();
-        return packet;
+        return etherBuilder.build();
     }
 }

@@ -29,16 +29,21 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.QueryHints;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 
 import entities.Lecture;
-import entities.User;
+import jooq.entities.Tables;
+import org.jooq.DSLContext;
+import org.jooq.Param;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 
 /**
  * @author sukhvir
@@ -49,6 +54,7 @@ public class Utils {
 	private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~-";
 	public static final String UTF8 = "UTF-8";
 	public static final String LOAD_ENTITY_HINT = "javax.persistence.loadgraph";
+	private static DSLContext jooqContext;
 
 	//creating Session factory on class load
 	static {
@@ -62,6 +68,8 @@ public class Utils {
 							.getMetadataBuilder()
 							.build();
 			sessionFactory = metaData.getSessionFactoryBuilder().build();
+
+			jooqContext = DSL.using( SQLDialect.POSTGRES_9_5 );
 
 		}
 		catch (Exception e) {
@@ -319,13 +327,18 @@ public class Utils {
 	 */
 	public static String generateSessionId(Session session) {
 		String id;
-		List<User> users;
-		Query query = session.createQuery( "from User where sessionId = :id" );
+
+		org.jooq.Query sql = getDsl().select( Tables.USERS.SESSION_ID )
+				.from( Tables.USERS )
+				.where( Tables.USERS.SESSION_ID.eq( "id" ) )
+				.limit( 1 );
+
+		System.out.println( sql.getSQL() );
+
 		do {
-			id = generateBase64( 12 );
-			query.setString( "id", id );
-			users = query.list();
-		} while ( !users.isEmpty() );
+			id = generateBase64( 20 );
+			sql.bind( 1, id );
+		} while ( !executeNativeStatement( session, sql ).isEmpty() );
 		return id;
 	}
 
@@ -454,4 +467,47 @@ public class Utils {
 			return "";
 		}
 	}
+
+	public static List<Object[]> executeNativeStatement(Session session, org.jooq.Query theQuery) {
+		Query result = session.createNativeQuery( theQuery.getSQL() );
+
+		//List<Object> values = theQuery.getBindValues();
+
+		int i = 1;
+		for ( Param<?> param : theQuery.getParams().values() ) {
+			if ( !param.isInline() ) {
+				result.setParameter( i++, convertToDatabaseType( param ) );
+			}
+		}
+
+		/*for ( int i = 0; i < values.size(); i++ ) {
+			result.setParameter( i + 1, values.get( i ) );
+		}*/
+
+		return result.setHint( QueryHints.READ_ONLY, true )
+				.getResultList();
+	}
+
+	private static <T> Object convertToDatabaseType(Param<T> param) {
+		return param.getBinding().converter().to( param.getValue() );
+	}
+
+	public static <T> List<T> executeNativeStatement(Session session, org.jooq.Query theQuery, Class<T> theClass) {
+		org.hibernate.query.Query<T> result = session.createNativeQuery( theQuery.getSQL(), theClass );
+
+		List<Object> values = theQuery.getBindValues();
+
+		for ( int i = 0; i < values.size(); i++ ) {
+			result.setParameter( i + 1, values.get( i ) );
+		}
+
+		return result.setHint( QueryHints.READ_ONLY, true )
+				.getResultList();
+	}
+
+	public static DSLContext getDsl() {
+		return jooqContext;
+	}
+
+
 }

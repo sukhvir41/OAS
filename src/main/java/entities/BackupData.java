@@ -59,7 +59,6 @@ public class BackupData implements Serializable {
     private String backupName;// this will be in json format
 
     @Column(name = "date")
-    @Convert(converter = LocalDateTimeConverter.class)
     @Getter
     @Setter
     private LocalDateTime date;

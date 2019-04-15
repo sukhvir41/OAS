@@ -8,7 +8,6 @@ package entities;
 import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -50,17 +49,19 @@ public class Admin implements Serializable {
 	private User user;
 
 	@Column(name = "type", nullable = false)
-	@Convert(converter = AdminTypeConverter.class)
-	@Getter
-	@Setter
-	private AdminType type = AdminType.Sub;
+	//@Convert(converter = AdminTypeConverter.class)
+	private String type;
 
 	public Admin() {
 	}
 
 	public Admin(String username, String password, String email, AdminType type) {
 		this.user = new User( username, password, email, -1, UserType.Admin );
-		this.type = type;
+		this.type = type.toString();
+	}
+
+	public AdminType getType(){
+		return AdminType.valueOf( type );
 	}
 
 

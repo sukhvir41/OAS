@@ -61,6 +61,7 @@ public class SystemInfoWS {
     
     @OnMessage
     public void handleMessage(String message, Session session) {
+
         
     }
     
