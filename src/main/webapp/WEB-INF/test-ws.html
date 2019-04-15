@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script>
+
+        var wsSocket;
+        var data;
+        var button;
+
+        $(document).ready(function () {
+
+
+            data = $("#data");
+            button = $("#button");
+            data.append(getURL());
+            wsSocket = new WebSocket(getURL());
+
+
+            wsSocket.onopen = wsOnOpen();
+            wsSocket.onmessage = function (event) { wsOnMessage(event) };
+
+
+
+            button.click(function(){
+                wsSocket.send("message from the button");
+            })
+
+
+        });
+
+        $(window).unload(function () {
+            if (wsSocket !== null) {
+                wsSocket.close();
+            }
+        });
+
+        var wsOnMessage = function (event) {
+            data.append(" <br />  -> " + event.data);
+        }
+
+        var wsOnOpen = function () {
+            data.append('socket open');
+        };
+
+
+        var getURL = function () {
+            var loc = window.location, new_uri;
+            if (loc.protocol === "https:") {
+                new_uri = "wss:";
+            } else {
+                new_uri = "ws:";
+            }
+            new_uri += "//" + loc.host;
+            new_uri += loc.pathname + "/mac-test";
+            return new_uri;
+        };
+    </script>
+</head>
+
+
+<body>
+    <p id="data"></p>
+
+    <button id="button">get data</button>
+</body>
+
+
+</html>
