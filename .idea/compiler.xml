@@ -2,10 +2,15 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
+      <profile default="true" name="Default" enabled="true">
+        <processorPath>
+          <entry name="$PROJECT_DIR$/out/production/classes/generated/entities" />
+        </processorPath>
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="OAS_gradle_test.jpaModelgen" target="1.8" />
+      <module name="OAS_gradle_test.metamodel" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

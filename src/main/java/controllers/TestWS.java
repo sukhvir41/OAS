@@ -18,7 +18,7 @@ public class TestWS extends Controller {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         httpSession.setAttribute("ip", req.getRemoteAddr());
 
-        boolean status = MacHandlers.setHandles("192.168.0.36", "08:00:27:66:EB:57");
+        boolean status = MacHandlers.setHandles("192.168.0.33", "08:00:27:66:EB:57");
         if (status) {
             MacHandlers.setPacketListners(new MacAddressListner());
         }

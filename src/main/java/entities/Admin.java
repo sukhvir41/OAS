@@ -25,7 +25,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 import lombok.Getter;
-import lombok.Setter;
 import utility.Utils;
 
 /**
