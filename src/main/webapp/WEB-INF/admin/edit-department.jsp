@@ -103,7 +103,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-8">
                                                     <label>Department Name</label>
-                                                    <input class="form-control input-lg"  type="text" name="departmentname" id="departmentname" required="true" value="${requestScope.department.name}">
+                                                    <input class="form-control input-lg"  type="text" name="departmentName" id="departmentName" required="true" value="${requestScope.department.name}">
                                                 </div>
                                             </div>
                                         </div>
@@ -112,7 +112,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-8">
                                                         <label>Select Hod</label>
-                                                        <select class="form-control input-lg mb-md"  name="teacherId" id="departmenthod">
+                                                        <select class="form-control input-lg mb-md"  name="teacherId" id="departmentHod">
                                                             <c:forEach var="teacher" items="${requestScope.department.teachers}">
                                                                 <option value="${teacher.id}">${teacher}</option>
                                                             </c:forEach>

@@ -15,10 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.Department_;
 import org.hibernate.Session;
 
 import entities.Department;
-import entities.Department_;
+
 import utility.Controller;
 
 /**

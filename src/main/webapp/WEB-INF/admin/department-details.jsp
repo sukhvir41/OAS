@@ -113,12 +113,15 @@
                                                         <dd>No Hod</dd>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <dd>${requestScope.department.hod}</dd>
+                                                        <dd><c:out value="${requestScope.department.hod}" /></dd>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </dl>
                                             <a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/departments/edit-department?departmentId=${requestScope.department.id}">Edit</a>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                            
+                                            <c:if test="${requestScope.canDelete}">
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                            </c:if>
                                             
                                             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" style="display: none;">
                                                 <div class="modal-dialog">
@@ -148,10 +151,10 @@
                                     <hr class="tall">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form action="/OAS/admin/courses/add-course-post" method="post">
+                                            <form action="/OAS/admin/courses/add-course" method="post">
                                                 <h4>Add Course</h4>
                                                 <input type="hidden" name="departmentId" value="${requestScope.department.id}">
-                                                <input type="hidden" name="from" value="department">
+                                                <input type="hidden" name="from" value="department-details">
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-4">
@@ -191,10 +194,10 @@
                                                         </tr>        
                                                     </c:if>
 
-                                                    <c:forEach var="course" items="${requestScope.courses}">
+                                                    <c:forEach var="course" items="${requestScope.courses}" varStatus="count">
                                                         <tr>
-                                                            <td>${course.id}</td>
-                                                            <td><a href="/OAS/admin/courses/course-details?courseId=${course.id}">${course.name}</a></td>
+                                                            <td>${count.index + 1}</td>
+                                                            <td><a href="/OAS/admin/courses/course-details?courseId=${course.id}"><c:out value="${course.name}"/></a></td>
                                                         </tr>
                                                     </c:forEach>
 
@@ -222,11 +225,11 @@
                                                         </tr>        
                                                     </c:if>
 
-                                                    <c:forEach var="teacher" items="${requestScope.teachers}">
+                                                    <c:forEach var="teacher" items="${requestScope.teachers}" varStatus="count" >
                                                         <tr>
-                                                            <td>${teacher.id}</td>
-                                                            <td><a href="#">${teacher}</a></td>
-                                                            <td>${teacher.email}</td>
+                                                            <td>${count.index + 1}</td>
+                                                            <td><a href="#"><c:out value="${teacher}"/></a></td>
+                                                            <td><c:out value="${teacher.email}"/></td>
                                                             <td>${teacher.verified}</td>
                                                         </tr>
                                                     </c:forEach>

@@ -5,19 +5,18 @@
  */
 package admin.postback;
 
-import java.io.PrintWriter;
+import entities.*;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Session;
+import utility.PostBackController;
+import utility.UrlParameters;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Department;
-import entities.Teacher;
-import org.apache.commons.lang3.StringUtils;
-import utility.PostBackController;
-import utility.UrlParameters;
+import java.io.PrintWriter;
+import java.util.UUID;
 
 /**
  * @author sukhvir
@@ -25,54 +24,59 @@ import utility.UrlParameters;
 @WebServlet(urlPatterns = "/admin/departments/update-department")
 public class UpdateDepartment extends PostBackController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    @Override
+    public void process(HttpServletRequest req,
+                        HttpServletResponse resp,
+                        Session session,
+                        HttpSession httpSession,
+                        PrintWriter out) throws Exception {
 
-		String theDepartmentId = req.getParameter( "departmentId" );
-		String theTeacherId = req.getParameter( "teacherId" );
-		String theDepartmentName = req.getParameter( "departmentName" );
+        String theDepartmentId = req.getParameter("departmentId");
+        String theTeacherId = req.getParameter("teacherId");
+        String theDepartmentName = req.getParameter("departmentName");
 
-		UrlParameters parameters = new UrlParameters();
+        UrlParameters parameters = new UrlParameters();
 
-		if ( StringUtils.isAnyBlank( theDepartmentId, theDepartmentName ) ) {
-			parameters.addErrorParameter()
-					.addMessage( "Unable to edit the department as details were missing" );
-			resp.sendRedirect( parameters.getUrl( "/OAS/admin/departments" ) );
-			return;
-		}
+        if (StringUtils.isAnyBlank(theDepartmentId, theDepartmentName)) {
+            parameters.addErrorParameter()
+                    .addMessage("Unable to edit the department as details were missing");
+            if (StringUtils.isBlank(theDepartmentId)) {
+                resp.sendRedirect(parameters.getUrl("/OAS/admin/departments"));
+            } else {
+                resp.sendRedirect(parameters.addParamter("departmentId", theDepartmentId)
+                        .getUrl("/OAS/admin/department-details"));
+            }
+            return;
+        }
 
-		int departmentId = Integer.parseInt( theDepartmentId );
-		Department department = Department.getDepartment( departmentId, session );
+        var departmentId = Long.parseLong(theDepartmentId);
 
-		if ( theTeacherId != null ) {
-			Teacher teacher = (Teacher) session.get( Teacher.class, Integer.parseInt( theTeacherId ) );
-			if ( department.getHod() == null ) {
-				teacher.addHodOf( department );
-			}
-			else {
-				Teacher tempTeacher = department.getHod();
-				tempTeacher.getHodOf().remove( department );
-				department.setHod( null );
-				teacher.addHodOf( department );
-				if ( tempTeacher.getHodOf()
-						.isEmpty() ) { // check if the teacher is hod of asome deaprtment or not if not remove as hod
-					tempTeacher.setHod( false );
-				}
-			}
-		}
-		department.setName( theDepartmentName );
+        var departmentRootGraph = session.createEntityGraph(Department.class);
+        var hodSubGraph = departmentRootGraph.addSubgraph(Department_.hod); //get hod
+        hodSubGraph.addAttributeNode(Teacher_.hodOf);
 
-		resp.sendRedirect(
-				parameters.addSuccessParameter()
-						.addMessage( theDepartmentName + " was updated" )
-						.addParamter( "departmetnId", theDepartmentId )
-						.getUrl( "/OAS/admin/departments/detail-department" )
-		);
-	}
+        Department department = EntityHelper.getInstance(departmentId, Department_.id, Department.class, session, false, departmentRootGraph);
+        department.setName(theDepartmentName);
+
+        if (StringUtils.isNotBlank(theTeacherId)) {
+            var teacherId = UUID.fromString(theTeacherId);
+
+            var teacherRootGraph = session.createEntityGraph(Teacher.class);
+            var hodOfSubGraph = teacherRootGraph.addSubGraph(Teacher_.hodOf);
+            hodOfSubGraph.addAttributeNode(Department_.HOD);
+
+            var teacher = EntityHelper.getInstance(teacherId, Teacher_.id, Teacher.class, session, false, teacherRootGraph);
+            teacher.addHodOf(department);
+        }
+
+
+        resp.sendRedirect(
+                parameters.addSuccessParameter()
+                        .addMessage(theDepartmentName + " was updated")
+                        .addParamter("departmentId", theDepartmentId)
+                        .getUrl("/OAS/admin/departments/department-details")
+        );
+    }
+
 
 }

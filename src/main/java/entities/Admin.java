@@ -43,7 +43,7 @@ public class Admin implements Serializable {
 
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	@MapsId()
-	@JoinColumn(name = "id", foreignKey = @ForeignKey(name = "user_foreign_key"))
+	@JoinColumn(name = "id", foreignKey = @ForeignKey(name = "user_admin_foreign_key"))
 	@Getter
 	private User user;
 

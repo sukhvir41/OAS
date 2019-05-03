@@ -32,9 +32,9 @@ public class Teacher implements Serializable {
     @Getter
     private UUID id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id", nullable = false, foreignKey = @ForeignKey(name = "user_teacher_foreign_key"))
     @Getter
     private User user;
 
@@ -61,7 +61,7 @@ public class Teacher implements Serializable {
     @Column(name = "is_hod", nullable = false)
     @Getter
     @Setter
-    private boolean hod;
+    private boolean hod = false;
 
     @OneToMany(mappedBy = "hod", fetch = FetchType.LAZY)
     @Getter
@@ -135,14 +135,24 @@ public class Teacher implements Serializable {
     }
 
     /**
-     * this method adds department hod to teacher and vice versa but does not
-     * mark hod to true
+     * this method adds department hod to teacher and vice versa.
      */
     public void addHodOf(Department department) {
-        if (!hodOf.contains(department)) {
-            hodOf.add(department);
-            department.setHod(this);
-            hod = true;
+        department.removeHod();//removing the old hod of the department
+        this.getHodOf().remove(department);//removing the department from the current hod of to avoid duplicate entries
+        this.getHodOf().add(department);//adding teh department to the hod of
+        department.setHod(this);//adding the teacher (HOD) to the department
+        setHod(true); //setting the isHod to true
+    }
+
+    /**
+     * this removes the department from HodOf and sets the department Hod to null.
+     */
+    public void removeHodOf(Department department) {
+        this.hodOf.remove(department);
+        department.setHod(null);
+        if (getHodOf().isEmpty()) {
+            setHod(false);
         }
     }
 
