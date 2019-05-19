@@ -149,12 +149,12 @@
                                     <c:choose>
                                         <c:when test="${requestScope.handlerReady}">
                                             <div class="alert alert-success">
-                                                <strong>Well Done Admin!</strong> Good job on network settings. Details ${requestScope.details}
+                                                <strong>Message!</strong> The network setting have been applied. Details ${requestScope.details}
                                             </div>
                                         </c:when>
                                         <c:otherwise>
                                             <div class="alert alert-danger">
-                                                <strong>Hey Admin!</strong> set the network settings. click <a href="/OAS/admin/networksettings" class="alert-link">here</a>
+                                                <strong>Alert!</strong> Set the network settings. click <a href="/OAS/admin/network-settings" class="alert-link">here</a>
                                             </div>
                                         </c:otherwise>
                                     </c:choose>

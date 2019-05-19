@@ -17,25 +17,22 @@ import entities.UserType;
  */
 public class AddToDatabase {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		Session session = Utils.openSession();
-		session.beginTransaction();
+        Session session = Utils.openSession();
+        session.beginTransaction();
 
-		Admin admin = new Admin( "adminsukhvir12", "qwertyuiop", "sukhvir4112@gmail.com", AdminType.Main );
-		//User user = new User( "adminsukhvir", "qwertyuiop", "sukhvir41@gmail.com", -2, UserType.Admin );
+        try {
+            Admin admin = new Admin("adminsukhvir12", "qwertyuiop", "sukhvir4112@gmail.com", AdminType.Main);
+            session.save(admin);
 
+            //session.save( new Admin( "adminkalpesh", "qwertyuiop", "kalpeshrawal96@gmail.com", AdminType.Main ) );
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        }
 
-		//session.save( user );
-		//System.out.println( user.getId() );
-		//admin.setUser( user );
-		session.save( admin );
+        session.close();
 
-		//session.save( new Admin( "adminkalpesh", "qwertyuiop", "kalpeshrawal96@gmail.com", AdminType.Main ) );
-		session.getTransaction().commit();
-		session.close();
-		Utils.closeSessionFactory();
-
-	}
-
+    }
 }

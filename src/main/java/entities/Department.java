@@ -20,12 +20,7 @@ import java.util.*;
 /**
  * @author sukhvir
  */
-@NamedEntityGraph(name = "getDepartment",
-        attributeNodes = {
-                @NamedAttributeNode("hod"),
-                @NamedAttributeNode("courses"),
-                @NamedAttributeNode("teachers")
-        })
+
 @Entity(name = "Department")
 @Table(name = "department")
 public class Department implements Serializable {
@@ -35,7 +30,7 @@ public class Department implements Serializable {
     @Column(name = "id")
     @Getter
     @Setter
-    private long id;
+    private Long id;
 
     @Column(name = "name", length = 40, nullable = false)
     @Getter
@@ -50,11 +45,18 @@ public class Department implements Serializable {
     private Teacher hod;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
+    @OrderBy("name")
     @Getter
     @Setter
     private List<Course> courses = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "department", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @OrderBy("fName ASC, lName ASC")
+    @JoinTable(name = "teacher_department_link",
+            joinColumns = @JoinColumn(name = "teacher_fid"),
+            inverseJoinColumns = @JoinColumn(name = "department_fid"),
+            foreignKey = @ForeignKey(name = "teacher_department_link_teacher_foreign_key"),
+            inverseForeignKey = @ForeignKey(name = "teacher_department_link_department_foreign_key"))
     @Getter
     @Setter
     private Set<Teacher> teachers = new HashSet<>();
@@ -68,79 +70,65 @@ public class Department implements Serializable {
 
     /**
      * this methods adds the teacher to the department
+     * OWNER of the relationship
      *
      * @param teacher teacher to be added to the department
      */
     public void addTeacher(Teacher teacher) {
-        if (!teachers.contains(teacher)) {
-            this.teachers.add(teacher);
-            teacher.getDepartment().add(this);
-        }
+        // as teacher is a set it will contain uniques
+        this.teachers.add(teacher);
     }
 
     /**
-     * this method adds the course to the department and the department to the
-     * course
+     * this methods removes the teacher to the department
+     * OWNER of the relationship
+     *
+     * @param teacher teacher to be added to the department
+     */
+    public void removeTeacher(Teacher teacher) {
+        // as teacher is a set it will contain uniques
+        this.teachers.remove(teacher);
+    }
+
+    /**
+     * this method adds the course to the department
+     * NOT the owner of the relationship
      *
      * @param course course to be added
      */
     public void addCourse(Course course) {
-        if (!courses.contains(course)) {
-            this.courses.add(course);
-            course.setDepartment(this);
-        }
+        this.courses.remove(course);
+        this.courses.add(course);
     }
 
     /**
-     * this method adds the teacher as hod of department and vice versa
+     * this method adds the teacher as hod of department
+     * OWNER of the relationship
      */
     public void addHod(Teacher teacher) {
-        teacher.addHodOf(this);
+
+        this.hod = teacher;
     }
 
     /**
-     * this method removes the Hod from the department and vice-versa. (indirectly calls the removeHodOf from the Teacher class)
+     * this method removes the Hod from the department.
+     * OWNER of the relationship
      */
     public void removeHod() {
-        if (Objects.nonNull(this.getHod())) {
-            this.getHod().removeHodOf(this);
-        }
+        this.hod = null;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return id != null && id.equals(that.id);
     }
 
     @Override
-    public String toString() {
-        return name;
+    public int hashCode() {
+        return 31;
     }
-
-    public static Department getDepartment(long id, Session session) {
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Department> query = builder.createQuery(Department.class);
-        Root<Department> departmentRoot = query.from(Department.class);
-        query.where(
-                builder.equal(departmentRoot.get(Department_.id), id)
-        );
-
-        return session.createQuery(query)
-                .applyLoadGraph(session.getEntityGraph("getDepartment"))
-                //.setMaxResults( 1 )
-                .getSingleResult();
-    }
-
-   /* public static Department getInstance(long id, Session session, String... fieldNames) {
-        RootGraph<Department> graph = session.createEntityGraph(Department.class);
-        graph.addAttributeNodes(fieldNames);
-
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Department> query = builder.createQuery(Department.class);
-        Root<Department> departmentRoot = query.from(Department.class);
-        query.where(
-                builder.equal(departmentRoot.get(Department_.id), id)
-        );
-
-        return session.createQuery(query)
-                .applyLoadGraph(graph)
-                .getSingleResult();
-    }*/
-
-
 }

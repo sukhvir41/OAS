@@ -5,11 +5,12 @@
  */
 package admin.postback;
 
-import entities.*;
+import jooq.entities.Tables;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
 import utility.UrlParameters;
+import utility.Utils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,24 +52,19 @@ public class UpdateDepartment extends PostBackController {
 
         var departmentId = Long.parseLong(theDepartmentId);
 
-        var departmentRootGraph = session.createEntityGraph(Department.class);
-        var hodSubGraph = departmentRootGraph.addSubgraph(Department_.hod); //get hod
-        hodSubGraph.addAttributeNode(Teacher_.hodOf);
-
-        Department department = EntityHelper.getInstance(departmentId, Department_.id, Department.class, session, false, departmentRootGraph);
-        department.setName(theDepartmentName);
+        // updating the department by setting the name
+        var sql = Utils.getDsl()
+                .update(Tables.DEPARTMENT)
+                .set(Tables.DEPARTMENT.NAME, theDepartmentName);
 
         if (StringUtils.isNotBlank(theTeacherId)) {
-            var teacherId = UUID.fromString(theTeacherId);
-
-            var teacherRootGraph = session.createEntityGraph(Teacher.class);
-            var hodOfSubGraph = teacherRootGraph.addSubGraph(Teacher_.hodOf);
-            hodOfSubGraph.addAttributeNode(Department_.HOD);
-
-            var teacher = EntityHelper.getInstance(teacherId, Teacher_.id, Teacher.class, session, false, teacherRootGraph);
-            teacher.addHodOf(department);
+            // updating the department hod
+            sql = sql.set(Tables.DEPARTMENT.HOD_TEACHER_FID, UUID.fromString(theTeacherId));
         }
+        //setting the condition which department to update
+        var updateQuery = sql.where(Tables.DEPARTMENT.ID.eq(departmentId));
 
+        Utils.executeNativeQuery(session, updateQuery);
 
         resp.sendRedirect(
                 parameters.addSuccessParameter()

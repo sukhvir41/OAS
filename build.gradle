@@ -87,16 +87,19 @@ cargo {
     }
 
     local {
-        homeDir = file('C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0')
+        homeDir = file('..//tomcat')
         outputFile = file('output.log')
     }
 }
 
 cargoStartLocal.mustRunAfter cargoStopLocal
+build.mustRunAfter clean
 
 task runApplication() {
     dependsOn clean
     dependsOn build
     dependsOn cargoStopLocal
     dependsOn cargoStartLocal
+    dependsOn build
+
 }

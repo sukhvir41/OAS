@@ -5,27 +5,29 @@
  */
 package servletListners;
 
+import admin.wsServices.SystemInfoService;
+import student.attendanceWsService.MacHandlers;
+import utility.AddToDatabase;
+import utility.Utils;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
-import AttendanceServices.MacHandlers;
-import admin.wsServices.SystemInfoService;
-import utility.Utils;
 
 /**
- *
  * @author sukhvir
  */
 public class ContextListner implements ServletContextListener {
 
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-    
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         sce.getServletContext().setAttribute("ready", false);
+        // used fro send system info to admin (home page) using web sockets
+        addToDb();
         executorService.scheduleWithFixedDelay(new SystemInfoService(), 10, 15, TimeUnit.SECONDS);
     }
 
@@ -34,6 +36,12 @@ public class ContextListner implements ServletContextListener {
         Utils.closeSessionFactory();
         MacHandlers.closeHandles();
         executorService.shutdown();
+    }
+
+
+    private void addToDb() {
+
+        AddToDatabase.main(null);
     }
 
 }

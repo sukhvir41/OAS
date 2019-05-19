@@ -46,6 +46,7 @@ public class AddAdmin extends PostBackController {
 			return;
 		}
 
+		// not checking for duplicate username and email as if they are, the insert is going fail due to the constraint
 		Admin admin = new Admin( username, password, email, AdminType.Sub );
 
 		session.save( admin );

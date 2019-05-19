@@ -5,40 +5,61 @@
  */
 package admin.postback;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
 import entities.Course;
 import utility.PostBackController;
+import utility.UrlParameters;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/courses/updatecourse")
+@WebServlet(urlPatterns = "/admin/courses/update-course")
 public class UpdateCourse extends PostBackController {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        int courseId = Integer.parseInt(req.getParameter("courseId"));
-        String name = req.getParameter("coursename");
+        long courseId = Long.parseLong(req.getParameter("courseId"));
+        String name = req.getParameter("courseName");
 
-        Course course = (Course) session.get(Course.class, courseId);
+        if (StringUtils.isBlank(name)) {
+            onError(req, resp);
+            return;
+        }
+
+        Course course = session.get(Course.class, courseId);
         course.setName(name);
         session.update(course);
 
-        if (req.getParameter("from").equals("")) {
-            resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
-        } else {
-            resp.sendRedirect("/OAS/admin/courses#" + courseId);
-        }
+        UrlParameters parameters = new UrlParameters()
+                .addSuccessParameter()
+                .addParamter("courseId", String.valueOf(courseId))
+                .addMessage("Course name updated");
+
+        resp.sendRedirect(
+                parameters.getUrl("/OAS/admin/courses/course-details")
+        );
 
     }
 
+    @Override
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect(
+                new UrlParameters()
+                        .addErrorParameter()
+                        .addParamter("courseId", req.getParameter("courseId"))
+                        .addMessage("Unable to edit the course as details were missing")
+                        .getUrl("/OAS/admin/courses")
+        );
+    }
 }

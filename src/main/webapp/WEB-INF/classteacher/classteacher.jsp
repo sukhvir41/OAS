@@ -97,6 +97,7 @@
                                                 <label>
                                                     <input id="filter" name="filter" value="true" type="radio">
                                                     Verified
+                                                </label>
                                                 <label>
                                                     <input id="filter" name="filter" value="false" type="radio">
                                                     Not Verified

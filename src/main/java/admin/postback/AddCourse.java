@@ -43,7 +43,7 @@ public class AddCourse extends PostBackController {
 
         Department department = session.get(Department.class, id);
         Course course = new Course(courseName);
-        department.addCourse(course);
+        course.addDepartment(department);
         session.save(course);
 
         String from = req.getParameter("from");
@@ -53,7 +53,7 @@ public class AddCourse extends PostBackController {
                     new UrlParameters().addSuccessParameter()
                             .addMessage(courseName + " was added to the department")
                             .addParamter("departmentId", departmentId)
-                            .getUrl("/OAS/admin/department-details")
+                            .getUrl("/OAS/admin/departments/department-details")
             );
 
         } else {

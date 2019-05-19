@@ -17,20 +17,19 @@ import entities.Course;
 import utility.Controller;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/courses/editcourse")
+@WebServlet(urlPatterns = "/admin/courses/edit-course")
 public class EditCourse extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int courseId = Integer.parseInt(req.getParameter("courseId"));
+        long courseId = Long.parseLong(req.getParameter("courseId"));
 
-        Course course = (Course) session.get(Course.class, courseId);
+        Course course = session.get(Course.class, courseId);
 
         req.setAttribute("course", course);
-        req.getRequestDispatcher("/WEB-INF/admin/editcourse.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/edit-course.jsp").include(req, resp);
 
     }
 

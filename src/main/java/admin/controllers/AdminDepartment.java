@@ -29,26 +29,19 @@ import utility.Controller;
 public class AdminDepartment extends Controller {
 
 	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
+	public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
 			PrintWriter out) throws Exception {
 
 		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Department> query = builder.createQuery( Department.class );
-		Root<Department> departmentRoot = query.from( Department.class );
-		query.orderBy( builder.asc( departmentRoot.get( Department_.NAME ) ) );
+		CriteriaQuery<Department> query = builder.createQuery(Department.class);
+		Root<Department> departmentRoot = query.from(Department.class);
+		query.orderBy(builder.asc(departmentRoot.get(Department_.NAME)));
 
-		List<Department> departments = session.createQuery( query )
-				.setReadOnly( true )
-				.list();
+		List<Department> departments = session.createQuery(query).setReadOnly(true).list();
 
-		req.setAttribute( "departments", departments );
+		req.setAttribute("departments", departments);
 
-		req.getRequestDispatcher( "/WEB-INF/admin/admin-department.jsp" )
-				.include( req, resp );
+		req.getRequestDispatcher("/WEB-INF/admin/admin-department.jsp").include(req, resp);
 	}
 
 }

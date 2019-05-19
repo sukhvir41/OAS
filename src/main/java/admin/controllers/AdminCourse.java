@@ -5,21 +5,21 @@
  */
 package admin.controllers;
 
-import java.io.PrintWriter;
-import java.util.List;
+import entities.Course;
+import entities.Course_;
+import entities.Department;
+import entities.Department_;
+import org.hibernate.Session;
+import utility.Controller;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Course;
-import entities.Department;
-import utility.Controller;
+import java.io.PrintWriter;
+import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/courses")
@@ -28,11 +28,34 @@ public class AdminCourse extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        List<Course> courses = (List<Course>) session.createCriteria(Course.class)
-                .list();
-        
-        List<Department> departments = (List<Department>) session.createCriteria(Department.class)
-                .list();
+        //getting the departments of the course graph
+        var courseRootGraph = session.createEntityGraph(Course.class);
+        courseRootGraph.addAttributeNode(Course_.department);
+
+        var courseBuilder = session.getCriteriaBuilder();
+        var courseQuery = courseBuilder.createQuery(Course.class);
+        var courseRoot = courseQuery.from(Course.class);
+
+        //ordering by course name
+        courseQuery.orderBy(courseBuilder.asc(courseRoot.get(Course_.name)));
+
+
+        List<Course> courses = session.createQuery(courseQuery)
+                .applyLoadGraph(courseRootGraph)
+                .setReadOnly(true)
+                .applyLoadGraph(courseRootGraph)
+                .getResultList();
+
+        var departmentBuilder = session.getCriteriaBuilder();
+        var departmentQuery = departmentBuilder.createQuery(Department.class);
+        var departmentRoot = departmentQuery.from(Department.class);
+
+        //ordering by department name
+        departmentQuery.orderBy(departmentBuilder.asc(departmentRoot.get(Department_.name)));
+
+        List<Department> departments = session.createQuery(departmentQuery)
+                .setReadOnly(true)
+                .getResultList();
 
         req.setAttribute("courses", courses);
         req.setAttribute("departments", departments);

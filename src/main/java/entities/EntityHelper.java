@@ -9,27 +9,55 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import javax.persistence.metamodel.Attribute;
 import javax.persistence.metamodel.SingularAttribute;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class EntityHelper {
 
-    public static <T> List<T> getAll(Session session, Class<T> tClass) {
+    private EntityHelper() throws InstantiationException {
+        throw new InstantiationException("Cant not create object of this class");
+    }
+
+    public static <T, U> void deleteInstance(U id, SingularAttribute<T, U> idField, Class<T> tClass, Session session) throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaDelete<T> delete = builder.createCriteriaDelete(tClass);
+        Root<T> classRoot = delete.from(tClass);
+
+        delete.where(builder.equal(classRoot.get(idField), id));
+
+        session.createQuery(delete)
+                .executeUpdate();
+    }
+
+    public static <T> List<T> getAll(Session session, Class<T> tClass, boolean readOnly) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(tClass);
         Root<T> classRoot = query.from(tClass);
 
         return session.createQuery(query)
-                .setReadOnly(true)
+                .setReadOnly(readOnly)
                 .getResultList();
 
     }
+
+    public static <T> List<T> getAll(Session session, Class<T> tClass, RootGraph<T> graph, boolean readOnly) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(tClass);
+        Root<T> classRoot = query.from(tClass);
+
+        return session.createQuery(query)
+                .setReadOnly(readOnly)
+                .applyLoadGraph(graph)
+                .getResultList();
+
+    }
+
 
     public static <U, T> T getInstance(U id, SingularAttribute<T, U> idField, Class<T> aClass, Session session, boolean readOnly, String... fieldNames) {
         RootGraph<T> graph = session.createEntityGraph(aClass);

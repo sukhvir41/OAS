@@ -45,7 +45,7 @@ public class UnnaccoutTeacher extends PostBackController {
 
             teacher.getTeaches().clear();
 
-            teacher.setHod(false);
+           // teacher.setHod(false);
 
             teacher.unaccount();
         }

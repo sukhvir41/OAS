@@ -7,13 +7,8 @@ package entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Session;
-import org.hibernate.graph.RootGraph;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.*;
 
@@ -58,11 +53,6 @@ public class Teacher implements Serializable {
     @Setter
     private boolean unaccounted;
 
-    @Column(name = "is_hod", nullable = false)
-    @Getter
-    @Setter
-    private boolean hod = false;
-
     @OneToMany(mappedBy = "hod", fetch = FetchType.LAZY)
     @Getter
     @Setter
@@ -79,12 +69,8 @@ public class Teacher implements Serializable {
     @Setter
     private List<Teaching> teaches = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "teacher_department_link",
-            joinColumns = @JoinColumn(name = "teacher_fid"),
-            inverseJoinColumns = @JoinColumn(name = "department_fid"),
-            foreignKey = @ForeignKey(name = "teacher_department_link_teacher_foreign_key"),
-            inverseForeignKey = @ForeignKey(name = "teacher_department_link_department_foreign_key"))
+    @ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
+    @OrderBy("name")
     @Getter
     @Setter
     private Set<Department> department = new HashSet<>();
@@ -93,12 +79,15 @@ public class Teacher implements Serializable {
     }
 
     public Teacher(String fName, String lName, String username, String password, String email, long number) {
-        //super(username, password, email, number);
         this.user = new User(username, password, email, number, UserType.Teacher);
         this.fName = fName;
         this.lName = lName;
         setVerified(false);
 
+    }
+
+    public boolean isHod() {
+        return !hodOf.isEmpty();
     }
 
     public void unaccount() {
@@ -108,97 +97,71 @@ public class Teacher implements Serializable {
     }
 
     /**
-     * this method adds class room to class teacher and vice versa
+     * add class room to teacher. by doing so you make the teacher teh class teacher of the class room .
+     * (owner of the relationship).
+     *
+     * @param classRoom
      */
     public final void addClassRoom(ClassRoom classRoom) {
-        classRoom.addClassTeacher(this);
+        this.classRoom = classRoom;
     }
 
+
     /**
-     * this methods adds the teaching to teacher and vice versa
+     * add the teaching to the teacher.
+     * (NOT the owner of the relationship)
+     *
+     * @param teaching
      */
     public final void addTeaching(Teaching teaching) {
-        if (!teaches.contains(teaching)) {
-            this.teaches.add(teaching);
-            teaching.setTeacher(this);
-        }
+        this.teaches.remove(teaching);
+        this.teaches.add(teaching);
     }
 
+
     /**
-     * this methods adds the teacher to the department and the department to the
-     * teacher
+     * adds teh teacher to the department
+     * (NOT the owner of the relationship)
      *
      * @param department
      */
     public void addDepartment(Department department) {
-        department.addTeacher(this);
+        //as department is a set it will only get added once
+        this.department.add(department);
     }
 
     /**
-     * this method adds department hod to teacher and vice versa.
+     * add hod (teacher ) to the department.
+     * (NOT the owner of the relationship)
+     *
+     * @param department
      */
     public void addHodOf(Department department) {
-        department.removeHod();//removing the old hod of the department
-        this.getHodOf().remove(department);//removing the department from the current hod of to avoid duplicate entries
-        this.getHodOf().add(department);//adding teh department to the hod of
-        department.setHod(this);//adding the teacher (HOD) to the department
-        setHod(true); //setting the isHod to true
+        this.hodOf.remove(department);
+        this.hodOf.add(department);
     }
 
+
     /**
-     * this removes the department from HodOf and sets the department Hod to null.
+     * remove the hod (teacher) from the department
+     * (NOT the  owner of the relationship)
+     *
+     * @param department
      */
     public void removeHodOf(Department department) {
         this.hodOf.remove(department);
-        department.setHod(null);
-        if (getHodOf().isEmpty()) {
-            setHod(false);
-        }
     }
 
     @Override
-    public String toString() {
-        return fName + " " + lName;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Teacher teacher = (Teacher) o;
+        return id != null && id.equals(teacher.id);
     }
 
-    public static Teacher getInstance(UUID id, Session session, String... fieldNames) {
-        RootGraph<Teacher> graph = session.createEntityGraph(Teacher.class);
-        graph.addAttributeNodes(fieldNames);
-        graph.addAttributeNode("user");
-
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Teacher> criteriaQuery = builder.createQuery(Teacher.class);
-        Root<Teacher> teacherRoot = criteriaQuery.from(Teacher.class);
-        criteriaQuery.where(
-                builder.equal(teacherRoot.get(Teacher_.ID), id)
-        );
-
-        return session.createQuery(criteriaQuery)
-                .applyLoadGraph(graph)
-                .setMaxResults(1)
-                .getSingleResult();
+    @Override
+    public int hashCode() {
+        return 31;
     }
-
-    public static Teacher getReadOnlyInstance(UUID id, Session session, String... fieldNames) {
-        RootGraph<Teacher> graph = session.createEntityGraph(Teacher.class);
-
-        if (Objects.nonNull(fieldNames) && fieldNames.length > 0) {
-            graph.addAttributeNodes(fieldNames);
-        }
-        graph.addAttributeNode("user");
-
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Teacher> criteriaQuery = builder.createQuery(Teacher.class);
-        Root<Teacher> teacherRoot = criteriaQuery.from(Teacher.class);
-        criteriaQuery.where(
-                builder.equal(teacherRoot.get(Teacher_.ID), id)
-        );
-
-        return session.createQuery(criteriaQuery)
-                .applyLoadGraph(graph)
-                .setMaxResults(1)
-                .setReadOnly(true)
-                .getSingleResult();
-    }
-
 }

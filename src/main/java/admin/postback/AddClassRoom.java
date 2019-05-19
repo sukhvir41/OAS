@@ -5,47 +5,95 @@
  */
 package admin.postback;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jooq.entities.Tables;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
 import entities.ClassRoom;
 import entities.Course;
 import utility.PostBackController;
+import utility.UrlParameters;
+import utility.Utils;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/classrooms/addclassroom")
+@WebServlet(urlPatterns = "/admin/classrooms/add-classroom")
 public class AddClassRoom extends PostBackController {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        long courseId = Long.parseLong(req.getParameter("courseId"));
-        String name = req.getParameter("classroomname");
-        String division = req.getParameter("division");
-        int semister = Integer.parseInt(req.getParameter("semister"));
-        int minimum = Integer.parseInt(req.getParameter("minimumsubjects"));
+        var theCourseId = req.getParameter("courseId");
+        var name = req.getParameter("classRoomName");
+        var division = req.getParameter("division");
+        var theSemester = req.getParameter("semester");
+        var theMinimumSubjects = req.getParameter("minimumSubjects");
 
-        ClassRoom classRoom = new ClassRoom(name, division, semister, minimum);
+        UrlParameters parameters = new UrlParameters();
 
-        Course course = (Course) session.get(Course.class, courseId);
-        course.addClassRoom(classRoom);
-        session.save(classRoom);
-        session.update(course);
+        if (StringUtils.isAnyBlank(theCourseId, name, division, theSemester, theMinimumSubjects)) {
+            parameters.addErrorParameter()
+                    .addMessage("Please provide the correct details");
 
-        if (req.getParameter("from") == null) {
-            resp.sendRedirect("/OAS/admin/classrooms");
-        } else {
-            resp.sendRedirect("/OAS/admin/courses/detailcourse?courseId=" + courseId);
+            redirect(req, resp, parameters);
+            return;
         }
 
+        long courseId = Long.parseLong(theCourseId);
+        int semester = Integer.parseInt(theSemester);
+        int minimumSubjects = Integer.parseInt(theMinimumSubjects);
+
+        ClassRoom classRoom = new ClassRoom(name, division, semester, minimumSubjects);
+        Course course = session.getReference(Course.class, courseId);
+        classRoom.addCourse(course);
+        session.save(classRoom);
+
+        parameters.addSuccessParameter()
+                .addMessage("Class room was added");
+
+        redirect(req, resp, parameters);
+    }
+
+    @Override
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UrlParameters parameters = new UrlParameters()
+                .addErrorParameter()
+                .addMessage("Please provide the correct details");
+
+        redirect(req, resp, parameters);
+    }
+
+    private void redirect(HttpServletRequest request, HttpServletResponse response, UrlParameters urlParameters) throws IOException {
+        var from = Optional.of(request.getParameter("from"))
+                .orElse("");
+        var courseId = request.getParameter("courseId");
+
+        switch (from) {
+            case "course-details": {
+                if (StringUtils.isBlank(courseId)) {
+                    response.sendRedirect("/OAS/admin/subjects");
+                } else {
+                    response.sendRedirect(
+                            urlParameters.addParamter("courseId", courseId)
+                                    .getUrl("/OAS/admin/courses/course-details")
+                    );
+                }
+                break;
+            }
+            default: {
+                response.sendRedirect("/OAS/admin/subjects");
+            }
+        }
     }
 
 }

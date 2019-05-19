@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.Session;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.graph.RootGraph;
 
 import javax.persistence.*;
@@ -18,6 +20,8 @@ import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author sukhvir
@@ -31,7 +35,7 @@ public class Course implements Serializable {
     @Column(name = "id")
     @Getter
     @Setter
-    private long id;
+    private Long id;
 
     @Column(name = "name", length = 40, nullable = false)
     @Getter
@@ -46,11 +50,13 @@ public class Course implements Serializable {
     private Department department;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OrderBy("name")
     @Getter
     @Setter
     private List<ClassRoom> classRooms = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OrderBy("name")
     @Getter
     @Setter
     private List<Subject> subjects = new ArrayList<>();
@@ -68,68 +74,53 @@ public class Course implements Serializable {
     }
 
     /**
-     * this method adds the course to the department and the department to the
-     * course
+     * this method adds the course to the department
+     * OWNER of the relationship
      *
      * @param department department to be added
      */
     public void addDepartment(Department department) {
-        department.addCourse(this);
+        this.department = department;
+    }
+
+    public void removeDepartment() {
+        this.department = null;
     }
 
     /**
-     * this method adds the classroom to the course and the course to the
-     * classroom
+     * this method adds the classroom to the course
+     * NOT the owner of the relationship
      *
      * @param classRoom classroom to be added
      */
     public void addClassRoom(ClassRoom classRoom) {
-        if (!classRooms.contains(classRoom)) {
-            this.classRooms.add(classRoom);
-            classRoom.setCourse(this);
-        }
+        this.classRooms.remove(classRoom);
+        this.classRooms.add(classRoom);
     }
 
     /**
-     * this method adds the subject to the course and the course to the subject
+     * this method adds the subject to the course.
+     * NOT the owner of the relationship
      *
      * @param subject subject to be added
      */
     public void addSubject(Subject subject) {
-        if (!subjects.contains(subject)) {
-            this.subjects.add(subject);
-            subject.setCourse(this);
-        }
+        this.subjects.remove(subject);
+        this.subjects.add(subject);
     }
 
     @Override
-    public String toString() {
-        return name;
-    }
-
-
-    public static Course getInstance(long id, Session session, String... fieldNames) {
-        RootGraph<Course> graph = session.createEntityGraph(Course.class);
-        graph.addAttributeNodes(fieldNames);
-
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Course> query = builder.createQuery(Course.class);
-        Root<Course> departmentRoot = query.from(Course.class);
-        query.where(
-                builder.equal(departmentRoot.get(Course_.id), id)
-        );
-
-        return session.createQuery(query)
-                .applyLoadGraph(graph)
-                .getSingleResult();
-
-    }
-
-    public static Course getFullInstance(long id, Session session) {
-        return getInstance(id, session, "department", "classRooms", "subjects");
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return id != null && id.equals(course.id);
     }
 
 
 
-
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 }

@@ -33,6 +33,7 @@ public class MacHandlers {
     private static MacAddress machineMac;
     private static InetAddress machineIp;
     private static Executor executor = Executors.newSingleThreadExecutor();
+    private static AtomicBoolean isListnerSet = new AtomicBoolean(false);
 
     public static String getMachineIp() {
 
@@ -84,7 +85,6 @@ public class MacHandlers {
             isHandlerReady.set(false);
             e.printStackTrace();
             return false;
-            //throw new Exception();
         }
     }
 
@@ -104,9 +104,10 @@ public class MacHandlers {
         }
     }
 
-    public static void setPacketListners(PacketListener listner) throws Exception {
+    public static void setPacketListeners(PacketListener listner) throws Exception {
         try {
-            if (isHandlerReady.get()) {
+            if (isHandlerReady.get() && !isListnerSet.get()) {
+                isListnerSet.set(true);
                 receiveHandle.loop(-1, listner, executor);
             }
         } catch (Exception exception) {

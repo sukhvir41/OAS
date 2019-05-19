@@ -58,16 +58,17 @@ public class Student implements Serializable, Comparable<Student> {
     @Setter
     private boolean unaccounted;
 
+    @Column(name = "verified", nullable = false)
+    @Getter
+    @Setter
+    private boolean verified;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "class_foreign_key"))
     @Getter
     @Setter
     private ClassRoom classRoom;
 
-    @Column(name = "verified", nullable = false)
-    @Getter
-    @Setter
-    private boolean verified;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     @Getter
@@ -75,6 +76,7 @@ public class Student implements Serializable, Comparable<Student> {
 
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @OrderBy("name")
     @JoinTable(name = "student_subject_link",
             joinColumns = @JoinColumn(name = "student_fid"),
             inverseJoinColumns = @JoinColumn(name = "subject_fid"),
@@ -84,7 +86,7 @@ public class Student implements Serializable, Comparable<Student> {
     @Setter
     private Set<Subject> subjects = new HashSet<>();
 
-    public Student() {
+    private Student() {
     }
 
     public Student(
@@ -100,7 +102,7 @@ public class Student implements Serializable, Comparable<Student> {
         this.rollNumber = rollNumber;
         this.fName = fName;
         this.lName = lName;
-        //addClassRoom( classRoom );
+        this.classRoom = classRoom;
         setVerified(false);
     }
 
@@ -111,30 +113,53 @@ public class Student implements Serializable, Comparable<Student> {
     }
 
     /**
-     * this method adds the subject to the student the subject to the student
+     * adds the attendance to the student
+     * NOT the owner of the relationship
+     *
+     * @param attendance
+     */
+    public void addAttendance(Attendance attendance) {
+        this.attendances.remove(attendance);
+        this.attendances.add(attendance);
+    }
+
+
+    /**
+     * this method adds the subject to the student
+     * OWNER of the relationship
      *
      * @param subject subject to be added
      */
     public void addSubject(Subject subject) {
-        if (!subjects.contains(subject)) {
-            subjects.add(subject);
-            subject.getStudents().add(this);
-        }
+        this.subjects.add(subject);
     }
 
     /**
-     * this methods adds the student to the classroom the classroom to the
-     * student
+     * this method removes the subject to the student
+     * OWNER of the relationship
+     *
+     * @param subject subject to be added
+     */
+    public void removeSubject(Subject subject) {
+        this.subjects.remove(subject);
+    }
+
+    /**
+     * this methods adds the student to the classroom
+     * OWNER of the relationship
      *
      * @param classRoom classroom to be added
      */
-    final public void addClassRoom(ClassRoom classRoom) {
-        classRoom.addStudent(this);
+    public void addClassRoom(ClassRoom classRoom) {
+        this.classRoom = classRoom;
     }
 
-    @Override
-    public String toString() {
-        return fName + " " + lName;
+    /**
+     * this methods removes the student from the classroom
+     * OWNER of the relationship
+     */
+    public void removesClassRoom() {
+        this.classRoom = null;
     }
 
     @Override
@@ -142,4 +167,16 @@ public class Student implements Serializable, Comparable<Student> {
         return Integer.compare(this.getRollNumber(), student.getRollNumber());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return id != null && id.equals(student.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 }

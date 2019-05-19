@@ -22,7 +22,7 @@
         </property>
 
         <property name="hibernate.connection.username">
-            OASuser
+            OASadmin
         </property>
 
         <property name="hibernate.connection.password">
@@ -38,8 +38,8 @@
         </property>
 
         <property name="javax.persistence.schema-generation.scripts.action">drop-and-create</property>
-        <property name="javax.persistence.schema-generation.scripts.create-target"> ./create.sql </property>
-        <property name="javax.persistence.schema-generation.scripts.drop-target" > ./drop.sql</property>
+        <property name="javax.persistence.schema-generation.scripts.create-target"> create.sql </property>
+        <property name="javax.persistence.schema-generation.scripts.drop-target" > drop.sql</property>
 
         <mapping class="entities.User"/>
         <mapping class="entities.Admin"/>

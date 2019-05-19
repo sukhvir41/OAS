@@ -5,9 +5,7 @@
  */
 package admin.controllers;
 
-import entities.Course;
-import entities.Department;
-import entities.Teacher;
+import entities.*;
 import org.hibernate.Session;
 import utility.Controller;
 
@@ -35,7 +33,7 @@ public class DepartmentDetails extends Controller {
             PrintWriter out) throws Exception {
         long departmentID = Long.parseLong(req.getParameter("departmentId"));
 
-        Department department = Department.getDepartment(departmentID, session);
+        Department department = EntityHelper.getInstance(departmentID, Department_.id, Department.class, session, true, "hod", "courses");
         Set<Teacher> teachers = department.getTeachers();
         List<Course> courses = department.getCourses();
         Teacher hod = department.getHod();

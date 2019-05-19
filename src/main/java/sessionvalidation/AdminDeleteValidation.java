@@ -24,7 +24,7 @@ import entities.AdminType;
  *
  * @author sukhvir
  */
-@WebFilter(urlPatterns = "/admin/admins/deleteadmin")
+@WebFilter(urlPatterns = "/admin/admins/delete-admin")
 public class AdminDeleteValidation implements Filter {
 
     HttpServletResponse resp;

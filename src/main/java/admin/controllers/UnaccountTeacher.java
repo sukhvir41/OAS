@@ -44,7 +44,7 @@ public class UnaccountTeacher extends Controller {
             }
             
             if(teacher.isHod()){
-                teacher.setHod(false);
+                //teacher.setHod(false);
                 teacher.getHodOf()
                         .stream()
                         .forEach(department -> department.setHod(null));

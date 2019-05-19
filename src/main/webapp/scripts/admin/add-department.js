@@ -13,7 +13,7 @@ $(document).ready(function () {
         },
         messages: {
             departmentName: {
-                required: "Please enter department anme",
+                required: "Please enter department name",
                 minlength: $.validator.format("Enter at least {0} characters"),
                 maxlength: $.validator.format("At max {0} characters")
             }

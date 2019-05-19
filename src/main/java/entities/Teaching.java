@@ -8,18 +8,8 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import java.util.Objects;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -30,92 +20,100 @@ import lombok.Setter;
  */
 @Entity(name = "Teaching")
 @Table(name = "tcs", uniqueConstraints = @UniqueConstraint(name = "tcs_unique_constraint", columnNames = {
-		"teacher_fid",
-		"class_fid",
-		"subject_fid"
+        "class_fid",
+        "subject_fid"
 }))
 public class Teaching implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column(name = "id")
-	@Getter
-	@Setter
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    @Getter
+    @Setter
+    private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "teacher_fid", foreignKey = @ForeignKey(name = "tcs_teacher_foreign_key"))
-	@Getter
-	@Setter
-	private Teacher teacher;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_fid", foreignKey = @ForeignKey(name = "tcs_teacher_foreign_key"))
+    @Getter
+    @Setter
+    private Teacher teacher;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "tcs_class_foreign_key"), nullable = false)
-	@Getter
-	@Setter
-	@NonNull
-	private ClassRoom classRoom;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "tcs_class_foreign_key"), nullable = false)
+    @Getter
+    @Setter
+    @NonNull
+    private ClassRoom classRoom;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "subject_fid", foreignKey = @ForeignKey(name = "tcs_subject_foreign_key"), nullable = false)
-	@Getter
-	@Setter
-	@NonNull
-	private Subject subject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_fid", foreignKey = @ForeignKey(name = "tcs_subject_foreign_key"), nullable = false)
+    @Getter
+    @Setter
+    @NonNull
+    private Subject subject;
 
-	@OneToMany(mappedBy = "teaching", fetch = FetchType.LAZY)
-	@Getter
-	@Setter
-	List<Lecture> lectures = new ArrayList<>();
+    @OneToMany(mappedBy = "teaching", fetch = FetchType.LAZY)
+    @OrderBy("date")
+    @Getter
+    @Setter
+    List<Lecture> lectures = new ArrayList<>();
 
-	public Teaching() {
-	}
+    public Teaching() {
+    }
 
-	public Teaching(ClassRoom classRoom, Subject subject) {
-		this.classRoom = classRoom;
-		this.subject = subject;
-	}
+    public Teaching(ClassRoom classRoom, Subject subject) {
+        this.classRoom = classRoom;
+        this.subject = subject;
+    }
 
-	public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
-		addTeacher( teacher );
-		addClassRoom( classRoom );
-		addSubject( subject );
-	}
+    public Teaching(Teacher teacher, ClassRoom classRoom, Subject subject) {
+        this.teacher = teacher;
+        this.classRoom = classRoom;
+        this.subject = subject;
+    }
 
-	/**
-	 * this method adds lecture to teachings and vice versa
-	 */
-	public final void addLecture(Lecture lecture) {
-		if ( !lectures.contains( lecture ) ) {
-			lectures.add( lecture );
-			lecture.setTeaching( this );
-		}
-	}
+    /**
+     * adds the lecture to teaching
+     * NOT the owner of the relationship
+     *
+     * @param lecture
+     */
+    public void addLecture(Lecture lecture) {
+        this.lectures.remove(lecture);
+        this.lectures.add(lecture);
+    }
 
-	/**
-	 * this method adds class room to this teaching
-	 */
-	public final void addClassRoom(ClassRoom classRoom) {
-		setClassRoom( classRoom );
-	}
 
-	/**
-	 * this method adds subject to teaching
-	 */
-	public final void addSubject(Subject subject) {
-		setSubject( subject );
-	}
+    /**
+     * removes the teacher to the teaching
+     * OWNER of the relationship
+     */
 
-	/**
-	 * this method adds teaching to teacher and vice versa
-	 */
-	public final void addTeacher(Teacher teacher) {
-		teacher.addTeaching( this );
-	}
+    public void removeTeacher() {
+        this.teacher = null;
+    }
 
-	@Override
-	public String toString() {
-		return subject + " - " + classRoom;
-	}
+    /**
+     * adds the teacher to the teaching
+     * OWNER of the relationship
+     *
+     * @param teacher
+     */
+    public void addTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Teaching teaching = (Teaching) o;
+        return id != null && id.equals(teaching.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 }
