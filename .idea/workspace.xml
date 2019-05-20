@@ -1,39 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateStudent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateTeacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchLectures.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudentByName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudentByName.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacherByName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacherByName.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateStudent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateTeacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminClassRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminCourse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Attendance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Course.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/UserType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/UserType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.log" beforeDir="false" afterPath="$PROJECT_DIR$/output.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Attendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Attendance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/adminsubject.jsp" beforeDir="false" />
-    </list>
+    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -97,35 +65,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+            <state relative-caret-position="442">
+              <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entities/Course.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entities/ClassRoom.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="55" column="115" selection-start-line="55" selection-start-column="115" selection-end-line="55" selection-end-column="115" />
             </state>
           </provider>
         </entry>
@@ -482,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558233400281</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="made changes in admin package">
+      <created>1558313107392</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1558313107392</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -496,7 +450,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project Explorer" order="0" weight="0.32995737" />
       <window_info id="Job Explorer" order="1" weight="0.32995737" />
@@ -504,15 +457,15 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Designer" order="5" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.24733475" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.24733475" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="DB Execution Console" order="0" />
       <window_info anchor="bottom" id="Console" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49733758" visible="true" weight="0.12892741" />
+      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49733758" weight="0.12892741" />
       <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50159746" side_tool="true" weight="0.17710583" />
       <window_info anchor="bottom" id="Build" order="4" sideWeight="0.49840257" weight="0.24074075" />
       <window_info anchor="bottom" id="Messages" order="5" sideWeight="0.49573562" weight="0.17170626" />
-      <window_info anchor="bottom" id="Version Control" order="6" weight="0.11050921" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="6" visible="true" weight="0.11050921" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.32937366" />
       <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4978678" weight="0.26349893" />
@@ -933,27 +886,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/ClassRoom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+        <state relative-caret-position="476">
+          <caret line="58" column="115" selection-start-line="58" selection-start-column="115" selection-end-line="58" selection-end-column="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/ClassRoom.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="55" column="115" selection-start-line="55" selection-start-column="115" selection-end-line="55" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
+        <state relative-caret-position="442">
+          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
