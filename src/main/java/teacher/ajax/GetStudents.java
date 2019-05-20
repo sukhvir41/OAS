@@ -5,14 +5,6 @@
  */
 package teacher.ajax;
 
-import java.io.PrintWriter;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -20,7 +12,14 @@ import com.google.gson.JsonObject;
 import entities.Student;
 import entities.Teacher;
 import entities.Teaching;
+import org.hibernate.Session;
 import utility.AjaxController;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 /**
  * @author sukhvir

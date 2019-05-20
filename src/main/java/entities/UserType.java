@@ -5,9 +5,9 @@
  */
 package entities;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import lombok.Getter;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author sukhvir

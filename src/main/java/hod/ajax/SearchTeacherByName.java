@@ -5,24 +5,23 @@
  */
 package hod.ajax;
 
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.List;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Department;
 import entities.Teacher;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author sukhvir

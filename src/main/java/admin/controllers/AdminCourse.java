@@ -30,7 +30,7 @@ public class AdminCourse extends Controller {
 
         //getting the departments of the course graph
         var courseRootGraph = session.createEntityGraph(Course.class);
-        courseRootGraph.addAttributeNode(Course_.department);
+        courseRootGraph.addAttributeNode(Course_.DEPARTMENT);
 
         var courseBuilder = session.getCriteriaBuilder();
         var courseQuery = courseBuilder.createQuery(Course.class);
@@ -43,7 +43,6 @@ public class AdminCourse extends Controller {
         List<Course> courses = session.createQuery(courseQuery)
                 .applyLoadGraph(courseRootGraph)
                 .setReadOnly(true)
-                .applyLoadGraph(courseRootGraph)
                 .getResultList();
 
         var departmentBuilder = session.getCriteriaBuilder();

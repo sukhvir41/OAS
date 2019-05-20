@@ -5,28 +5,23 @@
  */
 package postback;
 
+import entities.*;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Session;
+import utility.PostBackController;
+import utility.UrlParameters;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.ClassRoom;
-import entities.Department;
-import entities.Student;
-import entities.Subject;
-import entities.Teacher;
-import org.apache.commons.lang3.StringUtils;
-import utility.PostBackController;
-import utility.UrlParameters;
 
 import static java.util.Arrays.asList;
 

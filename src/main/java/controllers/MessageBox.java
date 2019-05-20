@@ -1,18 +1,17 @@
 package controllers;
 
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.util.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Session;
+import utility.Controller;
+import utility.Utils;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import org.apache.commons.lang3.StringUtils;
-import utility.Controller;
-import utility.Utils;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.util.Base64;
 
 @WebServlet(urlPatterns = "/WEB-INF/message-box")
 public class MessageBox extends Controller {

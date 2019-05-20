@@ -1,9 +1,9 @@
 package utility;
 
-import java.sql.Types;
-
 import org.hibernate.dialect.PostgreSQL95Dialect;
 import org.hibernate.type.PostgresUUIDType;
+
+import java.sql.Types;
 
 public class MyPostgresDialet extends PostgreSQL95Dialect {
 

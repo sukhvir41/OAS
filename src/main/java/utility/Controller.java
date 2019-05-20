@@ -1,84 +1,82 @@
 package utility;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import org.hibernate.Session;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public abstract class Controller extends HttpServlet {
 
 
-	@Override
-	final protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess( req, resp );
-	}
+    @Override
+    final protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doProcess(req, resp);
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess( req, resp );
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doProcess(req, resp);
+    }
 
-	public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendError( 500 );
-	}
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendError(500);
+    }
 
-	private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		setContentType( resp );
-		Session session = Utils.openSession();
-		session.beginTransaction();
-		PrintWriter out = resp.getWriter();
+    private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setContentType(resp);
+        Session session = Utils.openSession();
+        session.beginTransaction();
+        PrintWriter out = resp.getWriter();
 
-		try {
+        try {
 
-			process( req, resp, session, req.getSession(), out );
+            process(req, resp, session, req.getSession(), out);
 
-			session.getTransaction().commit();
+            session.getTransaction().commit();
 
-		}
-		catch (Exception e) {
+        } catch (Exception e) {
 
-			session.getTransaction().rollback();
+            session.getTransaction().rollback();
 
-			if ( showErrorLog() ) {
-				e.printStackTrace();
-			}
+            if (showErrorLog()) {
+                e.printStackTrace();
+            }
 
-			this.onError( req, resp );
+            this.onError(req, resp);
 
-		}
-		finally {
-			session.close();
-			if ( closePrintWriter() ) {
-				out.close();
-			}
+        } finally {
+            session.close();
+            if (closePrintWriter()) {
+                out.close();
+            }
 
-		}
-	}
+        }
+    }
 
 
-	public boolean closePrintWriter() {
-		return true;
-	}
+    public boolean closePrintWriter() {
+        return true;
+    }
 
-	public void setContentType(HttpServletResponse response) {
-		response.setContentType( "text/html" );
-	}
+    public void setContentType(HttpServletResponse response) {
+        response.setContentType("text/html");
+    }
 
-	public boolean showErrorLog() {
-		return true;
-	}
+    public boolean showErrorLog() {
+        return true;
+    }
 
-	public abstract void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception;
+    public abstract void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception;
 
 }
 

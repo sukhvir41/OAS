@@ -5,28 +5,18 @@
  */
 package entities;
 
-import java.io.Serializable;
-import java.util.Objects;
-import java.util.UUID;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import lombok.Getter;
+import org.hibernate.Session;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import utility.Utils;
+
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
-import lombok.Getter;
-import utility.Utils;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * @author sukhvir
@@ -45,6 +35,7 @@ public class Admin implements Serializable {
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @MapsId()
     @JoinColumn(name = "id", foreignKey = @ForeignKey(name = "user_admin_foreign_key"))
+    @LazyToOne(LazyToOneOption.NO_PROXY)
     @Getter
     private User user;
 

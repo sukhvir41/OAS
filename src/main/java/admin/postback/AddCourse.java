@@ -42,8 +42,7 @@ public class AddCourse extends PostBackController {
         long id = Long.parseLong(departmentId);
 
         Department department = session.get(Department.class, id);
-        Course course = new Course(courseName);
-        course.addDepartment(department);
+        Course course = new Course(courseName, department);
         session.save(course);
 
         String from = req.getParameter("from");

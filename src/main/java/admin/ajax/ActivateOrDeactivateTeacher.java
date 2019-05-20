@@ -5,16 +5,15 @@
  */
 package admin.ajax;
 
-import java.io.PrintWriter;
+import entities.Teacher;
+import org.hibernate.Session;
+import utility.AjaxController;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Teacher;
-import utility.AjaxController;
+import java.io.PrintWriter;
 
 /**
  * have to fix this and figure out what to o when teacher is deactivated. 

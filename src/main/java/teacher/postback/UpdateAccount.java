@@ -5,18 +5,17 @@
  */
 package teacher.postback;
 
-import java.io.PrintWriter;
-import java.util.Arrays;
+import entities.Department;
+import entities.Teacher;
+import org.hibernate.Session;
+import utility.PostBackController;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Department;
-import entities.Teacher;
-import utility.PostBackController;
+import java.io.PrintWriter;
+import java.util.Arrays;
 
 /**
  * @author sukhvir

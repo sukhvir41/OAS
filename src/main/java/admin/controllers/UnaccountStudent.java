@@ -5,16 +5,15 @@
  */
 package admin.controllers;
 
-import java.io.PrintWriter;
+import entities.Attendance;
+import entities.Student;
+import org.hibernate.Session;
+import utility.Controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Attendance;
-import entities.Student;
-import utility.Controller;
+import java.io.PrintWriter;
 
 /**
  *

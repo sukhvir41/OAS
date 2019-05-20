@@ -5,24 +5,18 @@
  */
 package hod.controllers;
 
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Set;
+import entities.*;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import utility.Controller;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
-import entities.ClassRoom;
-import entities.Course;
-import entities.Department;
-import entities.Subject;
-import entities.Teacher;
-import entities.Teaching;
-import utility.Controller;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Set;
 
 /**
  *

@@ -5,9 +5,14 @@
  */
 package controllers;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Objects;
+import entities.User;
+import entities.UserType;
+import entities.User_;
+import org.apache.commons.lang3.ObjectUtils;
+import org.hibernate.Session;
+import org.hibernate.jpa.QueryHints;
+import utility.Controller;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -17,15 +22,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.jpa.QueryHints;
-
-import entities.User;
-import entities.UserType;
-import entities.User_;
-import org.apache.commons.lang3.ObjectUtils;
-import utility.Controller;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Objects;
 
 /**
  * @author sukhvir

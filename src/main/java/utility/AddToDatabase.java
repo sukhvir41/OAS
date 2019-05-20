@@ -5,12 +5,9 @@
  */
 package utility;
 
-import org.hibernate.Session;
-
 import entities.Admin;
 import entities.AdminType;
-import entities.User;
-import entities.UserType;
+import org.hibernate.Session;
 
 /**
  * @author Kalpesh

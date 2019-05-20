@@ -5,27 +5,10 @@
  */
 package utility;
 
-import java.net.InetAddress;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.pcap4j.core.BpfProgram;
-import org.pcap4j.core.NotOpenException;
-import org.pcap4j.core.PacketListener;
-import org.pcap4j.core.PcapHandle;
-import org.pcap4j.core.PcapNetworkInterface;
-import org.pcap4j.core.Pcaps;
+import org.pcap4j.core.*;
 import org.pcap4j.packet.ArpPacket;
 import org.pcap4j.packet.EthernetPacket;
 import org.pcap4j.packet.Packet;
@@ -34,6 +17,12 @@ import org.pcap4j.packet.namednumber.ArpOperation;
 import org.pcap4j.packet.namednumber.EtherType;
 import org.pcap4j.util.ByteArrays;
 import org.pcap4j.util.MacAddress;
+
+import java.net.InetAddress;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  *

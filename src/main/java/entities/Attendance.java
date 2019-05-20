@@ -5,22 +5,14 @@
  */
 package entities;
 
-import java.io.Serializable;
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Table;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author sukhvir
@@ -50,13 +42,13 @@ public class Attendance implements Serializable {
     @Setter
     private boolean leave = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId("lectureId")
     @JoinColumn(name = "lecture_fid", foreignKey = @ForeignKey(name = "lecture_foreign_key"), nullable = false)
     @NonNull
     private Lecture lecture;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId("studentId")
     @JoinColumn(name = "student_fid", foreignKey = @ForeignKey(name = "student_foreign_key"), nullable = false)
     @NonNull

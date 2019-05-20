@@ -5,22 +5,21 @@
  */
 package teacher.postback;
 
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.util.List;
+import entities.Lecture;
+import entities.Teaching;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import utility.PostBackController;
+import utility.Utils;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-
-import entities.Lecture;
-import entities.Teaching;
-import utility.PostBackController;
-import utility.Utils;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *

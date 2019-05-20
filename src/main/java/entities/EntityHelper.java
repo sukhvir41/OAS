@@ -9,13 +9,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.criteria.*;
-import javax.persistence.metamodel.Attribute;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class EntityHelper {
@@ -54,6 +55,33 @@ public class EntityHelper {
         return session.createQuery(query)
                 .setReadOnly(readOnly)
                 .applyLoadGraph(graph)
+                .getResultList();
+
+    }
+
+    public static <T, U> List<T> getAll(Session session, Class<T> tClass, SingularAttribute<T, U> orderBy, RootGraph<T> graph, boolean readOnly) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(tClass);
+        Root<T> classRoot = query.from(tClass);
+
+        query.orderBy(builder.asc(classRoot.get(orderBy)));
+
+        return session.createQuery(query)
+                .setReadOnly(readOnly)
+                .applyLoadGraph(graph)
+                .getResultList();
+
+    }
+
+    public static <T, U> List<T> getAll(Session session, Class<T> tClass, SingularAttribute<T, U> orderBy, boolean readOnly) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(tClass);
+        Root<T> classRoot = query.from(tClass);
+
+        query.orderBy(builder.asc(classRoot.get(orderBy)));
+
+        return session.createQuery(query)
+                .setReadOnly(readOnly)
                 .getResultList();
 
     }

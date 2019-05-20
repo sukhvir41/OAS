@@ -5,16 +5,15 @@
  */
 package hod.ajax;
 
-import java.io.PrintWriter;
+import entities.Student;
+import org.hibernate.Session;
+import utility.AjaxController;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Student;
-import utility.AjaxController;
+import java.io.PrintWriter;
 
 /**
  *

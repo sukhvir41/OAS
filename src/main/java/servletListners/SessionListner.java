@@ -5,13 +5,13 @@
  */
 package servletListners;
 
+import entities.User;
+import entities.UserType;
+
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-
-import entities.User;
-import entities.UserType;
 
 /**
  *

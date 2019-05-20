@@ -5,15 +5,15 @@
  */
 package entities;
 
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.*;
-
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
 
 /**
  * @author sukhvir

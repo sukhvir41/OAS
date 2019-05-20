@@ -5,13 +5,18 @@
  */
 package entities;
 
-import java.io.Serializable;
-import java.util.*;
-import javax.persistence.*;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author sukhvir
@@ -50,13 +55,14 @@ public class ClassRoom implements Serializable {
     @Setter
     private int minimumSubjects;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_fid", foreignKey = @ForeignKey(name = "class_course_foreign_key"))
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "course_fid", foreignKey = @ForeignKey(name = "class_course_foreign_key"), nullable = false)
     @Getter
     @Setter
     private Course course;
 
     @OneToOne(mappedBy = "classRoom", fetch = FetchType.LAZY)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
     @Getter
     @Setter
     private Teacher classTeacher;
@@ -91,7 +97,8 @@ public class ClassRoom implements Serializable {
 
     /**
      * this methods adds the teacher as class teacher to the class Room
-     * NOT the owner of the relationship*/
+     * NOT the owner of the relationship
+     */
     final public void addClassTeacher(Teacher teacher) {
         this.classTeacher = teacher;
     }
@@ -143,7 +150,6 @@ public class ClassRoom implements Serializable {
     public void removeSubject(Subject subject) {
         this.subjects.remove(subject);
     }
-
 
 
     @Override

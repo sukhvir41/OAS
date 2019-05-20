@@ -4,11 +4,10 @@
 package jooq.entities.routines;
 
 
-import javax.annotation.Generated;
-
 import jooq.entities.Public;
-
 import org.jooq.impl.AbstractRoutine;
+
+import javax.annotation.Generated;
 
 
 /**

@@ -8,20 +8,11 @@ package entities;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.hibernate.Session;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.graph.RootGraph;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * @author sukhvir
@@ -43,7 +34,7 @@ public class Course implements Serializable {
     @NonNull
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_fid", foreignKey = @ForeignKey(name = "department_foreign_key"))
     @Getter
     @Setter
@@ -61,16 +52,12 @@ public class Course implements Serializable {
     @Setter
     private List<Subject> subjects = new ArrayList<>();
 
-    public Course() {
-    }
-
-    public Course(String name) {
-        this.name = name;
+    private Course() {
     }
 
     public Course(String name, Department department) {
         this.name = name;
-        addDepartment(department);
+        this.department = department;
     }
 
     /**
@@ -116,7 +103,6 @@ public class Course implements Serializable {
         Course course = (Course) o;
         return id != null && id.equals(course.id);
     }
-
 
 
     @Override

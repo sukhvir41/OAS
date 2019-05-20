@@ -4,14 +4,13 @@
 package jooq.entities.tables.records;
 
 
-import javax.annotation.Generated;
-
 import jooq.entities.tables.SubjectClassLink;
-
 import org.jooq.Field;
 import org.jooq.Record2;
 import org.jooq.Row2;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
 
 
 /**

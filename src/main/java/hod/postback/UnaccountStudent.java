@@ -5,19 +5,18 @@
  */
 package hod.postback;
 
-import java.io.PrintWriter;
+import entities.Attendance;
+import entities.Department;
+import entities.Student;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import utility.PostBackController;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
-import entities.Attendance;
-import entities.Department;
-import entities.Student;
-import utility.PostBackController;
+import java.io.PrintWriter;
 
 /**
  *

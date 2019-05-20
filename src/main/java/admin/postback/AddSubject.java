@@ -5,24 +5,25 @@
  */
 package admin.postback;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
-import java.util.stream.Collectors;
-import javax.persistence.criteria.Expression;
+import entities.ClassRoom;
+import entities.ClassRoom_;
+import entities.Course;
+import entities.Subject;
+import org.hibernate.Session;
+import utility.PostBackController;
+import utility.UrlParameters;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import entities.*;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Session;
-
-import oshi.jna.platform.unix.CLibrary;
-import utility.PostBackController;
-import utility.UrlParameters;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author sukhvir

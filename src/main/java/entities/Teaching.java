@@ -5,15 +5,14 @@
  */
 package entities;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import javax.persistence.*;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author sukhvir

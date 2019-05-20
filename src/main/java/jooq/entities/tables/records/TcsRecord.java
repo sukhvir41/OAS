@@ -4,17 +4,15 @@
 package jooq.entities.tables.records;
 
 
-import java.util.UUID;
-
-import javax.annotation.Generated;
-
 import jooq.entities.tables.Tcs;
-
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record4;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
+import java.util.UUID;
 
 
 /**

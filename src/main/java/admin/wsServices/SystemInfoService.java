@@ -5,17 +5,17 @@
  */
 package admin.wsServices;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-import javax.websocket.Session;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.UserType;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
+
+import javax.websocket.Session;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  *

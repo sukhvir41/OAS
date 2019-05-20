@@ -5,19 +5,18 @@
  */
 package postback;
 
-import java.io.PrintWriter;
+import entities.User;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import utility.PostBackController;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
-import entities.User;
-import org.apache.commons.lang3.StringUtils;
-import utility.PostBackController;
+import java.io.PrintWriter;
 
 /**
  * @author sukhvir

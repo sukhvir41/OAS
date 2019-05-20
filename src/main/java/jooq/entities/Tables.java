@@ -4,22 +4,9 @@
 package jooq.entities;
 
 
-import javax.annotation.Generated;
+import jooq.entities.tables.*;
 
-import jooq.entities.tables.Admin;
-import jooq.entities.tables.Attendance;
-import jooq.entities.tables.ClassRoom;
-import jooq.entities.tables.Course;
-import jooq.entities.tables.Department;
-import jooq.entities.tables.Lecture;
-import jooq.entities.tables.Student;
-import jooq.entities.tables.StudentSubjectLink;
-import jooq.entities.tables.Subject;
-import jooq.entities.tables.SubjectClassLink;
-import jooq.entities.tables.Tcs;
-import jooq.entities.tables.Teacher;
-import jooq.entities.tables.TeacherDepartmentLink;
-import jooq.entities.tables.Users;
+import javax.annotation.Generated;
 
 
 /**

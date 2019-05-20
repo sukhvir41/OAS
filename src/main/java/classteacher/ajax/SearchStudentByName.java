@@ -5,32 +5,24 @@
  */
 package classteacher.ajax;
 
-import java.io.PrintWriter;
-import java.util.List;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Student;
 import entities.Teacher;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 
-import static utility.Constants.CLASSROOM;
-import static utility.Constants.EMAIL;
-import static utility.Constants.ID;
-import static utility.Constants.NAME;
-import static utility.Constants.NUMBER;
-import static utility.Constants.ROLLNUMBER;
-import static utility.Constants.SUBJECTS;
-import static utility.Constants.VERIFIED;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.util.List;
+
+import static utility.Constants.*;
 
 /**
  *

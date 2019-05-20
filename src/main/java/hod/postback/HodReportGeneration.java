@@ -5,18 +5,17 @@
  */
 package hod.postback;
 
-import java.io.OutputStream;
+import admin.postback.GenerateReport;
+import entities.ClassRoom;
+import entities.Department;
+import org.hibernate.Session;
+import utility.ReportPostBackController;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import admin.postback.GenerateReport;
-import entities.ClassRoom;
-import entities.Department;
-import utility.ReportPostBackController;
+import java.io.OutputStream;
 
 /**
  *

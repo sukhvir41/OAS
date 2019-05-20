@@ -5,18 +5,17 @@
  */
 package admin.controllers;
 
-import java.io.PrintWriter;
-import java.util.List;
+import entities.Department;
+import entities.Teacher;
+import org.hibernate.Session;
+import utility.Controller;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Department;
-import entities.Teacher;
-import utility.Controller;
+import java.io.PrintWriter;
+import java.util.List;
 
 /**
  *

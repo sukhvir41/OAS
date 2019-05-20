@@ -5,18 +5,17 @@
  */
 package ajax;
 
-import java.io.PrintWriter;
+import entities.User;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import utility.AjaxController;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-
-import entities.User;
-import utility.AjaxController;
+import java.io.PrintWriter;
 
 /**
  *

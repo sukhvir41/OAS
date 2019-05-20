@@ -5,22 +5,21 @@
  */
 package teacher.ajax;
 
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.util.List;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
 import entities.Attendance;
 import entities.Lecture;
 import entities.Student;
 import entities.Teacher;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author icr

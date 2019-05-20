@@ -5,9 +5,14 @@
  */
 package controllers;
 
-import java.io.PrintWriter;
-import java.net.URLDecoder;
-import java.time.LocalDateTime;
+import entities.User;
+import entities.User_;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Session;
+import org.hibernate.jpa.QueryHints;
+import utility.Controller;
+import utility.Utils;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -15,15 +20,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.jpa.QueryHints;
-
-import entities.User;
-import entities.User_;
-import org.apache.commons.lang3.StringUtils;
-import utility.Controller;
-import utility.Utils;
+import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.time.LocalDateTime;
 
 /**
  * @author sukhvir

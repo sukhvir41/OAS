@@ -4,14 +4,13 @@
 package jooq.entities;
 
 
-import javax.annotation.Generated;
-
 import jooq.entities.routines.GetLectureId;
 import jooq.entities.routines.RandomString;
 import jooq.entities.routines.Test;
-
 import org.jooq.Configuration;
 import org.jooq.Field;
+
+import javax.annotation.Generated;
 
 
 /**

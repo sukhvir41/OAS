@@ -5,19 +5,18 @@
  */
 package admin.postback;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import entities.Department;
+import org.hibernate.Session;
+import utility.PostBackController;
+import utility.UrlParameters;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-
-import entities.Department;
-import utility.PostBackController;
-import utility.UrlParameters;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author sukhvir
