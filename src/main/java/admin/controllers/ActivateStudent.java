@@ -9,11 +9,15 @@ import entities.EntityHelper;
 import entities.Student;
 import entities.Student_;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Triple;
 import org.hibernate.Session;
 import utility.Controller;
 import utility.UrlParameters;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,17 +49,7 @@ public class ActivateStudent extends Controller {
 
         UUID studentId = UUID.fromString(studentIdString);
 
-        int updatedCount = EntityHelper.upadteInstances(session, Student.class, jpaObjects -> {
-
-            Predicate predicate = jpaObjects.getLeft()
-                    .and(
-                            jpaObjects.getLeft().equal(jpaObjects.getRight().get(Student_.id), studentId),
-                            jpaObjects.getLeft().equal(jpaObjects.getRight().get(Student_.unaccounted), false)
-                    );
-
-            jpaObjects.getMiddle().set(Student_.verified, true)
-                    .where(predicate);
-        });
+        int updatedCount = EntityHelper.upadteInstances(session, Student.class, jpaObjects -> updateStudentQuery(jpaObjects, studentId));
 
 
         if (updatedCount < 1) {
@@ -73,4 +67,15 @@ public class ActivateStudent extends Controller {
         resp.sendRedirect(params.getUrl("/OAS/admin/students/student-details"));
     }
 
+
+    private void updateStudentQuery(Triple<CriteriaBuilder, CriteriaUpdate<Student>, Root<Student>> jpaObjects, UUID studentId) {
+        Predicate predicate = jpaObjects.getLeft()
+                .and(
+                        jpaObjects.getLeft().equal(jpaObjects.getRight().get(Student_.id), studentId),
+                        jpaObjects.getLeft().equal(jpaObjects.getRight().get(Student_.unaccounted), false)
+                );
+
+        jpaObjects.getMiddle().set(Student_.verified, true)
+                .where(predicate);
+    }
 }

@@ -37,9 +37,9 @@ public class AdminSubject extends Controller {
 
         req.setAttribute("subjects", subjects);
         req.setAttribute("courses", courses);
-/*
+
         req.getRequestDispatcher("/WEB-INF/admin/admin-subject.jsp")
-                .include(req, resp);*/
+                .include(req, resp);
     }
 
 }

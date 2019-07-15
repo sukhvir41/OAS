@@ -52,7 +52,7 @@ public class Student implements Serializable, Comparable<Student> {
     @Setter
     private String lName;
 
-    @Column(name = "mac_id", length = 17) // or should 18 ?
+    @Column(name = "mac_id", length = 17) // or should it be 18
     @Getter
     @Setter
     private String macId;

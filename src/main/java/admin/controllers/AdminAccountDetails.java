@@ -6,6 +6,8 @@
 package admin.controllers;
 
 import entities.Admin;
+import entities.Admin_;
+import entities.EntityHelper;
 import entities.UserType;
 import org.hibernate.Session;
 import utility.Controller;
@@ -25,7 +27,9 @@ public class AdminAccountDetails extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Admin admin = (Admin) httpSession.getAttribute(UserType.Admin.toString());
-        admin = session.get(Admin.class, admin.getId());
+
+        admin = EntityHelper.getInstance(admin.getId(), Admin_.id, Admin.class, session, true, Admin_.USER);
+
         req.setAttribute("admin", admin);
         req.getRequestDispatcher("/WEB-INF/admin/my-account.jsp")
                 .include(req, resp);

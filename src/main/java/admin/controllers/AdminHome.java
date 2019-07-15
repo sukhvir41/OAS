@@ -33,11 +33,7 @@ import java.util.UUID;
 public class AdminHome extends Controller {
 
     @Override
-    public void process(
-            HttpServletRequest req,
-            HttpServletResponse resp,
-            Session session,
-            HttpSession httpSession,
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
             PrintWriter out) throws Exception {
 
         req.setAttribute(UserType.Student.toString(), UserType.Student.getCount());
