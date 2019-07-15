@@ -10,6 +10,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,13 +24,14 @@ import java.util.Set;
 public class Subject implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "subject_sequence")
     @Column(name = "id")
     @Getter
     @Setter
     private Long id;
 
     @Column(name = "name", nullable = false, length = 40)
+    @Size(max = 40, min = 2)
     @Getter
     @Setter
     @NonNull
@@ -40,23 +42,22 @@ public class Subject implements Serializable {
     @Setter
     private boolean elective;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "course_fid", foreignKey = @ForeignKey(name = "subject_course_foreign_key"))
     @Getter
     @Setter
     private Course course;
 
-    @ManyToMany(mappedBy = "subjects", fetch = FetchType.LAZY)
-    @OrderBy("name")
+    @OneToMany(mappedBy = "subject")
+    @OrderBy("classRoom.name")
     @Getter
     @Setter
-    private Set<ClassRoom> classRooms = new HashSet<>();
+    private Set<SubjectClassRoomLink> classRooms = new HashSet<>();
 
-    @ManyToMany(mappedBy = "subjects", fetch = FetchType.LAZY)
-    @OrderBy("fName ASC, lName ASC")
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    @OrderBy("student.fName ASC, student.lName ASC")
     @Getter
-    @Setter
-    private Set<Student> students = new HashSet<>();
+    private Set<StudentSubjectLink> students = new HashSet<>();
 
     private Subject() {
     }
@@ -85,7 +86,9 @@ public class Subject implements Serializable {
      * @param classRoom
      */
     public void addClassRoom(ClassRoom classRoom) {
-        this.classRooms.add(classRoom);
+        this.classRooms.add(
+                new SubjectClassRoomLink(this, classRoom)
+        );
     }
 
 
@@ -96,7 +99,7 @@ public class Subject implements Serializable {
      * @param student student to be added
      */
     public final void addStudent(Student student) {
-        this.students.add(student);
+        this.students.add(new StudentSubjectLink(student, this));
     }
 
     @Override

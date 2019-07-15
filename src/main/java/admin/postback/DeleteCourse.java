@@ -61,7 +61,7 @@ public class DeleteCourse extends PostBackController {
         UrlParameters parameters = new UrlParameters()
                 .addErrorParameter()
                 .addMessage("Before deleting this Course make sure that all of its subjects or class rooms are deleted or moved to another course")
-                .addParamter("courseId", courseId);
+                .addParameter("courseId", courseId);
 
         resp.sendRedirect(parameters.getUrl("/OAS/admin/courses/course-details"));
     }

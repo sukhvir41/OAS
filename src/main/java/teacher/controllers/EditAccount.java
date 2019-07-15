@@ -37,10 +37,10 @@ public class EditAccount extends Controller {
 		List<Department> departments = session.createCriteria( Department.class )
 				.list();
 
-		departments = departments.stream()
+		/*departments = departments.stream()
 				.filter( department -> !teacher.getDepartment().contains( department ) )
 				.collect( Collectors.toList() );
-
+*/
 		req.setAttribute( "username", teacher.getUser().getUsername() );
 		req.setAttribute( "teacher", teacher );
 		req.setAttribute( "departments", departments );

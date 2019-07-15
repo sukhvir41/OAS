@@ -40,8 +40,8 @@ public class SetNetworkSettings extends PostBackController {
             } else {
                 url.addErrorParameter()
                         .addMessage("could not set the network setting")
-                        .addParamter("ipAddress", ipAddress)
-                        .addParamter("macAddress", macAddress);
+                        .addParameter("ipAddress", ipAddress)
+                        .addParameter("macAddress", macAddress);
             }
 
         } else {

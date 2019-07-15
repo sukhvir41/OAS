@@ -16,11 +16,12 @@ import java.util.*;
  * @author sukhvir
  */
 
-@NamedEntityGraph(name = "userTeacher",
-        attributeNodes = @NamedAttributeNode("user"))
 @Entity(name = "Teacher")
-@Table(name = "teacher")
-//@PrimaryKeyJoinColumn(name = "id")
+@Table(name = "teacher",
+        indexes = {
+                @Index(name = "teacher_name_index", columnList = "first_name,last_name")
+        }
+)
 public class Teacher implements Serializable {
 
     @Id
@@ -33,12 +34,12 @@ public class Teacher implements Serializable {
     @Getter
     private User user;
 
-    @Column(name = "f_name", nullable = false, length = 40)
+    @Column(name = "first_name", nullable = false, length = 40)
     @Getter
     @Setter
     private String fName;
 
-    @Column(name = "l_name", nullable = false, length = 40)
+    @Column(name = "last_name", nullable = false, length = 40)
     @Getter
     @Setter
     private String lName;
@@ -56,10 +57,22 @@ public class Teacher implements Serializable {
     @OneToMany(mappedBy = "hod", fetch = FetchType.LAZY)
     @Getter
     @Setter
-    private List<Department> hodOf = new ArrayList<>();
+    private Set<Department> hodOf = new HashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "class_teacher_class_foreign_key"))
+    @JoinTable(
+            name = "class_teacher_class_room_link",
+            joinColumns = {@JoinColumn(name = "class_teacher_fid", referencedColumnName = "id",
+                    foreignKey = @ForeignKey(name = "class_teacher_class_room_link_class_teacher_foreign_key"))},
+            inverseJoinColumns = {@JoinColumn(name = "class_room_fid", referencedColumnName = "id",
+                    foreignKey = @ForeignKey(name = "class_teacher_class_room_link_class_room_foreign_key"))},
+            foreignKey = @ForeignKey(name = "class_teacher_class_room_link_class_teacher_foreign_key"),
+            inverseForeignKey = @ForeignKey(name = "class_teacher_class_room_link_class_room_foreign_key"),
+            indexes = {
+                    @Index(name = "class_teacher_class_room_link_class_teacher_index", columnList = "class_teacher_fid"),
+                    @Index(name = "class_teacher_class_room_link_class_room_index", columnList = "class_room_fid")
+            }
+    )
     @Getter
     @Setter
     private ClassRoom classRoom; // class teacher classroom
@@ -69,11 +82,10 @@ public class Teacher implements Serializable {
     @Setter
     private List<Teaching> teaches = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
-    @OrderBy("name")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
     @Getter
     @Setter
-    private Set<Department> department = new HashSet<>();
+    private Set<TeacherDepartmentLink> departments = new HashSet<>();
 
     public Teacher() {
     }
@@ -127,7 +139,7 @@ public class Teacher implements Serializable {
      */
     public void addDepartment(Department department) {
         //as department is a set it will only get added once
-        this.department.add(department);
+        this.departments.add(new TeacherDepartmentLink(this, department));
     }
 
     /**

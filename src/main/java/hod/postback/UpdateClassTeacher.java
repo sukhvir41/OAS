@@ -35,7 +35,7 @@ public class UpdateClassTeacher extends PostBackController {
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
         
-        if (department.getId() == classRoom.getCourse().getDepartment().getId() && teacher.getDepartment().contains(department)) {
+       /* if (department.getId() == classRoom.getCourse().getDepartment().getId() && teacher.getDepartment().contains(department)) {
             if (teacher.getClassRoom() == null) {
                 if (classRoom.getClassTeacher() == null) {
                     teacher.setClassRoom(classRoom);
@@ -63,7 +63,7 @@ public class UpdateClassTeacher extends PostBackController {
             resp.sendRedirect("/OAS/teacher/hod/classrooms/detailclassroom?classroomId=" + classroomId);
         } else {
             resp.sendRedirect("/OAS/error");
-        }
+        }*/
         
     }
     

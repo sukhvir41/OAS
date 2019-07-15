@@ -5,40 +5,40 @@
  */
 package entities;
 
+import com.sun.jna.platform.win32.COM.util.annotation.ComObject;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author sukhvir
  */
 @Entity(name = "Teaching")
-@Table(name = "tcs", uniqueConstraints = @UniqueConstraint(name = "tcs_unique_constraint", columnNames = {
-        "class_fid",
-        "subject_fid"
-}))
+@Table(name = "tcs",
+        indexes = {
+                @Index(name = "tcs_teacher_index", columnList = "teacher_fid"),
+                @Index(name = "tcs_class_room_index", columnList = "class_room_fid"),
+                @Index(name = "tcs_subject_index", columnList = "subject_fid")
+        }
+)
 public class Teaching implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+
+    @EmbeddedId
     @Getter
-    @Setter
-    private Long id;
+    private Id id = new Id();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_fid", foreignKey = @ForeignKey(name = "tcs_teacher_foreign_key"))
-    @Getter
-    @Setter
-    private Teacher teacher;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "tcs_class_foreign_key"), nullable = false)
+    @JoinColumn(name = "class_room_fid", foreignKey = @ForeignKey(name = "tcs_class_room_foreign_key"), nullable = false)
+    @MapsId("classRoomId")
     @Getter
     @Setter
     @NonNull
@@ -46,10 +46,18 @@ public class Teaching implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_fid", foreignKey = @ForeignKey(name = "tcs_subject_foreign_key"), nullable = false)
+    @MapsId("subjectId")
     @Getter
     @Setter
     @NonNull
     private Subject subject;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_fid", foreignKey = @ForeignKey(name = "tcs_teacher_foreign_key"))
+    @Getter
+    @Setter
+    private Teacher teacher;
+
 
     @OneToMany(mappedBy = "teaching", fetch = FetchType.LAZY)
     @OrderBy("date")
@@ -114,5 +122,37 @@ public class Teaching implements Serializable {
     @Override
     public int hashCode() {
         return 31;
+    }
+
+
+    @Embeddable
+    public static class Id implements Serializable {
+
+        @Column(name = "class_room_fid")
+        Long classRoomId;
+
+        @Column(name = "subject_fid")
+        Long subjectId;
+
+        protected Id() {
+        }
+
+        public Id(Long classRoomId, Long subjectId) {
+            this.classRoomId = classRoomId;
+            this.subjectId = subjectId;
+        }
+
+        public boolean equals(Object o) {
+            if (o != null && o instanceof Teaching.Id) {
+                Teaching.Id that = (Teaching.Id) o;
+                return this.subjectId.equals(that.subjectId)
+                        && this.classRoomId.equals(that.classRoomId);
+            }
+            return false;
+        }
+
+        public int hashCode() {
+            return Objects.hash(subjectId, classRoomId);
+        }
     }
 }

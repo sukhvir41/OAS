@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/teachersubjectmapping")
@@ -33,8 +32,8 @@ public class TCSassigner extends Controller {
 
         hod = (Teacher) session.get(Teacher.class, hod.getId());
         department = (Department) session.get(Department.class, department.getId());
-        Set<Teacher> teachers = department.getTeachers();
-
+        //  Set<Teacher> teachers = department.getTeachers();
+/*
         for (Course course : department.getCourses()) {
             for (ClassRoom classRoom : course.getClassRooms()) {
                 for (Subject subject : classRoom.getSubjects()) {
@@ -47,13 +46,13 @@ public class TCSassigner extends Controller {
                     }
                 }
             }
-        }
+        }*/
 
         List<Teaching> unregistredTeaching = session.createCriteria(Teaching.class)
                 .add(Restrictions.isNull("teacher")).list();
 
         req.setAttribute("department", department);
-        req.setAttribute("teachers", teachers);
+        // req.setAttribute("teachers", teachers);
         req.setAttribute("teachings", unregistredTeaching);
 
         req.getRequestDispatcher("/WEB-INF/hod/teachersubjectmapping.jsp").include(req, resp);

@@ -1,5 +1,6 @@
 package entities;
 
+import entities.Teaching.Id;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -13,7 +14,7 @@ public abstract class Teaching_ {
 	public static volatile SingularAttribute<Teaching, Subject> subject;
 	public static volatile SingularAttribute<Teaching, ClassRoom> classRoom;
 	public static volatile ListAttribute<Teaching, Lecture> lectures;
-	public static volatile SingularAttribute<Teaching, Long> id;
+	public static volatile SingularAttribute<Teaching, Id> id;
 
 	public static final String TEACHER = "teacher";
 	public static final String SUBJECT = "subject";

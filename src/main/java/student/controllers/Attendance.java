@@ -35,7 +35,7 @@ public class Attendance extends Controller {
         int totalLectures = 0;
         int totalAttendance = 0;
         List<Holder> holder = new ArrayList<>();
-        for (Subject subject : student.getSubjects()) {
+       /* for (Subject subject : student.getSubjects()) {
             //getting lectures of the class and subject
             List<Lecture> lectures = getLectures(student.getClassRoom(), subject, session);
             int lecturesCount = lectures.stream()
@@ -60,7 +60,7 @@ public class Attendance extends Controller {
         req.setAttribute("totalpresent", totalAttendance);
         req.setAttribute("totalabsent", totalLectures - totalAttendance);
 
-        req.getRequestDispatcher("/WEB-INF/student/attendance.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/student/attendance.jsp").include(req, resp);*/
 
     }
 

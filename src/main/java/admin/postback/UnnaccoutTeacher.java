@@ -30,12 +30,12 @@ public class UnnaccoutTeacher extends PostBackController {
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
 
         if (!teacher.isVerified()) {
-            teacher.getClassRoom().setClassTeacher(null);
+           /* teacher.getClassRoom().setClassTeacher(null);
             teacher.setClassRoom(null);
 
             teacher.getDepartment().stream()
                     .forEach(e -> e.getTeachers().remove(teacher));
-
+*/
             teacher.getHodOf().stream()
                     .forEach(e -> e.setHod(null));
 

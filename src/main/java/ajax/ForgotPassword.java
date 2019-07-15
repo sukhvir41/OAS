@@ -45,7 +45,7 @@ public class ForgotPassword extends AjaxController {
 
                 String token = Utils.createToken();
                 user.setToken(token);
-                user.setDate(LocalDateTime.now());
+                //user.setDate(LocalDateTime.now());
                 session.update(user);
                 String url = "192.168.1.1/OAS/resetpassword?username=" + user.getUsername() + "&token=" + URLEncoder.encode(token, "UTF-8");
                 Utils.sendMail(email, "Password reset.  OAS system", body + url);

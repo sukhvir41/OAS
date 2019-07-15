@@ -10,19 +10,27 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author sukhvir
  */
 @Entity(name = "Course")
-@Table(name = "course")
+@Table(name = "course",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "unique_course_name", columnNames = "name")
+        },
+        indexes = {
+                @Index(name = "course_name_index", columnList = "name")
+        }
+)
 public class Course implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "course_sequence")
     @Column(name = "id")
     @Getter
     @Setter
@@ -35,24 +43,25 @@ public class Course implements Serializable {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "department_fid", foreignKey = @ForeignKey(name = "department_foreign_key"))
+    @JoinColumn(name = "department_fid", nullable = false, foreignKey = @ForeignKey(name = "department_foreign_key"))
     @Getter
     @Setter
+    @NotNull
     private Department department;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     @OrderBy("name")
     @Getter
     @Setter
-    private List<ClassRoom> classRooms = new ArrayList<>();
+    private Set<ClassRoom> classRooms = new HashSet<>();
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     @OrderBy("name")
     @Getter
     @Setter
-    private List<Subject> subjects = new ArrayList<>();
+    private Set<Subject> subjects = new HashSet<>();
 
-    private Course() {
+    public Course() {
     }
 
     public Course(String name, Department department) {

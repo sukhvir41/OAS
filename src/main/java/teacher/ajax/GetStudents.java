@@ -77,9 +77,9 @@ public class GetStudents extends AjaxController {
 
 	private JsonElement addSubjects(Student e) {
 		JsonArray jsonSubjects = new JsonArray();
-		e.getSubjects()
+		/*e.getSubjects()
 				.stream()
-				.forEach( subject -> jsonSubjects.add( subject.getName() ) );
+				.forEach( subject -> jsonSubjects.add( subject.getName() ) );*/
 		return jsonSubjects;
 	}
 

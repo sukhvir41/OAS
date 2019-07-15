@@ -1,7 +1,369 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="" />
+    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/entities/StudentSubjectLink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entities/SubjectClassRoomLink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entities/TeacherDepartmentLink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entities/package-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/ActivateOrDeactivateTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudentByName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchStudentByName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacherByName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/SearchTeacherByName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAccountDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAccountDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAdmins.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAdmins.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminChangePassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminChangePassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminGrantLeave.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminGrantLeave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminHome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminStudents.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminStudents.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminTeachers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminTeachers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminUnaccountedStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminUnaccountedStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminUnaccountedTeachers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminUnaccountedTeachers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/CourseDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/CourseDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DeactivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DeactivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DeactivateTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DeactivateTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DepartmentDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DepartmentDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailLecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailLecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DetailTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EndSemester.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EndSemester.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ReportGeneration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ReportGeneration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/UnaccountStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/UnaccountStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/UnaccountTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/UnaccountTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddAdmin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddSubjectToClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/AddSubjectToClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/ChnagePassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/ChnagePassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteAdmin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/DeleteTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GenerateReport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GenerateReport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GenerateReportFast$StudentRowDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GenerateReportFast$StudentRowDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GenerateReportFast.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GenerateReportFast.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GrantLeavesPost.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/GrantLeavesPost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/SetNetworkSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/SetNetworkSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UnaccountStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UnaccountStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UnnaccoutTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UnnaccoutTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/wsServices/SystemInfoWS.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/wsServices/SystemInfoWS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckEmail.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckEmail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckUsername.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckUsername.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/ClassSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/ClassSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/ForgotPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/ForgotPassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/GetSubjectOfClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/GetSubjectOfClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterSubjects.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterSubjects.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/ajax/ActivateOrDeactivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/ajax/ActivateOrDeactivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/ajax/GetStudents.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/ajax/GetStudents.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/ajax/SearchStudentByName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/ajax/SearchStudentByName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/ActivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/ActivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/ClassTeacherHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/ClassTeacherHome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/ClassTeacherReport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/ClassTeacherReport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/DeactivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/DeactivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/DetailStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/DetailStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/GrantLeave.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/controllers/GrantLeave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/postback/GenerateReport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/postback/GenerateReport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/classteacher/postback/GrantLeavePost.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/classteacher/postback/GrantLeavePost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/controllers/LogOut.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/controllers/LogOut.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/controllers/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/controllers/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/controllers/MessageBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/controllers/MessageBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/controllers/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/controllers/Register.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/controllers/ResetPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/controllers/ResetPassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Attendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/AttendanceId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/AttendanceId_.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Attendance_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Attendance_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/BackupData.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/BackupData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Course.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Course_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Course_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Department.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Department_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Department_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/EntityHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/EntityHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Lecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Lecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/LectureIdGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Student_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Student_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Subject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Subject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Subject_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Subject_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Teacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Teacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Teacher_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Teacher_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Teaching.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Teaching.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/Teaching_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/Teaching_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/User_.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/User_.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/ActivateOrDeactivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/ActivateOrDeactivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/ActivateOrDeactivateTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/ActivateOrDeactivateTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/GetTeachers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/GetTeachers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchStudentByName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchStudentByName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchTeacherByName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/SearchTeacherByName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/TeacherSubjectMapping.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/ajax/TeacherSubjectMapping.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/ActivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/ActivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DeactivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DeactivateStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailLecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailLecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/DetailTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/GrantLeave.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/GrantLeave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodCourses.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodCourses.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodHome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodReport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodReport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodStudents.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodStudents.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodSubjects.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodSubjects.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/HodTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/SetClassTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/SetClassTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/TCSassigner.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/controllers/TCSassigner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/postback/DeleteStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/postback/DeleteStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/postback/GrantLeavePost.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/postback/GrantLeavePost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/postback/HodReportGeneration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/postback/HodReportGeneration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/postback/UnaccountStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/postback/UnaccountStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hod/postback/UpdateClassTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/hod/postback/UpdateClassTeacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/DefaultCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/DefaultCatalog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes$Indexes0.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes$Indexes0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$ForeignKeys0.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$ForeignKeys0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$UniqueKeys0.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$UniqueKeys0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Public.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Public.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Routines.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Routines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Tables.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Tables.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/GetLectureId.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/GetLectureId.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/RandomString.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/RandomString.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Attendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/ClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/ClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Course.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Department.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Lecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Lecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/StudentSubjectLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/StudentSubjectLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Subject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Subject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/SubjectClassLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/SubjectClassLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Tcs.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Tcs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Teacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Teacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/TeacherDepartmentLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/TeacherDepartmentLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AdminRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AdminRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AttendanceRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AttendanceRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/ClassRoomRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/ClassRoomRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/CourseRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/CourseRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/DepartmentRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/DepartmentRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/LectureRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/LectureRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentSubjectLinkRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentSubjectLinkRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectClassLinkRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectClassLinkRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TcsRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TcsRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherDepartmentLinkRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherDepartmentLinkRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/UsersRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/UsersRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/postback/LoginPost.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/postback/LoginPost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/postback/Registeration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/postback/Registeration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/postback/ResetPasswordPost.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/postback/ResetPasswordPost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/AdminDeleteValidation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/AdminDeleteValidation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/AdminValidation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/AdminValidation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/ClassTeacherValidation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/ClassTeacherValidation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/HodValidation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/HodValidation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/StudentValidation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/StudentValidation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/TeacherValidation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sessionvalidation/TeacherValidation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/ajax/GetLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/ajax/GetLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/ajax/GetMacId.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/ajax/GetMacId.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/ajax/MarkAttendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/ajax/MarkAttendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/attendanceWsService/MacHandlers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/attendanceWsService/MacHandlers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/controllers/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/controllers/Attendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/controllers/ChnagePassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/controllers/ChnagePassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/controllers/EditAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/controllers/EditAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/controllers/MyAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/controllers/MyAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/controllers/SetMacId.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/controllers/SetMacId.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/controllers/StudentHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/controllers/StudentHome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/controllers/StudentLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/controllers/StudentLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/postback/UpdateAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/postback/UpdateAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/postback/UpdateMaacId.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/postback/UpdateMaacId.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/student/postback/UpdatePassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/student/postback/UpdatePassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/GetAttendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/GetAttendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/GetLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/GetLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/GetStudents.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/GetStudents.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/PutAttendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/ajax/PutAttendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/ChangePassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/ChangePassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/CreateLectureHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/CreateLectureHome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/DetailLecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/DetailLecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/DetailStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/DetailStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/EditAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/EditAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/EndLecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/EndLecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/MyAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/MyAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/TeacherLectures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/TeacherLectures.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/TeacherReports.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/TeacherReports.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/TeacherStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/controllers/TeacherStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/CreateLecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/CreateLecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/GenerateReport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/GenerateReport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/UpdateAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/UpdateAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/UpdatePassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/teacher/postback/UpdatePassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/AddToDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/AddToDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/MacAddressUtil$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/MacAddressUtil$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/MacAddressUtil$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/MacAddressUtil$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/MacAddressUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/MacAddressUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/MyRunnable.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/MyRunnable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/MyThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/MyThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/MyThreadFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/MyThreadFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/NewMacaddress$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/NewMacaddress$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/NewMacaddress.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/NewMacaddress.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/Testing.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/Testing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/UrlParameters.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/UrlParameters.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/testing1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/testing1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Admin_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Admin_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/AttendanceId_.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Attendance_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Attendance_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/BackupData_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/BackupData_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/ClassRoom_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/ClassRoom_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Course_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Course_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Department_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Department_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Lecture_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Lecture_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Student_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Student_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Subject_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Subject_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Teacher_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Teacher_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Teaching_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Teaching_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/User_.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/User_.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/drop.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.log" beforeDir="false" afterPath="$PROJECT_DIR$/output.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchLectures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchLectures.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudentByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudentByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacherByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacherByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminChangePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminChangePassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminGrantLeave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminGrantLeave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/DetailSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/DetailSubject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/AddSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/AddSubject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteSubject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/GenerateReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/GenerateReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/GenerateReportFast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/GenerateReportFast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/SetNetworkSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/SetNetworkSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UnaccountStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UnaccountStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UnnaccoutTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UnnaccoutTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateSubject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/ClassSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/ClassSubject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/ForgotPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetSubjectOfClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetSubjectOfClassRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/RegisterClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/RegisterClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/RegisterSubjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/RegisterSubjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/ajax/GetStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/ajax/GetStudents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/ajax/SearchStudentByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/ajax/SearchStudentByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/controllers/ClassTeacherHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/controllers/ClassTeacherHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LogOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LogOut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ResetPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ResetPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Attendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Attendance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/AttendanceId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Department.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Lecture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/LectureIdGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Subject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Teaching.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Teaching.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/ActivateOrDeactivateTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/ActivateOrDeactivateTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/GetTeachers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/GetTeachers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudentByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudentByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchTeacherByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchTeacherByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/controllers/DetailTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/controllers/DetailTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/controllers/TCSassigner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/controllers/TCSassigner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/postback/UnaccountStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/postback/UnaccountStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hod/postback/UpdateClassTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/postback/UpdateClassTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/postback/Registeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/postback/Registeration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/student/attendanceWsService/MacHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/student/attendanceWsService/MacHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/student/controllers/Attendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/student/controllers/Attendance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/student/controllers/StudentHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/student/controllers/StudentHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/student/postback/UpdateAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/student/postback/UpdateAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/teacher/ajax/GetStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teacher/ajax/GetStudents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/teacher/controllers/CreateLectureHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teacher/controllers/CreateLectureHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/teacher/controllers/EditAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teacher/controllers/EditAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/teacher/postback/UpdateAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teacher/postback/UpdateAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Testing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/UrlParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/UrlParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/register.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -42,18 +404,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="help" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="metamodel" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
@@ -64,12 +414,21 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
+            <state relative-caret-position="289">
+              <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,8 +441,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -104,57 +464,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/student/attendanceWsService/AttendanceService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/student/attendanceWsService/AttendanceWs.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/lDepartmentDetails.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utility/Utils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddAdmin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminNetworkSettings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utility/Testing.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/NetworkSettings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/SetNetworkSettings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sessionvalidation/AdminDeleteValidation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/student/attendanceWsService/MacHandlers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controllers/TestWS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/servletListners/ContextListner.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utility/AddToDatabase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/DeleteCourse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/AttendanceId.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/AdminType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Lecture.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UnnaccoutTeacher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountTeacher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" />
-        <option value="$PROJECT_DIR$/drop.sql" />
-        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/create.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/EditCourse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddSubject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Department.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Student.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Subject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Teacher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Teaching.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utility/Controller.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Admin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Attendance.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" />
-        <option value="$PROJECT_DIR$/output.log" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/DeleteSubject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ajax/ClassSubject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ajax/GetSubjectOfClassRoom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ajax/RegisterSubjects.java" />
+        <option value="$PROJECT_DIR$/src/main/java/classteacher/ajax/SearchStudentByName.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hod/ajax/ActivateOrDeactivateTeacher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudentByName.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hod/postback/UnaccountStudent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/teacher/ajax/GetStudents.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Subject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Student.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Teaching.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Course.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Lecture.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Admin.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/DeleteAdmin.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/student/attendanceWsService/MacHandlers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminChangePassword.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminGrantLeave.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Teacher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Department.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/output.log" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/LogOut.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/Login.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" />
+        <option value="$PROJECT_DIR$/src/main/java/student/controllers/StudentHome.java" />
+        <option value="$PROJECT_DIR$/src/main/java/teacher/controllers/CreateLectureHome.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddSubject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/DeleteCourse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/SetNetworkSettings.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/postback/Registeration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utility/UrlParameters.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utility/Testing.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" />
       </list>
     </option>
   </component>
@@ -165,10 +525,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -227,8 +586,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="postback" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
@@ -237,6 +595,63 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="postback" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="teacher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="teacher" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="utility" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -248,7 +663,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/lombok testing/lombok" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -301,19 +716,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="testing1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utility.testing1" />
-      <module name="OAS_gradle_test.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utility.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OAS_gradle [metamodelClean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -333,7 +735,7 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="OAS_gradle [processMetamodelResources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="OAS_gradle [runApplication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -344,7 +746,26 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="processMetamodelResources" />
+            <option value="runApplication" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="OAS_gradle [verifyLombok]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="verifyLombok" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -355,17 +776,17 @@
     <list>
       <item itemvalue="Application.AddToDatabase" />
       <item itemvalue="Application.Testing" />
-      <item itemvalue="Application.testing1" />
       <item itemvalue="Gradle.OAS_gradle [metamodelClean]" />
-      <item itemvalue="Gradle.OAS_gradle [processMetamodelResources]" />
+      <item itemvalue="Gradle.OAS_gradle [runApplication]" />
+      <item itemvalue="Gradle.OAS_gradle [verifyLombok]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OAS_gradle [verifyLombok]" />
+        <item itemvalue="Gradle.OAS_gradle [runApplication]" />
         <item itemvalue="Application.Testing" />
         <item itemvalue="Application.AddToDatabase" />
         <item itemvalue="Gradle.OAS_gradle [metamodelClean]" />
-        <item itemvalue="Application.testing1" />
-        <item itemvalue="Gradle.OAS_gradle [processMetamodelResources]" />
       </list>
     </recent_temporary>
   </component>
@@ -450,6 +871,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project Explorer" order="0" weight="0.32995737" />
       <window_info id="Job Explorer" order="1" weight="0.32995737" />
@@ -457,23 +879,23 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Designer" order="5" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.24733475" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.1433902" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="DB Execution Console" order="0" />
       <window_info anchor="bottom" id="Console" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49733758" weight="0.12892741" />
+      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49733758" weight="0.30010834" />
       <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50159746" side_tool="true" weight="0.17710583" />
-      <window_info anchor="bottom" id="Build" order="4" sideWeight="0.49840257" weight="0.24074075" />
+      <window_info anchor="bottom" id="Build" order="4" sideWeight="0.49840257" weight="0.20043337" />
       <window_info anchor="bottom" id="Messages" order="5" sideWeight="0.49573562" weight="0.17170626" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="6" visible="true" weight="0.11050921" />
+      <window_info anchor="bottom" id="Version Control" order="6" weight="0.34994584" />
       <window_info anchor="bottom" id="Message" order="7" />
-      <window_info anchor="bottom" id="Find" order="8" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4978678" weight="0.26349893" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.23185265" />
+      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4978678" visible="true" weight="0.312026" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.39935064" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="13" weight="0.32897604" />
-      <window_info anchor="right" id="Gradle" order="0" weight="0.32960597" />
+      <window_info anchor="right" id="Gradle" order="0" sideWeight="0.4976378" visible="true" weight="0.18283582" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
       <window_info anchor="right" id="Maven" order="2" weight="0.32995737" />
       <window_info anchor="right" id="Palette" order="3" />
@@ -481,7 +903,7 @@
       <window_info anchor="right" id="Commander" order="5" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="8" side_tool="true" weight="0.110341154" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="8" sideWeight="0.5023622" side_tool="true" visible="true" weight="0.18283582" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -556,360 +978,381 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/BackupData.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/PostBackController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/MacAddressUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/student/attendanceWsService/MacHandlers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/TestWS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="28" column="41" lean-forward="true" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminChangePassword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="37" column="28" lean-forward="true" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminGrantLeave.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="27" column="58" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/DetailLecture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
           <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/LectureIdGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/AdminType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/postback/Registeration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="101" column="46" selection-start-line="101" selection-start-column="46" selection-end-line="101" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/student/controllers/Attendance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="53" column="37" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/AttendanceId.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/OrderBy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="119" column="18" selection-start-line="119" selection-start-column="18" selection-end-line="119" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/UserType.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Lecture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/DeleteCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UnnaccoutTeacher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountTeacher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7548">
-          <caret line="491" column="28" selection-start-line="491" selection-start-column="28" selection-end-line="491" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/drop.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="58" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddDepartment.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/DetailStudent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/EditCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="42" column="87" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/PostBackController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="163" selection-start-line="163" selection-end-line="163" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Subject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="100" selection-start-line="100" selection-end-line="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-808">
-          <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Teaching.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/classes/java/main/entities/Admin.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <folding>
-            <element signature="e#0#8562#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-377" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5725">
-          <caret line="94" column="32" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#18972#0" expanded="true" />
-          </folding>
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entities/Teacher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-79">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="426">
+          <caret line="84" column="60" selection-start-line="84" selection-start-column="60" selection-end-line="84" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/AdminValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="64" column="65" selection-start-line="64" selection-start-column="60" selection-end-line="64" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Department.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="61" column="63" selection-start-line="61" selection-start-column="63" selection-end-line="61" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/TeacherDepartmentLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="218" column="26" selection-start-line="218" selection-start-column="26" selection-end-line="218" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2291#2292#0" expanded="true" />
-            <element signature="e#2330#2331#0" expanded="true" />
+            <element signature="e#7547#7548#0" expanded="true" />
+            <element signature="e#7587#7588#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Admin.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+        <state relative-caret-position="404">
+          <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Attendance.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/CriteriaQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+        <state relative-caret-position="219">
+          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Controller.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/CriteriaBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="33" column="64" selection-start-line="33" selection-start-column="64" selection-end-line="33" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="57" column="76" selection-start-line="57" selection-start-column="76" selection-end-line="57" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="44" column="59" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradlew.bat">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Department.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/metamodel/SingularAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="27" column="25" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/EntityHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="151" column="27" lean-forward="true" selection-start-line="151" selection-start-column="27" selection-end-line="151" selection-end-column="27" />
+        <state relative-caret-position="219">
+          <caret line="48" column="17" lean-forward="true" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/output.log">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="41" column="41" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/DeactivateStudent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="36" column="57" lean-forward="true" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="59" column="36" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="59" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/LogOut.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="518">
-          <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+          <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="110" column="11" selection-start-line="110" selection-start-column="11" selection-end-line="110" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3732#3733#0" expanded="true" />
+            <element signature="e#3793#3794#0" expanded="true" />
+            <element signature="e#4302#4303#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.8.1/e9748d7783594da3735ad9724390a10e7cebc01d/commons-lang3-3.8.1-sources.jar!/org/apache/commons/lang3/ObjectUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="366" column="65" lean-forward="true" selection-start-line="366" selection-start-column="65" selection-end-line="366" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/EntityHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="170" column="10" selection-start-line="170" selection-start-column="10" selection-end-line="170" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-211">
+          <caret line="56" column="27" lean-forward="true" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/student/controllers/StudentHome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="60" column="74" selection-start-line="60" selection-start-column="74" selection-end-line="60" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="86" column="74" selection-start-line="86" selection-start-column="74" selection-end-line="86" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/teacher/controllers/CreateLectureHome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="139" column="43" selection-start-line="139" selection-start-column="43" selection-end-line="139" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.8.1/e9748d7783594da3735ad9724390a10e7cebc01d/commons-lang3-3.8.1-sources.jar!/org/apache/commons/lang3/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="4826" column="25" selection-start-line="4826" selection-start-column="25" selection-end-line="4826" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/testing1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/ReportPostBackController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+        <state relative-caret-position="119">
+          <caret line="83" column="51" selection-start-line="83" selection-start-column="51" selection-end-line="83" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/ClassRoom_.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+        <state relative-caret-position="113">
+          <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/ClassRoom.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddSubject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="58" column="115" selection-start-line="58" selection-start-column="115" selection-end-line="58" selection-end-column="115" />
+        <state relative-caret-position="111">
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Course.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/DeleteCourse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
+        <state relative-caret-position="111">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/SetNetworkSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="58" column="34" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/postback/Registeration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/postback/LoginPost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="112" column="26" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/UrlParameters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Testing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
+        <state relative-caret-position="161">
+          <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
         </state>
       </provider>
     </entry>

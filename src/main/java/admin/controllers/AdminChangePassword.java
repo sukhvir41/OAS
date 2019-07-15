@@ -18,19 +18,16 @@ import java.io.PrintWriter;
 /**
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/myaccount/changepassword")
+@WebServlet(urlPatterns = "/admin/my-account/change-password")
 public class AdminChangePassword extends Controller {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
-		req.setAttribute( "username", ( (Admin) req.getSession().getAttribute( "admin" ) ).getUser().getUsername() );
-		req.getRequestDispatcher( "/WEB-INF/admin/adminchangepassword.jsp" )
-				.include( req, resp );
-	}
+    @Override
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+
+        req.setAttribute("username", ((Admin) req.getSession().getAttribute("admin")).getUser().getUsername());
+        req.getRequestDispatcher("/WEB-INF/admin/change-password.jsp")
+                .include(req, resp);
+
+    }
 
 }

@@ -17,18 +17,17 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/myaccount")
+@WebServlet(urlPatterns = "/admin/my-account")
 public class AdminAccountDetails extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Admin admin = (Admin) httpSession.getAttribute(UserType.Admin.toString());
-        admin = (Admin) session.get(Admin.class, admin.getId());
+        admin = session.get(Admin.class, admin.getId());
         req.setAttribute("admin", admin);
-        req.getRequestDispatcher("/WEB-INF/admin/adminmyaccount.jsp")
+        req.getRequestDispatcher("/WEB-INF/admin/my-account.jsp")
                 .include(req, resp);
     }
 

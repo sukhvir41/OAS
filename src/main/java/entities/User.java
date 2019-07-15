@@ -8,24 +8,47 @@ package entities;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Session;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import utility.BCrypt;
 import utility.Utils;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
  * @author sukhvir
  */
 @Entity(name = "User")
-@Table(name = "users")
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "unique_user_username_email",
+                        columnNames = {"username", "email"}
+                ),
+                @UniqueConstraint(
+                        name = "unique_user_username",
+                        columnNames = {"username"}
+                ),
+                @UniqueConstraint(
+                        name = "unique_user_email",
+                        columnNames = {"email"}
+                )
+        },
+        indexes = {
+                @Index(name = "user_username_index", columnList = "username"),
+                @Index(name = "user_email_index", columnList = "email"),
+                @Index(name = "user_sessionId_index", columnList = "session_Id"),
+                @Index(name = "user_token_index", columnList = "token")
+        }
+)
 public final class User implements Serializable {
-
-
     @Id
     @Column
     @Getter
@@ -39,51 +62,59 @@ public final class User implements Serializable {
     private UUID id;
 
 
-    @Column(name = "username", unique = true, nullable = false, length = 40)
+    @Column(name = "username", nullable = false, length = 40)
     @Getter
     @Setter
+    @NotNull
+    @Size(min = 8, max = 40)
     private String username;
 
     @Column(name = "password", nullable = false, length = 100)
     @Getter(value = AccessLevel.PRIVATE)
+    @Size(min = 8, max = 100)
     private String password;
 
-    @Column(name = "email", unique = true, nullable = false, length = 40)
+    @Column(name = "email", nullable = false, length = 40)
     @Getter
     @Setter
+    @NotNull
+    @Size(min = 8, max = 40)
     private String email;
-
-    @Column(name = "token")
-    @Getter
-    @Setter
-    private String token; // used for forget password
 
     @Column(name = "number", nullable = false)
     @Getter
     @Setter
+    @NotNull
     private long number;
 
     @Column(name = "used")
     @Getter
     @Setter
-    private boolean used; // used to check if the forget password is used or not
+    private boolean used = true; // used to check if the forget password is used or not
 
-    @Column(name = "session_id", unique = true, length = 50)
-    @Getter
+    @Column(name = "token")
+    @Setter
+    private String token; // used for forget password
+
+    @Column(name = "forgot_password_expiry_date")
+    @Setter
+    private LocalDateTime forgotPasswordExpiryDate; // used check the forget password token expiry date
+
+    @Column(name = "session_id", length = 50)
     @Setter
     private String sessionId; //used for cookie login
 
     @Column(name = "session_token")
     private String sessionToken; // used for cookie login
 
-    @Column(name = "date")
-    @Getter
+    @Column(name = "session_expiry_date")
     @Setter
-    private LocalDateTime date; // used check the forget password token expiry date
+    private LocalDateTime sessionExpiryDate;
 
-    @Column(name = "user_type", nullable = false)
-    @Setter
+    @Column(name = "user_type", nullable = false, updatable = false)
+    @NotNull
     private String userType;
+
 
     public User() {
     }
@@ -96,16 +127,47 @@ public final class User implements Serializable {
         this.userType = userType.toString();
     }
 
+    public Optional<String> getToken() {
+        return Optional.ofNullable(this.token);
+    }
+
+    public Optional<String> getSessionId() {
+        return Optional.ofNullable(this.sessionId);
+    }
+
+    public Optional<String> getSessionToken() {
+        return Optional.ofNullable(this.sessionToken);
+    }
+
+    public Optional<LocalDateTime> getForgotPasswordExpiryDate() {
+        return Optional.of(forgotPasswordExpiryDate);
+    }
+
     final public void setSessionToken(String sessionToken) {
         this.sessionToken = Utils.hash(sessionToken);
     }
 
-    /**
-     * this method matches the given session token with the stored session token
-     */
-    public boolean matchSessionToken(String token) {
-        return Utils.hashEquals(this.sessionToken, Utils.hash(token));
+    public final Optional<LocalDateTime> getSessionExpiryDate() {
+        return Optional.ofNullable(sessionExpiryDate);
     }
+
+    /**
+     * checks the logged in session is valid or not
+     *
+     * @param sessionToken the session token from the cookie
+     * @param now          the current time of the system
+     * @return true if the session token matches and the now is with in ten days else false
+     */
+    public final boolean isSessionValid(String sessionToken, LocalDateTime now) {
+        return getSessionToken()
+                .map(s -> Utils.hashEquals(s, Utils.hash(token)))
+                .orElse(false)
+                &&
+                getSessionExpiryDate()
+                        .map(expiryDate -> expiryDate.isAfter(now))
+                        .orElse(false);
+    }
+
 
     /**
      * this method checks the given password matches with the stored password
@@ -124,6 +186,7 @@ public final class User implements Serializable {
     public UserType getUserType() {
         return UserType.valueOf(userType);
     }
+
 
     @Override
     public boolean equals(Object o) {

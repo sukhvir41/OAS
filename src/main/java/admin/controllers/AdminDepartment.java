@@ -7,6 +7,7 @@ package admin.controllers;
 
 import entities.Department;
 import entities.Department_;
+import entities.EntityHelper;
 import org.hibernate.Session;
 import utility.Controller;
 
@@ -26,20 +27,15 @@ import java.util.List;
 @WebServlet(urlPatterns = "/admin/departments")
 public class AdminDepartment extends Controller {
 
-	@Override
-	public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    @Override
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
+                        PrintWriter out) throws Exception {
 
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Department> query = builder.createQuery(Department.class);
-		Root<Department> departmentRoot = query.from(Department.class);
-		query.orderBy(builder.asc(departmentRoot.get(Department_.NAME)));
+        List<Department> departments = EntityHelper.getAll(session, Department.class, true);
 
-		List<Department> departments = session.createQuery(query).setReadOnly(true).list();
+        req.setAttribute("departments", departments);
 
-		req.setAttribute("departments", departments);
-
-		req.getRequestDispatcher("/WEB-INF/admin/admin-department.jsp").include(req, resp);
-	}
+        req.getRequestDispatcher("/WEB-INF/admin/admin-department.jsp").include(req, resp);
+    }
 
 }

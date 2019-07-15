@@ -14,7 +14,7 @@ public abstract class Student_ {
 	public static volatile SingularAttribute<Student, String> lName;
 	public static volatile SingularAttribute<Student, String> fName;
 	public static volatile SingularAttribute<Student, String> macId;
-	public static volatile SetAttribute<Student, Subject> subjects;
+	public static volatile SetAttribute<Student, StudentSubjectLink> subjects;
 	public static volatile SingularAttribute<Student, Integer> rollNumber;
 	public static volatile SingularAttribute<Student, Boolean> verified;
 	public static volatile SingularAttribute<Student, ClassRoom> classRoom;

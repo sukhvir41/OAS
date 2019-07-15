@@ -38,8 +38,8 @@ public class UnaccountStudent extends PostBackController {
             if (!student.isVerified()) {
                 student.getClassRoom().getStudents().remove(student);
                 student.setClassRoom(null);
-                student.getSubjects().stream()
-                        .forEach(e -> e.getStudents().remove(student));
+                /*student.getSubjects().stream()
+                        .forEach(e -> e.getStudents().remove(student));*/
                 student.getSubjects().clear();
                // student.getAttendance().stream()
                //         .forEach(attendance -> attendance.setStudent(null));

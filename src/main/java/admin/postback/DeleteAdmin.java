@@ -7,6 +7,8 @@ package admin.postback;
 
 import entities.Admin;
 import entities.AdminType;
+import entities.Admin_;
+import entities.EntityHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
@@ -27,52 +29,51 @@ import java.util.UUID;
 @WebServlet(urlPatterns = "/admin/admins/deleteadminpost")
 public class DeleteAdmin extends Controller {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
 
 
-		UUID adminId = UUID.fromString( req.getParameter( "adminId" ) );
+        UUID adminId = UUID.fromString(req.getParameter("adminId"));
 
-		Admin admin = Admin.getUserAdmin( adminId, session );
+        Admin admin = EntityHelper.getInstance(adminId, Admin_.id, Admin.class, session, true, Admin_.USER);
 
-		UrlParameters parameters = new UrlParameters();
+        UrlParameters parameters = new UrlParameters();
 
-		req.setAttribute( "username", admin.getUser().getUsername() );
+        req.setAttribute("username", admin.getUser().getUsername());
 
-		if ( admin.getType().equals( AdminType.Sub ) ) {
-			session.delete( admin );
-			parameters.addSuccessParameter()
-					.addMessage( StringUtils.joinWith( " ", admin.getUser().getUsername(), " was deleted" ) );
-		}
-		else {
-			parameters.addErrorParameter()
-					.addMessage( StringUtils.joinWith( " ", admin.getUser().getUsername(), " can not be deleted" ) );
-		}
+        if (admin.getType().equals(AdminType.Sub)) {
+            session.delete(admin);
+            parameters.addSuccessParameter()
+                    .addMessage(StringUtils.joinWith(" ", admin.getUser().getUsername(), " was deleted"));
+        } else {
+            parameters.addErrorParameter()
+                    .addMessage(StringUtils.joinWith(" ", admin.getUser().getUsername(), " can not be deleted"));
+        }
 
 
-		resp.sendRedirect( parameters.getUrl( "/OAS/admin/admins" ) );
+        resp.sendRedirect(parameters.getUrl("/OAS/admin/admins"));
 
-	}
+    }
 
-	@Override
-	public boolean showErrorLog() {
-		return true;
-	}
+    @Override
+    public boolean showErrorLog() {
+        return true;
+    }
 
-	@Override
-	public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = (String) req.getAttribute( "username" );
+    @Override
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = (String) req.getAttribute("username");
 
-		resp.sendRedirect(
-				new UrlParameters()
-						.addErrorParameter()
-						.addMessage( username + " unable to delete the admin" )
-						.getUrl( "/OAS/admin/admins" )
-		);
-	}
+        resp.sendRedirect(
+                new UrlParameters()
+                        .addErrorParameter()
+                        .addMessage(username + " unable to delete the admin")
+                        .getUrl("/OAS/admin/admins")
+        );
+    }
 }

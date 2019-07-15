@@ -6,12 +6,12 @@
 package admin.controllers;
 
 import entities.Admin;
+import entities.Admin_;
+import entities.EntityHelper;
 import org.hibernate.Session;
+import org.hibernate.graph.RootGraph;
 import utility.Controller;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/admins")
@@ -29,13 +28,10 @@ public class AdminAdmins extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Admin> query = builder.createQuery( Admin.class );
-        Root<Admin> admin = query.from( Admin.class );
+        RootGraph<Admin> rootGraph = session.createEntityGraph(Admin.class);
+        rootGraph.addAttributeNodes(Admin_.USER);
 
-        List<Admin> admins = session.createQuery( query )
-                .applyLoadGraph( session.getEntityGraph( "userAdmin" ) )
-                .list();
+        List<Admin> admins = EntityHelper.getAll(session, Admin.class, rootGraph, true);
 
         req.setAttribute("admins", admins);
         req.getRequestDispatcher("/WEB-INF/admin/admin-admins.jsp")

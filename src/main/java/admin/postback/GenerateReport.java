@@ -19,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author sukhvir
@@ -157,8 +154,8 @@ public class GenerateReport extends ReportPostBackController {
 
         //start of adding actual data
         int rowNumber = 4;
-        List<Student> students = classRoom.getStudents();
-        Collections.sort(students);
+        Set<Student> students = classRoom.getStudents();
+        //Collections.sort(students);
 
         for (Student student : students) {
 
@@ -175,7 +172,7 @@ public class GenerateReport extends ReportPostBackController {
             cell.setCellValue(student.toString());
             cellNumber++;
 
-            for (Subject subject : student.getSubjects()) {
+           /* for (Subject subject : student.getSubjects()) {
 
                 //getting lectures of the class and subject
 //                List<Lecture> lectures = getLectures(classRoom, subject, session, start, end);
@@ -213,7 +210,7 @@ public class GenerateReport extends ReportPostBackController {
                 cell.setCellValue(lecturesCount);
                 cell.setCellStyle(style);
 
-            }
+            }*/
             for (int i = 0; i < maxCellNumber - student.getSubjects().size(); i++) {
                 cell = row.createCell(cellNumber++);
                 cell.setCellValue("");

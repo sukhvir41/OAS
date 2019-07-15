@@ -92,11 +92,11 @@ public class SearchLectures extends AjaxController {
         //todo: have to optimize this.
         Subject[] subjects = {theLecture.getTeaching().getSubject()};//experimental
         
-        int totalStudents = (int) session.createCriteria(Student.class) //experimental 
+       /* int totalStudents = (int) session.createCriteria(Student.class) //experimental
                 .add(Restrictions.eq("classRoom", theLecture.getTeaching().getClassRoom()))
                 .add(Restrictions.in("subjects",subjects ))
                 .setProjection(Projections.rowCount())
-                .uniqueResult();
+                .uniqueResult();*/
         
 //        int totalStudents = theLecture.getTeaching()
 //                .getClassRoom()
@@ -113,7 +113,7 @@ public class SearchLectures extends AjaxController {
         lecture.addProperty(COUNT, theLecture.getCount());
         lecture.addProperty(DATE, Utils.formatDateTime(theLecture.getDate()));
         lecture.addProperty(PRESENT, attendedStudent);
-        lecture.addProperty(ABSENT, totalStudents - attendedStudent);
+       // lecture.addProperty(ABSENT, totalStudents - attendedStudent);
 
         jsonLectures.add(lecture);
 

@@ -8,25 +8,28 @@ package entities;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
  * @author sukhvir
  */
 @Entity(name = "ClassRoom")
-@Table(name = "class_room")
+@Table(name = "class_room",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "class_room_name", columnNames = "name")
+        },
+        indexes = {
+                @Index(name = "class_room_name_index", columnList = "name")
+        }
+)
 public class ClassRoom implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "class_room_sequence")
     @Column(name = "id")
     @Getter
     @Setter
@@ -55,34 +58,28 @@ public class ClassRoom implements Serializable {
     @Setter
     private int minimumSubjects;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "course_fid", foreignKey = @ForeignKey(name = "class_course_foreign_key"), nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_fid", foreignKey = @ForeignKey(name = "class_course_foreign_key"))
     @Getter
     @Setter
     private Course course;
 
-    @OneToOne(mappedBy = "classRoom", fetch = FetchType.LAZY)
-    @LazyToOne(LazyToOneOption.NO_PROXY)
-    @Getter
-    @Setter
-    private Teacher classTeacher;
+//    @OneToOne(mappedBy = "classRoom", fetch = FetchType.LAZY)
+//    @Getter
+//    @Setter
+//    private Teacher classTeacher;
 
     @OneToMany(mappedBy = "classRoom", fetch = FetchType.LAZY)
     @OrderBy("fName ASC, LName ASC")
     @Getter
     @Setter
-    private List<Student> students = new ArrayList<>();
+    private Set<Student> students = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @OrderBy("name")
-    @JoinTable(name = "subject_class_link",
-            joinColumns = @JoinColumn(name = "class_fid"),
-            inverseJoinColumns = @JoinColumn(name = "subject_fid"),
-            foreignKey = @ForeignKey(name = "subject_class_link_class_foreign_key"),
-            inverseForeignKey = @ForeignKey(name = "subject_class_link_subject_foreign_key"))
+    @OneToMany(mappedBy = "classRoom", fetch = FetchType.LAZY)
+    @OrderBy("subject.name")
     @Getter
     @Setter
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<SubjectClassRoomLink> subjects = new HashSet<>();
 
     private ClassRoom() {
     }
@@ -100,7 +97,7 @@ public class ClassRoom implements Serializable {
      * NOT the owner of the relationship
      */
     final public void addClassTeacher(Teacher teacher) {
-        this.classTeacher = teacher;
+        //     this.classTeacher = teacher;
     }
 
 
@@ -132,13 +129,15 @@ public class ClassRoom implements Serializable {
 
     /**
      * this method adds the subject to the classroom
-     * OWNER of the relationship
+     * NOT OWNER of the relationship
      *
      * @param subject subject to be added
      */
     public void addSubject(Subject subject) {
         //as it is a set no duplicates will exist
-        this.subjects.add(subject);
+        this.subjects.add(
+                new SubjectClassRoomLink(subject, this)
+        );
     }
 
     /**

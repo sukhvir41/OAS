@@ -11,7 +11,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Department_ {
 
 	public static volatile ListAttribute<Department, Course> courses;
-	public static volatile SetAttribute<Department, Teacher> teachers;
+	public static volatile SetAttribute<Department, TeacherDepartmentLink> teachers;
 	public static volatile SingularAttribute<Department, String> name;
 	public static volatile SingularAttribute<Department, Long> id;
 	public static volatile SingularAttribute<Department, Teacher> hod;

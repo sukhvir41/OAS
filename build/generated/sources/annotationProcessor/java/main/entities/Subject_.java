@@ -12,8 +12,8 @@ public abstract class Subject_ {
 	public static volatile SingularAttribute<Subject, Boolean> elective;
 	public static volatile SingularAttribute<Subject, String> name;
 	public static volatile SingularAttribute<Subject, Course> course;
-	public static volatile SetAttribute<Subject, ClassRoom> classRooms;
-	public static volatile SetAttribute<Subject, Student> students;
+	public static volatile SetAttribute<Subject, SubjectClassRoomLink> classRooms;
+	public static volatile SetAttribute<Subject, StudentSubjectLink> students;
 	public static volatile SingularAttribute<Subject, Long> id;
 
 	public static final String ELECTIVE = "elective";

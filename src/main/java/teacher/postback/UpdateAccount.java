@@ -50,11 +50,11 @@ public class UpdateAccount extends PostBackController {
 		teacher.setVerified( false );
 		teacher.setUnaccounted( false );
 
-		teacher.getDepartment()
+		/*teacher.getDepartment()
 				.stream()
 				.forEach( department -> department.getTeachers().remove( teacher ) );
 
-		teacher.setDepartment( null );
+		teacher.setDepartment( null );*/
 
 		Arrays.asList( req.getParameterValues( "department" ) )
 				.stream()

@@ -81,7 +81,7 @@ public class AddClassRoom extends PostBackController {
                     response.sendRedirect("/OAS/admin/subjects");
                 } else {
                     response.sendRedirect(
-                            urlParameters.addParamter("courseId", courseId)
+                            urlParameters.addParameter("courseId", courseId)
                                     .getUrl("/OAS/admin/courses/course-details")
                     );
                 }

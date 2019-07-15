@@ -32,7 +32,7 @@ public class ActivateOrDeactivateTeacher extends AjaxController {
         department = (Department) session.get(Department.class, department.getId());
         
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-        if (teacher.getDepartment().contains(department)) {
+       /* if (teacher.getDepartment().contains(department)) {
             if (action.equals("verify")) {
                 teacher.setVerified(true);
             } else {
@@ -41,7 +41,7 @@ public class ActivateOrDeactivateTeacher extends AjaxController {
             out.print(true);
         } else {
             out.print(false);
-        }
+        }*/
     }
     
 }

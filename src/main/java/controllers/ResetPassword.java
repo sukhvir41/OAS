@@ -31,66 +31,62 @@ import java.time.LocalDateTime;
 public class ResetPassword extends Controller {
 
 
-	// this servlet takes the username of the the user and the token as the parameter nad validates it by checking
-	// if the token belongs the user or not and if it does redirects to resetPassword page else to the expired if the link
-	// to old or to the error if the token does not matches.
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    // this servlet takes the username of the the user and the token as the parameter nad validates it by checking
+    // if the token belongs the user or not and if it does redirects to resetPassword page else to the expired if the link
+    // to old or to the error if the token does not matches.
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
 
-		String username = req.getParameter( "username" ); // username of the user
-		String token = URLDecoder.decode(
-				req.getParameter( "token" ),
-				"UTF-8"
-		); // the token set for the user to reset the password
+        String username = req.getParameter("username"); // username of the user
+        String token = URLDecoder.decode(
+                req.getParameter("token"),
+                "UTF-8"
+        ); // the token set for the user to reset the password
 
-		if ( StringUtils.isNoneBlank( username, token ) ) {
-			LocalDateTime presentTime = LocalDateTime.now();
+        if (StringUtils.isNoneBlank(username, token)) {
+            LocalDateTime presentTime = LocalDateTime.now();
 
-			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<User> query = builder.createQuery( User.class );
-			Root<User> user = query.from( User.class );
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<User> query = builder.createQuery(User.class);
+            Root<User> user = query.from(User.class);
 
-			query.where(
-					builder.equal( user.get( User_.username ), username )
-			);
+            query.where(
+                    builder.equal(user.get(User_.username), username)
+            );
 
-			User theUser = session.createQuery( query )
-					.setHint( QueryHints.HINT_READONLY, true )
-					.getSingleResult();
+            User theUser = session.createQuery(query)
+                    .setHint(QueryHints.HINT_READONLY, true)
+                    .getSingleResult();
 
-			if ( !theUser.isUsed() ) {// checking if the token is used before or not
+            if (!theUser.isUsed()) {// checking if the token is used before or not
 
-				if ( token.equals( theUser.getToken() ) ) {
+                if (token.equals(theUser.getToken())) {
 
-					LocalDateTime endTime = theUser.getDate().plusMinutes( 30 );
+                    LocalDateTime endTime = theUser.getForgotPasswordExpiryDate().get().plusMinutes(30);
 
-					if ( presentTime.isAfter( theUser.getDate() ) && presentTime.isBefore( endTime ) ) {
+                    if (presentTime.isAfter(theUser.getForgotPasswordExpiryDate().get()) && presentTime.isBefore(endTime)) {
 
-						req.setAttribute( "username", theUser.getUsername() );
-						//secret token used in the hidden tag that will be used in the post to validate the request
-						req.setAttribute( "token", Utils.createToken( 20 ) );
-						req.getRequestDispatcher( "WEB-INF/resetPassword.jsp" )
-								.include( req, resp );
-					}
-					else {
-						resp.sendRedirect( "expired" );
-					}
-				}
-				else {
-					resp.sendRedirect( "error" );
-				}
-			}
-			else {
-				resp.sendRedirect( "error" );
-			}
-		}
-		else {
-			resp.sendRedirect( "error" );
-		}
-	}
+                        req.setAttribute("username", theUser.getUsername());
+                        //secret token used in the hidden tag that will be used in the post to validate the request
+                        req.setAttribute("token", Utils.createToken(20));
+                        req.getRequestDispatcher("WEB-INF/resetPassword.jsp")
+                                .include(req, resp);
+                    } else {
+                        resp.sendRedirect("expired");
+                    }
+                } else {
+                    resp.sendRedirect("error");
+                }
+            } else {
+                resp.sendRedirect("error");
+            }
+        } else {
+            resp.sendRedirect("error");
+        }
+    }
 }

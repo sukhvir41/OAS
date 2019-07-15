@@ -28,9 +28,9 @@ public class DeleteSubject extends PostBackController {
         int subjectId = Integer.parseInt(req.getParameter("subjectId"));
 
         Subject subject = (Subject) session.get(Subject.class, subjectId);
-        subject.getClassRooms()
+        /*subject.getClassRooms()
                 .stream()
-                .forEach(e -> e.getSubjects().remove(subject));
+                .forEach(e -> e.getSubjects().remove(subject));*/
         session.delete(subject);
 
         resp.sendRedirect("/OAS/admin/subjects");

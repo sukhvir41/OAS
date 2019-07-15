@@ -2,7 +2,7 @@
 
 var minimumSubjects;
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     getCourses();
     getDepartments();
@@ -36,26 +36,26 @@ $(document).ready(function(){
         }
     });
 
-    $.validator.addMethod("subjectCheck",function(value,elemecnt){
+    $.validator.addMethod("subjectCheck", function (value, elemecnt) {
         return this.optional(element) || subjectCheck();
-    },"Please select the subjects");
+    }, "Please select the subjects");
 
 
-    $.validator.addMethod("departmentCheck",function(value,element){
+    $.validator.addMethod("departmentCheck", function (value, element) {
         return this.optional(element) || departmentCheck();
-    },"Please select at least one department");
+    }, "Please select at least one department");
 
 
 
     $("#register").validate({
-        rules:{
+        rules: {
             firstname: {
                 required: true,
             },
             lastname: {
                 required: true,
             },
-            email:{
+            email: {
                 required: true,
                 email: true,
                 remote: {
@@ -67,25 +67,25 @@ $(document).ready(function(){
                 required: true,
                 minlength: 8,
                 maxlength: 20,
-                remote:{
+                remote: {
                     url: "ajax/checkusername",
                     type: "post"
-                },    
+                },
             },
-            password:{
-                required: true,
-                minlength: 8,
-                maxlength: 40,   
-            },
-            repassword:{
+            password: {
                 required: true,
                 minlength: 8,
                 maxlength: 40,
+            },
+            repassword: {
+                required: true,
+                minlength: 8,
+                maxlength: 100,
                 equalTo: '#password',
             },
-            number:{
-                minlength:10,
-                maxlength:10,
+            number: {
+                minlength: 10,
+                maxlength: 10,
                 required: true,
                 number: true
             },
@@ -93,64 +93,64 @@ $(document).ready(function(){
                 minlength: 1,
                 maxlength: 3,
                 number: true,
-                required: function(element){
+                required: function (element) {
                     return ($('input[name=type]:checked', '#register').val() === 'student');
                 }
             },
             course: {
-                required: function(element){
+                required: function (element) {
                     return $('input[name=type]:checked', '#register').val() === 'student';
                 }
             },
             class: {
-                required: function(element){
+                required: function (element) {
                     return $('input[name=type]:checked', '#register').val() === 'student';
                 }
             },
             subjects: {
                 subjectCheck: true,
-                required:  function(element){
+                required: function (element) {
                     return $('input[name=type]:checked', '#register').val() === 'student';
                 }
             },
             department: {
                 departmentCheck: true,
-                required:  function(element){
+                required: function (element) {
                     return $('input[name=type]:checked', '#register').val() === 'teacher';
                 }
-            } 
+            }
         },
         messages: {
-            firstname:{
+            firstname: {
                 required: 'Please enter your first name'
             },
-            lastname:{
+            lastname: {
                 required: 'Please enter your last name'
             },
-            email:{
-                required:'Please enter your email address',
+            email: {
+                required: 'Please enter your email address',
                 email: 'Enter a vaild email address',
                 remote: $.validator.format('Email: {0} is in use')
             },
-            username:{
+            username: {
                 required: "Please enter your username",
                 remote: $.validator.format("Username: {0} is taken"),
                 minlength: $.validator.format("Enter at least {0} characters"),
-                maxlength: $.validator.format("At max {0} characters") 
+                maxlength: $.validator.format("At max {0} characters")
             },
-            rollnumber:{
+            rollnumber: {
                 required: 'Please enter your valid roll number',
             },
-            course:{
+            course: {
                 required: 'Please select a course',
             },
-            class:{
+            class: {
                 required: 'Please select a class',
             },
-            subjects:{
-                required: 'Please slecct the minimum subjects: '+ minimumSubjects,
+            subjects: {
+                required: 'Please slecct the minimum subjects: ' + minimumSubjects,
             },
-            department:{
+            department: {
                 required: 'Please select at least one department'
             }
 

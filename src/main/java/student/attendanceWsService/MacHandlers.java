@@ -13,6 +13,7 @@ import org.pcap4j.packet.namednumber.ArpHardwareType;
 import org.pcap4j.packet.namednumber.ArpOperation;
 import org.pcap4j.packet.namednumber.EtherType;
 import org.pcap4j.util.ByteArrays;
+import org.pcap4j.util.LinkLayerAddress;
 import org.pcap4j.util.MacAddress;
 
 import java.net.InetAddress;
@@ -33,18 +34,18 @@ public class MacHandlers {
     private static MacAddress machineMac;
     private static InetAddress machineIp;
     private static Executor executor = Executors.newSingleThreadExecutor();
-    private static AtomicBoolean isListnerSet = new AtomicBoolean(false);
+    private static AtomicBoolean isListenerSet = new AtomicBoolean(false);
 
     public static String getMachineIp() {
 
         return Optional.ofNullable(machineIp)
-                .map(ip -> ip.toString())
+                .map(InetAddress::toString)
                 .orElse("");
     }
 
     public static String getMachineMac() {
         return Optional.ofNullable(machineMac)
-                .map(mac -> mac.toString())
+                .map(MacAddress::toString)
                 .orElse("");
 
     }
@@ -106,8 +107,8 @@ public class MacHandlers {
 
     public static void setPacketListeners(PacketListener listner) throws Exception {
         try {
-            if (isHandlerReady.get() && !isListnerSet.get()) {
-                isListnerSet.set(true);
+            if (isHandlerReady.get() && !isListenerSet.get()) {
+                isListenerSet.set(true);
                 receiveHandle.loop(-1, listner, executor);
             }
         } catch (Exception exception) {

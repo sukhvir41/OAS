@@ -1,5 +1,6 @@
 package entities;
 
+import entities.Attendance.Id;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -13,7 +14,7 @@ public abstract class Attendance_ {
 	public static volatile SingularAttribute<Attendance, Boolean> leave;
 	public static volatile SingularAttribute<Attendance, Boolean> markedByTeacher;
 	public static volatile SingularAttribute<Attendance, Lecture> lecture;
-	public static volatile SingularAttribute<Attendance, AttendanceId> id;
+	public static volatile SingularAttribute<Attendance, Id> id;
 
 	public static final String ATTENDED = "attended";
 	public static final String STUDENT = "student";

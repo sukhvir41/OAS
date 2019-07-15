@@ -110,6 +110,7 @@ public class LoginPost extends PostBackController {
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect(new UrlParameters().addErrorParameter()
                 .addMessage("The username and password combination is wrong")
+                .addParameter("username", req.getParameter("username"))
                 .getUrl("/OAS/login")
         );
     }

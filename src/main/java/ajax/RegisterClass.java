@@ -38,11 +38,11 @@ public class RegisterClass extends AjaxController {
         long courseid = Long.parseLong(req.getParameter("course"));
 
         Course course = (Course) session.get(Course.class, courseid);
-        List<ClassRoom> classes = course.getClassRooms();
+        //List<ClassRoom> classes = course.getClassRooms();
         Gson gson = new Gson();
         JsonArray jsonClasses = new JsonArray();
-        classes.stream()
-                .forEach(e -> add(e, jsonClasses));
+        /*classes.stream()
+                .forEach(e -> add(e, jsonClasses));*/
         out.print(gson.toJson(jsonClasses));
 
     }

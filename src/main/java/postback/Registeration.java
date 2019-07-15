@@ -51,11 +51,11 @@ public class Registeration extends PostBackController {
 		if ( StringUtils.isAnyBlank( firstName, lastName, email, userName, password, numberString, type ) ) {
 			UrlParameters parameters = new UrlParameters()
 					.addErrorParameter()
-					.addParamter( "firstname", firstName )
-					.addParamter( "lastname", lastName )
-					.addParamter( "email", email )
-					.addParamter( "username", userName )
-					.addParamter( "number", numberString )
+					.addParameter( "firstname", firstName )
+					.addParameter( "lastname", lastName )
+					.addParameter( "email", email )
+					.addParameter( "username", userName )
+					.addParameter( "number", numberString )
 					.addMessage( "Please enter the required data" );
 			req.setAttribute( "error", parameters );
 			throw new Exception();

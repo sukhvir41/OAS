@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet("/teacher/classteacher")
@@ -30,9 +30,9 @@ public class ClassTeacherHome extends Controller {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
         req.setAttribute("classroom", teacher.getClassRoom());
-        List<Student> students = teacher.getClassRoom().getStudents();
-        Collections.sort(students);
-        req.setAttribute("students",students);
+        Set<Student> students = teacher.getClassRoom().getStudents();
+        //sCollections.sort(students);
+        req.setAttribute("students", students);
         req.getRequestDispatcher("/WEB-INF/classteacher/classteacher.jsp").include(req, resp);
 
     }

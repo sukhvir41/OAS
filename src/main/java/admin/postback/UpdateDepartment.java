@@ -44,7 +44,7 @@ public class UpdateDepartment extends PostBackController {
             if (StringUtils.isBlank(theDepartmentId)) {
                 resp.sendRedirect(parameters.getUrl("/OAS/admin/departments"));
             } else {
-                resp.sendRedirect(parameters.addParamter("departmentId", theDepartmentId)
+                resp.sendRedirect(parameters.addParameter("departmentId", theDepartmentId)
                         .getUrl("/OAS/admin/department-details"));
             }
             return;
@@ -69,7 +69,7 @@ public class UpdateDepartment extends PostBackController {
         resp.sendRedirect(
                 parameters.addSuccessParameter()
                         .addMessage(theDepartmentName + " was updated")
-                        .addParamter("departmentId", theDepartmentId)
+                        .addParameter("departmentId", theDepartmentId)
                         .getUrl("/OAS/admin/departments/department-details")
         );
     }

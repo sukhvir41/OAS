@@ -32,9 +32,9 @@ public class UnaccountStudent extends Controller {
         } else {
             student.setUnaccounted(true);
             
-            student.getSubjects()
+          /*  student.getSubjects()
                     .stream()
-                    .forEach(subject -> subject.getStudents().remove(student));
+                    .forEach(subject -> subject.getStudent().remove(student));*/
             student.getSubjects().clear();
 
             // todo: write sql for this

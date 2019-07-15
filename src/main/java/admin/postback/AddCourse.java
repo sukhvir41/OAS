@@ -51,7 +51,7 @@ public class AddCourse extends PostBackController {
             resp.sendRedirect(
                     new UrlParameters().addSuccessParameter()
                             .addMessage(courseName + " was added to the department")
-                            .addParamter("departmentId", departmentId)
+                            .addParameter("departmentId", departmentId)
                             .getUrl("/OAS/admin/departments/department-details")
             );
 
@@ -75,7 +75,7 @@ public class AddCourse extends PostBackController {
         String departmentId = req.getParameter("departmentId");
 
         if (StringUtils.isNoneBlank(from, departmentId)) {
-            parameters.addParamter("departmentId", departmentId);
+            parameters.addParameter("departmentId", departmentId);
             resp.sendRedirect(parameters.getUrl("/OAS/admin/detail-department"));
         } else {
             resp.sendRedirect(parameters.getUrl("/OAS/admin/courses"));

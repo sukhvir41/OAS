@@ -28,91 +28,87 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/teacher/hod/ajax/searchstudents")
 public class SearchStudent extends AjaxController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
-		Department department = (Department) httpSession.getAttribute( "department" );
-		department = (Department) session.get( Department.class, department.getId() );
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
+        Department department = (Department) httpSession.getAttribute("department");
+        department = (Department) session.get(Department.class, department.getId());
 
-		int classroomId = Integer.parseInt( req.getParameter( "classroom" ) );
-		String subjectId = req.getParameter( "subject" );
-		String filter = req.getParameter( "filter" );
-		Gson gson = new Gson();
-		JsonArray jsonStudents = new JsonArray();
-		ClassRoom classRoom = (ClassRoom) session.get( ClassRoom.class, classroomId );
+        int classroomId = Integer.parseInt(req.getParameter("classroom"));
+        String subjectId = req.getParameter("subject");
+        String filter = req.getParameter("filter");
+        Gson gson = new Gson();
+        JsonArray jsonStudents = new JsonArray();
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
 
-		if ( classRoom.getCourse().getDepartment().getId() == department.getId() ) {
+        if (classRoom.getCourse().getDepartment().getId() == department.getId()) {
 
-			if ( subjectId.equals( "all" ) ) {
+            if (subjectId.equals("all")) {
 
-				if ( filter.equals( "all" ) ) {
-					classRoom.getStudents()
-							.stream()
-							.filter( student -> !student.isUnaccounted() )
-							.forEach( student -> add( student, jsonStudents ) );
-				}
-				else {
-					classRoom.getStudents()
-							.stream()
-							.filter( student -> !student.isUnaccounted() )
-							.filter( e -> e.isVerified() == Boolean.parseBoolean( filter ) )
-							.forEach( e -> add( e, jsonStudents ) );
-				}
-			}
-			else {
+                if (filter.equals("all")) {
+                    classRoom.getStudents()
+                            .stream()
+                            .filter(student -> !student.isUnaccounted())
+                            .forEach(student -> add(student, jsonStudents));
+                } else {
+                    classRoom.getStudents()
+                            .stream()
+                            .filter(student -> !student.isUnaccounted())
+                            .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
+                            .forEach(e -> add(e, jsonStudents));
+                }
+            } else {
 
-				Subject subject = (Subject) session.get( Subject.class, Integer.parseInt( subjectId ) );
-				if ( filter.equals( "all" ) ) {
-					classRoom.getStudents()
-							.stream()
-							.filter( student -> !student.isUnaccounted() )
-							.filter( student -> student.getSubjects().contains( subject ) )
-							.forEach( student -> add( student, jsonStudents ) );
-				}
-				else {
-					classRoom.getStudents()
-							.stream()
-							.filter( student -> !student.isUnaccounted() )
-							.filter( e -> e.isVerified() == Boolean.parseBoolean( filter ) )
-							.filter( e -> e.getSubjects().contains( subject ) )
-							.forEach( e -> add( e, jsonStudents ) );
-				}
+                Subject subject = (Subject) session.get(Subject.class, Integer.parseInt(subjectId));
+                if (filter.equals("all")) {
+                    classRoom.getStudents()
+                            .stream()
+                            .filter(student -> !student.isUnaccounted())
+                            .filter(student -> student.getSubjects().contains(subject))
+                            .forEach(student -> add(student, jsonStudents));
+                } else {
+                    classRoom.getStudents()
+                            .stream()
+                            .filter(student -> !student.isUnaccounted())
+                            .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
+                            .filter(e -> e.getSubjects().contains(subject))
+                            .forEach(e -> add(e, jsonStudents));
+                }
 
-			}
-			out.print( gson.toJson( jsonStudents ) );
-		}
-		else {
+            }
+            out.print(gson.toJson(jsonStudents));
+        } else {
 
-			out.print( "error" );
-		}
+            out.print("error");
+        }
 
-	}
+    }
 
-	private void add(Student student, JsonArray jsonStudents) {
-		JsonObject studentJson = new JsonObject();
-		studentJson.addProperty( "id", student.getId().toString() );
-		studentJson.addProperty( "name", student.toString() );
-		studentJson.addProperty( "email", student.getUser().getEmail() );
-		studentJson.addProperty( "number", student.getUser().getNumber() );
-		studentJson.addProperty(
-				"classroom",
-				student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
-		);
-		studentJson.addProperty( "rollnumber", student.getRollNumber() );
-		studentJson.addProperty( "verified", student.isVerified() );
-		studentJson.add( "subjects", addSubjects( student ) );
-		jsonStudents.add( studentJson );
-	}
+    private void add(Student student, JsonArray jsonStudents) {
+        JsonObject studentJson = new JsonObject();
+        studentJson.addProperty("id", student.getId().toString());
+        studentJson.addProperty("name", student.toString());
+        studentJson.addProperty("email", student.getUser().getEmail());
+        studentJson.addProperty("number", student.getUser().getNumber());
+        studentJson.addProperty(
+                "classroom",
+                student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
+        );
+        studentJson.addProperty("rollnumber", student.getRollNumber());
+        studentJson.addProperty("verified", student.isVerified());
+        studentJson.add("subjects", addSubjects(student));
+        jsonStudents.add(studentJson);
+    }
 
-	private JsonElement addSubjects(Student e) {
-		JsonArray jsonSubjects = new JsonArray();
-		e.getSubjects()
-				.stream()
-				.forEach( subject -> jsonSubjects.add( subject.getName() ) );
-		return jsonSubjects;
-	}
+    private JsonElement addSubjects(Student e) {
+        JsonArray jsonSubjects = new JsonArray();
+        e.getSubjects()
+                .stream()
+                .forEach(subject -> jsonSubjects.add(subject.getSubject().getName()));
+        return jsonSubjects;
+    }
 }

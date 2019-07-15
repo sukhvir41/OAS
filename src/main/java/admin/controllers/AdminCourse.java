@@ -5,12 +5,11 @@
  */
 package admin.controllers;
 
-import entities.Course;
-import entities.Course_;
-import entities.Department;
-import entities.Department_;
+import entities.*;
 import org.hibernate.Session;
+import org.hibernate.tuple.entity.EntityTuplizer;
 import utility.Controller;
+import utility.Utils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,31 +29,11 @@ public class AdminCourse extends Controller {
 
         //getting the departments of the course graph
         var courseRootGraph = session.createEntityGraph(Course.class);
-        courseRootGraph.addAttributeNode(Course_.DEPARTMENT);
+        courseRootGraph.addAttributeNodes(Course_.DEPARTMENT);
 
-        var courseBuilder = session.getCriteriaBuilder();
-        var courseQuery = courseBuilder.createQuery(Course.class);
-        var courseRoot = courseQuery.from(Course.class);
+        List<Course> courses = EntityHelper.getAll(session, Course.class, courseRootGraph, true);
 
-        //ordering by course name
-        courseQuery.orderBy(courseBuilder.asc(courseRoot.get(Course_.name)));
-
-
-        List<Course> courses = session.createQuery(courseQuery)
-                .applyLoadGraph(courseRootGraph)
-                .setReadOnly(true)
-                .getResultList();
-
-        var departmentBuilder = session.getCriteriaBuilder();
-        var departmentQuery = departmentBuilder.createQuery(Department.class);
-        var departmentRoot = departmentQuery.from(Department.class);
-
-        //ordering by department name
-        departmentQuery.orderBy(departmentBuilder.asc(departmentRoot.get(Department_.name)));
-
-        List<Department> departments = session.createQuery(departmentQuery)
-                .setReadOnly(true)
-                .getResultList();
+        List<Department> departments = EntityHelper.getAll(session, Department.class, Department_.name, true);
 
         req.setAttribute("courses", courses);
         req.setAttribute("departments", departments);

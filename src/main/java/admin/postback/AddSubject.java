@@ -12,6 +12,7 @@ import entities.Subject;
 import org.hibernate.Session;
 import utility.PostBackController;
 import utility.UrlParameters;
+import utility.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,7 +64,7 @@ public class AddSubject extends PostBackController {
             classRoomQuery.where(classRoomRoot.get(ClassRoom_.id).in(classRoomsIds));
 
             session.createQuery(classRoomQuery)
-                    .applyLoadGraph(classRoomGraph)
+                    .setHint(Utils.LOAD_ENTITY_HINT, classRoomGraph)
                     .getResultStream()
                     .forEach(classRoom -> classRoom.addSubject(subject));
         }
@@ -96,7 +97,7 @@ public class AddSubject extends PostBackController {
             case "course-details": {
 
                 String url = Optional.ofNullable(courseId)
-                        .map(id -> urlParameters.addParamter("courseId", courseId).getUrl("/OAS/admin/courses/course-details"))
+                        .map(id -> urlParameters.addParameter("courseId", courseId).getUrl("/OAS/admin/courses/course-details"))
                         .orElse(urlParameters.getUrl("/OAS/admin/subjects"));
 
                 response.sendRedirect(url);

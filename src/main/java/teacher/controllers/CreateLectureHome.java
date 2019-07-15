@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = {"/teacher"})
@@ -93,7 +92,7 @@ public class CreateLectureHome extends Controller {
                         .add(Restrictions.in("teaching", teacher.getTeaches()))
                         .add(Restrictions.between("date", past, now))
                         .addOrder(Order.desc("date")).
-                        list();
+                                list();
             }
 
             if (lectures.size() > 0) {
@@ -135,17 +134,18 @@ public class CreateLectureHome extends Controller {
                 req.setAttribute("headcount", present.size());
             }
         }
-        req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/teacher/teacherhome.jsp")
+                .include(req, resp);
 
-        extendCookie(req, resp);
+        extendCookie(req, resp, httpSession, teacher);
 
     }
 
-    private void extendCookie(HttpServletRequest req, HttpServletResponse resp) {
-        HttpSession session = req.getSession();
+    private void extendCookie(HttpServletRequest req, HttpServletResponse resp, HttpSession httpSession, Teacher teacher) {
+
         try {
-            if ((boolean) session.getAttribute("extenedCookie")) {
-                session.setAttribute("extenedCookie", false);
+            if ((boolean) httpSession.getAttribute("extenedCookie")) {
+                httpSession.setAttribute("extenedCookie", false);
                 Cookie id = null, token = null;
 
                 for (Cookie cookie : req.getCookies()) {
@@ -163,6 +163,7 @@ public class CreateLectureHome extends Controller {
                 token.setMaxAge(864000);
                 resp.addCookie(id);
                 resp.addCookie(token);
+                teacher.getUser().setSessionExpiryDate(LocalDateTime.now());
             }
 
         } catch (Exception e) {

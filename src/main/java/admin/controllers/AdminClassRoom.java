@@ -37,7 +37,6 @@ public class AdminClassRoom extends Controller {
 
         req.getRequestDispatcher("/WEB-INF/admin/admin-classroom.jsp")
                 .include(req, resp);
-
     }
 
 }

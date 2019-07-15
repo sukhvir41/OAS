@@ -13,6 +13,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author sukhvir
@@ -25,7 +26,7 @@ public class Attendance implements Serializable {
     @Getter
     @Setter(AccessLevel.PRIVATE)
     @NonNull
-    private AttendanceId id;
+    private Id id;
 
     @Column(name = "marked_by_teacher", nullable = false)
     @Getter
@@ -62,7 +63,7 @@ public class Attendance implements Serializable {
         this.lecture = theLecture;
         this.student = theStudent;
         this.attended = attended;
-        this.id = new AttendanceId(lecture.getId(), student.getId());
+        this.id = new Id(lecture.getId(), student.getId());
     }
 
     public Attendance(
@@ -76,7 +77,7 @@ public class Attendance implements Serializable {
         this.leave = leave;
         this.lecture = lecture;
         this.student = student;
-        this.id = new AttendanceId(lecture.getId(), student.getId());
+        this.id = new Id(lecture.getId(), student.getId());
     }
 
     protected void setLecture(Lecture theLecture) {
@@ -112,4 +113,48 @@ public class Attendance implements Serializable {
     public int hashCode() {
         return Objects.hash(lecture, student);
     }
+
+    @Embeddable
+    public static class Id implements Serializable {
+
+
+        @Column(name = "lecture_fid", nullable = false, length = 8) // 8 or 6 ?
+        @Getter
+        @Setter
+        @NonNull
+        private String lectureId;
+
+        @Column(name = "student_fid", columnDefinition = "uuid", nullable = false)
+        @Getter
+        @Setter
+        @NonNull
+        private UUID studentId;
+
+        private Id() {
+        }
+
+        public Id(String lectureId, UUID studentId) {
+            this.lectureId = lectureId;
+            this.studentId = studentId;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Id that = (Id) o;
+            return lectureId.equals(that.lectureId) &&
+                    studentId.equals(that.studentId);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(lectureId, studentId);
+        }
+    }
+
 }

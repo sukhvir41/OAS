@@ -37,12 +37,12 @@ public class GetSubjectOfClassRoom extends AjaxController {
 
         long classroomId = Long.parseLong(req.getParameter("classroom"));
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-        Set<Subject> subjects = classRoom.getSubjects();
+        /*Set<Subject> subjects = classRoom.getSubjects();
         JsonArray jsonSubjects = new JsonArray();
         Gson gson = new Gson();
         subjects.stream()
-                .forEach(e -> add(e, jsonSubjects));
-        out.print(gson.toJson(jsonSubjects));
+                .forEach(e -> add(e, jsonSubjects));*/
+        //out.print(gson.toJson(jsonSubjects));
 
     }
 

@@ -32,10 +32,10 @@ public class ClassSubject extends AjaxController {
         int classRoomId = Integer.parseInt(req.getParameter("classroomId"));
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
-        Set<Subject> subjects = classRoom.getSubjects();
+       // Set<Subject> subjects = classRoom.getSubjects();
         JsonArray jsonSubjects = new JsonArray();
-        subjects.stream()
-                .forEach(e -> addsubject(e, jsonSubjects));
+        /*subjects.stream()
+                .forEach(e -> addsubject(e, jsonSubjects));*/
         session.getTransaction().commit();
         session.close();
         Gson gson = new Gson();

@@ -7,6 +7,8 @@ package entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,10 +18,12 @@ import java.util.*;
  * @author sukhvir
  */
 
-@NamedEntityGraph(name = "userStudent",
-        attributeNodes = @NamedAttributeNode("user"))
 @Entity(name = "Student")
-@Table(name = "student")
+@Table(name = "student",
+        indexes = {
+                @Index(name = "student_name_index", columnList = "first_name,last_name")
+        }
+)
 public class Student implements Serializable, Comparable<Student> {
 
     @Id
@@ -69,22 +73,14 @@ public class Student implements Serializable, Comparable<Student> {
     @Setter
     private ClassRoom classRoom;
 
-
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     @Getter
     private List<Attendance> attendances = new ArrayList<>();
 
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @OrderBy("name")
-    @JoinTable(name = "student_subject_link",
-            joinColumns = @JoinColumn(name = "student_fid"),
-            inverseJoinColumns = @JoinColumn(name = "subject_fid"),
-            foreignKey = @ForeignKey(name = "student_subject_link_student_foreign_key"),
-            inverseForeignKey = @ForeignKey(name = "student_subject_link_subject_foreign_key"))
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
+    @OrderBy("subject.name")
     @Getter
-    @Setter
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<StudentSubjectLink> subjects = new HashSet<>();
 
     private Student() {
     }
@@ -131,7 +127,7 @@ public class Student implements Serializable, Comparable<Student> {
      * @param subject subject to be added
      */
     public void addSubject(Subject subject) {
-        this.subjects.add(subject);
+        this.subjects.add(new StudentSubjectLink(this, subject));
     }
 
     /**

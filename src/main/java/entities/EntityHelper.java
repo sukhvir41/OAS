@@ -2,21 +2,21 @@ package entities;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.hibernate.Session;
 import org.hibernate.graph.RootGraph;
+import utility.Utils;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.*;
+import javax.persistence.criteria.*;
 import javax.persistence.metamodel.SingularAttribute;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class EntityHelper {
@@ -59,7 +59,7 @@ public class EntityHelper {
 
     }
 
-    public static <T, U> List<T> getAll(Session session, Class<T> tClass, SingularAttribute<T, U> orderBy, RootGraph<T> graph, boolean readOnly) {
+    public static <T, U> List<T> getAll(Session session, Class<T> tClass, SingularAttribute<T, U> orderBy, EntityGraph<T> graph, boolean readOnly) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(tClass);
         Root<T> classRoot = query.from(tClass);
@@ -68,10 +68,11 @@ public class EntityHelper {
 
         return session.createQuery(query)
                 .setReadOnly(readOnly)
-                .applyLoadGraph(graph)
+                .setHint(Utils.LOAD_ENTITY_HINT, graph)
                 .getResultList();
 
     }
+
 
     public static <T, U> List<T> getAll(Session session, Class<T> tClass, SingularAttribute<T, U> orderBy, boolean readOnly) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -88,7 +89,7 @@ public class EntityHelper {
 
 
     public static <U, T> T getInstance(U id, SingularAttribute<T, U> idField, Class<T> aClass, Session session, boolean readOnly, String... fieldNames) {
-        RootGraph<T> graph = session.createEntityGraph(aClass);
+        EntityGraph<T> graph = session.createEntityGraph(aClass);
         graph.addAttributeNodes(fieldNames);
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -100,7 +101,7 @@ public class EntityHelper {
 
         return session.createQuery(query)
                 .setReadOnly(readOnly)
-                .applyLoadGraph(graph)
+                .setHint(Utils.LOAD_ENTITY_HINT, graph)
                 .getSingleResult();
     }
 
@@ -123,7 +124,7 @@ public class EntityHelper {
                 .map(Field::getName)
                 .toArray();
 
-        RootGraph<T> graph = session.createEntityGraph(tClass);
+        EntityGraph<T> graph = session.createEntityGraph(tClass);
         graph.addAttributeNodes((String[]) listOfFieldNames);
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -135,11 +136,11 @@ public class EntityHelper {
 
         return session.createQuery(query)
                 .setReadOnly(readOnly)
-                .applyLoadGraph(graph)
+                .setHint(Utils.LOAD_ENTITY_HINT, graph)
                 .getSingleResult();
     }
 
-    public static <U, T> T getInstance(U id, SingularAttribute<T, U> idField, Class<T> tClass, Session session, boolean readOnly, RootGraph<T> graph) {
+    public static <U, T> T getInstance(U id, SingularAttribute<T, U> idField, Class<T> tClass, Session session, boolean readOnly, EntityGraph<T> graph) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(tClass);
         Root<T> departmentRoot = query.from(tClass);
@@ -149,7 +150,7 @@ public class EntityHelper {
 
         return session.createQuery(query)
                 .setReadOnly(readOnly)
-                .applyLoadGraph(graph)
+                .setHint(Utils.LOAD_ENTITY_HINT, graph)
                 .getSingleResult();
     }
 
@@ -166,5 +167,19 @@ public class EntityHelper {
                 .anyMatch(a -> StringUtils.equalsAnyIgnoreCase(a.annotationType().getName(), oneToManyName, oneToOneName, manyToManyName, manyToOneName));
     }
 
+
+    public static <T> int upadteInstances(Session session, Class<T> tClass, Consumer<Triple<CriteriaBuilder, CriteriaUpdate<T>, Root<T>>> operations) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaUpdate<T> query = builder.createCriteriaUpdate(tClass);
+        Root<T> root = query.from(tClass);
+
+        Triple jpsObjects = Triple.of(builder, query, root);
+
+        operations.accept(jpsObjects);
+
+        return session.createQuery(query)
+                .executeUpdate();
+
+    }
 
 }

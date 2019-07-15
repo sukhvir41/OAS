@@ -31,73 +31,73 @@ import static utility.Constants.*;
 @WebServlet(urlPatterns = "/admin/ajax/searchstudent")
 public class SearchStudent extends AjaxController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
 
-		resp.setContentType( "application/json" );
+        resp.setContentType("application/json");
 
-		long classroomId = Long.parseLong( req.getParameter( "classroom" ) );
-		String subjectId = req.getParameter( "subject" );
-		String filter = req.getParameter( "filter" );
+        long classroomId = Long.parseLong(req.getParameter("classroom"));
+        String subjectId = req.getParameter("subject");
+        String filter = req.getParameter("filter");
 
-		Gson gson = new Gson();
+        Gson gson = new Gson();
 
-		JsonArray jsonStudents = new JsonArray();
+        JsonArray jsonStudents = new JsonArray();
 
-		ClassRoom classRoom = (ClassRoom) session.get( ClassRoom.class, classroomId );
+        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
 
-		Criteria studentCriteria = session.createCriteria( Student.class )
-				.add( Restrictions.eq( "classRoom", classRoom ) )
-				.add( Restrictions.eq( "unaccounted", false ) );
+        Criteria studentCriteria = session.createCriteria(Student.class)
+                .add(Restrictions.eq("classRoom", classRoom))
+                .add(Restrictions.eq("unaccounted", false));
 
-		if ( !filter.equals( "all" ) ) {
-			studentCriteria = studentCriteria.add( Restrictions.eq( "verified", Boolean.parseBoolean( filter ) ) );
-		}
+        if (!filter.equals("all")) {
+            studentCriteria = studentCriteria.add(Restrictions.eq("verified", Boolean.parseBoolean(filter)));
+        }
 
-		if ( !subjectId.equals( "all" ) ) {
-			Subject subject = (Subject) session.get( Subject.class, Long.parseLong( subjectId ) );
-			Subject[] subjects = { subject };
-			studentCriteria = studentCriteria.add( Restrictions.eq( "subjects", subjects ) );
-		}
+        if (!subjectId.equals("all")) {
+            Subject subject = (Subject) session.get(Subject.class, Long.parseLong(subjectId));
+            Subject[] subjects = {subject};
+            studentCriteria = studentCriteria.add(Restrictions.eq("subjects", subjects));
+        }
 
-		studentCriteria.list()
-				.forEach( student -> add( (Student) student, jsonStudents ) );
+        studentCriteria.list()
+                .forEach(student -> add((Student) student, jsonStudents));
 
-		out.print( gson.toJson( jsonStudents ) );
+        out.print(gson.toJson(jsonStudents));
 
-	}
+    }
 
-	private void add(Student student, JsonArray jsonStudents) {
+    private void add(Student student, JsonArray jsonStudents) {
 
-		JsonObject studentJson = new JsonObject();
+        JsonObject studentJson = new JsonObject();
 
-		studentJson.addProperty( ID, student.getId().toString() );
-		studentJson.addProperty( NAME, student.toString() );
-		studentJson.addProperty( EMAIL, student.getUser().getEmail() );
-		studentJson.addProperty( NUMBER, student.getUser().getNumber() );
-		studentJson.addProperty(
-				CLASSROOM,
-				student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
-		);
-		studentJson.addProperty( ROLLNUMBER, student.getRollNumber() );
-		studentJson.addProperty( VERIFIED, student.isVerified() );
-		studentJson.add( SUBJECTS, addSubjects( student ) );
+        studentJson.addProperty(ID, student.getId().toString());
+        studentJson.addProperty(NAME, student.toString());
+        studentJson.addProperty(EMAIL, student.getUser().getEmail());
+        studentJson.addProperty(NUMBER, student.getUser().getNumber());
+        studentJson.addProperty(
+                CLASSROOM,
+                student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
+        );
+        studentJson.addProperty(ROLLNUMBER, student.getRollNumber());
+        studentJson.addProperty(VERIFIED, student.isVerified());
+        studentJson.add(SUBJECTS, addSubjects(student));
 
-		jsonStudents.add( studentJson );
-	}
+        jsonStudents.add(studentJson);
+    }
 
-	private JsonElement addSubjects(Student theStudent) {
-		JsonArray jsonSubjects = new JsonArray();
+    private JsonElement addSubjects(Student theStudent) {
+        JsonArray jsonSubjects = new JsonArray();
 
-		theStudent.getSubjects()
-				.forEach( subject -> jsonSubjects.add( subject.getName() ) );
+        theStudent.getSubjects()
+                .forEach(subject -> jsonSubjects.add(subject.getSubject().getName()));
 
-		return jsonSubjects;
-	}
+        return jsonSubjects;
+    }
 
 }

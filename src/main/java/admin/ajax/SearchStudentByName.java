@@ -24,7 +24,6 @@ import java.util.List;
 import static utility.Constants.*;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/students/searchstudentbyname")
@@ -39,12 +38,12 @@ public class SearchStudentByName extends AjaxController {
         List<Student> students = session.createCriteria(Student.class)
                 .add(Restrictions.or(Restrictions.like("fName", "%" + name + "%"), Restrictions.like("lName", "%" + name + "%")))
                 .list();
-        
+
         JsonArray jsonStudents = new JsonArray();
         Gson gson = new Gson();
         students.stream()
                 .forEach(student -> add(student, jsonStudents));
-        
+
         out.print(gson.toJson(jsonStudents));
 
     }
@@ -69,7 +68,7 @@ public class SearchStudentByName extends AjaxController {
         JsonArray jsonSubjects = new JsonArray();
 
         e.getSubjects()
-                .forEach(subject -> jsonSubjects.add(subject.getName()));
+                .forEach(subject -> jsonSubjects.add(subject.getSubject().getName()));
 
         return jsonSubjects;
     }

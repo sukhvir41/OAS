@@ -24,109 +24,98 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author sukhvir
  */
-@WebServlet({ "/login", })
+@WebServlet(urlPatterns = "/login")
 public class Login extends Controller {
 
-	// checks for if the user is logged in or not and i f hte user has redirects the user to the their respective home directory
-	// else checks for their cookies for the respective tokens and validates to forwards the user to the same. IF all of he above fails the users sees the login page
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    // checks for if the user is logged in or not and i f hte user has redirects the user to the their respective home directory
+    // else checks for their cookies for the respective tokens and validates to forwards the user to the same. IF all of he above fails the users sees the login page
+    @Override
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-		if ( Objects.nonNull( httpSession.getAttribute( "accept" ) ) ) {
-			if ( (boolean) httpSession.getAttribute( "accept" ) ) {
-				UserType user = (UserType) httpSession.getAttribute( "type" );
-				resp.sendRedirect( "/OAS/" + user.getHomeLink() );
-			}
-		}
-		else {
-			checkCookies( req, resp, session, httpSession );
-		}
-	}
+        if (Objects.nonNull(httpSession.getAttribute("accept"))) {
+            if ((boolean) httpSession.getAttribute("accept")) {
+                UserType user = (UserType) httpSession.getAttribute("type");
+                resp.sendRedirect("/OAS/" + user.getHomeLink());
+            }
+        } else {
+            checkCookies(req, resp, session, httpSession);
+        }
+    }
 
-	// this redirects the user to the the login page bu including the page.
-	@Override
-	public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setHeader( "Cache-Control", "no-cache, no-store, must-revalidate" ); // HTTP 1.1.
-		resp.setHeader( "Pragma", "no-cache" ); // HTTP 1.0.
-		resp.setDateHeader( "Expires", 0 );
-		req.getRequestDispatcher( "/WEB-INF/login.jsp" )
-				.include( req, resp );
-	}
+    // this redirects the user to the the login page by including the page.
+    @Override
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        resp.setDateHeader("Expires", 0);
 
-
-	// this methods checks for the required cookies the user has and validates it. if true redirects the user to its respective
-	// home page
-	private void checkCookies(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession) throws Exception {
-		Cookie id = null, token = null;
-		for ( Cookie cookie : req.getCookies() ) {
-			switch ( cookie.getName() ) {
-				case "sessionId":
-					id = cookie;
-					break;
-				case "sessionToken":
-					token = cookie;
-					break;
-			}
-		}
-
-		if ( ObjectUtils.allNotNull( id, token ) ) {
-
-			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<User> query = builder.createQuery( User.class );
-			Root<User> user = query.from( User.class );
-			query.where(
-					builder.equal( user.get( User_.sessionId ), id.getValue() )
-			);
-
-			User theUser = session.createQuery( query )
-					.setHint( QueryHints.HINT_READONLY, true )
-					.getSingleResult();
+        req.setAttribute(
+                "username",
+                Optional.ofNullable(req.getParameter("username"))
+                        .orElse("")
+        );
+        req.getRequestDispatcher("/WEB-INF/login.jsp")
+                .include(req, resp);
+    }
 
 
-			if ( theUser.matchSessionToken( token.getValue() ) ) {
-				forward( req, resp, theUser, session, httpSession );
-			}
-			else {
-				onError( req, resp );
-			}
-		}
-		else {
-			onError( req, resp );
-		}
-	}
+    // this methods checks for the required cookies the user has and validates it. if true redirects the user to its respective
+    // home page
+    private void checkCookies(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession) throws Exception {
+        Cookie id = null, token = null;
+        for (Cookie cookie : req.getCookies()) {
+            switch (cookie.getName()) {
+                case "sessionId":
+                    id = cookie;
+                    break;
+                case "sessionToken":
+                    token = cookie;
+                    break;
+            }
+        }
 
-	private void forward(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			User user,
-			Session session,
-			HttpSession httpSession) throws Exception {
+        if (ObjectUtils.allNotNull(id, token)) {
 
-		httpSession.setAttribute( "accept", true );
-		httpSession.setAttribute( "extendCookie", true );
-		httpSession.setAttribute( "type", user.getUserType() );
-		httpSession.setAttribute( "userId", user.getId() );
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<User> query = builder.createQuery(User.class);
+            Root<User> user = query.from(User.class);
+            query.where(
+                    builder.equal(user.get(User_.sessionId), id.getValue())
+            );
 
-		// incrementing the user count to keep track who has logged in
-		user.getUserType()
-				.incrementCount();
+            User theUser = session.createQuery(query)
+                    .setHint(QueryHints.HINT_READONLY, true)
+                    .getSingleResult();
 
-		resp.sendRedirect( "/OAS/" + user.getUserType().getHomeLink() );
+            if (theUser.isSessionValid(token.getValue(), LocalDateTime.now())) {
+                forward(req, resp, theUser, session, httpSession);
+            } else {
+                onError(req, resp);
+            }
+        } else {
+            onError(req, resp);
+        }
+    }
 
-	}
+    private void forward(HttpServletRequest req, HttpServletResponse resp, User user, Session session, HttpSession httpSession) throws Exception {
+
+        httpSession.setAttribute("accept", true);
+        httpSession.setAttribute("extendCookie", true);
+        httpSession.setAttribute("type", user.getUserType());
+        httpSession.setAttribute("userId", user.getId());
+
+        // incrementing the user count to keep track who has logged in
+        user.getUserType()
+                .incrementCount();
+
+        resp.sendRedirect("/OAS/" + user.getUserType().getHomeLink());
+    }
 
 }

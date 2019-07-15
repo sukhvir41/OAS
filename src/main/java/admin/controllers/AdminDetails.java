@@ -6,6 +6,8 @@
 package admin.controllers;
 
 import entities.Admin;
+import entities.Admin_;
+import entities.EntityHelper;
 import org.hibernate.Session;
 import utility.Controller;
 
@@ -22,22 +24,22 @@ import java.util.UUID;
 @WebServlet(urlPatterns = "/admin/admins/admin-details")
 public class AdminDetails extends Controller {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
 
-		UUID adminId = UUID.fromString( req.getParameter( "adminId" ) );
+        UUID adminId = UUID.fromString(req.getParameter("adminId"));
 
-		Admin admin = Admin.getUserAdminReadOnly( adminId, session );
+        Admin admin = EntityHelper.getInstance(adminId, Admin_.id, Admin.class, session, true, Admin_.USER);
 
-		req.setAttribute( "admin", admin );
-		req.getRequestDispatcher( "/WEB-INF/admin/admin-details.jsp" )
-				.include( req, resp );
+        req.setAttribute("admin", admin);
+        req.getRequestDispatcher("/WEB-INF/admin/admin-details.jsp")
+                .include(req, resp);
 
-	}
+    }
 
 }

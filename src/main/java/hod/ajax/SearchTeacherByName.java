@@ -29,61 +29,60 @@ import java.util.List;
 @WebServlet(urlPatterns = "/teacher/hod/ajax/searchteacherbyname")
 public class SearchTeacherByName extends AjaxController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
-		String name = req.getParameter( "name" );
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
+        String name = req.getParameter("name");
 
-		Department department = (Department) httpSession.getAttribute( "department" );
-		Department currentDepartment = (Department) session.get( Department.class, department.getId() );
+        Department department = (Department) httpSession.getAttribute("department");
+        Department currentDepartment = (Department) session.get(Department.class, department.getId());
 
-		List<Teacher> teachers = session.createCriteria( Teacher.class )
-				.add( Restrictions.or(
-						Restrictions.like( "fName", "%" + name + "%" ),
-						Restrictions.like( "lName", "%" + name + "%" )
-				) )
-				.list();
-		Gson gson = new Gson();
-		JsonArray jsonTeachers = new JsonArray();
-		teachers.stream()
-				.filter( teacher -> teacher.getDepartment().contains( currentDepartment ) )
-				.forEach( teacher -> add( teacher, jsonTeachers ) );
-		out.print( gson.toJson( jsonTeachers ) );
-	}
+        List<Teacher> teachers = session.createCriteria(Teacher.class)
+                .add(Restrictions.or(
+                        Restrictions.like("fName", "%" + name + "%"),
+                        Restrictions.like("lName", "%" + name + "%")
+                ))
+                .list();
+        Gson gson = new Gson();
+        JsonArray jsonTeachers = new JsonArray();
+        teachers.stream()
+                .filter(teacher -> teacher.getDepartments().contains(currentDepartment))
+                .forEach(teacher -> add(teacher, jsonTeachers));
+        out.print(gson.toJson(jsonTeachers));
+    }
 
-	private void add(Teacher teacher, JsonArray jsonTeachers) {
-		JsonObject teacherJson = new JsonObject();
-		teacherJson.addProperty( "id", teacher.getId().toString() );
-		teacherJson.addProperty( "name", teacher.toString() );
-		teacherJson.addProperty( "number", teacher.getUser().getNumber() );
-		teacherJson.addProperty( "email", teacher.getUser().getEmail() );
-		teacherJson.addProperty( "hod", teacher.isHod() );
-		if ( teacher.isHod() ) {
-			teacherJson.add( "hodof", addDepartment( teacher.getHodOf() ) );
-		}
-		else {
-			teacherJson.addProperty( "hodof", "not hod" );
-		}
-		teacherJson.addProperty(
-				"classteacher",
-				teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName()
-		);
-		teacherJson.add( "departments", addDepartment( teacher.getDepartment() ) );
-		teacherJson.addProperty( "verified", teacher.isVerified() );
-		jsonTeachers.add( teacherJson );
+    private void add(Teacher teacher, JsonArray jsonTeachers) {
+        JsonObject teacherJson = new JsonObject();
+        teacherJson.addProperty("id", teacher.getId().toString());
+        teacherJson.addProperty("name", teacher.toString());
+        teacherJson.addProperty("number", teacher.getUser().getNumber());
+        teacherJson.addProperty("email", teacher.getUser().getEmail());
+        teacherJson.addProperty("hod", teacher.isHod());
+        if (teacher.isHod()) {
+            teacherJson.add("hodof", addDepartment(teacher.getHodOf()));
+        } else {
+            teacherJson.addProperty("hodof", "not hod");
+        }
+        teacherJson.addProperty(
+                "classteacher",
+                teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName()
+        );
+        //teacherJson.add("departments", addDepartment(teacher.getDepartments()));
+        teacherJson.addProperty("verified", teacher.isVerified());
+        jsonTeachers.add(teacherJson);
 
-	}
+    }
 
-	private JsonElement addDepartment(Collection<Department> departments) {
-		JsonArray department = new JsonArray();
-		departments.stream()
-				.forEach( e -> {
-					department.add( e.getName() );
-				} );
-		return department;
-	}
+    private JsonElement addDepartment(Collection<Department> departments) {
+        JsonArray department = new JsonArray();
+        departments.stream()
+                .forEach(e -> {
+                    department.add(e.getName());
+                });
+        return department;
+    }
 }

@@ -1,60 +1,73 @@
 package utility;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UrlParameters {
 
-	private StringBuilder builder;
+    private static final String EQUALS = "=";
+    private static final String AMPERSAND = "&";
+    private static final String QUESTION_MARK = "?";
+    private static final String MESSAGE = "message";
+    private static final String SUCCESS = "success";
+    private static final String ERROR = "error";
+    private static final String TRUE = "true";
 
-	public UrlParameters() {
-		builder = new StringBuilder();
-	}
-
-	public UrlParameters addParamter(String name, String value) {
-		if ( builder.length() > 1 ) {
-			builder.append( '&' );
-		}
-		builder.append( name );
-		builder.append( '=' );
-		builder.append( Utils.URLEncode( value ) );
-
-		return this;
-	}
+    private Map<String, String> parameters;
 
 
-	public String getUrl() {
-		builder.insert( 0, '?' );
-		return builder.toString();
-	}
+    public UrlParameters() {
+        parameters = new HashMap<>();
+    }
+
+    public UrlParameters addParameter(final String name, final Object value) {
+
+        var theValue = value.toString();
+
+        if (StringUtils.isNoneBlank(name, theValue)) {
+            parameters.put(name, theValue);
+        }
+        return this;
+    }
 
 
-	public String getUrl(String directory) {
-		builder.insert( 0, directory + "?" );
-		//builder.insert( directory.length(), '?' );
-		return builder.toString();
-	}
+    public String getUrl(final String directory) {
 
-	public UrlParameters addMessage(String message) {
-		//addParamter( "message",  message );
-		addParamter( "message", Base64.getEncoder().encodeToString( message.getBytes() ) );
-		return this;
-	}
+        StringBuilder stringBuilder = new StringBuilder();
 
-	public UrlParameters addErrorParameter() {
-		if ( builder.length() > 1 ) {
-			builder.append( '&' );
-		}
-		builder.append( "error=true" );
-		return this;
-	}
+        stringBuilder.append(directory)
+                .append(QUESTION_MARK);
 
-	public UrlParameters addSuccessParameter() {
-		if ( builder.length() > 1 ) {
-			builder.append( '&' );
-		}
-		builder.append( "success=true" );
-		return this;
-	}
+        for (Map.Entry entry : parameters.entrySet()) {
+            stringBuilder.append(entry.getKey())
+                    .append(EQUALS)
+                    .append(Utils.URLEncode(entry.getValue().toString()))
+                    .append(AMPERSAND);
+        }
+
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+
+        return stringBuilder.toString();
+    }
+
+
+    public UrlParameters addMessage(final String message) {
+        addParameter(MESSAGE, Base64.getEncoder().encodeToString(message.getBytes()));
+        return this;
+    }
+
+    public UrlParameters addErrorParameter() {
+        addParameter(ERROR, TRUE);
+        return this;
+    }
+
+    public UrlParameters addSuccessParameter() {
+        addParameter(SUCCESS, TRUE);
+        return this;
+    }
 
 
 }

@@ -23,13 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
- *
  * @author development
  */
 public class GenerateReportFast extends ReportPostBackController {
@@ -166,8 +162,8 @@ public class GenerateReportFast extends ReportPostBackController {
         //starting row number
         final int rowNumber = 4;
 
-        List<Student> students = classRoom.getStudents(); // have to check here is not verified student to be included or not
-        Collections.sort(students); // sorting according to the rollnumber of students.
+        Set<Student> students = classRoom.getStudents(); // have to check here is not verified student to be included or not
+        //Collections.sort(students); // sorting according to the rollnumber of students.
 
         students.parallelStream()
                 .map(student -> getStudentDetails(student, start, end, classRoom, session))
@@ -248,7 +244,7 @@ public class GenerateReportFast extends ReportPostBackController {
         row.setStudentName(student.getFName() + " " + student.getLName());
         row.setRollNumber(student.getRollNumber());
 
-        for (Subject subject : student.getSubjects()) {
+       /* for (Subject subject : student.getSubjects()) {
 
             row.getSubjectName().add(subject.getName());
 
@@ -265,7 +261,7 @@ public class GenerateReportFast extends ReportPostBackController {
             int leaves = getStudentAttendanceLeaveCount(classRoom, subject, session, start, end, student);
 
             row.addToLeaves(leaves);
-        }
+        }*/
 
         //calculate the percentage
         if (row.getTotalLectures() > 0) {

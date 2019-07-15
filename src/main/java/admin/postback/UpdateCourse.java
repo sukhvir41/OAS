@@ -42,7 +42,7 @@ public class UpdateCourse extends PostBackController {
 
         UrlParameters parameters = new UrlParameters()
                 .addSuccessParameter()
-                .addParamter("courseId", String.valueOf(courseId))
+                .addParameter("courseId", String.valueOf(courseId))
                 .addMessage("Course name updated");
 
         resp.sendRedirect(
@@ -56,7 +56,7 @@ public class UpdateCourse extends PostBackController {
         resp.sendRedirect(
                 new UrlParameters()
                         .addErrorParameter()
-                        .addParamter("courseId", req.getParameter("courseId"))
+                        .addParameter("courseId", req.getParameter("courseId"))
                         .addMessage("Unable to edit the course as details were missing")
                         .getUrl("/OAS/admin/courses")
         );

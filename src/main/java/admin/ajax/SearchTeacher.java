@@ -11,6 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entities.Department;
 import entities.Teacher;
+import entities.TeacherDepartmentLink;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -26,7 +27,6 @@ import java.util.Collection;
 import static utility.Constants.*;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/teachers/searchteacher")
@@ -37,25 +37,25 @@ public class SearchTeacher extends AjaxController {
 
         resp.setContentType("application/json");
         String departmentId = req.getParameter("departmentId");
-        String verified  = req.getParameter("verified");
+        String verified = req.getParameter("verified");
 
         Criteria teacherCriteria = session.createCriteria(Teacher.class)
                 .add(Restrictions.eq("unaccounted", false));
 
-        if(!departmentId.equals("all")){
+        if (!departmentId.equals("all")) {
             Department department = (Department) session.get(Department.class, Long.parseLong(departmentId));
             teacherCriteria = teacherCriteria.add(Restrictions.eq("department", department));
         }
-        
-        if(!verified.equals("all")){
-           teacherCriteria =  teacherCriteria.add(Restrictions.eq("verified", Boolean.parseBoolean(verified)));
-        }  
-    
+
+        if (!verified.equals("all")) {
+            teacherCriteria = teacherCriteria.add(Restrictions.eq("verified", Boolean.parseBoolean(verified)));
+        }
+
         Gson gson = new Gson();
         JsonArray jsonTeachers = new JsonArray();
         teacherCriteria.list()
                 .stream()
-                .forEach(teacher -> add((Teacher)teacher, jsonTeachers));
+                .forEach(teacher -> add((Teacher) teacher, jsonTeachers));
         out.print(gson.toJson(jsonTeachers));
 
     }
@@ -69,19 +69,29 @@ public class SearchTeacher extends AjaxController {
         teacherJson.addProperty(EMAIL, teacher.getUser().getEmail());
         teacherJson.addProperty(HOD, teacher.isHod());
         if (teacher.isHod()) {
-            teacherJson.add(HODOF, addDepartment(teacher.getHodOf()));
+            teacherJson.add(HODOF, addHodDepartment(teacher.getHodOf()));
         } else {
             teacherJson.addProperty(HODOF, "not hod");
         }
         teacherJson.addProperty(CLASSTEACHER, teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName());
-        teacherJson.add(DEPARTMENTS, addDepartment(teacher.getDepartment()));
+        teacherJson.add(DEPARTMENTS, addDepartment(teacher.getDepartments()));
         teacherJson.addProperty(VERIFIED, teacher.isVerified());
 
         jsonTeachers.add(teacherJson);
 
     }
 
-    private JsonElement addDepartment(Collection<Department> departments) {
+
+    private JsonElement addDepartment(Collection<TeacherDepartmentLink> departments) {
+        JsonArray department = new JsonArray();
+
+        departments.stream()
+                .forEach(e -> department.add(e.getDepartment().getName()));
+
+        return department;
+    }
+
+    private JsonElement addHodDepartment(Collection<Department> departments) {
         JsonArray department = new JsonArray();
 
         departments.stream()

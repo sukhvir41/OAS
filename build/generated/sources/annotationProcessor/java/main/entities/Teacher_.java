@@ -16,9 +16,9 @@ public abstract class Teacher_ {
 	public static volatile SingularAttribute<Teacher, String> fName;
 	public static volatile SingularAttribute<Teacher, Boolean> verified;
 	public static volatile SingularAttribute<Teacher, ClassRoom> classRoom;
-	public static volatile ListAttribute<Teacher, Department> hodOf;
+	public static volatile SetAttribute<Teacher, Department> hodOf;
 	public static volatile SingularAttribute<Teacher, UUID> id;
-	public static volatile SetAttribute<Teacher, Department> department;
+	public static volatile SetAttribute<Teacher, TeacherDepartmentLink> departments;
 	public static volatile SingularAttribute<Teacher, User> user;
 	public static volatile SingularAttribute<Teacher, Boolean> unaccounted;
 
@@ -29,7 +29,7 @@ public abstract class Teacher_ {
 	public static final String CLASS_ROOM = "classRoom";
 	public static final String HOD_OF = "hodOf";
 	public static final String ID = "id";
-	public static final String DEPARTMENT = "department";
+	public static final String DEPARTMENTS = "departments";
 	public static final String USER = "user";
 	public static final String UNACCOUNTED = "unaccounted";
 

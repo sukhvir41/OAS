@@ -5,19 +5,25 @@
  */
 package admin.controllers;
 
-import entities.Admin;
-import entities.UserType;
+import entities.*;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.tuple.Triple;
 import org.hibernate.Session;
+import org.hibernate.SessionBuilder;
 import student.attendanceWsService.MacHandlers;
 import utility.Controller;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -43,22 +49,22 @@ public class AdminHome extends Controller {
 
         UUID id = (UUID) httpSession.getAttribute("userId");
 
-        Admin theAdmin = Admin.getUserAdminReadOnly(id, session);
+        Admin theAdmin = EntityHelper.getInstance(id, Admin_.id, Admin.class, session, true, Admin_.USER);
+
+        extendCookie(req, resp, httpSession, theAdmin);
 
         httpSession.setAttribute(UserType.Admin.getType().toLowerCase(), theAdmin);
 
         req.getRequestDispatcher("WEB-INF/admin/home.jsp")
                 .include(req, resp);
 
-
-        extendCookie(req, resp);
     }
 
-    private void extendCookie(HttpServletRequest req, HttpServletResponse resp) {
-        HttpSession session = req.getSession();
+    private void extendCookie(HttpServletRequest req, HttpServletResponse resp, HttpSession httpSession, Admin admin) {
+
         try {
-            if ((boolean) session.getAttribute("extenedCookie")) {
-                session.setAttribute("extenedCookie", false);
+            if ((boolean) httpSession.getAttribute("extendCookie")) {
+                httpSession.setAttribute("extendCookie", false);
                 Cookie id = null, token = null;
 
                 for (Cookie cookie : req.getCookies()) {
@@ -76,8 +82,11 @@ public class AdminHome extends Controller {
                     token.setMaxAge(864000);
                     resp.addCookie(id);
                     resp.addCookie(token);
+
                 }
+                admin.getUser().setSessionExpiryDate(LocalDateTime.now());
             }
+
 
         } catch (Exception e) {
             System.out.println("could not extend login session cookies");

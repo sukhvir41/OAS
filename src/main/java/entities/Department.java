@@ -10,6 +10,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,11 +22,18 @@ import java.util.Set;
  */
 
 @Entity(name = "Department")
-@Table(name = "department")
+@Table(name = "department",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "department_unique_name", columnNames = "name")
+        },
+        indexes = {
+                @Index(name = "department_name_index", columnList = "name")
+        }
+)
 public class Department implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "department_sequence")
     @Column(name = "id")
     @Getter
     @Setter
@@ -35,6 +43,7 @@ public class Department implements Serializable {
     @Getter
     @Setter
     @NonNull
+    @Size(min = 2, max = 40)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -49,16 +58,11 @@ public class Department implements Serializable {
     @Setter
     private List<Course> courses = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @OrderBy("fName ASC, lName ASC")
-    @JoinTable(name = "teacher_department_link",
-            joinColumns = @JoinColumn(name = "teacher_fid"),
-            inverseJoinColumns = @JoinColumn(name = "department_fid"),
-            foreignKey = @ForeignKey(name = "teacher_department_link_teacher_foreign_key"),
-            inverseForeignKey = @ForeignKey(name = "teacher_department_link_department_foreign_key"))
+
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     @Getter
     @Setter
-    private Set<Teacher> teachers = new HashSet<>();
+    private Set<TeacherDepartmentLink> teachers = new HashSet<>();
 
     public Department() {
     }
@@ -69,13 +73,13 @@ public class Department implements Serializable {
 
     /**
      * this methods adds the teacher to the department
-     * OWNER of the relationship
+     * NOT THE OWNER of the relationship
      *
      * @param teacher teacher to be added to the department
      */
     public void addTeacher(Teacher teacher) {
         // as teacher is a set it will contain uniques
-        this.teachers.add(teacher);
+        this.teachers.add(new TeacherDepartmentLink(teacher, this));
     }
 
     /**

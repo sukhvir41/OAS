@@ -61,8 +61,8 @@ public class UpdateSubject extends PostBackController {
                 .stream()
                 .filter(classRoom -> !hashSet.contains(classRoom))
                 .forEachOrdered(classRoom -> { // find a better way to do this
-                    classRoom.getSubjects().remove(subject);
-                    classes.add(classRoom);
+                   // classRoom.getSubjects().remove(subject);
+                    //classes.add(classRoom);
                 });
 
         subject.getClassRooms().removeAll(classes);

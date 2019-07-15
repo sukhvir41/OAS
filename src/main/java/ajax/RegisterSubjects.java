@@ -41,14 +41,14 @@ public class RegisterSubjects extends AjaxController {
 
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
         JsonArray jsonSubjects = new JsonArray();
-        Set<Subject> subjects = classRoom.getSubjects();
+       /* Set<Subject> subjects = classRoom.getSubjects();
         subjects.forEach(e -> add(e, jsonSubjects));
 
         Gson gson = new Gson();
         JsonObject subject = new JsonObject();
         subject.add(SUBJECTS, jsonSubjects);
         subject.addProperty(MINSUBJECTS, classRoom.getMinimumSubjects());
-        out.print(gson.toJson(subject));
+        out.print(gson.toJson(subject));*/
 
     }
 

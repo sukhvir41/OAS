@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/subjects/detailsubject")
@@ -29,8 +29,8 @@ public class DetailSubject extends Controller {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int subjectId = Integer.parseInt(req.getParameter("subjectId"));
 
-        Subject subject = (Subject) session.get(Subject.class, subjectId);
-        List<ClassRoom> classRooms = subject.getCourse().getClassRooms();
+        Subject subject = session.get(Subject.class, subjectId);
+        Set<ClassRoom> classRooms = subject.getCourse().getClassRooms();
         List<ClassRoom> classroom = new ArrayList<>();
         classRooms.stream()
                 .filter(e -> !subject.getClassRooms().contains(e))

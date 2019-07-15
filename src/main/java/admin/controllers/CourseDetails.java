@@ -29,11 +29,9 @@ public class CourseDetails extends Controller {
 
         long courseId = Long.parseLong(req.getParameter("courseId"));
 
-        // both the course below are the same course but as jsp does not allow getting multiple buckets  in same query we have to write another query.
-
+        // both the course below are the same course but as jpa does not allow getting multiple buckets in same query we have to write another query.
         var courseRootGraph = session.createEntityGraph(Course.class);
         courseRootGraph.addAttributeNodes(Course_.DEPARTMENT, Course_.CLASS_ROOMS);
-
 
         // this course gets the department and the list of classrooms
         Course course = EntityHelper.getInstance(courseId, Course_.id, Course.class, session, true, courseRootGraph);
@@ -41,7 +39,6 @@ public class CourseDetails extends Controller {
         courseRootGraph = session.createEntityGraph(Course.class);
         var subjectsSubGraph = courseRootGraph.addSubgraph(Course_.SUBJECTS);
         subjectsSubGraph.addAttributeNodes(Subject_.CLASS_ROOMS);
-
 
         //this course gets subjects and it corresponding classrooms.
         Course course1 = EntityHelper.getInstance(courseId, Course_.id, Course.class, session, true, courseRootGraph);

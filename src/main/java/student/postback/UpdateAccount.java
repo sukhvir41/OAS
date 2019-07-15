@@ -58,11 +58,11 @@ public class UpdateAccount extends PostBackController {
 		student.getClassRoom().getStudents().remove( student );
 		student.addClassRoom( classRoom ); // addding
 
-		student.getSubjects()
+	/*	student.getSubjects()
 				.stream()
 				.forEach( subject -> subject.getStudents().remove( student ) );
 
-		student.setSubjects( null );
+		student.setSubjects( null );*/
 
 		Arrays.asList( req.getParameter( "subjects" ) ) //adding
 				.stream()
