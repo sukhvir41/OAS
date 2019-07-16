@@ -57,16 +57,6 @@ public class Student implements Serializable, Comparable<Student> {
     @Setter
     private String macId;
 
-    @Column(name = "unaccounted")
-    @Getter
-    @Setter
-    private boolean unaccounted;
-
-    @Column(name = "verified", nullable = false)
-    @Getter
-    @Setter
-    private boolean verified;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "class_foreign_key"))
     @Getter
@@ -94,19 +84,14 @@ public class Student implements Serializable, Comparable<Student> {
             String password,
             String email,
             long number) {
-        this.user = new User(username, password, email, number, UserType.Student);
+        this.user = User.createdBlockedUser(username, password, email, number, UserType.Student);
         this.rollNumber = rollNumber;
         this.fName = fName;
         this.lName = lName;
         this.classRoom = classRoom;
-        setVerified(false);
+
     }
 
-    public void unaccount() {
-        if (!verified) {
-            unaccounted = true;
-        }
-    }
 
     /**
      * adds the attendance to the student

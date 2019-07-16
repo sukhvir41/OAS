@@ -44,16 +44,6 @@ public class Teacher implements Serializable {
     @Setter
     private String lName;
 
-    @Column(name = "verified", nullable = false)
-    @Getter
-    @Setter
-    private boolean verified;
-
-    @Column(name = "unaccounted", nullable = false)
-    @Getter
-    @Setter
-    private boolean unaccounted;
-
     @OneToMany(mappedBy = "hod", fetch = FetchType.LAZY)
     @Getter
     @Setter
@@ -91,21 +81,13 @@ public class Teacher implements Serializable {
     }
 
     public Teacher(String fName, String lName, String username, String password, String email, long number) {
-        this.user = new User(username, password, email, number, UserType.Teacher);
+        this.user = User.createdBlockedUser(username, password, email, number, UserType.Teacher);
         this.fName = fName;
         this.lName = lName;
-        setVerified(false);
-
     }
 
     public boolean isHod() {
         return !hodOf.isEmpty();
-    }
-
-    public void unaccount() {
-        if (!verified) {
-            unaccounted = true;
-        }
     }
 
     /**

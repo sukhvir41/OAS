@@ -74,6 +74,7 @@ public class LoginPost extends PostBackController {
 
         if (user.checkPassword(password)) {
             httpSession.setAttribute("userId", user.getId());
+            httpSession.setAttribute("user", user);
             httpSession.setAttribute("type", user.getUserType());
             httpSession.setAttribute("accept", true);
 

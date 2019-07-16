@@ -115,16 +115,28 @@ public final class User implements Serializable {
     @NotNull
     private String userType;
 
+    @Column(name = "status", nullable = false)
+    @NotNull
+    private UserStatus status;
 
     public User() {
     }
 
-    public User(String username, String password, String email, long number, UserType userType) {
+    public static User createdBlockedUser(String username, String password, String email, long number, UserType userType) {
+        return new User(username, password, email, number, userType, UserStatus.BLOCKED);
+    }
+
+    public static User createdActiveUser(String username, String password, String email, long number, UserType userType) {
+        return new User(username, password, email, number, userType, UserStatus.ACTIVE);
+    }
+
+    public User(String username, String password, String email, long number, UserType userType, UserStatus status) {
         this.username = username;
         this.setPassword(password);
         this.email = email;
         this.number = number;
         this.userType = userType.toString();
+        this.status = status;
     }
 
     public Optional<String> getToken() {

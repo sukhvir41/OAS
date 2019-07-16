@@ -48,14 +48,14 @@ public class Admin implements Serializable {
     }
 
     public Admin(String username, String password, String email, AdminType type) {
-        this.user = new User(username, password, email, -1, UserType.Admin);
+        this.user = User.createdActiveUser(username, password, email, -1, UserType.Admin);
         this.type = type.toString();
     }
 
     public AdminType getType() {
         return AdminType.valueOf(type);
     }
-    
+
 
     @Override
     public boolean equals(Object o) {
