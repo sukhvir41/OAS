@@ -1,6 +1,7 @@
 package entities;
 
 public enum UserStatus {
-    VERIFIED,UNVERIFIED
-
+    ACTIVE, // all features available
+    BLOCKED, // can not login
+    INACTIVE // all data has been removed and ready for hard delete
 }
