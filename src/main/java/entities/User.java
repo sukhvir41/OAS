@@ -8,7 +8,6 @@ package entities;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Session;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import utility.BCrypt;
@@ -109,21 +108,23 @@ public final class User implements Serializable {
 
     @Column(name = "session_expiry_date")
     @Setter
-    private LocalDateTime sessionExpiryDate;
+    private LocalDateTime sessionExpiryDate; // session cookie expiration date
 
     @Column(name = "user_type", nullable = false, updatable = false)
     @NotNull
     private String userType;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     @NotNull
+    @Getter
     private UserStatus status;
 
     public User() {
     }
 
     public static User createdBlockedUser(String username, String password, String email, long number, UserType userType) {
-        return new User(username, password, email, number, userType, UserStatus.BLOCKED);
+        return new User(username, password, email, number, userType, UserStatus.SUSPENDED);
     }
 
     public static User createdActiveUser(String username, String password, String email, long number, UserType userType) {

@@ -110,7 +110,7 @@ public class Login extends Controller {
         httpSession.setAttribute("extendCookie", true);
         httpSession.setAttribute("type", user.getUserType());
         httpSession.setAttribute("userId", user.getId());
-        httpSession.setAttribute("user", user);
+        httpSession.setAttribute("userStatus", user.getStatus());
 
         // incrementing the user count to keep track who has logged in
         user.getUserType()
