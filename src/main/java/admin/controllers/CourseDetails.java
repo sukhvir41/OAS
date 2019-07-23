@@ -9,8 +9,10 @@ import entities.Course;
 import entities.Course_;
 import entities.EntityHelper;
 import entities.Subject_;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
+import utility.UrlParameters;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,18 @@ public class CourseDetails extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        long courseId = Long.parseLong(req.getParameter("courseId"));
+        var urlParameters = new UrlParameters();
+
+        var courseIdString = req.getParameter("courseId");
+
+        if (StringUtils.isBlank(courseIdString)) {
+            urlParameters.addErrorParameter()
+                    .addMessage("The course you are trying to access does not exist");
+            resp.sendRedirect(urlParameters.getUrl("/OAS/admin/courses"));
+            return;
+        }
+
+        long courseId = Long.parseLong(courseIdString);
 
         // both the course below are the same course but as jpa does not allow getting multiple buckets in same query we have to write another query.
         var courseRootGraph = session.createEntityGraph(Course.class);

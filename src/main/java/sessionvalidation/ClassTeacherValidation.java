@@ -20,7 +20,7 @@ import java.io.IOException;
  *
  * @author sukhvir
  */
-@WebFilter(urlPatterns = {"/teacher/classteacher/*", "/teacher/classteacher"})
+@WebFilter(urlPatterns = {"/teacher/class-teacher/*", "/teacher/class-teacher"})
 public class ClassTeacherValidation implements Filter {
 
     @Override

@@ -5,7 +5,7 @@
  */
 package admin.controllers;
 
-import entities.Student;
+import entities.Teacher;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.Controller;
@@ -18,20 +18,16 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/admin/students/unaccounted")
-public class AdminUnaccountedStudent extends Controller {
-    
+@WebServlet(urlPatterns = "/admin/teachers/deactivated")
+public class AdminDeactivatedTeachers extends Controller {
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        List<Student> students = session.createCriteria(Student.class)
-                .add(Restrictions.eq("unaccounted", true))
-                .list();
-        
-        req.setAttribute("students", students);
-        req.getRequestDispatcher("/WEB-INF/admin/unaccountedstudents.jsp")
+
+        req.getRequestDispatcher("/WEB-INF/admin/unaccountedteacher.jsp")
                 .include(req, resp);
-    }    
+    }
+
 }

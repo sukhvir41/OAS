@@ -30,7 +30,7 @@ public class AdminStudents extends Controller {
 
         req.setAttribute("courses", courses);
 
-        req.getRequestDispatcher("/WEB-INF/admin/adminstudent.jsp")
+        req.getRequestDispatcher("/WEB-INF/admin/admin-student.jsp")
                 .include(req, resp);
     }
 

@@ -34,7 +34,7 @@ public class AdminHome extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
-            PrintWriter out) throws Exception {
+                        PrintWriter out) throws Exception {
 
         req.setAttribute(UserType.Student.toString(), UserType.Student.getCount());
         req.setAttribute(UserType.Admin.toString(), UserType.Admin.getCount());
@@ -80,7 +80,8 @@ public class AdminHome extends Controller {
                     resp.addCookie(token);
 
                 }
-                admin.getUser().setSessionExpiryDate(LocalDateTime.now());
+                admin.getUser()
+                        .setSessionExpiryDate(LocalDateTime.now());
             }
 
 

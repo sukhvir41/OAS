@@ -2,11 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/UserStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/UserStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/ActivateOrDeactivateStudent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/ActivateOrDeactivateTeacher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminLectures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminLectures.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminStudents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminTeachers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminTeachers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminUnaccountedStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDeactivatedStudents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminUnaccountedTeachers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDeactivatedTeachers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/DeactivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/DeactivateTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/DetailClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ClassRoomDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sessionvalidation/AdminDeleteValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sessionvalidation/AdminDeleteValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sessionvalidation/AdminValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sessionvalidation/AdminValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sessionvalidation/ClassTeacherValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sessionvalidation/ClassTeacherValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sessionvalidation/StudentValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sessionvalidation/StudentValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sessionvalidation/TeacherValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sessionvalidation/TeacherValidation.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -48,32 +73,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Login.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1360">
-              <caret line="114" column="70" lean-forward="true" selection-start-line="114" selection-start-column="70" selection-end-line="114" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/postback/LoginPost.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ClassRoomDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -85,8 +89,8 @@
       <list>
         <option value="Interface" />
         <option value="package-info" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -107,26 +111,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/hod/postback/UnaccountStudent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/teacher/ajax/GetStudents.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Subject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Teaching.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Course.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Lecture.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/DeleteAdmin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/student/attendanceWsService/MacHandlers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminChangePassword.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Department.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/output.log" />
         <option value="$PROJECT_DIR$/src/main/java/controllers/LogOut.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/student/controllers/StudentHome.java" />
         <option value="$PROJECT_DIR$/src/main/java/teacher/controllers/CreateLectureHome.java" />
         <option value="$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java" />
@@ -139,17 +125,10 @@
         <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" />
         <option value="$PROJECT_DIR$/src/main/java/utility/UrlParameters.java" />
         <option value="$PROJECT_DIR$/src/main/java/utility/Testing.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" />
         <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java" />
         <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDetails.java" />
         <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminGrantLeave.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/lectures.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminStudents.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminLectures.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminTeachers.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-teacher.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Student.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Teacher.java" />
@@ -158,6 +137,31 @@
         <option value="$PROJECT_DIR$/src/main/java/controllers/Login.java" />
         <option value="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sessionvalidation/ClassTeacherValidation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sessionvalidation/TeacherValidation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sessionvalidation/StudentValidation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sessionvalidation/AdminValidation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sessionvalidation/AdminDeleteValidation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/ajax/ActivateStudent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminLectures.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminStudents.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminTeachers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDeactivatedStudents.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDeactivatedTeachers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/DeactivateStudent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/DetailClassRoom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/controllers/ClassRoomDetails.java" />
       </list>
     </option>
   </component>
@@ -211,6 +215,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -227,7 +240,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="postback" type="462c0819:PsiDirectoryNode" />
+              <item name="utility" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
@@ -240,8 +253,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="CatdeaLogs" />
     </panes>
   </component>
@@ -442,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558313107392</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added userStatus">
+      <created>1563765879483</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1563765879483</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -464,25 +484,25 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Designer" order="5" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.16897655" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.1705757" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="8" />
       <window_info id="Capture Tool" order="9" />
       <window_info anchor="bottom" id="DB Execution Console" order="0" />
       <window_info anchor="bottom" id="Console" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49733758" weight="0.30010834" />
-      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50159746" side_tool="true" weight="0.17710583" />
-      <window_info anchor="bottom" id="Build" order="4" sideWeight="0.49840257" weight="0.20043337" />
+      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50159913" side_tool="true" weight="0.25460455" />
+      <window_info anchor="bottom" id="Build" order="4" sideWeight="0.4978678" visible="true" weight="0.20043337" />
       <window_info anchor="bottom" id="Messages" order="5" sideWeight="0.49573562" weight="0.17170626" />
-      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.4989339" visible="true" weight="0.25460455" />
+      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.49840087" weight="0.25460455" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.09431021" />
-      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4978678" visible="true" weight="0.312026" />
+      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4978678" weight="0.312026" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.39935064" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="13" weight="0.32897604" />
-      <window_info anchor="right" id="Gradle" order="0" sideWeight="0.4976378" visible="true" weight="0.18250497" />
+      <window_info anchor="right" id="Gradle" order="0" sideWeight="0.49593496" visible="true" weight="0.18230277" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
       <window_info anchor="right" id="Maven" order="2" weight="0.32995737" />
       <window_info anchor="right" id="Palette" order="3" />
@@ -490,7 +510,7 @@
       <window_info anchor="right" id="Commander" order="5" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="8" sideWeight="0.5023622" side_tool="true" visible="true" weight="0.18283582" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="8" sideWeight="0.50406504" side_tool="true" weight="0.18230277" />
       <window_info anchor="right" id="Capture Analysis" order="9" />
       <window_info anchor="right" id="Theme Preview" order="10" />
     </layout>
@@ -549,7 +569,8 @@
     <MESSAGE value="upgraded jdk(11), gradle(latest) and cargo(latest)" />
     <MESSAGE value="added helper class for entities" />
     <MESSAGE value="made changes in admin package" />
-    <option name="LAST_COMMIT_MESSAGE" value="made changes in admin package" />
+    <MESSAGE value="added userStatus" />
+    <option name="LAST_COMMIT_MESSAGE" value="added userStatus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -567,123 +588,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="218" column="26" selection-start-line="218" selection-start-column="26" selection-end-line="218" selection-end-column="26" />
-          <folding>
-            <element signature="e#7547#7548#0" expanded="true" />
-            <element signature="e#7587#7588#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/CriteriaQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/CriteriaBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="48" column="17" lean-forward="true" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/LogOut.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/Path.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.8.1/e9748d7783594da3735ad9724390a10e7cebc01d/commons-lang3-3.8.1-sources.jar!/org/apache/commons/lang3/ObjectUtils.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/EntityHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="170" column="10" selection-start-line="170" selection-start-column="10" selection-end-line="170" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/student/controllers/StudentHome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="60" column="74" selection-start-line="60" selection-start-column="74" selection-end-line="60" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/teacher/controllers/CreateLectureHome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="139" column="43" selection-start-line="139" selection-start-column="43" selection-end-line="139" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.8.1/e9748d7783594da3735ad9724390a10e7cebc01d/commons-lang3-3.8.1-sources.jar!/org/apache/commons/lang3/StringUtils.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/testing1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/ReportPostBackController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="83" column="51" selection-start-line="83" selection-start-column="51" selection-end-line="83" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="100" selection-start-line="100" selection-end-line="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/DeleteCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/SetNetworkSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
@@ -732,79 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminChangePassword.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="37" column="28" lean-forward="true" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="50" lean-forward="true" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="37" column="36" lean-forward="true" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="35" column="91" selection-start-line="35" selection-start-column="91" selection-end-line="35" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-lectures.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -812,52 +643,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminGrantLeave.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="32" column="51" lean-forward="true" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminStudents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="28" column="80" selection-start-line="28" selection-start-column="80" selection-end-line="28" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminLectures.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-teacher.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2754">
           <caret line="162" column="57" selection-start-line="162" selection-start-column="57" selection-end-line="162" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminTeachers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="34" column="36" lean-forward="true" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminUnaccountedStudent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="30" column="24" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="30" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -882,31 +671,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/AdminValidation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/StudentValidation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="42" column="42" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/UserStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Login.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="114" column="70" lean-forward="true" selection-start-line="114" selection-start-column="70" selection-end-line="114" selection-end-column="70" />
+        <state relative-caret-position="1921">
+          <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -917,13 +688,277 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/User.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Login.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
+        <state relative-caret-position="1360">
+          <caret line="114" column="70" lean-forward="true" selection-start-line="114" selection-start-column="70" selection-end-line="114" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nativelibs/loaded.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nativelibs/NativeLibs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/ClassTeacherValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/TeacherValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="39" column="122" selection-start-line="39" selection-start-column="122" selection-end-line="39" selection-end-column="122" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/StudentValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/HodValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="34" column="27" lean-forward="true" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/AdminValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sessionvalidation/AdminDeleteValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/ActivateOrDeactivateStudent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="18" column="79" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/ActivateStudent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/UserStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/CommonAbstractCriteria.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/javax.persistence-api/2.2/462dff65f6f8bde02ee9d8afe07fe9d50268199c/javax.persistence-api-2.2-sources.jar!/javax/persistence/criteria/CriteriaUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="37" column="50" lean-forward="true" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="59" column="77" selection-start-line="59" selection-start-column="77" selection-end-line="59" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="30" column="65" lean-forward="true" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminChangePassword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="26" column="85" selection-start-line="26" selection-start-column="85" selection-end-line="26" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminClassRoom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="30" column="63" lean-forward="true" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/EntityHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="73" column="33" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDeactivatedStudents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="37" column="70" selection-start-line="37" selection-start-column="70" selection-end-line="37" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminGrantLeave.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="39" column="9" lean-forward="true" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminHome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="83" column="47" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminLectures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminStudents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="33" column="36" lean-forward="true" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminTeachers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="30" column="102" selection-start-line="30" selection-start-column="102" selection-end-line="30" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDeactivatedTeachers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="22" column="54" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="61" column="99" selection-start-line="61" selection-start-column="99" selection-end-line="61" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="69" column="5" lean-forward="true" selection-start-line="60" selection-start-column="3" selection-end-line="69" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="38" column="45" lean-forward="true" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="47" column="44" lean-forward="true" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ClassRoomDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
         </state>
       </provider>
     </entry>

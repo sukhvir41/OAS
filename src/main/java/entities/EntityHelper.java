@@ -2,7 +2,6 @@ package entities;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.hibernate.Session;
 import org.hibernate.graph.RootGraph;
@@ -14,8 +13,6 @@ import javax.persistence.metamodel.SingularAttribute;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -167,19 +164,17 @@ public class EntityHelper {
                 .anyMatch(a -> StringUtils.equalsAnyIgnoreCase(a.annotationType().getName(), oneToManyName, oneToOneName, manyToManyName, manyToOneName));
     }
 
-
-    public static <T> int upadteInstances(Session session, Class<T> tClass, Consumer<Triple<CriteriaBuilder, CriteriaUpdate<T>, Root<T>>> operations) {
+    public static <T> int upadteInstances(Session session, Class<T> tClass, Consumer<CriteriaHolder<CriteriaUpdate<T>, T>> operations) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaUpdate<T> query = builder.createCriteriaUpdate(tClass);
         Root<T> root = query.from(tClass);
 
-        Triple jpsObjects = Triple.of(builder, query, root);
+        CriteriaHolder<CriteriaUpdate<T>, T> holder = new CriteriaHolder<>(builder, query, root);
 
-        operations.accept(jpsObjects);
+        operations.accept(holder);
 
         return session.createQuery(query)
                 .executeUpdate();
-
     }
 
 }

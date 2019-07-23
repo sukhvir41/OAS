@@ -6,6 +6,7 @@
 package sessionvalidation;
 
 import entities.Student;
+import entities.UserStatus;
 import entities.UserType;
 
 import javax.servlet.*;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- *
  * @author sukhvir
  */
 @WebFilter(urlPatterns = {"/student/*", "/student"})
@@ -38,22 +38,22 @@ public class StudentValidation implements Filter {
 
         try {
             if ((boolean) req.getServletContext().getAttribute("ready")) {
-                if ((boolean) session.getAttribute("accept") && (session.getAttribute("type")).equals(UserType.Student)) {
-                    Student student = (Student) session.getAttribute("student");
-                    if (student.isVerified()) {
+                if ((boolean) session.getAttribute("accept")
+                        && (session.getAttribute("type")).equals(UserType.Student)) {
+                    if (session.getAttribute("userStatus").equals(UserStatus.ACTIVE)) {
 
                         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
                         resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
                         resp.setDateHeader("Expires", 0);
                         chain.doFilter(request, response);
                     } else {
-                        resp.sendRedirect("/OAS/notverified.jsp");
+                        resp.sendRedirect("/OAS/not-verified.jsp");
                     }
                 } else {
                     resp.sendRedirect("/OAS/login");
                 }
-            }else{
-                resp.sendRedirect("/OAS/accessdenied.jsp");
+            } else {
+                resp.sendRedirect("/OAS/access-denied.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();

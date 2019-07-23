@@ -7,15 +7,12 @@ package admin.controllers;
 
 import entities.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Triple;
 import org.hibernate.Session;
 import utility.Controller;
 import utility.UrlParameters;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +43,7 @@ public class ActivateTeacher extends Controller {
 
         UUID teacherId = UUID.fromString(teacherIdString);
 
-        int updatedCount = EntityHelper.upadteInstances(session, Teacher.class, jpaObjects -> updateTeacherQuery(jpaObjects, teacherId));
+        int updatedCount = EntityHelper.upadteInstances(session, User.class, jpaObjects -> updateTeacherQuery(jpaObjects, teacherId));
 
 
         if (updatedCount < 1) {
@@ -63,14 +60,13 @@ public class ActivateTeacher extends Controller {
         resp.sendRedirect(params.getUrl("/OAS/admin/teacher/teacher-details"));
     }
 
-    private void updateTeacherQuery(Triple<CriteriaBuilder, CriteriaUpdate<Teacher>, Root<Teacher>> jpaObjects, UUID teacherId) {
-        Predicate predicate = jpaObjects.getLeft()
+    private void updateTeacherQuery(CriteriaHolder<CriteriaUpdate<User>, User> jpaObjects, UUID teacherId) {
+        Predicate predicate = jpaObjects.getCriteriaBuilder()
                 .and(
-                        jpaObjects.getLeft().equal(jpaObjects.getRight().get(Teacher_.id), teacherId),
-                        jpaObjects.getLeft().equal(jpaObjects.getRight().get(Teacher_.unaccounted), false)
+                        jpaObjects.getCriteriaBuilder().equal(jpaObjects.getRoot().get(User_.id), teacherId)
                 );
 
-        jpaObjects.getMiddle().set(Teacher_.verified, true)
+        jpaObjects.getQuery().set(User_.status, UserStatus.ACTIVE)
                 .where(predicate);
     }
 

@@ -6,6 +6,7 @@
 package sessionvalidation;
 
 import entities.Teacher;
+import entities.UserStatus;
 import entities.UserType;
 
 import javax.servlet.*;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- *
  * @author sukhvir
  */
 @WebFilter(urlPatterns = {"/teacher/*", "/teacher"})
@@ -38,8 +38,7 @@ public class TeacherValidation implements Filter {
         try {
             if ((boolean) req.getServletContext().getAttribute("ready")) {
                 if ((boolean) session.getAttribute("accept") && (session.getAttribute("type")).equals(UserType.Teacher)) {
-                    Teacher teacher = (Teacher) session.getAttribute("teacher");
-                    if (teacher.isVerified()) {
+                    if (session.getAttribute("userStatus").equals(UserStatus.ACTIVE)) {
 
                         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
                         resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.

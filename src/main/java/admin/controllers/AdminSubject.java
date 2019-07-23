@@ -5,10 +5,7 @@
  */
 package admin.controllers;
 
-import entities.Course;
-import entities.EntityHelper;
-import entities.Subject;
-import entities.Subject_;
+import entities.*;
 import org.hibernate.Session;
 import utility.Controller;
 
@@ -33,7 +30,7 @@ public class AdminSubject extends Controller {
 
         List<Subject> subjects = EntityHelper.getAll(session, Subject.class, subjectGraph, true);
 
-        List<Course> courses = EntityHelper.getAll(session, Course.class, true);
+        List<Course> courses = EntityHelper.getAll(session, Course.class, Course_.name, true);
 
         req.setAttribute("subjects", subjects);
         req.setAttribute("courses", courses);

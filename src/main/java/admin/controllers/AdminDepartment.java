@@ -31,7 +31,7 @@ public class AdminDepartment extends Controller {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
                         PrintWriter out) throws Exception {
 
-        List<Department> departments = EntityHelper.getAll(session, Department.class, true);
+        List<Department> departments = EntityHelper.getAll(session, Department.class, Department_.name, true);
 
         req.setAttribute("departments", departments);
 

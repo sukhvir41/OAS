@@ -16,15 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- *
  * @author sukhvir
  */
 @WebFilter(urlPatterns = "/admin/admins/delete-admin")
 public class AdminDeleteValidation implements Filter {
 
-    HttpServletResponse resp;
-    HttpServletRequest req;
-    HttpSession session;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -33,10 +29,11 @@ public class AdminDeleteValidation implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletResponse resp = (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession session = req.getSession();
+
         try {
-            resp = (HttpServletResponse) response;
-            req = (HttpServletRequest) request;
-            session = req.getSession();
             if (((Admin) session.getAttribute("admin")).getType().equals(AdminType.Main.toString())) {
                 chain.doFilter(request, response);
             } else {

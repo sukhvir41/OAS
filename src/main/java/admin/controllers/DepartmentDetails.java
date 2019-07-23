@@ -6,8 +6,10 @@
 package admin.controllers;
 
 import entities.*;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
+import utility.UrlParameters;
 
 import javax.persistence.criteria.JoinType;
 import javax.servlet.annotation.WebServlet;
@@ -27,16 +29,24 @@ import java.util.stream.Collectors;
 public class DepartmentDetails extends Controller {
 
     @Override
-    public void process(
-            HttpServletRequest req,
-            HttpServletResponse resp,
-            Session session,
-            HttpSession httpSession,
-            PrintWriter out) throws Exception {
+    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
+                        PrintWriter out) throws Exception {
 
-        long departmentID = Long.parseLong(req.getParameter("departmentId"));
+        var departmentIdString = req.getParameter("departmentId");
 
-        Department department = EntityHelper.getInstance(departmentID, Department_.id, Department.class, session, true, Department_.HOD, Department_.COURSES);
+        if (StringUtils.isBlank(departmentIdString)) {
+            resp.sendRedirect(
+                    new UrlParameters().addErrorParameter()
+                            .addMessage("The department you are trying to access does not exist")
+                            .getUrl("/OAS/admin/departments")
+            );
+            return;
+        }
+
+        long departmentID = Long.parseLong(departmentIdString);
+
+        Department department = EntityHelper
+                .getInstance(departmentID, Department_.id, Department.class, session, true, Department_.HOD, Department_.COURSES);
 
         //this will fire another query get the teacher which is necessary
         List<Teacher> teachers = getTeachersOfDepartment(session, department);
