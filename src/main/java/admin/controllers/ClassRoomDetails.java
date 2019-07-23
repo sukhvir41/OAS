@@ -6,8 +6,13 @@
 package admin.controllers;
 
 import entities.ClassRoom;
+import entities.ClassRoom_;
+import entities.EntityHelper;
+import entities.SubjectClassRoomLink_;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
+import utility.UrlParameters;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,11 +31,26 @@ public class ClassRoomDetails extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
+        var classroomIdString = req.getParameter("classroomId");
 
-        // update this agent
-        long classRoomId = Long.parseLong(req.getParameter("classroomId"));
+        if (StringUtils.isBlank(classroomIdString)) {
+            resp.sendRedirect(
+                    new UrlParameters()
+                            .addErrorParameter()
+                            .addMessage("The class room you are trying to access does not exist")
+                            .getUrl("/OAS/admin/classrooms")
+            );
+            return;
+        }
 
-        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
+        long classRoomId = Long.parseLong(classroomIdString);
+
+        var classroomGraph = session.createEntityGraph(ClassRoom.class);
+        classroomGraph.addAttributeNodes(ClassRoom_.COURSE);
+        var subjectLinkSubGraph = classroomGraph.addSubgraph(ClassRoom_.subjects);
+        subjectLinkSubGraph.addAttributeNodes(SubjectClassRoomLink_.SUBJECT);
+
+        ClassRoom classRoom = EntityHelper.getInstance(classRoomId, ClassRoom_.id, ClassRoom.class, session, true, classroomGraph);
 
         req.setAttribute("classroom", classRoom);
 
