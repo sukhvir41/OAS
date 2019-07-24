@@ -31,7 +31,6 @@ public class LectureDetails extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-
         var lectureId = req.getParameter("lectureId");
 
         if (StringUtils.isBlank(lectureId)) {
@@ -44,41 +43,19 @@ public class LectureDetails extends Controller {
             return;
         }
 
+        var lecture = session.get(Lecture.class, lectureId);
 
         List<Student> presentStudents = getPresentStudents(lectureId, session);
+        List<Student> absentStudents = getAbsentStudents(lectureId, session);
 
+        req.setAttribute("total", presentStudents.size() + absentStudents.size());// setting the total size first as the list will have only absent students later
 
-        String lectureId = req.getParameter("lectureId");
-        Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
-
-        List<Student> students = lecture.getTeaching()// this will contain all studentts first and then only absent students
-                .getClassRoom()
-                .getStudents()
-                .stream()
-                .filter(student -> student.getSubjects().contains(lecture.getTeaching().getSubject()))
-                .collect(Collectors.toList());
-
-        Collections.sort(students);// sorting all studnets according to their roll number
-
-        req.setAttribute("total", students.size());// setting the total size first as the list will have only absent students later
-
-        // todo: write sql for this
-       /* List<Student> present = lecture.getAttendance()
-                .stream()
-                .filter(attendance -> attendance.isAttended())
-                .map(attendance -> attendance.getStudent())
-                .collect(Collectors.toList());
-        students.removeAll(present);//removing all present students from the students list
-
-        Collections.sort(present);// sorting all students accordig to their to roll number
-*/
-        // todo: write sql for this
-        //req.setAttribute("present", present);
-        req.setAttribute("absent", students);
-        // todo: write sql for this
-        //req.setAttribute("headcount", present.size());
+        req.setAttribute("presentStudents", presentStudents);
+        req.setAttribute("absentStudents", absentStudents);
+        req.setAttribute("headcount", presentStudents.size());
         req.setAttribute("lecture", lecture);
-        req.getRequestDispatcher("/WEB-INF/admin/detaillecture.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/lecture-details.jsp")
+                .include(req, resp);
     }
 
     private List<Student> getPresentStudents(String lectureId, Session session) {
@@ -113,6 +90,87 @@ public class LectureDetails extends Controller {
                                                 .get(Student_.rollNumber)
                                 )
                 );
+
+        return session.createQuery(criteriaStudent.getQuery())
+                .setReadOnly(true)
+                .getResultList();
+    }
+
+
+    private List<Student> getAbsentStudents(String lectureId, Session session) {
+
+        var criteriaStudent = CriteriaHolder.getQueryHolder(session, Student.class);
+
+        var lectureAttendedSubQuery = criteriaStudent.getQuery()
+                .subquery(Student.class);
+        var lectureRoot = lectureAttendedSubQuery.from(Lecture.class);
+        var attendanceJoin = lectureRoot.join(Lecture_.attendances, JoinType.INNER);
+        lectureAttendedSubQuery.where(
+                criteriaStudent.getCriteriaBuilder()
+                        .and(
+                                criteriaStudent.getCriteriaBuilder()
+                                        .equal(lectureRoot.get(Lecture_.id), lectureId),
+                                criteriaStudent.getCriteriaBuilder()
+                                        .equal(attendanceJoin.get(Attendance_.attended), true)
+                        )
+        );
+        lectureAttendedSubQuery.select(attendanceJoin.get(Attendance_.student));
+
+        var lectureSubQuery = criteriaStudent.getQuery()
+                .subquery(Lecture.class);
+        var lectureSubQueryRoot = lectureSubQuery.from(Lecture.class);
+        lectureSubQuery.where(
+                criteriaStudent.getCriteriaBuilder()
+                        .equal(lectureSubQueryRoot.get(Lecture_.id), lectureId)
+        );
+
+        var teachingClassRoomSubQuery = criteriaStudent.getQuery()
+                .subquery(ClassRoom.class);
+        var teachingClassRoomRoot = teachingClassRoomSubQuery.
+                from(Teaching.class);
+        teachingClassRoomSubQuery.where(
+                criteriaStudent.getCriteriaBuilder()
+                        .equal(teachingClassRoomRoot.get(Teaching_.lectures), lectureSubQuery)
+        );
+        teachingClassRoomSubQuery.select(teachingClassRoomRoot.get(Teaching_.classRoom));
+
+        var teachingSubjectSubQuery = criteriaStudent.getQuery()
+                .subquery(Subject.class);
+        var teachingSubjectRoot = teachingClassRoomSubQuery.
+                from(Teaching.class);
+        teachingClassRoomSubQuery.where(
+                criteriaStudent.getCriteriaBuilder()
+                        .equal(teachingSubjectRoot.get(Teaching_.lectures), lectureSubQuery)
+        );
+        teachingSubjectSubQuery.select(teachingSubjectRoot.get(Teaching_.subject));
+
+        criteriaStudent.getQuery()
+                .where(
+                        criteriaStudent.getCriteriaBuilder()
+                                .and(
+                                        criteriaStudent.getCriteriaBuilder()
+                                                .not(
+                                                        criteriaStudent.getCriteriaBuilder()
+                                                                .in(lectureAttendedSubQuery)
+                                                ),
+                                        criteriaStudent.getCriteriaBuilder().equal(
+                                                criteriaStudent.getRoot()
+                                                        .get(Student_.classRoom),
+                                                teachingClassRoomSubQuery
+                                        ),
+                                        criteriaStudent.getRoot()
+                                                .get(Student_.subjects)
+                                                .in(teachingSubjectSubQuery)
+                                )
+                )
+                .orderBy(
+                        criteriaStudent.getCriteriaBuilder()
+                                .asc(
+                                        criteriaStudent.getRoot()
+                                                .get(Student_.rollNumber)
+                                )
+                );
+
 
         return session.createQuery(criteriaStudent.getQuery())
                 .setReadOnly(true)
