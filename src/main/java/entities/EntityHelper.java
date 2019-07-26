@@ -111,6 +111,7 @@ public class EntityHelper {
         );
 
         return session.createQuery(query)
+                .setMaxResults(1)
                 .setReadOnly(readOnly)
                 .getSingleResult();
     }

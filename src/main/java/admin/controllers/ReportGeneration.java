@@ -6,6 +6,8 @@
 package admin.controllers;
 
 import entities.Course;
+import entities.Course_;
+import entities.EntityHelper;
 import org.hibernate.Session;
 import utility.Controller;
 
@@ -17,7 +19,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/reports")
@@ -26,11 +27,11 @@ public class ReportGeneration extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        List<Course> courses = session.createCriteria(Course.class)
-                .list();
+        List<Course> courses = EntityHelper.getAll(session, Course.class, Course_.name, true);
 
         req.setAttribute("courses", courses);
-        req.getRequestDispatcher("/WEB-INF/admin/adminreportgen.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/report-generation.jsp")
+                .include(req, resp);
     }
 
 }
