@@ -47,6 +47,7 @@ public class AddCourse extends PostBackController {
 
         String from = req.getParameter("from");
 
+
         if (StringUtils.isNotBlank(from) && from.equalsIgnoreCase("department-details")) {
             resp.sendRedirect(
                     new UrlParameters().addSuccessParameter()
@@ -69,14 +70,14 @@ public class AddCourse extends PostBackController {
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UrlParameters parameters = new UrlParameters()
                 .addErrorParameter()
-                .addMessage("unable to add course as the provided data was incorrect");
+                .addMessage("Unable to add course as the provided data was incorrect");
 
         String from = req.getParameter("from");
         String departmentId = req.getParameter("departmentId");
 
         if (StringUtils.isNoneBlank(from, departmentId)) {
             parameters.addParameter("departmentId", departmentId);
-            resp.sendRedirect(parameters.getUrl("/OAS/admin/detail-department"));
+            resp.sendRedirect(parameters.getUrl("/OAS/admin/departments/department-details"));
         } else {
             resp.sendRedirect(parameters.getUrl("/OAS/admin/courses"));
         }

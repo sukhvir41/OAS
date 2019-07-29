@@ -69,6 +69,7 @@ public class Login extends Controller {
     // this methods checks for the required cookies the user has and validates it. if true redirects the user to its respective
     // home page
     private void checkCookies(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession) throws Exception {
+
         Cookie id = null, token = null;
         for (Cookie cookie : req.getCookies()) {
             switch (cookie.getName()) {
@@ -91,6 +92,7 @@ public class Login extends Controller {
             );
 
             User theUser = session.createQuery(query)
+                    .setMaxResults(1)
                     .setHint(QueryHints.HINT_READONLY, true)
                     .getSingleResult();
 

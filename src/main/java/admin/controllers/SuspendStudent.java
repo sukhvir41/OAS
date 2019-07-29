@@ -43,7 +43,7 @@ public class SuspendStudent extends Controller {
         }
 
         UUID studentId = UUID.fromString(studentIdString);
-        int updated = EntityHelper.upadteInstances(session, User.class, jpaObjects -> updateStudent(jpaObjects, studentId));
+        int updated = EntityHelper.updateInstances(session, User.class, jpaObjects -> updateStudent(jpaObjects, studentId));
 
         if (updated > 0) {
             urlParameters.addSuccessParameter()
@@ -58,7 +58,7 @@ public class SuspendStudent extends Controller {
         }
     }
 
-    private void updateStudent(CriteriaHolder<CriteriaUpdate<User>, User> jpaObjects, UUID studentId) {
+    private void updateStudent(CriteriaHolder<CriteriaUpdate<User>, User,User> jpaObjects, UUID studentId) {
 
         jpaObjects.getQuery().where(
                 jpaObjects.getCriteriaBuilder().equal(jpaObjects.getRoot().get(User_.id), studentId)

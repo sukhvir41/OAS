@@ -165,12 +165,12 @@ public class EntityHelper {
                 .anyMatch(a -> StringUtils.equalsAnyIgnoreCase(a.annotationType().getName(), oneToManyName, oneToOneName, manyToManyName, manyToOneName));
     }
 
-    public static <T> int upadteInstances(Session session, Class<T> tClass, Consumer<CriteriaHolder<CriteriaUpdate<T>, T>> operations) {
+    public static <T> int updateInstances(Session session, Class<T> tClass, Consumer<CriteriaHolder<CriteriaUpdate<T>, T, T>> operations) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaUpdate<T> query = builder.createCriteriaUpdate(tClass);
         Root<T> root = query.from(tClass);
 
-        CriteriaHolder<CriteriaUpdate<T>, T> holder = new CriteriaHolder<>(builder, query, root);
+        CriteriaHolder<CriteriaUpdate<T>, T, T> holder = new CriteriaHolder<>(builder, query, root);
 
         operations.accept(holder);
 

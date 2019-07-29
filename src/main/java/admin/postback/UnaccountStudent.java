@@ -29,11 +29,11 @@ public class UnaccountStudent extends PostBackController {
 
         int studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
-        if (!student.isVerified()) {
+        /*if (!student.isVerified()) {
             student.getClassRoom().getStudents().remove(student);
             student.setClassRoom(null);
-            /*student.getSubjects().stream()
-                    .forEach(e -> e.getStudents().remove(student));*/
+            *//*student.getSubjects().stream()
+                    .forEach(e -> e.getStudents().remove(student));*//*
             student.getSubjects().clear();
             //student.getAttendance().stream()
             //        .forEach(e -> e.setStudent(null));
@@ -50,7 +50,7 @@ public class UnaccountStudent extends PostBackController {
         }
 
         resp.sendRedirect("/OAS/admin/students/detailsstudent?studentId=" + studentId);
-
+*/
     }
 
 }

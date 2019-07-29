@@ -20,24 +20,27 @@ public class Testing {
 
     public static void main(String[] args) throws Exception {
 
-       /* Session session = Utils.openSession();
+        Session session = Utils.openSession();
         session.beginTransaction();
 
         try {
 
-            Department department = session.get(Department.class, 1l);
+            var holder = CriteriaHolder.getQueryHolder(session, Department.class);
 
-            var builder = session.getCriteriaBuilder();
-            var query = builder.createQuery(Teacher.class);
-            var root = query.from(Teacher.class);
+            holder.getQuery().orderBy(holder.getBuilder().asc(holder.getRoot().get(Department_.name)));
 
-            var join = root.join(Teacher_.departments, JoinType.INNER);
+            holder.getQuery().where(
+                holder.getBuilder().greaterThan(holder.getRoot().get(Department_.name),"Jooqtest2")
+            );
 
-            query.where(builder.equal(join.get(TeacherDepartmentLink_.department), department));
+            var results = session.createQuery(holder.getQuery())
+                    .setMaxResults(6)
+                    .getResultList();
 
-            session.createQuery(query)
-                    .getResultList()
-                    .forEach(o -> System.out.println(o.getFName()));
+            results.forEach(department -> System.out.println(department.getName() + "  " + department.getId()));
+
+
+
 
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -46,7 +49,7 @@ public class Testing {
         }
 
         session.close();
-        Utils.closeSessionFactory();*/
+        Utils.closeSessionFactory();
     }
 
 

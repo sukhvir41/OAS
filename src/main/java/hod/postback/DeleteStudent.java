@@ -32,13 +32,13 @@ public class DeleteStudent extends PostBackController {
         department = (Department) session.get(Department.class, department.getId());
 
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
-            if (student.isUnaccounted()) {
+           /* if (student.isUnaccounted()) {
 
                 session.delete(student);
                 resp.sendRedirect("/OAS/teacher/hod/students");
             } else {
                 resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + studentId);
-            }
+            }*/
         } else {
             resp.sendRedirect("/OAS/error");
         }

@@ -27,7 +27,7 @@ public class UnaccountTeacher extends Controller {
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
         
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-        if (teacher.isVerified()) {
+        /*if (teacher.isVerified()) {
             resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacherId);
         } else {
             teacher.setUnaccounted(true);
@@ -38,9 +38,9 @@ public class UnaccountTeacher extends Controller {
             
             teacher.getTeaches().clear();
             
-         /*   if(teacher.getClassRoom()!=null){
+         *//*   if(teacher.getClassRoom()!=null){
                 teacher.getClassRoom().setClassTeacher(null);
-            }*/
+            }*//*
             
             if(teacher.isHod()){
                 //teacher.setHod(false);
@@ -50,13 +50,13 @@ public class UnaccountTeacher extends Controller {
                 teacher.getHodOf().clear();
             }
             
-           /* teacher.getDepartment()
+           *//* teacher.getDepartment()
                     .stream()
                     .forEach(department -> department.getTeachers().remove(teacher));
             
-            teacher.getDepartment().clear();*/
+            teacher.getDepartment().clear();*//*
             resp.sendRedirect("/OAS/admin/teachers");
-        }
+        }*/
     }
     
 }

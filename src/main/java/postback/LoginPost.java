@@ -24,6 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -97,6 +100,8 @@ public class LoginPost extends PostBackController {
                 //keeping the cookie valid for 10 days
                 cookieSessionToken.setMaxAge(864000);
                 user.setSessionToken(token);
+
+                user.setSessionExpiryDate(LocalDateTime.now().plus(10, ChronoUnit.DAYS));
 
                 resp.addCookie(cookieSessionId);
                 resp.addCookie(cookieSessionToken);

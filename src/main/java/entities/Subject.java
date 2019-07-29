@@ -49,13 +49,11 @@ public class Subject implements Serializable {
     private Course course;
 
     @OneToMany(mappedBy = "subject")
-    @OrderBy("classRoom.name")
     @Getter
     @Setter
     private Set<SubjectClassRoomLink> classRooms = new HashSet<>();
 
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
-    @OrderBy("student.fName ASC, student.lName ASC")
     @Getter
     private Set<StudentSubjectLink> students = new HashSet<>();
 

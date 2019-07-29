@@ -50,13 +50,11 @@ public class Course implements Serializable {
     private Department department;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
-    @OrderBy("name")
     @Getter
     @Setter
     private Set<ClassRoom> classRooms = new HashSet<>();
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
-    @OrderBy("name")
     @Getter
     @Setter
     private Set<Subject> subjects = new HashSet<>();

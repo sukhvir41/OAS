@@ -26,29 +26,29 @@ public class UnaccountStudent extends Controller {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
-        
+       /*
         if (student.isVerified()) {
             resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + studentId);
         } else {
             student.setUnaccounted(true);
             
-          /*  student.getSubjects()
+          *//*  student.getSubjects()
                     .stream()
-                    .forEach(subject -> subject.getStudent().remove(student));*/
+                    .forEach(subject -> subject.getStudent().remove(student));*//*
             student.getSubjects().clear();
 
             // todo: write sql for this
-          /*  student.getAttendance()
+          *//*  student.getAttendance()
                     .stream()
                     .forEach(attendance -> removeAttendance(attendance, session));
-            student.getAttendance().clear();*/
+            student.getAttendance().clear();*//*
             
             student.getClassRoom().getStudents().remove(student);
             
             student.setClassRoom(null);
             
             resp.sendRedirect("/OAS/admin/students");
-        }
+        }*/
     }
     
     private void removeAttendance(Attendance attendance, Session session) {

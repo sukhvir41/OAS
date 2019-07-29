@@ -28,14 +28,17 @@ public class UnnaccoutTeacher extends PostBackController {
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
 
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
+/*
 
         if (!teacher.isVerified()) {
-           /* teacher.getClassRoom().setClassTeacher(null);
+           */
+/* teacher.getClassRoom().setClassTeacher(null);
             teacher.setClassRoom(null);
 
             teacher.getDepartment().stream()
                     .forEach(e -> e.getTeachers().remove(teacher));
-*/
+*//*
+
             teacher.getHodOf().stream()
                     .forEach(e -> e.setHod(null));
 
@@ -49,6 +52,7 @@ public class UnnaccoutTeacher extends PostBackController {
             teacher.unaccount();
         }
         resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacherId);
+*/
 
     }
 

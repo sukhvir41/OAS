@@ -33,7 +33,7 @@ public class DeactivateStudent extends Controller {
         Student student = (Student) session.get(Student.class, studentId);
 
         if (teacher.getClassRoom().getStudents().contains(student)) {
-            student.setVerified(false);
+            //student.setVerified(false);
             resp.sendRedirect("/OAS/teacher/classteacher/students/detailstudent?studentId=" + studentId);
         } else {
             resp.sendRedirect("/OAS/error");

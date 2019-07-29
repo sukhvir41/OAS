@@ -35,23 +35,23 @@ public class UnaccountStudent extends PostBackController {
         Student student = (Student) session.get(Student.class, studentId);
         
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
-            if (!student.isVerified()) {
+            /*if (!student.isVerified()) {
                 student.getClassRoom().getStudents().remove(student);
                 student.setClassRoom(null);
-                /*student.getSubjects().stream()
-                        .forEach(e -> e.getStudents().remove(student));*/
+                *//*student.getSubjects().stream()
+                        .forEach(e -> e.getStudents().remove(student));*//*
                 student.getSubjects().clear();
                // student.getAttendance().stream()
                //         .forEach(attendance -> attendance.setStudent(null));
                 //todo: rewrite sql for this
-                /*student.getAttendance().clear();*/
+                *//*student.getAttendance().clear();*//*
                 session.createCriteria(Attendance.class)
                         .add(Restrictions.isNull("student"))
                         .list()
                         .stream()
                         .forEach(e -> session.delete(e));
                 student.unaccount();
-            }
+            }*/
             resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + studentId);
         } else {
             resp.sendRedirect("/OAS/error");

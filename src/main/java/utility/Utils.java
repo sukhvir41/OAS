@@ -492,6 +492,10 @@ public class Utils {
         result.executeUpdate();
     }
 
+    public static boolean isEamil(String email) {
+        return regexMatch("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", email, Pattern.CASE_INSENSITIVE);
+    }
+
 
     public static DSLContext getDsl() {
         return jooqContext;

@@ -120,45 +120,10 @@
 				<hr class="tall">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-12">
-								<!--Department-->
-								<h4>Department</h4>
-								<table class="table table-hover table-striped">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Name</th>
-											<!--<th>Action</th>-->
-										</tr>
-									</thead>
-									<tbody>
 
-										<c:if test="${fn:length(requestScope.departments) eq 0}">
-											<tr>
-												<td>----</td>
-												<td>no departments to show</td>
-												<!--<td>----</td>-->
-											</tr>
-										</c:if>
+						<div id="departmentsTable"> </div>
+						<hr class="tall">
 
-										<c:forEach var="department" items="${requestScope.departments}"
-											varStatus="count">
-											<tr>
-												<td>${count.index + 1}<a name="${department.id}"></a></td>
-												<td>
-													<a
-														href="/OAS/admin/departments/department-details?departmentId=${department.id}">
-														${department.name}
-													</a>
-												</td>
-												<!--<td><a class="mb-xs mt-xs mr-xs btn btn-primary" href="/OAS/admin/departments/editdepartment?departmentId=${department.id}&from=departments">Edit</a></td>-->
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -210,8 +175,10 @@
 
 	<!-- Theme Initialization Files -->
 	<script src="/OAS/js/theme.init.js"></script>
+	<script src="/OAS/scripts/vue.js"></script>
+	<script src="/OAS/scripts/pagination.js"></script>
+	<script src="/OAS/scripts/admin/admin-department.js"></script>
 
-	<script src="/OAS/scripts/admin/add-department.js"></script>
 
 </body>
 

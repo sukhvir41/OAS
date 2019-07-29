@@ -33,7 +33,7 @@ public class ActivateStudent extends Controller {
         Student student = (Student) session.get(Student.class, studentId);
         
         if (teacher.getClassRoom().getStudents().contains(student)) {
-            student.setVerified(true);
+            //student.setVerified(true);
             resp.sendRedirect("/OAS/teacher/classteacher/students/detailstudent?studentId=" + studentId);
         } else {
             resp.sendRedirect("/OAS/error");

@@ -173,7 +173,7 @@ public final class User implements Serializable {
      */
     public final boolean isSessionValid(String sessionToken, LocalDateTime now) {
         return getSessionToken()
-                .map(s -> Utils.hashEquals(s, Utils.hash(token)))
+                .map(s -> Utils.hashEquals(s, Utils.hash(sessionToken)))
                 .orElse(false)
                 &&
                 getSessionExpiryDate()

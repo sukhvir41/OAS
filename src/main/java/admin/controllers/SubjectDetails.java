@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import utility.Controller;
 import utility.UrlParameters;
 
+import javax.persistence.criteria.JoinType;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,13 +54,6 @@ public class SubjectDetails extends Controller {
 
         var subject = EntityHelper.getInstance(subjectId, Subject_.id, Subject.class, session, true, subjectGraph);
 
-
-        var classRooms = subject.getClassRooms()
-                .parallelStream()
-                .map(SubjectClassRoomLink::getClassRoom)
-                .sorted((o1, o2) -> StringUtils.compare(o1.getName(), o2.getName()))
-                .collect(Collectors.toList());
-
         if (Objects.isNull(subject)) {
             resp.sendRedirect(
                     urlParameters.addErrorParameter()
@@ -67,12 +61,64 @@ public class SubjectDetails extends Controller {
                             .getUrl("/OAS/admin/subjects")
             );
             return;
-        } else {
-            req.setAttribute("classrooms", classRooms);
-            req.setAttribute("subject", subject);
-
-            req.getRequestDispatcher("/WEB-INF/admin/subject-details.jsp")
-                    .include(req, resp);
         }
+
+        var classRooms = getCourseClassRooms(subject.getCourse(), session);
+
+        var subjectClassRooms = subject.getClassRooms()
+                .parallelStream()
+                .map(SubjectClassRoomLink::getClassRoom)
+                .sorted((o1, o2) -> StringUtils.compare(o1.getName(), o2.getName()))
+                .collect(Collectors.toList());
+
+        var canDelete = canDeleteSubject(subject, session);
+
+        req.setAttribute("subjectClassrooms", subjectClassRooms);
+        req.setAttribute("subject", subject);
+        req.setAttribute("course", subject.getCourse());
+        req.setAttribute("canDelete", canDelete);
+        req.setAttribute("classRooms", classRooms);
+
+        req.getRequestDispatcher("/WEB-INF/admin/subject-details.jsp")
+                .include(req, resp);
+
+    }
+
+    private List<ClassRoom> getCourseClassRooms(Course course, Session session) {
+
+        var holder = CriteriaHolder.getQueryHolder(session, ClassRoom.class);
+
+        var courseJoin = holder.getRoot().join(ClassRoom_.course, JoinType.INNER);
+
+        holder.getQuery()
+                .where(
+                        holder.getBuilder().equal(courseJoin.get(Course_.id), course.getId())
+                );
+
+        return session.createQuery(holder.getQuery())
+                .setReadOnly(true)
+                .getResultList();
+
+    }
+
+    private boolean canDeleteSubject(Subject subject, Session session) {
+
+        var holder = CriteriaHolder.getQueryHolder(session, Long.class, Subject.class);
+
+        holder.getRoot().join(Subject_.classRooms, JoinType.INNER);
+        holder.getRoot().join(Subject_.students, JoinType.INNER);
+
+        holder.getQuery()
+                .where(
+                        holder.getBuilder().equal(holder.getRoot().get(Subject_.id), subject.getId())
+                );
+
+        holder.getQuery().select(holder.getBuilder().count(holder.getRoot().get(Subject_.id)));
+
+        return session.createQuery(holder.getQuery())
+                .setMaxResults(1)
+                .setReadOnly(true)
+                .getSingleResult() < 1;
+
     }
 }

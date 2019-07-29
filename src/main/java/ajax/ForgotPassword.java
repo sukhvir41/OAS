@@ -23,10 +23,9 @@ import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/ajax/forgotpassword")
+@WebServlet(urlPatterns = "/ajax/forgot-password")
 public class ForgotPassword extends AjaxController {
 
     @Override
@@ -47,7 +46,7 @@ public class ForgotPassword extends AjaxController {
                 user.setToken(token);
                 //user.setDate(LocalDateTime.now());
                 session.update(user);
-                String url = "192.168.1.1/OAS/resetpassword?username=" + user.getUsername() + "&token=" + URLEncoder.encode(token, "UTF-8");
+                String url = "192.168.1.1/OAS/reset-password?username=" + user.getUsername() + "&token=" + URLEncoder.encode(token, "UTF-8");
                 Utils.sendMail(email, "Password reset.  OAS system", body + url);
                 out.print(true);
 

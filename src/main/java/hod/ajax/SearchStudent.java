@@ -52,13 +52,13 @@ public class SearchStudent extends AjaxController {
                 if (filter.equals("all")) {
                     classRoom.getStudents()
                             .stream()
-                            .filter(student -> !student.isUnaccounted())
+                            //.filter(student -> !student.isUnaccounted())
                             .forEach(student -> add(student, jsonStudents));
                 } else {
                     classRoom.getStudents()
                             .stream()
-                            .filter(student -> !student.isUnaccounted())
-                            .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
+                            //.filter(student -> !student.isUnaccounted())
+                            //.filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
                             .forEach(e -> add(e, jsonStudents));
                 }
             } else {
@@ -67,14 +67,14 @@ public class SearchStudent extends AjaxController {
                 if (filter.equals("all")) {
                     classRoom.getStudents()
                             .stream()
-                            .filter(student -> !student.isUnaccounted())
+                            //.filter(student -> !student.isUnaccounted())
                             .filter(student -> student.getSubjects().contains(subject))
                             .forEach(student -> add(student, jsonStudents));
                 } else {
                     classRoom.getStudents()
                             .stream()
-                            .filter(student -> !student.isUnaccounted())
-                            .filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
+                            //.filter(student -> !student.isUnaccounted())
+                            //.filter(e -> e.isVerified() == Boolean.parseBoolean(filter))
                             .filter(e -> e.getSubjects().contains(subject))
                             .forEach(e -> add(e, jsonStudents));
                 }
@@ -99,7 +99,7 @@ public class SearchStudent extends AjaxController {
                 student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
         );
         studentJson.addProperty("rollnumber", student.getRollNumber());
-        studentJson.addProperty("verified", student.isVerified());
+        //studentJson.addProperty("verified", student.isVerified());
         studentJson.add("subjects", addSubjects(student));
         jsonStudents.add(studentJson);
     }

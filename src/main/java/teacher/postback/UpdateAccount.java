@@ -47,8 +47,8 @@ public class UpdateAccount extends PostBackController {
 			resp.sendRedirect( "/OAS/account/editteacher" );
 		}
 
-		teacher.setVerified( false );
-		teacher.setUnaccounted( false );
+		//teacher.setVerified( false );
+		//teacher.setUnaccounted( false );
 
 		/*teacher.getDepartment()
 				.stream()

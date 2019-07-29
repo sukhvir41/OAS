@@ -27,13 +27,13 @@ public class DeleteTeacher extends PostBackController {
 
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
-        if (teacher.isUnaccounted()) {
+        /*if (teacher.isUnaccounted()) {
 
             session.delete(teacher);
             resp.sendRedirect("/OAS/admin/teacherd");
         } else {
             resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacherId);
-        }
+        }*/
 
     }
 

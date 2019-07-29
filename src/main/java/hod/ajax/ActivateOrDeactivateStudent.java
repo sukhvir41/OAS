@@ -27,7 +27,7 @@ public class ActivateOrDeactivateStudent extends AjaxController {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
         String action = req.getParameter("action");
         Student student = (Student) session.get(Student.class, studentId);
-        switch (action) {
+        /*switch (action) {
             case "verify": {
                 student.setVerified(true);
                 out.print("true");
@@ -41,7 +41,7 @@ public class ActivateOrDeactivateStudent extends AjaxController {
             default: {
                 out.print("false");
             }
-        }
+        }*/
     }
 
 }

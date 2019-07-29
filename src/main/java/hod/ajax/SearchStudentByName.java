@@ -69,7 +69,7 @@ public class SearchStudentByName extends AjaxController {
 				student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
 		);
 		studentJson.addProperty( "rollnumber", student.getRollNumber() );
-		studentJson.addProperty( "verified", student.isVerified() );
+		//studentJson.addProperty( "verified", student.isVerified() );
 		studentJson.add( "subjects", addSubjects( student ) );
 		jsonStudents.add( studentJson );
 	}

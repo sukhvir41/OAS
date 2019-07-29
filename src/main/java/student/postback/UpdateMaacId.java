@@ -34,7 +34,7 @@ public class UpdateMaacId extends PostBackController {
                 resp.sendRedirect("/OAS/student/resetmacid");
             } else {
                 student.setMacId(macId);
-                student.setVerified(false);
+                //student.setVerified(false);
                 resp.sendRedirect("/OAS/logout");
             }
             req.getSession().setAttribute("student", student);

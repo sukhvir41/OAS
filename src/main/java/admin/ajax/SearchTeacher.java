@@ -75,7 +75,7 @@ public class SearchTeacher extends AjaxController {
         }
         teacherJson.addProperty(CLASSTEACHER, teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName());
         teacherJson.add(DEPARTMENTS, addDepartment(teacher.getDepartments()));
-        teacherJson.addProperty(VERIFIED, teacher.isVerified());
+        //teacherJson.addProperty(VERIFIED, teacher.isVerified());
 
         jsonTeachers.add(teacherJson);
 

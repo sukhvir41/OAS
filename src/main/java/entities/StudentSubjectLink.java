@@ -29,7 +29,7 @@ public class StudentSubjectLink implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_fid", nullable = false, insertable = false, updatable = false,
-            foreignKey = @ForeignKey(name = "student_subject_link_student_foreign_key")
+            foreignKey = @ForeignKey(name = "student_subject_link_subject_foreign_key")
     )
     @NotNull
     @Getter

@@ -3,20 +3,20 @@
 $(document).ready(function () {
 
     $('#adminForm').validate({
-        rules:{
-            username:{
+        rules: {
+            username: {
                 required: true,
-                minlength : 8,
+                minlength: 8,
                 maxlength: 20,
-                remote:{
+                remote: {
                     url: "/OAS/ajax/checkusername",
                     type: "post"
                 },
             },
             email: {
-                required : true,
+                required: true,
                 email: true,
-                remote:{
+                remote: {
                     url: "/OAS/ajax/checkemail",
                     type: "post"
                 }
@@ -33,12 +33,12 @@ $(document).ready(function () {
                 equalTo: "#password"
             }
         },
-        messages:{
-            username:{
-                required: "Please enter your username",
+        messages: {
+            username: {
+                required: "Please enter username",
                 remote: $.validator.format("Username: {0} is taken"),
                 minlength: $.validator.format("Enter at least {0} characters"),
-                maxlength: $.validator.format("At max {0} characters") 
+                maxlength: $.validator.format("At max {0} characters")
             },
             email: {
                 remote: $.validator.format("Email: {0} is in use")
@@ -60,22 +60,22 @@ var usernameTakenCheck = function () {
             },
             method: "post",
             success: function (responseText) {
-                if(responseText ===true){
+                if (responseText === true) {
                     errorDialog.hide();
                     return true;
-                }else{
+                } else {
                     errorDialog.show();
                     return false;
                 }
-                    //presponse(responseText);
-                },
-                error: function(){
-                    //perror(false);
-                    errorDialog.show();
-                    return false;
-                },
-                async : false
-            });
+                //presponse(responseText);
+            },
+            error: function () {
+                //perror(false);
+                errorDialog.show();
+                return false;
+            },
+            async: false
+        });
         /*try{   
             var data = await promise;
             
@@ -93,7 +93,7 @@ var usernameTakenCheck = function () {
     }else{
         return false;
     }*/
-}
+    }
 };
 
 
@@ -102,7 +102,7 @@ var emailTakenCheck = async function () {
     var check;
     if (emailCheck()) {
 
-        var promise = await new Promise((presponse,perror) => {
+        var promise = await new Promise((presponse, perror) => {
             $.ajax({
                 url: "/OAS/ajax/checkemail",
                 data: {
@@ -113,25 +113,25 @@ var emailTakenCheck = async function () {
                     presponse(responseText)
 
                 },
-                error: function(){
+                error: function () {
                     perror(false);
                 }
             });
         });
-        try{
+        try {
             var data = promise;
             if (data === true) {
                 error.hide();
                 return true;
-            }else{
+            } else {
                 error.show();
                 return false;
             }
-        }catch(err){
+        } catch (err) {
             error.show()
             return false;
         }
-        
+
     }
 
 };
@@ -209,5 +209,5 @@ var usernameCheck = function () {
 var submitCheck = function () {
     var promise = emailTakenCheck() && passwordCheck() && usernameTakenCheck();
     return promise === true;
-    
+
 };

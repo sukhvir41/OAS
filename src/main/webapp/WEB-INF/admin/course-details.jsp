@@ -284,7 +284,7 @@
                                         <c:if test="${fn:length(requestScope.classRooms) eq 0}">
                                             <tr>
                                                 <td>----</td>
-                                                <td>This course <br /> has no Class Rooms</td>
+                                                <td>This course has no Class Rooms</td>
                                                 <td>----</td>
                                                 <td>----</td>
                                                 <td>----</td>

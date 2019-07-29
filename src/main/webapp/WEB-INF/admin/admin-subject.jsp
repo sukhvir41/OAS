@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -164,15 +165,20 @@
                                             <tr>
                                                 <td><a name="${subject.id}"></a>${subject.id}</td>
                                                 <td><a
-                                                        href="/OAS/admin/subjects/detailsubject?subjectId=${subject.id}">${subject.name}</a>
+                                                        href="/OAS/admin/subjects/subject-details?subjectId=${subject.id}">${subject.name}</a>
                                                 </td>
                                                 <td>
                                                     <c:forEach var="classRoom" items="${subject.classRooms}">
                                                         <a
-                                                            href="/OAS/admin/classrooms/detailclassroom?classroomId=${classRoom.id}">${classRoom.name}<br></a>
+                                                            href="/OAS/admin/classrooms/classroom-details?classroomId=${classRoom.id}">${classRoom.name}<br></a>
                                                     </c:forEach>
                                                 </td>
-                                                <td>${subject.course.name}</td>
+                                                <td>
+                                                    <a
+                                                        href="/OAS/admin/courses/course-details?courseId=${subject.course.id}">
+                                                        ${subject.course.name}
+                                                    </a>
+                                                </td>
                                                 <td>${subject.elective}</td>
                                             </tr>
                                         </c:forEach>

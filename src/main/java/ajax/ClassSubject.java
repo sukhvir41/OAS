@@ -7,9 +7,10 @@ package ajax;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import entities.ClassRoom;
-import entities.Subject;
+import entities.*;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
 
@@ -18,36 +19,57 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/getclasssubject")
+@WebServlet(urlPatterns = "/ajax/get-classroom-subjects")
 public class ClassSubject extends AjaxController {
+
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        int classRoomId = Integer.parseInt(req.getParameter("classroomId"));
 
-        ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classRoomId);
-       // Set<Subject> subjects = classRoom.getSubjects();
-        JsonArray jsonSubjects = new JsonArray();
-        /*subjects.stream()
-                .forEach(e -> addsubject(e, jsonSubjects));*/
-        session.getTransaction().commit();
-        session.close();
+
+        var classRoomIdString = req.getParameter("classroomId");
+
+        if (StringUtils.isBlank(classRoomIdString)) {
+            onError(req, resp);
+            return;
+        }
+
+        var classRoomId = Long.parseLong(classRoomIdString);
+
+        var holder = CriteriaHolder.getQueryHolder(session, Subject.class, SubjectClassRoomLink.class);
+
+        holder.getQuery().where(
+                holder.getCriteriaBuilder()
+                        .equal(holder.getRoot().get(SubjectClassRoomLink_.classRoom), classRoomId)
+        );
+        holder.getQuery().select(holder.getRoot().get(SubjectClassRoomLink_.subject));
+
+
+        JsonArray subjectsJson = session.createQuery(holder.getQuery())
+                .stream()
+                .map(this::jsonSubject)
+                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+
         Gson gson = new Gson();
-        out.print(gson.toJson(jsonSubjects));
+        var jsonObject = new JsonObject();
+        jsonObject.addProperty(STATUS, true);
+        jsonObject.add(DATA, subjectsJson);
+        out.print(gson.toJson(jsonObject));
 
     }
 
-    private void addsubject(Subject e, JsonArray jsonSubjects) {
-        JsonObject o = new JsonObject();
-        o.addProperty("id", e.getId());
-        o.addProperty("name", e.getName());
-        jsonSubjects.add(o);
+    private JsonObject jsonSubject(Subject subject) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id", subject.getId());
+        jsonObject.addProperty("name", subject.getName());
+        return jsonObject;
     }
 
 }

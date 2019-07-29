@@ -48,8 +48,8 @@ public class UpdateAccount extends PostBackController {
 		else {
 			resp.sendRedirect( "/OAS/account/editstudent" );
 		}
-		student.setVerified( false );
-		student.setUnaccounted( false );
+		//student.setVerified( false );
+		//student.setUnaccounted( false );
 		ClassRoom classRoom = (ClassRoom) session.get(
 				ClassRoom.class,
 				Long.parseLong( req.getParameter( "classroom" ) )

@@ -72,7 +72,7 @@ public class SearchTeacherByName extends AjaxController {
                 teacher.getClassRoom() == null ? "" : teacher.getClassRoom().getName()
         );
         //teacherJson.add("departments", addDepartment(teacher.getDepartments()));
-        teacherJson.addProperty("verified", teacher.isVerified());
+        //teacherJson.addProperty("verified", teacher.isVerified());
         jsonTeachers.add(teacherJson);
 
     }

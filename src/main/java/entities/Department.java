@@ -53,7 +53,6 @@ public class Department implements Serializable {
     private Teacher hod;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
-    @OrderBy("name")
     @Getter
     @Setter
     private List<Course> courses = new ArrayList<>();

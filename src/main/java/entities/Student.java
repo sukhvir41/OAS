@@ -68,7 +68,6 @@ public class Student implements Serializable, Comparable<Student> {
     private List<Attendance> attendances = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
-    @OrderBy("subject.name")
     @Getter
     private Set<StudentSubjectLink> subjects = new HashSet<>();
 

@@ -54,7 +54,7 @@ public class GetStudents extends AjaxController {
             teacher.getClassRoom()
                     .getStudents()
                     .stream()
-                    .filter(student -> student.isVerified() == Boolean.parseBoolean(filter))
+                    //.filter(student -> student.isVerified() == Boolean.parseBoolean(filter))
                     .sorted()
                     .forEach(student -> add(student, jsonStudent));
         }
@@ -74,7 +74,7 @@ public class GetStudents extends AjaxController {
                 student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
         );
         studentJson.addProperty(ROLLNUMBER, student.getRollNumber());
-        studentJson.addProperty(VERIFIED, student.isVerified());
+        //studentJson.addProperty(VERIFIED, student.isVerified());
         studentJson.add(SUBJECTS, addSubjects(student));
 
         jsonStudents.add(studentJson);

@@ -43,7 +43,7 @@ public class ActivateStudent extends Controller {
 
         UUID studentId = UUID.fromString(studentIdString);
 
-        int updatedCount = EntityHelper.upadteInstances(session, User.class, jpaObjects -> updateStudentQuery(jpaObjects, studentId));
+        int updatedCount = EntityHelper.updateInstances(session, User.class, jpaObjects -> updateStudentQuery(jpaObjects, studentId));
 
         if (updatedCount < 1) {
             // no rows updated
@@ -61,7 +61,7 @@ public class ActivateStudent extends Controller {
     }
 
 
-    private void updateStudentQuery(CriteriaHolder<CriteriaUpdate<User>, User> jpaObjects, UUID studentId) {
+    private void updateStudentQuery(CriteriaHolder<CriteriaUpdate<User>, User, User> jpaObjects, UUID studentId) {
         Predicate predicate = jpaObjects.getCriteriaBuilder()
                 .and(
                         jpaObjects.getCriteriaBuilder()

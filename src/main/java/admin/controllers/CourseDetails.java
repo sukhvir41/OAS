@@ -71,4 +71,5 @@ public class CourseDetails extends Controller {
 
     }
 
+
 }

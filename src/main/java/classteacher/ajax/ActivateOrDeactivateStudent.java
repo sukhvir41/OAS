@@ -35,7 +35,7 @@ public class ActivateOrDeactivateStudent extends AjaxController {
 
         Student student = (Student) session.get(Student.class, studentId);
 
-        if (teacher.getClassRoom().getStudents().contains(student)) {
+       /* if (teacher.getClassRoom().getStudents().contains(student)) {
             switch (action) {
                 case "verify": {
                     student.setVerified(true);
@@ -53,7 +53,7 @@ public class ActivateOrDeactivateStudent extends AjaxController {
             }
         } else {
             out.print(ERROR);
-        }
+        }*/
     }
 
 }

@@ -30,7 +30,7 @@ public class ActivateStudent extends Controller {
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
-            student.setVerified(true);
+            //student.setVerified(true);
             resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + student.getId());
         } else {
             resp.sendRedirect("/OAS/error");

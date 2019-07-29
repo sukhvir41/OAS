@@ -131,7 +131,7 @@ sukhvir --%>
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-hidden="true">
-                                                            ×
+                                                            X
                                                         </button>
                                                         <h4 class="modal-title" id="formModalLabel">
                                                             Alert! Are you sure you want to delete
@@ -167,7 +167,7 @@ sukhvir --%>
                                 <hr class="tall" />
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form action="/OAS/admin/courses/add-course" method="post">
+                                        <form id="addCourse" action="/OAS/admin/courses/add-course" method="post">
                                             <h4>Add Course</h4>
                                             <input type="hidden" name="departmentId"
                                                 value="${requestScope.department.id}" />
@@ -229,7 +229,7 @@ sukhvir --%>
                                                     <th>#</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
-                                                    <th>Verified</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -253,7 +253,7 @@ sukhvir --%>
                                                         <td>
                                                             <c:out value="${teacher.email}" />
                                                         </td>
-                                                        <td>${teacher.verified}</td>
+                                                        <td>${teacher.user.status}</td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -313,6 +313,9 @@ sukhvir --%>
 
     <!-- Theme Initialization Files -->
     <script src="/OAS/js/theme.init.js"></script>
+
+    <script src="/OAS/scripts/admin/department-details.js"></script>
+
 </body>
 
 </html>

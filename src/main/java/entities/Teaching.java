@@ -60,7 +60,6 @@ public class Teaching implements Serializable {
 
 
     @OneToMany(mappedBy = "teaching", fetch = FetchType.LAZY)
-    @OrderBy("date")
     @Getter
     @Setter
     List<Lecture> lectures = new ArrayList<>();

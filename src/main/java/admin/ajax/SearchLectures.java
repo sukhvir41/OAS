@@ -90,7 +90,7 @@ public class SearchLectures extends AjaxController {
 //                .size();
 //        
         //todo: have to optimize this.
-        Subject[] subjects = {theLecture.getTeaching().getSubject()};//experimental
+        //Subject[] subjects = {theLecture.getTeaching().getSubject()};//experimental
         
        /* int totalStudents = (int) session.createCriteria(Student.class) //experimental
                 .add(Restrictions.eq("classRoom", theLecture.getTeaching().getClassRoom()))

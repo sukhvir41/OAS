@@ -70,13 +70,11 @@ public class ClassRoom implements Serializable {
 //    private Teacher classTeacher;
 
     @OneToMany(mappedBy = "classRoom", fetch = FetchType.LAZY)
-    @OrderBy("fName ASC, LName ASC")
     @Getter
     @Setter
     private Set<Student> students = new HashSet<>();
 
     @OneToMany(mappedBy = "classRoom", fetch = FetchType.LAZY)
-    @OrderBy("subject.name")
     @Getter
     @Setter
     private Set<SubjectClassRoomLink> subjects = new HashSet<>();

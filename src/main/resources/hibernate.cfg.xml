@@ -18,7 +18,7 @@
         </property>
 
         <property name="hibernate.connection.url">
-            jdbc:postgresql://192.168.0.23:5432/OASdb
+            jdbc:postgresql://192.168.0.30:5432/OASdb
         </property>
 
         <property name="hibernate.connection.username">
@@ -49,7 +49,7 @@
         <property name="javax.persistence.schema-generation.scripts.create-target">create.sql</property>
         <property name="javax.persistence.schema-generation.scripts.drop-target">drop.sql</property>
         <!-- <property name="hibernate.format_sql">true</property>-->
-       <!-- <property name="hibernate.use_sql_comments">true</property>-->
+        <!-- <property name="hibernate.use_sql_comments">true</property>-->
 
         <mapping class="entities.Admin"/>
         <mapping class="entities.Attendance"/>

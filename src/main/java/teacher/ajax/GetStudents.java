@@ -27,60 +27,59 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/teacher/ajax/getstudents")
 public class GetStudents extends AjaxController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
-		Teacher teacher = (Teacher) httpSession.getAttribute( "teacher" );
-		teacher = (Teacher) session.get( Teacher.class, teacher.getId() );
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
+        Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
+        teacher = (Teacher) session.get(Teacher.class, teacher.getId());
 
-		int teachingId = Integer.parseInt( req.getParameter( "teachingId" ) );
-		Teaching teaching = (Teaching) session.get( Teaching.class, teachingId );
+        int teachingId = Integer.parseInt(req.getParameter("teachingId"));
+        Teaching teaching = (Teaching) session.get(Teaching.class, teachingId);
 
-		if ( teacher.getTeaches().contains( teaching ) ) {
-			Gson gson = new Gson();
-			JsonArray JsonStudents = new JsonArray();
+        if (teacher.getTeaches().contains(teaching)) {
+            Gson gson = new Gson();
+            JsonArray JsonStudents = new JsonArray();
 
-			teaching.getClassRoom()
-					.getStudents()
-					.stream()
-					.filter( student -> student.getSubjects().contains( teaching.getSubject() ) )
-					.sorted()
-					.forEach( student -> add( student, JsonStudents ) );
+            teaching.getClassRoom()
+                    .getStudents()
+                    .stream()
+                    .filter(student -> student.getSubjects().contains(teaching.getSubject()))
+                    .sorted()
+                    .forEach(student -> add(student, JsonStudents));
 
-			out.print( gson.toJson( JsonStudents ) );
-		}
-		else {
-			out.print( "error" );
-		}
+            out.print(gson.toJson(JsonStudents));
+        } else {
+            out.print("error");
+        }
 
-	}
+    }
 
-	private void add(Student student, JsonArray jsonStudents) {
-		JsonObject studentJson = new JsonObject();
-		studentJson.addProperty( "id", student.getId().toString() );
-		studentJson.addProperty( "name", student.toString() );
-		studentJson.addProperty( "email", student.getUser().getEmail() );
-		studentJson.addProperty( "number", student.getUser().getNumber() );
-		studentJson.addProperty(
-				"classroom",
-				student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
-		);
-		studentJson.addProperty( "rollnumber", student.getRollNumber() );
-		studentJson.addProperty( "verified", student.isVerified() );
-		studentJson.add( "subjects", addSubjects( student ) );
-		jsonStudents.add( studentJson );
-	}
+    private void add(Student student, JsonArray jsonStudents) {
+        JsonObject studentJson = new JsonObject();
+        studentJson.addProperty("id", student.getId().toString());
+        studentJson.addProperty("name", student.toString());
+        studentJson.addProperty("email", student.getUser().getEmail());
+        studentJson.addProperty("number", student.getUser().getNumber());
+        studentJson.addProperty(
+                "classroom",
+                student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
+        );
+        studentJson.addProperty("rollnumber", student.getRollNumber());
+        //studentJson.addProperty( "verified", student.isVerified() );
+        studentJson.add("subjects", addSubjects(student));
+        jsonStudents.add(studentJson);
+    }
 
-	private JsonElement addSubjects(Student e) {
-		JsonArray jsonSubjects = new JsonArray();
+    private JsonElement addSubjects(Student e) {
+        JsonArray jsonSubjects = new JsonArray();
 		/*e.getSubjects()
 				.stream()
 				.forEach( subject -> jsonSubjects.add( subject.getName() ) );*/
-		return jsonSubjects;
-	}
+        return jsonSubjects;
+    }
 
 }
