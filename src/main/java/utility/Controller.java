@@ -27,6 +27,11 @@ public abstract class Controller extends HttpServlet {
         resp.sendError(500);
     }
 
+    public void onErrorWithException(HttpServletRequest req, HttpServletResponse resp, Exception e) throws ServletException, IOException {
+        resp.sendError(500);
+    }
+
+
     private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setContentType(resp);
         Session session = Utils.openSession();
@@ -47,7 +52,11 @@ public abstract class Controller extends HttpServlet {
                 e.printStackTrace();
             }
 
-            this.onError(req, resp);
+            if (callOnError()) {
+                this.onError(req, resp);
+            } else {
+                this.onErrorWithException(req, resp, e);
+            }
 
         } finally {
             session.close();
@@ -71,12 +80,29 @@ public abstract class Controller extends HttpServlet {
         return true;
     }
 
+    /**
+     * if onErrorWithException is overwritten by child class then call onErrorWithException else call onError
+     *
+     * @return call onError or not
+     */
+    private boolean callOnError() {
+        try {
+            return this.getClass()
+                    .getMethod("onErrorWithException")
+                    .getDeclaringClass()
+                    .equals(this.getClass());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public abstract void process(
             HttpServletRequest req,
             HttpServletResponse resp,
             Session session,
             HttpSession httpSession,
             PrintWriter out) throws Exception;
+
 
 }
 
