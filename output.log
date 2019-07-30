@@ -51,42 +51,28 @@ Hibernate:
 connection opened
 Hibernate: 
     select
-        user0_.id as id1_14_,
-        user0_.email as email2_14_,
-        user0_.forgot_password_expiry_date as forgot_p3_14_,
-        user0_.number as number4_14_,
-        user0_.password as password5_14_,
-        user0_.session_expiry_date as session_6_14_,
-        user0_.session_id as session_7_14_,
-        user0_.session_token as session_8_14_,
-        user0_.status as status9_14_,
-        user0_.token as token10_14_,
-        user0_.used as used11_14_,
-        user0_.user_type as user_ty12_14_,
-        user0_.username as usernam13_14_ 
+        admin0_.id as id1_0_0_,
+        user1_.id as id1_14_1_,
+        admin0_.type as type2_0_0_,
+        user1_.email as email2_14_1_,
+        user1_.forgot_password_expiry_date as forgot_p3_14_1_,
+        user1_.number as number4_14_1_,
+        user1_.password as password5_14_1_,
+        user1_.session_expiry_date as session_6_14_1_,
+        user1_.session_id as session_7_14_1_,
+        user1_.session_token as session_8_14_1_,
+        user1_.status as status9_14_1_,
+        user1_.token as token10_14_1_,
+        user1_.used as used11_14_1_,
+        user1_.user_type as user_ty12_14_1_,
+        user1_.username as usernam13_14_1_ 
     from
-        users user0_ 
+        admin admin0_ 
+    left outer join
+        users user1_ 
+            on admin0_.id=user1_.id 
     where
-        user0_.email=?
-Hibernate: 
-    select
-        user0_.id as id1_14_,
-        user0_.email as email2_14_,
-        user0_.forgot_password_expiry_date as forgot_p3_14_,
-        user0_.number as number4_14_,
-        user0_.password as password5_14_,
-        user0_.session_expiry_date as session_6_14_,
-        user0_.session_id as session_7_14_,
-        user0_.session_token as session_8_14_,
-        user0_.status as status9_14_,
-        user0_.token as token10_14_,
-        user0_.used as used11_14_,
-        user0_.user_type as user_ty12_14_,
-        user0_.username as usernam13_14_ 
-    from
-        users user0_ 
-    where
-        user0_.email=?
+        admin0_.id=?
 Hibernate: 
     select
         admin0_.id as id1_0_0_,
@@ -111,7 +97,6 @@ Hibernate:
             on admin0_.id=user1_.id 
     where
         admin0_.id=?
-could not extend login session cookies
 connection opened
 Hibernate: 
     select
@@ -141,6 +126,28 @@ Hibernate:
     from
         department department0_ 
     where
+        lower(department0_.name) like ? 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
         department0_.name>? 
     order by
         department0_.name asc limit ?
@@ -166,6 +173,341 @@ Hibernate:
         department0_.name>? 
     order by
         department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        department0_.name>? 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        department0_.name>? 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    order by
+        department0_.name asc
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        nextval ('department_sequence')
+Hibernate: 
+    insert 
+    into
+        department
+        (hod_teacher_fid, name, id) 
+    values
+        (?, ?, ?)
 Hibernate: 
     select
         department0_.id as id1_5_,
@@ -224,1141 +566,7 @@ Hibernate:
     from
         department department0_ 
     where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_0_,
-        courses1_.id as id1_4_1_,
-        teacher2_.id as id1_12_2_,
-        department0_.hod_teacher_fid as hod_teac3_5_0_,
-        department0_.name as name2_5_0_,
-        courses1_.department_fid as departme3_4_1_,
-        courses1_.name as name2_4_1_,
-        courses1_.department_fid as departme3_4_0__,
-        courses1_.id as id1_4_0__,
-        teacher2_.first_name as first_na2_12_2_,
-        teacher2_.last_name as last_nam3_12_2_,
-        teacher2_1_.class_room_fid as class_ro1_3_2_ 
-    from
-        department department0_ 
-    left outer join
-        course courses1_ 
-            on department0_.id=courses1_.department_fid 
-    left outer join
-        teacher teacher2_ 
-            on department0_.hod_teacher_fid=teacher2_.id 
-    left outer join
-        class_teacher_class_room_link teacher2_1_ 
-            on teacher2_.id=teacher2_1_.class_teacher_fid 
-    where
-        department0_.id=32
-Hibernate: 
-    select
-        teacher0_.id as id1_12_,
-        teacher0_.first_name as first_na2_12_,
-        teacher0_.last_name as last_nam3_12_,
-        teacher0_1_.class_room_fid as class_ro1_3_ 
-    from
-        teacher teacher0_ 
-    left outer join
-        class_teacher_class_room_link teacher0_1_ 
-            on teacher0_.id=teacher0_1_.class_teacher_fid 
-    inner join
-        teacher_department_link department1_ 
-            on teacher0_.id=department1_.teacher_fid 
-    where
-        department1_.department_fid=?
-Hibernate: 
-    select
-        department0_.id as id1_5_0_,
-        department0_.hod_teacher_fid as hod_teac3_5_0_,
-        department0_.name as name2_5_0_ 
-    from
-        department department0_ 
-    where
-        department0_.id=?
-Hibernate: 
-    delete 
-    from
-        department 
-    where
-        id=?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1369,51 +577,7 @@ Hibernate:
     from
         department department0_ 
     where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1424,7 +588,7 @@ Hibernate:
     from
         department department0_ 
     where
-        1=1 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1436,6 +600,9 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
+        and (
+            lower(department0_.name) like ?
+        ) 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1446,7 +613,7 @@ Hibernate:
     from
         department department0_ 
     where
-        1=1 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1458,17 +625,9 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
+        and (
+            lower(department0_.name) like ?
+        ) 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1479,7 +638,7 @@ Hibernate:
     from
         department department0_ 
     where
-        department0_.name>? 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1490,7 +649,7 @@ Hibernate:
     from
         department department0_ 
     where
-        1=1 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1501,7 +660,7 @@ Hibernate:
     from
         department department0_ 
     where
-        department0_.name>? 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1524,17 +683,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1546,17 +694,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1568,17 +705,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1590,17 +716,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1634,17 +749,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1656,17 +760,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1678,17 +771,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1700,17 +782,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1744,17 +815,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1776,17 +836,6 @@ Hibernate:
     from
         department department0_ 
     where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
         department0_.name>? 
     order by
         department0_.name asc limit ?
@@ -1810,17 +859,6 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -1832,17 +870,8 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
     order by
         department0_.name asc limit ?
 decrement error session context
+ogExceptions
+ERROR: The connection attempt failed.

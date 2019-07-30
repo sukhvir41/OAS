@@ -37,11 +37,17 @@ public class GetDepartments extends AjaxController {
         List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(pageValue)) {
-            predicates.add(holder.getBuilder().greaterThan(holder.getRoot().get(Department_.name), pageValue));
+            predicates.add(
+                    holder.getBuilder()
+                            .greaterThan(holder.getRoot().get(Department_.name), pageValue)
+            );
         }
 
         if (StringUtils.isNotBlank(searchText)) {
-            predicates.add(holder.getBuilder().like(holder.getBuilder().lower(holder.getRoot().get(Department_.name)), searchText.toLowerCase() + "%"));
+            predicates.add(
+                    holder.getBuilder()
+                            .like(holder.getBuilder().lower(holder.getRoot().get(Department_.name)), searchText.toLowerCase() + "%")
+            );
         }
 
         var predicatesArray = new Predicate[predicates.size()];

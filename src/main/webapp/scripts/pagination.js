@@ -1,7 +1,7 @@
 'use strict';
 
-
-var paginate = function (element, title, url, tr, noDataMessage) {
+//does seek pgination
+var paginate = function (element, title, url, tr, noDataMessage, showSearch, additionalData) {
     var vue = new Vue({
         el: element,
         data: {
@@ -14,12 +14,18 @@ var paginate = function (element, title, url, tr, noDataMessage) {
             error: false,
             showNext: true,
             showPrev: false,
+            searchText: '',
+            showSearch: showSearch || true,
+            additionalData: additionalData || "",
         },
         mounted: function () {
             var self = this;
             $.ajax({
                 url: url,
                 method: "post",
+                data: {
+                    additionalData: self.additionalData
+                },
                 success: function (result) {
                     if (result.status === 'error') {
                         self.error = true;
@@ -53,7 +59,9 @@ var paginate = function (element, title, url, tr, noDataMessage) {
                     url: url,
                     method: "post",
                     data: {
-                        pageValue: self.getPageValue()
+                        pageValue: self.getPageValue(),
+                        searchText: self.searchText,
+                        additionalData: additionalData,
                     },
                     success: function (result) {
                         if (result.status === 'error') {
@@ -82,7 +90,9 @@ var paginate = function (element, title, url, tr, noDataMessage) {
                     url: url,
                     method: "post",
                     data: {
-                        pageValue: self.getPageValue()
+                        pageValue: self.getPageValue(),
+                        searchText: self.searchText,
+                        additionalData: additionalData,
                     },
                     success: function (result) {
                         if (result.status === 'error') {
@@ -104,19 +114,49 @@ var paginate = function (element, title, url, tr, noDataMessage) {
                         self.counter = 1;
                     }
                 });
+            },
+            search: function () {
+                this.pageValues = [];
+                this.showPrev = false;
+                var self = this;
+                self.counter = 1;
+                $.ajax({
+                    url: url,
+                    method: "post",
+                    data: {
+                        searchText: self.searchText,
+                        additionalData: additionalData,
+                    },
+                    success: function (result) {
+                        if (result.status === 'error') {
+                            self.error = true;
+                        } else {
+                            self.error = false;
+                            self.data = result.data;
+                            self.pageValues.push(result.pageValue);
+                            self.columns = result.columns;
+                            self.showNext = result.more;
+                            if (self.data.length === 0) {
+                                self.error = true;
+                            }
+                        }
+                    },
+                    error: function () {
+                        self.error = true;
+                    }
+                });
             }
         },
         template: `
         <div>
            <div class="row">
                 <div class="col-md-12">
-                    <h4> {{ title }}</h4>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <label>Search</label>
-                            <input type="text" class = "form-control" placeholder="search">
-                            <button class="btn btn-primary btn-sm"> Search </button>
-                            <button class = "btn btn-primary btn-sm"> Clear </button>
+                    <div class="row">
+                        <div class = "col-md-4 col-xs-12">
+                            <h4> 
+                                {{title}}     
+                            </h4>
+                            <input v-if="showSearch" type="text" class = "form-control" placeholder = "search" v-model.trim="searchText" v-on:keyup="search" />
                         </div>
                     </div>
                     <table class="table table-hover table-striped">

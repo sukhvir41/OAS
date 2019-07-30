@@ -2,86 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/drop.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output.log" beforeDir="false" afterPath="$PROJECT_DIR$/output.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchLectures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchLectures.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudentByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudentByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacherByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/SearchTeacherByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/CourseDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/SubjectDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/SubjectDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/UnaccountTeacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/DeleteTeacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UnaccountStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UnaccountStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UnnaccoutTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UnnaccoutTeacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/CheckEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/CheckEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/ClassSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/ClassSubject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/ForgotPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/ajax/ActivateOrDeactivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/ajax/ActivateOrDeactivateStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/ajax/GetStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/ajax/GetStudents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/ajax/SearchStudentByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/ajax/SearchStudentByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/controllers/ActivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/controllers/ActivateStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/classteacher/controllers/DeactivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/classteacher/controllers/DeactivateStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/StudentSubjectLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/StudentSubjectLink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Subject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Teaching.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Teaching.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/ActivateOrDeactivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/ActivateOrDeactivateStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/GetTeachers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/GetTeachers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudentByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudentByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchTeacherByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/ajax/SearchTeacherByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/controllers/ActivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/controllers/ActivateStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/controllers/DeactivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/controllers/DeactivateStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/postback/DeleteStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/postback/DeleteStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hod/postback/UnaccountStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hod/postback/UnaccountStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/postback/LoginPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/student/postback/UpdateAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/student/postback/UpdateAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/student/postback/UpdateMaacId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/student/postback/UpdateMaacId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/teacher/ajax/GetStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teacher/ajax/GetStudents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/teacher/postback/UpdateAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teacher/postback/UpdateAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/AjaxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/AjaxController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Testing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-department.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-department.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-subject.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-subject.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/course-details.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/course-details.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/department-details.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/department-details.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/detailsubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/admin/add-admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/admin/add-admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/admin/add-department.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/pagination.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -136,11 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="80" column="45" selection-start-line="80" selection-start-column="45" selection-end-line="80" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="238">
+              <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -158,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="49" column="53" lean-forward="true" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+              <caret line="49" column="53" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -166,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/output.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-238">
-              <caret line="15" column="35" selection-start-line="1847" selection-start-column="31" selection-end-line="1848" />
+            <state relative-caret-position="-323">
+              <caret line="10" column="35" selection-start-line="22" selection-start-column="45" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -638,7 +559,21 @@
       <option name="project" value="LOCAL" />
       <updated>1563917212360</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="changes admin controllers package and added vue.js and pagination.js">
+      <created>1564372095470</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1564372095470</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added pagination.js">
+      <created>1564372180061</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1564372180061</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -652,6 +587,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project Explorer" order="0" weight="0.32995737" />
       <window_info id="Job Explorer" order="1" weight="0.32995737" />
@@ -746,7 +682,9 @@
     <MESSAGE value="made changes in admin package" />
     <MESSAGE value="added userStatus" />
     <MESSAGE value="changes admin controllers package" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes admin controllers package" />
+    <MESSAGE value="changes admin controllers package and added vue.js and pagination.js" />
+    <MESSAGE value="added pagination.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="added pagination.js" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1101,7 +1039,7 @@
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="49" column="53" lean-forward="true" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+          <caret line="49" column="53" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -1121,18 +1059,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/output.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="15" column="35" selection-start-line="1847" selection-start-column="31" selection-end-line="1848" />
+        <state relative-caret-position="-323">
+          <caret line="10" column="35" selection-start-line="22" selection-start-column="45" selection-end-line="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="80" column="45" selection-start-line="80" selection-start-column="45" selection-end-line="80" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
         </state>
       </provider>
     </entry>
