@@ -18,6 +18,39 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
             showSearch: showSearch || true,
             additionalData: additionalData || "",
         },
+        watch: {
+            searchText: function (val) {
+                this.pageValues = [];
+                this.showPrev = false;
+                var self = this;
+                self.counter = 1;
+                $.ajax({
+                    url: url,
+                    method: "post",
+                    data: {
+                        searchText: self.searchText,
+                        additionalData: additionalData,
+                    },
+                    success: function (result) {
+                        if (result.status === 'error') {
+                            self.error = true;
+                        } else {
+                            self.error = false;
+                            self.data = result.data;
+                            self.pageValues.push(result.pageValue);
+                            self.columns = result.columns;
+                            self.showNext = result.more;
+                            if (self.data.length === 0) {
+                                self.error = true;
+                            }
+                        }
+                    },
+                    error: function () {
+                        self.error = true;
+                    }
+                });
+            }
+        },
         mounted: function () {
             var self = this;
             $.ajax({
@@ -114,37 +147,6 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
                         self.counter = 1;
                     }
                 });
-            },
-            search: function () {
-                this.pageValues = [];
-                this.showPrev = false;
-                var self = this;
-                self.counter = 1;
-                $.ajax({
-                    url: url,
-                    method: "post",
-                    data: {
-                        searchText: self.searchText,
-                        additionalData: additionalData,
-                    },
-                    success: function (result) {
-                        if (result.status === 'error') {
-                            self.error = true;
-                        } else {
-                            self.error = false;
-                            self.data = result.data;
-                            self.pageValues.push(result.pageValue);
-                            self.columns = result.columns;
-                            self.showNext = result.more;
-                            if (self.data.length === 0) {
-                                self.error = true;
-                            }
-                        }
-                    },
-                    error: function () {
-                        self.error = true;
-                    }
-                });
             }
         },
         template: `
@@ -156,7 +158,7 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
                             <h4> 
                                 {{title}}     
                             </h4>
-                            <input v-if="showSearch" type="text" class = "form-control" placeholder = "search" v-model.trim="searchText" v-on:keyup="search" />
+                            <input v-if="showSearch" type="text" class = "form-control" placeholder = "search" v-model="searchText" />
                         </div>
                     </div>
                     <table class="table table-hover table-striped">
@@ -183,13 +185,25 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
                                 <i class = "fa fa-chevron-left">  </i> 
                                 Previous
                             </button> 
+                        </li>
+                        <li v-else>
+                            <button type = "button" class = "mb-xs mt-xs mr-xs btn btn-default disabled" >
+                                <i class = "fa fa-chevron-left"></i>
+                                Previous
+                            </button>
                         </li> 
                         <li v-if="showNext">
                             <button type = "button" class = "mb-xs mt-xs mr-xs btn btn-default" v-on:click="getNext" >
                                 Next
                                 <i class = "fa fa-chevron-right"></i> 
                             </button> 
-                        </li> 
+                        </li>
+                        <li v-else>
+                            <button type = "button" class = "mb-xs mt-xs mr-xs btn btn-default disabled" >
+                                Next 
+                                <i class = "fa fa-chevron-right"> </i>  
+                            </button>  
+                        </li>  
                     </ul> 
                </div> 
             </div>

@@ -73,6 +73,103 @@ Hibernate:
             on admin0_.id=user1_.id 
     where
         admin0_.id=?
+connection opened
+Hibernate: 
+    select
+        admin0_.id as id1_0_0_,
+        user1_.id as id1_14_1_,
+        admin0_.type as type2_0_0_,
+        user1_.email as email2_14_1_,
+        user1_.forgot_password_expiry_date as forgot_p3_14_1_,
+        user1_.number as number4_14_1_,
+        user1_.password as password5_14_1_,
+        user1_.session_expiry_date as session_6_14_1_,
+        user1_.session_id as session_7_14_1_,
+        user1_.session_token as session_8_14_1_,
+        user1_.status as status9_14_1_,
+        user1_.token as token10_14_1_,
+        user1_.used as used11_14_1_,
+        user1_.user_type as user_ty12_14_1_,
+        user1_.username as usernam13_14_1_ 
+    from
+        admin admin0_ 
+    left outer join
+        users user1_ 
+            on admin0_.id=user1_.id
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        lower(department0_.name) like ? 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        lower(department0_.name) like ? 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        lower(department0_.name) like ? 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        1=1 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        user0_.id as id1_14_,
+        user0_.email as email2_14_,
+        user0_.forgot_password_expiry_date as forgot_p3_14_,
+        user0_.number as number4_14_,
+        user0_.password as password5_14_,
+        user0_.session_expiry_date as session_6_14_,
+        user0_.session_id as session_7_14_,
+        user0_.session_token as session_8_14_,
+        user0_.status as status9_14_,
+        user0_.token as token10_14_,
+        user0_.used as used11_14_,
+        user0_.user_type as user_ty12_14_,
+        user0_.username as usernam13_14_ 
+    from
+        users user0_ 
+    where
+        user0_.email=?
 Hibernate: 
     select
         admin0_.id as id1_0_0_,
@@ -97,6 +194,7 @@ Hibernate:
             on admin0_.id=user1_.id 
     where
         admin0_.id=?
+could not extend login session cookies
 connection opened
 Hibernate: 
     select
@@ -105,8 +203,21 @@ Hibernate:
         department0_.name as name2_5_ 
     from
         department department0_ 
+    where
+        1=1 
     order by
-        department0_.name asc
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        lower(department0_.name) like ? 
+    order by
+        department0_.name asc limit ?
 Hibernate: 
     select
         department0_.id as id1_5_,
@@ -148,405 +259,9 @@ Hibernate:
     from
         department department0_ 
     where
-        department0_.name>? 
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        nextval ('department_sequence')
-Hibernate: 
-    insert 
-    into
-        department
-        (hod_teacher_fid, name, id) 
-    values
-        (?, ?, ?)
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    order by
-        department0_.name asc
 Hibernate: 
     select
         department0_.id as id1_5_,
@@ -577,7 +292,7 @@ Hibernate:
     from
         department department0_ 
     where
-        lower(department0_.name) like ? 
+        1=1 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -649,6 +364,20 @@ Hibernate:
     from
         department department0_ 
     where
+        department0_.name>? 
+        and (
+            lower(department0_.name) like ?
+        ) 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
         lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
@@ -660,6 +389,20 @@ Hibernate:
     from
         department department0_ 
     where
+        department0_.name>? 
+        and (
+            lower(department0_.name) like ?
+        ) 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
         lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
@@ -671,7 +414,21 @@ Hibernate:
     from
         department department0_ 
     where
-        1=1 
+        department0_.name>? 
+        and (
+            lower(department0_.name) like ?
+        ) 
+    order by
+        department0_.name asc limit ?
+Hibernate: 
+    select
+        department0_.id as id1_5_,
+        department0_.hod_teacher_fid as hod_teac3_5_,
+        department0_.name as name2_5_ 
+    from
+        department department0_ 
+    where
+        lower(department0_.name) like ? 
     order by
         department0_.name asc limit ?
 Hibernate: 
@@ -683,195 +440,560 @@ Hibernate:
         department department0_ 
     where
         department0_.name>? 
+        and (
+            lower(department0_.name) like ?
+        ) 
     order by
         department0_.name asc limit ?
 Hibernate: 
     select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        1=1 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-Hibernate: 
-    select
-        department0_.id as id1_5_,
-        department0_.hod_teacher_fid as hod_teac3_5_,
-        department0_.name as name2_5_ 
-    from
-        department department0_ 
-    where
-        department0_.name>? 
-    order by
-        department0_.name asc limit ?
-decrement error session context
-ogExceptions
+        department0_.id as Jul 30, 2019 11:30:28 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08001
+Jul 30, 2019 11:30:28 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
 ERROR: The connection attempt failed.
+org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:118)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:321)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.poll(DriverManagerConnectionProviderImpl.java:276)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.getConnection(DriverManagerConnectionProviderImpl.java:430)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:171)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:106)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:136)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:254)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:262)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:236)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:86)
+	at org.hibernate.internal.AbstractSharedSessionContract.beginTransaction(AbstractSharedSessionContract.java:468)
+	at utility.Controller.doProcess(Controller.java:38)
+	at utility.Controller.doPost(Controller.java:18)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:292)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195)
+	at org.postgresql.Driver.makeConnection(Driver.java:454)
+	at org.postgresql.Driver.connect(Driver.java:256)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 42 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:70)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:91)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
+	... 47 more
+Jul 30, 2019 11:30:33 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08006
+Jul 30, 2019 11:30:33 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: An I/O error occurred while sending to the backend.
+Jul 30, 2019 11:30:33 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08003
+Jul 30, 2019 11:30:33 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: This connection has been closed.
+org.hibernate.exception.JDBCConnectionException: Unable to release JDBC Connection
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.releaseConnection(LogicalConnectionManagedImpl.java:199)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.close(LogicalConnectionManagedImpl.java:239)
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.close(JdbcCoordinatorImpl.java:189)
+	at org.hibernate.internal.AbstractSharedSessionContract.close(AbstractSharedSessionContract.java:327)
+	at org.hibernate.internal.SessionImpl.closeWithoutOpenChecks(SessionImpl.java:444)
+	at org.hibernate.internal.SessionImpl.close(SessionImpl.java:421)
+	at utility.Controller.doProcess(Controller.java:62)
+	at utility.Controller.doPost(Controller.java:18)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: This connection has been closed.
+	at org.postgresql.jdbc.PgConnection.checkClosed(PgConnection.java:783)
+	at org.postgresql.jdbc.PgConnection.setAutoCommit(PgConnection.java:727)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.add(DriverManagerConnectionProviderImpl.java:266)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.closeConnection(DriverManagerConnectionProviderImpl.java:444)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.closeConnection(DriverManagerConnectionProviderImpl.java:176)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.releaseConnection(NonContextualJdbcConnectionAccess.java:46)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.releaseConnection(LogicalConnectionManagedImpl.java:196)
+	... 34 more
+Jul 30, 2019 11:30:36 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08006
+Jul 30, 2019 11:30:36 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: An I/O error occurred while sending to the backend.
+Jul 30, 2019 11:30:36 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08003
+Jul 30, 2019 11:30:36 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: This connection has been closed.
+org.hibernate.exception.JDBCConnectionException: Unable to release JDBC Connection
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.releaseConnection(LogicalConnectionManagedImpl.java:199)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.close(LogicalConnectionManagedImpl.java:239)
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.close(JdbcCoordinatorImpl.java:189)
+	at org.hibernate.internal.AbstractSharedSessionContract.close(AbstractSharedSessionContract.java:327)
+	at org.hibernate.internal.SessionImpl.closeWithoutOpenChecks(SessionImpl.java:444)
+	at org.hibernate.internal.SessionImpl.close(SessionImpl.java:421)
+	at utility.Controller.doProcess(Controller.java:62)
+	at utility.Controller.doPost(Controller.java:18)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: This connection has been closed.
+	at org.postgresql.jdbc.PgConnection.checkClosed(PgConnection.java:783)
+	at org.postgresql.jdbc.PgConnection.setAutoCommit(PgConnection.java:727)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.add(DriverManagerConnectionProviderImpl.java:266)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.closeConnection(DriverManagerConnectionProviderImpl.java:444)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.closeConnection(DriverManagerConnectionProviderImpl.java:176)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.releaseConnection(NonContextualJdbcConnectionAccess.java:46)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.releaseConnection(LogicalConnectionManagedImpl.java:196)
+	... 34 more
+Jul 30, 2019 11:30:38 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08001
+Jul 30, 2019 11:30:38 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: The connection attempt failed.
+org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:118)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:321)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.poll(DriverManagerConnectionProviderImpl.java:276)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.getConnection(DriverManagerConnectionProviderImpl.java:430)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:171)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:106)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:136)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:254)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:262)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:236)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:86)
+	at org.hibernate.internal.AbstractSharedSessionContract.beginTransaction(AbstractSharedSessionContract.java:468)
+	at utility.Controller.doProcess(Controller.java:38)
+	at utility.Controller.doPost(Controller.java:18)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:292)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195)
+	at org.postgresql.Driver.makeConnection(Driver.java:454)
+	at org.postgresql.Driver.connect(Driver.java:256)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 42 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:70)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:91)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
+	... 47 more
+Jul 30, 2019 11:30:42 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08001
+Jul 30, 2019 11:30:42 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: The connection attempt failed.
+Jul 30, 2019 11:30:48 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08001
+Jul 30, 2019 11:30:48 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: The connection attempt failed.
+org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:118)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:321)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.poll(DriverManagerConnectionProviderImpl.java:276)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.getConnection(DriverManagerConnectionProviderImpl.java:430)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:171)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:106)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:136)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:254)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:262)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:236)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:86)
+	at org.hibernate.internal.AbstractSharedSessionContract.beginTransaction(AbstractSharedSessionContract.java:468)
+	at utility.Controller.doProcess(Controller.java:38)
+	at utility.Controller.doPost(Controller.java:18)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:292)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195)
+	at org.postgresql.Driver.makeConnection(Driver.java:454)
+	at org.postgresql.Driver.connect(Driver.java:256)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 42 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:70)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:91)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
+	... 47 more
+Jul 30, 2019 11:30:58 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08001
+Jul 30, 2019 11:30:58 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: The connection attempt failed.
+org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:118)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:321)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.poll(DriverManagerConnectionProviderImpl.java:276)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.getConnection(DriverManagerConnectionProviderImpl.java:430)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:171)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:106)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:136)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:254)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:262)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:236)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:86)
+	at org.hibernate.internal.AbstractSharedSessionContract.beginTransaction(AbstractSharedSessionContract.java:468)
+	at utility.Controller.doProcess(Controller.java:38)
+	at utility.Controller.doGet(Controller.java:23)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:292)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195)
+	at org.postgresql.Driver.makeConnection(Driver.java:454)
+	at org.postgresql.Driver.connect(Driver.java:256)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 42 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:70)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:91)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
+	... 47 more
+Jul 30, 2019 11:31:08 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08001
+Jul 30, 2019 11:31:08 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: The connection attempt failed.
+org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:118)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:321)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.poll(DriverManagerConnectionProviderImpl.java:276)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.getConnection(DriverManagerConnectionProviderImpl.java:430)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:171)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:106)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:136)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:254)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:262)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:236)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:86)
+	at org.hibernate.internal.AbstractSharedSessionContract.beginTransaction(AbstractSharedSessionContract.java:468)
+	at utility.Controller.doProcess(Controller.java:38)
+	at utility.Controller.doPost(Controller.java:18)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:292)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195)
+	at org.postgresql.Driver.makeConnection(Driver.java:454)
+	at org.postgresql.Driver.connect(Driver.java:256)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 42 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:70)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:91)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
+	... 47 more
+Jul 30, 2019 11:31:18 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 0, SQLState: 08001
+Jul 30, 2019 11:31:18 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: The connection attempt failed.
+org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:118)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:321)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.poll(DriverManagerConnectionProviderImpl.java:276)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState.getConnection(DriverManagerConnectionProviderImpl.java:430)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:171)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:106)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:136)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:254)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:262)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:236)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:86)
+	at org.hibernate.internal.AbstractSharedSessionContract.beginTransaction(AbstractSharedSessionContract.java:468)
+	at utility.Controller.doProcess(Controller.java:38)
+	at utility.Controller.doPost(Controller.java:18)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at sessionvalidation.AdminValidation.doFilter(AdminValidation.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:292)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195)
+	at org.postgresql.Driver.makeConnection(Driver.java:454)
+	at org.postgresql.Driver.connect(Driver.java:256)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 42 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:70)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:91)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
+	... 47 more

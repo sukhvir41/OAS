@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//@WebServlet(urlPatterns = "/admin/ajax/get-departments")
-@WebServlet(urlPatterns = "/get-departments")
+@WebServlet(urlPatterns = "/admin/ajax/get-departments")
 public class GetDepartments extends AjaxController {
 
     private static final int PAGE_SIZE = 10;
