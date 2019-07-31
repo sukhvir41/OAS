@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Controller.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -46,16 +46,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/utility/Controller.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="74" column="62" lean-forward="true" selection-start-line="74" selection-start-column="62" selection-end-line="74" selection-end-column="62" />
+            <state relative-caret-position="204">
+              <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
               <folding>
-                <element signature="e#1960#1961#0" expanded="true" />
-                <element signature="e#1987#1988#0" expanded="true" />
-                <element signature="e#2103#2104#0" expanded="true" />
-                <element signature="e#2140#2141#0" expanded="true" />
-                <element signature="e#2167#2168#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,12 +83,13 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
+    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/classteacher/ajax/SearchStudentByName.java" />
         <option value="$PROJECT_DIR$/src/main/java/classteacher/controllers/DeactivateStudent.java" />
         <option value="$PROJECT_DIR$/src/main/java/hod/ajax/ActivateOrDeactivateStudent.java" />
         <option value="$PROJECT_DIR$/src/main/java/hod/ajax/SearchStudent.java" />
@@ -143,6 +140,7 @@
         <option value="$PROJECT_DIR$/src/main/java/utility/AjaxController.java" />
         <option value="$PROJECT_DIR$/output.log" />
         <option value="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" />
+        <option value="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" />
       </list>
     </option>
   </component>
@@ -209,30 +207,7 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="utility" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="ajax" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -468,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564372180061</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added new error function">
+      <created>1564524419478</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1564524419478</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -500,7 +482,7 @@
       <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50159913" side_tool="true" weight="0.25460455" />
       <window_info anchor="bottom" id="Build" order="4" sideWeight="0.4978678" weight="0.4907909" />
       <window_info anchor="bottom" id="Messages" order="5" sideWeight="0.49573562" weight="0.17170626" />
-      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.49840087" weight="0.25460455" />
+      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.49840087" visible="true" weight="0.25409198" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.09431021" />
       <window_info active="true" anchor="bottom" id="Run" order="9" sideWeight="0.4978678" visible="true" weight="0.2892741" />
@@ -579,7 +561,8 @@
     <MESSAGE value="changes admin controllers package" />
     <MESSAGE value="changes admin controllers package and added vue.js and pagination.js" />
     <MESSAGE value="added pagination.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="added pagination.js" />
+    <MESSAGE value="added new error function" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new error function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -603,13 +586,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -935,6 +911,16 @@
             <element signature="e#2103#2104#0" expanded="true" />
             <element signature="e#2140#2141#0" expanded="true" />
             <element signature="e#2167#2168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
