@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
+    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="js changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.log" beforeDir="false" afterPath="$PROJECT_DIR$/output.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-course.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/admin-course.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -36,6 +38,16 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -44,12 +56,12 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="38" column="42" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+            <state relative-caret-position="1836">
+              <caret line="108" column="19" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -58,13 +70,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/entities/Course.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="790">
-              <caret line="98" column="5" lean-forward="true" selection-start-line="91" selection-start-column="4" selection-end-line="98" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-351">
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -147,9 +156,9 @@
         <option value="$PROJECT_DIR$/src/main/java/entities/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/utility/Testing.java" />
         <option value="$PROJECT_DIR$/src/main/java/utility/AjaxController.java" />
-        <option value="$PROJECT_DIR$/output.log" />
         <option value="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" />
         <option value="$PROJECT_DIR$/src/main/java/admin/controllers/AdminDepartment.java" />
+        <option value="$PROJECT_DIR$/output.log" />
         <option value="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" />
       </list>
     </option>
@@ -174,37 +183,36 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="CatdeaLogs" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -212,17 +220,106 @@
             </path>
             <path>
               <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="ajax" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="postback" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ajax" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="postback" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sessionvalidation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="utility" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OAS_gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="CatdeaLogs" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -466,8 +563,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2575" height="1415" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Project Explorer" order="0" weight="0.32995737" />
       <window_info id="Job Explorer" order="1" weight="0.32995737" />
@@ -475,7 +571,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Designer" order="5" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.15149106" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.17377399" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="8" />
       <window_info id="Capture Tool" order="9" />
@@ -588,20 +684,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="495" column="76" selection-start-line="495" selection-start-column="76" selection-end-line="495" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entities/StudentSubjectLink.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -768,13 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/EntityHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1039">
-          <caret line="167" column="123" selection-start-line="167" selection-start-column="123" selection-end-line="167" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -882,13 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/output.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
-          <caret line="10" column="35" selection-start-line="876" selection-start-column="37" selection-end-line="877" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/SearchStudent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -923,10 +991,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/EntityHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2223">
+          <caret line="167" column="123" selection-start-line="167" selection-start-column="123" selection-end-line="167" selection-end-column="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-351">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-559">
+          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.5/c5b4c491aecb72e7c32a78da0b5c6b9cda8dee0f/gson-2.8.5-sources.jar!/com/google/gson/JsonObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="28" column="26" lean-forward="true" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="26" />
+          <folding>
+            <element signature="e#3016#3017#0" expanded="true" />
+            <element signature="e#3065#3066#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="38" column="42" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+        <state relative-caret-position="1836">
+          <caret line="108" column="19" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

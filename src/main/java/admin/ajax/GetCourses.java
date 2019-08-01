@@ -3,14 +3,16 @@ package admin.ajax;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import entities.*;
+import entities.Course;
+import entities.Course_;
+import entities.CriteriaHolder;
+import entities.Department_;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
 
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Selection;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +36,6 @@ public class GetCourses extends AjaxController {
         var holder = CriteriaHolder.getQueryHolder(session, Course.class);
 
         List<Predicate> predicates = new ArrayList<>();
-        List<Selection<?>> selections = new ArrayList<>();
 
         if (StringUtils.isNotBlank(pageValue)) {
             predicates.add(
@@ -55,21 +56,20 @@ public class GetCourses extends AjaxController {
                                     .like(holder.getBuilder().lower(departmentJoinQuery.get(Department_.name)), searchText.toLowerCase() + "%")
                     )
             );
-            selections.add(departmentJoinQuery);
-
         }
 
         var predicatesArray = new Predicate[predicates.size()];
         predicatesArray = predicates.toArray(predicatesArray);
 
-        selections.add(holder.getRoot());
+        var graph = session.createEntityGraph(Course.class);
+        graph.addAttributeNodes(Course_.DEPARTMENT);
 
         holder.getQuery()
-                .multiselect(selections)
                 .where(holder.getBuilder().and(predicatesArray))
                 .orderBy(holder.getBuilder().asc(holder.getRoot().get(Course_.name)));
 
         var results = session.createQuery(holder.getQuery())
+                .applyLoadGraph(graph)
                 .setMaxResults(PAGE_SIZE + 1)
                 .getResultList();
 
@@ -98,7 +98,9 @@ public class GetCourses extends AjaxController {
             output.addProperty("pageValue", "");
         }
 
-        out.println(new Gson().toJson(output));
+        out.println(
+                new Gson().toJson(output)
+        );
     }
 
     private JsonObject mapCourseToJson(Course course) {
@@ -106,6 +108,7 @@ public class GetCourses extends AjaxController {
 
         json.addProperty("id", course.getId());
         json.addProperty("name", course.getName());
+        json.addProperty("departmentId", course.getDepartment().getId());
         json.addProperty("departmentName", course.getDepartment().getName());
 
         return json;

@@ -90,7 +90,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="/OAS/admin/courses/add-course" method="post">
+                        <form action="/OAS/admin/courses/add-course" method="post" id="addCourseForm">
                             <input type="hidden" name="admin-course" value="admin=course" />
                             <div class="row">
                                 <div class="form-group">
@@ -107,9 +107,11 @@
                                     <div class="col-md-4">
                                         <label>Department</label>
                                         <select class="form-control mb-md" id="departmentId" name="departmentId">
+
                                             <c:forEach var="department" items="${requestScope.departments}">
                                                 <option value="${department.id}">${department.name}</option>
                                             </c:forEach>
+
                                         </select>
                                     </div>
                                 </div>
@@ -127,41 +129,10 @@
                 <hr class="tall">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--Course-->
-                                <h4>Course</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Department Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:if test="${fn:length(requestScope.courses) eq 0}">
-                                            <tr>
-                                                <td>----</td>
-                                                <td>There are no courses</td>
-                                                <td>----</td>
-                                            </tr>
-                                        </c:if>
-                                        <c:forEach var="course" items="${requestScope.courses}" varStatus="count">
-                                            <tr>
-                                                <td>${count.index +1}<a name="${course.id}"></a></td>
-                                                <td><a
-                                                        href="/OAS/admin/courses/course-details?courseId=${course.id}">${course.name}</a>
-                                                </td>
-                                                <td><a
-                                                        href="/OAS/admin/departments/department-details?departmentId=${course.department.id}">${course.department.name}</a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
+                        <div id="coursesTable"></div>
+                        <hr class="tall">
+
                     </div>
                 </div>
             </div>
@@ -214,21 +185,9 @@
     <!-- Theme Initialization Files -->
     <script src="/OAS/js/theme.init.js"></script>
 
-    <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-        <script type="text/javascript">
-        
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-12345678-1']);
-                _gaq.push(['_trackPageview']);
-        
-                (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                })();
-        
-        </script>
-        -->
+    <script src="/OAS/scripts/vue.js"></script>
+    <script src="/OAS/scripts/admin/admin-courses.js"></script>
+    <script src="/OAS/scripts/pagination.js"></script>
 
 </body>
 
