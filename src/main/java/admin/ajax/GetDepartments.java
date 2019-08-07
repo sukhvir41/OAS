@@ -23,8 +23,6 @@ import java.util.List;
 @WebServlet(urlPatterns = "/admin/ajax/get-departments")
 public class GetDepartments extends AjaxController {
 
-    private static final int PAGE_SIZE = 10;
-
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
@@ -59,16 +57,16 @@ public class GetDepartments extends AjaxController {
                 .orderBy(holder.getBuilder().asc(holder.getRoot().get(Department_.name)));
 
         var results = session.createQuery(holder.getQuery())
-                .setMaxResults(PAGE_SIZE + 1)
+                .setMaxResults(super.getPageSize() + 1)
                 .getResultList();
 
-        var output = SUCCESS_STATUS.deepCopy();
+        var output = super.getSuccessJson().deepCopy();
 
         var columns = new JsonArray();
         columns.add("Name");
         output.add("columns", columns);
 
-        if (results.size() == PAGE_SIZE + 1) {
+        if (results.size() == super.getPageSize() + 1) {
             output.addProperty("more", true);
             results.remove(results.size() - 1);
         } else {

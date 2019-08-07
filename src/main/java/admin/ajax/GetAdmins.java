@@ -3,10 +3,7 @@ package admin.ajax;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import entities.Course;
-import entities.Course_;
-import entities.CriteriaHolder;
-import entities.Department_;
+import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
@@ -22,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(urlPatterns = "/admin/ajax/get-courses")
-public class GetCourses extends AjaxController {
+@WebServlet(urlPatterns = "/admin/ajax/get-admins")
+public class GetAdmins extends AjaxController {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
@@ -31,27 +28,28 @@ public class GetCourses extends AjaxController {
         var pageValue = req.getParameter("pageValue");
         var searchText = req.getParameter("searchText");
 
-        var holder = CriteriaHolder.getQueryHolder(session, Course.class);
+        var holder = CriteriaHolder.getQueryHolder(session, Admin.class);
+        var userJoin = holder.getRoot()
+                .join(Admin_.user, JoinType.INNER);
 
         List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(pageValue)) {
             predicates.add(
                     holder.getBuilder()
-                            .greaterThan(holder.getRoot().get(Course_.name), pageValue)
+                            .greaterThan(userJoin.get(User_.username), pageValue)
             );
         }
 
         if (StringUtils.isNotBlank(searchText)) {
-            var departmentJoinQuery = holder.getRoot()
-                    .join(Course_.department, JoinType.INNER);
-
             predicates.add(
                     holder.getBuilder().or(
                             holder.getBuilder()
-                                    .like(holder.getBuilder().lower(holder.getRoot().get(Course_.name)), searchText.toLowerCase() + "%"),
+                                    .like(holder.getBuilder().lower(userJoin.get(User_.username)), searchText.toLowerCase() + "%"),
                             holder.getBuilder()
-                                    .like(holder.getBuilder().lower(departmentJoinQuery.get(Department_.name)), searchText.toLowerCase() + "%")
+                                    .like(holder.getBuilder().lower(userJoin.get(User_.email)), searchText.toLowerCase() + "%"),
+                            holder.getBuilder()
+                                    .like(holder.getBuilder().lower(holder.getRoot().get(Admin_.type)), searchText.toLowerCase() + "%")
                     )
             );
         }
@@ -59,16 +57,16 @@ public class GetCourses extends AjaxController {
         var predicatesArray = new Predicate[predicates.size()];
         predicatesArray = predicates.toArray(predicatesArray);
 
-        var graph = session.createEntityGraph(Course.class);
-        graph.addAttributeNodes(Course_.DEPARTMENT);
+        var graph = session.createEntityGraph(Admin.class);
+        graph.addAttributeNodes(Admin_.USER);
 
         holder.getQuery()
                 .where(holder.getBuilder().and(predicatesArray))
-                .orderBy(holder.getBuilder().asc(holder.getRoot().get(Course_.name)));
+                .orderBy(holder.getBuilder().asc(userJoin.get(User_.username)));
 
         var results = session.createQuery(holder.getQuery())
                 .applyLoadGraph(graph)
-                .setMaxResults(super.getPageSize() + 1)
+                .setMaxResults(getPageSize() + 1)
                 .getResultList();
 
         var output = super.getSuccessJson();
@@ -81,12 +79,12 @@ public class GetCourses extends AjaxController {
         }
 
         JsonArray data = results.stream()
-                .map(this::mapCourseToJson)
+                .map(this::mapAdminToJson)
                 .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
 
         output.add(DATA, data);
         if (data.size() > 0) {
-            output.addProperty("pageValue", results.get(results.size() - 1).getName());
+            output.addProperty("pageValue", results.get(results.size() - 1).getUser().getUsername());
         } else {
             output.addProperty("pageValue", "");
         }
@@ -94,17 +92,18 @@ public class GetCourses extends AjaxController {
         out.println(
                 new Gson().toJson(output)
         );
+
     }
 
-    private JsonObject mapCourseToJson(Course course) {
-        var json = new JsonObject();
+    private JsonObject mapAdminToJson(Admin admin) {
+        var jsonObject = new JsonObject();
 
-        json.addProperty("id", course.getId());
-        json.addProperty("name", course.getName());
-        json.addProperty("departmentId", course.getDepartment().getId());
-        json.addProperty("departmentName", course.getDepartment().getName());
+        jsonObject.addProperty("id", admin.getId().toString());
+        jsonObject.addProperty("username", admin.getUser().getUsername());
+        jsonObject.addProperty("type", admin.getType().toString());
+        jsonObject.addProperty("email", admin.getUser().getEmail());
 
-        return json;
+        return jsonObject;
+
     }
-
 }
