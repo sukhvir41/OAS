@@ -30,6 +30,7 @@ public class Admin implements Serializable {
 
     @Id
     @Getter
+    @org.hibernate.annotations.Type(type="pg-uuid")
     private UUID id;
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)

@@ -19,4 +19,23 @@ $(document).ready(function () {
         }
     });
 
+
+    var courseTr = `
+        <tr v-for="(course,index) in data">
+            <td> 
+                {{ counter + index }} 
+            </td> 
+            <td >
+                <a v-bind:href="'/OAS/admin/courses/course-details?courseId=' + course.id"> 
+                    {{ course.name }} 
+                </a> 
+            </td> 
+        </tr>    
+    `
+    var additionalData = {
+        departmentId: $('#departmentId').val()
+    }
+
+    paginate('#coursesTable', 'Courses', "/OAS/admin/ajax/get-courses", ['Name'], courseTr, "<tr> <td>----</td> <td> No courses in department </td> </tr>", true, JSON.stringify(additionalData));
+
 });

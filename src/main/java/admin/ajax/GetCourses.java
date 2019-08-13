@@ -1,16 +1,13 @@
 package admin.ajax;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import entities.Course;
-import entities.Course_;
-import entities.CriteriaHolder;
-import entities.Department_;
+import com.google.gson.*;
+import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
 
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 
 @WebServlet(urlPatterns = "/admin/ajax/get-courses")
@@ -28,8 +27,12 @@ public class GetCourses extends AjaxController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
+        Gson gson = new Gson();
+
         var pageValue = req.getParameter("pageValue");
         var searchText = req.getParameter("searchText");
+
+        var additionalData = req.getParameter("additionalData");
 
         var holder = CriteriaHolder.getQueryHolder(session, Course.class);
 
@@ -55,6 +58,15 @@ public class GetCourses extends AjaxController {
                     )
             );
         }
+
+        if (StringUtils.isNotBlank(additionalData)) {
+            var additionalDataJson = new JsonParser()
+                    .parse(additionalData)
+                    .getAsJsonObject();
+
+            processAdditionalData(holder, predicates, additionalDataJson);
+        }
+
 
         var predicatesArray = new Predicate[predicates.size()];
         predicatesArray = predicates.toArray(predicatesArray);
@@ -92,8 +104,39 @@ public class GetCourses extends AjaxController {
         }
 
         out.println(
-                new Gson().toJson(output)
+                gson.toJson(output)
         );
+    }
+
+    private void processAdditionalData(CriteriaHolder<CriteriaQuery<Course>, Course, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+
+        // if the additional data contains the departmentId then get the courses of the department.
+        Optional.ofNullable(additionalDataJson.get("departmentId"))
+                .map(JsonElement::getAsLong)
+                .ifPresent(departmentId -> addDepartmentCondition(holder, predicates, additionalDataJson, departmentId));
+
+
+    }
+
+    private void addDepartmentCondition(CriteriaHolder<CriteriaQuery<Course>, Course, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long departmentId) {
+
+        Join<Course, Department> departmentJoin = holder.getRoot()
+                .getJoins()
+                .stream()
+                .filter(courseJoin -> courseJoin.getAttribute().equals(Course_.department))
+                .map(courseJoin -> (Join<Course, Department>) courseJoin)
+                .findFirst()
+                .orElse(null);
+
+        //if the join does not exist already then add it other wise use the added join
+        if (Objects.isNull(departmentJoin)) {
+            departmentJoin = holder.getRoot()
+                    .join(Course_.department, JoinType.INNER);
+        }
+
+        var condition = holder.getBuilder()
+                .equal(departmentJoin.get(Department_.id), departmentId);
+        predicates.add(condition);
     }
 
     private JsonObject mapCourseToJson(Course course) {

@@ -28,6 +28,7 @@ public class Student implements Serializable, Comparable<Student> {
 
     @Id
     @Getter
+    @org.hibernate.annotations.Type(type="pg-uuid")
     private UUID id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
