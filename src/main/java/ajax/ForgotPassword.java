@@ -24,6 +24,8 @@ import java.util.regex.Pattern;
 
 /**
  * @author sukhvir
+ * <p>
+ * todo: have to re qrite this entire thing
  */
 @WebServlet(urlPatterns = "/ajax/forgot-password")
 public class ForgotPassword extends AjaxController {
@@ -56,11 +58,6 @@ public class ForgotPassword extends AjaxController {
         } else {
             out.print(false);
         }
-    }
-
-    @Override
-    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print(true);
     }
 
 }

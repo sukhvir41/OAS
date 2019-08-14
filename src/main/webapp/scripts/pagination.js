@@ -1,7 +1,7 @@
 'use strict';
 
 //does seek pgination
-var paginate = function (element, title, url, tr, noDataMessage, showSearch, additionalData) {
+var paginate = function (element, title, url, columns, tr, noDataMessage, showSearch, additionalData) {
     var vue = new Vue({
         el: element,
         data: {
@@ -10,7 +10,7 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
             counter: 1,
             title: title,
             data: [],
-            columns: [],
+            columns: columns,
             error: false,
             showNext: true,
             showPrev: false,
@@ -38,7 +38,7 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
                             self.error = false;
                             self.data = result.data;
                             self.pageValues.push(result.pageValue);
-                            self.columns = result.columns;
+                            //self.columns = result.columns;
                             self.showNext = result.more;
                             if (self.data.length === 0) {
                                 self.error = true;
@@ -67,7 +67,7 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
                         self.error = false;
                         self.data = result.data;
                         self.pageValues.push(result.pageValue);
-                        self.columns = result.columns;
+                        //self.columns = result.columns;
                         self.showNext = result.more;
                     }
                 },
@@ -103,7 +103,7 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
                         } else {
                             self.error = false;
                             self.data = result.data;
-                            self.columns = result.columns;
+                            //self.columns = result.columns;
                             self.showNext = result.more;
                             self.showPrev = true;
                             self.pageValues.push(result.pageValue);
@@ -135,7 +135,7 @@ var paginate = function (element, title, url, tr, noDataMessage, showSearch, add
                             self.error = false;
                             self.counter -= result.data.length;
                             self.data = result.data;
-                            self.columns = result.columns;
+                            //self.columns = result.columns;
                             self.showNext = result.more;
                             self.pageValues.push(result.pageValue);
                             self.showPrev = self.pageValues.length > 1;

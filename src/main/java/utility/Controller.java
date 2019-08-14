@@ -52,6 +52,7 @@ public abstract class Controller extends HttpServlet {
                 e.printStackTrace();
             }
 
+            System.out.println("the oncall error " + callOnError());
             if (callOnError()) {
                 this.onError(req, resp);
             } else {
@@ -88,10 +89,11 @@ public abstract class Controller extends HttpServlet {
     private boolean callOnError() {
         try {
             return this.getClass()
-                    .getMethod("onErrorWithException")
+                    .getMethod("onErrorWithException", HttpServletRequest.class, HttpServletResponse.class, Exception.class)
                     .getDeclaringClass()
-                    .equals(this.getClass());
+                    .equals(Controller.class);
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

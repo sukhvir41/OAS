@@ -42,8 +42,8 @@ $(document).ready(function () {
 
 
     $.validator.addMethod("departmentCheck", function (value, element) {
-        return this.optional(element) || departmentCheck();
-    }, "Please select at least one department");
+        return departmentCheck();
+    }, "Please select a department");
 
 
 
@@ -114,10 +114,7 @@ $(document).ready(function () {
                 }
             },
             department: {
-                departmentCheck: true,
-                required: function (element) {
-                    return $('input[name=type]:checked', '#register').val() === 'teacher';
-                }
+                departmentCheck: true
             }
         },
         messages: {
@@ -148,12 +145,8 @@ $(document).ready(function () {
                 required: 'Please select a class',
             },
             subjects: {
-                required: 'Please slecct the minimum subjects: ' + minimumSubjects,
-            },
-            department: {
-                required: 'Please select at least one department'
+                required: 'Please select the minimum subjects: ' + minimumSubjects,
             }
-
         }
     });
 
@@ -161,12 +154,28 @@ $(document).ready(function () {
 
 
 var departmentCheck = function () {
-    var error = $("#departmenterror");
+    console.log('the department check');
+
+    if ($('input[name=type]:checked', '#register').val() !== 'teacher') {
+        return true;
+    }
+
     if ($('input[name=department]:checked', '#register').length >= 1) {
-        error.hide();
+        $('input[name=department]').closest('.col-md-12').css({
+            "border": "unset"
+        });
+
         return true;
     } else {
-        error.show();
+        $('input[name=department]').closest('.col-md-12').css({
+            "border": "1px #a94442 solid"
+        });
+
+        $('#department-error').remove();
+
+        $($('input[name=department]').closest('.row'))
+            .append('<label id="department-error" class="error" for="department" style="display: inline-block;"></label>')
+
         return false;
     }
 }
@@ -215,16 +224,14 @@ var getSubjects = function () {
 }
 
 var getDepartments = function () {
-    var departmentDiv = $("#departments");
-    var template = '<span class="checkbox"><label class="checkbox"><input type="checkbox" name="department" value="{{id}}">{{name}}</label></span>';
     $.ajax({
-        url: "ajax/getdepartment",
+        url: "ajax/get-all-departments",
         dataType: "json",
         method: "post",
-        success: function (data) {
-            $.each(data, function (i, department) {
-                departmentDiv.append(Mustache.render(template, department));
-            });
+        success: function (result) {
+            if (result.status === "success") {
+                multiSelect('#departments', 'department', 'Departments', result.data, 200);
+            }
         }
     });
 }

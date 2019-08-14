@@ -5,10 +5,16 @@
  */
 package utility;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import entities.*;
 import org.hibernate.Session;
 
 import javax.persistence.criteria.JoinType;
+import java.io.IOException;
+import java.io.Writer;
 import java.security.URIParameter;
 import java.util.stream.Collectors;
 
@@ -25,23 +31,27 @@ public class Testing {
 
         try {
 
-            var holder = CriteriaHolder.getQueryHolder(session, Department.class);
 
-            holder.getQuery().orderBy(holder.getBuilder().asc(holder.getRoot().get(Department_.name)));
+            var query = session.createNativeQuery("" +
+                    "select " +
+                    "   cast(array_to_json(array_agg(row_to_json(d))) as varchar)" +
+                    "from(" +
+                    "   select" +
+                    "       \"id\"," +
+                    "       \"name\"" +
+                    "   from" +
+                    "   department" +
+                    ") d");
 
-            holder.getQuery().where(
-                holder.getBuilder().greaterThan(holder.getRoot().get(Department_.name),"Jooqtest2")
-            );
-
-            var results = session.createQuery(holder.getQuery())
-                    .setMaxResults(6)
-                    .getResultList();
-
-            results.forEach(department -> System.out.println(department.getName() + "  " + department.getId()));
-
-
+            var departments = (String) query.getSingleResult();
 
 
+            var jsonObject = new JsonObject();
+
+
+            var array = new Gson().fromJson(departments, JsonArray.class);
+            jsonObject.add("departments", array);
+            System.out.println(new Gson().toJson(jsonObject));
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

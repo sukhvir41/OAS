@@ -62,10 +62,6 @@ public class GetDepartments extends AjaxController {
 
         var output = super.getSuccessJson().deepCopy();
 
-        var columns = new JsonArray();
-        columns.add("Name");
-        output.add("columns", columns);
-
         if (results.size() == super.getPageSize() + 1) {
             output.addProperty("more", true);
             results.remove(results.size() - 1);

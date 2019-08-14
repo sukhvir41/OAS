@@ -52,7 +52,7 @@ public final class User implements Serializable {
     @Column
     @Getter
     @Setter
-    @Type(type = "pg-uuid")
+    @org.hibernate.annotations.Type(type="pg-uuid")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",

@@ -38,7 +38,6 @@ public abstract class AjaxController extends Controller {
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         out.print("{\"status\":\"error\"}");
-
     }
 
     @Override

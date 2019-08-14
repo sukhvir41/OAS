@@ -33,6 +33,6 @@ $(document).ready(function () {
         </tr>        
     `;
 
-    paginate('#departmentsTable', 'Departments', "/OAS/admin/ajax/get-departments", tr, "<tr> <td>----</td> <td> no departments to show </td> </tr>");
+    paginate('#departmentsTable', 'Departments', "/OAS/admin/ajax/get-departments", ['Name'], tr, "<tr> <td>----</td> <td> no departments to show </td> </tr>");
 
 });

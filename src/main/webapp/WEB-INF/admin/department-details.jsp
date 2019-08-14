@@ -94,6 +94,8 @@ sukhvir --%>
 
                         <div class="row">
                             <div class="col-md-12">
+                                <input value='<c:out value="${requestScope.department.id}" />' id="departmentId"
+                                    type="hidden" />
                                 <h2>
                                     Department :
                                     <c:out value="${requestScope.department.name}" />
@@ -194,34 +196,11 @@ sukhvir --%>
                                 <hr class="tall" />
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Courses</h4>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:if test="${fn:length(requestScope.courses) eq 0}">
-                                                    <tr>
-                                                        <td>----</td>
-                                                        <td>This departmetnt has no courses</td>
-                                                    </tr>
-                                                </c:if>
 
-                                                <c:forEach var="course" items="${requestScope.courses}"
-                                                    varStatus="count">
-                                                    <tr>
-                                                        <td>${count.index + 1}</td>
-                                                        <td><a
-                                                                href="/OAS/admin/courses/course-details?courseId=${course.id}">
-                                                                <c:out value="${course.name}" /></a></td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                                        <div id="coursesTable"></div>
+
                                         <hr class="tall" />
+
                                         <h4>Teachers</h4>
                                         <table class="table">
                                             <thead>
@@ -314,6 +293,8 @@ sukhvir --%>
     <!-- Theme Initialization Files -->
     <script src="/OAS/js/theme.init.js"></script>
 
+    <script src="/OAS/scripts/vue.js"></script>
+    <script src="/OAS/scripts/pagination.js"></script>
     <script src="/OAS/scripts/admin/department-details.js"></script>
 
 </body>

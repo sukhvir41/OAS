@@ -27,15 +27,9 @@ public class AdminCourse extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        //getting the departments of the course graph
-        var courseRootGraph = session.createEntityGraph(Course.class);
-        courseRootGraph.addAttributeNodes(Course_.DEPARTMENT);
-
-        List<Course> courses = EntityHelper.getAll(session, Course.class, courseRootGraph, true);
-
+        //getting all departments for the drop down to add the course
         List<Department> departments = EntityHelper.getAll(session, Department.class, Department_.name, true);
 
-        req.setAttribute("courses", courses);
         req.setAttribute("departments", departments);
 
         req.getRequestDispatcher("/WEB-INF/admin/admin-course.jsp")

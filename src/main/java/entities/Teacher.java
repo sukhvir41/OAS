@@ -26,6 +26,7 @@ public class Teacher implements Serializable {
 
     @Id
     @Getter
+    @org.hibernate.annotations.Type(type="pg-uuid")
     private UUID id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

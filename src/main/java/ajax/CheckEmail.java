@@ -32,26 +32,26 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/ajax/check-email")
 public class CheckEmail extends AjaxController {
 
-    private static final String STATUS = "status";
+    private static final String IS_UNIQUE = "isUnique";
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
         String email = req.getParameter("email");
-        Gson gson = new Gson();
-        JsonObject status = new JsonObject();
+
 
         if (StringUtils.isBlank(email)) {
-            status.addProperty(STATUS, false);
-            out.println(gson.toJson(status));
+            onError(req, resp);
             return;
         }
 
         if (!Utils.isEamil(email)) {
-            status.addProperty(STATUS, false);
-            out.println(gson.toJson(status));
+            onError(req, resp);
             return;
         }
+
+        Gson gson = new Gson();
+        var json = getSuccessJson();
 
         var holder = CriteriaHolder.getQueryHolder(session, Long.class, User.class);
 
@@ -68,12 +68,12 @@ public class CheckEmail extends AjaxController {
                 .getSingleResult();
 
         if (count > 0) {
-            status.addProperty(STATUS, false);
+            json.addProperty(IS_UNIQUE, false);
         } else {
-            status.addProperty(STATUS, true);
+            json.addProperty(IS_UNIQUE, true);
         }
 
-        out.println(gson.toJson(status));
+        out.println(gson.toJson(json));
     }
 
 }
