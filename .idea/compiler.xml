@@ -10,7 +10,9 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="OAS_gradle_test.jpaModelgen" target="1.8" />
+      <module name="OAS_gradle_test.main" target="11" />
       <module name="OAS_gradle_test.metamodel" target="11" />
+      <module name="OAS_gradle_test.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
