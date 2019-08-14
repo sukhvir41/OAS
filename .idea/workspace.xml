@@ -1,51 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="changes in ajax package">
-      <change afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/StudentSubjectLink_.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/SubjectClassRoomLink_.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/TeacherDepartmentLink_.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetClassRooms.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ajax/GetClassRooms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/nb-cache/OAS_gradle-341330328/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/nb-cache/OAS_gradle-341330328/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/nb-cache/OAS_gradle-341330328/project-info.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/nb-cache/OAS_gradle-341330328/project-info.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/drop.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.log" beforeDir="false" afterPath="$PROJECT_DIR$/output.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminCourse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/RegisterClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/RegisterCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetAllCourses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/RegisterDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetAllDepartments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/RegisterSubjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetSubjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/AjaxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/AjaxController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/MyPostgresDialet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/MyPostgresDialect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Testing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/department-details.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/department-details.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/register.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/admin/admin-department.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/admin/admin-department.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/admin/department-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/admin/department-details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/CheckEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/CheckEmail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/ClassSubject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/ForgotPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetAllCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetAllCourses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetAllDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetAllDepartments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetClassRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetClassRooms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetSubjectOfClassRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetSubjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetSubjects.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -355,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564372180061</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="changes in ajax package">
+      <created>1565662081573</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1565662081573</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -412,7 +385,8 @@
     <MESSAGE value="changes admin controllers package" />
     <MESSAGE value="changes admin controllers package and added vue.js and pagination.js" />
     <MESSAGE value="added pagination.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="added pagination.js" />
+    <MESSAGE value="changes in ajax package" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes in ajax package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

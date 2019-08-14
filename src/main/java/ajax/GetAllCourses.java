@@ -7,10 +7,7 @@ package ajax;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import entities.Course;
 import org.hibernate.Session;
-import org.jooq.tools.json.JSONArray;
 import utility.AjaxController;
 
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * @author sukhvir

@@ -31,7 +31,7 @@ public class GetAllDepartments extends AjaxController {
 
         var query = session.createNativeQuery("" +
                 "select " +
-                "   cast(array_to_json(array_agg(row_to_json(d))) as varchar)" +
+                "   coalesce(cast(array_to_json(array_agg(row_to_json(d))) as varchar),'[]')" +
                 "from(" +
                 "   select" +
                 "       \"id\"," +

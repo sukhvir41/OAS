@@ -6,6 +6,7 @@
 package ajax;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
@@ -25,7 +26,6 @@ public class GetSubjects extends AjaxController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-
         var classroomString = req.getParameter("classroom");
 
         if (StringUtils.isBlank(classroomString)) {
@@ -34,20 +34,35 @@ public class GetSubjects extends AjaxController {
         }
 
         var gson = new Gson();
-// do it using hibernate then native sql
         long classroomId = Long.parseLong(classroomString);
 
+        var nativeQuery = session.createNativeQuery("" +
+                "select" +
+                "   coalesce(cast(array_to_json(array_agg(row_to_json(sub))) as varchar),'[]')" +
+                "from(" +
+                "   select" +
+                "       sub.id," +
+                "       sub.\"name\"," +
+                "       sub.elective" +
+                "   from" +
+                "       subject sub" +
+                "   inner join subject_class_link scl " +
+                "   on sub.id = scl.subject_fid" +
+                "   inner join class_room cr " +
+                "   on cr.id = scl.class_room_fid" +
+                "   where" +
+                "   cr.id = :classroomId" +
+                ") as sub;")
+                .setParameter("classroomId", classroomId);
 
-        //ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classId);
-        //JsonArray jsonSubjects = new JsonArray();
-       /* Set<Subject> subjects = classRoom.getSubjects();
-        subjects.forEach(e -> add(e, jsonSubjects));
+        var subjects = (String) nativeQuery.getSingleResult();
 
-        Gson gson = new Gson();
-        JsonObject subject = new JsonObject();
-        subject.add(SUBJECTS, jsonSubjects);
-        subject.addProperty(MINSUBJECTS, classRoom.getMinimumSubjects());
-        out.print(gson.toJson(subject));*/
+        var jsonObject = getSuccessJson();
 
+        var subjectsJson = gson.fromJson(subjects, JsonArray.class);
+
+        jsonObject.add(DATA, subjectsJson);
+
+        out.println(gson.toJson(jsonObject));
     }
 }

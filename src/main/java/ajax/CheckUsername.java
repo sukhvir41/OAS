@@ -30,20 +30,20 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/ajax/check-username")
 public class CheckUsername extends AjaxController {
 
-    private static final String STATUS = "status";
+    private static final String IS_UNIQUE = "isUnique";
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
         String username = req.getParameter("username");
 
-        Gson gson = new Gson();
-        JsonObject status = new JsonObject();
         if (StringUtils.isBlank(username)) {
-            status.addProperty(STATUS, false);
-            out.println(gson.toJson(status));
+            onError(req, resp);
             return;
         }
+
+        Gson gson = new Gson();
+        JsonObject status = getSuccessJson();
 
         var holder = CriteriaHolder.getQueryHolder(session, Long.class, User.class);
 
@@ -60,9 +60,9 @@ public class CheckUsername extends AjaxController {
                 .getSingleResult();
 
         if (count > 0) {
-            status.addProperty(STATUS, false);
+            status.addProperty(IS_UNIQUE, false);
         } else {
-            status.addProperty(STATUS, true);
+            status.addProperty(IS_UNIQUE, true);
         }
 
         out.println(gson.toJson(status));
