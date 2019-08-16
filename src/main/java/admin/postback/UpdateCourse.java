@@ -6,6 +6,7 @@
 package admin.postback;
 
 import entities.Course;
+import entities.CriteriaHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
@@ -28,13 +29,17 @@ public class UpdateCourse extends PostBackController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        long courseId = Long.parseLong(req.getParameter("courseId"));
+        var courseIdString = req.getParameter("courseId");
         String name = req.getParameter("courseName");
 
-        if (StringUtils.isBlank(name)) {
+        if (StringUtils.isAnyBlank(name, courseIdString)) {
             onError(req, resp);
             return;
         }
+
+        long courseId = Long.parseLong(courseIdString);
+
+        var holder = CriteriaHolder.getUpdateHolder(session, Course.class);
 
         Course course = session.get(Course.class, courseId);
         course.setName(name);
@@ -53,6 +58,17 @@ public class UpdateCourse extends PostBackController {
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        var url = new UrlParameters()
+                .addErrorParameter();
+        var courseId = req.getParameter("courseId");
+
+        if (StringUtils.isBlank(courseId)) {
+            url.addMessage("The course you are tying to update does not exist");
+            resp.sendRedirect(url.getUrl("/OAS/admin/courses"));
+        }else{
+            url.addMessage("Please provide the necessary data");
+        }
+
         resp.sendRedirect(
                 new UrlParameters()
                         .addErrorParameter()

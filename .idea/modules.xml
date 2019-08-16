@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/OAS_gradle.iml" filepath="$PROJECT_DIR$/.idea/OAS_gradle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OAS_gradle_test.iml" filepath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" filepath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" filepath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" />
     </modules>
   </component>
 </project>

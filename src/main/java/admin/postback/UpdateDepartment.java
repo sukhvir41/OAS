@@ -5,6 +5,9 @@
  */
 package admin.postback;
 
+import entities.CriteriaHolder;
+import entities.Department;
+import entities.Department_;
 import jooq.entities.Tables;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;

@@ -52,7 +52,8 @@ public class CheckUsername extends AjaxController {
                         holder.getBuilder().equal(holder.getRoot().get(User_.username), username)
                 );
 
-        holder.getQuery().select(holder.getBuilder().count(holder.getRoot().get(User_.username)));
+        holder.getQuery()
+                .select(holder.getBuilder().count(holder.getRoot().get(User_.username)));
 
         Long count = session.createQuery(holder.getQuery())
                 .setMaxResults(1)
