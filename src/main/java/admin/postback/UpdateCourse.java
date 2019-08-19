@@ -6,7 +6,9 @@
 package admin.postback;
 
 import entities.Course;
+import entities.Course_;
 import entities.CriteriaHolder;
+import entities.EntityHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
@@ -39,15 +41,20 @@ public class UpdateCourse extends PostBackController {
 
         long courseId = Long.parseLong(courseIdString);
 
-        var holder = CriteriaHolder.getUpdateHolder(session, Course.class);
-
-        Course course = session.get(Course.class, courseId);
+        Course course = EntityHelper.getInstance(courseId, Course_.id, Course.class, session, false, Course_.DEPARTMENT);
         course.setName(name);
-        session.update(course);
+
+        var departmentIdString = req.getParameter("departmentId");
+        if (StringUtils.isNotBlank(departmentIdString)) {
+            var departmentId = Long.parseLong(departmentIdString);
+            if (course.getDepartment().getId() != departmentId) {
+                // change course department if it is different
+            }
+        }
 
         UrlParameters parameters = new UrlParameters()
                 .addSuccessParameter()
-                .addParameter("courseId", String.valueOf(courseId))
+                .addParameter("courseId", courseId)
                 .addMessage("Course name updated");
 
         resp.sendRedirect(
@@ -65,7 +72,7 @@ public class UpdateCourse extends PostBackController {
         if (StringUtils.isBlank(courseId)) {
             url.addMessage("The course you are tying to update does not exist");
             resp.sendRedirect(url.getUrl("/OAS/admin/courses"));
-        }else{
+        } else {
             url.addMessage("Please provide the necessary data");
         }
 
@@ -77,4 +84,10 @@ public class UpdateCourse extends PostBackController {
                         .getUrl("/OAS/admin/courses")
         );
     }
+
+    public void changeDepartent(Course course, long departmentId, Session session) {
+
+    }
+
+
 }

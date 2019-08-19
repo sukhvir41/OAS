@@ -62,8 +62,15 @@ public class TransferDepartment extends PostBackController {
         var from = req.getParameter("from");
 
         if (StringUtils.isAnyBlank(to, from)) {
-            url.addMessage("Please provide the correct details for department transfer");
-            resp.sendRedirect(url.getUrl("/OAS/admin/departments"));
+            if (StringUtils.isNotBlank(from)) {
+                url.addMessage("Please select the department to transfer the courses and the teachers")
+                        .addParameter("departmentId", from);
+                resp.sendRedirect(url.getUrl("/OAS/admin/departments/edit-department"));
+            } else {
+                url.addMessage("Please provide the correct details for department transfer");
+                resp.sendRedirect(url.getUrl("/OAS/admin/departments"));
+            }
+
         } else {
             url.addMessage("An error occurred while transferring courses and teachers")
                     .addParameter("departmentId", from);
