@@ -39,24 +39,11 @@ public class GetClassRooms extends AjaxController {
         List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(pageValue)) {
-            predicates.add(
-                    holder.getBuilder()
-                            .greaterThan(holder.getRoot().get(ClassRoom_.name), pageValue)
-            );
+            addPageValueCondition(pageValue, holder, predicates);
         }
 
         if (StringUtils.isNotBlank(searchText)) {
-            var courseJoinQuery = holder.getRoot()
-                    .join(ClassRoom_.course, JoinType.INNER);
-
-            predicates.add(
-                    holder.getBuilder().or(
-                            holder.getBuilder()
-                                    .like(holder.getBuilder().lower(holder.getRoot().get(ClassRoom_.name)), searchText.toLowerCase() + "%"),
-                            holder.getBuilder()
-                                    .like(holder.getBuilder().lower(courseJoinQuery.get(Course_.name)), searchText.toLowerCase() + "%")
-                    )
-            );
+            addSearchTextCondition(searchText, holder, predicates);
         }
 
         if (StringUtils.isNotBlank(additionalData)) {
@@ -67,14 +54,11 @@ public class GetClassRooms extends AjaxController {
             processAdditionalData(holder, predicates, additionalDataJson);
         }
 
-        var predicatesArray = new Predicate[predicates.size()];
-        predicatesArray = predicates.toArray(predicatesArray);
-
         var graph = session.createEntityGraph(ClassRoom.class);
         graph.addAttributeNodes(ClassRoom_.COURSE);
 
         holder.getQuery()
-                .where(holder.getBuilder().and(predicatesArray))
+                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
                 .orderBy(holder.getBuilder().asc(holder.getRoot().get(ClassRoom_.name)));
 
         var results = session.createQuery(holder.getQuery())
@@ -107,8 +91,28 @@ public class GetClassRooms extends AjaxController {
         );
     }
 
-    private void processAdditionalData(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+    private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates) {
+        var courseJoinQuery = holder.getRoot()
+                .join(ClassRoom_.course, JoinType.INNER);
 
+        predicates.add(
+                holder.getBuilder().or(
+                        holder.getBuilder()
+                                .like(holder.getBuilder().lower(holder.getRoot().get(ClassRoom_.name)), searchText.toLowerCase() + "%"),
+                        holder.getBuilder()
+                                .like(holder.getBuilder().lower(courseJoinQuery.get(Course_.name)), searchText.toLowerCase() + "%")
+                )
+        );
+    }
+
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates) {
+        predicates.add(
+                holder.getBuilder()
+                        .greaterThan(holder.getRoot().get(ClassRoom_.name), pageValue)
+        );
+    }
+
+    private void processAdditionalData(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
         Optional.of(additionalDataJson.get("courseId"))
                 .map(JsonElement::getAsLong)
                 .ifPresent(courseId -> addCourseCondition(holder, predicates, additionalDataJson, courseId));

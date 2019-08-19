@@ -8,6 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
 
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.servlet.annotation.WebServlet;
@@ -35,33 +37,18 @@ public class GetAdmins extends AjaxController {
         List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(pageValue)) {
-            predicates.add(
-                    holder.getBuilder()
-                            .greaterThan(userJoin.get(User_.username), pageValue)
-            );
+            addPageValueCondition(pageValue, holder, userJoin, predicates);
         }
 
         if (StringUtils.isNotBlank(searchText)) {
-            predicates.add(
-                    holder.getBuilder().or(
-                            holder.getBuilder()
-                                    .like(holder.getBuilder().lower(userJoin.get(User_.username)), searchText.toLowerCase() + "%"),
-                            holder.getBuilder()
-                                    .like(holder.getBuilder().lower(userJoin.get(User_.email)), searchText.toLowerCase() + "%"),
-                            holder.getBuilder()
-                                    .like(holder.getBuilder().lower(holder.getRoot().get(Admin_.type)), searchText.toLowerCase() + "%")
-                    )
-            );
+            addSearchCondition(searchText, holder, userJoin, predicates);
         }
-
-        var predicatesArray = new Predicate[predicates.size()];
-        predicatesArray = predicates.toArray(predicatesArray);
 
         var graph = session.createEntityGraph(Admin.class);
         graph.addAttributeNodes(Admin_.USER);
 
         holder.getQuery()
-                .where(holder.getBuilder().and(predicatesArray))
+                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
                 .orderBy(holder.getBuilder().asc(userJoin.get(User_.username)));
 
         var results = session.createQuery(holder.getQuery())
@@ -93,6 +80,26 @@ public class GetAdmins extends AjaxController {
                 new Gson().toJson(output)
         );
 
+    }
+
+    private void addSearchCondition(String searchText, CriteriaHolder<CriteriaQuery<Admin>, Admin, Admin> holder, Join<Admin, User> userJoin, List<Predicate> predicates) {
+        predicates.add(
+                holder.getBuilder().or(
+                        holder.getBuilder()
+                                .like(holder.getBuilder().lower(userJoin.get(User_.username)), searchText.toLowerCase() + "%"),
+                        holder.getBuilder()
+                                .like(holder.getBuilder().lower(userJoin.get(User_.email)), searchText.toLowerCase() + "%"),
+                        holder.getBuilder()
+                                .like(holder.getBuilder().lower(holder.getRoot().get(Admin_.type)), searchText.toLowerCase() + "%")
+                )
+        );
+    }
+
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Admin>, Admin, Admin> holder, Join<Admin, User> userJoin, List<Predicate> predicates) {
+        predicates.add(
+                holder.getBuilder()
+                        .greaterThan(userJoin.get(User_.username), pageValue)
+        );
     }
 
     private JsonObject mapAdminToJson(Admin admin) {

@@ -1,10 +1,14 @@
 'use strict';
 
-var minimumSubjects;
-
 $(document).ready(function () {
 
-    getCourses();
+    getCourses()
+        .then(function () {
+            return getClasses();
+        })
+        .then(function () {
+            getSubjects();
+        });
     getDepartments();
 
     if ($('input[name=type]:checked', '#register').val() === 'student') {
@@ -16,8 +20,12 @@ $(document).ready(function () {
     }
 
     $("#course").change(function () {
-        getClasses();
+        getClasses()
+            .then(function () {
+                getSubjects();
+            });
     });
+
     $("#class").change(function () {
         getSubjects();
     });
@@ -59,8 +67,14 @@ $(document).ready(function () {
                 required: true,
                 email: true,
                 remote: {
-                    url: "ajax/checkemail",
-                    type: "post"
+                    url: "ajax/check-email",
+                    type: "post",
+                    data: {
+                        email: function () {
+                            return $('#email').val();
+                        },
+                        jqueryValidator: true
+                    }
                 }
             },
             username: {
@@ -68,8 +82,14 @@ $(document).ready(function () {
                 minlength: 8,
                 maxlength: 20,
                 remote: {
-                    url: "ajax/checkusername",
-                    type: "post"
+                    url: "ajax/check-username",
+                    type: "post",
+                    data: {
+                        username: function () {
+                            return $('#username').val();
+                        },
+                        jqueryValidator: true
+                    }
                 },
             },
             password: {
@@ -102,7 +122,7 @@ $(document).ready(function () {
                     return $('input[name=type]:checked', '#register').val() === 'student';
                 }
             },
-            class: {
+            classroom: {
                 required: function (element) {
                     return $('input[name=type]:checked', '#register').val() === 'student';
                 }
@@ -141,12 +161,9 @@ $(document).ready(function () {
             course: {
                 required: 'Please select a course',
             },
-            class: {
+            classroom: {
                 required: 'Please select a class',
             },
-            subjects: {
-                required: 'Please select the minimum subjects: ' + minimumSubjects,
-            }
         }
     });
 
@@ -154,7 +171,6 @@ $(document).ready(function () {
 
 
 var departmentCheck = function () {
-    console.log('the department check');
 
     if ($('input[name=type]:checked', '#register').val() !== 'teacher') {
         return true;
@@ -187,38 +203,48 @@ var subjectCheck = function () {
         return true;
     } else {
         error.empty();
-        var template = '<strong>Error!</strong> please select ' + minimumSubjects + ' subjects';
-        error.append(template);
-        error.show();
+        //var template = '<strong>Error!</strong> please select ' + minimumSubjects + ' subjects';
+        //error.append(template);
+        //error.show();
         return false;
     }
 }
 
 var getSubjects = function () {
-    var course = $("#course").val();
-    var classes = $("#class").val();
-    var subjectDiv = $("#subjects");
-    var templateElective = '<span class="checkbox"><label class="checkbox"><input type="checkbox" name="subject" value="{{id}}">{{name}}</label></span>';
-    var templateNotElective = '<span class="checkbox"><label class="checkbox"><input type="checkbox" name="subject" checked disabled value="{{id}}">{{name}}<input type="hidden" name="subject" value="{{id}}"></label></span>';
+    var classes = $("#classroom").val();
+    var subjectDiv = $("#subjects"); // will have subjecets that are not elective
+    var electiveSubjectsDiv = $('#electiveSubjects');
     subjectDiv.empty();
+    electiveSubjectsDiv.empty();
+
+    var subjectTemplate = "<label>{{name}} {{#show}}<span>,</span>{{/show}} <input type='hidden' name='subjects' value={{id}}/></label>"
+
     $.ajax({
-        url: "ajax/getsubjects",
+        url: "ajax/get-subjects",
         dataType: "json",
         data: {
-            course: course,
-            class: classes
+            classroom: classes
         },
         method: "post",
         success: function (data) {
-            minimumSubjects = data.minimumsubjects;
-            $.each(data.subjects, function (i, subject) {
-                if (subject.elective) {
-                    subjectDiv.append(Mustache.render(templateElective, subject));
-                } else {
-                    subjectDiv.append(Mustache.render(templateNotElective, subject));
-                }
-            });
+            if (data.status === "success") {
+                var electiveSubjects = [];
+                var subjects = [];
+                $.each(data.data, function (i, subject) {
+                    if (subject.elective) {
+                        electiveSubjects.push(subject);
+                    } else {
+                        subjects.push(subject);
+                    }
+                });
 
+                $.each(subjects, function (i, subject) {
+                    subject.show = (i < subjects.length - 1)
+                    subjectDiv.append(Mustache.render(subjectTemplate, subject));
+                });
+
+                multiSelect('#electiveSubjects', 'subjects', '', electiveSubjects, 200);
+            }
         }
     });
 }
@@ -237,41 +263,39 @@ var getDepartments = function () {
 }
 
 var getClasses = function () {
-    var classes = $("#class");
-    classes.empty();
-    $.ajax({
-        url: "ajax/getclass",
+    var classroom = $("#classroom");
+    var selectTemplate = '<option value="{{id}}" data-minimum-subjects="{{minimum_subjects}}">{{name}}</option>';
+    classroom.empty();
+    return $.ajax({
+        url: "ajax/get-classrooms",
         dataType: "json",
         data: {
             course: $('#course').val()
         },
         method: "post",
         success: function (data) {
-            $.each(data, function (i, jsonclass) {
-                classes.append($('<option>', {
-                    value: jsonclass.id,
-                    text: jsonclass.name
-                }));
-            });
-            getSubjects();
+            if (data.status === "success") {
+                $.each(data.data, function (i, jsonclass) {
+                    classroom.append(Mustache.render(selectTemplate, jsonclass));
+                });
+            }
         }
     });
 
 }
 var getCourses = function () {
     var course = $("#course");
-    $.ajax({
-        url: "ajax/getcourse",
+    var selectTemplate = '<option value="{{id}}">{{name}}</option>';
+    return $.ajax({
+        url: "ajax/get-all-courses",
         dataType: "json",
         method: "post",
         success: function (data) {
-            $.each(data, function (i, jsoncourse) {
-                course.append($('<option>', {
-                    value: jsoncourse.id,
-                    text: jsoncourse.name
-                }));
-            });
-            getClasses();
+            if (data.status === "success") {
+                $.each(data.data, function (i, jsoncourse) {
+                    course.append(Mustache.render(selectTemplate, jsoncourse));
+                });
+            }
         }
     });
 

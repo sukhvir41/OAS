@@ -79,7 +79,7 @@ public class ClassRoom implements Serializable {
     @Setter
     private Set<SubjectClassRoomLink> subjects = new HashSet<>();
 
-    private ClassRoom() {
+    public ClassRoom() {
     }
 
 

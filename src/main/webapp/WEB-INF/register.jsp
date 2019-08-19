@@ -98,7 +98,7 @@
                                         <div class="box-content">
                                             <h4 class="heading-primary text-uppercase mb-md">Register An Account</h4>
                                             <!-- from tag starts from here-->
-                                            <form id="register" method="post" action="registerpost">
+                                            <form id="register" method="post" action="register-post">
 
                                                 <jsp:include page="/WEB-INF/message-box" />
 
@@ -107,7 +107,8 @@
                                                         <div class="col-md-8">
                                                             <label>First Name</label>
                                                             <input class="form-control input-lg" placeholder="sam"
-                                                                type="text" name="firstname" id="firstname">
+                                                                type="text" name="firstname" id="firstname"
+                                                                value="${param.firstname}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,7 +117,8 @@
                                                         <div class="col-md-8">
                                                             <label>Last Name</label>
                                                             <input class="form-control input-lg" placeholder="smith"
-                                                                type="text" name="lastname" id="lastname">
+                                                                type="text" name="lastname" id="lastname"
+                                                                value="${param.lastname}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -126,7 +128,7 @@
                                                             <label>E-mail Address</label>
                                                             <input class="form-control input-lg"
                                                                 placeholder="sam.smith@mail.com" type="text"
-                                                                name="email" id="email">
+                                                                name="email" id="email" value="${param.email}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,7 +137,8 @@
                                                         <div class="col-md-8">
                                                             <label>Username</label>
                                                             <input class="form-control input-lg" placeholder="samsmart"
-                                                                type="text" name="username" id="username">
+                                                                type="text" name="username" id="username"
+                                                                value="${param.username}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,7 +166,7 @@
                                                             <label>Number</label>
                                                             <input class="form-control input-lg"
                                                                 placeholder="9922288888" type="number" name="number"
-                                                                id="number">
+                                                                id="number" value="${param.number}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,14 +207,18 @@
                                                             </select>
                                                             <br>
                                                             <label>Class</label>
-                                                            <select class="form-control mb-md" id="class" name="class">
+                                                            <select class="form-control mb-md" id="classroom"
+                                                                name="classroom">
                                                             </select>
                                                             <br>
                                                             <label>Subjects</label>
+                                                            <br />
+                                                            <label>Pre-selected subjects</label>
                                                             <div id="subjects">
                                                             </div>
-                                                            <div class="row">
+                                                            <div id="electiveSubjects">
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>

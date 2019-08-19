@@ -201,42 +201,7 @@ sukhvir --%>
 
                                         <hr class="tall" />
 
-                                        <h4>Teachers</h4>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:if test="${fn:length(requestScope.teachers) eq 0}">
-                                                    <tr>
-                                                        <td>----</td>
-                                                        <td>This departmetnt has no teachers</td>
-                                                        <td>----</td>
-                                                        <td>----</td>
-                                                    </tr>
-                                                </c:if>
-
-                                                <c:forEach var="teacher" items="${requestScope.teachers}"
-                                                    varStatus="count">
-                                                    <tr>
-                                                        <td>${count.index + 1}</td>
-                                                        <td><a
-                                                                href="/OAS/teachers/teacher-details?teacherId=${teacher.id}">
-                                                                <c:out value="${teacher}" /></a>
-                                                        </td>
-                                                        <td>
-                                                            <c:out value="${teacher.email}" />
-                                                        </td>
-                                                        <td>${teacher.user.status}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                                        <div id="teachersTable"></div>
                                     </div>
                                 </div>
                             </div>

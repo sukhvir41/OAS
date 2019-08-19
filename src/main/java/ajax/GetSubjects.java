@@ -48,10 +48,8 @@ public class GetSubjects extends AjaxController {
                 "       subject sub" +
                 "   inner join subject_class_link scl " +
                 "   on sub.id = scl.subject_fid" +
-                "   inner join class_room cr " +
-                "   on cr.id = scl.class_room_fid" +
                 "   where" +
-                "   cr.id = :classroomId" +
+                "   scl.class_room_fid = :classroomId" +
                 ") as sub;")
                 .setParameter("classroomId", classroomId);
 

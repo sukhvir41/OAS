@@ -45,9 +45,9 @@ var multiSelect = function (element, name, heading, list, height) {
             }
         },
         template: `
-        <div class="row">
+        <div class="row" v-if="list.length !== 0">
             <div class="col-md-12" style ="border-radius: 6px;">
-                <label>{{heading}}</label>
+                <label v-if="heading.length !== 0">{{heading}}</label>
                 <br/>
                 <label v-for="(item,index) in selected">
                     {{item.name}}<span v-if="index+1 < selected.length">,</span>
@@ -68,7 +68,7 @@ var multiSelect = function (element, name, heading, list, height) {
                         v-bind:class="{'checkbox':true , 'alert alert-info alert-sm': isChecked(item.id) }"
                     >
                         <label v-bind:for="item.id+item.name+index" style="width: 100%">
-                            <input type="checkbox" v-bind:id="item.id+item.name+index" v-on:click.self="addItem(item.id,index)" v-bind:name="name" v-bind:checked="isChecked(item.id)"/>
+                            <input type="checkbox" v-bind:id="item.id+item.name+index" v-on:click.self="addItem(item.id,index)" v-bind:name="name" v-bind:checked="isChecked(item.id)" v-bind:value="item.id"/>
                             {{item.name}}
                         </label>
                     </span>

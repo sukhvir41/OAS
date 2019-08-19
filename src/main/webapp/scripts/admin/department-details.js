@@ -38,4 +38,28 @@ $(document).ready(function () {
 
     paginate('#coursesTable', 'Courses', "/OAS/admin/ajax/get-courses", ['Name'], courseTr, "<tr> <td>----</td> <td> No courses in department </td> </tr>", true, JSON.stringify(additionalData));
 
+    var teacherTr = `
+        <tr v-for="(teacher,index) in data">
+            <td> 
+                {{ counter + index }} 
+            </td> 
+            <td>
+                <a v-bind:href="'/OAS/admin/teacher/teacher-details?teacherId=' + teacher.id"> 
+                    {{ teacher.name }} 
+                </a> 
+            </td> 
+            <td>
+                {{teacher.email}}
+            </td>
+            <td>
+                {{teacher.status}}
+            </td>
+        </tr>    
+    `
+    additionalData = {
+        departmentId: $('#departmentId').val()
+    }
+
+    paginate('#teachersTable', 'Teachers', "/OAS/admin/ajax/get-teachers", ['Name', 'Email', 'Status'], teacherTr, "<tr> <td>----</td> <td col-span='3'> No Teachers in department </td> </tr>", true, JSON.stringify(additionalData));
+
 });

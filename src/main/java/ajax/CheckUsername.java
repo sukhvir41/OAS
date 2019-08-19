@@ -36,14 +36,12 @@ public class CheckUsername extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
         String username = req.getParameter("username");
+        String isJqueryValidator = req.getParameter("jqueryValidator");
 
         if (StringUtils.isBlank(username)) {
             onError(req, resp);
             return;
         }
-
-        Gson gson = new Gson();
-        JsonObject status = getSuccessJson();
 
         var holder = CriteriaHolder.getQueryHolder(session, Long.class, User.class);
 
@@ -59,6 +57,14 @@ public class CheckUsername extends AjaxController {
                 .setMaxResults(1)
                 .setReadOnly(true)
                 .getSingleResult();
+
+        if (StringUtils.isNoneBlank(isJqueryValidator) && Boolean.parseBoolean(isJqueryValidator)) {
+            out.println(count == 0);
+            return;
+        }
+
+        Gson gson = new Gson();
+        JsonObject status = getSuccessJson();
 
         if (count > 0) {
             status.addProperty(IS_UNIQUE, false);

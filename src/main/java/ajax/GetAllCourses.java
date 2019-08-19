@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 /**
  * @author sukhvir
  */
-@WebServlet(urlPatterns = "/ajax/get-all-course")
+@WebServlet(urlPatterns = "/ajax/get-all-courses")
 public class GetAllCourses extends AjaxController {
 
     @Override
