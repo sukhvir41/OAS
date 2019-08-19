@@ -35,10 +35,9 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
                         if (result.status === 'error') {
                             self.error = true;
                         } else {
-                            self.error = false;
+                            self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
                             self.data = result.data;
                             self.pageValues.push(result.pageValue);
-                            //self.columns = result.columns;
                             self.showNext = result.more;
                             if (self.data.length === 0) {
                                 self.error = true;
@@ -64,10 +63,9 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
                         self.error = true;
                         self.counter = 1;
                     } else {
-                        self.error = false;
+                        self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
                         self.data = result.data;
                         self.pageValues.push(result.pageValue);
-                        //self.columns = result.columns;
                         self.showNext = result.more;
                     }
                 },
@@ -101,9 +99,8 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
                             self.error = true;
                             self.counter = 1;
                         } else {
-                            self.error = false;
+                            self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
                             self.data = result.data;
-                            //self.columns = result.columns;
                             self.showNext = result.more;
                             self.showPrev = true;
                             self.pageValues.push(result.pageValue);
@@ -132,14 +129,12 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
                             self.error = true;
                             self.counter = 1;
                         } else {
-                            self.error = false;
+                            self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
                             self.counter -= result.data.length;
                             self.data = result.data;
-                            //self.columns = result.columns;
                             self.showNext = result.more;
                             self.pageValues.push(result.pageValue);
                             self.showPrev = self.pageValues.length > 1;
-
                         }
                     },
                     error: function () {

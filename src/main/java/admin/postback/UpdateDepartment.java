@@ -60,7 +60,7 @@ public class UpdateDepartment extends PostBackController {
                 .update(Tables.DEPARTMENT)
                 .set(Tables.DEPARTMENT.NAME, theDepartmentName);
 
-        if (StringUtils.isNotBlank(theTeacherId)) {
+        if (StringUtils.isNotBlank(theTeacherId) && !theTeacherId.equals("no-hod")) {
             // updating the department hod
             sql = sql.set(Tables.DEPARTMENT.HOD_TEACHER_FID, UUID.fromString(theTeacherId));
         }

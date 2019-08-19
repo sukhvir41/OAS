@@ -53,7 +53,6 @@ public abstract class Controller extends HttpServlet {
                 e.printStackTrace();
             }
 
-            System.out.println("the oncall error " + callOnError());
             if (callOnError()) {
                 this.onError(req, resp);
             } else {

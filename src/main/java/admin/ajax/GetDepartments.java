@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
 
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,33 +35,23 @@ public class GetDepartments extends AjaxController {
         List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(pageValue)) {
-            predicates.add(
-                    holder.getBuilder()
-                            .greaterThan(holder.getRoot().get(Department_.name), pageValue)
-            );
+            addPageValueCondition(pageValue, holder, predicates);
         }
 
         if (StringUtils.isNotBlank(searchText)) {
-            predicates.add(
-                    holder.getBuilder()
-                            .like(holder.getBuilder().lower(holder.getRoot().get(Department_.name)), searchText.toLowerCase() + "%")
-            );
+            addSearchTextCondition(searchText, holder, predicates);
         }
 
-        var predicatesArray = new Predicate[predicates.size()];
-        predicatesArray = predicates.toArray(predicatesArray);
-
         holder.getQuery()
-                .where(holder.getBuilder().and(predicatesArray));
-
-        holder.getQuery()
+                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
                 .orderBy(holder.getBuilder().asc(holder.getRoot().get(Department_.name)));
 
         var results = session.createQuery(holder.getQuery())
                 .setMaxResults(super.getPageSize() + 1)
+                .setReadOnly(true)
                 .getResultList();
 
-        var output = super.getSuccessJson().deepCopy();
+        var output = super.getSuccessJson();
 
         if (results.size() == super.getPageSize() + 1) {
             output.addProperty("more", true);
@@ -81,6 +72,20 @@ public class GetDepartments extends AjaxController {
         }
 
         out.println(new Gson().toJson(output));
+    }
+
+    private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<Department>, Department, Department> holder, List<Predicate> predicates) {
+        predicates.add(
+                holder.getBuilder()
+                        .like(holder.getBuilder().lower(holder.getRoot().get(Department_.name)), searchText.toLowerCase() + "%")
+        );
+    }
+
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Department>, Department, Department> holder, List<Predicate> predicates) {
+        predicates.add(
+                holder.getBuilder()
+                        .greaterThan(holder.getRoot().get(Department_.name), pageValue)
+        );
     }
 
     private JsonObject mapDepartmentToJson(Department department) {

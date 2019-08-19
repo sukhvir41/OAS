@@ -42,8 +42,6 @@ public class TeacherDepartmentLink implements Serializable {
         this.id = new Id(theTeacher.getId(), theDepartment.getId());
         this.teacher = theTeacher;
         this.department = theDepartment;
-        theDepartment.getTeachers().add(this);
-
     }
 
 

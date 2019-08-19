@@ -38,7 +38,7 @@ public class CheckEmail extends AjaxController {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
         String email = req.getParameter("email");
-
+        String isJqueryValidator = req.getParameter("jqueryValidator");
 
         if (StringUtils.isBlank(email)) {
             onError(req, resp);
@@ -49,9 +49,6 @@ public class CheckEmail extends AjaxController {
             onError(req, resp);
             return;
         }
-
-        Gson gson = new Gson();
-        var json = getSuccessJson();
 
         var holder = CriteriaHolder.getQueryHolder(session, Long.class, User.class);
 
@@ -66,6 +63,16 @@ public class CheckEmail extends AjaxController {
                 .setMaxResults(1)
                 .setReadOnly(true)
                 .getSingleResult();
+
+        if (StringUtils.isNotBlank(isJqueryValidator) && Boolean.parseBoolean(isJqueryValidator)) {
+            resp.setContentType("text/html");
+            out.println(count == 0);
+            return;
+        }
+
+
+        Gson gson = new Gson();
+        var json = getSuccessJson();
 
         if (count > 0) {
             json.addProperty(IS_UNIQUE, false);

@@ -1,7 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="" />
+    <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetTeachers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/admin/postback/TransferDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_9_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_9_10.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetAdmins.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetAdmins.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetClassRooms.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetClassRooms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetCourses.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetCourses.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetDepartments.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetDepartments.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DepartmentDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DepartmentDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateDepartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateSubject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckEmail.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckEmail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckUsername.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckUsername.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/ClassSubject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/ForgotPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/ForgotPassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/GetAllDepartments.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/GetAllDepartments.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/GetSubjectOfClassRoom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterCourse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/RegisterSubjects.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/ClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/TeacherDepartmentLink$Id.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/TeacherDepartmentLink$Id.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/TeacherDepartmentLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/TeacherDepartmentLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/postback/Registeration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/testing1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/testing1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.log" beforeDir="false" afterPath="$PROJECT_DIR$/output.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetAdmins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetAdmins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetClassRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetClassRooms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/DepartmentDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/EditDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/EditDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/CheckEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/CheckEmail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetAllCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetAllCourses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetAllDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetAllDepartments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ajax/GetSubjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ajax/GetSubjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/ClassRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/TeacherDepartmentLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/TeacherDepartmentLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/postback/Registeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/postback/Registration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/testing1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/testing1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/department-details.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/department-details.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/edit-department.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/edit-department.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/admin/department-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/admin/department-details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/multi-select.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/multi-select.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/pagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/register.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,15 +99,17 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="OAS_gradle_test" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
-  </component>
-  <component name="FileEditorManager">
-    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -50,124 +121,12 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>equa</find>
-      <find>queryDslVersion</find>
-      <find>setPacketListeners</find>
-      <find>@LazyToOne(LazyToOneOption.NO_PROXY)</find>
-      <find>@Order</find>
-    </findStrings>
-    <dirStrings>
-      <dir>C:\Users\development\Documents\OAS\OAS_gradle\src\main\java</dir>
-      <dir>D:\sharedFolder\OAS_gradle\src\main\java\entities</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utility/Utils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utility/Controller.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateSubject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Course.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1908" />
-    <option name="width" value="1941" />
-    <option name="height" value="2112" />
   </component>
   <component name="ProjectId" id="1PFTh1yW8ydvj0Vgo2dxXTIpcX0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="CatdeaLogs" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="postback" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OAS_gradle_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OAS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="utility" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -228,24 +187,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OAS_gradle [metamodelClean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="metamodelClean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
+    <configuration name="testing1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="utility.testing1" />
+      <module name="OAS_gradle_test.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utility.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="OAS_gradle [runApplication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -288,17 +241,17 @@
     <list>
       <item itemvalue="Application.AddToDatabase" />
       <item itemvalue="Application.Testing" />
-      <item itemvalue="Gradle.OAS_gradle [metamodelClean]" />
       <item itemvalue="Gradle.OAS_gradle [runApplication]" />
       <item itemvalue="Gradle.OAS_gradle [verifyLombok]" />
+      <item itemvalue="Application.testing1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.testing1" />
         <item itemvalue="Gradle.OAS_gradle [runApplication]" />
         <item itemvalue="Gradle.OAS_gradle [verifyLombok]" />
         <item itemvalue="Application.Testing" />
         <item itemvalue="Application.AddToDatabase" />
-        <item itemvalue="Gradle.OAS_gradle [metamodelClean]" />
       </list>
     </recent_temporary>
   </component>
@@ -414,64 +367,8 @@
       <option name="project" value="LOCAL" />
       <updated>1565662081573</updated>
     </task>
-    <task id="LOCAL-00014" summary="changes in admin package">
-      <created>1565820584177</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1565820584177</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="14" />
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2575" height="1415" extended-state="6" />
-    <layout>
-      <window_info id="Project Explorer" order="0" weight="0.32995737" />
-      <window_info id="Job Explorer" order="1" weight="0.32995737" />
-      <window_info id="DB Browser" order="2" weight="0.32995737" />
-      <window_info id="UI Designer" order="3" />
-      <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info id="Designer" order="5" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.15653555" />
-      <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="8" />
-      <window_info id="Capture Tool" order="9" />
-      <window_info anchor="bottom" id="DB Execution Console" order="0" />
-      <window_info anchor="bottom" id="Console" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49733758" weight="0.30010834" />
-      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.5025845" side_tool="true" weight="0.25409198" />
-      <window_info anchor="bottom" id="Build" order="4" sideWeight="0.4978678" weight="0.4907909" />
-      <window_info anchor="bottom" id="Messages" order="5" sideWeight="0.49573562" weight="0.17170626" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="6" sideWeight="0.4974155" visible="true" weight="0.2538941" />
-      <window_info anchor="bottom" id="Message" order="7" />
-      <window_info anchor="bottom" id="Find" order="8" weight="0.09431021" />
-      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4978678" weight="0.2892741" />
-      <window_info anchor="bottom" id="Debug" order="10" weight="0.39869988" />
-      <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="13" weight="0.32897604" />
-      <window_info anchor="right" id="Gradle" order="0" sideWeight="0.49181604" visible="true" weight="0.043305524" />
-      <window_info anchor="right" id="Palette&#9;" order="1" />
-      <window_info anchor="right" id="Maven" order="2" weight="0.32995737" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="right" id="Commander" order="5" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="8" sideWeight="0.50818396" side_tool="true" weight="0.04333996" />
-      <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info anchor="right" id="Theme Preview" order="10" />
-    </layout>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
@@ -482,12 +379,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -525,21 +416,18 @@
     <MESSAGE value="changes admin controllers package and added vue.js and pagination.js" />
     <MESSAGE value="added pagination.js" />
     <MESSAGE value="changes in ajax package" />
-    <MESSAGE value="changes in admin package" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes in admin package" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes in ajax package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/utility/Testing.java</url>
-          <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/teacher/ajax/GetStudents.java</url>
           <line>61</line>
-          <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -548,203 +436,5 @@
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/ajax/GetAdmins.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ajax/CheckUsername.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="55" column="78" selection-start-line="55" selection-start-column="78" selection-end-line="55" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ajax/ForgotPassword.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ajax/GetAllDepartments.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ajax/GetAllCourses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ajax/GetClassRooms.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ajax/GetSubjects.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddAdmin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="48" column="76" lean-forward="true" selection-start-line="48" selection-start-column="76" selection-end-line="48" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddClassRoom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/AddCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="54" column="71" lean-forward="true" selection-start-line="54" selection-start-column="71" selection-end-line="54" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar!/javax/persistence/Query.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/UrlParameters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/EditSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="22" column="55" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/AdminSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/controllers/SubjectDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="26" column="58" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="95" column="4" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utility/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/entities/Department_.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="66" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jooq/jooq/3.11.10/9c3f03abfd3b553cb41f9f285320119b46f90ea/jooq-3.11.10-sources.jar!/org/jooq/UpdateSetStep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="79" column="10" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateDepartment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/ClassRoom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/SubjectClassRoomLink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Subject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateSubject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="60" column="19" lean-forward="true" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="41" column="18" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
-          <folding>
-            <element signature="e#1921#1922#0" expanded="true" />
-            <element signature="e#1965#1966#0" expanded="true" />
-            <element signature="e#2003#2004#0" expanded="true" />
-            <element signature="e#2041#2042#0" expanded="true" />
-            <element signature="e#2923#2924#0" expanded="true" />
-            <element signature="e#2948#2949#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>
