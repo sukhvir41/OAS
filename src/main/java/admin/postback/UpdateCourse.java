@@ -6,11 +6,14 @@
 package admin.postback;
 
 import entities.*;
+import jooq.entities.Tables;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
 import utility.UrlParameters;
+import utility.Utils;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.JoinType;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
+
+import static jooq.entities.Tables.*;
 
 /**
  * @author sukhvir
@@ -48,6 +53,7 @@ public class UpdateCourse extends PostBackController {
             var departmentId = Long.parseLong(departmentIdString);
             if (course.getDepartment().getId() != departmentId) {
                 // change course department if it is different
+                changeDepartment(course, departmentId, session);
             }
         }
 
@@ -72,16 +78,13 @@ public class UpdateCourse extends PostBackController {
             url.addMessage("The course you are tying to update does not exist");
             resp.sendRedirect(url.getUrl("/OAS/admin/courses"));
         } else {
-            url.addMessage("Please provide the necessary data");
-        }
+            url.addMessage("Please provide the necessary data")
+                    .addParameter("courseId", courseId);
 
-        resp.sendRedirect(
-                new UrlParameters()
-                        .addErrorParameter()
-                        .addParameter("courseId", req.getParameter("courseId"))
-                        .addMessage("Unable to edit the course as details were missing")
-                        .getUrl("/OAS/admin/courses")
-        );
+            resp.sendRedirect(
+                    url.getUrl("/OAS/admin/courses/edit-course")
+            );
+        }
     }
 
     public void changeDepartment(Course course, long departmentId, Session session) {
@@ -90,49 +93,57 @@ public class UpdateCourse extends PostBackController {
         // 2 remove any teacher form teaching mapping that are not registered to the new department
         // 3. change the department of the course
 
-        /*
-         * select all teacher inner join classroom inner course where teacher department not in department set teacher classroom as null
-         * will jooq be easier
-         * */
-        var holder = CriteriaHolder.getUpdateHolder(session, Teacher.class);
+        removeClassTeachers(course, departmentId, session);
+        removeTeachersFromTeaching(course, departmentId, session);
+        updateTheCourse(course, departmentId, session);
 
-        var subQuery = holder.getQuery()
-                .subquery(UUID.class);
-        var subQueryFrom = subQuery.from(Teacher.class);
+    }
 
-        var departmentJoin = subQueryFrom.join(Teacher_.departments, JoinType.INNER);
-        departmentJoin.on(
-                holder.getBuilder()
-                        .equal(subQueryFrom.get(Teacher_.departments), departmentJoin.get(TeacherDepartmentLink_.department)),
-                holder.getBuilder()
-                        .notEqual(departmentJoin.get(TeacherDepartmentLink_.department), departmentId)
-        );
+    private void removeClassTeachers(Course course, long departmentId, Session session) {
+        var dsl = Utils.getDsl();
+        var nativeQuery = dsl
+                .delete(CLASS_TEACHER_CLASS_ROOM_LINK)
+                .where(CLASS_TEACHER_CLASS_ROOM_LINK.CLASS_TEACHER_FID.in(
+                        dsl.select(TEACHER_DEPARTMENT_LINK.TEACHER_FID)
+                                .from(TEACHER_DEPARTMENT_LINK)
+                                .innerJoin(CLASS_TEACHER_CLASS_ROOM_LINK)
+                                .on(CLASS_TEACHER_CLASS_ROOM_LINK.CLASS_TEACHER_FID.eq(TEACHER_DEPARTMENT_LINK.TEACHER_FID))
+                                .innerJoin(CLASS_ROOM)
+                                .on(CLASS_ROOM.ID.eq(CLASS_TEACHER_CLASS_ROOM_LINK.CLASS_ROOM_FID).and(CLASS_ROOM.COURSE_FID.eq(course.getId())))
+                                .where(TEACHER_DEPARTMENT_LINK.DEPARTMENT_FID.notEqual(departmentId))
+                ));
 
-        var classRoomJoin = subQueryFrom.join(Teacher_.classRoom, JoinType.INNER);
-        var courseJoin = classRoomJoin.join(ClassRoom_.course, JoinType.INNER);
-        courseJoin.on(
-                holder.getBuilder()
-                        .equal(classRoomJoin.get(ClassRoom_.course), courseJoin.get(Course_.id)),
-                holder.getBuilder()
-                        .equal(classRoomJoin.get(ClassRoom_.course), course)
-        );
+        Utils.executeNativeQuery(session, nativeQuery);
+    }
 
-        subQuery.select(subQueryFrom.get(Teacher_.id));
+    public void removeTeachersFromTeaching(Course course, long departmentId, Session session) {
+        var dsl = Utils.getDsl();
+
+        var nativeQuery = dsl.update(TCS)
+                .set(TCS.TEACHER_FID, (UUID) null)
+                .where(TCS.TEACHER_FID.in(
+                        dsl.select(TEACHER_DEPARTMENT_LINK.TEACHER_FID)
+                                .from(TEACHER_DEPARTMENT_LINK)
+                                .innerJoin(CLASS_TEACHER_CLASS_ROOM_LINK)
+                                .on(CLASS_TEACHER_CLASS_ROOM_LINK.CLASS_TEACHER_FID.eq(TEACHER_DEPARTMENT_LINK.TEACHER_FID))
+                                .innerJoin(CLASS_ROOM)
+                                .on(CLASS_ROOM.ID.eq(CLASS_TEACHER_CLASS_ROOM_LINK.CLASS_ROOM_FID).and(CLASS_ROOM.COURSE_FID.eq(course.getId())))
+                                .where(TEACHER_DEPARTMENT_LINK.DEPARTMENT_FID.notEqual(departmentId))
+                ));
+    }
+
+    private void updateTheCourse(Course course, long departmentId, Session session) {
+        var holder = CriteriaHolder.getUpdateHolder(session, Course.class);
 
         holder.getQuery()
-                .set(
-                        Teacher_.classRoom,
-                        holder.getBuilder()
-                                .nullLiteral(ClassRoom.class)
-                )
+                .set(Course_.DEPARTMENT, departmentId)
                 .where(
-                        holder.getRoot().get(Teacher_.id)
-                                .in(subQuery)
+                        holder.getBuilder()
+                                .equal(holder.getRoot().get(Course_.id), course.getId())
                 );
 
         session.createQuery(holder.getQuery())
                 .executeUpdate();
-
     }
 
 

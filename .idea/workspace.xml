@@ -2,8 +2,104 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/ClassTeacherClassRoomLink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/ClassTeacherClassRoomLinkRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateCourse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/DefaultCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/DefaultCatalog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes$Indexes0.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes$Indexes0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Indexes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$ForeignKeys0.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$ForeignKeys0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$UniqueKeys0.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys$UniqueKeys0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Keys.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Public.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Public.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Routines.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Sequences.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Sequences.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Tables.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/Tables.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/GetLectureId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/RandomString.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/routines/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Attendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/ClassRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/ClassRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Course.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Department.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Lecture.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Lecture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/StudentSubjectLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/StudentSubjectLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Subject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Subject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/SubjectClassLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/SubjectClassLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Tcs.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Tcs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Teacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Teacher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/TeacherDepartmentLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/TeacherDepartmentLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AdminRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AdminRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AttendanceRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/AttendanceRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/ClassRoomRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/ClassRoomRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/CourseRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/CourseRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/DepartmentRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/DepartmentRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/LectureRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/LectureRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentSubjectLinkRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/StudentSubjectLinkRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectClassLinkRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectClassLinkRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/SubjectRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TcsRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TcsRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherDepartmentLinkRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherDepartmentLinkRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/TeacherRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/UsersRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/jooq/entities/tables/records/UsersRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/utility/testing1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/utility/testing1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/drop.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/postback/UpdateCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/DefaultCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/DefaultCatalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/Indexes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/Indexes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/Keys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/Keys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/Public.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/Public.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/Routines.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/Sequences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/Sequences.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/Tables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/Tables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/routines/GetLectureId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/routines/RandomString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/routines/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Attendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Attendance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/ClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/ClassRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Department.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Lecture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/StudentSubjectLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/StudentSubjectLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Subject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/SubjectClassLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/SubjectClassLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Tcs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Tcs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/TeacherDepartmentLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/TeacherDepartmentLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/AdminRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/AdminRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/AttendanceRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/AttendanceRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/ClassRoomRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/ClassRoomRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/CourseRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/CourseRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/DepartmentRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/DepartmentRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/LectureRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/LectureRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/StudentRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/StudentRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/StudentSubjectLinkRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/StudentSubjectLinkRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/SubjectClassLinkRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/SubjectClassLinkRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/SubjectRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/SubjectRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/TcsRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/TcsRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/TeacherDepartmentLinkRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/TeacherDepartmentLinkRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/TeacherRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/TeacherRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/UsersRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jooq/entities/tables/records/UsersRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/testing1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/testing1.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,11 +154,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1908" />
-    <option name="width" value="1941" />
-    <option name="height" value="2112" />
-  </component>
   <component name="ProjectId" id="1PFTh1yW8ydvj0Vgo2dxXTIpcX0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -70,21 +161,22 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/scripts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\sharedFolder\OAS_gradle\src\main\webapp\scripts" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\development\Documents\OAS\OAS_gradle\src\main\webapp\WEB-INF" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="student.attendanceWsService" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\development\Documents\OAS\OAS_gradle\src\main\webapp\WEB-INF" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\sharedFolder\OAS_gradle\src\main\java" />
+      <recent name="D:\sharedFolder\OAS_gradle\src\main\webapp\scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -99,7 +191,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.OAS_gradle [runApplication]">
+  <component name="RunManager" selected="Application.testing1">
     <configuration name="AddToDatabase" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="utility.AddToDatabase" />
       <module name="OAS_gradle_test.main" />
@@ -306,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565662081573</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="changes in update course">
+      <created>1566271875016</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1566271875017</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -355,7 +454,8 @@
     <MESSAGE value="changes admin controllers package and added vue.js and pagination.js" />
     <MESSAGE value="added pagination.js" />
     <MESSAGE value="changes in ajax package" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes in ajax package" />
+    <MESSAGE value="changes in update course" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes in update course" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

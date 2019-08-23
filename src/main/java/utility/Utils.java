@@ -482,7 +482,7 @@ public class Utils {
     }
 
 
-    public static void executeNativeQuery(Session session, org.jooq.Query theQuery) {
+    public static int executeNativeQuery(Session session, org.jooq.Query theQuery) {
         org.hibernate.query.Query result = session.createNativeQuery(theQuery.getSQL());
 
         List<Object> values = theQuery.getBindValues();
@@ -491,7 +491,7 @@ public class Utils {
             result.setParameter(i + 1, values.get(i));
         }
 
-        result.executeUpdate();
+        return result.executeUpdate();
     }
 
     public static boolean isEamil(String email) {
