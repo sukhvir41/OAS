@@ -23,13 +23,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/students/grantleavepost")
 public class GrantLeavesPost extends PostBackController {
 
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
@@ -38,7 +37,7 @@ public class GrantLeavesPost extends PostBackController {
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
 
         Student student = (Student) session.get(Student.class, studentId);
-       
+
         List<Teaching> teachings = session.createCriteria(Teaching.class)
                 .add(Restrictions.eq("classRoom", student.getClassRoom()))
                 .add(Restrictions.in("subject", student.getSubjects()))
@@ -54,7 +53,7 @@ public class GrantLeavesPost extends PostBackController {
         if (lectures != null && !lectures.isEmpty()) {
             lectures.stream()
                     .filter(lecture -> !checkAttendance(lecture, student, session))
-                    .forEach(lecture -> session.save(new Attendance(lecture, student,true, true,true)));
+                    .forEach(lecture -> session.save(new Attendance(lecture, student, true, true, true)));
         }
         resp.sendRedirect("/OAS/admin/students/detailstudent?studentId=" + studentId);
     }

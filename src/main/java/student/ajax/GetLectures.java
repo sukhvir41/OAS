@@ -27,50 +27,49 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/student/ajax/getlectures")
 public class GetLectures extends AjaxController {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Student student = (Student) req.getSession().getAttribute("student");
         Student currentStudent = (Student) session.get(Student.class, student.getId());
-        
+
         LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
         LocalDateTime endDate = Utils.getEndDate(req.getParameter("enddate"));
-        
+
         int subjectId = Integer.parseInt(req.getParameter("subjectId"));
-        
+
         Subject subject = (Subject) session.get(Subject.class, subjectId);
-        
+
         if (currentStudent.getSubjects().contains(subject)) {
             Teaching teaching = (Teaching) session.createCriteria(Teaching.class)
                     .add(Restrictions.eq("subject", subject))
                     .add(Restrictions.eq("classRoom", currentStudent.getClassRoom()))
                     .list()
                     .get(0);
-            
+
             List<Lecture> lectures = session.createCriteria(Lecture.class)
                     .add(Restrictions.eq("teaching", teaching))
                     .add(Restrictions.between("date", startDate, endDate))
                     .addOrder(Order.desc("date"))
                     .list();
-            
+
             Gson gson = new Gson();
             JsonArray jsonLectures = new JsonArray();
-            
+
             lectures.stream()
                     .forEach(lecture -> add(lecture, currentStudent, jsonLectures));
-            
+
             out.print(gson.toJson(jsonLectures));
-            
+
         } else {
             out.print("error");
         }
     }
-    
+
     private void add(Lecture theLecture, Student student, JsonArray jsonLectures) {
         JsonObject lecture = new JsonObject();
         lecture.addProperty("id", theLecture.getId());
@@ -81,7 +80,7 @@ public class GetLectures extends AjaxController {
 
         //todo : write sql for this
         /*
-       *//* List<Attendance> attendaces = theLecture.getAttendance()
+         *//* List<Attendance> attendaces = theLecture.getAttendance()
                 .stream()
                 .filter(attendance -> attendance.getStudent().getId() == student.getId())
                 .collect(Collectors.toList());*//*
@@ -97,8 +96,8 @@ public class GetLectures extends AjaxController {
         } else {
             lecture.addProperty("status", "absent");
         }*/
-        
+
         jsonLectures.add(lecture);
     }
-    
+
 }

@@ -13,7 +13,6 @@ import org.pcap4j.packet.namednumber.ArpHardwareType;
 import org.pcap4j.packet.namednumber.ArpOperation;
 import org.pcap4j.packet.namednumber.EtherType;
 import org.pcap4j.util.ByteArrays;
-import org.pcap4j.util.LinkLayerAddress;
 import org.pcap4j.util.MacAddress;
 
 import java.net.InetAddress;

@@ -5,7 +5,9 @@
  */
 package hod.controllers;
 
-import entities.*;
+import entities.Department;
+import entities.Teacher;
+import entities.Teaching;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import utility.Controller;
@@ -16,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author sukhvir

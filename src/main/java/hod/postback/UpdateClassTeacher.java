@@ -18,20 +18,19 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/classrooms/updateclassteacher")
 public class UpdateClassTeacher extends PostBackController {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int classroomId = Integer.parseInt(req.getParameter("classroomId"));
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
-        
+
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
         
@@ -64,7 +63,7 @@ public class UpdateClassTeacher extends PostBackController {
         } else {
             resp.sendRedirect("/OAS/error");
         }*/
-        
+
     }
-    
+
 }

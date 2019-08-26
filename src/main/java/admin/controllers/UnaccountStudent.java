@@ -16,12 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 //@WebServlet(urlPatterns = "/admin/students/unaccountstudent")
 public class UnaccountStudent extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
@@ -50,11 +49,11 @@ public class UnaccountStudent extends Controller {
             resp.sendRedirect("/OAS/admin/students");
         }*/
     }
-    
+
     private void removeAttendance(Attendance attendance, Session session) {
         //attendance.setStudent(null);
         //attendance.setLecture(null);
         session.delete(attendance);
     }
-    
+
 }

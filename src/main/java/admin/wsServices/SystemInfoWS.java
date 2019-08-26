@@ -14,12 +14,11 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
 /**
- *
  * @author development
  */
 @ServerEndpoint(value = "/admin/ws/systemInfo", configurator = GlobalWsConfig.class)
 public class SystemInfoWS {
-    
+
     @OnOpen
     public void open(Session session, EndpointConfig conf) {
         System.out.println("connection opened");
@@ -41,24 +40,24 @@ public class SystemInfoWS {
             }
         }
     }
-    
+
     @OnClose
     public void close(Session session) {
         SystemInfoService.removeSession(session);
     }
-    
+
     @OnError
     public void onError(Throwable error) {
         System.out.println("error in WS Admin web socket");
         error.printStackTrace();
         // have to cehcck what to do here
     }
-    
+
     @OnMessage
     public void handleMessage(String message, Session session) {
 
-        
+
     }
-    
-   
+
+
 }

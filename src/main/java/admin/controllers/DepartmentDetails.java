@@ -9,18 +9,13 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
-import javax.persistence.criteria.JoinType;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author sukhvir
@@ -36,7 +31,7 @@ public class DepartmentDetails extends Controller {
 
         if (StringUtils.isBlank(departmentIdString)) {
             resp.sendRedirect(
-                    new UrlParameters().addErrorParameter()
+                    new UrlBuilder().addErrorParameter()
                             .addMessage("The department you are trying to access does not exist")
                             .getUrl("/OAS/admin/departments")
             );

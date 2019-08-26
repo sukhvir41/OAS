@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/createlecture")

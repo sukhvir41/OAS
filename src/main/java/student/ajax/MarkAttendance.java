@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/student/ajax/markattendance")
@@ -54,7 +53,7 @@ public class MarkAttendance extends AjaxController {
                     String macAddr = NewMacaddress.getMacAddress(req.getRemoteAddr());
                     System.out.println(macAddr.toLowerCase() + " : " + student.getMacId().toLowerCase() + "  : " + req.getRemoteAddr());
                     if (macAddr.toLowerCase().equals(student.getMacId().toLowerCase())) {
-                        Attendance attendance = new Attendance(lecture, student,true);
+                        Attendance attendance = new Attendance(lecture, student, true);
                         attendance.setAttended(true);
                         attendance.setLeave(false);
                         attendance.setMarkedByTeacher(false);

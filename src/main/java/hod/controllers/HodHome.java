@@ -19,7 +19,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet("/teacher/hod")

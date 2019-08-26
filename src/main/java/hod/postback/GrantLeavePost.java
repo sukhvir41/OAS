@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/students/grantleavepost")
@@ -53,7 +52,7 @@ public class GrantLeavePost extends PostBackController {
             if (lectures != null && !lectures.isEmpty()) {
                 lectures.stream()
                         .filter(lecture -> !checkAttendance(lecture, student, session))
-                        .forEach(lecture -> session.save(new Attendance(lecture,student,true, true,true)));
+                        .forEach(lecture -> session.save(new Attendance(lecture, student, true, true, true)));
             }
             resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + studentId);
         } else {

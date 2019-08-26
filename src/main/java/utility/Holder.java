@@ -11,9 +11,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * @author sukhvir
- * 
+ * <p>
  * used to show the pie chat attendance at the student attendance pages
  */
 public class Holder {

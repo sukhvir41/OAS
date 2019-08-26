@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/students/deletestudent")

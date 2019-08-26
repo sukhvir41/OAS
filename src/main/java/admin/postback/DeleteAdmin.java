@@ -12,7 +12,7 @@ import entities.EntityHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +42,7 @@ public class DeleteAdmin extends Controller {
 
         Admin admin = EntityHelper.getInstance(adminId, Admin_.id, Admin.class, session, true, Admin_.USER);
 
-        UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
         req.setAttribute("username", admin.getUser().getUsername());
 
@@ -70,7 +70,7 @@ public class DeleteAdmin extends Controller {
         String username = (String) req.getAttribute("username");
 
         resp.sendRedirect(
-                new UrlParameters()
+                new UrlBuilder()
                         .addErrorParameter()
                         .addMessage(username + " unable to delete the admin")
                         .getUrl("/OAS/admin/admins")

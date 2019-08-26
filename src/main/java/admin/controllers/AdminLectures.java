@@ -5,9 +5,9 @@
  */
 package admin.controllers;
 
-import entities.Course;
-import entities.Course_;
 import entities.EntityHelper;
+import entities.Teaching;
+import entities.Teaching_;
 import org.hibernate.Session;
 import utility.Controller;
 
@@ -27,11 +27,16 @@ public class AdminLectures extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        List<Course> courses = EntityHelper.getAll(session, Course.class, Course_.name, true);
+        var graph = session.createEntityGraph(Teaching.class);
+        graph.addAttributeNodes(Teaching_.CLASS_ROOM, Teaching_.SUBJECT);
 
-        req.setAttribute("courses", courses);
+        //usd for drop down
+        List<Teaching> teachings = EntityHelper.getAll(session, Teaching.class, graph, true);
+
+        req.setAttribute("teachings", teachings);
         req.getRequestDispatcher("/WEB-INF/admin/admin-admin-lectures.jsp")
                 .include(req, resp);
     }
+
 
 }

@@ -24,39 +24,38 @@ import java.util.Arrays;
 @WebServlet(urlPatterns = "/account/updatestudent")
 public class UpdateAccount extends PostBackController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
-		Student sessionStudent = (Student) req.getSession().getAttribute( "student" );
-		Student student = (Student) session.get( Student.class, sessionStudent.getId() );
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
+        Student sessionStudent = (Student) req.getSession().getAttribute("student");
+        Student student = (Student) session.get(Student.class, sessionStudent.getId());
 
-		String email = req.getParameter( "email" );
-		String number = req.getParameter( "number" );
-		String fName = req.getParameter( "fname" );
-		String lName = req.getParameter( "lname" );
-		int rollnumber = Integer.parseInt( req.getParameter( "rollnumber" ) );
+        String email = req.getParameter("email");
+        String number = req.getParameter("number");
+        String fName = req.getParameter("fname");
+        String lName = req.getParameter("lname");
+        int rollnumber = Integer.parseInt(req.getParameter("rollnumber"));
 
-		if ( !student.getUser().getEmail().equals( email ) ) {
+        if (!student.getUser().getEmail().equals(email)) {
 
-			student.getUser().setEmail( email );
-			resp.sendRedirect( "/OAS/logout" );
-		}
-		else {
-			resp.sendRedirect( "/OAS/account/editstudent" );
-		}
-		//student.setVerified( false );
-		//student.setUnaccounted( false );
-		ClassRoom classRoom = (ClassRoom) session.get(
-				ClassRoom.class,
-				Long.parseLong( req.getParameter( "classroom" ) )
-		);
+            student.getUser().setEmail(email);
+            resp.sendRedirect("/OAS/logout");
+        } else {
+            resp.sendRedirect("/OAS/account/editstudent");
+        }
+        //student.setVerified( false );
+        //student.setUnaccounted( false );
+        ClassRoom classRoom = (ClassRoom) session.get(
+                ClassRoom.class,
+                Long.parseLong(req.getParameter("classroom"))
+        );
 
-		student.getClassRoom().getStudents().remove( student );
-		student.addClassRoom( classRoom ); // addding
+        student.getClassRoom().getStudents().remove(student);
+        student.addClassRoom(classRoom); // addding
 
 	/*	student.getSubjects()
 				.stream()
@@ -64,17 +63,17 @@ public class UpdateAccount extends PostBackController {
 
 		student.setSubjects( null );*/
 
-		Arrays.asList( req.getParameter( "subjects" ) ) //adding
-				.stream()
-				.map( subject -> Integer.parseInt( subject ) )
-				.map( subject -> (Subject) session.get( Subject.class, subject ) )
-				.forEach( subject -> student.addSubject( subject ) );
+        Arrays.asList(req.getParameter("subjects")) //adding
+                .stream()
+                .map(subject -> Integer.parseInt(subject))
+                .map(subject -> (Subject) session.get(Subject.class, subject))
+                .forEach(subject -> student.addSubject(subject));
 
-		student.setFName( fName );//adding
-		student.getUser().setNumber( Long.parseLong( number ) );//adding
-		student.setLName( lName );//adding
-		student.setRollNumber( rollnumber );//adding
+        student.setFName(fName);//adding
+        student.getUser().setNumber(Long.parseLong(number));//adding
+        student.setLName(lName);//adding
+        student.setRollNumber(rollnumber);//adding
 
-	}
+    }
 
 }

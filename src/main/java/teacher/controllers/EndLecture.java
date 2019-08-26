@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author icr
  */
 @WebServlet(urlPatterns = "/teacher/endlecture")

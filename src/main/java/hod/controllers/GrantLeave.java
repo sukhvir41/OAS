@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet("/teacher/hod/students/grantleave")
@@ -30,12 +29,12 @@ public class GrantLeave extends Controller {
 
         int studentId = Integer.parseInt(req.getParameter("studentId"));
         Student student = (Student) session.get(Student.class, studentId);
-        
-        if(student.getClassRoom().getCourse().getDepartment().getId() == department.getId()){
+
+        if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
             req.setAttribute("student", student);
             req.getRequestDispatcher("/WEB-INF/hod/hodgrantleave.jsp").include(req, resp);
-            
-        }else{
+
+        } else {
             resp.sendRedirect("/OAS/error");
         }
     }

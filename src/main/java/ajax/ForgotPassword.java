@@ -11,15 +11,12 @@ import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 import utility.Utils;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 /**

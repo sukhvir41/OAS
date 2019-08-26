@@ -44,7 +44,7 @@ public class GetClassRooms extends AjaxController {
                 "   select" +
                 "       id," +
                 "       name," +
-                "       minimum_subjects"+
+                "       minimum_subjects" +
                 "   from" +
                 "   class_room" +
                 "   where course_fid = :courseId" +

@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/generatereportpost")
@@ -170,7 +169,7 @@ public class GenerateReport extends ReportPostBackController {
                 .filter(attendace -> attendace.getStudent().getId() == student.getId())
                 .mapToInt(attendance -> lecture.getCount())
                 .sum();*/
-       return 0;
+        return 0;
     }
 
 //    private int getAttendedCount(Lecture lecture, Student student, Session session) {

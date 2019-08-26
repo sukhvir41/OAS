@@ -25,8 +25,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static utility.Constants.*;
+
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/ajax/searchlecture")
@@ -34,9 +34,9 @@ public class SearchLectures extends AjaxController {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-        
+
         resp.setContentType("application/json");
-        
+
         long classId = Long.parseLong(req.getParameter("classroomId"));
         String subjectId = req.getParameter("subjectId");
         LocalDateTime startDate = Utils.getStartDate(req.getParameter("startdate"));
@@ -97,7 +97,7 @@ public class SearchLectures extends AjaxController {
                 .add(Restrictions.in("subjects",subjects ))
                 .setProjection(Projections.rowCount())
                 .uniqueResult();*/
-        
+
 //        int totalStudents = theLecture.getTeaching()
 //                .getClassRoom()
 //                .getStudents()
@@ -113,7 +113,7 @@ public class SearchLectures extends AjaxController {
         lecture.addProperty(COUNT, theLecture.getCount());
         lecture.addProperty(DATE, Utils.formatDateTime(theLecture.getDate()));
         lecture.addProperty(PRESENT, attendedStudent);
-       // lecture.addProperty(ABSENT, totalStudents - attendedStudent);
+        // lecture.addProperty(ABSENT, totalStudents - attendedStudent);
 
         jsonLectures.add(lecture);
 

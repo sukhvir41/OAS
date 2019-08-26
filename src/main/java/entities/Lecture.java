@@ -8,17 +8,12 @@ package entities;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Kalpesh
@@ -55,7 +50,7 @@ public class Lecture implements Serializable {
     @JoinColumns(value = {
             @JoinColumn(name = "tcs_class_room_fid", foreignKey = @ForeignKey(name = "lecture_tcs_class_room_foreign_key"), referencedColumnName = "class_room_fid"),
             @JoinColumn(name = "tcs_subject_fid", foreignKey = @ForeignKey(name = "lecture_tcs_subject_foreign_key"), referencedColumnName = "subject_fid")
-    },foreignKey = @ForeignKey(name = "teaching_foreign_key"))
+    }, foreignKey = @ForeignKey(name = "teaching_foreign_key"))
     @Getter
     @Setter
     Teaching teaching;

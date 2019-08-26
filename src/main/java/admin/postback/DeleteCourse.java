@@ -11,7 +11,7 @@ import entities.EntityHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +37,7 @@ public class DeleteCourse extends PostBackController {
             return;
         }
 
-        UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
         long theCourseId = Long.parseLong(courseId);
         //this delete query will fail if the course has links to subject to classroom
@@ -58,7 +58,7 @@ public class DeleteCourse extends PostBackController {
             return;
         }
 
-        UrlParameters parameters = new UrlParameters()
+        UrlBuilder parameters = new UrlBuilder()
                 .addErrorParameter()
                 .addMessage("Before deleting this Course make sure that all of its subjects or class rooms are deleted or moved to another course")
                 .addParameter("courseId", courseId);
@@ -69,7 +69,7 @@ public class DeleteCourse extends PostBackController {
 
     private boolean validate(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
         String courseId = request.getParameter("courseId");
 

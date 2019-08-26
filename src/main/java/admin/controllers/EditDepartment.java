@@ -9,7 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +37,7 @@ public class EditDepartment extends Controller {
 
         if (StringUtils.isBlank(departmentIdString)) {
             resp.sendRedirect(
-                    new UrlParameters().addErrorParameter()
+                    new UrlBuilder().addErrorParameter()
                             .addMessage("The department you are looking for does not exists")
                             .getUrl("/OAS/admin/departments")
             );

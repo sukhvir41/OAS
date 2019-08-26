@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import java.io.OutputStream;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet("/teacher/hod/generatereportpost")

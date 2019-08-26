@@ -17,12 +17,11 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/grantleave")
 public class GrantLeave extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
@@ -36,5 +35,5 @@ public class GrantLeave extends Controller {
             resp.sendRedirect("/OAS/accessdenied.jsp");
         }
     }
-    
+
 }

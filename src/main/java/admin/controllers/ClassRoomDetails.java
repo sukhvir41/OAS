@@ -12,14 +12,12 @@ import entities.SubjectClassRoomLink_;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -35,7 +33,7 @@ public class ClassRoomDetails extends Controller {
 
         if (StringUtils.isBlank(classroomIdString)) {
             resp.sendRedirect(
-                    new UrlParameters()
+                    new UrlBuilder()
                             .addErrorParameter()
                             .addMessage("The class room you are trying to access does not exist")
                             .getUrl("/OAS/admin/classrooms")

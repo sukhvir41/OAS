@@ -18,9 +18,8 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
- *
  * @author development
- *
+ * <p>
  * has been setup in contextListner to run every 15 seconds
  */
 public class SystemInfoService implements Runnable {
@@ -40,11 +39,11 @@ public class SystemInfoService implements Runnable {
     private static final String TYPE = "type";
 
     private static JsonObject ERROR_JSON = new JsonObject();
-    
+
     static {
         ERROR_JSON.addProperty(TYPE, ERROR);
     }
-            
+
     public static void addSession(Session theSession) {
         sessions.add(theSession);
     }
@@ -57,7 +56,7 @@ public class SystemInfoService implements Runnable {
         JsonObject info = new JsonObject();
 
         double cpuUsage = Arrays.stream(HARDWARE.getProcessor().getProcessorCpuLoadBetweenTicks())
-                .map( e -> e*100d)
+                .map(e -> e * 100d)
                 .average()
                 .orElse(0);
 
@@ -89,14 +88,14 @@ public class SystemInfoService implements Runnable {
             sendSystemReport();
         } catch (Exception ex) {
             sessions.parallelStream()
-                .forEach(SystemInfoService::sendError);
+                    .forEach(SystemInfoService::sendError);
         }
     }
-    
-    public static void sendError(Session theSession){
+
+    public static void sendError(Session theSession) {
         theSession.getAsyncRemote()
                 .sendText(gson.toJson(ERROR_JSON));
     }
 
-   
+
 }

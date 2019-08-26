@@ -11,11 +11,11 @@ import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/register")
 public class Register extends Controller {
-	@Override
-	public void process(
-			HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out)
-			throws Exception {
-		req.getRequestDispatcher( "/WEB-INF/register.jsp" )
-				.include( req, resp );
-	}
+    @Override
+    public void process(
+            HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out)
+            throws Exception {
+        req.getRequestDispatcher("/WEB-INF/register.jsp")
+                .include(req, resp);
+    }
 }

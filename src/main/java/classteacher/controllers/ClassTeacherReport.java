@@ -16,19 +16,18 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/reports")
 public class ClassTeacherReport extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
-        
+
         req.setAttribute("classroom", teacher.getClassRoom());
         req.getRequestDispatcher("/WEB-INF/classteacher/classteacherreportgen.jsp").include(req, resp);
     }
-    
+
 }

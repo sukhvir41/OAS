@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/subjects/addsubjecttoclassrooms")

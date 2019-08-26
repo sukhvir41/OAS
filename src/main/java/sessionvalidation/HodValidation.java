@@ -15,22 +15,21 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- *
  * @author sukhvir
  */
 @WebFilter(urlPatterns = {"/teacher/hod", "/teacher/hod/*"})
 public class HodValidation implements Filter {
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        
+
     }
-    
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        
+
         try {
             HttpSession ses = req.getSession();
             Teacher teacher = (Teacher) ses.getAttribute("teacher");
@@ -42,12 +41,12 @@ public class HodValidation implements Filter {
         } catch (Exception e) {
             resp.sendRedirect("/OAS/error");
         }
-        
+
     }
-    
+
     @Override
     public void destroy() {
-        
+
     }
-    
+
 }

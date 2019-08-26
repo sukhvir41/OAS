@@ -5,7 +5,9 @@
  */
 package admin.controllers;
 
-import entities.*;
+import entities.Course;
+import entities.Course_;
+import entities.EntityHelper;
 import org.hibernate.Session;
 import utility.Controller;
 
@@ -24,15 +26,9 @@ public class AdminClassRoom extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
-
-        var classRoomGraph = session.createEntityGraph(ClassRoom.class);
-        classRoomGraph.addAttributeNodes(ClassRoom_.COURSE);
-
-        List<ClassRoom> classRooms = EntityHelper.getAll(session, ClassRoom.class, ClassRoom_.name, classRoomGraph, true);
-
+        // used in options to add new classroom
         List<Course> courses = EntityHelper.getAll(session, Course.class, Course_.name, true);
 
-        req.setAttribute("classrooms", classRooms);
         req.setAttribute("courses", courses);
 
         req.getRequestDispatcher("/WEB-INF/admin/admin-classroom.jsp")

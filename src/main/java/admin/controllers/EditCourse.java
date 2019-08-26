@@ -9,7 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +31,7 @@ public class EditCourse extends Controller {
 
         if (StringUtils.isBlank(courseIdString)) {
             resp.sendRedirect(
-                    new UrlParameters().addErrorParameter()
+                    new UrlBuilder().addErrorParameter()
                             .addMessage("The course you are trying to access does not exist")
                             .getUrl("/OAS/admin/courses")
             );

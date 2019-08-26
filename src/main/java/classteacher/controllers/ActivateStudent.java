@@ -17,28 +17,27 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/students/activateteacher")
 public class ActivateStudent extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Teacher teacher = (Teacher) httpSession.getAttribute("teacher");
         teacher = (Teacher) session.get(Teacher.class, teacher.getId());
-        
+
         int studentId = Integer.parseInt(req.getParameter("studentId"));
-        
+
         Student student = (Student) session.get(Student.class, studentId);
-        
+
         if (teacher.getClassRoom().getStudents().contains(student)) {
             //student.setVerified(true);
             resp.sendRedirect("/OAS/teacher/classteacher/students/detailstudent?studentId=" + studentId);
         } else {
             resp.sendRedirect("/OAS/error");
         }
-        
+
     }
-    
+
 }

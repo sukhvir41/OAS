@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
  * @author development
  */
 public class NativeLibs {
@@ -19,7 +18,7 @@ public class NativeLibs {
     private final static File file = new File(NativeLibs.class.getResource("loaded.txt").getFile());
 
     static {
-       
+
     }
 
 //    private NativeLibs() throws InstantiationException {

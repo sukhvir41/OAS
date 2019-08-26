@@ -5,8 +5,7 @@
  */
 package admin.controllers;
 
-import org.hibernate.Session;
-import utility.Controller;
+import utility.PlainController;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +17,13 @@ import java.io.PrintWriter;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/departments")
-public class AdminDepartment extends Controller {
+public class AdminDepartment extends PlainController {
 
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession,
-                        PrintWriter out) throws Exception {
+    public void process(HttpServletRequest req, HttpServletResponse resp, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        req.getRequestDispatcher("/WEB-INF/admin/admin-department.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/admin/admin-department.jsp")
+                .include(req, resp);
     }
 
 }

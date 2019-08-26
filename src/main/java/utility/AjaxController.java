@@ -1,4 +1,3 @@
-
 package utility;
 
 import com.google.gson.JsonObject;

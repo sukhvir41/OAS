@@ -17,21 +17,20 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/students/deactivatestudent")
 public class DeactivateStudent extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
-        
+
         Student student = (Student) session.get(Student.class, studentId);
-        
+
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
             //student.setVerified(false);
             resp.sendRedirect("/OAS/teacher/hod/students/detailstudent?studentId=" + student.getId());
@@ -39,5 +38,5 @@ public class DeactivateStudent extends Controller {
             resp.sendRedirect("/OAS/error");
         }
     }
-    
+
 }

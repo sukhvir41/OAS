@@ -21,21 +21,21 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/teacher/students/detailstudent")
 public class DetailStudent extends Controller {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
-		int studentId = Integer.parseInt( req.getParameter( "studentId" ) );
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
+        int studentId = Integer.parseInt(req.getParameter("studentId"));
 
-		Student student = (Student) session.get( Student.class, studentId );
+        Student student = (Student) session.get(Student.class, studentId);
 
-		req.setAttribute( "student", student );
-		req.setAttribute( "username", student.getUser().getUsername() );
+        req.setAttribute("student", student);
+        req.setAttribute("username", student.getUser().getUsername());
 
-		req.getRequestDispatcher( "/WEB-INF/teacher/detailstudent.jsp" ).include( req, resp );
-	}
+        req.getRequestDispatcher("/WEB-INF/teacher/detailstudent.jsp").include(req, resp);
+    }
 
 }

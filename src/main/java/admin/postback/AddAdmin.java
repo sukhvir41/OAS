@@ -10,7 +10,7 @@ import entities.AdminType;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,41 +26,41 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/admin/admins/add-admin-post")
 public class AddAdmin extends PostBackController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
 
-		String username = req.getParameter( "username" );
-		String email = req.getParameter( "email" );
-		String password = req.getParameter( "password" );
+        String username = req.getParameter("username");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
 
-		UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
-		if ( StringUtils.isAnyBlank( username, email, password ) ) {
-			onError( req, resp );
-			return;
-		}
+        if (StringUtils.isAnyBlank(username, email, password)) {
+            onError(req, resp);
+            return;
+        }
 
-		// not checking for duplicate username and email as if they are, the insert is going fail due to the constraint
-		Admin admin = new Admin( username, password, email, AdminType.Sub );
+        // not checking for duplicate username and email as if they are, the insert is going fail due to the constraint
+        Admin admin = new Admin(username, password, email, AdminType.Sub);
 
-		session.save( admin );
+        session.save(admin);
 
-		parameters.addSuccessParameter()
-				.addMessage( StringUtils.joinWith( " ", username, "was added" ) );
-		resp.sendRedirect( parameters.getUrl( "/OAS/admin/admins" ) );
+        parameters.addSuccessParameter()
+                .addMessage(StringUtils.joinWith(" ", username, "was added"));
+        resp.sendRedirect(parameters.getUrl("/OAS/admin/admins"));
 
-	}
+    }
 
-	@Override
-	public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		UrlParameters parameters = new UrlParameters()
-				.addErrorParameter()
-				.addMessage( "Please provide the right parameters" );
-		resp.sendRedirect( parameters.getUrl( "/OAS/admin/admins" ) );
-	}
+    @Override
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UrlBuilder parameters = new UrlBuilder()
+                .addErrorParameter()
+                .addMessage("Please provide the right parameters");
+        resp.sendRedirect(parameters.getUrl("/OAS/admin/admins"));
+    }
 }

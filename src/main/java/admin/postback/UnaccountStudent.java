@@ -5,10 +5,8 @@
  */
 package admin.postback;
 
-import entities.Attendance;
 import entities.Student;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.PostBackController;
 
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/students/unaccountstudent")

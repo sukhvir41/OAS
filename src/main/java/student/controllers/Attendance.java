@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/student/attendance")

@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import student.attendanceWsService.MacHandlers;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +31,7 @@ public class SetNetworkSettings extends PostBackController {
         String macAddress = req.getParameter("macAddress");
         String ipAddress = req.getParameter("ipAddress");
 
-        var url = new UrlParameters();
+        var url = new UrlBuilder();
 
         if (StringUtils.isNoneBlank(macAddress, ipAddress)) {
 

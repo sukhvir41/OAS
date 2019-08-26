@@ -6,16 +6,8 @@
 package entities;
 
 import lombok.Getter;
-import org.hibernate.Session;
-import org.hibernate.annotations.Immutable;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
-import utility.Utils;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
@@ -30,7 +22,7 @@ public class Admin implements Serializable {
 
     @Id
     @Getter
-    @org.hibernate.annotations.Type(type="pg-uuid")
+    @org.hibernate.annotations.Type(type = "pg-uuid")
     private UUID id;
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)

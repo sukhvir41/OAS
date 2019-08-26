@@ -5,26 +5,18 @@
  */
 package controllers;
 
-import entities.EntityHelper;
 import entities.User;
 import entities.UserType;
 import entities.User_;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.hibernate.Session;
 import utility.Controller;
 import utility.Utils;
 
-import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.*;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 

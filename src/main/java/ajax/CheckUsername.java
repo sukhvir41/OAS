@@ -12,8 +12,6 @@ import entities.User;
 import entities.User_;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import utility.AjaxController;
 
 import javax.servlet.annotation.WebServlet;

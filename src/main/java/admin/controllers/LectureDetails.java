@@ -9,8 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
-import utility.Utils;
+import utility.UrlBuilder;
 
 import javax.persistence.criteria.JoinType;
 import javax.servlet.annotation.WebServlet;
@@ -18,11 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author sukhvir
@@ -37,7 +32,7 @@ public class LectureDetails extends Controller {
 
         if (StringUtils.isBlank(lectureId)) {
             resp.sendRedirect(
-                    new UrlParameters()
+                    new UrlBuilder()
                             .addErrorParameter()
                             .addMessage("The lecture you are trying to access does not exist")
                             .getUrl("/OAS/admin/lectures")
@@ -179,9 +174,6 @@ public class LectureDetails extends Controller {
 
 
     }
-
-
-
 
 
 }

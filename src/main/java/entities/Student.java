@@ -7,8 +7,6 @@ package entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +26,7 @@ public class Student implements Serializable, Comparable<Student> {
 
     @Id
     @Getter
-    @org.hibernate.annotations.Type(type="pg-uuid")
+    @org.hibernate.annotations.Type(type = "pg-uuid")
     private UUID id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

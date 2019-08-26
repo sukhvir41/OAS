@@ -9,7 +9,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import utility.BCrypt;
 import utility.Utils;
 
@@ -52,7 +51,7 @@ public final class User implements Serializable {
     @Column
     @Getter
     @Setter
-    @org.hibernate.annotations.Type(type="pg-uuid")
+    @org.hibernate.annotations.Type(type = "pg-uuid")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",

@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/getattendance")

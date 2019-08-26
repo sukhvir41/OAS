@@ -8,7 +8,7 @@ package admin.postback;
 import entities.Department;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,36 +24,36 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/admin/departments/delete-department-post")
 public class DeleteDepartment extends PostBackController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
 
-		Long departmentId = Long.parseLong( req.getParameter( "departmentId" ) );
-		Department department = session.get( Department.class, departmentId );
+        Long departmentId = Long.parseLong(req.getParameter("departmentId"));
+        Department department = session.get(Department.class, departmentId);
 
-		req.setAttribute( "name", department.getName() );
+        req.setAttribute("name", department.getName());
 
-		UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
-		session.delete( department );
-		parameters.addSuccessParameter()
-				.addMessage( department.getName() + " was deleted" );
-		resp.sendRedirect( parameters.getUrl( "/OAS/admin/departments" ) );
-	}
+        session.delete(department);
+        parameters.addSuccessParameter()
+                .addMessage(department.getName() + " was deleted");
+        resp.sendRedirect(parameters.getUrl("/OAS/admin/departments"));
+    }
 
-	@Override
-	public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = (String) req.getAttribute( "name" );
+    @Override
+    public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = (String) req.getAttribute("name");
 
-		resp.sendRedirect(
-				new UrlParameters()
-						.addErrorParameter()
-						.addMessage( "unable to delete department " + name )
-						.getUrl( "/OAS/admin/departments" )
-		);
-	}
+        resp.sendRedirect(
+                new UrlBuilder()
+                        .addErrorParameter()
+                        .addMessage("unable to delete department " + name)
+                        .getUrl("/OAS/admin/departments")
+        );
+    }
 }

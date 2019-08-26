@@ -17,20 +17,19 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/ajax/activateordeactivateteacher")
 public class ActivateOrDeactivateTeacher extends AjaxController {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
         String action = req.getParameter("action");
-        
+
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
        /* if (teacher.getDepartment().contains(department)) {
             if (action.equals("verify")) {
@@ -43,5 +42,5 @@ public class ActivateOrDeactivateTeacher extends AjaxController {
             out.print(false);
         }*/
     }
-    
+
 }

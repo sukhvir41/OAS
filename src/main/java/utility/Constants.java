@@ -6,7 +6,6 @@
 package utility;
 
 /**
- *
  * @author sukhvir
  */
 public class Constants {

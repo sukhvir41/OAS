@@ -9,7 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,7 +47,7 @@ public class Registration extends PostBackController {
         String numberString = req.getParameter("number");
         String type = req.getParameter("type");
 
-        UrlParameters parameters = new UrlParameters()
+        UrlBuilder parameters = new UrlBuilder()
                 .addErrorParameter()
                 .addParameter("firstname", firstName)
                 .addParameter("lastname", lastName)
@@ -99,16 +98,16 @@ public class Registration extends PostBackController {
                     .map(department -> new TeacherDepartmentLink(teacher, department))
                     .forEach(session::save);
         }
-        UrlParameters urlParameters = new UrlParameters()
+        UrlBuilder urlBuilder = new UrlBuilder()
                 .addSuccessParameter()
                 .addMessage("Account was successfully created. Please Contact the Admin or your respective supervisor to activate your account");
-        resp.sendRedirect(urlParameters.getUrl("/OAS/login"));
+        resp.sendRedirect(urlBuilder.getUrl("/OAS/login"));
     }
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Object object = req.getAttribute("error"); //error Url parameter sent from the process method
-        resp.sendRedirect(((UrlParameters) object).getUrl("/OAS/register"));
+        resp.sendRedirect(((UrlBuilder) object).getUrl("/OAS/register"));
 
     }
 

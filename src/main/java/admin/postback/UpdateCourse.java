@@ -5,16 +5,15 @@
  */
 package admin.postback;
 
-import entities.*;
-import jooq.entities.Tables;
+import entities.Course;
+import entities.Course_;
+import entities.EntityHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 import utility.Utils;
 
-import javax.persistence.Query;
-import javax.persistence.criteria.JoinType;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +56,7 @@ public class UpdateCourse extends PostBackController {
             }
         }
 
-        UrlParameters parameters = new UrlParameters()
+        UrlBuilder parameters = new UrlBuilder()
                 .addSuccessParameter()
                 .addParameter("courseId", courseId)
                 .addMessage("Course name updated");
@@ -70,7 +69,7 @@ public class UpdateCourse extends PostBackController {
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var url = new UrlParameters()
+        var url = new UrlBuilder()
                 .addErrorParameter();
         var courseId = req.getParameter("courseId");
 
@@ -130,20 +129,20 @@ public class UpdateCourse extends PostBackController {
                                 .on(CLASS_ROOM.ID.eq(CLASS_TEACHER_CLASS_ROOM_LINK.CLASS_ROOM_FID).and(CLASS_ROOM.COURSE_FID.eq(course.getId())))
                                 .where(TEACHER_DEPARTMENT_LINK.DEPARTMENT_FID.notEqual(departmentId))
                 ));
+
+        Utils.executeNativeQuery(session, nativeQuery);
     }
 
     private void updateTheCourse(Course course, long departmentId, Session session) {
-        var holder = CriteriaHolder.getUpdateHolder(session, Course.class);
 
-        holder.getQuery()
-                .set(Course_.DEPARTMENT, departmentId)
-                .where(
-                        holder.getBuilder()
-                                .equal(holder.getRoot().get(Course_.id), course.getId())
-                );
+        var dsl = Utils.getDsl();
 
-        session.createQuery(holder.getQuery())
-                .executeUpdate();
+        var nativeQuery = dsl
+                .update(COURSE)
+                .set(COURSE.DEPARTMENT_FID, departmentId)
+                .where(COURSE.ID.eq(course.getId()));
+
+        Utils.executeNativeQuery(session, nativeQuery);
     }
 
 

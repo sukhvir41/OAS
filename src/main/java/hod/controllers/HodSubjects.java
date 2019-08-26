@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/subjects")

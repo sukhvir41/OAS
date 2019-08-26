@@ -6,11 +6,10 @@
 package admin.controllers;
 
 import entities.*;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.persistence.criteria.JoinType;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +32,7 @@ public class SubjectDetails extends Controller {
 
         var subjectIdString = req.getParameter("subjectId");
 
-        var urlParameters = new UrlParameters();
+        var urlParameters = new UrlBuilder();
 
         if (StringUtils.isBlank(subjectIdString)) {
             resp.sendRedirect(

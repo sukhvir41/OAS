@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.OutputStream;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/generatereportpost")

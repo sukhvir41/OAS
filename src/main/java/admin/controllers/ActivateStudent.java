@@ -9,7 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
@@ -29,7 +29,7 @@ public class ActivateStudent extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        var params = new UrlParameters();
+        var params = new UrlBuilder();
 
         var studentIdString = req.getParameter("studentId");
 

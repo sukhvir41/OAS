@@ -5,11 +5,9 @@
  */
 package hod.postback;
 
-import entities.Attendance;
 import entities.Department;
 import entities.Student;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import utility.PostBackController;
 
 import javax.servlet.annotation.WebServlet;
@@ -19,21 +17,20 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/studnets/unaccountstudent")
 public class UnaccountStudent extends PostBackController {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int studentId = Integer.parseInt(req.getParameter("studentId"));
-        
+
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+
         Student student = (Student) session.get(Student.class, studentId);
-        
+
         if (student.getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
             /*if (!student.isVerified()) {
                 student.getClassRoom().getStudents().remove(student);
@@ -57,5 +54,5 @@ public class UnaccountStudent extends PostBackController {
             resp.sendRedirect("/OAS/error");
         }
     }
-    
+
 }

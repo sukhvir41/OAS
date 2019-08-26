@@ -8,7 +8,6 @@ package admin.controllers;
 import entities.Department;
 import entities.Department_;
 import entities.EntityHelper;
-import entities.Teacher;
 import org.hibernate.Session;
 import utility.Controller;
 

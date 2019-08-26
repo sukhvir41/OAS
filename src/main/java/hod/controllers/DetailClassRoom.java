@@ -17,20 +17,19 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/classrooms/detailclassroom")
 public class DetailClassRoom extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int classroomId = Integer.parseInt(req.getParameter("classroomId"));
         ClassRoom classRoom = (ClassRoom) session.get(ClassRoom.class, classroomId);
-        
+
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+
         if (department.getId() == classRoom.getCourse().getDepartment().getId()) {
             req.setAttribute("classroom", classRoom);
             req.getRequestDispatcher("/WEB-INF/hod/detailclassroom.jsp").include(req, resp);
@@ -38,5 +37,5 @@ public class DetailClassRoom extends Controller {
             resp.sendRedirect("/OAS/error");
         }
     }
-    
+
 }

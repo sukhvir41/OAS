@@ -9,7 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -79,7 +79,7 @@ public class UpdateSubject extends PostBackController {
                 .map(classRoom -> new SubjectClassRoomLink(subject, classRoom))
                 .forEach(session::save);
 
-        var redirectUrl = new UrlParameters()
+        var redirectUrl = new UrlBuilder()
                 .addSuccessParameter()
                 .addParameter("subjectId", subjectId)
                 .addMessage("The subject : " + subjectName + " was updated");
@@ -94,7 +94,7 @@ public class UpdateSubject extends PostBackController {
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var redirectUrl = new UrlParameters()
+        var redirectUrl = new UrlBuilder()
                 .addErrorParameter();
         var subjectId = req.getParameter("subjectId");
 

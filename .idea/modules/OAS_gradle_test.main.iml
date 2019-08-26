@@ -13,16 +13,191 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: javax.websocket:javax.websocket-api:1.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.6" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/kotlin-stdlib-jdk8-1.3.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/gradle-installation-beacon-5.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/installation-beacon" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/kotlin-stdlib-common-1.3.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/kotlin-stdlib-jdk7-1.3.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/kotlin-stdlib-1.3.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/5.6/generated-gradle-jars/gradle-api-5.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/announce" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/antlr" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/base-services" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/base-services-groovy" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/bootstrap" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/build-cache" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/build-cache-http" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/build-cache-packaging" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/build-comparison" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/build-init" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/build-option" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/build-profile" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/cli" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/code-quality" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/composite-builds" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/core" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/core-api" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/dependency-management" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/diagnostics" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/docs" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/ear" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/execution" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/file-collections" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/files" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/hashing" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/ide" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/ide-native" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/ide-play" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/installation-beacon" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/instant-execution" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/instant-execution-report" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/internal-android-performance-testing" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/internal-integ-testing" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/internal-performance-testing" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/internal-testing" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/ivy" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/jacoco" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/javascript" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/jvm-services" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/kotlin-dsl" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/kotlin-dsl-plugins" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/kotlin-dsl-provider-plugins" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/kotlin-dsl-test-fixtures" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/kotlin-dsl-tooling-builders" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/kotlin-dsl-tooling-models" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/language-groovy" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/language-java" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/language-jvm" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/language-native" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/language-scala" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/launcher" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/logging" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/maven" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/messaging" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/model-core" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/model-groovy" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/native" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/osgi" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/persistent-cache" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/pineapple" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/platform-base" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/platform-jvm" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/platform-native" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/platform-play" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/plugin-development" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/plugin-use" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/plugins" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/process-services" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/publish" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/reporting" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/resources" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/resources-gcs" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/resources-http" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/resources-s3" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/resources-sftp" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/scala" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/signing" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/snapshots" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/test-kit" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/testing-base" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/testing-junit-platform" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/testing-jvm" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/testing-native" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/tooling-api" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/tooling-api-builders" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/tooling-native" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/version-control" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/worker-processes" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/workers" />
+          <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/src/wrapper" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/kotlin-reflect-1.3.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-jpamodelgen:5.4.4.Final" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/groovy-all-1.3-2.5.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/5.6/generated-gradle-jars/gradle-api-5.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: javax.websocket:javax.websocket-api:1.1" level="project" />
     <orderEntry type="library" name="Gradle: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="library" name="Gradle: javax.annotation:javax.annotation-api:1.3.2" level="project" />
     <orderEntry type="library" name="Gradle: org.postgresql:postgresql:42.2.5" level="project" />
     <orderEntry type="library" name="Gradle: javax.mail:javax.mail-api:1.6.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.4.4.Final" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.8.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate.validator:hibernate-validator:6.0.16.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-text:1.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.9" level="project" />
     <orderEntry type="library" name="Gradle: com.github.oshi:oshi-core:3.13.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.poi:poi:4.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.jooq:jooq-codegen:3.11.10" level="project" />
@@ -30,7 +205,6 @@
     <orderEntry type="library" name="Gradle: org.jooq:jooq:3.11.10" level="project" />
     <orderEntry type="library" name="Gradle: org.pcap4j:pcap4j-packetfactory-static:1.7.6" level="project" />
     <orderEntry type="library" name="Gradle: org.pcap4j:pcap4j-core:1.7.6" level="project" />
-    <orderEntry type="library" name="Gradle: org.hibernate.validator:hibernate-validator:6.0.16.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet:javax.servlet-api:4.0.0" level="project" />
     <orderEntry type="library" name="Gradle: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.1.0.Final" level="project" />
@@ -46,16 +220,26 @@
     <orderEntry type="library" name="Gradle: javax.xml.bind:jaxb-api:2.3.1" level="project" />
     <orderEntry type="library" name="Gradle: javax.activation:javax.activation-api:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.dom4j:dom4j:2.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: javax.validation:validation-api:2.0.1.Final" level="project" />
     <orderEntry type="library" name="Gradle: net.java.dev.jna:jna-platform:5.2.0" level="project" />
     <orderEntry type="library" name="Gradle: net.java.dev.jna:jna:5.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-collections4:4.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-math3:3.6.1" level="project" />
-    <orderEntry type="library" name="Gradle: javax.validation:validation-api:2.0.1.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jaxb:txw2:2.3.1" level="project" />
     <orderEntry type="library" name="Gradle: com.sun.istack:istack-commons-runtime:3.0.7" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.6" level="project" />
     <orderEntry type="library" name="Gradle: org.jvnet.staxex:stax-ex:1.8" level="project" />
     <orderEntry type="library" name="Gradle: com.sun.xml.fastinfoset:FastInfoset:1.2.15" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-5.6-all/4chhpeaqtrfx4ih6mafwwr40u/gradle-5.6/lib/gradle-installation-beacon-5.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

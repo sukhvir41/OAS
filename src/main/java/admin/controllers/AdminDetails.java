@@ -11,7 +11,7 @@ import entities.EntityHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +32,7 @@ public class AdminDetails extends Controller {
 
         String adminIdString = req.getParameter("adminId");
 
-        var params = new UrlParameters();
+        var params = new UrlBuilder();
 
         if (StringUtils.isBlank(adminIdString)) {
             params.addErrorParameter()

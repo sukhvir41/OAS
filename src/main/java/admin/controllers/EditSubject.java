@@ -9,7 +9,7 @@ import entities.Subject;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +30,7 @@ public class EditSubject extends Controller {
 
         if (StringUtils.isBlank(subjectIdString)) {
             resp.sendRedirect(
-                    new UrlParameters()
+                    new UrlBuilder()
                             .addErrorParameter()
                             .addMessage("The subject you are trying to access does not exist")
                             .getUrl("/OAS/admin/subjects")

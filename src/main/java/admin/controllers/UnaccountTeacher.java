@@ -16,16 +16,15 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/teachers/unaccountteacher")
 public class UnaccountTeacher extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         int teacherId = Integer.parseInt(req.getParameter("teacherId"));
-        
+
         Teacher teacher = (Teacher) session.get(Teacher.class, teacherId);
         /*if (teacher.isVerified()) {
             resp.sendRedirect("/OAS/admin/teachers/detailteacher?teacherId=" + teacherId);
@@ -58,5 +57,5 @@ public class UnaccountTeacher extends Controller {
             resp.sendRedirect("/OAS/admin/teachers");
         }*/
     }
-    
+
 }

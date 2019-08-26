@@ -25,7 +25,6 @@ import java.util.List;
 import static utility.Constants.*;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/classteacher/ajax/searchstudentbyname")

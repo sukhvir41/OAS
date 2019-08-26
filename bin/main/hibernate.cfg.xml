@@ -9,27 +9,35 @@
             org.postgresql.Driver
         </property>
 
-        <!--<property name="hibernate.dialect">
-            org.hibernate.dialect.PostgreSQL95Dialect
-        </property>-->
+        <!-- <property name="hibernate.dialect">
+             org.hibernate.dialect.PostgreSQL10Dialect
+         </property>-->
 
         <property name="hibernate.dialect">
-            utility.MyPostgresDialet
+            utility.MyPostgresDialect
         </property>
 
         <property name="hibernate.connection.url">
-            jdbc:postgresql://127.0.0.1:5432/OASdb
+            jdbc:postgresql://192.168.0.23:5432/OASdb
         </property>
 
         <property name="hibernate.connection.username">
-            OASuser
+            OASadmin
         </property>
 
         <property name="hibernate.connection.password">
             admin@oas
         </property>
 
+        <property name="hibernate.ejb.use_class_enhancer">
+            true
+        </property>
+
         <property name="show_sql">
+            true
+        </property>
+
+        <property name="format_sql">
             true
         </property>
 
@@ -38,22 +46,25 @@
         </property>
 
         <property name="javax.persistence.schema-generation.scripts.action">drop-and-create</property>
-        <property name="javax.persistence.schema-generation.scripts.create-target"> ./create.sql </property>
-        <property name="javax.persistence.schema-generation.scripts.drop-target" > ./drop.sql</property>
+        <property name="javax.persistence.schema-generation.scripts.create-target">create.sql</property>
+        <property name="javax.persistence.schema-generation.scripts.drop-target">drop.sql</property>
+        <!-- <property name="hibernate.format_sql">true</property>-->
+        <!-- <property name="hibernate.use_sql_comments">true</property>-->
 
-        <mapping class="entities.User"/>
         <mapping class="entities.Admin"/>
         <mapping class="entities.Attendance"/>
-        <mapping class="entities.AttendanceId"/>
         <mapping class="entities.ClassRoom"/>
         <mapping class="entities.Course"/>
         <mapping class="entities.Department"/>
         <mapping class="entities.Lecture"/>
         <mapping class="entities.Student"/>
+        <mapping class="entities.StudentSubjectLink"/>
         <mapping class="entities.Subject"/>
+        <mapping class="entities.SubjectClassRoomLink"/>
         <mapping class="entities.Teacher"/>
+        <mapping class="entities.TeacherDepartmentLink"/>
         <mapping class="entities.Teaching"/>
-
+        <mapping class="entities.User"/>
 
     </session-factory>
 </hibernate-configuration>

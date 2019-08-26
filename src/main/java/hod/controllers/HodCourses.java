@@ -16,11 +16,10 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/courses")
-public class HodCourses extends Controller{
+public class HodCourses extends Controller {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
@@ -29,5 +28,5 @@ public class HodCourses extends Controller{
         req.setAttribute("courses", department.getCourses());
         req.getRequestDispatcher("/WEB-INF/hod/hodcourse.jsp").include(req, resp);
     }
-    
+
 }

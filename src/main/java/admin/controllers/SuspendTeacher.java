@@ -9,7 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +30,7 @@ public class SuspendTeacher extends Controller {
 
         var teacherIdString = req.getParameter("teacherId");
 
-        var urlParameters = new UrlParameters();
+        var urlParameters = new UrlBuilder();
 
         if (StringUtils.isBlank(teacherIdString)) {
             urlParameters.addErrorParameter()

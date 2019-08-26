@@ -28,57 +28,57 @@ import java.util.List;
 @WebServlet(urlPatterns = "/teacher/hod/ajax/searchstudentbyname")
 public class SearchStudentByName extends AjaxController {
 
-	@Override
-	public void process(
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Session session,
-			HttpSession httpSession,
-			PrintWriter out) throws Exception {
-		String name = req.getParameter( "name" );
+    @Override
+    public void process(
+            HttpServletRequest req,
+            HttpServletResponse resp,
+            Session session,
+            HttpSession httpSession,
+            PrintWriter out) throws Exception {
+        String name = req.getParameter("name");
 
-		Department department = (Department) httpSession.getAttribute( "department" );
-		Department currentDepartment = (Department) session.get( Department.class, department.getId() );
+        Department department = (Department) httpSession.getAttribute("department");
+        Department currentDepartment = (Department) session.get(Department.class, department.getId());
 
-		name = req.getParameter( "name" );
-		List<Student> students = session.createCriteria( Student.class )
-				.add( Restrictions.or(
-						Restrictions.like( "fName", "%" + name + "%" ),
-						Restrictions.like( "lName", "%" + name + "%" )
-				) )
-				.list();
-		JsonArray jsonStudents = new JsonArray();
-		Gson gson = new Gson();
-		students.stream()
-				.filter( student -> student.getClassRoom()
-						.getCourse()
-						.getDepartment()
-						.getId() == currentDepartment.getId() )
-				.forEach( student -> add( student, jsonStudents ) );
-		out.print( gson.toJson( jsonStudents ) );
-	}
+        name = req.getParameter("name");
+        List<Student> students = session.createCriteria(Student.class)
+                .add(Restrictions.or(
+                        Restrictions.like("fName", "%" + name + "%"),
+                        Restrictions.like("lName", "%" + name + "%")
+                ))
+                .list();
+        JsonArray jsonStudents = new JsonArray();
+        Gson gson = new Gson();
+        students.stream()
+                .filter(student -> student.getClassRoom()
+                        .getCourse()
+                        .getDepartment()
+                        .getId() == currentDepartment.getId())
+                .forEach(student -> add(student, jsonStudents));
+        out.print(gson.toJson(jsonStudents));
+    }
 
-	private void add(Student student, JsonArray jsonStudents) {
-		JsonObject studentJson = new JsonObject();
-		studentJson.addProperty( "id", student.getId().toString() );
-		studentJson.addProperty( "name", student.toString() );
-		studentJson.addProperty( "email", student.getUser().getEmail() );
-		studentJson.addProperty( "number", student.getUser().getNumber() );
-		studentJson.addProperty(
-				"classroom",
-				student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
-		);
-		studentJson.addProperty( "rollnumber", student.getRollNumber() );
-		//studentJson.addProperty( "verified", student.isVerified() );
-		studentJson.add( "subjects", addSubjects( student ) );
-		jsonStudents.add( studentJson );
-	}
+    private void add(Student student, JsonArray jsonStudents) {
+        JsonObject studentJson = new JsonObject();
+        studentJson.addProperty("id", student.getId().toString());
+        studentJson.addProperty("name", student.toString());
+        studentJson.addProperty("email", student.getUser().getEmail());
+        studentJson.addProperty("number", student.getUser().getNumber());
+        studentJson.addProperty(
+                "classroom",
+                student.getClassRoom().getName() + " " + student.getClassRoom().getDivision()
+        );
+        studentJson.addProperty("rollnumber", student.getRollNumber());
+        //studentJson.addProperty( "verified", student.isVerified() );
+        studentJson.add("subjects", addSubjects(student));
+        jsonStudents.add(studentJson);
+    }
 
-	private JsonElement addSubjects(Student e) {
-		JsonArray jsonSubjects = new JsonArray();
+    private JsonElement addSubjects(Student e) {
+        JsonArray jsonSubjects = new JsonArray();
 		/*e.getSubjects()
 				.stream()
 				.forEach( subject -> jsonSubjects.add( subject.getName() ) );*/
-		return jsonSubjects;
-	}
+        return jsonSubjects;
+    }
 }

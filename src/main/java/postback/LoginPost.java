@@ -10,7 +10,7 @@ import entities.User_;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 import utility.Utils;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -47,7 +46,7 @@ public class LoginPost extends PostBackController {
         String password = req.getParameter("password");
         String remember = req.getParameter("rememberMe");
 
-        UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
         if (StringUtils.isAnyBlank(username, password)) {
             parameters.addErrorParameter()
@@ -115,7 +114,7 @@ public class LoginPost extends PostBackController {
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(new UrlParameters().addErrorParameter()
+        resp.sendRedirect(new UrlBuilder().addErrorParameter()
                 .addMessage("The username and password combination is wrong")
                 .addParameter("username", req.getParameter("username"))
                 .getUrl("/OAS/login")

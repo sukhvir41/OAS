@@ -4,7 +4,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,25 +37,27 @@ public class TransferDepartment extends PostBackController {
         //teacherDepartmentLinkSubGraph.addAttributeNode(TeacherDepartmentLink_.TEACHER);
         teacherDepartmentLinkSubGraph.addSubGraph(TeacherDepartmentLink_.TEACHER)
                 .addAttributeNodes(Teacher_.USER);// will not need this if one to one lazy loading works on BE
+
         var fromDepartment = EntityHelper.getInstance(fromDepartmentId, Department_.id, Department.class, session, true, fromGraph);
+
         var toDepartment = EntityHelper.getInstance(toDepartmentId, Department_.id, Department.class, session, true, fromGraph);
 
         transferCourses(fromDepartment, toDepartment, session);
 
         transferTeachers(fromDepartment, toDepartment, session);
 
-        resp.sendRedirect(
-                new UrlParameters().addSuccessParameter()
+        redirect(
+                new UrlBuilder().addSuccessParameter()
                         .addMessage("The transfer was successful from " + fromDepartment.getName() + " to " + toDepartment.getName())
                         .addParameter("departmentId", toDepartmentId)
-                        .getUrl("/OAS/admin/departments/department-details")
-
+                        .getUrl("/OAS/admin/departments/department-details"),
+                req
         );
     }
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var url = new UrlParameters()
+        var url = new UrlBuilder()
                 .addErrorParameter();
 
         var to = req.getParameter("to");
@@ -64,18 +66,20 @@ public class TransferDepartment extends PostBackController {
         if (StringUtils.isAnyBlank(to, from)) {
             if (StringUtils.isNotBlank(from)) {
                 url.addMessage("Please select the department to transfer the courses and the teachers")
-                        .addParameter("departmentId", from);
-                resp.sendRedirect(url.getUrl("/OAS/admin/departments/edit-department"));
+                        .addParameter("departmentId", from)
+                        .setUrl("/OAS/admin/departments/edit-department");
             } else {
-                url.addMessage("Please provide the correct details for department transfer");
-                resp.sendRedirect(url.getUrl("/OAS/admin/departments"));
+                url.addMessage("Please provide the correct details for department transfer")
+                        .setUrl("/OAS/admin/departments");
             }
 
         } else {
             url.addMessage("An error occurred while transferring courses and teachers")
-                    .addParameter("departmentId", from);
-            resp.sendRedirect(url.getUrl("/OAS/admin/departments/edit-department"));
+                    .addParameter("departmentId", from)
+                    .setUrl("/OAS/admin/departments/edit-department");
         }
+
+        redirect(url.getUrl(), req);
     }
 
     private void transferCourses(Department fromDepartment, Department toDepartment, Session session) {
@@ -95,16 +99,17 @@ public class TransferDepartment extends PostBackController {
     }
 
     private void transferTeachers(Department fromDepartment, Department toDepartment, Session session) {
-        //insert teachers into the toDepartment
-        var teachersFromToDepartment = toDepartment.getTeachers()
+
+        var teachersOfToDepartment = toDepartment.getTeachers()
                 .stream()
                 .map(TeacherDepartmentLink::getTeacher)
                 .collect(Collectors.toSet());
 
+        //insert teachers into the toDepartment
         fromDepartment.getTeachers()
                 .stream()
                 .map(TeacherDepartmentLink::getTeacher)
-                .filter(teacher -> !teachersFromToDepartment.contains(teacher))// remove teachers that already in the toDepartment
+                .filter(teacher -> !teachersOfToDepartment.contains(teacher))// remove teachers that already in the toDepartment
                 .forEach(teacher -> session.save(new TeacherDepartmentLink(teacher, toDepartment))); // have to enable batching for this
 
         // delete all teacher departmentLink where department  = fromDepartment

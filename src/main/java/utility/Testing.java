@@ -8,15 +8,7 @@ package utility;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import entities.*;
 import org.hibernate.Session;
-
-import javax.persistence.criteria.JoinType;
-import java.io.IOException;
-import java.io.Writer;
-import java.security.URIParameter;
-import java.util.stream.Collectors;
 
 
 /**

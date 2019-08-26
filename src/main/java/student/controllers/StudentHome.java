@@ -5,7 +5,10 @@
  */
 package student.controllers;
 
-import entities.*;
+import entities.EntityHelper;
+import entities.Student;
+import entities.Student_;
+import entities.UserType;
 import org.hibernate.Session;
 import utility.Controller;
 

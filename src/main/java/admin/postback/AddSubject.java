@@ -11,7 +11,7 @@ import entities.Course;
 import entities.Subject;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 import utility.Utils;
 
 import javax.servlet.ServletException;
@@ -69,7 +69,7 @@ public class AddSubject extends PostBackController {
                     .forEach(classRoom -> classRoom.addSubject(subject));
         }
 
-        UrlParameters parameters = new UrlParameters()
+        UrlBuilder parameters = new UrlBuilder()
                 .addSuccessParameter()
                 .addMessage("Subject added to the course and the class room(s) specified");
 
@@ -78,14 +78,14 @@ public class AddSubject extends PostBackController {
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var parameters = new UrlParameters()
+        var parameters = new UrlBuilder()
                 .addErrorParameter()
                 .addMessage("Please provide the correct parameters");
 
         redirect(req, resp, parameters);
     }
 
-    private void redirect(HttpServletRequest request, HttpServletResponse response, UrlParameters urlParameters) throws IOException {
+    private void redirect(HttpServletRequest request, HttpServletResponse response, UrlBuilder urlBuilder) throws IOException {
         var from = request.getParameter("from");
         var courseId = request.getParameter("courseId");
         List<String> classRooms = Arrays.asList(
@@ -97,15 +97,15 @@ public class AddSubject extends PostBackController {
             case "course-details": {
 
                 String url = Optional.ofNullable(courseId)
-                        .map(id -> urlParameters.addParameter("courseId", courseId).getUrl("/OAS/admin/courses/course-details"))
-                        .orElse(urlParameters.getUrl("/OAS/admin/subjects"));
+                        .map(id -> urlBuilder.addParameter("courseId", courseId).getUrl("/OAS/admin/courses/course-details"))
+                        .orElse(urlBuilder.getUrl("/OAS/admin/subjects"));
 
                 response.sendRedirect(url);
                 break;
 
             }
             default: {
-                response.sendRedirect(urlParameters.getUrl("/OAS/admin/subjects"));
+                response.sendRedirect(urlBuilder.getUrl("/OAS/admin/subjects"));
             }
         }
     }

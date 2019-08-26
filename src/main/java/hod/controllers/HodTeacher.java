@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet("/teacher/hod/teachers")
@@ -26,7 +25,7 @@ public class HodTeacher extends Controller {
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+
         req.setAttribute("teachers", department.getTeachers());
         req.getRequestDispatcher("/WEB-INF/hod/hodteacher.jsp").include(req, resp);
     }

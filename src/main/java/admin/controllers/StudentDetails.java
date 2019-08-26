@@ -11,7 +11,7 @@ import entities.Student_;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +34,7 @@ public class StudentDetails extends Controller {
 
         if (StringUtils.isBlank(studentIdString)) {
             resp.sendRedirect(
-                    new UrlParameters()
+                    new UrlBuilder()
                             .addErrorParameter()
                             .addMessage("The student you are trying tp access does not exist")
                             .getUrl("/OAS/admin/Students")

@@ -5,12 +5,9 @@
  */
 package entities;
 
-import com.sun.jna.platform.win32.COM.util.annotation.ComObject;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;

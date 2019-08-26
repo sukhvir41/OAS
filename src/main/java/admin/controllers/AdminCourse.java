@@ -5,11 +5,11 @@
  */
 package admin.controllers;
 
-import entities.*;
+import entities.Department;
+import entities.Department_;
+import entities.EntityHelper;
 import org.hibernate.Session;
-import org.hibernate.tuple.entity.EntityTuplizer;
 import utility.Controller;
-import utility.Utils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -5,18 +5,15 @@
  */
 package admin.controllers;
 
-import entities.*;
+import entities.Admin;
+import entities.Admin_;
+import entities.EntityHelper;
+import entities.UserType;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.tuple.Triple;
 import org.hibernate.Session;
-import org.hibernate.SessionBuilder;
 import student.attendanceWsService.MacHandlers;
 import utility.Controller;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +22,8 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static views.Views.VIEWS;
 
 /**
  * @author sukhvir
@@ -51,9 +50,8 @@ public class AdminHome extends Controller {
 
         httpSession.setAttribute(UserType.Admin.getType().toLowerCase(), theAdmin);
 
-        req.getRequestDispatcher("WEB-INF/admin/home.jsp")
+        req.getRequestDispatcher(VIEWS.ADMIN.HOME)
                 .include(req, resp);
-
     }
 
     private void extendCookie(HttpServletRequest req, HttpServletResponse resp, HttpSession httpSession, Admin admin) {

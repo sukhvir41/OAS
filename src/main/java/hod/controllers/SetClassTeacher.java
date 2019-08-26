@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet("/teacher/hod/classrooms/setclassteacher")

@@ -38,7 +38,7 @@ public class GetAllDepartments extends AjaxController {
                 "       \"name\"" +
                 "   from" +
                 "   department" +
-                "   order by name"+
+                "   order by name" +
                 ") d");
 
         var departments = (String) query.getSingleResult();

@@ -6,8 +6,7 @@
 package admin.controllers;
 
 import entities.Admin;
-import org.hibernate.Session;
-import utility.Controller;
+import utility.PlainController;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +18,10 @@ import java.io.PrintWriter;
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/admin/my-account/change-password")
-public class AdminChangePassword extends Controller {
+public class AdminChangePassword extends PlainController {
 
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
+    public void process(HttpServletRequest req, HttpServletResponse resp, HttpSession httpSession, PrintWriter out) throws Exception {
 
         req.setAttribute("username", ((Admin) req.getSession().getAttribute("admin")).getUser().getUsername());
         req.getRequestDispatcher("/WEB-INF/admin/change-password.jsp")

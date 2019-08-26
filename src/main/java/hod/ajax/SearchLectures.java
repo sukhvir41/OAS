@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/ajax/searchlectures")

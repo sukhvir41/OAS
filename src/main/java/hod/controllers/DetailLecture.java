@@ -20,20 +20,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/hod/lectures/detaillecture")
 public class DetailLecture extends Controller {
-    
+
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
         Department department = (Department) httpSession.getAttribute("department");
         department = (Department) session.get(Department.class, department.getId());
-        
+
         String lectureId = req.getParameter("lectureId");
         Lecture lecture = (Lecture) session.get(Lecture.class, lectureId);
-        
+
         if (lecture.getTeaching().getClassRoom().getCourse().getDepartment().getId() == department.getId()) {
             List<Student> students = lecture.getTeaching()// this will contain all studentts first and then only absent students
                     .getClassRoom()
@@ -42,7 +41,7 @@ public class DetailLecture extends Controller {
                     .filter(student -> student.getSubjects().contains(lecture.getTeaching().getSubject()))
                     .sorted()
                     .collect(Collectors.toList());
-            
+
             req.setAttribute("total", students.size());// setting the total size first as the list will have only absent students later
 
             //todo: rewrite sql for this
@@ -66,5 +65,5 @@ public class DetailLecture extends Controller {
             resp.sendRedirect("/OAS/error");
         }
     }
-    
+
 }

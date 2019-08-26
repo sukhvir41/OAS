@@ -31,7 +31,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

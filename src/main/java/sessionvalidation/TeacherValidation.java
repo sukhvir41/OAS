@@ -5,7 +5,6 @@
  */
 package sessionvalidation;
 
-import entities.Teacher;
 import entities.UserStatus;
 import entities.UserType;
 

@@ -12,7 +12,7 @@ import entities.Subject_;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,7 @@ public class CourseDetails extends Controller {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, Session session, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        var urlParameters = new UrlParameters();
+        var urlParameters = new UrlBuilder();
 
         var courseIdString = req.getParameter("courseId");
 

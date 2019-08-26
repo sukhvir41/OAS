@@ -9,15 +9,13 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.persistence.criteria.CriteriaUpdate;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
 
@@ -32,7 +30,7 @@ public class SuspendStudent extends Controller {
 
         var studentIdString = req.getParameter("studentId");
 
-        var urlParameters = new UrlParameters();
+        var urlParameters = new UrlBuilder();
 
         if (StringUtils.isBlank(studentIdString)) {
             urlParameters.addErrorParameter()
@@ -58,7 +56,7 @@ public class SuspendStudent extends Controller {
         }
     }
 
-    private void updateStudent(CriteriaHolder<CriteriaUpdate<User>, User,User> jpaObjects, UUID studentId) {
+    private void updateStudent(CriteriaHolder<CriteriaUpdate<User>, User, User> jpaObjects, UUID studentId) {
 
         jpaObjects.getQuery().where(
                 jpaObjects.getCriteriaBuilder().equal(jpaObjects.getRoot().get(User_.id), studentId)

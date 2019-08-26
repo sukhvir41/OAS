@@ -21,7 +21,6 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- *
  * @author sukhvir
  */
 public class MacAddressUtil {
@@ -67,8 +66,8 @@ public class MacAddressUtil {
             service = Executors.newSingleThreadExecutor();
             handle.setFilter(
                     "arp and src host " + destinationIpAddress
-                    + " and dst host " + stringSourceIpAddress
-                    + " and ether dst " + Pcaps.toBpfString(sourceMacAddress),
+                            + " and dst host " + stringSourceIpAddress
+                            + " and ether dst " + Pcaps.toBpfString(sourceMacAddress),
                     BpfProgram.BpfCompileMode.OPTIMIZE
             );
 

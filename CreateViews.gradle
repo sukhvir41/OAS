@@ -1,0 +1,91 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
+import static java.nio.file.StandardOpenOption.CREATE
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING
+
+task createViews() {
+    println "Creating View Classes"
+
+    def file = new File("${projectDir.getCanonicalPath()}/src/main/java/views")
+    file.mkdir()
+    def toScan = new File("${projectDir.getCanonicalPath()}/src/main/webapp/WEB-INF")
+
+    Map<String, String> filesToCompile = new HashMap<>()
+
+    createFiles(List.of(toScan.listFiles()), filesToCompile, "Views")
+
+    filesToCompile.forEach { name, code -> createJavaFiles(name, code, file) }
+}
+
+def createFiles(List<File> theFiles, Map<String, String> filesToCompile, String className) {
+
+    List<File> folders = new ArrayList<>()
+    List<File> files = new ArrayList<>()
+
+    for (File file : theFiles) {
+        if (file.isDirectory()) {
+            folders.add(file)
+            createFiles(List.of(file.listFiles()), filesToCompile, file.getName().capitalize())
+        } else if (file.getName().endsWith(".jsp")) {
+            files.add(file)
+        }
+    }
+
+    def filesString = new StringBuilder()
+    files.stream()
+            .map { createFileStringVariable(it) }
+            .forEach { filesString.append(it) }
+
+    def folderString = new StringBuilder()
+    folders.stream()
+            .map { createFolderStringVariables(it) }
+            .forEach { folderString.append(it) }
+
+    String theClass = """ 
+            package views;
+            public class ${className} {
+               public static ${className}  ${className.toUpperCase()}  = new ${className}();
+            ${filesString} 
+            ${folderString} 
+            }"""
+
+    filesToCompile.put(className, theClass)
+
+}
+
+static def createFileStringVariable(File file) {
+    try {
+        String name = file.getName().replace(".jsp", "")
+        String path = file.getCanonicalPath()
+        String variableValue = path.substring(path.indexOf("WEB-INF")).replace("\\", "\\\\")
+        return "public String ${name.toUpperCase().replace('-', '_')} = \"${variableValue}\";"
+
+    } catch (Exception e) {
+        e.printStackTrace()
+        return ""
+    }
+}
+
+static def createFolderStringVariables(File file) {
+    try {
+        def name = file.getName().capitalize()
+        def variable = name.toUpperCase()
+        return "public ${name} ${variable} = new ${name} ();"
+
+    } catch (Exception e) {
+        e.printStackTrace()
+        return ""
+    }
+}
+
+static def createJavaFiles(String name, String code, File destination) {
+    try {
+        File file = new File(destination.getCanonicalPath() + "\\" + name + ".java")
+        Files.write(Paths.get(file.toURI()), code.getBytes(), CREATE, TRUNCATE_EXISTING)
+
+    } catch (Exception e) {
+        e.printStackTrace()
+    }
+
+}

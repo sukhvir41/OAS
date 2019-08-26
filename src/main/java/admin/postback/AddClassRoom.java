@@ -10,7 +10,7 @@ import entities.Course;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +36,7 @@ public class AddClassRoom extends PostBackController {
         var theSemester = req.getParameter("semester");
         var theMinimumSubjects = req.getParameter("minimumSubjects");
 
-        UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
         if (StringUtils.isAnyBlank(theCourseId, name, division, theSemester, theMinimumSubjects)) {
             parameters.addErrorParameter()
@@ -63,14 +63,14 @@ public class AddClassRoom extends PostBackController {
 
     @Override
     public void onError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UrlParameters parameters = new UrlParameters()
+        UrlBuilder parameters = new UrlBuilder()
                 .addErrorParameter()
                 .addMessage("Please provide the correct details");
 
         redirect(req, resp, parameters);
     }
 
-    private void redirect(HttpServletRequest request, HttpServletResponse response, UrlParameters urlParameters) throws IOException {
+    private void redirect(HttpServletRequest request, HttpServletResponse response, UrlBuilder urlBuilder) throws IOException {
         var from = Optional.of(request.getParameter("from"))
                 .orElse("");
         var courseId = request.getParameter("courseId");
@@ -81,7 +81,7 @@ public class AddClassRoom extends PostBackController {
                     response.sendRedirect("/OAS/admin/subjects");
                 } else {
                     response.sendRedirect(
-                            urlParameters.addParameter("courseId", courseId)
+                            urlBuilder.addParameter("courseId", courseId)
                                     .getUrl("/OAS/admin/courses/course-details")
                     );
                 }

@@ -5,14 +5,11 @@
  */
 package admin.postback;
 
-import entities.CriteriaHolder;
-import entities.Department;
-import entities.Department_;
 import jooq.entities.Tables;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.PostBackController;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 import utility.Utils;
 
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +36,7 @@ public class UpdateDepartment extends PostBackController {
         String theTeacherId = req.getParameter("teacherId");
         String theDepartmentName = req.getParameter("departmentName");
 
-        UrlParameters parameters = new UrlParameters();
+        UrlBuilder parameters = new UrlBuilder();
 
         if (StringUtils.isAnyBlank(theDepartmentId, theDepartmentName)) {
             parameters.addErrorParameter()

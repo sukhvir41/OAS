@@ -9,7 +9,7 @@ import entities.Student;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
-import utility.UrlParameters;
+import utility.UrlBuilder;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +31,7 @@ public class AdminGrantLeave extends Controller {
 
 
         if (StringUtils.isBlank(studentIdString)) {
-            var params = new UrlParameters();
+            var params = new UrlBuilder();
             params.addErrorParameter()
                     .addMessage("The student you are trying to access does not exist");
 

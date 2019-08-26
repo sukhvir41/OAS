@@ -26,7 +26,6 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author sukhvir
  */
 @WebServlet(urlPatterns = "/teacher/ajax/getlectures")
