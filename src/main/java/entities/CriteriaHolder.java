@@ -4,33 +4,33 @@ import org.hibernate.Session;
 
 import javax.persistence.criteria.*;
 
-public class CriteriaHolder<U, T, V> {
+public class CriteriaHolder<T, U, V> {
     CriteriaBuilder builder;
     U query;
     Root<V> root;
 
-    public static <T> CriteriaHolder<CriteriaUpdate<T>, T, T> getUpdateHolder(Session session, Class<T> tClass) {
+    public static <T> CriteriaHolder<T, CriteriaUpdate<T>, T> getUpdateHolder(Session session, Class<T> tClass) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaUpdate<T> query = builder.createCriteriaUpdate(tClass);
         Root<T> root = query.from(tClass);
         return new CriteriaHolder<>(builder, query, root);
     }
 
-    public static <T> CriteriaHolder<CriteriaQuery<T>, T, T> getQueryHolder(Session session, Class<T> tClass) {
+    public static <T> CriteriaHolder<T, CriteriaQuery<T>, T> getQueryHolder(Session session, Class<T> tClass) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(tClass);
         Root<T> root = query.from(tClass);
         return new CriteriaHolder<>(builder, query, root);
     }
 
-    public static <T, V> CriteriaHolder<CriteriaQuery<T>, T, V> getQueryHolder(Session session, Class<T> queryClass, Class<V> rootClass) {
+    public static <T, V> CriteriaHolder<T, CriteriaQuery<T>, V> getQueryHolder(Session session, Class<T> queryClass, Class<V> rootClass) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(queryClass);
         Root<V> root = query.from(rootClass);
         return new CriteriaHolder<>(builder, query, root);
     }
 
-    public static <T> CriteriaHolder<CriteriaDelete<T>, T, T> getDeleteHolder(Session session, Class<T> tClass) {
+    public static <T> CriteriaHolder<T, CriteriaDelete<T>, T> getDeleteHolder(Session session, Class<T> tClass) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaDelete<T> query = builder.createCriteriaDelete(tClass);
         Root<T> root = query.from(tClass);

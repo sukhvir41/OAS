@@ -91,7 +91,7 @@ public class GetClassRooms extends AjaxController {
         );
     }
 
-    private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates) {
+    private void addSearchTextCondition(String searchText, CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates) {
         var courseJoinQuery = holder.getRoot()
                 .join(ClassRoom_.course, JoinType.INNER);
 
@@ -105,21 +105,21 @@ public class GetClassRooms extends AjaxController {
         );
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates) {
+    private void addPageValueCondition(String pageValue, CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates) {
         predicates.add(
                 holder.getBuilder()
                         .greaterThan(holder.getRoot().get(ClassRoom_.name), pageValue)
         );
     }
 
-    private void processAdditionalData(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+    private void processAdditionalData(CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
         Optional.of(additionalDataJson.get("courseId"))
                 .map(JsonElement::getAsLong)
                 .ifPresent(courseId -> addCourseCondition(holder, predicates, additionalDataJson, courseId));
 
     }
 
-    private void addCourseCondition(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long courseId) {
+    private void addCourseCondition(CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long courseId) {
         Join<ClassRoom, Course> courseJoinQuery = holder.getRoot()
                 .getJoins()
                 .stream()

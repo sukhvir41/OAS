@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/utility/EntitySelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateViews.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CreateViews.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetClassRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetClassRooms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -204,9 +210,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.OAS_gradle [scan]" />
       <item itemvalue="Application.testing1" />
       <item itemvalue="Application.CreateViews" />
+      <item itemvalue="Gradle.OAS_gradle [scan]" />
       <item itemvalue="Gradle.OAS_gradle [runApplication]" />
       <item itemvalue="Gradle.OAS_gradle [build]" />
     </list>

@@ -18,7 +18,7 @@ task createViews() {
     filesToCompile.forEach { name, code -> createJavaFiles(name, code, file) }
 }
 
-def createFiles(List<File> theFiles, Map<String, String> filesToCompile, String className) {
+def static createFiles(List<File> theFiles, Map<String, String> filesToCompile, String className) {
 
     List<File> folders = new ArrayList<>()
     List<File> files = new ArrayList<>()
