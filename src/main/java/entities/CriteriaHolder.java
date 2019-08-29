@@ -3,6 +3,7 @@ package entities;
 import org.hibernate.Session;
 
 import javax.persistence.criteria.*;
+import javax.persistence.metamodel.SingularAttribute;
 
 public class CriteriaHolder<T, U, V> {
     CriteriaBuilder builder;
@@ -58,4 +59,12 @@ public class CriteriaHolder<T, U, V> {
     public Root<V> getRoot() {
         return root;
     }
+
+    public <A> Path<A> getPath(SingularAttribute<V, A> attribute) {
+        return root.get(attribute);
+    }
+
+
 }
+
+

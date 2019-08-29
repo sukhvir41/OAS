@@ -43,23 +43,23 @@ def static createFiles(List<File> theFiles, Map<String, String> filesToCompile, 
             .forEach { folderString.append(it) }
 
     String theClass = """ 
-            package views;
-            public class ${className} {
-               public static ${className}  ${className.toUpperCase()}  = new ${className}();
-            ${filesString} 
-            ${folderString} 
-            }"""
+package views;\n
+public class ${className} {\n
+    public static ${className}  ${className.toUpperCase()}  = new ${className}();\n
+${filesString} \n
+${folderString} \n
+}"""
 
     filesToCompile.put(className, theClass)
 
 }
 
-static def createFileStringVariable(File file) {
+static def createFileStringVariable(File file)  {
     try {
         String name = file.getName().replace(".jsp", "")
         String path = file.getCanonicalPath()
         String variableValue = path.substring(path.indexOf("WEB-INF")).replace("\\", "\\\\")
-        return "public String ${name.toUpperCase().replace('-', '_')} = \"${variableValue}\";"
+        return "\tpublic String ${name.toUpperCase().replace('-', '_')} = \"${variableValue}\";\n"
 
     } catch (Exception e) {
         e.printStackTrace()
@@ -71,7 +71,7 @@ static def createFolderStringVariables(File file) {
     try {
         def name = file.getName().capitalize()
         def variable = name.toUpperCase()
-        return "public ${name} ${variable} = new ${name} ();"
+        return "\tpublic ${name} ${variable} = new ${name} ();\n"
 
     } catch (Exception e) {
         e.printStackTrace()

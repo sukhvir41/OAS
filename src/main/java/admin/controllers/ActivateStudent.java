@@ -61,7 +61,7 @@ public class ActivateStudent extends Controller {
     }
 
 
-    private void updateStudentQuery(CriteriaHolder<CriteriaUpdate<User>, User, User> jpaObjects, UUID studentId) {
+    private void updateStudentQuery(CriteriaHolder<User, CriteriaUpdate<User>, User> jpaObjects, UUID studentId) {
         Predicate predicate = jpaObjects.getCriteriaBuilder()
                 .and(
                         jpaObjects.getCriteriaBuilder()

@@ -31,75 +31,105 @@ public class GetAdmins extends AjaxController {
         var searchText = req.getParameter("searchText");
 
         var holder = CriteriaHolder.getQueryHolder(session, Admin.class);
-        var userJoin = holder.getRoot()
-                .join(Admin_.user, JoinType.INNER);
-
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.isNotBlank(pageValue)) {
-            addPageValueCondition(pageValue, holder, userJoin, predicates);
-        }
+        addUserJoin(holder);
+        addPageValueCondition(pageValue, holder, predicates);
+        addSearchCondition(searchText, holder, predicates);
 
-        if (StringUtils.isNotBlank(searchText)) {
-            addSearchCondition(searchText, holder, userJoin, predicates);
+        var adminList = getAdminsList(session, holder, predicates);
+
+        var successJson = super.getSuccessJson();
+
+        setMorePageAttributeAndRemoveLastAdmin(adminList, successJson);
+
+        JsonArray data = getAdminAsJsonData(adminList);
+
+        successJson.add(DATA, data);
+
+        setPageValue(adminList, successJson);
+
+        out.println(
+                new Gson().toJson(successJson)
+        );
+    }
+
+    private void setPageValue(List<Admin> adminList, JsonObject successJsonObject) {
+        if (adminList.size() > 0) {
+            successJsonObject
+                    .addProperty("pageValue",
+                            adminList.get(adminList.size() - 1)
+                                    .getUser()
+                                    .getUsername()
+                    );
+        } else {
+            successJsonObject.addProperty("pageValue", "");
         }
+    }
+
+    private JsonArray getAdminAsJsonData(List<Admin> adminList) {
+        return adminList.stream()
+                .map(this::mapAdminToJson)
+                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+    }
+
+    private void setMorePageAttributeAndRemoveLastAdmin(List<Admin> adminList, JsonObject successJsonObject) {
+        if (adminList.size() == super.getPageSize() + 1) {
+            successJsonObject.addProperty("more", true);
+            adminList.remove(adminList.size() - 1);
+        } else {
+            successJsonObject.addProperty("more", false);
+        }
+    }
+
+    private List<Admin> getAdminsList(Session session, CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
 
         var graph = session.createEntityGraph(Admin.class);
         graph.addAttributeNodes(Admin_.USER);
 
         holder.getQuery()
-                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
-                .orderBy(holder.getBuilder().asc(userJoin.get(User_.username)));
+                .where(
+                        holder.getBuilder()
+                                .and(predicates.toArray(new Predicate[0]))
+                )
+                .orderBy(
+                        holder.getBuilder()
+                                .asc(getUserJoin(holder).get(User_.username))
+                );
 
-        var results = session.createQuery(holder.getQuery())
+        return session.createQuery(holder.getQuery())
                 .applyLoadGraph(graph)
                 .setMaxResults(getPageSize() + 1)
                 .getResultList();
-
-        var output = super.getSuccessJson();
-
-        if (results.size() == super.getPageSize() + 1) {
-            output.addProperty("more", true);
-            results.remove(results.size() - 1);
-        } else {
-            output.addProperty("more", false);
-        }
-
-        JsonArray data = results.stream()
-                .map(this::mapAdminToJson)
-                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
-
-        output.add(DATA, data);
-        if (data.size() > 0) {
-            output.addProperty("pageValue", results.get(results.size() - 1).getUser().getUsername());
-        } else {
-            output.addProperty("pageValue", "");
-        }
-
-        out.println(
-                new Gson().toJson(output)
-        );
-
     }
 
-    private void addSearchCondition(String searchText, CriteriaHolder<CriteriaQuery<Admin>, Admin, Admin> holder, Join<Admin, User> userJoin, List<Predicate> predicates) {
-        predicates.add(
-                holder.getBuilder().or(
-                        holder.getBuilder()
-                                .like(holder.getBuilder().lower(userJoin.get(User_.username)), searchText.toLowerCase() + "%"),
-                        holder.getBuilder()
-                                .like(holder.getBuilder().lower(userJoin.get(User_.email)), searchText.toLowerCase() + "%"),
-                        holder.getBuilder()
-                                .like(holder.getBuilder().lower(holder.getRoot().get(Admin_.type)), searchText.toLowerCase() + "%")
-                )
-        );
+
+    private void addSearchCondition(String searchText, CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
+        if (StringUtils.isNotBlank(searchText)) {
+
+            Join<Admin, User> userJoin = getUserJoin(holder);
+
+            var searchPredicate = holder.getBuilder()
+                    .or(
+                            holder.getBuilder()
+                                    .like(holder.getBuilder().lower(userJoin.get(User_.username)), searchText.toLowerCase() + "%"),
+                            holder.getBuilder()
+                                    .like(holder.getBuilder().lower(userJoin.get(User_.email)), searchText.toLowerCase() + "%"),
+                            holder.getBuilder()
+                                    .like(holder.getBuilder().lower(holder.getRoot().get(Admin_.type)), searchText.toLowerCase() + "%")
+                    );
+            predicates.add(searchPredicate);
+        }
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Admin>, Admin, Admin> holder, Join<Admin, User> userJoin, List<Predicate> predicates) {
-        predicates.add(
-                holder.getBuilder()
-                        .greaterThan(userJoin.get(User_.username), pageValue)
-        );
+    private void addPageValueCondition(String pageValue, CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
+
+        if (StringUtils.isNotBlank(pageValue)) {
+            predicates.add(
+                    holder.getBuilder()
+                            .greaterThan(getUserJoin(holder).get(User_.username), pageValue)
+            );
+        }
     }
 
     private JsonObject mapAdminToJson(Admin admin) {
@@ -111,6 +141,20 @@ public class GetAdmins extends AjaxController {
         jsonObject.addProperty("email", admin.getUser().getEmail());
 
         return jsonObject;
+    }
 
+    private Join<Admin, User> getUserJoin(CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder) {
+        return holder.getRoot()
+                .getJoins()
+                .stream()
+                .filter(join -> join.getAttribute().equals(Admin_.user))
+                .map(join -> (Join<Admin, User>) join)
+                .findFirst()
+                .get();
+    }
+
+    private void addUserJoin(CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder) {
+        holder.getRoot()
+                .join(Admin_.user, JoinType.INNER);
     }
 }

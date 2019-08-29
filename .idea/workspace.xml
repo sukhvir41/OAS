@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/utility/EntitySelector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CreateViews.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CreateViews.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetClassRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetClassRooms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetAdmins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetAdmins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/ActivateTeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAdmins.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/CriteriaHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/EntityHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/EntitySelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/EntitySelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/Classteacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Classteacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/Hod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Hod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/Views.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Views.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -125,7 +134,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.OAS_gradle [build]">
+  <component name="RunManager" selected="Gradle.OAS_gradle [createViews]">
     <configuration name="CreateViews" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="utility.CreateViews" />
       <module name="OAS_gradle_test.main" />
@@ -171,6 +180,25 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="OAS_gradle [createViews]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="createViews" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="OAS_gradle [runApplication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -190,39 +218,20 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="OAS_gradle [scan]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="scan" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Application.testing1" />
       <item itemvalue="Application.CreateViews" />
-      <item itemvalue="Gradle.OAS_gradle [scan]" />
       <item itemvalue="Gradle.OAS_gradle [runApplication]" />
       <item itemvalue="Gradle.OAS_gradle [build]" />
+      <item itemvalue="Gradle.OAS_gradle [createViews]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OAS_gradle [createViews]" />
         <item itemvalue="Gradle.OAS_gradle [build]" />
         <item itemvalue="Gradle.OAS_gradle [runApplication]" />
         <item itemvalue="Application.CreateViews" />
         <item itemvalue="Application.testing1" />
-        <item itemvalue="Gradle.OAS_gradle [scan]" />
       </list>
     </recent_temporary>
   </component>
@@ -359,7 +368,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566788724393</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add new abstraction for easy selects as replacement of EntityHelper">
+      <created>1566879679132</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1566879679132</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -411,7 +427,8 @@
     <MESSAGE value="changes in ajax package" />
     <MESSAGE value="changes in update course" />
     <MESSAGE value="changes in update course and added the gradle script that creates views ie links to jsp pages so if a page is deleted or changed the code will not compile unless the new changes are made" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes in update course and added the gradle script that creates views ie links to jsp pages so if a page is deleted or changed the code will not compile unless the new changes are made" />
+    <MESSAGE value="add new abstraction for easy selects as replacement of EntityHelper" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new abstraction for easy selects as replacement of EntityHelper" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

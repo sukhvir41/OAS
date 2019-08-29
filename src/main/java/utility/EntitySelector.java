@@ -19,7 +19,13 @@ public class EntitySelector<entityClass> {
     private CriteriaHolder<entityClass, CriteriaQuery<entityClass>, entityClass> criteriaHolder;
     private RootGraph<entityClass> graph;
     private boolean isReadOnly = false;
-    private List<Predicate> predicates = new ArrayList<>(1);
+    private List<Predicate> predicates = new ArrayList<>();
+
+
+    public static <entityClass> EntitySelector<entityClass> select(Session session, Class<entityClass> entityClass) {
+        var holder = CriteriaHolder.getQueryHolder(session, entityClass);
+        return new EntitySelector<>(session, entityClass, holder);
+    }
 
 
     private EntitySelector(Session session, Class<entityClass> entityClass, CriteriaHolder<entityClass, CriteriaQuery<entityClass>, entityClass> criteriaHolder) {
@@ -84,23 +90,25 @@ public class EntitySelector<entityClass> {
 
 
     private void addPredicatesToQuery() {
-        criteriaHolder.getQuery()
-                .where(this.predicates.toArray(new Predicate[0]));
+        if (predicates.size() > 0) {
+            criteriaHolder.getQuery()
+                    .where(this.predicates.toArray(new Predicate[0]));
+        }
     }
 
-    private Query<entityClass> getExecutableQuery() {
+    private Query<entityClass> createQueryWithPredicates() {
         addPredicatesToQuery();
         return createQuery();
     }
 
 
     public entityClass get() {
-        return getExecutableQuery()
+        return createQueryWithPredicates()
                 .getSingleResult();
     }
 
     public List<entityClass> getList() {
-        return getExecutableQuery()
+        return createQueryWithPredicates()
                 .getResultList();
     }
 

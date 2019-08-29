@@ -60,7 +60,7 @@ public class ActivateTeacher extends Controller {
         resp.sendRedirect(params.getUrl("/OAS/admin/teacher/teacher-details"));
     }
 
-    private void updateTeacherQuery(CriteriaHolder<CriteriaUpdate<User>, User, User> jpaObjects, UUID teacherId) {
+    private void updateTeacherQuery(CriteriaHolder<User, CriteriaUpdate<User>, User> jpaObjects, UUID teacherId) {
         Predicate predicate = jpaObjects.getCriteriaBuilder()
                 .and(
                         jpaObjects.getCriteriaBuilder().equal(jpaObjects.getRoot().get(User_.id), teacherId)

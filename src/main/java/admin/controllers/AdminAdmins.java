@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
+import static views.Views.VIEWS;
+
 /**
  * @author sukhvir
  */
@@ -22,7 +24,7 @@ public class AdminAdmins extends PlainController {
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, HttpSession httpSession, PrintWriter out) throws Exception {
 
-        req.getRequestDispatcher("/WEB-INF/admin/admin-admins.jsp")
+        req.getRequestDispatcher(VIEWS.ADMIN.ADMIN_ADMINS)
                 .include(req, resp);
 
     }

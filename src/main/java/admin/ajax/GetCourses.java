@@ -91,14 +91,14 @@ public class GetCourses extends AjaxController {
         );
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Course>, Course, Course> holder, List<Predicate> predicates) {
+    private void addPageValueCondition(String pageValue, CriteriaHolder<Course, CriteriaQuery<Course>, Course> holder, List<Predicate> predicates) {
         predicates.add(
                 holder.getBuilder()
                         .greaterThan(holder.getRoot().get(Course_.name), pageValue)
         );
     }
 
-    private void addSearchCondition(String searchText, CriteriaHolder<CriteriaQuery<Course>, Course, Course> holder, List<Predicate> predicates) {
+    private void addSearchCondition(String searchText, CriteriaHolder<Course, CriteriaQuery<Course>, Course> holder, List<Predicate> predicates) {
         var departmentJoinQuery = holder.getRoot()
                 .join(Course_.department, JoinType.INNER);
 
@@ -112,14 +112,14 @@ public class GetCourses extends AjaxController {
         );
     }
 
-    private void processAdditionalData(CriteriaHolder<CriteriaQuery<Course>, Course, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+    private void processAdditionalData(CriteriaHolder<Course, CriteriaQuery<Course>, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
         // if the additional data contains the departmentId then get the courses of the department.
         Optional.ofNullable(additionalDataJson.get("departmentId"))
                 .map(JsonElement::getAsLong)
                 .ifPresent(departmentId -> addDepartmentCondition(holder, predicates, additionalDataJson, departmentId));
     }
 
-    private void addDepartmentCondition(CriteriaHolder<CriteriaQuery<Course>, Course, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long departmentId) {
+    private void addDepartmentCondition(CriteriaHolder<Course, CriteriaQuery<Course>, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long departmentId) {
 
         Join<Course, Department> departmentJoin = holder.getRoot()
                 .getJoins()
