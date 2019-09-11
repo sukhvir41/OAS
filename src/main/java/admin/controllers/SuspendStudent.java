@@ -56,7 +56,7 @@ public class SuspendStudent extends Controller {
         }
     }
 
-    private void updateStudent(CriteriaHolder<CriteriaUpdate<User>, User, User> jpaObjects, UUID studentId) {
+    private void updateStudent(CriteriaHolder<User, CriteriaUpdate<User>, User> jpaObjects, UUID studentId) {
 
         jpaObjects.getQuery().where(
                 jpaObjects.getCriteriaBuilder().equal(jpaObjects.getRoot().get(User_.id), studentId)

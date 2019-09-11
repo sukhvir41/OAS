@@ -74,14 +74,14 @@ public class GetDepartments extends AjaxController {
         out.println(new Gson().toJson(output));
     }
 
-    private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<Department>, Department, Department> holder, List<Predicate> predicates) {
+    private void addSearchTextCondition(String searchText, CriteriaHolder<Department, CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
         predicates.add(
                 holder.getBuilder()
                         .like(holder.getBuilder().lower(holder.getRoot().get(Department_.name)), searchText.toLowerCase() + "%")
         );
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Department>, Department, Department> holder, List<Predicate> predicates) {
+    private void addPageValueCondition(String pageValue, CriteriaHolder<Department, CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
         predicates.add(
                 holder.getBuilder()
                         .greaterThan(holder.getRoot().get(Department_.name), pageValue)

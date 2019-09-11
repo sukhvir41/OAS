@@ -7,15 +7,15 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING
 task createViews() {
     println "Creating View Classes"
 
-    def file = new File("${projectDir.getCanonicalPath()}/src/main/java/views")
-    file.mkdir()
+    def destinationFolder = new File("${projectDir.getCanonicalPath()}/src/main/java/views")
+    destinationFolder.mkdir()
     def toScan = new File("${projectDir.getCanonicalPath()}/src/main/webapp/WEB-INF")
 
     Map<String, String> filesToCompile = new HashMap<>()
 
     createFiles(List.of(toScan.listFiles()), filesToCompile, "Views")
 
-    filesToCompile.forEach { name, code -> createJavaFiles(name, code, file) }
+    filesToCompile.forEach { name, code -> createJavaFiles(name, code, destinationFolder) }
 }
 
 def static createFiles(List<File> theFiles, Map<String, String> filesToCompile, String className) {
@@ -32,34 +32,58 @@ def static createFiles(List<File> theFiles, Map<String, String> filesToCompile, 
         }
     }
 
-    def filesString = new StringBuilder()
-    files.stream()
-            .map { createFileStringVariable(it) }
-            .forEach { filesString.append(it) }
+    def fileVariables = getAllFileVariables(files)
 
-    def folderString = new StringBuilder()
-    folders.stream()
-            .map { createFolderStringVariables(it) }
-            .forEach { folderString.append(it) }
+    def folderVariables = getAllFolderVariables(folders)
 
-    String theClass = """ 
-package views;\n
-public class ${className} {\n
-    public static ${className}  ${className.toUpperCase()}  = new ${className}();\n
-${filesString} \n
-${folderString} \n
-}"""
+    String theClass = createClass(className, fileVariables, folderVariables)
 
     filesToCompile.put(className, theClass)
 
 }
 
-static def createFileStringVariable(File file)  {
+static String getAllFileVariables(List<File> files) {
+    def filesString = new StringBuilder()
+    files.stream()
+            .map { createFileStringVariable(it) }
+            .forEach { filesString.append(it) }
+
+    return filesString.toString();
+}
+
+static String getAllFolderVariables(List<File> folders) {
+    def folderString = new StringBuilder()
+    folders.stream()
+            .map { createFolderStringVariables(it) }
+            .forEach { folderString.append(it) }
+
+    return folderString.toString();
+}
+
+static String createClass(String className, String fileVariables, String folderVariables) {
+    return """ 
+package views;\n
+public class ${className} {\n
+    public static ${className} ${className.toUpperCase()}  = new ${className}();\n
+${fileVariables} \n
+${folderVariables}
+}"""
+
+}
+
+static def createFileStringVariable(File file) {
     try {
-        String name = file.getName().replace(".jsp", "")
+        String variableName = file.getName()
+                .replace(".jsp", "")
+                .toUpperCase()
+                .replace('-', '_')
+
         String path = file.getCanonicalPath()
-        String variableValue = path.substring(path.indexOf("WEB-INF")).replace("\\", "\\\\")
-        return "\tpublic String ${name.toUpperCase().replace('-', '_')} = \"${variableValue}\";\n"
+
+        String variableValue = path.substring(path.indexOf("WEB-INF"))
+                .replace("\\", "\\\\")
+
+        return "\tpublic String ${variableName} = \"${variableValue}\";\n"
 
     } catch (Exception e) {
         e.printStackTrace()
@@ -67,11 +91,13 @@ static def createFileStringVariable(File file)  {
     }
 }
 
-static def createFolderStringVariables(File file) {
+static def createFolderStringVariables(File folder) {
     try {
-        def name = file.getName().capitalize()
-        def variable = name.toUpperCase()
-        return "\tpublic ${name} ${variable} = new ${name} ();\n"
+        def className = folder.getName()
+                .capitalize()
+        def variableName = className.toUpperCase()
+
+        return "\tpublic ${className} ${variableName} = new ${className} ();\n"
 
     } catch (Exception e) {
         e.printStackTrace()
@@ -79,10 +105,10 @@ static def createFolderStringVariables(File file) {
     }
 }
 
-static def createJavaFiles(String name, String code, File destination) {
+static def createJavaFiles(String javaClassName, String code, File destinationFolder) {
     try {
-        File file = new File(destination.getCanonicalPath() + "\\" + name + ".java")
-        Files.write(Paths.get(file.toURI()), code.getBytes(), CREATE, TRUNCATE_EXISTING)
+        File javaFile = new File(destinationFolder.getCanonicalPath() + "\\" + javaClassName + ".java")
+        Files.write(Paths.get(javaFile.toURI()), code.getBytes(), CREATE, TRUNCATE_EXISTING)
 
     } catch (Exception e) {
         e.printStackTrace()

@@ -3,7 +3,7 @@ package views;
 
 public class Teacher {
 
-    public static Teacher  TEACHER  = new Teacher();
+    public static Teacher TEACHER  = new Teacher();
 
 	public String DETAILLECTURE = "WEB-INF\\teacher\\detaillecture.jsp";
 	public String DETAILSTUDENT = "WEB-INF\\teacher\\detailstudent.jsp";
@@ -17,6 +17,5 @@ public class Teacher {
 	public String TEACHERSTUDENT = "WEB-INF\\teacher\\teacherstudent.jsp";
  
 
- 
 
 }
