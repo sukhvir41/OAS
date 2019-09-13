@@ -4,10 +4,14 @@ import java.nio.file.Paths
 import static java.nio.file.StandardOpenOption.CREATE
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING
 
-task createViews() {
+
+
+task createViews {
     println "Creating View Classes"
 
     def destinationFolder = new File("${projectDir.getCanonicalPath()}/src/main/java/views")
+    //def destinationFolder = new File("${projectDir.getCanonicalPath()}/src/main/generated/views")
+
     destinationFolder.mkdir()
     def toScan = new File("${projectDir.getCanonicalPath()}/src/main/webapp/WEB-INF")
 
@@ -16,7 +20,11 @@ task createViews() {
     createFiles(List.of(toScan.listFiles()), filesToCompile, "Views")
 
     filesToCompile.forEach { name, code -> createJavaFiles(name, code, destinationFolder) }
+
 }
+
+
+
 
 def static createFiles(List<File> theFiles, Map<String, String> filesToCompile, String className) {
 
@@ -109,7 +117,6 @@ static def createJavaFiles(String javaClassName, String code, File destinationFo
     try {
         File javaFile = new File(destinationFolder.getCanonicalPath() + "\\" + javaClassName + ".java")
         Files.write(Paths.get(javaFile.toURI()), code.getBytes(), CREATE, TRUNCATE_EXISTING)
-
     } catch (Exception e) {
         e.printStackTrace()
     }

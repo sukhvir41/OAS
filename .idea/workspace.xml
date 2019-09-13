@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/annotation-processors.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileContent/fileContent.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/jarAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/views/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/views/Classteacher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/views/Hod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/views/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/views/Teacher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/views/Views.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6/fileContent/fileContent.lock" afterDir="false" />
@@ -27,45 +20,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/OAS_gradle_test.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CreateViews.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CreateViews.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetAdmins.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetAdmins.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetClassRooms.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetClassRooms.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetCourses.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetCourses.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetDepartments.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetDepartments.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetTeachers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/ajax/GetTeachers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateStudent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/ActivateTeacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAdmins.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAdmins.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DepartmentDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/DepartmentDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditCourse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/EditDepartment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/LectureDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/LectureDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/SubjectDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/SubjectDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/SuspendStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/SuspendStudent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/SuspendTeacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/SuspendTeacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/TransferDepartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/TransferDepartment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateSubject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/postback/UpdateSubject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckEmail.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckEmail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckUsername.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ajax/CheckUsername.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/CriteriaHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/CriteriaHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/entities/EntityHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/entities/EntityHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/postback/Registration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/postback/Registration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/views/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/views/Admin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/views/Classteacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/views/Classteacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/views/Hod.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/views/Hod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/views/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/views/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/views/Teacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/views/Teacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/views/Views.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/views/Views.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAccountDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/admin/controllers/AdminAccountDetails.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/OAS_gradle_test.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetTeachers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetTeachers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/SuspendTeacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/Classteacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Classteacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/Hod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Hod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/Views.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/Views.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/controllers/AdminAccountDetails.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,6 +98,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -151,22 +116,23 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/generated/views" />
     <property name="last_opened_file_path" value="$USER_HOME$/.gradle/caches/5.6/generated-gradle-jars/gradle-api-5.6.jar!/" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\development\Documents\OAS\OAS_gradle\src\main\webapp\WEB-INF" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\sharedFolder\OAS_gradle\src\main\java" />
+      <recent name="D:\sharedFolder\OAS_gradle\src\main\webapp\scripts" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="student.attendanceWsService" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\sharedFolder\OAS_gradle\src\main\java" />
-      <recent name="D:\sharedFolder\OAS_gradle\src\main\webapp\scripts" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\development\Documents\OAS\OAS_gradle\src\main\webapp\WEB-INF" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -181,32 +147,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.OAS_gradle [createViews]">
-    <configuration name="CreateViews" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utility.CreateViews" />
-      <module name="OAS_gradle_test.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utility.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="testing1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utility.testing1" />
-      <module name="OAS_gradle_test.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utility.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RunManager" selected="Gradle.OAS_gradle [build]">
+    <configuration name="OAS_gradle [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
     </configuration>
     <configuration name="OAS_gradle [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -220,6 +179,25 @@
         <option name="taskNames">
           <list>
             <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="OAS_gradle [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -266,19 +244,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.testing1" />
-      <item itemvalue="Application.CreateViews" />
       <item itemvalue="Gradle.OAS_gradle [runApplication]" />
       <item itemvalue="Gradle.OAS_gradle [build]" />
       <item itemvalue="Gradle.OAS_gradle [createViews]" />
+      <item itemvalue="Gradle.OAS_gradle [buildDependents]" />
+      <item itemvalue="Gradle.OAS_gradle [clean]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OAS_gradle [clean]" />
+        <item itemvalue="Gradle.OAS_gradle [buildDependents]" />
         <item itemvalue="Gradle.OAS_gradle [build]" />
         <item itemvalue="Gradle.OAS_gradle [createViews]" />
         <item itemvalue="Gradle.OAS_gradle [runApplication]" />
-        <item itemvalue="Application.CreateViews" />
-        <item itemvalue="Application.testing1" />
       </list>
     </recent_temporary>
   </component>
@@ -429,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567044900499</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="refactoring the create views gradle task">
+      <created>1568164714568</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1568164714568</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -483,7 +468,8 @@
     <MESSAGE value="changes in update course and added the gradle script that creates views ie links to jsp pages so if a page is deleted or changed the code will not compile unless the new changes are made" />
     <MESSAGE value="add new abstraction for easy selects as replacement of EntityHelper" />
     <MESSAGE value="refactoring admin ajax package" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring admin ajax package" />
+    <MESSAGE value="refactoring the create views gradle task" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring the create views gradle task" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

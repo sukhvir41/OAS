@@ -25,6 +25,7 @@ apply plugin: 'org.hibernate.orm'
 apply plugin: 'net.ltgt.apt'
 apply plugin: 'net.ltgt.apt-idea'
 
+
 apply from: 'CreateViews.gradle'
 
 repositories {
@@ -98,7 +99,8 @@ cargo {
 }
 
 cargoStartLocal.mustRunAfter cargoStopLocal
-build.mustRunAfter clean, createViews
+compileJava.dependsOn(createViews)
+build.mustRunAfter clean //,createViews
 
 
 task runApplication() {
