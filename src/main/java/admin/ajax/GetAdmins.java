@@ -7,6 +7,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
+import utility.CriteriaHolder;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -82,7 +83,7 @@ public class GetAdmins extends AjaxController {
         }
     }
 
-    private List<Admin> getAdminsList(Session session, CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
+    private List<Admin> getAdminsList(Session session, CriteriaHolder<CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
 
         var graph = session.createEntityGraph(Admin.class);
         graph.addAttributeNodes(Admin_.USER);
@@ -104,7 +105,7 @@ public class GetAdmins extends AjaxController {
     }
 
 
-    private void addSearchCondition(String searchText, CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
+    private void addSearchCondition(String searchText, CriteriaHolder<CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
         if (StringUtils.isNotBlank(searchText)) {
 
             Join<Admin, User> userJoin = getUserJoin(holder);
@@ -122,7 +123,7 @@ public class GetAdmins extends AjaxController {
         }
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Admin>, Admin> holder, List<Predicate> predicates) {
 
         if (StringUtils.isNotBlank(pageValue)) {
             predicates.add(
@@ -143,7 +144,7 @@ public class GetAdmins extends AjaxController {
         return jsonObject;
     }
 
-    private Join<Admin, User> getUserJoin(CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder) {
+    private Join<Admin, User> getUserJoin(CriteriaHolder<CriteriaQuery<Admin>, Admin> holder) {
         return holder.getRoot()
                 .getJoins()
                 .stream()
@@ -153,7 +154,7 @@ public class GetAdmins extends AjaxController {
                 .get();
     }
 
-    private void addUserJoin(CriteriaHolder<Admin, CriteriaQuery<Admin>, Admin> holder) {
+    private void addUserJoin(CriteriaHolder<CriteriaQuery<Admin>, Admin> holder) {
         holder.getRoot()
                 .join(Admin_.user, JoinType.INNER);
     }

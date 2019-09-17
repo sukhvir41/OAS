@@ -9,6 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
+import utility.CriteriaHolder;
 import utility.UrlBuilder;
 
 import javax.persistence.criteria.CriteriaUpdate;
@@ -61,7 +62,7 @@ public class ActivateStudent extends Controller {
     }
 
 
-    private void updateStudentQuery(CriteriaHolder<User, CriteriaUpdate<User>, User> jpaObjects, UUID studentId) {
+    private void updateStudentQuery(CriteriaHolder<CriteriaUpdate<User>, User> jpaObjects, UUID studentId) {
         Predicate predicate = jpaObjects.getCriteriaBuilder()
                 .and(
                         jpaObjects.getCriteriaBuilder()

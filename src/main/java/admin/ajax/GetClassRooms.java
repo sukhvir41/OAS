@@ -5,6 +5,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
+import utility.CriteriaHolder;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -38,13 +39,8 @@ public class GetClassRooms extends AjaxController {
 
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.isNotBlank(pageValue)) {
-            addPageValueCondition(pageValue, holder, predicates);
-        }
-
-        if (StringUtils.isNotBlank(searchText)) {
-            addSearchTextCondition(searchText, holder, predicates);
-        }
+        addPageValueCondition(pageValue, holder, predicates);
+        addSearchTextCondition(searchText, holder, predicates);
 
         if (StringUtils.isNotBlank(additionalData)) {
             var additionalDataJson = new JsonParser()
@@ -91,9 +87,13 @@ public class GetClassRooms extends AjaxController {
         );
     }
 
-    private void addSearchTextCondition(String searchText, CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates) {
-        var courseJoinQuery = holder.getRoot()
-                .join(ClassRoom_.course, JoinType.INNER);
+    private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates) {
+
+        if (searchText.isBlank()) {
+            return;
+        }
+
+        Join<ClassRoom, Course> courseJoinQuery = getCourseJoin(holder);
 
         predicates.add(
                 holder.getBuilder().or(
@@ -105,33 +105,39 @@ public class GetClassRooms extends AjaxController {
         );
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates) {
+    private Join<ClassRoom, Course> getCourseJoin(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder) {
+        return holder.getJoin(ClassRoom_.course)
+                .orElseGet(() -> joinCourse(holder));
+    }
+
+    private Join<ClassRoom, Course> joinCourse(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder) {
+        return holder.getRoot()
+                .join(ClassRoom_.course, JoinType.INNER);
+    }
+
+
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates) {
+
+        if (pageValue.isBlank()) {
+            return;
+        }
+
         predicates.add(
                 holder.getBuilder()
                         .greaterThan(holder.getRoot().get(ClassRoom_.name), pageValue)
         );
+
     }
 
-    private void processAdditionalData(CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+    private void processAdditionalData(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
         Optional.of(additionalDataJson.get("courseId"))
                 .map(JsonElement::getAsLong)
                 .ifPresent(courseId -> addCourseCondition(holder, predicates, additionalDataJson, courseId));
 
     }
 
-    private void addCourseCondition(CriteriaHolder<ClassRoom, CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long courseId) {
-        Join<ClassRoom, Course> courseJoinQuery = holder.getRoot()
-                .getJoins()
-                .stream()
-                .filter(classRoomJoin -> classRoomJoin.getAttribute().equals(ClassRoom_.course))
-                .map(classRoomJoin -> (Join<ClassRoom, Course>) classRoomJoin)
-                .findFirst()
-                .orElse(null);
-
-        if (Objects.isNull(courseJoinQuery)) {
-            courseJoinQuery = holder.getRoot()
-                    .join(ClassRoom_.course, JoinType.INNER);
-        }
+    private void addCourseCondition(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long courseId) {
+        Join<ClassRoom, Course> courseJoinQuery = getCourseJoin(holder);
 
         var condition = holder.getBuilder()
                 .equal(courseJoinQuery.get(Course_.id), courseId);

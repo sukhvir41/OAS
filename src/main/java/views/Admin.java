@@ -3,7 +3,7 @@ package views;
 
 public class Admin {
 
-    public static Admin ADMIN  = new Admin();
+    public static Admin ADMIN = new Admin();
 
 	public String ADMIN_ADMINS = "WEB-INF\\admin\\admin-admins.jsp";
 	public String ADMIN_CLASSROOM = "WEB-INF\\admin\\admin-classroom.jsp";

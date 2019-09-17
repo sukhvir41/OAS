@@ -3,7 +3,7 @@ package views;
 
 public class Student {
 
-    public static Student STUDENT  = new Student();
+    public static Student STUDENT = new Student();
 
 	public String ATTENDANCE = "WEB-INF\\student\\attendance.jsp";
 	public String STUDENTCHANGEPASSWORD = "WEB-INF\\student\\studentchangepassword.jsp";

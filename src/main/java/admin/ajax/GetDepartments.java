@@ -3,7 +3,7 @@ package admin.ajax;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import entities.CriteriaHolder;
+import utility.CriteriaHolder;
 import entities.Department;
 import entities.Department_;
 import org.apache.commons.lang3.StringUtils;
@@ -74,14 +74,14 @@ public class GetDepartments extends AjaxController {
         out.println(new Gson().toJson(output));
     }
 
-    private void addSearchTextCondition(String searchText, CriteriaHolder<Department, CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
+    private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
         predicates.add(
                 holder.getBuilder()
                         .like(holder.getBuilder().lower(holder.getRoot().get(Department_.name)), searchText.toLowerCase() + "%")
         );
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<Department, CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
         predicates.add(
                 holder.getBuilder()
                         .greaterThan(holder.getRoot().get(Department_.name), pageValue)

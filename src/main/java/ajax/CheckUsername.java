@@ -7,7 +7,7 @@ package ajax;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import entities.CriteriaHolder;
+import utility.CriteriaHolder;
 import entities.User;
 import entities.User_;
 import org.apache.commons.lang3.StringUtils;

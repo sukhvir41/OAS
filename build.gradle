@@ -93,7 +93,7 @@ cargo {
     }
 
     local {
-        homeDir = file('..//tomcat')
+        homeDir = file('.//tomcat')
         outputFile = file('output.log')
     }
 }

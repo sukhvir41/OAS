@@ -3,7 +3,7 @@ package views;
 
 public class Hod {
 
-    public static Hod HOD  = new Hod();
+    public static Hod HOD = new Hod();
 
 	public String DETAILCLASSROOM = "WEB-INF\\hod\\detailclassroom.jsp";
 	public String DETAILCOURSE = "WEB-INF\\hod\\detailcourse.jsp";

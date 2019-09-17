@@ -9,6 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
+import utility.CriteriaHolder;
 import utility.UrlBuilder;
 
 import javax.persistence.criteria.JoinType;

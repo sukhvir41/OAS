@@ -72,7 +72,7 @@ static String createClass(String className, String fileVariables, String folderV
     return """ 
 package views;\n
 public class ${className} {\n
-    public static ${className} ${className.toUpperCase()}  = new ${className}();\n
+    public static ${className} ${className.toUpperCase()} = new ${className}();\n
 ${fileVariables} \n
 ${folderVariables}
 }"""

@@ -5,6 +5,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
+import utility.CriteriaHolder;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -100,7 +101,7 @@ public class GetTeachers extends AjaxController {
         out.println(new Gson().toJson(output));
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<Teacher, CriteriaQuery<Teacher>, Teacher> holder, List<Predicate> predicates) {
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Teacher>, Teacher> holder, List<Predicate> predicates) {
         var names = pageValue.split("--");
         predicates.add(
                 holder.getBuilder()
@@ -112,7 +113,7 @@ public class GetTeachers extends AjaxController {
         );
     }
 
-    private void processAdditionalData(CriteriaHolder<Teacher, CriteriaQuery<Teacher>, Teacher> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+    private void processAdditionalData(CriteriaHolder<CriteriaQuery<Teacher>, Teacher> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
         // if the additional data contains the departmentId then get the teacher of the department.
         Optional.ofNullable(additionalDataJson.get("departmentId"))
                 .map(JsonElement::getAsLong)
@@ -120,7 +121,7 @@ public class GetTeachers extends AjaxController {
 
     }
 
-    private void addDepartmentCondition(CriteriaHolder<Teacher, CriteriaQuery<Teacher>, Teacher> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long departmentId) {
+    private void addDepartmentCondition(CriteriaHolder<CriteriaQuery<Teacher>, Teacher> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long departmentId) {
         var subQuery = holder.getQuery()
                 .subquery(UUID.class);
         var subQueryRoot = subQuery.from(TeacherDepartmentLink.class);
@@ -148,7 +149,7 @@ public class GetTeachers extends AjaxController {
 
     }
 
-    private void addSearchConditions(String searchText, CriteriaHolder<Teacher, CriteriaQuery<Teacher>, Teacher> holder, Join<Teacher, User> userJoin, List<Predicate> predicates) {
+    private void addSearchConditions(String searchText, CriteriaHolder<CriteriaQuery<Teacher>, Teacher> holder, Join<Teacher, User> userJoin, List<Predicate> predicates) {
         List<Predicate> orPredicates = new ArrayList<>();
 
         orPredicates.add(

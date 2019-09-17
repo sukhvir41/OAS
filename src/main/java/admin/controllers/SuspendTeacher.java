@@ -9,6 +9,7 @@ import entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.Controller;
+import utility.CriteriaHolder;
 import utility.UrlBuilder;
 
 import javax.persistence.criteria.CriteriaUpdate;
@@ -56,7 +57,7 @@ public class SuspendTeacher extends Controller {
         }
     }
 
-    private void updateTeacher(CriteriaHolder<User, CriteriaUpdate<User>, User> jpaObjects, UUID teacherId) {
+    private void updateTeacher(CriteriaHolder<CriteriaUpdate<User>, User> jpaObjects, UUID teacherId) {
 
         jpaObjects.getQuery().where(
                 jpaObjects.getCriteriaBuilder().equal(jpaObjects.getRoot().get(User_.id), teacherId)

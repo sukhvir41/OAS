@@ -3,7 +3,7 @@ package views;
 
 public class Views {
 
-    public static Views VIEWS  = new Views();
+    public static Views VIEWS = new Views();
 
 	public String LOGIN = "WEB-INF\\login.jsp";
 	public String MESSAGE_BOX = "WEB-INF\\message-box.jsp";

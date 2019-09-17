@@ -1,6 +1,5 @@
 package utility;
 
-import entities.CriteriaHolder;
 import org.hibernate.Session;
 import org.hibernate.graph.RootGraph;
 import org.hibernate.query.Query;
@@ -16,7 +15,7 @@ public class EntitySelector<entityClass> {
 
     private Session session;
     private Class<entityClass> entityClass;
-    private CriteriaHolder<entityClass, CriteriaQuery<entityClass>, entityClass> criteriaHolder;
+    private CriteriaHolder<CriteriaQuery<entityClass>, entityClass> criteriaHolder;
     private RootGraph<entityClass> graph;
     private boolean isReadOnly = false;
     private List<Predicate> predicates = new ArrayList<>();
@@ -28,7 +27,7 @@ public class EntitySelector<entityClass> {
     }
 
 
-    private EntitySelector(Session session, Class<entityClass> entityClass, CriteriaHolder<entityClass, CriteriaQuery<entityClass>, entityClass> criteriaHolder) {
+    private EntitySelector(Session session, Class<entityClass> entityClass, CriteriaHolder<CriteriaQuery<entityClass>, entityClass> criteriaHolder) {
         this.session = session;
         this.entityClass = entityClass;
         this.criteriaHolder = criteriaHolder;

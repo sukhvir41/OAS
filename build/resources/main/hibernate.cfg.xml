@@ -18,7 +18,7 @@
         </property>
 
         <property name="hibernate.connection.url">
-            jdbc:postgresql://192.168.0.23:5432/OASdb
+            jdbc:postgresql://0.0.0.0:5432/OASdb
         </property>
 
         <property name="hibernate.connection.username">
