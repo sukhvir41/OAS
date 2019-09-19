@@ -3,7 +3,10 @@ package admin.ajax;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import entities.*;
+import entities.Admin;
+import entities.Admin_;
+import entities.User;
+import entities.User_;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
@@ -38,35 +41,17 @@ public class GetAdmins extends AjaxController {
         addPageValueCondition(pageValue, holder, predicates);
         addSearchCondition(searchText, holder, predicates);
 
-        var adminList = getAdminsList(session, holder, predicates);
+        var admins = getAdminsList(session, holder, predicates);
 
-        var successJson = super.getSuccessJson();
+        JsonObject successJson = super.getSuccessJson();
 
-        setMorePageAttributeAndRemoveLastAdmin(adminList, successJson);
-
-        JsonArray data = getAdminAsJsonData(adminList);
-
-        successJson.add(DATA, data);
-
-        setPageValue(adminList, successJson);
+        addDataToJson(successJson, admins);
 
         out.println(
                 new Gson().toJson(successJson)
         );
     }
 
-    private void setPageValue(List<Admin> adminList, JsonObject successJsonObject) {
-        if (adminList.size() > 0) {
-            successJsonObject
-                    .addProperty("pageValue",
-                            adminList.get(adminList.size() - 1)
-                                    .getUser()
-                                    .getUsername()
-                    );
-        } else {
-            successJsonObject.addProperty("pageValue", "");
-        }
-    }
 
     private JsonArray getAdminAsJsonData(List<Admin> adminList) {
         return adminList.stream()
@@ -157,5 +142,26 @@ public class GetAdmins extends AjaxController {
     private void addUserJoin(CriteriaHolder<CriteriaQuery<Admin>, Admin> holder) {
         holder.getRoot()
                 .join(Admin_.user, JoinType.INNER);
+    }
+
+    private void addDataToJson(JsonObject successJson, List<Admin> admins) {
+        setMorePageAttributeAndRemoveLastAdmin(admins, successJson);
+        JsonArray data = getAdminAsJsonData(admins);
+        successJson.add(DATA, data);
+
+        setPageValue(admins, successJson);
+    }
+
+    private void setPageValue(List<Admin> adminList, JsonObject successJsonObject) {
+        if (adminList.size() > 0) {
+            successJsonObject
+                    .addProperty("pageValue",
+                            adminList.get(adminList.size() - 1)
+                                    .getUser()
+                                    .getUsername()
+                    );
+        } else {
+            successJsonObject.addProperty("pageValue", "");
+        }
     }
 }

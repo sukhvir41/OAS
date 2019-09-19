@@ -1,8 +1,10 @@
 package admin.ajax;
 
 import com.google.gson.*;
-import entities.*;
-import org.apache.commons.lang3.StringUtils;
+import entities.ClassRoom;
+import entities.ClassRoom_;
+import entities.Course;
+import entities.Course_;
 import org.hibernate.Session;
 import utility.AjaxController;
 import utility.CriteriaHolder;
@@ -18,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -41,49 +42,15 @@ public class GetClassRooms extends AjaxController {
 
         addPageValueCondition(pageValue, holder, predicates);
         addSearchTextCondition(searchText, holder, predicates);
+        processAdditionalData(holder, predicates, additionalData);
 
-        if (StringUtils.isNotBlank(additionalData)) {
-            var additionalDataJson = new JsonParser()
-                    .parse(additionalData)
-                    .getAsJsonObject();
+        var classRooms = getClassRooms(session, holder, predicates);
 
-            processAdditionalData(holder, predicates, additionalDataJson);
-        }
-
-        var graph = session.createEntityGraph(ClassRoom.class);
-        graph.addAttributeNodes(ClassRoom_.COURSE);
-
-        holder.getQuery()
-                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
-                .orderBy(holder.getBuilder().asc(holder.getRoot().get(ClassRoom_.name)));
-
-        var results = session.createQuery(holder.getQuery())
-                .applyLoadGraph(graph)
-                .setMaxResults(super.getPageSize() + 1)
-                .getResultList();
-
-        var output = super.getSuccessJson();
-
-        if (results.size() == super.getPageSize() + 1) {
-            output.addProperty("more", true);
-            results.remove(results.size() - 1);
-        } else {
-            output.addProperty("more", false);
-        }
-
-        JsonArray data = results.stream()
-                .map(this::mapClassRoomToJson)
-                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
-
-        output.add(DATA, data);
-        if (data.size() > 0) {
-            output.addProperty("pageValue", results.get(results.size() - 1).getName());
-        } else {
-            output.addProperty("pageValue", "");
-        }
+        var successJson = super.getSuccessJson();
+        addDataToJson(successJson, classRooms);
 
         out.println(
-                gson.toJson(output)
+                gson.toJson(successJson)
         );
     }
 
@@ -129,19 +96,79 @@ public class GetClassRooms extends AjaxController {
 
     }
 
-    private void processAdditionalData(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+    private void processAdditionalData(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, String additionalData) {
+
+        JsonObject additionalDataJson = parseAdditionalData(additionalData);
+
         Optional.of(additionalDataJson.get("courseId"))
                 .map(JsonElement::getAsLong)
-                .ifPresent(courseId -> addCourseCondition(holder, predicates, additionalDataJson, courseId));
+                .ifPresent(courseId -> addCourseCondition(holder, predicates, courseId));
 
     }
 
-    private void addCourseCondition(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long courseId) {
+    private JsonObject parseAdditionalData(String additionalData) {
+        try {
+            return new JsonParser()
+                    .parse(additionalData)
+                    .getAsJsonObject();
+        } catch (Exception e) {
+            return new JsonObject();
+        }
+    }
+
+
+    private void addCourseCondition(CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates, Long courseId) {
         Join<ClassRoom, Course> courseJoinQuery = getCourseJoin(holder);
 
         var condition = holder.getBuilder()
                 .equal(courseJoinQuery.get(Course_.id), courseId);
         predicates.add(condition);
+    }
+
+    private List<ClassRoom> getClassRooms(Session session, CriteriaHolder<CriteriaQuery<ClassRoom>, ClassRoom> holder, List<Predicate> predicates) {
+        // add course graph
+        var graph = session.createEntityGraph(ClassRoom.class);
+        graph.addAttributeNodes(ClassRoom_.COURSE);
+
+        holder.getQuery()
+                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
+                .orderBy(holder.getBuilder().asc(holder.getRoot().get(ClassRoom_.name)));
+
+        return session.createQuery(holder.getQuery())
+                .applyLoadGraph(graph)
+                .setMaxResults(super.getPageSize() + 1)
+                .getResultList();
+    }
+
+    private void addDataToJson(JsonObject successJson, List<ClassRoom> classRooms) {
+
+        setMorePageProperty(successJson, classRooms);
+        removeExtraClassRoom(classRooms);
+        setPageValueProperty(successJson, classRooms);
+
+        JsonArray classRoomsJson = classRooms.stream()
+                .map(this::mapClassRoomToJson)
+                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+
+        successJson.add(DATA, classRoomsJson);
+    }
+
+    private void setMorePageProperty(JsonObject successJson, List<ClassRoom> classRooms) {
+        successJson.addProperty("more", classRooms.size() == super.getPageSize() + 1);
+    }
+
+    private void removeExtraClassRoom(List<ClassRoom> classRooms) {
+        if (classRooms.size() == super.getPageSize() + 1) {
+            classRooms.remove(classRooms.size() - 1);
+        }
+    }
+
+    private void setPageValueProperty(JsonObject successJson, List<ClassRoom> classRooms) {
+        if (classRooms.size() > 0) {
+            successJson.addProperty("pageValue", classRooms.get(classRooms.size() - 1).getName());
+        } else {
+            successJson.addProperty("pageValue", "");
+        }
     }
 
     private JsonObject mapClassRoomToJson(ClassRoom classRoom) {
