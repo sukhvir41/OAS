@@ -1,8 +1,10 @@
 package admin.ajax;
 
 import com.google.gson.*;
-import entities.*;
-import org.apache.commons.lang3.StringUtils;
+import entities.Course;
+import entities.Course_;
+import entities.Department;
+import entities.Department_;
 import org.hibernate.Session;
 import utility.AjaxController;
 import utility.CriteriaHolder;
@@ -18,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -39,53 +40,15 @@ public class GetCourses extends AjaxController {
 
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.isNotBlank(pageValue)) {
-            addPageValueCondition(pageValue, holder, predicates);
-        }
+        addPageValueCondition(pageValue, holder, predicates);
+        addSearchCondition(searchText, holder, predicates);
+        processAdditionalData(holder, predicates, additionalData);
 
-        if (StringUtils.isNotBlank(searchText)) {
-            addSearchCondition(searchText, holder, predicates);
-        }
-
-        if (StringUtils.isNotBlank(additionalData)) {
-            var additionalDataJson = new JsonParser()
-                    .parse(additionalData)
-                    .getAsJsonObject();
-
-            processAdditionalData(holder, predicates, additionalDataJson);
-        }
-
-        var graph = session.createEntityGraph(Course.class);
-        graph.addAttributeNodes(Course_.DEPARTMENT);
-
-        holder.getQuery()
-                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
-                .orderBy(holder.getBuilder().asc(holder.getRoot().get(Course_.name)));
-
-        var results = session.createQuery(holder.getQuery())
-                .applyLoadGraph(graph)
-                .setMaxResults(super.getPageSize() + 1)
-                .getResultList();
+        var courses = getCourses(session, holder, predicates);
 
         var output = super.getSuccessJson();
 
-        if (results.size() == super.getPageSize() + 1) {
-            output.addProperty("more", true);
-            results.remove(results.size() - 1);
-        } else {
-            output.addProperty("more", false);
-        }
-
-        JsonArray data = results.stream()
-                .map(this::mapCourseToJson)
-                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
-
-        output.add(DATA, data);
-        if (data.size() > 0) {
-            output.addProperty("pageValue", results.get(results.size() - 1).getName());
-        } else {
-            output.addProperty("pageValue", "");
-        }
+        addDataToJson(output, courses);
 
         out.println(
                 gson.toJson(output)
@@ -93,6 +56,11 @@ public class GetCourses extends AjaxController {
     }
 
     private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Course>, Course> holder, List<Predicate> predicates) {
+
+        if (pageValue.isBlank()) {
+            return;
+        }
+
         predicates.add(
                 holder.getBuilder()
                         .greaterThan(holder.getRoot().get(Course_.name), pageValue)
@@ -100,8 +68,12 @@ public class GetCourses extends AjaxController {
     }
 
     private void addSearchCondition(String searchText, CriteriaHolder<CriteriaQuery<Course>, Course> holder, List<Predicate> predicates) {
-        var departmentJoinQuery = holder.getRoot()
-                .join(Course_.department, JoinType.INNER);
+
+        if (searchText.isBlank()) {
+            return;
+        }
+
+        var departmentJoinQuery = getDepartmentJoin(holder);
 
         predicates.add(
                 holder.getBuilder().or(
@@ -113,32 +85,91 @@ public class GetCourses extends AjaxController {
         );
     }
 
-    private void processAdditionalData(CriteriaHolder<CriteriaQuery<Course>, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson) {
+
+    private Join<Course, Department> getDepartmentJoin(CriteriaHolder<CriteriaQuery<Course>, Course> holder) {
+        return holder.getJoin(Course_.department)
+                .orElseGet(() -> joinDepartment(holder));
+    }
+
+    private Join<Course, Department> joinDepartment(CriteriaHolder<CriteriaQuery<Course>, Course> holder) {
+        return holder.getRoot()
+                .join(Course_.department, JoinType.INNER);
+    }
+
+    private void processAdditionalData(CriteriaHolder<CriteriaQuery<Course>, Course> holder, List<Predicate> predicates, String additionalData) {
+
+        JsonObject additionalDataJson = parseAdditionalData(additionalData);
+
         // if the additional data contains the departmentId then get the courses of the department.
         Optional.ofNullable(additionalDataJson.get("departmentId"))
                 .map(JsonElement::getAsLong)
                 .ifPresent(departmentId -> addDepartmentCondition(holder, predicates, additionalDataJson, departmentId));
     }
 
+    private JsonObject parseAdditionalData(String additionalData) {
+        try {
+            return new JsonParser()
+                    .parse(additionalData)
+                    .getAsJsonObject();
+        } catch (Exception e) {
+            return new JsonObject();
+        }
+    }
+
+
     private void addDepartmentCondition(CriteriaHolder<CriteriaQuery<Course>, Course> holder, List<Predicate> predicates, JsonObject additionalDataJson, Long departmentId) {
 
-        Join<Course, Department> departmentJoin = holder.getRoot()
-                .getJoins()
-                .stream()
-                .filter(courseJoin -> courseJoin.getAttribute().equals(Course_.department))
-                .map(courseJoin -> (Join<Course, Department>) courseJoin)
-                .findFirst()
-                .orElse(null);
-
-        //if the join does not exist already then add it other wise use the added join
-        if (Objects.isNull(departmentJoin)) {
-            departmentJoin = holder.getRoot()
-                    .join(Course_.department, JoinType.INNER);
-        }
+        Join<Course, Department> departmentJoin = getDepartmentJoin(holder);
 
         var condition = holder.getBuilder()
                 .equal(departmentJoin.get(Department_.id), departmentId);
         predicates.add(condition);
+    }
+
+    private List<Course> getCourses(Session session, CriteriaHolder<CriteriaQuery<Course>, Course> holder, List<Predicate> predicates) {
+        var graph = session.createEntityGraph(Course.class);
+        graph.addAttributeNodes(Course_.DEPARTMENT);
+
+        holder.getQuery()
+                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
+                .orderBy(holder.getBuilder().asc(holder.getRoot().get(Course_.name)));
+
+        return session.createQuery(holder.getQuery())
+                .applyLoadGraph(graph)
+                .setMaxResults(super.getPageSize() + 1)
+                .getResultList();
+    }
+
+    private void addDataToJson(JsonObject successJson, List<Course> courses) {
+
+        setMorePageProperty(successJson, courses);
+        removeExtraCourse(courses);
+        setPageValueProperty(successJson, courses);
+
+        JsonArray data = courses.stream()
+                .map(this::mapCourseToJson)
+                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+
+        successJson.add(DATA, data);
+    }
+
+
+    private void setMorePageProperty(JsonObject successJson, List<Course> courses) {
+        successJson.addProperty("more", courses.size() == super.getPageSize() + 1);
+    }
+
+    private void removeExtraCourse(List<Course> courses) {
+        if (courses.size() == super.getPageSize() + 1) {
+            courses.remove(courses.size() - 1);
+        }
+    }
+
+    private void setPageValueProperty(JsonObject successJson, List<Course> courses) {
+        if (courses.size() > 0) {
+            successJson.addProperty("pageValue", courses.get(courses.size() - 1).getName());
+        } else {
+            successJson.addProperty("pageValue", "");
+        }
     }
 
     private JsonObject mapCourseToJson(Course course) {

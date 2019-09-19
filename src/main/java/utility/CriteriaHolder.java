@@ -1,7 +1,5 @@
 package utility;
 
-import entities.Admin;
-import entities.User;
 import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.Session;
 

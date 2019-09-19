@@ -3,6 +3,7 @@ package admin.ajax;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import entities.Course;
 import utility.CriteriaHolder;
 import entities.Department;
 import entities.Department_;
@@ -34,58 +35,83 @@ public class GetDepartments extends AjaxController {
 
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.isNotBlank(pageValue)) {
-            addPageValueCondition(pageValue, holder, predicates);
-        }
+        addPageValueCondition(pageValue, holder, predicates);
+        addSearchTextCondition(searchText, holder, predicates);
 
-        if (StringUtils.isNotBlank(searchText)) {
-            addSearchTextCondition(searchText, holder, predicates);
-        }
-
-        holder.getQuery()
-                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
-                .orderBy(holder.getBuilder().asc(holder.getRoot().get(Department_.name)));
-
-        var results = session.createQuery(holder.getQuery())
-                .setMaxResults(super.getPageSize() + 1)
-                .setReadOnly(true)
-                .getResultList();
+        var departments = getDepartments(session, holder, predicates);
 
         var output = super.getSuccessJson();
 
-        if (results.size() == super.getPageSize() + 1) {
-            output.addProperty("more", true);
-            results.remove(results.size() - 1);
-        } else {
-            output.addProperty("more", false);
-        }
-
-        JsonArray data = results.stream()
-                .map(this::mapDepartmentToJson)
-                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
-
-        output.add(DATA, data);
-        if (data.size() > 0) {
-            output.addProperty("pageValue", results.get(results.size() - 1).getName());
-        } else {
-            output.addProperty("pageValue", "");
-        }
+        addDataToJson(output, departments);
 
         out.println(new Gson().toJson(output));
     }
 
+
+    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
+
+        if (pageValue.isBlank()) {
+            return;
+        }
+
+        predicates.add(
+                holder.getBuilder()
+                        .greaterThan(holder.getRoot().get(Department_.name), pageValue)
+        );
+    }
+
     private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
+
+        if (searchText.isBlank()) {
+            return;
+        }
+
         predicates.add(
                 holder.getBuilder()
                         .like(holder.getBuilder().lower(holder.getRoot().get(Department_.name)), searchText.toLowerCase() + "%")
         );
     }
 
-    private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
-        predicates.add(
-                holder.getBuilder()
-                        .greaterThan(holder.getRoot().get(Department_.name), pageValue)
-        );
+    private List<Department> getDepartments(Session session, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
+        holder.getQuery()
+                .where(holder.getBuilder().and(predicates.toArray(new Predicate[0])))
+                .orderBy(holder.getBuilder().asc(holder.getRoot().get(Department_.name)));
+
+        return session.createQuery(holder.getQuery())
+                .setMaxResults(super.getPageSize() + 1)
+                .setReadOnly(true)
+                .getResultList();
+    }
+
+    private void addDataToJson(JsonObject successJson, List<Department> departments) {
+
+        setMorePageProperty(successJson, departments);
+        removeExtraDepartment(departments);
+        setPageValueProperty(successJson, departments);
+
+        JsonArray data = departments.stream()
+                .map(this::mapDepartmentToJson)
+                .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+
+        successJson.add(DATA, data);
+    }
+
+    private void setMorePageProperty(JsonObject successJson, List<Department> departments) {
+        successJson.addProperty("more", departments.size() == super.getPageSize() + 1);
+    }
+
+    private void removeExtraDepartment(List<Department> departments) {
+        if (departments.size() == super.getPageSize() + 1) {
+            departments.remove(departments.size() - 1);
+        }
+    }
+
+    private void setPageValueProperty(JsonObject successJson, List<Department> departments) {
+        if (departments.size() > 0) {
+            successJson.addProperty("pageValue", departments.get(departments.size() - 1).getName());
+        } else {
+            successJson.addProperty("pageValue", "");
+        }
     }
 
     private JsonObject mapDepartmentToJson(Department department) {
