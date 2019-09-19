@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0e44e6cd-4c1b-4255-9a3a-a8b43e98e915" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetCourses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetDepartments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/CriteriaHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/CriteriaHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/admin/ajax/GetTeachers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/admin/ajax/GetTeachers.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -379,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568164714568</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="refactoring the ajax admin package">
+      <created>1568911581093</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1568911581093</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -434,7 +439,8 @@
     <MESSAGE value="add new abstraction for easy selects as replacement of EntityHelper" />
     <MESSAGE value="refactoring admin ajax package" />
     <MESSAGE value="refactoring the create views gradle task" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring the create views gradle task" />
+    <MESSAGE value="refactoring the ajax admin package" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring the ajax admin package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
