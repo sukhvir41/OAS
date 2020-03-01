@@ -89,9 +89,9 @@ static def createFileStringVariable(File file) {
         String path = file.getCanonicalPath()
 
         String variableValue = path.substring(path.indexOf("WEB-INF"))
-                .replace("\\", "\\\\")
+                .replace("\\", "/")
 
-        return "\tpublic String ${variableName} = \"${variableValue}\";\n"
+        return "\tpublic String ${variableName} = \"/${variableValue}\";\n"
 
     } catch (Exception e) {
         e.printStackTrace()

@@ -7,12 +7,12 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
         data: {
             pageValues: [],
             url: url,
-            counter: 1,
             title: title,
             data: [],
+            counter: 0, // used to show the # columnn in the table
             columns: columns,
             error: false,
-            showNext: true,
+            showNext: false,
             showPrev: false,
             searchText: '',
             showSearch: showSearch || true,
@@ -20,62 +20,54 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
         },
         watch: {
             searchText: function (val) {
-                this.pageValues = [];
-                this.showPrev = false;
+                this.reserData();
+                this.counter += (this.data.length <= 0) ? 1 : this.data.length;
                 var self = this;
-                self.counter = 1;
+                this.disableButtons();
                 $.ajax({
-                    url: url,
+                    url: self.url,
                     method: "post",
                     data: {
                         searchText: self.searchText,
-                        additionalData: additionalData,
+                        additionalData: self.additionalData,
                     },
                     success: function (result) {
-                        if (result.status === 'error') {
-                            self.error = true;
+                        if (result.status === 'error' || result.data.length <= 0) {
+                            this.processError();
                         } else {
-                            self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
                             self.data = result.data;
                             self.pageValues.push(result.pageValue);
                             self.showNext = result.more;
-                            if (self.data.length === 0) {
-                                self.error = true;
-                            }
                         }
                     },
                     error: function () {
-                        self.error = true;
+                        self.processError();
                     }
                 });
             }
         },
         mounted: function () {
-            var self = this;
-            $.ajax({
-                url: url,
-                method: "post",
-                data: {
-                    additionalData: self.additionalData
-                },
-                success: function (result) {
-                    if (result.status === 'error') {
-                        self.error = true;
-                        self.counter = 1;
-                    } else {
-                        self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
-                        self.data = result.data;
-                        self.pageValues.push(result.pageValue);
-                        self.showNext = result.more;
-                    }
-                },
-                error: function () {
-                    self.error = true;
-                    self.counter = 1;
-                }
-            });
+            this.getNext();
         },
         methods: {
+
+            disableButtons: function () {
+                this.showPrev = false;
+                this.showNext = false;
+            },
+
+            processError: function () {
+                this.error = true;
+                this.reserData();
+                this.disableButtons();
+            },
+
+            reserData: function () {
+                this.pageValues = [];
+                this.showPrev = false;
+                this.counter = 0;
+            },
+
             getPageValue: function () {
                 if (this.pageValues.length === 0) {
                     return '';
@@ -83,11 +75,13 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
                     return this.pageValues[this.pageValues.length - 1];
                 }
             },
+
             getNext: function () {
+                this.counter += (this.data.length <= 0) ? 1 : this.data.length;
                 var self = this;
-                this.counter += this.data.length;
+                this.disableButtons();
                 $.ajax({
-                    url: url,
+                    url: self.url,
                     method: "post",
                     data: {
                         pageValue: self.getPageValue(),
@@ -95,55 +89,53 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
                         additionalData: additionalData,
                     },
                     success: function (result) {
-                        if (result.status === 'error') {
-                            self.error = true;
-                            self.counter = 1;
+                        if (result.status === 'error' || result.data.length <= 0) {
+                            self.processError();
                         } else {
-                            self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
-                            self.data = result.data;
+
                             self.showNext = result.more;
-                            self.showPrev = true;
+                            self.showPrev = self.data.length > 0;
+                            self.data = result.data;
                             self.pageValues.push(result.pageValue);
                         }
                     },
                     error: function () {
-                        self.error = true;
-                        self.counter = 1;
+                        self.processError();
                     }
                 });
             },
+
             getPrev: function () {
                 var self = this;
                 self.pageValues.pop();
                 self.pageValues.pop();
+                this.disableButtons();
                 $.ajax({
-                    url: url,
+                    url: self.url,
                     method: "post",
                     data: {
                         pageValue: self.getPageValue(),
                         searchText: self.searchText,
-                        additionalData: additionalData,
+                        additionalData: self.additionalData,
                     },
                     success: function (result) {
-                        if (result.status === 'error') {
-                            self.error = true;
-                            self.counter = 1;
+                        if (result.status === 'error' || result.data.length <= 0) {
+                            self.processError();
                         } else {
-                            self.error = result.data.length <= 0; // if data lenght <= 0 then is an error
                             self.counter -= result.data.length;
                             self.data = result.data;
                             self.showNext = result.more;
+                            self.showPrev = self.pageValues.length > 0;
                             self.pageValues.push(result.pageValue);
-                            self.showPrev = self.pageValues.length > 1;
                         }
                     },
                     error: function () {
-                        self.error = true;
-                        self.counter = 1;
+                        self.processError();
                     }
                 });
             }
         },
+
         template: `
         <div>
            <div class="row">
@@ -155,6 +147,7 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
                             </h4>
                             <input v-if="showSearch" type="text" class = "form-control" placeholder = "search" v-model="searchText" />
                         </div>
+
                     </div>
                     <table class="table table-hover table-striped">
                         <thead>
@@ -175,6 +168,12 @@ var paginate = function (element, title, url, columns, tr, noDataMessage, showSe
            <div class = "row">
                <div class = "col-md-12" >
                     <ul class = "pagination pull-right" >
+                        <li v-if="error">
+                            <button type = "button" class = "mb-xs mt-xs mr-xs btn btn-default" v-on:click = "getNext" >
+                                <i class = "fa fa-refresh"> 
+                                </i> 
+                            </button> 
+                        </li>
                         <li v-if="showPrev">
                             <button type = "button" class = "mb-xs mt-xs mr-xs btn btn-default" v-on:click="getPrev" >
                                 <i class = "fa fa-chevron-left">  </i> 

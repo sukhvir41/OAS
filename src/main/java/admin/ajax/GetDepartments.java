@@ -3,13 +3,11 @@ package admin.ajax;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import entities.Course;
-import utility.CriteriaHolder;
 import entities.Department;
 import entities.Department_;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import utility.AjaxController;
+import utility.CriteriaHolder;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -50,7 +48,7 @@ public class GetDepartments extends AjaxController {
 
     private void addPageValueCondition(String pageValue, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
 
-        if (pageValue.isBlank()) {
+        if (pageValue == null || pageValue.isBlank()) {
             return;
         }
 
@@ -62,7 +60,7 @@ public class GetDepartments extends AjaxController {
 
     private void addSearchTextCondition(String searchText, CriteriaHolder<CriteriaQuery<Department>, Department> holder, List<Predicate> predicates) {
 
-        if (searchText.isBlank()) {
+        if (searchText == null || searchText.isBlank()) {
             return;
         }
 

@@ -30,16 +30,16 @@ public class GetAllDepartments extends AjaxController {
         var gson = new Gson();
 
         var query = session.createNativeQuery("" +
-                "select " +
-                "   coalesce(cast(array_to_json(array_agg(row_to_json(d))) as varchar),'[]')" +
-                "from(" +
-                "   select" +
-                "       \"id\"," +
-                "       \"name\"" +
-                "   from" +
-                "   department" +
-                "   order by name" +
-                ") d");
+                                              "        select" +
+                                              "            coalesce(cast(array_to_json(array_agg(row_to_json(d))) as varchar),'[]')" +
+                                              "        from "+
+                                              "           select" +
+                                              "                \"id\"," +
+                                              "                \"name\"" +
+                                              "            from" +
+                                              "            department" +
+                                              "            order by name" +
+                                              "         ) d");
 
         var departments = (String) query.getSingleResult();
 

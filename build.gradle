@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.bmuschko:gradle-cargo-plugin:2.6.1'
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.7.1'
         classpath "org.hibernate:hibernate-gradle-plugin:5.4.4.Final"
         classpath 'net.ltgt.gradle:gradle-apt-plugin:0.18'
     }
@@ -46,8 +46,10 @@ hibernate {
 }
 
 dependencies {
-    cargo 'org.codehaus.cargo:cargo-core-uberjar:1.7.3',
-            'org.codehaus.cargo:cargo-ant:1.7.3'
+    def cargoVersion = '1.7.10'
+    cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
+            "org.codehaus.cargo:cargo-licensed-dtds:$cargoVersion",
+            "org.codehaus.cargo:cargo-ant:$cargoVersion"
 
     providedCompile 'javax.servlet:javax.servlet-api:4.0.0'
     implementation 'javax.websocket:javax.websocket-api:1.1'
@@ -93,7 +95,7 @@ cargo {
     }
 
     local {
-        homeDir = file('.//tomcat')
+        homeDir = file('tomcat')
         outputFile = file('output.log')
     }
 }
